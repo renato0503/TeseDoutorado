@@ -3,144 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doutorado — Transparência Algorítmica em Compras Públicas</title>
+    <title>Doutorado — Transparência Algorítmica</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=SF+Pro+Text:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-page: #f5f5f7;
+            --bg-card: #ffffff;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --text-tertiary: #a1a1a6;
+            --accent-blue: #007aff;
+            --accent-green: #34c759;
+            --accent-orange: #ff9500;
+            --accent-red: #ff3b30;
+            --accent-purple: #af52de;
+            --shadow-card: 0 4px 20px rgba(0,0,0,0.06);
+            --shadow-nav: 0 0 30px rgba(0,0,0,0.03);
+            --radius-card: 18px;
+            --radius-sm: 10px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --bg: #fafafa;
-            --surface: #ffffff;
-            --text: #1a1a1a;
-            --text-secondary: #6b7280;
-            --text-tertiary: #9ca3af;
-            --border: #e5e7eb;
-            --accent: #374151;
-            --accent-light: #f3f4f6;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --error: #ef4444;
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 14px;
-            line-height: 1.6;
-            color: var(--text);
-            background: var(--bg);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-page);
+            color: var(--text-primary);
+            line-height: 1.5;
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         a {
-            color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.15s;
-        }
-
-        a:hover {
-            color: var(--text);
+            color: inherit;
         }
 
         /* Layout */
-        .layout {
+        .app-container {
             display: grid;
-            grid-template-columns: 240px 1fr;
+            grid-template-columns: 280px 1fr;
             min-height: 100vh;
         }
 
-        /* Sidebar */
+        /* Sidebar com Glassmorphism */
         .sidebar {
-            background: var(--surface);
-            border-right: 1px solid var(--border);
-            padding: 32px 24px;
             position: fixed;
-            width: 240px;
+            top: 0;
+            left: 0;
+            width: 280px;
             height: 100vh;
-            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-right: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 32px 0;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            box-shadow: var(--shadow-nav);
         }
 
         .sidebar-brand {
-            font-weight: 600;
-            font-size: 13px;
-            letter-spacing: 0.5px;
-            color: var(--text);
+            padding: 0 24px;
             margin-bottom: 32px;
         }
 
-        .sidebar-section {
-            margin-bottom: 28px;
+        .brand-title {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
         }
 
-        .sidebar-title {
-            font-size: 10px;
+        .brand-subtitle {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 24px;
+        }
+
+        .sidebar-section-title {
+            font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             color: var(--text-tertiary);
-            margin-bottom: 12px;
+            padding: 0 24px;
+            margin-bottom: 10px;
         }
 
         .sidebar-nav {
             display: flex;
             flex-direction: column;
-            gap: 4px;
         }
 
         .sidebar-link {
+            padding: 10px 24px;
             font-size: 13px;
             color: var(--text-secondary);
-            padding: 6px 0;
+            transition: all var(--transition);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
-        .sidebar-link .num {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
+        .sidebar-link:hover {
+            color: var(--text-primary);
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .sidebar-link.active {
+            background: rgba(0, 122, 255, 0.1);
+            color: var(--accent-blue);
+        }
+
+        .link-num {
+            font-family: "SF Pro Text", monospace;
+            font-size: 11px;
             color: var(--text-tertiary);
-            width: 18px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: rgba(0, 0, 0, 0.06);
+            margin: 16px 24px;
         }
 
         /* Main Content */
-        .main {
-            margin-left: 240px;
-            padding: 48px 64px;
-            max-width: 1200px;
+        .main-content {
+            margin-left: 280px;
+            padding: 48px 56px;
+            max-width: 1400px;
         }
 
         /* Header */
         .header {
-            margin-bottom: 48px;
+            margin-bottom: 40px;
         }
 
         .header h1 {
-            font-size: 24px;
-            font-weight: 300;
-            color: var(--text);
-            margin-bottom: 8px;
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
         }
 
-        .header p {
-            font-size: 14px;
+        .header-subtitle {
+            font-size: 15px;
             color: var(--text-secondary);
+            margin-bottom: 20px;
         }
 
         .header-meta {
             display: flex;
-            gap: 32px;
-            margin-top: 16px;
-            font-size: 12px;
+            gap: 24px;
+            font-size: 13px;
             color: var(--text-tertiary);
         }
 
-        .header-meta span {
+        .header-meta-item {
             display: flex;
             align-items: center;
             gap: 6px;
@@ -154,35 +188,36 @@
         .section-header {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: center;
             margin-bottom: 16px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border);
         }
 
         .section-title {
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             color: var(--text-tertiary);
         }
 
-        .section-count {
-            font-size: 12px;
-            color: var(--text-tertiary);
+        /* Tese Card */
+        .tese-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-card);
+            padding: 28px;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 16px;
         }
 
-        /* Tese Overview */
-        .tese-overview {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 24px;
-            margin-bottom: 32px;
+        .tese-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
         }
 
         .tese-title {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 500;
             margin-bottom: 4px;
         }
@@ -190,182 +225,206 @@
         .tese-subtitle {
             font-size: 13px;
             color: var(--text-secondary);
-            margin-bottom: 20px;
         }
 
-        .progress-text {
-            font-size: 13px;
-            color: var(--text-secondary);
-            font-family: 'JetBrains Mono', monospace;
+        .tese-progress {
+            text-align: right;
         }
 
-        .progress-bar {
-            height: 3px;
-            background: var(--border);
-            margin: 8px 0 12px;
-            border-radius: 2px;
+        .tese-percent {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--accent-blue);
+            letter-spacing: -1px;
+        }
+
+        .tese-words {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        /* Progress Bar */
+        .progress-track {
+            height: 6px;
+            background: #f0f0f0;
+            border-radius: 3px;
             overflow: hidden;
+            margin: 16px 0;
         }
 
         .progress-fill {
             height: 100%;
-            background: var(--text);
-            border-radius: 2px;
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, var(--accent-blue), #5ac8fa);
+            border-radius: 3px;
+            transition: width 1s ease-out;
+        }
+
+        /* Sections Status */
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .section-pill {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .section-pill.complete {
+            border-left: 3px solid var(--accent-green);
+        }
+
+        .section-pill.empty {
+            border-left: 3px solid #e5e5e5;
+            opacity: 0.6;
+        }
+
+        .section-name {
+            color: var(--text-primary);
+        }
+
+        .section-status {
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .status-done {
+            background: rgba(52, 199, 89, 0.12);
+            color: var(--accent-green);
+        }
+
+        .status-pending {
+            background: #f5f5f7;
+            color: var(--text-tertiary);
         }
 
         /* Articles Grid */
         .articles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 16px;
         }
 
         .article-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 20px;
-            transition: border-color 0.15s;
+            background: var(--bg-card);
+            border-radius: var(--radius-card);
+            padding: 22px;
+            box-shadow: var(--shadow-card);
+            transition: all var(--transition);
         }
 
         .article-card:hover {
-            border-color: var(--text-tertiary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
         }
 
-        .article-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
-        .article-num {
+        .article-badge {
+            display: inline-block;
             font-size: 10px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: var(--text-tertiary);
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .badge-quanti {
+            background: rgba(0, 122, 255, 0.1);
+            color: var(--accent-blue);
+        }
+
+        .badge-quali {
+            background: rgba(175, 82, 222, 0.1);
+            color: var(--accent-purple);
+        }
+
+        .badge-produto {
+            background: rgba(52, 199, 89, 0.1);
+            color: var(--accent-green);
         }
 
         .article-title {
             font-size: 14px;
             font-weight: 500;
-            color: var(--text);
-            margin-top: 4px;
+            margin-bottom: 12px;
+            line-height: 1.4;
         }
 
-        .article-progress {
+        .article-progress-text {
             font-size: 12px;
-            font-family: 'JetBrains Mono', monospace;
             color: var(--text-secondary);
+            font-family: "SF Pro Text", monospace;
         }
 
         .article-bar {
-            height: 2px;
-            background: var(--border);
-            margin: 8px 0;
+            height: 4px;
+            background: #f0f0f0;
+            border-radius: 2px;
+            margin: 10px 0;
+            overflow: hidden;
         }
 
         .article-bar-fill {
             height: 100%;
-            background: var(--text);
-            border-radius: 1px;
+            border-radius: 2px;
+            transition: width 0.8s ease;
         }
 
-        .article-sections {
-            font-size: 11px;
-            color: var(--text-tertiary);
-            margin-top: 8px;
-        }
-
-        .article-sections .done {
-            color: var(--success);
-        }
-
-        .article-sections .missing {
-            color: var(--text-tertiary);
-        }
-
-        /* Sections Status */
-        .sections-list {
+        .article-missing {
+            margin-top: 12px;
             display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .section-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 16px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            font-size: 13px;
-        }
-
-        .section-item-name {
-            color: var(--text);
-        }
-
-        .section-item-status {
-            font-size: 11px;
-            padding: 4px 8px;
-            border-radius: 3px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .status-complete {
-            background: #ecfdf5;
-            color: #059669;
-        }
-
-        .status-empty {
-            background: var(--accent-light);
-            color: var(--text-tertiary);
-        }
-
-        .status-partial {
-            background: #fffbeb;
-            color: #d97706;
-        }
-
-        /* Base Files */
-        .base-files {
-            display: flex;
-            gap: 16px;
             flex-wrap: wrap;
+            gap: 6px;
         }
 
-        .base-file {
-            font-size: 13px;
-            color: var(--text-secondary);
-            padding: 8px 0;
-            border-bottom: 1px solid transparent;
-        }
-
-        .base-file:hover {
-            border-bottom-color: var(--text);
+        .missing-tag {
+            font-size: 10px;
+            padding: 4px 8px;
+            background: #f5f5f7;
+            color: var(--text-tertiary);
+            border-radius: 6px;
         }
 
         /* Footer */
         .footer {
             margin-top: 48px;
             padding-top: 24px;
-            border-top: 1px solid var(--border);
-            font-size: 11px;
-            color: var(--text-tertiary);
+            border-top: 1px solid rgba(0,0,0,0.06);
             display: flex;
             justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-tertiary);
         }
 
-        /* Loading State */
-        .loading {
-            opacity: 0.5;
+        .footer a {
+            color: var(--accent-blue);
+        }
+
+        /* Loading */
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: var(--radius-sm);
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .layout {
+        @media (max-width: 900px) {
+            .app-container {
                 grid-template-columns: 1fr;
             }
             
@@ -373,57 +432,64 @@
                 display: none;
             }
             
-            .main {
+            .main-content {
                 margin-left: 0;
-                padding: 24px;
+                padding: 32px 24px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="layout">
+    <div class="app-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="sidebar-brand">Doutorado</div>
+            <div class="sidebar-brand">
+                <div class="brand-title">Doutorado</div>
+                <div class="brand-subtitle">Fucape Business School</div>
+            </div>
             
             <div class="sidebar-section">
-                <div class="sidebar-title">Tese</div>
+                <div class="sidebar-section-title">Tese</div>
                 <nav class="sidebar-nav">
                     <a href="Tese/tese_draft.html" class="sidebar-link" target="_blank">
-                        <span>Draft da Tese</span>
+                        Draft da Tese
                     </a>
                 </nav>
             </div>
             
+            <div class="sidebar-divider"></div>
+            
             <div class="sidebar-section">
-                <div class="sidebar-title">Artigos</div>
+                <div class="sidebar-section-title">Artigos</div>
                 <nav class="sidebar-nav">
-                    <a href="Artigos/01-Opacidade-Institucional-Analise-Complexidade-Textual-Editais-Inovacao/artigo_01.html" class="sidebar-link" target="_blank"><span class="num">01</span> Opacidade</a>
-                    <a href="Artigos/02-Auditoria-Continua-Deteccao-Anomalias-Precos/artigo_02.html" class="sidebar-link" target="_blank"><span class="num">02</span> Auditoria</a>
-                    <a href="Artigos/03-Predicao-Fracasso-Risco-Aditivos-Cancelamentos/artigo_03.html" class="sidebar-link" target="_blank"><span class="num">03</span> Predição</a>
-                    <a href="Artigos/04-Apagao-Canetas-Quantificado-Latencia-Decisoria/artigo_04.html" class="sidebar-link" target="_blank"><span class="num">04</span> Apagão</a>
-                    <a href="Artigos/05-Redes-Fornecimento-Oligopolios-Analise-Grafos/artigo_05.html" class="sidebar-link" target="_blank"><span class="num">05</span> Redes</a>
-                    <a href="Artigos/06-Sobrevivencia-Contratos-Inovacao-Analise-Kaplan-Meier/artigo_06.html" class="sidebar-link" target="_blank"><span class="num">06</span> Sobrevivência</a>
-                    <a href="Artigos/07-Governanca-Algoritmica-Benchmarking-Eficiencia/artigo_07.html" class="sidebar-link" target="_blank"><span class="num">07</span> Governança</a>
-                    <a href="Artigos/08-XAI-Setor-Publico-Prova-Conceito-Tribunais-Contas/artigo_08.html" class="sidebar-link" target="_blank"><span class="num">08</span> XAI</a>
-                    <a href="Artigos/09-Jurisprudencia-Medo-Analise-Discurso-Acordaos/artigo_09.html" class="sidebar-link" target="_blank"><span class="num">09</span> Jurisprudência</a>
-                    <a href="Artigos/10-Uso-Retorico-Inovacao-Analise-Conteudo-Justificativas/artigo_10.html" class="sidebar-link" target="_blank"><span class="num">10</span> Retórico</a>
-                    <a href="Artigos/11-Voz-Mercado-Analise-Impugnacoes-Editais-Tecnologia/artigo_11.html" class="sidebar-link" target="_blank"><span class="num">11</span> Mercado</a>
-                    <a href="Artigos/12-Evolucao-Risco-Legislacao-Compras-8.666-Marco-Startups/artigo_12.html" class="sidebar-link" target="_blank"><span class="num">12</span> Legislação</a>
-                    <a href="Artigos/13-Dor-GovTechs-Netnografia-Ecosistema-Inovacao-Publica/artigo_13.html" class="sidebar-link" target="_blank"><span class="num">13</span> GovTechs</a>
-                    <a href="Artigos/14-Discurso-Custo-Brasil-Politica-Industrial-Narrativas-Pratica/artigo_14.html" class="sidebar-link" target="_blank"><span class="num">14</span> Custo Brasil</a>
-                    <a href="Artigos/15-Enquadramento-IA-Controle-Publico-Midia/artigo_15.html" class="sidebar-link" target="_blank"><span class="num">15</span> Mídia</a>
-                    <a href="Artigos/16-Caixa-Preta-Setor-Publico-Revisao-Sistematica-XAI-Gestao-Publica/artigo_16.html" class="sidebar-link" target="_blank"><span class="num">16</span> Revisão</a>
-                    <a href="Artigos/17-DSR-Contabilidade-Publica-Mapeamento-Artefatos/artigo_17.html" class="sidebar-link" target="_blank"><span class="num">17</span> DSR</a>
+                    <a href="Artigos/01-Opacidade-Institucional-Analise-Complexidade-Textual-Editais-Inovacao/artigo_01.html" class="sidebar-link" target="_blank"><span class="link-num">01</span> Opacidade</a>
+                    <a href="Artigos/02-Auditoria-Continua-Deteccao-Anomalias-Precos/artigo_02.html" class="sidebar-link" target="_blank"><span class="link-num">02</span> Auditoria</a>
+                    <a href="Artigos/03-Predicao-Fracasso-Risco-Aditivos-Cancelamentos/artigo_03.html" class="sidebar-link" target="_blank"><span class="link-num">03</span> Predição</a>
+                    <a href="Artigos/04-Apagao-Canetas-Quantificado-Latencia-Decisoria/artigo_04.html" class="sidebar-link" target="_blank"><span class="link-num">04</span> Apagão</a>
+                    <a href="Artigos/05-Redes-Fornecimento-Oligopolios-Analise-Grafos/artigo_05.html" class="sidebar-link" target="_blank"><span class="link-num">05</span> Redes</a>
+                    <a href="Artigos/06-Sobrevivencia-Contratos-Inovacao-Analise-Kaplan-Meier/artigo_06.html" class="sidebar-link" target="_blank"><span class="link-num">06</span> Sobrevivência</a>
+                    <a href="Artigos/07-Governanca-Algoritmica-Benchmarking-Eficiencia/artigo_07.html" class="sidebar-link" target="_blank"><span class="link-num">07</span> Governança</a>
+                    <a href="Artigos/08-XAI-Setor-Publico-Prova-Conceito-Tribunais-Contas/artigo_08.html" class="sidebar-link" target="_blank"><span class="link-num">08</span> XAI</a>
+                    <a href="Artigos/09-Jurisprudencia-Medo-Analise-Discurso-Acordaos/artigo_09.html" class="sidebar-link" target="_blank"><span class="link-num">09</span> Jurisprudência</a>
+                    <a href="Artigos/10-Uso-Retorico-Inovacao-Analise-Conteudo-Justificativas/artigo_10.html" class="sidebar-link" target="_blank"><span class="link-num">10</span> Retórico</a>
+                    <a href="Artigos/11-Voz-Mercado-Analise-Impugnacoes-Editais-Tecnologia/artigo_11.html" class="sidebar-link" target="_blank"><span class="link-num">11</span> Mercado</a>
+                    <a href="Artigos/12-Evolucao-Risco-Legislacao-Compras-8.666-Marco-Startups/artigo_12.html" class="sidebar-link" target="_blank"><span class="link-num">12</span> Legislação</a>
+                    <a href="Artigos/13-Dor-GovTechs-Netnografia-Ecosistema-Inovacao-Publica/artigo_13.html" class="sidebar-link" target="_blank"><span class="link-num">13</span> GovTechs</a>
+                    <a href="Artigos/14-Discurso-Custo-Brasil-Politica-Industrial-Narrativas-Pratica/artigo_14.html" class="sidebar-link" target="_blank"><span class="link-num">14</span> Custo Brasil</a>
+                    <a href="Artigos/15-Enquadramento-IA-Controle-Publico-Midia/artigo_15.html" class="sidebar-link" target="_blank"><span class="link-num">15</span> Mídia</a>
+                    <a href="Artigos/16-Caixa-Preta-Setor-Publico-Revisao-Sistematica-XAI-Gestao-Publica/artigo_16.html" class="sidebar-link" target="_blank"><span class="link-num">16</span> Revisão</a>
+                    <a href="Artigos/17-DSR-Contabilidade-Publica-Mapeamento-Artefatos/artigo_17.html" class="sidebar-link" target="_blank"><span class="link-num">17</span> DSR</a>
                 </nav>
             </div>
             
+            <div class="sidebar-divider"></div>
+            
             <div class="sidebar-section">
-                <div class="sidebar-title">Arquivos Base</div>
+                <div class="sidebar-section-title">Arquivos Base</div>
                 <nav class="sidebar-nav">
                     <a href="Direcionamento.md" class="sidebar-link">Direcionamento</a>
                     <a href="documentacao.md" class="sidebar-link">Documentação</a>
-                    <a href="escrita.md" class="sidebar-link">Escrita</a>
+                    <a href="escrita.md" class="sidebar-link">Guia de Escrita</a>
                     <a href="pesquisa.md" class="sidebar-link">Pesquisa</a>
                     <a href="estrategia_paper.md" class="sidebar-link">Estratégia</a>
                     <a href="processo.md" class="sidebar-link">Processo</a>
@@ -432,261 +498,236 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="main">
+        <main class="main-content">
             <!-- Header -->
             <header class="header">
-                <h1>Copiloto Algorítmico para Compras Públicas Complexas</h1>
-                <p>Transparência de Algoritmos e Inteligência Artificial em Contratações Públicas</p>
+                <h1>Copiloto Algorítmico para Compras Públicas</h1>
+                <p class="header-subtitle">Transparência de Algoritmos e IA em Contratações Públicas</p>
                 <div class="header-meta">
-                    <span><strong>Orientador:</strong> Prof. Dr. Olavo Venturim Caldas</span>
-                    <span><strong>Instituição:</strong> Fucape Business School</span>
-                    <span><strong>Atualizado:</strong> <span id="last-update">--</span></span>
+                    <div class="header-meta-item">
+                        <span>📚</span>
+                        <span>Orientador: Prof. Dr. Olavo Venturim Caldas</span>
+                    </div>
+                    <div class="header-meta-item">
+                        <span>🏛️</span>
+                        <span>Fucape Business School</span>
+                    </div>
+                    <div class="header-meta-item">
+                        <span>🕐</span>
+                        <span>Atualizado: <span id="last-update">--</span></span>
+                    </div>
                 </div>
             </header>
 
-            <!-- Tese Overview -->
+            <!-- Tese Section -->
             <section class="section">
                 <div class="section-header">
                     <span class="section-title">Tese</span>
-                    <span class="section-count">1 arquivo</span>
-                </div>
-                <div class="tese-overview">
-                    <div class="tese-title">Draft da Tese</div>
-                    <div class="tese-subtitle">Copiloto Algorítmico para Compras Públicas Complexas</div>
-                    <div class="progress-text" id="tese-progress">Carregando...</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="tese-bar" style="width: 0%"></div>
-                    </div>
                 </div>
                 
-                <!-- Seções da Tese -->
-                <div class="sections-list" id="tese-sections">
-                    <!-- Preenchido via JS -->
+                <div class="tese-card" id="tese-card">
+                    <div class="tese-header">
+                        <div>
+                            <div class="tese-title">Draft da Tese</div>
+                            <div class="tese-subtitle">Copiloto Algorítmico para Compras Públicas Complexas</div>
+                        </div>
+                        <div class="tese-progress">
+                            <div class="tese-percent" id="tese-percent">--%</div>
+                            <div class="tese-words" id="tese-words">-- palavras</div>
+                        </div>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="tese-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="sections-grid" id="tese-sections"></div>
                 </div>
             </section>
 
-            <!-- Artigos -->
+            <!-- Artigos Section -->
             <section class="section">
                 <div class="section-header">
                     <span class="section-title">Artigos</span>
-                    <span class="section-count">17 artigos</span>
+                    <span style="font-size: 12px; color: var(--text-tertiary);" id="articles-count">17 artigos</span>
                 </div>
-                <div class="articles-grid" id="articles-grid">
-                    <!-- Preenchido via JS -->
-                </div>
+                <div class="articles-grid" id="articles-grid"></div>
             </section>
 
             <!-- Footer -->
             <footer class="footer">
                 <span>Repositório: <a href="https://github.com/renato0503/TeseDoutorado" target="_blank">github.com/renato0503/TeseDoutorado</a></span>
-                <span>Painel automático — leitura em tempo real</span>
+                <span>Painel automático • Leitura em tempo real</span>
             </footer>
         </main>
     </div>
 
-    <!-- Script de Automação -->
     <script>
-        // Metas de palavras por documento
+        // Configurações
         const META_TESE = 40000;
         
         const ARTIGOS = [
-            { id: 1, pasta: '01-Opacidade-Institucional-Analise-Complexidade-Textual-Editais-Inovacao', arquivo: 'artigo_01.html', titulo: 'Opacidade Institucional', meta: 8000 },
-            { id: 2, pasta: '02-Auditoria-Continua-Deteccao-Anomalias-Precos', arquivo: 'artigo_02.html', titulo: 'Auditoria Contínua', meta: 8000 },
-            { id: 3, pasta: '03-Predicao-Fracasso-Risco-Aditivos-Cancelamentos', arquivo: 'artigo_03.html', titulo: 'Predição de Fracasso', meta: 8000 },
-            { id: 4, pasta: '04-Apagao-Canetas-Quantificado-Latencia-Decisoria', arquivo: 'artigo_04.html', titulo: 'Apagão das Canetas', meta: 8000 },
-            { id: 5, pasta: '05-Redes-Fornecimento-Oligopolios-Analise-Grafos', arquivo: 'artigo_05.html', titulo: 'Redes de Fornecimento', meta: 8000 },
-            { id: 6, pasta: '06-Sobrevivencia-Contratos-Inovacao-Analise-Kaplan-Meier', arquivo: 'artigo_06.html', titulo: 'Sobrevivência Contratos', meta: 8000 },
-            { id: 7, pasta: '07-Governanca-Algoritmica-Benchmarking-Eficiencia', arquivo: 'artigo_07.html', titulo: 'Governança Algorítmica', meta: 10000 },
-            { id: 8, pasta: '08-XAI-Setor-Publico-Prova-Conceito-Tribunais-Contas', arquivo: 'artigo_08.html', titulo: 'XAI Tribunais', meta: 8000 },
-            { id: 9, pasta: '09-Jurisprudencia-Medo-Analise-Discurso-Acordaos', arquivo: 'artigo_09.html', titulo: 'Jurisprudência do Medo', meta: 8000 },
-            { id: 10, pasta: '10-Uso-Retorico-Inovacao-Analise-Conteudo-Justificativas', arquivo: 'artigo_10.html', titulo: 'Uso Retórico Inovação', meta: 8000 },
-            { id: 11, pasta: '11-Voz-Mercado-Analise-Impugnacoes-Editais-Tecnologia', arquivo: 'artigo_11.html', titulo: 'Voz do Mercado', meta: 8000 },
-            { id: 12, pasta: '12-Evolucao-Risco-Legislacao-Compras-8.666-Marco-Startups', arquivo: 'artigo_12.html', titulo: 'Evolução Risco Legislativo', meta: 8000 },
-            { id: 13, pasta: '13-Dor-GovTechs-Netnografia-Ecosistema-Inovacao-Publica', arquivo: 'artigo_13.html', titulo: 'Dor das GovTechs', meta: 10000 },
-            { id: 14, pasta: '14-Discurso-Custo-Brasil-Politica-Industrial-Narrativas-Pratica', arquivo: 'artigo_14.html', titulo: 'Discurso Custo Brasil', meta: 8000 },
-            { id: 15, pasta: '15-Enquadramento-IA-Controle-Publico-Midia', arquivo: 'artigo_15.html', titulo: 'IA na Mídia', meta: 8000 },
-            { id: 16, pasta: '16-Caixa-Preta-Setor-Publico-Revisao-Sistematica-XAI-Gestao-Publica', arquivo: 'artigo_16.html', titulo: 'Revisão Sistemática XAI', meta: 12000 },
-            { id: 17, pasta: '17-DSR-Contabilidade-Publica-Mapeamento-Artefatos', arquivo: 'artigo_17.html', titulo: 'DSR Contabilidade', meta: 8000 }
+            { id: 1, pasta: '01-Opacidade-Institucional-Analise-Complexidade-Textual-Editais-Inovacao', arquivo: 'artigo_01.html', titulo: 'Opacidade Institucional', meta: 8000, tipo: 'quanti' },
+            { id: 2, pasta: '02-Auditoria-Continua-Deteccao-Anomalias-Precos', arquivo: 'artigo_02.html', titulo: 'Auditoria Contínua', meta: 8000, tipo: 'quanti' },
+            { id: 3, pasta: '03-Predicao-Fracasso-Risco-Aditivos-Cancelamentos', arquivo: 'artigo_03.html', titulo: 'Predição de Fracasso', meta: 8000, tipo: 'quanti' },
+            { id: 4, pasta: '04-Apagao-Canetas-Quantificado-Latencia-Decisoria', arquivo: 'artigo_04.html', titulo: 'Apagão das Canetas', meta: 8000, tipo: 'quanti' },
+            { id: 5, pasta: '05-Redes-Fornecimento-Oligopolios-Analise-Grafos', arquivo: 'artigo_05.html', titulo: 'Redes de Fornecimento', meta: 8000, tipo: 'quanti' },
+            { id: 6, pasta: '06-Sobrevivencia-Contratos-Inovacao-Analise-Kaplan-Meier', arquivo: 'artigo_06.html', titulo: 'Sobrevivência Contratos', meta: 8000, tipo: 'quanti' },
+            { id: 7, pasta: '07-Governanca-Algoritmica-Benchmarking-Eficiencia', arquivo: 'artigo_07.html', titulo: 'Governança Algorítmica', meta: 10000, tipo: 'produto' },
+            { id: 8, pasta: '08-XAI-Setor-Publico-Prova-Conceito-Tribunais-Contas', arquivo: 'artigo_08.html', titulo: 'XAI Tribunais', meta: 8000, tipo: 'quanti' },
+            { id: 9, pasta: '09-Jurisprudencia-Medo-Analise-Discurso-Acordaos', arquivo: 'artigo_09.html', titulo: 'Jurisprudência do Medo', meta: 8000, tipo: 'quali' },
+            { id: 10, pasta: '10-Uso-Retorico-Inovacao-Analise-Conteudo-Justificativas', arquivo: 'artigo_10.html', titulo: 'Uso Retórico Inovação', meta: 8000, tipo: 'quali' },
+            { id: 11, pasta: '11-Voz-Mercado-Analise-Impugnacoes-Editais-Tecnologia', arquivo: 'artigo_11.html', titulo: 'Voz do Mercado', meta: 8000, tipo: 'quali' },
+            { id: 12, pasta: '12-Evolucao-Risco-Legislacao-Compras-8.666-Marco-Startups', arquivo: 'artigo_12.html', titulo: 'Evolução Risco Legislativo', meta: 8000, tipo: 'quali' },
+            { id: 13, pasta: '13-Dor-GovTechs-Netnografia-Ecosistema-Inovacao-Publica', arquivo: 'artigo_13.html', titulo: 'Dor das GovTechs', meta: 10000, tipo: 'quali' },
+            { id: 14, pasta: '14-Discurso-Custo-Brasil-Politica-Industrial-Narrativas-Pratica', arquivo: 'artigo_14.html', titulo: 'Discurso Custo Brasil', meta: 8000, tipo: 'quali' },
+            { id: 15, pasta: '15-Enquadramento-IA-Controle-Publico-Midia', arquivo: 'artigo_15.html', titulo: 'IA na Mídia', meta: 8000, tipo: 'quali' },
+            { id: 16, pasta: '16-Caixa-Preta-Setor-Publico-Revisao-Sistematica-XAI-Gestao-Publica', arquivo: 'artigo_16.html', titulo: 'Revisão Sistemática XAI', meta: 12000, tipo: 'quali' },
+            { id: 17, pasta: '17-DSR-Contabilidade-Publica-Mapeamento-Artefatos', arquivo: 'artigo_17.html', titulo: 'DSR Contabilidade', meta: 8000, tipo: 'quali' }
         ];
 
-        // Seções padrão para análise
-        const SECOES_TESE = [
-            'INTRODUÇÃO', 'Contextualização', 'Problema de Pesquisa', 'Justificativa', 'Objetivos', 'Estrutura da Tese',
-            'FUNDAMENTAÇÃO TEÓRICA', 'Economia dos Custos de Transação', 'Estado Empreendedor', 'Transparência Algorítmica', 'Design Science Research',
-            'METODOLOGIA', 'Tipo de Pesquisa', 'Produto de Tecnologia', 'Coleta de Dados', 'Análise de Dados',
-            'RESULTADOS ESPERADOS', 'Eixo 1', 'Eixo 2', 'Eixo 3',
-            'CONSIDERAÇÕES FINAIS', 'Contribuições', 'Limitações', 'Sugestões'
-        ];
+        const SECOES_RELEVANTES = ['INTRODUÇÃO', 'FUNDAMENTAÇÃO TEÓRICA', 'METODOLOGIA', 'RESULTADOS', 'DISCUSSÃO', 'CONSIDERAÇÕES FINAIS', 'REFERÊNCIAS'];
 
-        const SECOES_ARTIGO = [
-            'INTRODUÇÃO', 'FUNDAMENTAÇÃO TEÓRICA', 'METODOLOGIA', 'RESULTADOS E DISCUSSÃO', 'CONCLUSÕES', 'REFERÊNCIAS'
-        ];
-
-        // Função para contar palavras
+        // Funções de análise
         function countWords(text) {
             return text.trim().split(/\s+/).filter(w => w.length > 0).length;
         }
 
-        // Função para analisar seções
         function analyzeSections(html) {
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
             
-            const h2s = Array.from(doc.querySelectorAll('h2'));
-            const h3s = Array.from(doc.querySelectorAll('h3'));
-            
-            const headings = [...h2s, ...h3s].sort((a, b) => a.offsetTop - b.offsetTop);
+            const headings = [...doc.querySelectorAll('h2'), ...doc.querySelectorAll('h3')];
+            const placeholders = ['[seção em construção]', '[em construção]', '[espaço reservado]', '[conclusões]', '[preencher]', '[placeholder]', '[em construção...]', '[resultados a serem]'];
             
             const sections = [];
-            const placeholders = ['[Seção em construção]', '[Em construção]', '[Em construção...]', '[Espaço reservado]', '[Conclusões a serem preenchidas]', '[Preencher]', '[Placeholder]'];
             
-            for (let i = 0; i < headings.length; i++) {
-                const heading = headings[i];
-                const nextHeading = headings[i + 1];
+            headings.forEach(heading => {
                 const headingText = heading.textContent.trim().toUpperCase();
+                const parent = heading.parentElement;
+                const textBelow = parent?.textContent || '';
+                const wordCount = countWords(textBelow);
                 
-                let sectionContent = '';
-                if (nextHeading) {
-                    sectionContent = doc.body.substring(heading.offsetTop, nextHeading.offsetTop);
-                } else {
-                    sectionContent = doc.body.substring(heading.offsetTop);
+                const isRelevant = SECOES_RELEVANT.some(s => headingText.includes(s));
+                const isPlaceholder = placeholders.some(p => textBelow.toLowerCase().includes(p));
+                const hasContent = wordCount > 30 && !isPlaceholder;
+                
+                if (isRelevant) {
+                    sections.push({
+                        name: headingText.replace(/^\d+\.?\s*/, '').substring(0, 25),
+                        hasContent,
+                        words: wordCount
+                    });
                 }
-                
-                // Limpar conteúdo
-                const cleanContent = sectionContent.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-                
-                // Verificar se é placeholder
-                const isPlaceholder = placeholders.some(p => cleanContent.toLowerCase().includes(p.toLowerCase()));
-                const hasRealContent = cleanContent.length > 50 && !isPlaceholder;
-                
-                sections.push({
-                    name: headingText,
-                    words: countWords(cleanContent),
-                    hasContent: hasRealContent
-                });
-            }
+            });
             
             return sections;
         }
 
-        // Função para analisar arquivo
         async function analyzeFile(path) {
             try {
                 const response = await fetch(path);
                 if (!response.ok) return null;
                 const html = await response.text();
                 
-                // Extrair texto puro
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
                 const textContent = doc.body.textContent || '';
                 const wordCount = countWords(textContent);
                 
-                // Analisar seções
                 const sections = analyzeSections(html);
                 
                 return {
                     words: wordCount,
                     sections: sections,
-                    doneSections: sections.filter(s => s.hasContent).length,
-                    totalSections: sections.length
+                    doneCount: sections.filter(s => s.hasContent).length,
+                    totalCount: sections.length,
+                    missing: sections.filter(s => !s.hasContent).map(s => s.name)
                 };
             } catch (e) {
-                console.error(`Erro ao analisar ${path}:`, e);
+                console.error(`Erro: ${path}`, e);
                 return null;
             }
         }
 
-        // Renderizar progresso da tese
-        function renderTeseProgress(data, meta) {
+        // Renderização
+        function renderTese(data) {
             const words = data?.words || 0;
-            const percent = Math.min(100, Math.round((words / meta) * 100));
+            const percent = Math.min(100, Math.round((words / META_TESE) * 100));
             
-            document.getElementById('tese-progress').textContent = 
-                `${words.toLocaleString()} / ${meta.toLocaleString()} palavras (${percent}%)`;
+            document.getElementById('tese-percent').textContent = `${percent}%`;
+            document.getElementById('tese-words').textContent = `${words.toLocaleString()} / ${META_TESE.toLocaleString()} palavras`;
             document.getElementById('tese-bar').style.width = `${percent}%`;
             
-            // Renderizar seções
             const sectionsContainer = document.getElementById('tese-sections');
-            if (data?.sections) {
-                const mainSections = data.sections.filter(s => 
-                    s.name.includes('INTRODUÇÃO') || 
-                    s.name.includes('FUNDAMENTAÇÃO') || 
-                    s.name.includes('METODOLOGIA') || 
-                    s.name.includes('RESULTADOS') || 
-                    s.name.includes('CONSIDERAÇÕES')
-                );
-                
-                sectionsContainer.innerHTML = mainSections.map(s => `
-                    <div class="section-item">
-                        <span class="section-item-name">${s.name}</span>
-                        <span class="section-item-status ${s.hasContent ? 'status-complete' : 'status-empty'}">
-                            ${s.hasContent ? 'OK' : 'vazio'}
+            if (data?.sections?.length > 0) {
+                sectionsContainer.innerHTML = data.sections.map(s => `
+                    <div class="section-pill ${s.hasContent ? 'complete' : 'empty'}">
+                        <span class="section-name">${s.name}</span>
+                        <span class="section-status ${s.hasContent ? 'status-done' : 'status-pending'}">
+                            ${s.hasContent ? '✓' : '○'}
                         </span>
                     </div>
                 `).join('');
+            } else {
+                sectionsContainer.innerHTML = '<p style="color: var(--text-tertiary); font-size: 12px;">Aguardando análise...</p>';
             }
         }
 
-        // Renderizar artigos
         function renderArticles(articlesData) {
             const grid = document.getElementById('articles-grid');
             
-            grid.innerHTML = ARTIGOS.map(artigo => {
-                const data = articlesData[artigo.id] || { words: 0, sections: [], doneSections: 0, totalSections: 0 };
-                const percent = Math.min(100, Math.round((data.words / artigo.meta) * 100));
+            grid.innerHTML = ARTIGOS.map(art => {
+                const data = articlesData[art.id] || {};
+                const words = data.words || 0;
+                const percent = Math.min(100, Math.round((words / art.meta) * 100));
+                const missing = data.missing || [];
                 
-                // Verificar seções presentes
-                const presentSections = data.sections.filter(s => s.hasContent).map(s => s.name.replace('2. ', '').replace('3. ', '')).slice(0, 3);
+                const colorMap = {
+                    quanti: 'var(--accent-blue)',
+                    quali: 'var(--accent-purple)',
+                    produto: 'var(--accent-green)'
+                };
                 
                 return `
                     <div class="article-card">
-                        <div class="article-header">
-                            <div>
-                                <div class="article-num">Artigo ${String(artigo.id).padStart(2, '0')}</div>
-                                <div class="article-title">${artigo.titulo}</div>
-                            </div>
-                        </div>
-                        <div class="article-progress">${data.words.toLocaleString()} / ${artigo.meta.toLocaleString()} (${percent}%)</div>
+                        <span class="article-badge badge-${art.tipo}">${art.tipo}</span>
+                        <div class="article-title">${art.titulo}</div>
+                        <div class="article-progress-text">${words.toLocaleString()} / ${art.meta.toLocaleString()} palavras</div>
                         <div class="article-bar">
-                            <div class="article-bar-fill" style="width: ${percent}%"></div>
+                            <div class="article-bar-fill" style="width: ${percent}%; background: ${colorMap[art.tipo]}"></div>
                         </div>
-                        <div class="article-sections">
-                            ${data.totalSections > 0 
-                                ? `${data.doneSections}/${data.totalSections} seções preenchidas` 
-                                : 'Aguardando análise'}
-                        </div>
+                        ${missing.length > 0 ? `
+                            <div class="article-missing">
+                                ${missing.slice(0, 3).map(m => `<span class="missing-tag">${m}</span>`).join('')}
+                                ${missing.length > 3 ? `<span class="missing-tag">+${missing.length - 3}</span>` : ''}
+                            </div>
+                        ` : ''}
                     </div>
                 `;
             }).join('');
         }
 
-        // Inicializar
+        // Inicialização
         async function init() {
-            // Atualizar timestamp
             document.getElementById('last-update').textContent = new Date().toLocaleDateString('pt-BR');
             
-            // Analisar tese
+            // Carregar tese
             const teseData = await analyzeFile('Tese/tese_draft.html');
-            renderTeseProgress(teseData, META_TESE);
+            renderTese(teseData);
             
-            // Analisar artigos
-            const articlesPromises = ARTIGOS.map(async artigo => {
-                const path = `Artigos/${artigo.pasta}/${artigo.arquivo}`;
+            // Carregar artigos
+            const articlePromises = ARTIGOS.map(async art => {
+                const path = `Artigos/${art.pasta}/${art.arquivo}`;
                 const data = await analyzeFile(path);
-                return { id: artigo.id, data };
+                return { id: art.id, data };
             });
             
-            const articlesResults = await Promise.all(articlesPromises);
+            const results = await Promise.all(articlePromises);
             const articlesData = {};
-            articlesResults.forEach(r => {
-                if (r.data) articlesData[r.id] = r.data;
-            });
+            results.forEach(r => { if (r.data) articlesData[r.id] = r.data; });
             
             renderArticles(articlesData);
         }
 
-        // Executar quando DOM estiver pronto
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
