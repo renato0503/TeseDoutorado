@@ -3,568 +3,691 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Controle - Doutorado</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Doutorado — Transparência Algorítmica em Compras Públicas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
         * {
-            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
+
+        :root {
+            --bg: #fafafa;
+            --surface: #ffffff;
+            --text: #1a1a1a;
+            --text-secondary: #6b7280;
+            --text-tertiary: #9ca3af;
+            --border: #e5e7eb;
+            --accent: #374151;
+            --accent-light: #f3f4f6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
         body {
-            background-color: #f8f9fa;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            min-height: 100vh;
         }
-        
+
+        a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        a:hover {
+            color: var(--text);
+        }
+
+        /* Layout */
+        .layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
         .sidebar {
-            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            padding: 32px 24px;
+            position: fixed;
+            width: 240px;
+            height: 100vh;
+            overflow-y: auto;
         }
-        
-        .card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+
+        .sidebar-brand {
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            color: var(--text);
+            margin-bottom: 32px;
         }
-        
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+        .sidebar-section {
+            margin-bottom: 28px;
         }
-        
-        .progress-ring {
-            transform: rotate(-90deg);
+
+        .sidebar-title {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-tertiary);
+            margin-bottom: 12px;
         }
-        
-        .progress-ring-circle {
-            transition: stroke-dashoffset 0.35s;
-            transform-origin: 50% 50%;
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
-        
-        .status-planejamento { background: #e3f2fd; color: #1565c0; }
-        .status-redacao { background: #fff3e0; color: #e65100; }
-        .status-revisao { background: #e8f5e9; color: #2e7d32; }
-        .status-submetido { background: #f3e5f5; color: #7b1fa2; }
-        
-        .nav-item {
-            transition: all 0.2s;
+
+        .sidebar-link {
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        
-        .nav-item:hover {
-            background: rgba(255,255,255,0.1);
+
+        .sidebar-link .num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--text-tertiary);
+            width: 18px;
         }
-        
-        .nav-item.active {
-            background: rgba(99, 102, 241, 0.3);
-            border-left: 3px solid #6366f1;
+
+        /* Main Content */
+        .main {
+            margin-left: 240px;
+            padding: 48px 64px;
+            max-width: 1200px;
         }
-        
-        .alert-priority-high {
-            border-left: 4px solid #ef4444;
+
+        /* Header */
+        .header {
+            margin-bottom: 48px;
         }
-        
-        .alert-priority-medium {
-            border-left: 4px solid #f59e0b;
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text);
+            margin-bottom: 8px;
         }
-        
-        .alert-priority-low {
-            border-left: 4px solid #10b981;
+
+        .header p {
+            font-size: 14px;
+            color: var(--text-secondary);
         }
-        
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+
+        .header-meta {
+            display: flex;
+            gap: 32px;
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--text-tertiary);
         }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+
+        .header-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        
-        ::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 4px;
+
+        /* Section */
+        .section {
+            margin-bottom: 40px;
         }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-tertiary);
+        }
+
+        .section-count {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        /* Tese Overview */
+        .tese-overview {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .tese-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .tese-subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .progress-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .progress-bar {
+            height: 3px;
+            background: var(--border);
+            margin: 8px 0 12px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--text);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Articles Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        .article-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 20px;
+            transition: border-color 0.15s;
+        }
+
+        .article-card:hover {
+            border-color: var(--text-tertiary);
+        }
+
+        .article-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .article-num {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-tertiary);
+        }
+
+        .article-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+            margin-top: 4px;
+        }
+
+        .article-progress {
+            font-size: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-secondary);
+        }
+
+        .article-bar {
+            height: 2px;
+            background: var(--border);
+            margin: 8px 0;
+        }
+
+        .article-bar-fill {
+            height: 100%;
+            background: var(--text);
+            border-radius: 1px;
+        }
+
+        .article-sections {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            margin-top: 8px;
+        }
+
+        .article-sections .done {
+            color: var(--success);
+        }
+
+        .article-sections .missing {
+            color: var(--text-tertiary);
+        }
+
+        /* Sections Status */
+        .sections-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .section-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            font-size: 13px;
+        }
+
+        .section-item-name {
+            color: var(--text);
+        }
+
+        .section-item-status {
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .status-complete {
+            background: #ecfdf5;
+            color: #059669;
+        }
+
+        .status-empty {
+            background: var(--accent-light);
+            color: var(--text-tertiary);
+        }
+
+        .status-partial {
+            background: #fffbeb;
+            color: #d97706;
+        }
+
+        /* Base Files */
+        .base-files {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .base-file {
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding: 8px 0;
+            border-bottom: 1px solid transparent;
+        }
+
+        .base-file:hover {
+            border-bottom-color: var(--text);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-size: 11px;
+            color: var(--text-tertiary);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Loading State */
+        .loading {
+            opacity: 0.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .main {
+                margin-left: 0;
+                padding: 24px;
+            }
         }
     </style>
 </head>
-<body class="flex min-h-screen">
-    
-    <!-- SIDEBAR -->
-    <aside class="sidebar w-64 flex-shrink-0 text-white hidden md:flex flex-col">
-        <div class="p-6 border-b border-gray-700">
-            <h1 class="text-xl font-bold flex items-center gap-2">
-                <i class="fas fa-graduation-cap text-indigo-400"></i>
-                FUCAPE
-            </h1>
-            <p class="text-xs text-gray-400 mt-1">Doutorado em Contabilidade</p>
-        </div>
-        
-        <nav class="flex-1 overflow-y-auto p-4">
-            <div class="mb-6">
-                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3 tracking-wider">TESE</h3>
-                <a href="Tese/tese_draft.html" target="_blank" class="nav-item flex items-center gap-3 py-2 px-3 rounded-lg text-sm">
-                    <i class="fas fa-file-alt text-gray-400"></i>
-                    <span>Draft da Tese</span>
-                </a>
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">Doutorado</div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">Tese</div>
+                <nav class="sidebar-nav">
+                    <a href="Tese/tese_draft.html" class="sidebar-link" target="_blank">
+                        <span>Draft da Tese</span>
+                    </a>
+                </nav>
             </div>
             
-            <div class="mb-6">
-                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3 tracking-wider">ARTIGOS</h3>
-                <div class="space-y-1 max-h-64 overflow-y-auto">
-                    <a href="Artigos/01-Opacidade-Institucional-Analise-Complexidade-Textual-Editais-Inovacao/artigo_01.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-indigo-600 text-xs flex items-center justify-center">1</span>
-                        <span>Opacidade Institucional</span>
-                    </a>
-                    <a href="Artigos/02-Auditoria-Continua-Deteccao-Anomalias-Precos/artigo_02.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-indigo-600 text-xs flex items-center justify-center">2</span>
-                        <span>Auditoria Contínua</span>
-                    </a>
-                    <a href="Artigos/03-Predicao-Fracasso-Risco-Aditivos-Cancelamentos/artigo_03.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-indigo-600 text-xs flex items-center justify-center">3</span>
-                        <span>Predição Fracasso</span>
-                    </a>
-                    <a href="Artigos/04-Apagao-Canetas-Quantificado-Latencia-Decisoria/artigo_04.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-indigo-600 text-xs flex items-center justify-center">4</span>
-                        <span>Apagão das Canetas</span>
-                    </a>
-                    <a href="Artigos/05-Redes-Fornecimento-Oligopolios-Analise-Grafos/artigo_05.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-indigo-600 text-xs flex items-center justify-center">5</span>
-                        <span>Redes Fornecimento</span>
-                    </a>
-                    <a href="Artigos/06-Sobrevivencia-Contratos-Inovacao-Analise-Kaplan-Meier/artigo_06.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-indigo-600 text-xs flex items-center justify-center">6</span>
-                        <span>Sobrevivência Contratos</span>
-                    </a>
-                    <a href="Artigos/07-Governanca-Algoritmica-Benchmarking-Eficiencia/artigo_07.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-indigo-600 text-xs flex items-center justify-center">7</span>
-                        <span>Governança Algorítmica</span>
-                    </a>
-                    <a href="Artigos/08-XAI-Setor-Publico-Prova-Conceito-Tribunais-Contas/artigo_08.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-indigo-600 text-xs flex items-center justify-center">8</span>
-                        <span>XAI Tribunais</span>
-                    </a>
-                    <a href="Artigos/09-Jurisprudencia-Medo-Analise-Discurso-Acordaos/artigo_09.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-gray-600 text-xs flex items-center justify-center">9</span>
-                        <span>Jurisprudência Medo</span>
-                    </a>
-                    <a href="Artigos/10-Uso-Retorico-Inovacao-Analise-Conteudo-Justificativas/artigo_10.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-gray-600 text-xs flex items-center justify-center">10</span>
-                        <span>Uso Retórico Inovação</span>
-                    </a>
-                    <a href="Artigos/11-Voz-Mercado-Analise-Impugnacoes-Editais-Tecnologia/artigo_11.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-gray-600 text-xs flex items-center justify-center">11</span>
-                        <span>Voz do Mercado</span>
-                    </a>
-                    <a href="Artigos/12-Evolucao-Risco-Legislacao-Compras-8.666-Marco-Startups/artigo_12.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-gray-600 text-xs flex items-center justify-center">12</span>
-                        <span>Evolução Risco</span>
-                    </a>
-                    <a href="Artigos/13-Dor-GovTechs-Netnografia-Ecosistema-Inovacao-Publica/artigo_13.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-gray-600 text-xs flex items-center justify-center">13</span>
-                        <span>Dor das GovTechs</span>
-                    </a>
-                    <a href="Artigos/14-Discurso-Custo-Brasil-Politica-Industrial-Narrativas-Pratica/artigo_14.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-gray-600 text-xs flex items-center justify-center">14</span>
-                        <span>Discurso Custo Brasil</span>
-                    </a>
-                    <a href="Artigos/15-Enquadramento-IA-Controle-Publico-Midia/artigo_15.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-gray-600 text-xs flex items-center justify-center">15</span>
-                        <span>IA na Mídia</span>
-                    </a>
-                    <a href="Artigos/16-Caixa-Preta-Setor-Publico-Revisao-Sistematica-XAI-Gestao-Publica/artigo_16.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-gray-600 text-xs flex items-center justify-center">16</span>
-                        <span>Revisão Sistemática XAI</span>
-                    </a>
-                    <a href="Artigos/17-DSR-Contabilidade-Publica-Mapeamento-Artefatos/artigo_17.html" target="_blank" class="nav-item flex items-center gap-2 py-2 px-3 rounded-lg text-sm">
-                        <span class="w-5 h-5 rounded bg-gray-600 text-xs flex items-center justify-center">17</span>
-                        <span>DSR Contabilidade</span>
-                    </a>
-                </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">Artigos</div>
+                <nav class="sidebar-nav">
+                    <a href="Artigos/01-Opacidade-Institucional-Analise-Complexidade-Textual-Editais-Inovacao/artigo_01.html" class="sidebar-link" target="_blank"><span class="num">01</span> Opacidade</a>
+                    <a href="Artigos/02-Auditoria-Continua-Deteccao-Anomalias-Precos/artigo_02.html" class="sidebar-link" target="_blank"><span class="num">02</span> Auditoria</a>
+                    <a href="Artigos/03-Predicao-Fracasso-Risco-Aditivos-Cancelamentos/artigo_03.html" class="sidebar-link" target="_blank"><span class="num">03</span> Predição</a>
+                    <a href="Artigos/04-Apagao-Canetas-Quantificado-Latencia-Decisoria/artigo_04.html" class="sidebar-link" target="_blank"><span class="num">04</span> Apagão</a>
+                    <a href="Artigos/05-Redes-Fornecimento-Oligopolios-Analise-Grafos/artigo_05.html" class="sidebar-link" target="_blank"><span class="num">05</span> Redes</a>
+                    <a href="Artigos/06-Sobrevivencia-Contratos-Inovacao-Analise-Kaplan-Meier/artigo_06.html" class="sidebar-link" target="_blank"><span class="num">06</span> Sobrevivência</a>
+                    <a href="Artigos/07-Governanca-Algoritmica-Benchmarking-Eficiencia/artigo_07.html" class="sidebar-link" target="_blank"><span class="num">07</span> Governança</a>
+                    <a href="Artigos/08-XAI-Setor-Publico-Prova-Conceito-Tribunais-Contas/artigo_08.html" class="sidebar-link" target="_blank"><span class="num">08</span> XAI</a>
+                    <a href="Artigos/09-Jurisprudencia-Medo-Analise-Discurso-Acordaos/artigo_09.html" class="sidebar-link" target="_blank"><span class="num">09</span> Jurisprudência</a>
+                    <a href="Artigos/10-Uso-Retorico-Inovacao-Analise-Conteudo-Justificativas/artigo_10.html" class="sidebar-link" target="_blank"><span class="num">10</span> Retórico</a>
+                    <a href="Artigos/11-Voz-Mercado-Analise-Impugnacoes-Editais-Tecnologia/artigo_11.html" class="sidebar-link" target="_blank"><span class="num">11</span> Mercado</a>
+                    <a href="Artigos/12-Evolucao-Risco-Legislacao-Compras-8.666-Marco-Startups/artigo_12.html" class="sidebar-link" target="_blank"><span class="num">12</span> Legislação</a>
+                    <a href="Artigos/13-Dor-GovTechs-Netnografia-Ecosistema-Inovacao-Publica/artigo_13.html" class="sidebar-link" target="_blank"><span class="num">13</span> GovTechs</a>
+                    <a href="Artigos/14-Discurso-Custo-Brasil-Politica-Industrial-Narrativas-Pratica/artigo_14.html" class="sidebar-link" target="_blank"><span class="num">14</span> Custo Brasil</a>
+                    <a href="Artigos/15-Enquadramento-IA-Controle-Publico-Midia/artigo_15.html" class="sidebar-link" target="_blank"><span class="num">15</span> Mídia</a>
+                    <a href="Artigos/16-Caixa-Preta-Setor-Publico-Revisao-Sistematica-XAI-Gestao-Publica/artigo_16.html" class="sidebar-link" target="_blank"><span class="num">16</span> Revisão</a>
+                    <a href="Artigos/17-DSR-Contabilidade-Publica-Mapeamento-Artefatos/artigo_17.html" class="sidebar-link" target="_blank"><span class="num">17</span> DSR</a>
+                </nav>
             </div>
             
-            <div>
-                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-3 tracking-wider">ARQUIVOS BASE</h3>
-                <a href="Direcionamento.md" class="nav-item flex items-center gap-3 py-2 px-3 rounded-lg text-sm">
-                    <i class="fas fa-compass text-gray-400"></i>
-                    <span>Direcionamento</span>
-                </a>
-                <a href="documentacao.md" class="nav-item flex items-center gap-3 py-2 px-3 rounded-lg text-sm">
-                    <i class="fas fa-folder text-gray-400"></i>
-                    <span>Documentação</span>
-                </a>
-                <a href="escrita.md" class="nav-item flex items-center gap-3 py-2 px-3 rounded-lg text-sm">
-                    <i class="fas fa-pen text-gray-400"></i>
-                    <span>Guia de Escrita</span>
-                </a>
-                <a href="pesquisa.md" class="nav-item flex items-center gap-3 py-2 px-3 rounded-lg text-sm">
-                    <i class="fas fa-search text-gray-400"></i>
-                    <span>Pesquisa</span>
-                </a>
-                <a href="estrategia_paper.md" class="nav-item flex items-center gap-3 py-2 px-3 rounded-lg text-sm">
-                    <i class="fas fa-newspaper text-gray-400"></i>
-                    <span>Estratégia Papers</span>
-                </a>
-                <a href="processo.md" class="nav-item flex items-center gap-3 py-2 px-3 rounded-lg text-sm">
-                    <i class="fas fa-cogs text-gray-400"></i>
-                    <span>Processo</span>
-                </a>
+            <div class="sidebar-section">
+                <div class="sidebar-title">Arquivos Base</div>
+                <nav class="sidebar-nav">
+                    <a href="Direcionamento.md" class="sidebar-link">Direcionamento</a>
+                    <a href="documentacao.md" class="sidebar-link">Documentação</a>
+                    <a href="escrita.md" class="sidebar-link">Escrita</a>
+                    <a href="pesquisa.md" class="sidebar-link">Pesquisa</a>
+                    <a href="estrategia_paper.md" class="sidebar-link">Estratégia</a>
+                    <a href="processo.md" class="sidebar-link">Processo</a>
+                </nav>
             </div>
-        </nav>
-        
-        <div class="p-4 border-t border-gray-700">
-            <a href="https://github.com/renato0503/TeseDoutorado" target="_blank" class="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition">
-                <i class="fab fa-github"></i>
-                <span>GitHub Repository</span>
-            </a>
-        </div>
-    </aside>
+        </aside>
 
-    <!-- MAIN CONTENT -->
-    <main class="flex-1 flex flex-col">
-        
-        <!-- HEADER -->
-        <header class="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h2 class="text-2xl font-bold text-gray-800">Painel de Controle</h2>
-                    <p class="text-sm text-gray-500">Copiloto Algorítmico para Compras Públicas Complexas</p>
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Header -->
+            <header class="header">
+                <h1>Copiloto Algorítmico para Compras Públicas Complexas</h1>
+                <p>Transparência de Algoritmos e Inteligência Artificial em Contratações Públicas</p>
+                <div class="header-meta">
+                    <span><strong>Orientador:</strong> Prof. Dr. Olavo Venturim Caldas</span>
+                    <span><strong>Instituição:</strong> Fucape Business School</span>
+                    <span><strong>Atualizado:</strong> <span id="last-update">--</span></span>
                 </div>
-                <div class="flex items-center gap-4">
-                    <div class="bg-indigo-50 px-4 py-2 rounded-lg">
-                        <p class="text-xs text-indigo-600 font-medium">Qualificação</p>
-                        <p class="text-lg font-bold text-indigo-700" id="dias-qualificacao">-- dias</p>
-                    </div>
-                    <div class="bg-emerald-50 px-4 py-2 rounded-lg">
-                        <p class="text-xs text-emerald-600 font-medium">Defesa</p>
-                        <p class="text-lg font-bold text-emerald-700" id="dias-defesa">-- dias</p>
-                    </div>
-                </div>
-            </div>
-        </header>
+            </header>
 
-        <!-- CONTENT -->
-        <div class="flex-1 overflow-y-auto p-6">
-            
-            <!-- PROGRESSO DA TESE -->
-            <section class="mb-8">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                    <i class="fas fa-file-alt text-indigo-600"></i>
-                    Progresso da Tese
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Meta de Páginas -->
-                    <div class="card p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h4 class="text-sm font-medium text-gray-600">Meta de Páginas</h4>
-                            <span class="text-2xl font-bold text-gray-800">0<span class="text-gray-400 text-sm">/180</span></span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-3">
-                            <div class="bg-indigo-600 h-3 rounded-full" style="width: 0%"></div>
-                        </div>
-                        <p class="text-xs text-gray-500 mt-2">0% completado</p>
-                    </div>
-                    
-                    <!-- Checkbox Items -->
-                    <div class="card p-6 col-span-2">
-                        <h4 class="text-sm font-medium text-gray-600 mb-4">Checklist de Elementos</h4>
-                        <div class="grid grid-cols-2 gap-3">
-                            <label class="flex items-center gap-2 text-sm">
-                                <input type="checkbox" class="rounded text-indigo-600" checked disabled>
-                                <span class="text-gray-600">Elementos Pré-textuais</span>
-                            </label>
-                            <label class="flex items-center gap-2 text-sm">
-                                <input type="checkbox" class="rounded text-indigo-600">
-                                <span class="text-gray-800">Introdução</span>
-                            </label>
-                            <label class="flex items-center gap-2 text-sm">
-                                <input type="checkbox" class="rounded text-indigo-600">
-                                <span class="text-gray-800">Capítulo 2 (Artigo 1)</span>
-                            </label>
-                            <label class="flex items-center gap-2 text-sm">
-                                <input type="checkbox" class="rounded text-indigo-600">
-                                <span class="text-gray-800">Capítulo 3 (Artigo 2)</span>
-                            </label>
-                            <label class="flex items-center gap-2 text-sm">
-                                <input type="checkbox" class="rounded text-indigo-600">
-                                <span class="text-gray-800">Capítulo 4 (Produto Tech)</span>
-                            </label>
-                            <label class="flex items-center gap-2 text-sm">
-                                <input type="checkbox" class="rounded text-indigo-600">
-                                <span class="text-gray-800">Considerações Finais</span>
-                            </label>
-                            <label class="flex items-center gap-2 text-sm">
-                                <input type="checkbox" class="rounded text-indigo-600">
-                                <span class="text-gray-800">Referências</span>
-                            </label>
-                            <label class="flex items-center gap-2 text-sm">
-                                <input type="checkbox" class="rounded text-indigo-600">
-                                <span class="text-gray-800">Apêndices</span>
-                            </label>
-                        </div>
+            <!-- Tese Overview -->
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-title">Tese</span>
+                    <span class="section-count">1 arquivo</span>
+                </div>
+                <div class="tese-overview">
+                    <div class="tese-title">Draft da Tese</div>
+                    <div class="tese-subtitle">Copiloto Algorítmico para Compras Públicas Complexas</div>
+                    <div class="progress-text" id="tese-progress">Carregando...</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="tese-bar" style="width: 0%"></div>
                     </div>
                 </div>
-            </section>
-
-            <!-- PROGRESSO DOS ARTIGOS -->
-            <section class="mb-8">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                    <i class="fas fa-newspaper text-indigo-600"></i>
-                    Progresso dos Artigos
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                    
-                    <!-- Artigo 1 -->
-                    <div class="card p-4 border-l-4 border-blue-500">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded">QUANTI</span>
-                            <span class="status-planejamento text-xs px-2 py-1 rounded-full">Planejamento</span>
-                        </div>
-                        <h5 class="font-medium text-gray-800 text-sm mb-2">1. Opacidade Institucional</h5>
-                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
-                            <div class="bg-blue-500 h-2 rounded-full" style="width: 15%"></div>
-                        </div>
-                        <p class="text-xs text-gray-500">0 / 30 páginas • Faltam: Metodologia, Resultados</p>
-                    </div>
-                    
-                    <!-- Artigo 2 -->
-                    <div class="card p-4 border-l-4 border-blue-500">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded">QUANTI</span>
-                            <span class="status-planejamento text-xs px-2 py-1 rounded-full">Planejamento</span>
-                        </div>
-                        <h5 class="font-medium text-gray-800 text-sm mb-2">2. Auditoria Contínua</h5>
-                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
-                            <div class="bg-blue-500 h-2 rounded-full" style="width: 10%"></div>
-                        </div>
-                        <p class="text-xs text-gray-500">0 / 30 páginas • Faltam: Intro, Fundamentação</p>
-                    </div>
-                    
-                    <!-- Artigo 8 (Revisão Sistemática) -->
-                    <div class="card p-4 border-l-4 border-purple-500">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-bold text-purple-600 bg-purple-100 px-2 py-1 rounded">QUALI</span>
-                            <span class="status-redacao text-xs px-2 py-1 rounded-full">Redação</span>
-                        </div>
-                        <h5 class="font-medium text-gray-800 text-sm mb-2">16. Revisão Sistemática XAI</h5>
-                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
-                            <div class="bg-purple-500 h-2 rounded-full" style="width: 35%"></div>
-                        </div>
-                        <p class="text-xs text-gray-500">10 / 30 páginas • Faltam: Resultados, Conclusão</p>
-                    </div>
-                    
-                    <!-- Artigo 17 (Scoping Review) -->
-                    <div class="card p-4 border-l-4 border-purple-500">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-bold text-purple-600 bg-purple-100 px-2 py-1 rounded">QUALI</span>
-                            <span class="status-planejamento text-xs px-2 py-1 rounded-full">Planejamento</span>
-                        </div>
-                        <h5 class="font-medium text-gray-800 text-sm mb-2">17. DSR Contabilidade</h5>
-                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
-                            <div class="bg-purple-500 h-2 rounded-full" style="width: 5%"></div>
-                        </div>
-                        <p class="text-xs text-gray-500">0 / 25 páginas • Faltam: Todos</p>
-                    </div>
-                    
-                    <!-- Artigo 13 (Delphi) -->
-                    <div class="card p-4 border-l-4 border-orange-500">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-bold text-orange-600 bg-orange-100 px-2 py-1 rounded">DELPHI</span>
-                            <span class="status-planejamento text-xs px-2 py-1 rounded-full">Planejamento</span>
-                        </div>
-                        <h5 class="font-medium text-gray-800 text-sm mb-2">13. Dor das GovTechs</h5>
-                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
-                            <div class="bg-orange-500 h-2 rounded-full" style="width: 0%"></div>
-                        </div>
-                        <p class="text-xs text-gray-500">0 / 35 páginas •等待 Delphi</p>
-                    </div>
-                    
-                    <!-- Artigo 7 (Produto) -->
-                    <div class="card p-4 border-l-4 border-green-500">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded">PRODUTO</span>
-                            <span class="status-planejamento text-xs px-2 py-1 rounded-full">Planejamento</span>
-                        </div>
-                        <h5 class="font-medium text-gray-800 text-sm mb-2">7. Governança Algorítmica</h5>
-                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
-                            <div class="bg-green-500 h-2 rounded-full" style="width: 0%"></div>
-                        </div>
-                        <p class="text-xs text-gray-500">0 / 40 páginas •等待 Artefato</p>
-                    </div>
-
-                    <!-- Placeholders para outros artigos -->
-                    <div class="card p-4 border-l-4 border-gray-300 opacity-60">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded">QUANTI</span>
-                            <span class="text-xs text-gray-400">Pendente</span>
-                        </div>
-                        <h5 class="font-medium text-gray-500 text-sm mb-2">3-6. Artigos Quantitativos</h5>
-                        <p class="text-xs text-gray-400">Aguardando desenvolvimento</p>
-                    </div>
-                    
-                    <div class="card p-4 border-l-4 border-gray-300 opacity-60">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded">QUALI</span>
-                            <span class="text-xs text-gray-400">Pendente</span>
-                        </div>
-                        <h5 class="font-medium text-gray-500 text-sm mb-2">9-12, 14-15. Artigos Quali</h5>
-                        <p class="text-xs text-gray-400">Aguardando desenvolvimento</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- TO-DO LIST E ALERTAS -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
-                <!-- TO-DO LIST -->
-                <div class="card p-6">
-                    <h4 class="text-sm font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                        <i class="fas fa-tasks text-indigo-600"></i>
-                        Próximos Passos
-                    </h4>
-                    <div class="space-y-3" id="todo-list">
-                        <label class="flex items-start gap-3 cursor-pointer">
-                            <input type="checkbox" class="mt-1 rounded text-indigo-600">
-                            <div>
-                                <p class="text-sm text-gray-700">Finalizar subseção do referencial teórico</p>
-                                <p class="text-xs text-gray-400">Artigo 16 - Revisão Sistemática</p>
-                            </div>
-                        </label>
-                        <label class="flex items-start gap-3 cursor-pointer">
-                            <input type="checkbox" class="mt-1 rounded text-indigo-600">
-                            <div>
-                                <p class="text-sm text-gray-700">Revisar normas APA da introdução</p>
-                                <p class="text-xs text-gray-400">Tese - Capítulo 1</p>
-                            </div>
-                        </label>
-                        <label class="flex items-start gap-3 cursor-pointer">
-                            <input type="checkbox" class="mt-1 rounded text-indigo-600">
-                            <div>
-                                <p class="text-sm text-gray-700">Coletar dados via API PNCP</p>
-                                <p class="text-xs text-gray-400">Biblioteca de editais</p>
-                            </div>
-                        </label>
-                        <label class="flex items-start gap-3 cursor-pointer">
-                            <input type="checkbox" class="mt-1 rounded text-indigo-600">
-                            <div>
-                                <p class="text-sm text-gray-700">Definir painel Delphi</p>
-                                <p class="text-xs text-gray-400">10 gestores de compras</p>
-                            </div>
-                        </label>
-                        <label class="flex items-start gap-3 cursor-pointer">
-                            <input type="checkbox" class="mt-1 rounded text-indigo-600">
-                            <div>
-                                <p class="text-sm text-gray-700">Atualizar datas de qualificação/defesa</p>
-                                <p class="text-xs text-gray-400">Configurar no painel</p>
-                            </div>
-                        </label>
-                    </div>
-                    <button onclick="addTodo()" class="mt-4 text-sm text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
-                        <i class="fas fa-plus"></i> Adicionar tarefa
-                    </button>
+                <!-- Seções da Tese -->
+                <div class="sections-list" id="tese-sections">
+                    <!-- Preenchido via JS -->
                 </div>
+            </section>
 
-                <!-- ALERTAS -->
-                <div class="card p-6">
-                    <h4 class="text-sm font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                        <i class="fas fa-exclamation-triangle text-amber-500"></i>
-                        Alertas
-                    </h4>
-                    <div class="space-y-3">
-                        <div class="alert-priority-high bg-red-50 p-3 rounded-lg">
-                            <div class="flex items-start gap-2">
-                                <i class="fas fa-circle text-red-500 text-xs mt-1"></i>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-800">Prazo Artigo 16</p>
-                                    <p class="text-xs text-gray-500">Revisão sistemática deve ser submetida em 30 dias</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="alert-priority-medium bg-amber-50 p-3 rounded-lg">
-                            <div class="flex items-start gap-2">
-                                <i class="fas fa-circle text-amber-500 text-xs mt-1"></i>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-800">Aguardando credenciais</p>
-                                    <p class="text-xs text-gray-500">API PNCP precisa de registro</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="alert-priority-low bg-green-50 p-3 rounded-lg">
-                            <div class="flex items-start gap-2">
-                                <i class="fas fa-circle text-green-500 text-xs mt-1"></i>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-800">Estrutura concluída</p>
-                                    <p class="text-xs text-gray-500">17 skeletons de artigos HTML criados</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Artigos -->
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-title">Artigos</span>
+                    <span class="section-count">17 artigos</span>
                 </div>
-            </div>
+                <div class="articles-grid" id="articles-grid">
+                    <!-- Preenchido via JS -->
+                </div>
+            </section>
 
-            <!-- RODAPÉ -->
-            <footer class="mt-8 text-center text-xs text-gray-400">
-                <p>Painel de Controle - Doutorado FUCAPE | Última atualização: <span id="last-update"></span></p>
+            <!-- Footer -->
+            <footer class="footer">
+                <span>Repositório: <a href="https://github.com/renato0503/TeseDoutorado" target="_blank">github.com/renato0503/TeseDoutorado</a></span>
+                <span>Painel automático — leitura em tempo real</span>
             </footer>
-        </div>
-    </main>
+        </main>
+    </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- Script de Automação -->
     <script>
-        // Data de qualificação (ajuste aqui)
-        const dataQualificacao = new Date('2026-12-15');
-        // Data de defesa (ajuste aqui)
-        const dataDefesa = new Date('2027-06-15');
+        // Metas de palavras por documento
+        const META_TESE = 40000;
         
-        // Função para calcular dias
-        function calcularDias(dataFutura) {
-            const hoje = new Date();
-            const diff = dataFutura - hoje;
-            return Math.ceil(diff / (1000 * 60 * 60 * 24));
+        const ARTIGOS = [
+            { id: 1, pasta: '01-Opacidade-Institucional-Analise-Complexidade-Textual-Editais-Inovacao', arquivo: 'artigo_01.html', titulo: 'Opacidade Institucional', meta: 8000 },
+            { id: 2, pasta: '02-Auditoria-Continua-Deteccao-Anomalias-Precos', arquivo: 'artigo_02.html', titulo: 'Auditoria Contínua', meta: 8000 },
+            { id: 3, pasta: '03-Predicao-Fracasso-Risco-Aditivos-Cancelamentos', arquivo: 'artigo_03.html', titulo: 'Predição de Fracasso', meta: 8000 },
+            { id: 4, pasta: '04-Apagao-Canetas-Quantificado-Latencia-Decisoria', arquivo: 'artigo_04.html', titulo: 'Apagão das Canetas', meta: 8000 },
+            { id: 5, pasta: '05-Redes-Fornecimento-Oligopolios-Analise-Grafos', arquivo: 'artigo_05.html', titulo: 'Redes de Fornecimento', meta: 8000 },
+            { id: 6, pasta: '06-Sobrevivencia-Contratos-Inovacao-Analise-Kaplan-Meier', arquivo: 'artigo_06.html', titulo: 'Sobrevivência Contratos', meta: 8000 },
+            { id: 7, pasta: '07-Governanca-Algoritmica-Benchmarking-Eficiencia', arquivo: 'artigo_07.html', titulo: 'Governança Algorítmica', meta: 10000 },
+            { id: 8, pasta: '08-XAI-Setor-Publico-Prova-Conceito-Tribunais-Contas', arquivo: 'artigo_08.html', titulo: 'XAI Tribunais', meta: 8000 },
+            { id: 9, pasta: '09-Jurisprudencia-Medo-Analise-Discurso-Acordaos', arquivo: 'artigo_09.html', titulo: 'Jurisprudência do Medo', meta: 8000 },
+            { id: 10, pasta: '10-Uso-Retorico-Inovacao-Analise-Conteudo-Justificativas', arquivo: 'artigo_10.html', titulo: 'Uso Retórico Inovação', meta: 8000 },
+            { id: 11, pasta: '11-Voz-Mercado-Analise-Impugnacoes-Editais-Tecnologia', arquivo: 'artigo_11.html', titulo: 'Voz do Mercado', meta: 8000 },
+            { id: 12, pasta: '12-Evolucao-Risco-Legislacao-Compras-8.666-Marco-Startups', arquivo: 'artigo_12.html', titulo: 'Evolução Risco Legislativo', meta: 8000 },
+            { id: 13, pasta: '13-Dor-GovTechs-Netnografia-Ecosistema-Inovacao-Publica', arquivo: 'artigo_13.html', titulo: 'Dor das GovTechs', meta: 10000 },
+            { id: 14, pasta: '14-Discurso-Custo-Brasil-Politica-Industrial-Narrativas-Pratica', arquivo: 'artigo_14.html', titulo: 'Discurso Custo Brasil', meta: 8000 },
+            { id: 15, pasta: '15-Enquadramento-IA-Controle-Publico-Midia', arquivo: 'artigo_15.html', titulo: 'IA na Mídia', meta: 8000 },
+            { id: 16, pasta: '16-Caixa-Preta-Setor-Publico-Revisao-Sistematica-XAI-Gestao-Publica', arquivo: 'artigo_16.html', titulo: 'Revisão Sistemática XAI', meta: 12000 },
+            { id: 17, pasta: '17-DSR-Contabilidade-Publica-Mapeamento-Artefatos', arquivo: 'artigo_17.html', titulo: 'DSR Contabilidade', meta: 8000 }
+        ];
+
+        // Seções padrão para análise
+        const SECOES_TESE = [
+            'INTRODUÇÃO', 'Contextualização', 'Problema de Pesquisa', 'Justificativa', 'Objetivos', 'Estrutura da Tese',
+            'FUNDAMENTAÇÃO TEÓRICA', 'Economia dos Custos de Transação', 'Estado Empreendedor', 'Transparência Algorítmica', 'Design Science Research',
+            'METODOLOGIA', 'Tipo de Pesquisa', 'Produto de Tecnologia', 'Coleta de Dados', 'Análise de Dados',
+            'RESULTADOS ESPERADOS', 'Eixo 1', 'Eixo 2', 'Eixo 3',
+            'CONSIDERAÇÕES FINAIS', 'Contribuições', 'Limitações', 'Sugestões'
+        ];
+
+        const SECOES_ARTIGO = [
+            'INTRODUÇÃO', 'FUNDAMENTAÇÃO TEÓRICA', 'METODOLOGIA', 'RESULTADOS E DISCUSSÃO', 'CONCLUSÕES', 'REFERÊNCIAS'
+        ];
+
+        // Função para contar palavras
+        function countWords(text) {
+            return text.trim().split(/\s+/).filter(w => w.length > 0).length;
         }
-        
-        // Atualizar contadores
-        document.getElementById('dias-qualificacao').textContent = calcularDias(dataQualificacao) + ' dias';
-        document.getElementById('dias-defesa').textContent = calcularDias(dataDefesa) + ' dias';
-        
-        // Data de atualização
-        document.getElementById('last-update').textContent = new Date().toLocaleDateString('pt-BR');
-        
-        // Função para adicionar tarefa
-        function addTodo() {
-            const texto = prompt('Nova tarefa:');
-            if (texto) {
-                const container = document.getElementById('todo-list');
-                const novaTarefa = document.createElement('label');
-                novaTarefa.className = 'flex items-start gap-3 cursor-pointer';
-                novaTarefa.innerHTML = `
-                    <input type="checkbox" class="mt-1 rounded text-indigo-600">
-                    <div>
-                        <p class="text-sm text-gray-700">${texto}</p>
-                        <p class="text-xs text-gray-400">Adicionado agora</p>
-                    </div>
-                `;
-                container.appendChild(novaTarefa);
+
+        // Função para analisar seções
+        function analyzeSections(html) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            
+            const h2s = Array.from(doc.querySelectorAll('h2'));
+            const h3s = Array.from(doc.querySelectorAll('h3'));
+            
+            const headings = [...h2s, ...h3s].sort((a, b) => a.offsetTop - b.offsetTop);
+            
+            const sections = [];
+            const placeholders = ['[Seção em construção]', '[Em construção]', '[Em construção...]', '[Espaço reservado]', '[Conclusões a serem preenchidas]', '[Preencher]', '[Placeholder]'];
+            
+            for (let i = 0; i < headings.length; i++) {
+                const heading = headings[i];
+                const nextHeading = headings[i + 1];
+                const headingText = heading.textContent.trim().toUpperCase();
+                
+                let sectionContent = '';
+                if (nextHeading) {
+                    sectionContent = doc.body.substring(heading.offsetTop, nextHeading.offsetTop);
+                } else {
+                    sectionContent = doc.body.substring(heading.offsetTop);
+                }
+                
+                // Limpar conteúdo
+                const cleanContent = sectionContent.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+                
+                // Verificar se é placeholder
+                const isPlaceholder = placeholders.some(p => cleanContent.toLowerCase().includes(p.toLowerCase()));
+                const hasRealContent = cleanContent.length > 50 && !isPlaceholder;
+                
+                sections.push({
+                    name: headingText,
+                    words: countWords(cleanContent),
+                    hasContent: hasRealContent
+                });
+            }
+            
+            return sections;
+        }
+
+        // Função para analisar arquivo
+        async function analyzeFile(path) {
+            try {
+                const response = await fetch(path);
+                if (!response.ok) return null;
+                const html = await response.text();
+                
+                // Extrair texto puro
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const textContent = doc.body.textContent || '';
+                const wordCount = countWords(textContent);
+                
+                // Analisar seções
+                const sections = analyzeSections(html);
+                
+                return {
+                    words: wordCount,
+                    sections: sections,
+                    doneSections: sections.filter(s => s.hasContent).length,
+                    totalSections: sections.length
+                };
+            } catch (e) {
+                console.error(`Erro ao analisar ${path}:`, e);
+                return null;
             }
         }
-        
-        // Salvar estado das checkboxes (localStorage)
-        document.querySelectorAll('#todo-list input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                localStorage.setItem('todo-state', JSON.stringify(
-                    Array.from(document.querySelectorAll('#todo-list input[type="checkbox"]')).map(cb => cb.checked)
-                ));
+
+        // Renderizar progresso da tese
+        function renderTeseProgress(data, meta) {
+            const words = data?.words || 0;
+            const percent = Math.min(100, Math.round((words / meta) * 100));
+            
+            document.getElementById('tese-progress').textContent = 
+                `${words.toLocaleString()} / ${meta.toLocaleString()} palavras (${percent}%)`;
+            document.getElementById('tese-bar').style.width = `${percent}%`;
+            
+            // Renderizar seções
+            const sectionsContainer = document.getElementById('tese-sections');
+            if (data?.sections) {
+                const mainSections = data.sections.filter(s => 
+                    s.name.includes('INTRODUÇÃO') || 
+                    s.name.includes('FUNDAMENTAÇÃO') || 
+                    s.name.includes('METODOLOGIA') || 
+                    s.name.includes('RESULTADOS') || 
+                    s.name.includes('CONSIDERAÇÕES')
+                );
+                
+                sectionsContainer.innerHTML = mainSections.map(s => `
+                    <div class="section-item">
+                        <span class="section-item-name">${s.name}</span>
+                        <span class="section-item-status ${s.hasContent ? 'status-complete' : 'status-empty'}">
+                            ${s.hasContent ? 'OK' : 'vazio'}
+                        </span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Renderizar artigos
+        function renderArticles(articlesData) {
+            const grid = document.getElementById('articles-grid');
+            
+            grid.innerHTML = ARTIGOS.map(artigo => {
+                const data = articlesData[artigo.id] || { words: 0, sections: [], doneSections: 0, totalSections: 0 };
+                const percent = Math.min(100, Math.round((data.words / artigo.meta) * 100));
+                
+                // Verificar seções presentes
+                const presentSections = data.sections.filter(s => s.hasContent).map(s => s.name.replace('2. ', '').replace('3. ', '')).slice(0, 3);
+                
+                return `
+                    <div class="article-card">
+                        <div class="article-header">
+                            <div>
+                                <div class="article-num">Artigo ${String(artigo.id).padStart(2, '0')}</div>
+                                <div class="article-title">${artigo.titulo}</div>
+                            </div>
+                        </div>
+                        <div class="article-progress">${data.words.toLocaleString()} / ${artigo.meta.toLocaleString()} (${percent}%)</div>
+                        <div class="article-bar">
+                            <div class="article-bar-fill" style="width: ${percent}%"></div>
+                        </div>
+                        <div class="article-sections">
+                            ${data.totalSections > 0 
+                                ? `${data.doneSections}/${data.totalSections} seções preenchidas` 
+                                : 'Aguardando análise'}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Inicializar
+        async function init() {
+            // Atualizar timestamp
+            document.getElementById('last-update').textContent = new Date().toLocaleDateString('pt-BR');
+            
+            // Analisar tese
+            const teseData = await analyzeFile('Tese/tese_draft.html');
+            renderTeseProgress(teseData, META_TESE);
+            
+            // Analisar artigos
+            const articlesPromises = ARTIGOS.map(async artigo => {
+                const path = `Artigos/${artigo.pasta}/${artigo.arquivo}`;
+                const data = await analyzeFile(path);
+                return { id: artigo.id, data };
             });
-        });
-        
-        // Carregar estado
-        const savedState = JSON.parse(localStorage.getItem('todo-state') || '[]');
-        document.querySelectorAll('#todo-list input[type="checkbox"]').forEach((checkbox, index) => {
-            if (savedState[index]) checkbox.checked = true;
-        });
+            
+            const articlesResults = await Promise.all(articlesPromises);
+            const articlesData = {};
+            articlesResults.forEach(r => {
+                if (r.data) articlesData[r.id] = r.data;
+            });
+            
+            renderArticles(articlesData);
+        }
+
+        // Executar quando DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
