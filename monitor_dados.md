@@ -68,7 +68,7 @@
 | # | Artigo | Dados Necessários | Fonte | Status |
 |---|--------|-------------------|-------|--------|
 | 16 | XAI em Gestão Pública: Revisão Sistemática | Artigos acadêmicos (52 filtrados) | OpenAlex | ✅ Pronto |
-| 17 | DSR em Contabilidade Pública: Mapeamento | Artigos acadêmicos (~100-200) | Scopus + SciELO | 🔴 Pendente |
+| 17 | DSR em Contabilidade Pública: Mapeamento | Artigos acadêmicos (42 filtrados) | OpenAlex | ✅ Pronto |
 
 ---
 
@@ -87,9 +87,9 @@
 
 | Categoria | Quantidade | Porcentagem |
 |-----------|------------|--------------|
-| Artigos com dados ✅ | 1 | 5.9% |
+| Artigos com dados ✅ | 2 | 11.8% |
 | Artigos com dados parciais ⚠️ | 2 | 11.8% |
-| Artigos pendentes 🔴 | 14 | 82.4% |
+| Artigos pendentes 🔴 | 13 | 76.5% |
 
 ### Próximos Passos Prioritários
 
