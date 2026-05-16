@@ -11,6 +11,6 @@ Thumbs.db
 .idea/
 
 # Arquivos de saída (serão gerados depois)
-*.html
-*.docx
-*.xlsx
+# *.html  # agora serão versionados
+# *.docx
+# *.xlsx
