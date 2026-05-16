@@ -144,6 +144,46 @@ Doutorado/
 
 ```
 Base_de_Dados_e_APIs/
+├── Raw_Data/                          # Dados brutos extraídos
+│   ├── Artefato_Copiloto/            # Dados para o Copiloto Algorítmico
+│   │   ├── editais_json/             # Editais de inovação/TI/sustentabilidade
+│   │   ├── contratos_json/           # Contratos processados
+│   │   └──预处理/                    # Dados pré-processados para IA
+│   │
+│   ├── Artigos_Quanti/               # Dados para artigos quantitativos
+│   │   ├── Artigo_01_Opacidade/     # Complexidade textual (PNCP)
+│   │   ├── Artigo_02_Auditoria/      # Detecção anomalias (Portal Transparência)
+│   │   ├── Artigo_03_Predicao/       # Predição fracasso (PNCP + Transparência)
+│   │   ├── Artigo_04_Apagao/         # Latência decisória (TCU)
+│   │   ├── Artigo_05_Redes/          # Redes fornecimento (CNPJs)
+│   │   ├── Artigo_06_Sobrevivencia/  # Análise sobrevivência (Transparência)
+│   │   ├── Artigo_07_Governanca/      # Benchmarking (Siconfi)
+│   │   └── Artigo_08_XAI/            # Explicabilidade SHAP (TCU)
+│   │
+│   ├── Artigos_Quali/                # Dados para artigos qualitativos
+│   │   ├── Artigo_09_Jurisprudencia/ # Acórdãos TCU
+│   │   ├── Artigo_10_Retorico/       # Justificativas PNCP
+│   │   ├── Artigo_11_Mercado/        # Impugnações Compras.gov
+│   │   ├── Artigo_12_Legislacao/      # LexML + Planalto
+│   │   ├── Artigo_13_GovTechs/        # LinkedIn + Medium
+│   │   ├── Artigo_14_Custo_Brasil/   # Relatórios MDIC
+│   │   └── Artigo_15_Midia/           # NewsAPI
+│   │
+│   └── Revisao_Sistematica/           # Dados para revisão sistemática
+│       ├── artigos_xai_gestao_publica.json
+│       ├── referencias_revisao.bib
+│       └── analise_bibliometrica.csv
+│
+├── Scripts_Extracao/                  # Códigos de consumo de API
+│   ├── extrator_pncp.py              # Cliente Python para PNCP ✓
+│   ├── extrator_academico.py         # Extrator acadêmico ✓
+│   ├── extrator_transparencia.py     # Portal Transparência
+│   ├── extrator_tcu.py               # Jurisprudência TCU
+│   └── pipeline.py                   # Pipeline de ETL completo
+│
+└── README.md                          # Documentação técnica
+```
+Base_de_Dados_e_APIs/
 ├── Raw_Data/                    # Dados brutos extraídos
 │   ├── editais_json/           # Editais em formato JSON
 │   ├── contratos_json/         # Contratos em formato JSON

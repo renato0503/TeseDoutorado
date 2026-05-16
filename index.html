@@ -363,6 +363,192 @@
         .status-done { background: rgba(52, 199, 89, 0.12); color: var(--accent-green); }
         .status-pending { background: #f5f5f7; color: var(--text-tertiary); }
 
+        /* Data Ecosystem */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 14px;
+        }
+
+        .data-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .data-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .data-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .data-title {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 2px;
+        }
+
+        .data-value {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .data-sub {
+            font-size: 10px;
+            color: var(--text-tertiary);
+        }
+
+        /* Data Health Tracker */
+        .health-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .health-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            box-shadow: var(--shadow-card);
+            text-align: center;
+        }
+
+        .health-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .health-title {
+            font-size: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .health-badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 10px;
+        }
+
+        .health-badge.ready {
+            background: rgba(52, 199, 89, 0.15);
+            color: var(--accent-green);
+        }
+
+        .health-badge.partial {
+            background: rgba(255, 149, 0, 0.15);
+            color: var(--accent-orange);
+        }
+
+        .health-badge.pending {
+            background: rgba(255, 59, 48, 0.15);
+            color: #ff3b30;
+        }
+
+        .health-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        .health-subtitle {
+            font-size: 10px;
+            color: var(--text-tertiary);
+        }
+
+        .health-detail {
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .health-detail-header {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .health-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .health-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .health-bar-label {
+            font-size: 10px;
+            color: var(--text-secondary);
+            width: 50px;
+            flex-shrink: 0;
+        }
+
+        .health-bar-track {
+            flex: 1;
+            height: 6px;
+            background: #f0f0f0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .health-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .health-bar-fill.ready { background: var(--accent-green); }
+        .health-bar-fill.partial { background: var(--accent-orange); }
+        .health-bar-fill.pending { background: #ff3b30; }
+
+        .health-bar-status {
+            font-size: 9px;
+            width: 60px;
+            text-align: right;
+        }
+
+        .monitor-link {
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .monitor-link a {
+            font-size: 11px;
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .monitor-link a:hover {
+            text-decoration: underline;
+        }
+
         /* Articles Grid */
         .articles-grid {
             display: grid;
@@ -560,6 +746,94 @@
                         <div class="progress-fill" id="tese-bar" style="width: 0%"></div>
                     </div>
                     <div class="sections-grid" id="tese-sections"></div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-title">Ecossistema de Dados</span>
+                    <span style="font-size: 11px; color: var(--text-tertiary);">Base processada</span>
+                </div>
+                <div class="data-grid">
+                    <div class="data-card">
+                        <div class="data-icon" style="background: rgba(0, 122, 255, 0.1); color: var(--accent-blue);">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="data-info">
+                            <div class="data-title">Repositório Acadêmico</div>
+                            <div class="data-value" id="data-papers">--</div>
+                            <div class="data-sub">papers XAI extraídos</div>
+                        </div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-icon" style="background: rgba(52, 199, 89, 0.1); color: var(--accent-green);">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <div class="data-info">
+                            <div class="data-title">Base de Editais</div>
+                            <div class="data-value" id="data-editais">--</div>
+                            <div class="data-sub">documentos processados</div>
+                        </div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-icon" style="background: rgba(175, 82, 222, 0.1); color: var(--accent-purple);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="data-info">
+                            <div class="data-title">Citações Acadêmicas</div>
+                            <div class="data-value" id="data-citacoes">--</div>
+                            <div class="data-sub">total de citações</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-header">
+                    <span class="section-title">Data Health & Pipeline</span>
+                    <span style="font-size: 11px; color: var(--text-tertiary);">Monitor de Dados</span>
+                </div>
+                <div class="health-grid">
+                    <div class="health-card">
+                        <div class="health-header">
+                            <div class="health-title">Status dos Dados</div>
+                            <div class="health-badge ready" id="health-ready">1</div>
+                        </div>
+                        <div class="health-subtitle">Dados Prontos</div>
+                    </div>
+                    <div class="health-card">
+                        <div class="health-header">
+                            <div class="health-title">Status dos Dados</div>
+                            <div class="health-badge partial" id="health-partial">2</div>
+                        </div>
+                        <div class="health-subtitle">Coleta Parcial</div>
+                    </div>
+                    <div class="health-card">
+                        <div class="health-header">
+                            <div class="health-title">Status dos Dados</div>
+                            <div class="health-badge pending" id="health-pending">14</div>
+                        </div>
+                        <div class="health-subtitle">Pendente</div>
+                    </div>
+                    <div class="health-card">
+                        <div class="health-header">
+                            <div class="health-title">Progresso</div>
+                            <div class="health-value" id="health-progress">18%</div>
+                        </div>
+                        <div class="health-subtitle">Dados coletados</div>
+                    </div>
+                </div>
+                <div class="health-detail">
+                    <div class="health-detail-header">
+                        <span>Artigos por Status de Dados</span>
+                    </div>
+                    <div class="health-bars" id="health-bars"></div>
+                </div>
+                <div class="monitor-link">
+                    <a href="monitor_dados.md" target="_blank">
+                        <i class="fas fa-external-link-alt"></i>
+                        Ver auditoria completa
+                    </a>
                 </div>
             </section>
 
@@ -804,6 +1078,151 @@
             });
             
             renderArticles(articlesData);
+            
+            // Load Data Ecosystem
+            await loadDataEcosystem();
+        }
+
+        // ========== DATA ECOSYSTEM ==========
+        async function loadDataEcosystem() {
+            try {
+                // Load academic papers from CSV
+                const csvResponse = await fetch('Base_de_Dados_e_APIs/Raw_Data/Revisao_Sistematica/xai_public_sector.csv');
+                if (csvResponse.ok) {
+                    const csvText = await csvResponse.text();
+                    const papers = parseCSV(csvText);
+                    
+                    const papersEl = document.getElementById('data-papers');
+                    const citacoesEl = document.getElementById('data-citacoes');
+                    
+                    if (papersEl) papersEl.textContent = papers.length;
+                    if (citacoesEl) {
+                        const totalCitacoes = papers.reduce((sum, p) => sum + (parseInt(p.citacoes) || 0), 0);
+                        citacoesEl.textContent = formatNumber(totalCitacoes);
+                    }
+                }
+            } catch (e) {
+                console.log('CSV não disponível ainda');
+            }
+
+            try {
+                // Load PNCP data from JSON
+                const jsonResponse = await fetch('Base_de_Dados_e_APIs/Raw_Data/Artefato_Copiloto/amostra_pncp_ti.json');
+                if (jsonResponse.ok) {
+                    const editais = await jsonResponse.json();
+                    const editaisEl = document.getElementById('data-editais');
+                    if (editaisEl) editaisEl.textContent = editais.length;
+                }
+            } catch (e) {
+                console.log('JSON não disponível ainda');
+            }
+
+            // Render Data Health Bars
+            renderHealthBars();
+        }
+
+        // ========== DATA HEALTH TRACKER ==========
+        function renderHealthBars() {
+            const container = document.getElementById('health-bars');
+            if (!container) return;
+
+            // Status: 1=pronto, 2=parcial, 14=pendente (conforme monitor_dados.md)
+            const articlesStatus = [
+                { id: 1, status: 'partial', label: 'Art 01' },
+                { id: 2, status: 'pending', label: 'Art 02' },
+                { id: 3, status: 'pending', label: 'Art 03' },
+                { id: 4, status: 'pending', label: 'Art 04' },
+                { id: 5, status: 'pending', label: 'Art 05' },
+                { id: 6, status: 'pending', label: 'Art 06' },
+                { id: 7, status: 'pending', label: 'Art 07' },
+                { id: 8, status: 'pending', label: 'Art 08' },
+                { id: 9, status: 'pending', label: 'Art 09' },
+                { id: 10, status: 'partial', label: 'Art 10' },
+                { id: 11, status: 'pending', label: 'Art 11' },
+                { id: 12, status: 'pending', label: 'Art 12' },
+                { id: 13, status: 'pending', label: 'Art 13' },
+                { id: 14, status: 'pending', label: 'Art 14' },
+                { id: 15, status: 'pending', label: 'Art 15' },
+                { id: 16, status: 'ready', label: 'Art 16' },
+                { id: 17, status: 'pending', label: 'Art 17' }
+            ];
+
+            let ready = 0, partial = 0, pending = 0;
+
+            container.innerHTML = articlesStatus.map(art => {
+                if (art.status === 'ready') ready++;
+                else if (art.status === 'partial') partial++;
+                else pending++;
+
+                const statusText = art.status === 'ready' ? '🟢 Pronto' : 
+                                   art.status === 'partial' ? '🟡 Parcial' : '🔴 Pendente';
+                
+                return `
+                    <div class="health-bar-item">
+                        <span class="health-bar-label">${art.label}</span>
+                        <div class="health-bar-track">
+                            <div class="health-bar-fill ${art.status}" style="width: ${art.status === 'ready' ? '100%' : art.status === 'partial' ? '50%' : '10%'}"></div>
+                        </div>
+                        <span class="health-bar-status">${statusText}</span>
+                    </div>
+                `;
+            }).join('');
+
+            // Update summary badges
+            const readyEl = document.getElementById('health-ready');
+            const partialEl = document.getElementById('health-partial');
+            const pendingEl = document.getElementById('health-pending');
+            const progressEl = document.getElementById('health-progress');
+
+            if (readyEl) readyEl.textContent = ready;
+            if (partialEl) partialEl.textContent = partial;
+            if (pendingEl) pendingEl.textContent = pending;
+            if (progressEl) {
+                const pct = Math.round(((ready * 100 + partial * 50) / 1700) * 100);
+                progressEl.textContent = pct + '%';
+            }
+        }
+
+        function parseCSV(text) {
+            const lines = text.split('\n');
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            const result = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) continue;
+                
+                const values = [];
+                let current = '';
+                let inQuotes = false;
+                
+                for (let j = 0; j < line.length; j++) {
+                    const char = line[j];
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        values.push(current);
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                values.push(current);
+                
+                const obj = {};
+                headers.forEach((h, idx) => {
+                    obj[h] = values[idx] || '';
+                });
+                result.push(obj);
+            }
+            return result;
+        }
+
+        function formatNumber(num) {
+            if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'k';
+            }
+            return num.toString();
         }
 
         document.addEventListener('DOMContentLoaded', init);
