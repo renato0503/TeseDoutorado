@@ -19,7 +19,7 @@
             --shadow-nav: 0 8px 32px rgba(0,0,0,0.08);
             --radius-card: 20px;
             --radius-sm: 12px;
-            --sidebar-width: 280px;
+            --sidebar-width: 260px;
             --bottom-nav-height: 64px;
         }
 
@@ -46,7 +46,13 @@
             overflow-x: hidden;
         }
 
-        /* ========== DESKTOP LAYOUT ========== */
+        a {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        /* ========== DESKTOP LAYOUT - GRID CORRIGIDO ========== */
         @media (min-width: 1024px) {
             .app-container {
                 display: grid;
@@ -70,12 +76,15 @@
                 z-index: 100;
                 box-shadow: var(--shadow-nav);
                 overflow-y: auto;
+                flex-shrink: 0;
             }
 
             .main-content {
-                margin-left: var(--sidebar-width);
+                grid-column: 2;
                 padding: 40px 48px;
                 max-width: 1400px;
+                min-width: 0;
+                width: 100%;
             }
 
             .mobile-nav { display: none !important; }
@@ -95,9 +104,9 @@
             .main-content {
                 padding: 24px 20px;
                 padding-bottom: 40px;
+                width: 100%;
             }
 
-            /* Bottom Navigation Bar - iOS/Android */
             .bottom-nav {
                 display: fixed;
                 bottom: 0;
@@ -107,7 +116,6 @@
                 padding-bottom: env(safe-area-inset-bottom, 0px);
                 background: rgba(255, 255, 255, 0.85);
                 backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
                 -webkit-backdrop-filter: blur(24px);
                 border-top: 1px solid rgba(0, 0, 0, 0.06);
                 box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.06);
@@ -117,7 +125,6 @@
                 z-index: 100;
             }
 
-            /* Android shadow adjustment */
             @supports (-webkit-touch-callout: none) {
                 .bottom-nav {
                     box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.12);
@@ -132,8 +139,6 @@
                 padding: 8px 16px;
                 color: var(--text-tertiary);
                 font-size: 10px;
-                text-decoration: none;
-                transition: color 0.2s;
             }
 
             .nav-item.active {
@@ -146,7 +151,6 @@
         }
 
         /* ========== COMMON STYLES ========== */
-        a { text-decoration: none; color: inherit; }
         
         /* Sidebar */
         .sidebar-brand {
@@ -225,6 +229,8 @@
             font-weight: 600;
             letter-spacing: -0.5px;
             margin-bottom: 6px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .header-subtitle {
@@ -281,6 +287,8 @@
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .tese-title {
@@ -440,20 +448,11 @@
             justify-content: space-between;
             font-size: 11px;
             color: var(--text-tertiary);
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .footer a { color: var(--accent-blue); }
-
-        /* Loading */
-        .loading {
-            opacity: 0.5;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.7; }
-        }
 
         /* Mobile adjustments */
         @media (max-width: 1023px) {
@@ -510,12 +509,12 @@
             <div class="sidebar-section">
                 <div class="sidebar-section-title">Arquivos Base</div>
                 <nav class="sidebar-nav">
-                    <a href="Direcionamento.md" class="sidebar-link">Direcionamento</a>
-                    <a href="documentacao.md" class="sidebar-link">Documentação</a>
-                    <a href="escrita.md" class="sidebar-link">Guia de Escrita</a>
-                    <a href="pesquisa.md" class="sidebar-link">Pesquisa</a>
-                    <a href="estrategia_paper.md" class="sidebar-link">Estratégia</a>
-                    <a href="processo.md" class="sidebar-link">Processo</a>
+                    <a href="Direcionamento.md" class="sidebar-link" target="_blank">Direcionamento</a>
+                    <a href="documentacao.md" class="sidebar-link" target="_blank">Documentação</a>
+                    <a href="escrita.md" class="sidebar-link" target="_blank">Guia de Escrita</a>
+                    <a href="pesquisa.md" class="sidebar-link" target="_blank">Pesquisa</a>
+                    <a href="estrategia_paper.md" class="sidebar-link" target="_blank">Estratégia</a>
+                    <a href="processo.md" class="sidebar-link" target="_blank">Processo</a>
                 </nav>
             </div>
         </aside>
@@ -584,7 +583,7 @@
                 <i class="fas fa-file-alt"></i>
                 <span>Tese</span>
             </a>
-            <a href="#" class="nav-item active" onclick="document.getElementById('articles-grid').scrollIntoView({behavior: 'smooth'})">
+            <a href="#" class="nav-item" onclick="document.getElementById('articles-grid').scrollIntoView({behavior: 'smooth'})">
                 <i class="fas fa-newspaper"></i>
                 <span>Artigos</span>
             </a>
@@ -598,6 +597,9 @@
             </a>
         </nav>
     </div>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
         // ========== CONFIGURATION ==========
@@ -628,34 +630,28 @@
 
         // ========== ANALYSIS FUNCTIONS ==========
         
-        // Count words from text content
         function countWords(text) {
             if (!text || typeof text !== 'string') return 0;
             return text.trim().split(/\s+/).filter(w => w.length > 0).length;
         }
 
-        // Analyze sections - robust parser
         function analyzeSections(html) {
             try {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
                 
-                // Find all heading elements
                 const headings = doc.querySelectorAll('h1, h2, h3, h4');
                 const sections = [];
                 
                 headings.forEach(heading => {
                     const headingText = heading.textContent.trim().toUpperCase();
                     
-                    // Check if it's a relevant section
                     const isRelevant = SECOES_RELEVANTES.some(s => headingText.includes(s));
                     if (!isRelevant) return;
                     
-                    // Check if next element is a paragraph with real content
                     let hasContent = false;
                     let nextElem = heading.nextElementSibling;
                     
-                    // Look for the next paragraph (skip divs, etc)
                     while (nextElem && !nextElem.tagName.match(/^(P|DIV|SECTION|ARTICLE)$/i)) {
                         nextElem = nextElem.nextElementSibling;
                     }
@@ -664,7 +660,6 @@
                         const textContent = nextElem.textContent || '';
                         const wordCount = countWords(textContent);
                         
-                        // Check for placeholders
                         const isPlaceholder = PLACEHOLDERS.some(p => textContent.toLowerCase().includes(p.toLowerCase()));
                         hasContent = wordCount > 50 && !isPlaceholder;
                     }
@@ -682,7 +677,6 @@
             }
         }
 
-        // Analyze single file
         async function analyzeFile(path) {
             try {
                 const response = await fetch(path);
@@ -693,11 +687,9 @@
                 
                 const html = await response.text();
                 
-                // Parse HTML and extract paragraph text
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
                 
-                // Count words from all paragraphs
                 const paragraphs = doc.querySelectorAll('p');
                 let totalWords = 0;
                 
@@ -705,12 +697,10 @@
                     totalWords += countWords(p.textContent);
                 });
                 
-                // Also get text content as fallback
                 if (totalWords === 0) {
                     totalWords = countWords(doc.body.textContent);
                 }
                 
-                // Analyze sections
                 const sections = analyzeSections(html);
                 
                 return {
@@ -793,17 +783,14 @@
         // ========== INITIALIZATION ==========
         
         async function init() {
-            // Set timestamp
             const lastUpdate = document.getElementById('last-update');
             if (lastUpdate) {
                 lastUpdate.textContent = new Date().toLocaleDateString('pt-BR');
             }
             
-            // Analyze tese
             const teseData = await analyzeFile('Tese/tese_draft.html');
             renderTese(teseData);
             
-            // Analyze all articles in parallel
             const articlePromises = ARTIGOS.map(async art => {
                 const path = `Artigos/${art.pasta}/${art.arquivo}`;
                 const data = await analyzeFile(path);
@@ -819,7 +806,6 @@
             renderArticles(articlesData);
         }
 
-        // Run when DOM is ready
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
