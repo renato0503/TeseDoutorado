@@ -289,10 +289,61 @@ site:linkedin.com/pulse "compras públicas" tecnologia
 4. **Rate Limits:** Necessidade de controle de requisições
 5. **Estrutura:** Dados de planejamento vs execução em APIs distintas
 
+### 3.3 Fontes Secundárias e Planos B
+
+#### Querido Diário (Open Knowledge Brasil)
+- **URL:** `https://queridodiario.ok.org.br/`
+- **Dados:** Diários oficiais de municípios brasileiros
+- **Formato:** API + Web Scraping
+- **Gargalos:** Necessidade de scraping, dados em PDF
+
+#### TCE-MT (Tribunal de Contas de Mato Grosso)
+- **URL:** `https://www.tce.mt.gov.br/`
+- **Dados:** Licitações e contratos do estado
+- **Gargalos:** API limitada, necessidade de web scraping
+
+#### TCE-SP (Tribunal de Contas de São Paulo)
+- **URL:** `https://www.tce.sp.gov.br/`
+- **Dados:** Contratos, aditivos, execuções
+- **Gargalos:** API interna, acesso restrito
+
+#### Repositórios Científicos
+| Base | URL | Dados |
+|------|-----|-------|
+| Semantic Scholar | `api.semanticscholar.org` | Metadados + abstracts |
+| CrossRef | `api.crossref.org` | Metadados |
+| OpenAlex | `api.openalex.org` | Artigos + citações |
+| SciELO | `search.scielo.org` | Artigos brasileiros |
+| Scopus/Web of Science | Via institucional | Revisão sistemática |
+
 ### 3.4 Próximos Passos
 
 - [ ] Registrar-se no PNCP para obter API Key
-- [ ] Testar endpoints de busca por palavra-chave (inovação, sustentabilidade)
-- [ ] Desenvolver script de extração em Python
-- [ ] Estruturar dados em formato JSON na pasta `Raw_Data/`
-- [ ] Documentar dicionário de variáveis para alimentação do Copiloto
+- [ ] Testar script extrator_pncp.py
+- [ ] Executar extrator_academico.py para Artigo 16
+- [ ] Estruturar dados em pastas por artigo
+
+---
+
+## 4. Mapeamento 5W2H por Artigo
+
+**Documento completo:** Ver `dicionario_dados.md` para matriz consolidada com:
+
+- **17 artigos + 1 artefato** mapeados individualmente
+- Para cada item: What, Why, Where, When, Who, How, How much
+- Fontes de dados, volumes estimados e ordem de extração recomendada
+
+### Resumo do Mapeamento
+
+| Categoria | Artigos | Fontes Principais |
+|-----------|---------|-------------------|
+| **Quantitativos** | 01-08 | PNCP, Portal Transparência, TCU, TCEs |
+| **Qualitativos** | 09-15 | TCU, Mídia, LinkedIn, Reddit, Legislação |
+| **Revisão Sistêmica** | 16-17 | Scopus, Web of Science, Semantic Scholar |
+| **Artefato** | Copiloto | PNCP (corpus de treinamento) |
+
+### Ordem de Extração Recomendada
+
+1. **Fase 1 (Críticos):** PNCP → Art 01, 10, 11 + Artefato; Semantic Scholar → Art 16
+2. **Fase 2 (Quanti):** Portal Transparência → Art 02, 03, 06, 07; TCU → Art 04, 09; TCEs → Art 08
+3. **Fase 3 (Quali):** NewsAPI → Art 14, 15; Web Scraping → Art 13; Legislação → Art 12
