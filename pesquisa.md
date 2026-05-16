@@ -244,3 +244,55 @@ site:linkedin.com/pulse "compras públicas" tecnologia
 ### Economia Institucional
 - Williamson (1985, 1996) - Custos de Transação
 - Coase (1937) - Nature of the firm
+
+---
+
+## 3. Fontes de Dados e APIs (Status: Mapeamento em Andamento)
+
+### 3.1 Fontes Identificadas e Viabilidade
+
+| Fonte | URL/Endpoint | Status | Observações |
+|-------|--------------|--------|--------------|
+| **PNCP API** | `https://pncp.gov.br/api/v1/` | ✅ Viável | API REST oficial, requer registro para key |
+| **Compras.gov.br** | `https://compras.dados.gov.br` | ✅ Viável | Dados abertos em JSON/CSV |
+| **Portal Transparência** | `https://portaldatransparencia.gov.br/api/v1` | ✅ Viável | Livre acesso, dados de execução |
+| **Dados.gov.br** | `https://dados.gov.br` | ✅ Viável | Repositório de datasets |
+| **TCU Jurisprudência** | `https://jurisprudencia.tcu.gov.br` | ⚠️ Parcial | RequerAPI key para extração estruturada |
+| **ComprasNet** | `https://pncp.gov.br` (novo) | ✅ Viável | Integração via PNCP |
+
+### 3.2 Detalhamento por Fonte
+
+#### PNCP (Portal Nacional de Contratações Públicas)
+- **URL Base:** `https://pncp.gov.br/api/v1/`
+- **Autenticação:** API Key gratuita via registro no portal
+- **Dados disponíveis:** Editais, contratos, fornecedores, atas
+- **Cobertura:** Administrações direta/indireta federal
+- **Gargalos:** Rate limit de 100 req/min, necessidade de paginação
+
+#### Portal da Transparência (CGU)
+- **URL Base:** `https://portaldatransparencia.gov.br/api/v1`
+- **Autenticação:** Livre acesso
+- **Dados disponíveis:** Empenhos, pagamentos, contratos
+- **Gargalos:** Dados de execução, não de planejamento
+
+#### Dados.gov.br
+- **URL Base:** `https://dados.gov.br/api/v3`
+- **Autenticação:** Livre acesso para datasets públicos
+- **Dados disponíveis:** Diversos datasets de compras
+- **Gargalos:** Formatos heterogêneos, necessidade de ETL
+
+### 3.3 Gargalos e Desafios
+
+1. **Autenticação:** PNCP requer API Key (processo de registro em andamento)
+2. **Volume:** Base histórica a partir de 2020 - limite temporal
+3. **Formato:** HTML em editais，需要 parsing de PDF para texto
+4. **Rate Limits:** Necessidade de controle de requisições
+5. **Estrutura:** Dados de planejamento vs execução em APIs distintas
+
+### 3.4 Próximos Passos
+
+- [ ] Registrar-se no PNCP para obter API Key
+- [ ] Testar endpoints de busca por palavra-chave (inovação, sustentabilidade)
+- [ ] Desenvolver script de extração em Python
+- [ ] Estruturar dados em formato JSON na pasta `Raw_Data/`
+- [ ] Documentar dicionário de variáveis para alimentação do Copiloto
