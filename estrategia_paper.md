@@ -1,322 +1,200 @@
-# Estratégia de Geração de Paper Acadêmico
+# Estratégia de Artigos - Doutorado
+
+---
 
 ## Visão Geral
 
-Este documento descreve a estratégia completa para gerar papers acadêmicos seguindo rigorosamente o guia de escrita.md. O processo foi desenvolvido e validado com o paper "O Paradoxo da Produtividade da IA".
+Este documento define a estratégia de publicação para os 17 artigos planejados no doutorado de Copiloto Algorítmico para Compras Públicas Complexas.
 
 ---
 
-## Fase 1: Preparação do Ambiente
+## Estrutura da Tese (Formato Multipaper)
 
-### 1.1 Arquivos de Referência Obrigatórios
+A tese será organizada em formato de compilação com três eixos:
 
-Antes de iniciar, garanta que os seguintes arquivos existam:
+### Eixo 1: Transparência Algorítmica
+- Artigo 16: Revisão Sistemática sobre XAI na Gestão Pública
+- Foco: Mapear lacunas na literatura
 
-- **escrita.md**: Guia completo de escrita acadêmica com regras deformatação, citações, linguagem e estrutura
-- **pesquisa.md**: Diretrizes para pesquisa e coleta de dados
-- **documentacao.md**: Documentação do projeto
+### Eixo 2: Produto de Tecnologia
+- Artigo 7: Governança Algorítmica - Benchmarking
+- Artigo 8: XAI Prova de Conceito para Tribunais de Contas
+- Foco: Desenvolvimento e validação do artefato
 
-### 1.2 Estrutura de Diretórios
-
-```
-ThePapperAI/
-├── papers/
-│   └── [nome-do-paper]/
-│       ├── 01-pesquisa/
-│       ├── 02-escrita/
-│       ├── 03-revisao/
-│       ├── 04-formatacao/
-│       └── 05-documento/
-│           ├── [nome].html
-│           ├── [nome].docx
-│           ├── tabelas.xlsx
-│           └── assets/
-├── escrita.md
-├── pesquisa.md
-└── estrategia_paper.md
-```
+### Eixo 3: Validação Empirical
+- Artigo 13: Dor das GovTechs (Netnografia)
+- Artigo 14: Discurso Custo Brasil (ACD)
+- Foco: Método Delphi com 10 gestores
 
 ---
 
-## Fase 2: Pesquisa e Coleta de Dados
+## Frente Quantitativa (8 artigos)
 
-### 2.1 Definição do Tema
+### Artigo 1: Opacidade Institucional
+- **Título:** A Opacidade Institucional: Análise de Complexidade Textual em Editais de Inovação
+- **Periódico alvo:** Revista de Administração Pública (RAP)
+- **Metodologia:** NLP - Índices de legibilidade (Flesch-Kincaid)
+- **Dados:** API PNCP
 
-1. Identificar o tema do paper
-2. Definir a pergunta de pesquisa
-3. Estabelecer os objetivos (geral e específicos)
+### Artigo 2: Auditoria Contínua
+- **Título:** Auditoria Contínua em Compras Públicas: Um Modelo de Detecção de Anomalias de Preços
+- **Periódico alvo:** Revista de Contabilidade e Organizações
+- **Metodologia:** Machine Learning - Isolation Forest
+- **Dados:** Portal da Transparência
 
-### 2.2 Revisão de Literatura
+### Artigo 3: Predição de Fracasso
+- **Título:** Predição de Fracasso Institucional: Modelando o Risco de Aditivos e Cancelamentos
+- **Periódico alvo:** Revista Brasileira de Gestão de Negócios (RBGN)
+- **Metodologia:** Random Forest / XGBoost
+- **Dados:** PNCP + Portal Transparência
 
-Seguir pesquisa.md para coletar referências de:
-- Artigos acadêmicos (Google Scholar, SciELO, etc.)
-- Livros e capítulos
-- Relatórios e publicações corporativas
-- Bases de dados especializadas
+### Artigo 4: Apagão das Canetas
+- **Título:** O "Apagão das Canetas" Quantificado: Latência Decisória e o Ciclo de Auditoria
+- **Periódico alvo:** Revista de Administração Pública (RAP)
+- **Metodologia:** ARIMA / Prophet
+- **Dados:** API TCU + Compras.gov
 
-### 2.3 Categorias de Análise
+### Artigo 5: Redes de Fornecimento
+- **Título:** Redes de Fornecimento e Oligopólios: Análise de Grafos em Contratações Tecnológicas
+- **Periódico alvo:** Revista de Contabilidade e Organizações
+- **Metodologia:** Network Analysis - NetworkX
+- **Dados:** CNPJs + Adjudicações PNCP
 
-Definir categorias analíticas baseadas no referencial teórico. Exemplos do paper:
-- Natureza da justificativa
-- Presença de dados operacionais concretos
-- Contexto financeiro da empresa
-- Existência de sobrecontratação prévia
-- Investimentos simultâneos em IA
-- Linguagem utilizada
+### Artigo 6: Sobrevivência de Contratos
+- **Título:** Sobrevivência dos Contratos de Inovação: Uma Análise de Kaplan-Meier
+- **Periódico alvo:** Revista Contabilidade & Gestão
+- **Metodologia:** Análise de Sobrevivência - Kaplan-Meier + Cox
+- **Dados:** Portal Transparência
 
----
+### Artigo 7: Governança Algorítmica
+- **Título:** Governança Algorítmica em Contraponto à Confiança Analógica: Benchmarking de Eficiência
+- **Periódico alvo:** Revista de Administração Pública (RAP)
+- **Metodologia:** Design Science Research
+- **Dados:** Siconfi
 
-## Fase 3: Escrita Seguindo escrita.md
-
-### 3.1 Regras Obrigatórias de Idioma
-
-- **Português do Brasil apenas**: Todo o texto em português brasileiro
-- **Termos técnicos em inglês**: Manter em itálico na primeira ocorrência com tradução entre parênteses
-- **Citações diretas em inglês**: Tradução livre entre parênteses
-
-### 3.2 Estrutura do Paper (Formato APA)
-
-1. **Título**
-2. **Resumo** (150-300 palavras)
-3. **Abstract** (mesmo conteúdo em inglês)
-4. **Palavras-chave** / **Keywords**
-5. **1. Introdução**
-   - Contexto amplo
-   - Problema específico
-   - Justificativa
-   - Objetivos
-   - Estrutura do trabalho
-6. **2. Revisão de Literatura**
-   - Panorama geral
-   - Frameworks teóricos
-   - Estudos contemporâneos
-   - Lacuna na literatura
-7. **3. Metodologia**
-   - Enquadramento metodológico
-   - Delineamento
-   - Procedimentos de coleta
-   - Procedimentos de análise
-   - Limitações
-8. **4. Resultados**
-   - Caracterização do corpus
-   - Categorias de análise
-   - Síntese
-9. **5. Discussão**
-   - Interpretação por categoria
-   - Resposta à pergunta de pesquisa
-   - Contribuições
-10. **6. Conclusão**
-    - Síntese dos achados
-    - Implicações
-    - Limitações
-    - Sugestões futuras
-11. **Referências**
-
-### 3.3 Regras de Estilo
-
-#### ❌ PROIBIDO
-- Adjetivações valorativas: "excelente", "impressionante", "incrível"
-- Expressões informais: "hoje em dia", "cada vez mais", "basicamente"
-- Travessão (—)
-- Palavras marcadoras de IA: "crucial", "inovador", "holístico", "delve", "landscape"
-- Português de Portugal: "ao princípio", "de modo que"
-
-#### ✅ OBRIGATÓRIO
-- Conectivos após cada ponto (ver lista completa em escrita.md)
-- Citações em toda afirmação que não seja resultado próprio
-- Pessoa verbal: 3ª pessoa ou 1ª pessoa do plural
-- Tempos verbais corretos por seção:
-  - Revisão: presente ou pretérito
-  - Metodologia: pretérito perfeito
-  - Resultados: pretérito perfeito
-  - Discussão: presente
-
-### 3.4 Formatação APA 7ª Edição
-
-| Elemento | Especificação |
-|----------|----------------|
-| Margens | 2.54 cm (1 polegada) |
-| Fonte | Times New Roman 12 |
-| Espaçamento | Duplo |
-| Alinhamento | À esquerda |
-| Recuo de parágrafo | 1.27 cm |
-| Citações (até 40 palavras) | Aspas no texto |
-| Citações (mais de 40 palavras) | Bloco recuado, fonte 10 |
-| Referências | Recuo francês (hanging indent) |
+### Artigo 8: XAI para Tribunais de Contas
+- **Título:** Inteligência Artificial Explicável (XAI) no Setor Público: Uma Prova de Conceito para Tribunais de Contas
+- **Periódico alvo:** Revista de Administração Pública (RAP)
+- **Metodologia:** SHAP explainability
+- **Dados:** Bases TCU
 
 ---
 
-## Fase 4: Criação das Tabelas
+## Frente Qualitativa (9 artigos)
 
-### 4.1 Processo de Criação
+### Artigo 9: Jurisprudência do Medo
+- **Título:** A Construção da "Jurisprudência do Medo": Análise de Discurso em Acórdãos
+- **Periódico alvo:** Revista de Direito Administrativo (RDA)
+- **Metodologia:** Análise Crítica do Discurso (ACD)
+- **Dados:** API Jurisprudência TCU
 
-1. **Identificar todas as tabelas do paper**: Listar todas as tabelas mencionadas no texto
-2. **Criar estrutura em CSV**: Formatarp dados em formato CSV
-3. **Converter para Excel (XLSX)**: Usar openpyxl para criar arquivo com cada tabela em sheet separada
+### Artigo 10: Uso Retórico Inovação
+- **Título:** O Uso Retórico da "Inovação": Análise de Conteúdo das Justificativas de Contratação
+- **Periódico alvo:** Revista de Administração Pública (RAP)
+- **Metodologia:** Análise de Conteúdo (Bardin)
+- **Dados:** Termos de Referência PNCP
 
-### 4.2 Exemplo de Script Python
+### Artigo 11: Voz do Mercado
+- **Título:** A Voz do Mercado: Análise dos Pedidos de Impugnação em Editais de Tecnologia
+- **Periódico alvo:** Revista de Contabilidade e Organizações
+- **Metodologia:** Categorização temática
+- **Dados:** Compras.gov.br - Impugnações
 
-```python
-from openpyxl import Workbook
-from openpyxl.styles import Font, Alignment, Border, Side, PatternFill
+### Artigo 12: Evolução Risco Legislativo
+- **Título:** A Evolução do "Risco" na Legislação de Compras: Da Lei 8.666 ao Marco das Startups
+- **Periódico alvo:** Revista de Direito Público (RDP)
+- **Metodologia:** Análise Lexicográfica Diacrônica
+- **Dados:** LexML + Portal Planalto
 
-wb = Workbook()
-ws = wb.active
-ws.title = "Nome da Tabela"
+### Artigo 13: Dor das GovTechs
+- **Título:** A Dor das GovTechs: Uma Netnografia do Ecossistema de Inovação Pública
+- **Periódico alvo:** Revista de Administração Pública (RAP)
+- **Metodologia:** Netnografia + Análise Temática
+- **Dados:** LinkedIn (#GovTech) + Medium
 
-# Escrever dados
-# Aplicar estilos...
+### Artigo 14: Discurso Custo Brasil
+- **Título:** O Discurso do Custo Brasil na Política Industrial: Narrativas em Contraponto à Prática
+- **Periódico alvo:** Revista de Administração Pública (RAP)
+- **Metodologia:** Análise Crítica do Discurso (ACD)
+- **Dados:** Relatórios MDIC + ABDI
 
-wb.save("tabelas.xlsx")
-```
+### Artigo 15: IA na Mídia
+- **Título:** O Enquadramento da "Inteligência Artificial no Controle Público" na Mídia
+- **Periódico alvo:** Revista de Comunicação e Informação
+- **Metodologia:** Framing Analysis
+- **Dados:** NewsAPI - Conjur, Valor, Jota
 
-### 4.3 Estrutura do Arquivo XLSX
+### Artigo 16: Revisão Sistemática XAI
+- **Título:** A "Caixa-Preta" do Setor Público: Revisão Sistemática sobre Inteligência Artificial Explicável na Gestão Pública
+- **Periódico alvo:** Accounting, Organizations and Society (AOS)
+- **Metodologia:** PRISMA + Bibliometria (VOSviewer)
+- **Dados:** Scopus + Web of Science
 
-Cada sheet deve conter:
-- Cabeçalho em negrito com fundo cinza
-- Bordas em todas as células
-- Texto justificado com quebra de linha
-
----
-
-## Fase 5: Validação e Revisão
-
-### 5.1 Checklist de Revisão (segundo escrita.md)
-
-#### Estrutura
-- [ ] Texto segue lógica macro → micro em todas as seções
-- [ ] Cada seção cumpre sua função sem repetir conteúdo
-- [ ] Introdução apresenta: contexto, problema, justificativa, objetivo
-- [ ] Revisão da literatura é analítica
-- [ ] Metodologia detalhada o suficiente para replicação
-- [ ] Resultados apresentam dados sem interpretação
-- [ ] Discussão interpreta resultados à luz da literatura
-- [ ] Conclusão sintetiza sem introduzir informação nova
-
-#### Linguagem
-- [ ] Sem adjetivações valorativas
-- [ ] Sem expressões informais ou coloquiais
-- [ ] Sem uso de travessão
-- [ ] Sem palavras marcadoras de IA
-- [ ] Pessoa verbal correta (3ª pessoa / 1ª plural)
-- [ ] Tempos verbais corretos por seção
-- [ ] Frases com no máximo 4 linhas
-
-#### Coesão e Fluidez
-- [ ] Toda frase após ponto final começa com conectivo
-- [ ] Parágrafos conectados entre si
-- [ ] Não há dois parágrafos consecutivos com mesmo conectivo
-
-#### Citações
-- [ ] Toda afirmação que não é resultado próprio tem citação
-- [ ] Citações no formato APA correto
-- [ ] Variedade nas formas de integrar citações
-- [ ] Todas as referências citadas no texto
-- [ ] Referências atualizadas (predominantemente últimos 5-10 anos)
+### Artigo 17: DSR em Contabilidade Pública
+- **Título:** Design Science Research na Contabilidade Pública: Mapeamento de Artefatos
+- **Periódico alvo:** Revista de Contabilidade e Organizações
+- **Metodologia:** Scoping Review
+- **Dados:** Scielo + Spell + Scopus
 
 ---
 
-## Fase 6: Geração de Documentos Finais
+## Formato de Publicação
 
-### 6.1 Arquivos de Saída
+### Pré-textuais
+- Título
+- Resumo (150-300 palavras)
+- Palavras-chave (3-6)
+- Abstract (inglês)
+- Keywords
 
-1. **HTML**: Versão para GitHub Pages
-2. **DOCX**: Versão para download/edição
-3. **XLSX**: Tabelas formatadas para Excel
+### Textuais
+- Introdução (contextualização, gap, objetivo)
+- Referencial Teórico
+- Metodologia
+- Resultados
+- Discussão
+- Conclusões
 
-### 6.2 Configuração do GitHub Pages
-
-1. Ativar GitHub Pages em Settings → Pages
-2. Selecionar branch main
-3. O site será disponível em: `https://[usuario].github.io/[repositorio]/`
-
-### 6.3 Arquivo Index
-
-Criar index.html na raiz com menu de papers:
-
-```html
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>ThePapperAI - Papéis Acadêmicos</title>
-</head>
-<body>
-    <h1>ThePapperAI</h1>
-    <p>Papers Acadêmicos Gerados com IA</p>
-    
-    <div class="papers-grid">
-        <!-- Cards para cada paper -->
-    </div>
-</body>
-</html>
-```
+### Pós-textuais
+- Referências (APA 7ª)
 
 ---
 
-## Fase 7: Git e Deploy
+## Normas de Escrita
 
-### 7.1 Comandos Git
-
-```bash
-# Adicionar arquivos (forçar se ignorados pelo .gitignore)
-git add -f arquivo.html arquivo.docx arquivo.xlsx
-
-# Commitar
-git commit -m "Descrição das alterações"
-
-# Push
-git push
-```
-
-### 7.2 Atualização do .gitignore
-
-Para permitir arquivos específicos:
-
-```gitignore
-# Allow specific files
-!papers/[pasta]/05-documento/[arquivo].html
-!papers/[pasta]/05-documento/[arquivo].docx
-!index.html
-!tabelas.xlsx
-```
+Consultar arquivo `escrita.md` para:
+- Regras de idioma (português brasileiro)
+- Formatação APA
+- Uso de citações
+- Palavras proibidas
+- Conectivos acadêmicos
 
 ---
 
-## Checklist Final de Execução
+## Fluxo de Desenvolvimento
 
-- [ ] Tema definido e pergunta de pesquisa formulada
-- [ ] Referências coletadas e organizadas
-- [ ] Estrutura do paper definida
-- [ ] Draft completo seguindo escrita.md
-- [ ] Todas as tabelas criadas em XLSX
-- [ ] Revisãoconforme checklist
-- [ ] Arquivos HTML e DOCX gerados
-- [ ] GitHub Pages ativado
-- [ ] Index.html criado com menu
-- [ ] Arquivos commitados e pushados
+1. **Revisão de Literatura** (Artigos 16, 17)
+2. **Coleta de Dados** (APIs governamentais)
+3. **Análise Quantitativa** (Artigos 1-8)
+4. **Análise Qualitativa** (Artigos 9-15)
+5. **Integração** (Validação Delphi)
+6. **Publicação** (Submissão periódicos)
 
 ---
 
-## Notas Adicionais
+## Status dos Artigos
 
-### Diferenças ABNT vs APA
-
-| Aspecto | ABNT | APA |
-|---------|------|-----|
-| Sobrenome entre parênteses | MAIÚSCULO | Normal |
-| Separador de autores | ponto e vírgula | & |
-| Espaçamento | 1,5 | Duplo |
-| Alinhamento | Justificado | À esquerda |
-
-### Conectivos Acadêmicos (exemplos)
-
-**Adição**: Além disso, Ademais, Nesse sentido, De forma complementar
-**Contraste**: Contudo, Entretanto, No entanto, Por outro lado
-**Causa**: Em razão disso, Devido a esse fato, Em consequência
-**Consequência**: Dessa forma, Assim sendo, Por conseguinte
-**Conclusão**: Portanto, Logo, Em síntese, Diante do exposto
+| # | Status | Prioridade |
+|---|--------|------------|
+| 16 | Skeleton pronto | Alta |
+| 17 | Skeleton pronto | Alta |
+| 1-8 | Skeleton pronto | Média |
+| 9-15 | Skeleton pronto | Média |
 
 ---
 
-*Documento gerado automaticamente para fins de documentação do processo.*
+## Repositório
+
+Os artigos estão disponíveis em formato HTML na pasta `Artigos/` para visualização via GitHub Pages.
+
+**URL:** https://github.com/renato0503/TeseDoutorado
