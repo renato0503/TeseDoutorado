@@ -10,9 +10,9 @@
 
 **Programa:** PPGCont - Universidade Federal de Santa Catarina
 
-**Orientador:** [A definir]
+**Orientador:** Prof. Dr. Olavo Venturim Caldas
 
-**Linha de Pesquisa:** Contabilidade e Controladoria no Setor Público
+**Instituição:** Fucape Business School - Vitória/ES
 
 ---
 
@@ -135,3 +135,98 @@ Doutorado/
 - Portal da Transparência (CGU)
 - Tribunal de Contas da União (TCU)
 - Compras.gov.br
+
+---
+
+## Arquitetura de Extração de Dados
+
+### Estrutura de Diretórios
+
+```
+Base_de_Dados_e_APIs/
+├── Raw_Data/                    # Dados brutos extraídos
+│   ├── editais_json/           # Editais em formato JSON
+│   ├── contratos_json/         # Contratos em formato JSON
+│   └── preprocessamento/      # Dados processados antes do treinamento
+│
+├── Scripts_Extracao/            # Códigos de consumo de API
+│   ├── pncp_client.py          # Cliente Python para PNCP
+│   ├── transparencia_client.py # Cliente para Portal Transparência
+│   └── pipeline.py             # Pipeline de ETL completo
+│
+└── README.md                    # Documentação técnica
+```
+
+### Endpoints Principais
+
+#### PNCP (Portal Nacional de Contratações Públicas)
+| Endpoint | Método | Descrição |
+|----------|--------|------------|
+| `/api/v1/orgaos` | GET | Lista órgãos cadastrados |
+| `/api/v1/contratacoes` | GET | Busca editais por filtros |
+| `/api/v1/contratacoes/{id}` | GET | Detalhes de contratação |
+| `/api/v1/fornecedores` | GET | Busca fornecedores |
+
+#### Portal da Transparência
+| Endpoint | Método | Descrição |
+|----------|--------|------------|
+| `/api/v1/contratos` | GET | Lista contratos |
+| `/api/v1/empenhos` | GET | Lista empenhos |
+| `/api/v1/fornecedores/{cpf-cnpj}` | GET | Dados fornecedor |
+
+### Dicionário de Dados (Campos para Alimentação da IA)
+
+| Campo | Tipo | Descrição | Prioridade |
+|-------|------|-----------|------------|
+| `numero_edital` | string | Número único do edital | Alta |
+| `objeto` | text | Descrição do objeto da contratação | Alta |
+| `modalidade` | string | Pregão, RDC, etc. | Alta |
+| `valor_estimado` | decimal | Valor estimado da contratação | Alta |
+| `data_publicacao` | date | Data de publicação no DOU | Alta |
+| `unidade_compradora` | string | Nome do órgão comprador | Alta |
+| `cnpj_unidade` | string | CNPJ da unidade | Alta |
+| `regime_contratual` | string | Lei 8.666, Pregão, etc. | Média |
+| `criterio_julgamento` | string | Menor preço, técnica e preço | Média |
+| `prazo_execucao` | integer | Prazo em meses | Média |
+| `garantia` | string | Tipo de garantia exigida | Baixa |
+| `anexos` | array | Links para arquivos PDF | Alta |
+| `categorias` | array | Tags: inovação, TI, sustentabilidade | Alta |
+| `clausulas_especificas` | text | Cláusulas especiais identificadas | Alta |
+| `fornecedores_participantes` | array | CNPJ/CPF participantes | Média |
+| `resultado` | string | Fracassado, Homologado, etc. | Média |
+
+### Pipeline de Extração
+
+```
+1. Coleta (Extract)
+   ├─ API PNCP → JSON editais
+   ├─ API Transparência → JSON contratos
+   └─ Web Scraping → PDFs de anexos (se necessário)
+
+2. Transformação (Transform)
+   ├─ Limpeza de texto (normalização)
+   ├─ Extração de entidades (NER)
+   ├─ Classificação de categoria (inovação/TI/sustentabilidade)
+   └─ Identificação de cláusulas específicas
+
+3. Carregamento (Load)
+   ├─ Armazenamento em JSON estruturado
+   ├─ Indexação para busca vetorial
+   └─ Exportação para treinamento do modelo
+```
+
+### Tecnologias Recomendadas
+
+- **Linguagem:** Python 3.10+
+- **Bibliotecas:** requests, pandas, BeautifulSoup4, spacy
+- **Armazenamento:** JSON local + vector database (opcional)
+- **Orquestração:** Apache Airflow ou Prefect (para pipelines)
+
+### Status de Implementação
+
+- [ ] Registro no PNCP para API Key
+- [ ] Desenvolvimento cliente Python
+- [ ] Teste de endpoints
+- [ ] Extração de amostra (100 editais)
+- [ ] Validação de estrutura de dados
+- [ ] Indexação para Copiloto
