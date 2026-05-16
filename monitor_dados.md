@@ -53,13 +53,13 @@
 
 | # | Artigo | Dados Necessários | Fonte | Status |
 |---|--------|-------------------|-------|--------|
-| 09 | "Jurisprudência do Medo": Análise de Discurso | Acórdãos TCU (~200-500) | API Jurisprudência TCU | 🔴 Pendente |
+| 09 | "Jurisprudência do Medo": Análise de Discurso | Acórdãos TCU (5 sample) | API Jurisprudência TCU | ⚠️ Parcial (exemplo) |
 | 10 | Uso Retórico da Inovação em Justificativas | Textos de justificativas (300-500) | PNCP API | ⚠️ Parcial (5 exemplos) |
 | 11 | "Voz do Mercado": Impugnações de Editais | Editais impugnados (100-200) | PNCP API | 🔴 Pendente |
 | 12 | Evolução da Legislação de Compras | Textos legislativos (20-30) | Download direto (Planalto) | 🔴 Pendente |
 | 13 | "Dor das GovTechs": Netnografia | Posts e discussões (1K-2K) | LinkedIn + Reddit | 🔴 Pendente |
 | 14 | Discurso do "Custo Brasil" e Política Industrial | Notícias (500-1000) | NewsAPI + Google | 🔴 Pendente |
-| 15 | Enquadramento da IA no Controle Público | Cobertura jornalística (300-500) | NewsAPI | 🔴 Pendente |
+| 15 | Enquadramento da IA no Controle Público | Cobertura jornalística (38 items) | OpenAlex | ⚠️ Parcial (38 artigos) |
 
 ---
 
@@ -87,9 +87,9 @@
 
 | Categoria | Quantidade | Porcentagem |
 |-----------|------------|--------------|
-| Artigos com dados ✅ | 2 | 11.8% |
+| Artigos com dados ✅ | 4 | 23.5% |
 | Artigos com dados parciais ⚠️ | 2 | 11.8% |
-| Artigos pendentes 🔴 | 13 | 76.5% |
+| Artigos pendentes 🔴 | 11 | 64.7% |
 
 ### Próximos Passos Prioritários
 
