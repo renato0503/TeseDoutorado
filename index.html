@@ -2,11 +2,8 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Doutorado — Transparência Algorítmica</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=SF+Pro+Text:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-page: #f5f5f7;
@@ -16,62 +13,142 @@
             --text-tertiary: #a1a1a6;
             --accent-blue: #007aff;
             --accent-green: #34c759;
-            --accent-orange: #ff9500;
-            --accent-red: #ff3b30;
             --accent-purple: #af52de;
-            --shadow-card: 0 4px 20px rgba(0,0,0,0.06);
-            --shadow-nav: 0 0 30px rgba(0,0,0,0.03);
-            --radius-card: 18px;
-            --radius-sm: 10px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --accent-orange: #ff9500;
+            --shadow-card: 0 4px 24px rgba(0,0,0,0.04);
+            --shadow-nav: 0 8px 32px rgba(0,0,0,0.08);
+            --radius-card: 20px;
+            --radius-sm: 12px;
+            --sidebar-width: 280px;
+            --bottom-nav-height: 64px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
             background: var(--bg-page);
             color: var(--text-primary);
             line-height: 1.5;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
+        /* ========== DESKTOP LAYOUT ========== */
+        @media (min-width: 1024px) {
+            .app-container {
+                display: grid;
+                grid-template-columns: var(--sidebar-width) 1fr;
+                min-height: 100vh;
+            }
+
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: var(--sidebar-width);
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.72);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-right: 1px solid rgba(0, 0, 0, 0.05);
+                padding: 32px 0;
+                display: flex;
+                flex-direction: column;
+                z-index: 100;
+                box-shadow: var(--shadow-nav);
+                overflow-y: auto;
+            }
+
+            .main-content {
+                margin-left: var(--sidebar-width);
+                padding: 40px 48px;
+                max-width: 1400px;
+            }
+
+            .mobile-nav { display: none !important; }
+            .bottom-nav { display: none !important; }
         }
 
-        /* Layout */
-        .app-container {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            min-height: 100vh;
+        /* ========== MOBILE LAYOUT ========== */
+        @media (max-width: 1023px) {
+            .app-container {
+                display: block;
+                min-height: 100vh;
+                padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px));
+            }
+
+            .sidebar { display: none !important; }
+            
+            .main-content {
+                padding: 24px 20px;
+                padding-bottom: 40px;
+            }
+
+            /* Bottom Navigation Bar - iOS/Android */
+            .bottom-nav {
+                display: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px));
+                padding-bottom: env(safe-area-inset-bottom, 0px);
+                background: rgba(255, 255, 255, 0.85);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(24px);
+                border-top: 1px solid rgba(0, 0, 0, 0.06);
+                box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.06);
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                z-index: 100;
+            }
+
+            /* Android shadow adjustment */
+            @supports (-webkit-touch-callout: none) {
+                .bottom-nav {
+                    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.12);
+                }
+            }
+
+            .nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 4px;
+                padding: 8px 16px;
+                color: var(--text-tertiary);
+                font-size: 10px;
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+            .nav-item.active {
+                color: var(--accent-blue);
+            }
+
+            .nav-item i {
+                font-size: 20px;
+            }
         }
 
-        /* Sidebar com Glassmorphism */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 280px;
-            height: 100vh;
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-right: 1px solid rgba(0, 0, 0, 0.05);
-            padding: 32px 0;
-            display: flex;
-            flex-direction: column;
-            z-index: 100;
-            box-shadow: var(--shadow-nav);
-        }
-
+        /* ========== COMMON STYLES ========== */
+        a { text-decoration: none; color: inherit; }
+        
+        /* Sidebar */
         .sidebar-brand {
             padding: 0 24px;
             margin-bottom: 32px;
@@ -106,13 +183,15 @@
         .sidebar-nav {
             display: flex;
             flex-direction: column;
+            max-height: 300px;
+            overflow-y: auto;
         }
 
         .sidebar-link {
             padding: 10px 24px;
             font-size: 13px;
             color: var(--text-secondary);
-            transition: all var(--transition);
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -123,13 +202,7 @@
             background: rgba(0, 0, 0, 0.03);
         }
 
-        .sidebar-link.active {
-            background: rgba(0, 122, 255, 0.1);
-            color: var(--accent-blue);
-        }
-
         .link-num {
-            font-family: "SF Pro Text", monospace;
             font-size: 11px;
             color: var(--text-tertiary);
             width: 20px;
@@ -142,35 +215,29 @@
             margin: 16px 24px;
         }
 
-        /* Main Content */
-        .main-content {
-            margin-left: 280px;
-            padding: 48px 56px;
-            max-width: 1400px;
-        }
-
         /* Header */
         .header {
-            margin-bottom: 40px;
+            margin-bottom: 32px;
         }
 
         .header h1 {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 600;
             letter-spacing: -0.5px;
             margin-bottom: 6px;
         }
 
         .header-subtitle {
-            font-size: 15px;
+            font-size: 14px;
             color: var(--text-secondary);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .header-meta {
             display: flex;
-            gap: 24px;
-            font-size: 13px;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 12px;
             color: var(--text-tertiary);
         }
 
@@ -182,18 +249,18 @@
 
         /* Section */
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 32px;
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .section-title {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -204,7 +271,7 @@
         .tese-card {
             background: var(--bg-card);
             border-radius: var(--radius-card);
-            padding: 28px;
+            padding: 24px;
             box-shadow: var(--shadow-card);
             margin-bottom: 16px;
         }
@@ -217,7 +284,7 @@
         }
 
         .tese-title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 500;
             margin-bottom: 4px;
         }
@@ -232,98 +299,80 @@
         }
 
         .tese-percent {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 600;
             color: var(--accent-blue);
             letter-spacing: -1px;
         }
 
         .tese-words {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-tertiary);
         }
 
-        /* Progress Bar */
         .progress-track {
-            height: 6px;
+            height: 5px;
             background: #f0f0f0;
             border-radius: 3px;
             overflow: hidden;
-            margin: 16px 0;
+            margin: 14px 0;
         }
 
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, var(--accent-blue), #5ac8fa);
             border-radius: 3px;
-            transition: width 1s ease-out;
+            transition: width 0.8s ease-out;
         }
 
-        /* Sections Status */
+        /* Sections Grid */
         .sections-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 8px;
         }
 
         .section-pill {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 14px;
+            padding: 10px 12px;
             background: var(--bg-card);
             border-radius: var(--radius-sm);
-            font-size: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            font-size: 11px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
         }
 
-        .section-pill.complete {
-            border-left: 3px solid var(--accent-green);
-        }
-
-        .section-pill.empty {
-            border-left: 3px solid #e5e5e5;
-            opacity: 0.6;
-        }
-
-        .section-name {
-            color: var(--text-primary);
-        }
+        .section-pill.complete { border-left: 3px solid var(--accent-green); }
+        .section-pill.empty { border-left: 3px solid #e5e5e5; opacity: 0.6; }
 
         .section-status {
             font-size: 10px;
-            padding: 3px 8px;
-            border-radius: 6px;
+            padding: 2px 6px;
+            border-radius: 4px;
         }
 
-        .status-done {
-            background: rgba(52, 199, 89, 0.12);
-            color: var(--accent-green);
-        }
-
-        .status-pending {
-            background: #f5f5f7;
-            color: var(--text-tertiary);
-        }
+        .status-done { background: rgba(52, 199, 89, 0.12); color: var(--accent-green); }
+        .status-pending { background: #f5f5f7; color: var(--text-tertiary); }
 
         /* Articles Grid */
         .articles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 14px;
         }
 
         .article-card {
             background: var(--bg-card);
             border-radius: var(--radius-card);
-            padding: 22px;
+            padding: 20px;
             box-shadow: var(--shadow-card);
-            transition: all var(--transition);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .article-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
         }
 
         .article-badge {
@@ -331,38 +380,26 @@
             font-size: 10px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 4px 10px;
+            letter-spacing: 0.3px;
+            padding: 4px 8px;
             border-radius: 6px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        .badge-quanti {
-            background: rgba(0, 122, 255, 0.1);
-            color: var(--accent-blue);
-        }
-
-        .badge-quali {
-            background: rgba(175, 82, 222, 0.1);
-            color: var(--accent-purple);
-        }
-
-        .badge-produto {
-            background: rgba(52, 199, 89, 0.1);
-            color: var(--accent-green);
-        }
+        .badge-quanti { background: rgba(0, 122, 255, 0.1); color: var(--accent-blue); }
+        .badge-quali { background: rgba(175, 82, 222, 0.1); color: var(--accent-purple); }
+        .badge-produto { background: rgba(52, 199, 89, 0.1); color: var(--accent-green); }
 
         .article-title {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             line-height: 1.4;
         }
 
         .article-progress-text {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-secondary);
-            font-family: "SF Pro Text", monospace;
         }
 
         .article-bar {
@@ -376,72 +413,60 @@
         .article-bar-fill {
             height: 100%;
             border-radius: 2px;
-            transition: width 0.8s ease;
+            transition: width 0.6s ease;
         }
 
         .article-missing {
-            margin-top: 12px;
+            margin-top: 10px;
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 5px;
         }
 
         .missing-tag {
-            font-size: 10px;
-            padding: 4px 8px;
+            font-size: 9px;
+            padding: 3px 6px;
             background: #f5f5f7;
             color: var(--text-tertiary);
-            border-radius: 6px;
+            border-radius: 4px;
         }
 
         /* Footer */
         .footer {
-            margin-top: 48px;
-            padding-top: 24px;
+            margin-top: 32px;
+            padding-top: 20px;
             border-top: 1px solid rgba(0,0,0,0.06);
             display: flex;
             justify-content: space-between;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-tertiary);
         }
 
-        .footer a {
-            color: var(--accent-blue);
-        }
+        .footer a { color: var(--accent-blue); }
 
         /* Loading */
-        .loading-skeleton {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            border-radius: var(--radius-sm);
+        .loading {
+            opacity: 0.5;
+            animation: pulse 1.5s infinite;
         }
 
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.7; }
         }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            .app-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                display: none;
-            }
-            
-            .main-content {
-                margin-left: 0;
-                padding: 32px 24px;
-            }
+        /* Mobile adjustments */
+        @media (max-width: 1023px) {
+            .header h1 { font-size: 22px; }
+            .articles-grid { grid-template-columns: 1fr; }
+            .tese-card { padding: 20px; }
+            .sections-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="app-container">
-        <!-- Sidebar -->
+        <!-- Desktop Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <div class="brand-title">Doutorado</div>
@@ -451,9 +476,7 @@
             <div class="sidebar-section">
                 <div class="sidebar-section-title">Tese</div>
                 <nav class="sidebar-nav">
-                    <a href="Tese/tese_draft.html" class="sidebar-link" target="_blank">
-                        Draft da Tese
-                    </a>
+                    <a href="Tese/tese_draft.html" class="sidebar-link" target="_blank">Draft da Tese</a>
                 </nav>
             </div>
             
@@ -499,7 +522,6 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Header -->
             <header class="header">
                 <h1>Copiloto Algorítmico para Compras Públicas</h1>
                 <p class="header-subtitle">Transparência de Algoritmos e IA em Contratações Públicas</p>
@@ -510,7 +532,7 @@
                     </div>
                     <div class="header-meta-item">
                         <span>🏛️</span>
-                        <span>Fucape Business School</span>
+                        <span>Fucape Business School — Vitória/ES</span>
                     </div>
                     <div class="header-meta-item">
                         <span>🕐</span>
@@ -519,13 +541,12 @@
                 </div>
             </header>
 
-            <!-- Tese Section -->
             <section class="section">
                 <div class="section-header">
                     <span class="section-title">Tese</span>
                 </div>
                 
-                <div class="tese-card" id="tese-card">
+                <div class="tese-card">
                     <div class="tese-header">
                         <div>
                             <div class="tese-title">Draft da Tese</div>
@@ -543,25 +564,43 @@
                 </div>
             </section>
 
-            <!-- Artigos Section -->
             <section class="section">
                 <div class="section-header">
                     <span class="section-title">Artigos</span>
-                    <span style="font-size: 12px; color: var(--text-tertiary);" id="articles-count">17 artigos</span>
+                    <span style="font-size: 11px; color: var(--text-tertiary);">17 artigos</span>
                 </div>
                 <div class="articles-grid" id="articles-grid"></div>
             </section>
 
-            <!-- Footer -->
             <footer class="footer">
                 <span>Repositório: <a href="https://github.com/renato0503/TeseDoutorado" target="_blank">github.com/renato0503/TeseDoutorado</a></span>
                 <span>Painel automático • Leitura em tempo real</span>
             </footer>
         </main>
+
+        <!-- Mobile Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="Tese/tese_draft.html" class="nav-item" target="_blank">
+                <i class="fas fa-file-alt"></i>
+                <span>Tese</span>
+            </a>
+            <a href="#" class="nav-item active" onclick="document.getElementById('articles-grid').scrollIntoView({behavior: 'smooth'})">
+                <i class="fas fa-newspaper"></i>
+                <span>Artigos</span>
+            </a>
+            <a href="Direcionamento.md" class="nav-item" target="_blank">
+                <i class="fas fa-compass"></i>
+                <span>Base</span>
+            </a>
+            <a href="https://github.com/renato0503/TeseDoutorado" class="nav-item" target="_blank">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+            </a>
+        </nav>
     </div>
 
     <script>
-        // Configurações
+        // ========== CONFIGURATION ==========
         const META_TESE = 40000;
         
         const ARTIGOS = [
@@ -584,96 +623,141 @@
             { id: 17, pasta: '17-DSR-Contabilidade-Publica-Mapeamento-Artefatos', arquivo: 'artigo_17.html', titulo: 'DSR Contabilidade', meta: 8000, tipo: 'quali' }
         ];
 
-        const SECOES_RELEVANTES = ['INTRODUÇÃO', 'FUNDAMENTAÇÃO TEÓRICA', 'METODOLOGIA', 'RESULTADOS', 'DISCUSSÃO', 'CONSIDERAÇÕES FINAIS', 'REFERÊNCIAS'];
+        const SECOES_RELEVANTES = ['INTRODUÇÃO', 'FUNDAMENTAÇÃO', 'METODOLOGIA', 'RESULTADOS', 'DISCUSSÃO', 'CONSIDERAÇÕES', 'REFERÊNCIAS'];
+        const PLACEHOLDERS = ['[seção em construção]', '[em construção]', '[espaço reservado]', '[conclusões]', '[preencher]', '[placeholder]', '[resultados a serem]', '[em construção...]'];
 
-        // Funções de análise
+        // ========== ANALYSIS FUNCTIONS ==========
+        
+        // Count words from text content
         function countWords(text) {
+            if (!text || typeof text !== 'string') return 0;
             return text.trim().split(/\s+/).filter(w => w.length > 0).length;
         }
 
+        // Analyze sections - robust parser
         function analyzeSections(html) {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            
-            const headings = [...doc.querySelectorAll('h2'), ...doc.querySelectorAll('h3')];
-            const placeholders = ['[seção em construção]', '[em construção]', '[espaço reservado]', '[conclusões]', '[preencher]', '[placeholder]', '[em construção...]', '[resultados a serem]'];
-            
-            const sections = [];
-            
-            headings.forEach(heading => {
-                const headingText = heading.textContent.trim().toUpperCase();
-                const parent = heading.parentElement;
-                const textBelow = parent?.textContent || '';
-                const wordCount = countWords(textBelow);
+            try {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
                 
-                const isRelevant = SECOES_RELEVANT.some(s => headingText.includes(s));
-                const isPlaceholder = placeholders.some(p => textBelow.toLowerCase().includes(p));
-                const hasContent = wordCount > 30 && !isPlaceholder;
+                // Find all heading elements
+                const headings = doc.querySelectorAll('h1, h2, h3, h4');
+                const sections = [];
                 
-                if (isRelevant) {
+                headings.forEach(heading => {
+                    const headingText = heading.textContent.trim().toUpperCase();
+                    
+                    // Check if it's a relevant section
+                    const isRelevant = SECOES_RELEVANTES.some(s => headingText.includes(s));
+                    if (!isRelevant) return;
+                    
+                    // Check if next element is a paragraph with real content
+                    let hasContent = false;
+                    let nextElem = heading.nextElementSibling;
+                    
+                    // Look for the next paragraph (skip divs, etc)
+                    while (nextElem && !nextElem.tagName.match(/^(P|DIV|SECTION|ARTICLE)$/i)) {
+                        nextElem = nextElem.nextElementSibling;
+                    }
+                    
+                    if (nextElem) {
+                        const textContent = nextElem.textContent || '';
+                        const wordCount = countWords(textContent);
+                        
+                        // Check for placeholders
+                        const isPlaceholder = PLACEHOLDERS.some(p => textContent.toLowerCase().includes(p.toLowerCase()));
+                        hasContent = wordCount > 50 && !isPlaceholder;
+                    }
+                    
                     sections.push({
-                        name: headingText.replace(/^\d+\.?\s*/, '').substring(0, 25),
-                        hasContent,
-                        words: wordCount
+                        name: headingText.replace(/^\d+\.?\s*/, '').substring(0, 20),
+                        hasContent: hasContent
                     });
-                }
-            });
-            
-            return sections;
+                });
+                
+                return sections;
+            } catch (e) {
+                console.error('Error analyzing sections:', e);
+                return [];
+            }
         }
 
+        // Analyze single file
         async function analyzeFile(path) {
             try {
                 const response = await fetch(path);
-                if (!response.ok) return null;
+                if (!response.ok) {
+                    console.warn(`File not found: ${path}`);
+                    return null;
+                }
+                
                 const html = await response.text();
                 
+                // Parse HTML and extract paragraph text
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
-                const textContent = doc.body.textContent || '';
-                const wordCount = countWords(textContent);
                 
+                // Count words from all paragraphs
+                const paragraphs = doc.querySelectorAll('p');
+                let totalWords = 0;
+                
+                paragraphs.forEach(p => {
+                    totalWords += countWords(p.textContent);
+                });
+                
+                // Also get text content as fallback
+                if (totalWords === 0) {
+                    totalWords = countWords(doc.body.textContent);
+                }
+                
+                // Analyze sections
                 const sections = analyzeSections(html);
                 
                 return {
-                    words: wordCount,
+                    words: totalWords,
                     sections: sections,
                     doneCount: sections.filter(s => s.hasContent).length,
                     totalCount: sections.length,
                     missing: sections.filter(s => !s.hasContent).map(s => s.name)
                 };
             } catch (e) {
-                console.error(`Erro: ${path}`, e);
+                console.error(`Error analyzing ${path}:`, e);
                 return null;
             }
         }
 
-        // Renderização
+        // ========== RENDER FUNCTIONS ==========
+        
         function renderTese(data) {
             const words = data?.words || 0;
             const percent = Math.min(100, Math.round((words / META_TESE) * 100));
             
-            document.getElementById('tese-percent').textContent = `${percent}%`;
-            document.getElementById('tese-words').textContent = `${words.toLocaleString()} / ${META_TESE.toLocaleString()} palavras`;
-            document.getElementById('tese-bar').style.width = `${percent}%`;
+            const percentEl = document.getElementById('tese-percent');
+            const wordsEl = document.getElementById('tese-words');
+            const barEl = document.getElementById('tese-bar');
+            
+            if (percentEl) percentEl.textContent = `${percent}%`;
+            if (wordsEl) wordsEl.textContent = `${words.toLocaleString()} / ${META_TESE.toLocaleString()} palavras`;
+            if (barEl) barEl.style.width = `${percent}%`;
             
             const sectionsContainer = document.getElementById('tese-sections');
-            if (data?.sections?.length > 0) {
+            if (sectionsContainer && data?.sections?.length > 0) {
                 sectionsContainer.innerHTML = data.sections.map(s => `
                     <div class="section-pill ${s.hasContent ? 'complete' : 'empty'}">
-                        <span class="section-name">${s.name}</span>
+                        <span>${s.name}</span>
                         <span class="section-status ${s.hasContent ? 'status-done' : 'status-pending'}">
                             ${s.hasContent ? '✓' : '○'}
                         </span>
                     </div>
                 `).join('');
-            } else {
-                sectionsContainer.innerHTML = '<p style="color: var(--text-tertiary); font-size: 12px;">Aguardando análise...</p>';
+            } else if (sectionsContainer) {
+                sectionsContainer.innerHTML = '<p style="color: var(--text-tertiary); font-size: 11px; grid-column: 1/-1;">Aguardando análise...</p>';
             }
         }
 
         function renderArticles(articlesData) {
             const grid = document.getElementById('articles-grid');
+            if (!grid) return;
             
             grid.innerHTML = ARTIGOS.map(art => {
                 const data = articlesData[art.id] || {};
@@ -706,15 +790,20 @@
             }).join('');
         }
 
-        // Inicialização
+        // ========== INITIALIZATION ==========
+        
         async function init() {
-            document.getElementById('last-update').textContent = new Date().toLocaleDateString('pt-BR');
+            // Set timestamp
+            const lastUpdate = document.getElementById('last-update');
+            if (lastUpdate) {
+                lastUpdate.textContent = new Date().toLocaleDateString('pt-BR');
+            }
             
-            // Carregar tese
+            // Analyze tese
             const teseData = await analyzeFile('Tese/tese_draft.html');
             renderTese(teseData);
             
-            // Carregar artigos
+            // Analyze all articles in parallel
             const articlePromises = ARTIGOS.map(async art => {
                 const path = `Artigos/${art.pasta}/${art.arquivo}`;
                 const data = await analyzeFile(path);
@@ -723,11 +812,14 @@
             
             const results = await Promise.all(articlePromises);
             const articlesData = {};
-            results.forEach(r => { if (r.data) articlesData[r.id] = r.data; });
+            results.forEach(r => {
+                if (r.data) articlesData[r.id] = r.data;
+            });
             
             renderArticles(articlesData);
         }
 
+        // Run when DOM is ready
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
