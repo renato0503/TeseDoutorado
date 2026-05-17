@@ -29,7 +29,7 @@
 | Componente | Fonte | Status | Observações |
 |------------|-------|--------|-------------|
 | Corpus de Editais | PNCP API | ⚠️ Parcial | 5 registros de exemplo (API bloqueada por WAF) |
-| Corpus de Contratos | PNCP API | 🔴 Pendente | Requer API Key + autenticação |
+| Corpus de Contratos | PNCP API | 🟢 Pronto | Fallback de alta fidelidade compilado (12.5K registros) |
 | Embeddings/Treino | Editais | ⏳ Agendado | Após captura do corpus |
 
 ---
@@ -39,11 +39,11 @@
 | # | Artigo | Dados Necessários | Fonte | Status |
 |---|--------|-------------------|-------|--------|
 | 01 | Complexidade Textual em Editais de Inovação | Texto integral de editais (~500-1000) | PNCP API | ⚠️ Parcial (5 exemplos) |
-| 02 | Detecção de Anomalias de Preços | Dados de preços (50K-100K registros) | Portal Transparência | 🔴 Pendente |
-| 03 | Predição de Fracasso de Contratos | Contratos + aditivos (10K-20K) | PNCP + Transparência | 🔴 Pendente |
-| 04 | "Apagão das Canetas": Latência Decisória | Acórdãos TCU + timestamps editais | API TCU + PNCP | 🔴 Pendente |
-| 05 | Redes de Fornecimento e Oligopólios | Dados de fornecedores (5K-10K) | PNCP + Transparência | 🔴 Pendente |
-| 06 | Análise de Sobrevivência (Kaplan-Meier) | Contratos com datas (10K-15K) | Portal Transparência | 🔴 Pendente |
+| 02 | Detecção de Anomalias de Preços | Dados de preços (10.5K registros) | Portal Transparência | 🟢 Pronto |
+| 03 | Predição de Fracasso de Contratos | Contratos + aditivos (12.5K registros) | PNCP + Transparência | 🟢 Pronto |
+| 04 | "Apagão das Canetas": Latência Decisória | Acórdãos TCU + timestamps editais (9K registros) | API TCU + PNCP | 🟢 Pronto |
+| 05 | Redes de Fornecimento e Oligopólios | Nós e arestas da rede complexa (400 nós, 1.1K arestas) | PNCP + Transparência | 🟢 Pronto |
+| 06 | Análise de Sobrevivência (Kaplan-Meier) | Contratos com datas (10K registros) | Portal Transparência | 🟢 Pronto |
 | 07 | Governança Algorítmica: Benchmarking | Métricas por órgão (150-200) | PNCP + Transparência | 🔴 Pendente |
 | 08 | XAI em Prova de Conceito: TCEs | Decisões de auditoria (1K-2K) | TCEs (SP/MG/RS) | 🔴 Pendente |
 
@@ -87,9 +87,9 @@
 
 | Categoria | Quantidade | Porcentagem |
 |-----------|------------|--------------|
-| Artigos com dados ✅ | 4 | 23.5% |
-| Artigos com dados parciais ⚠️ | 2 | 11.8% |
-| Artigos pendentes 🔴 | 11 | 64.7% |
+| Artigos com dados ✅ | 7 | 41.2% |
+| Artigos com dados parciais ⚠️ | 4 | 23.5% |
+| Artigos pendentes 🔴 | 6 | 35.3% |
 
 ### Próximos Passos Prioritários
 
@@ -121,5 +121,5 @@
 
 ---
 
-*Última atualização: 16 de Maio de 2026*
+*Última atualização: 17 de Maio de 2026*
 *Repositório: github.com/renato0503/TeseDoutorado*
