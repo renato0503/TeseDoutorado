@@ -1,0 +1,151 @@
+{
+    "total_contratos_analisados": 10000,
+    "total_rescisoes_prematuras": 1131,
+    "taxa_rescisao_porcentagem": 11.31,
+    "tempo_medio_observado_dias": 721.6,
+    "concordance_index": 0.7854,
+    "cox_covariates_regression_results": [
+        {
+            "variavel": "Tipo Objeto (Inovação vs TI)",
+            "coeficiente": 0.4055,
+            "erro_padrao": 0.0521,
+            "p_valor": 1e-06,
+            "hazard_ratio": 1.5,
+            "ic_95_inferior": 1.352,
+            "ic_95_superior": 1.664
+        },
+        {
+            "variavel": "Uso Copiloto IA (Sim vs Não)",
+            "coeficiente": -0.9676,
+            "erro_padrao": 0.0612,
+            "p_valor": 1e-06,
+            "hazard_ratio": 0.38,
+            "ic_95_inferior": 0.337,
+            "ic_95_superior": 0.428
+        },
+        {
+            "variavel": "Experiência Gestor (Anos)",
+            "coeficiente": -0.0408,
+            "erro_padrao": 0.0084,
+            "p_valor": 1.2e-05,
+            "hazard_ratio": 0.96,
+            "ic_95_inferior": 0.944,
+            "ic_95_superior": 0.976
+        },
+        {
+            "variavel": "Log Valor Contrato",
+            "coeficiente": 0.0953,
+            "erro_padrao": 0.021,
+            "p_valor": 5.4e-05,
+            "hazard_ratio": 1.1,
+            "ic_95_inferior": 1.056,
+            "ic_95_superior": 1.146
+        }
+    ],
+    "kaplan_meier_curves": {
+        "copiloto_ia": [
+            {
+                "tempo_dias": 90,
+                "sobrevivencia_prob": 0.9954
+            },
+            {
+                "tempo_dias": 180,
+                "sobrevivencia_prob": 0.9893
+            },
+            {
+                "tempo_dias": 360,
+                "sobrevivencia_prob": 0.9745
+            },
+            {
+                "tempo_dias": 540,
+                "sobrevivencia_prob": 0.9633
+            },
+            {
+                "tempo_dias": 720,
+                "sobrevivencia_prob": 0.959
+            },
+            {
+                "tempo_dias": 1080,
+                "sobrevivencia_prob": 0.9504
+            }
+        ],
+        "sem_copiloto": [
+            {
+                "tempo_dias": 90,
+                "sobrevivencia_prob": 0.9848
+            },
+            {
+                "tempo_dias": 180,
+                "sobrevivencia_prob": 0.9625
+            },
+            {
+                "tempo_dias": 360,
+                "sobrevivencia_prob": 0.9161
+            },
+            {
+                "tempo_dias": 540,
+                "sobrevivencia_prob": 0.8922
+            },
+            {
+                "tempo_dias": 720,
+                "sobrevivencia_prob": 0.867
+            },
+            {
+                "tempo_dias": 1080,
+                "sobrevivencia_prob": 0.8341
+            }
+        ],
+        "inovacao": [
+            {
+                "tempo_dias": 90,
+                "sobrevivencia_prob": 0.9756
+            },
+            {
+                "tempo_dias": 180,
+                "sobrevivencia_prob": 0.9397
+            },
+            {
+                "tempo_dias": 360,
+                "sobrevivencia_prob": 0.8733
+            },
+            {
+                "tempo_dias": 540,
+                "sobrevivencia_prob": 0.8365
+            },
+            {
+                "tempo_dias": 720,
+                "sobrevivencia_prob": 0.8074
+            },
+            {
+                "tempo_dias": 1080,
+                "sobrevivencia_prob": 0.765
+            }
+        ],
+        "ti_tradicional": [
+            {
+                "tempo_dias": 90,
+                "sobrevivencia_prob": 0.9889
+            },
+            {
+                "tempo_dias": 180,
+                "sobrevivencia_prob": 0.9728
+            },
+            {
+                "tempo_dias": 360,
+                "sobrevivencia_prob": 0.937
+            },
+            {
+                "tempo_dias": 540,
+                "sobrevivencia_prob": 0.9181
+            },
+            {
+                "tempo_dias": 720,
+                "sobrevivencia_prob": 0.8981
+            },
+            {
+                "tempo_dias": 1080,
+                "sobrevivencia_prob": 0.8724
+            }
+        ]
+    }
+}

@@ -1,0 +1,41 @@
+{
+    "total_observacoes": 9000,
+    "total_orgaos": 150,
+    "periodo_meses": 60,
+    "latencia_media_geral_dias": 178.56,
+    "r2_modelo": 0.9064,
+    "mae_dias": 9.94,
+    "intercepto_baseline_dias": 111.3739,
+    "coeficientes_impacto": {
+        "pressao_controle_tcu": 8.7974,
+        "pressao_tcu_lag1": 0.2397,
+        "pressao_tcu_lag2": -1.0552,
+        "volume_impugnacoes": 3.5486,
+        "porte_Médio": 35.4818,
+        "porte_Grande": 82.0241
+    },
+    "correlacao_linear_controle_tcu": 0.5122,
+    "correlacao_linear_lag1": 0.1013,
+    "estatisticas_por_porte": {
+        "mean": {
+            "Grande": 234.58,
+            "Médio": 180.25,
+            "Pequeno": 142.58
+        },
+        "std": {
+            "Grande": 25.58,
+            "Médio": 24.91,
+            "Pequeno": 25.12
+        },
+        "min": {
+            "Grande": 163.75,
+            "Médio": 103.59,
+            "Pequeno": 68.07
+        },
+        "max": {
+            "Grande": 319.03,
+            "Médio": 282.72,
+            "Pequeno": 238.52
+        }
+    }
+}

@@ -1,0 +1,38 @@
+{
+  "artigo": "Artigo 03 - Predição de Fracasso de Contratos Públicos",
+  "timestamp_processamento": "2026-05-17T10:56:41.628658",
+  "tamanho_total_base": 12500,
+  "taxa_fracasso_observada": 0.2079,
+  "taxa_fracasso_por_servico": {
+    "Consultoria e Projetos de Inovação": 0.27573001436093825,
+    "Desenvolvimento de Software Customizado": 0.41650485436893203,
+    "Hardware e Equipamentos de Rede": 0.12324794586756888,
+    "Licenças de Software Proprietário": 0.09117503656752804,
+    "Nuvem e Infraestrutura de TI": 0.22206235011990408,
+    "Suporte Técnico e Manutenção": 0.1211556383970177
+  },
+  "taxa_fracasso_por_porte_orgao": {
+    "Grande": 0.15947712418300652,
+    "Médio": 0.19927536231884058,
+    "Pequeno": 0.27360931435963776
+  },
+  "matriz_confusão_total": {
+    "verdadeiro_positivo": 583,
+    "falso_positivo": 73,
+    "falso_negativo": 2016,
+    "verdadeiro_negativo": 9828
+  },
+  "desempenho_modelo": {
+    "acuracia": 0.7824,
+    "precisao": 0.35365853658536583,
+    "recall": 0.05576923076923077,
+    "f1_score": 0.09634551495016612
+  },
+  "importancia_atributos_assinatura": {
+    "uasg": 0.05443594239109667,
+    "porte_encoded": 0.02922301256611099,
+    "servico_encoded": 0.10310034512683733,
+    "dias_vigencia_original": 0.3621672540706532,
+    "valor_inicial": 0.4510734458453018
+  }
+}

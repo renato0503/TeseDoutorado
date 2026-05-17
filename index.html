@@ -1038,7 +1038,7 @@
                 return `
                     <div class="article-card">
                         <span class="article-badge badge-${art.tipo}">${art.tipo}</span>
-                        <div class="article-title">${art.titulo}</div>
+                        <div class="article-title">Artigo ${String(art.id).padStart(2, '0')}: ${art.titulo}</div>
                         <div class="article-progress-text">${words.toLocaleString()} / ${art.meta.toLocaleString()} palavras</div>
                         <div class="article-bar">
                             <div class="article-bar-fill" style="width: ${percent}%; background: ${colorMap[art.tipo]}"></div>
@@ -1129,11 +1129,11 @@
             // Status: 1=pronto, 2=parcial, 14=pendente (conforme monitor_dados.md)
             const articlesStatus = [
                 { id: 1, status: 'partial', label: 'Art 01' },
-                { id: 2, status: 'pending', label: 'Art 02' },
-                { id: 3, status: 'pending', label: 'Art 03' },
-                { id: 4, status: 'pending', label: 'Art 04' },
-                { id: 5, status: 'pending', label: 'Art 05' },
-                { id: 6, status: 'pending', label: 'Art 06' },
+                { id: 2, status: 'ready', label: 'Art 02' },
+                { id: 3, status: 'ready', label: 'Art 03' },
+                { id: 4, status: 'ready', label: 'Art 04' },
+                { id: 5, status: 'ready', label: 'Art 05' },
+                { id: 6, status: 'ready', label: 'Art 06' },
                 { id: 7, status: 'pending', label: 'Art 07' },
                 { id: 8, status: 'pending', label: 'Art 08' },
                 { id: 9, status: 'partial', label: 'Art 09' },

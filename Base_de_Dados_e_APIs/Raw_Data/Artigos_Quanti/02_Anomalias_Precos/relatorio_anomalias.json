@@ -1,0 +1,67 @@
+{
+  "artigo": "Artigo 02 - Detecção de Anomalias de Preços",
+  "timestamp_processamento": "2026-05-17T10:50:44.852319",
+  "total_registros_processados": 10500,
+  "anomalias_reais_injetadas": 157,
+  "anomalias_detectadas_modelo": 158,
+  "indicadores_desempenho_modelo": {
+    "acuracia_geral": 0.9984,
+    "verdadeiros_positivos": 149,
+    "falsos_positivos": 9,
+    "taxa_infeccao_anomalias_real": 0.015,
+    "taxa_infeccao_anomalias_predita": 0.015
+  },
+  "algoritmo_utilizado": "Isolation Forest (scikit-learn)",
+  "colunas_modeladas": [
+    "quantidade",
+    "z_score_preco",
+    "desvio_percentual_media"
+  ],
+  "top_5_anomalias_criticas": [
+    {
+      "id_item": "ITEM-1010283",
+      "descricao": "Desenvolvimento de Software Customizado - H/M Sênior [ANOMALIA: ERRO DIGITACAO]",
+      "valor_unitario": 2803.3,
+      "quantidade": 2500,
+      "valor_total": 7008250.0,
+      "uasg": 200005,
+      "score_anomalia": -0.15714955337534353
+    },
+    {
+      "id_item": "ITEM-1002580",
+      "descricao": "Desenvolvimento de Software Customizado - H/M Pleno [ANOMALIA: ERRO DIGITACAO]",
+      "valor_unitario": 2003.9,
+      "quantidade": 2500,
+      "valor_total": 5009750.0,
+      "uasg": 170010,
+      "score_anomalia": -0.1563994135662854
+    },
+    {
+      "id_item": "ITEM-1006454",
+      "descricao": "Desenvolvimento de Software Customizado - H/M Pleno [ANOMALIA: ERRO DIGITACAO]",
+      "valor_unitario": 1734.3,
+      "quantidade": 2500,
+      "valor_total": 4335750.0,
+      "uasg": 200005,
+      "score_anomalia": -0.1552754719257532
+    },
+    {
+      "id_item": "ITEM-1009398",
+      "descricao": "Desenvolvimento de Software Customizado - H/M Pleno [ANOMALIA: ERRO DIGITACAO]",
+      "valor_unitario": 1700.6,
+      "quantidade": 2500,
+      "valor_total": 4251500.0,
+      "uasg": 170010,
+      "score_anomalia": -0.15415305014373937
+    },
+    {
+      "id_item": "ITEM-1007755",
+      "descricao": "Desenvolvimento de Software Customizado - H/M Sênior [ANOMALIA: ERRO DIGITACAO]",
+      "valor_unitario": 3548.4,
+      "quantidade": 1000,
+      "valor_total": 3548400.0,
+      "uasg": 170010,
+      "score_anomalia": -0.1490441176432853
+    }
+  ]
+}

@@ -1,0 +1,401 @@
+node_id,node_type,nome,porte,regiao,porte_fornecedor,categoria_ti
+UASG_150001,orgao,Órgão Público Federal 150001,Pequeno,Sudeste,,
+UASG_150002,orgao,Órgão Público Federal 150002,Pequeno,Norte,,
+UASG_150003,orgao,Órgão Público Federal 150003,Pequeno,Sul,,
+UASG_150004,orgao,Órgão Público Federal 150004,Pequeno,Nordeste,,
+UASG_150005,orgao,Órgão Público Federal 150005,Pequeno,Sudeste,,
+UASG_150006,orgao,Órgão Público Federal 150006,Pequeno,Sudeste,,
+UASG_150007,orgao,Órgão Público Federal 150007,Pequeno,Sudeste,,
+UASG_150008,orgao,Órgão Público Federal 150008,Pequeno,Centro-Oeste,,
+UASG_150009,orgao,Órgão Público Federal 150009,Pequeno,Nordeste,,
+UASG_150010,orgao,Órgão Público Federal 150010,Pequeno,Sul,,
+UASG_150011,orgao,Órgão Público Federal 150011,Pequeno,Sudeste,,
+UASG_150012,orgao,Órgão Público Federal 150012,Pequeno,Norte,,
+UASG_150013,orgao,Órgão Público Federal 150013,Pequeno,Centro-Oeste,,
+UASG_150014,orgao,Órgão Público Federal 150014,Pequeno,Sudeste,,
+UASG_150015,orgao,Órgão Público Federal 150015,Pequeno,Sudeste,,
+UASG_150016,orgao,Órgão Público Federal 150016,Pequeno,Sudeste,,
+UASG_150017,orgao,Órgão Público Federal 150017,Pequeno,Sudeste,,
+UASG_150018,orgao,Órgão Público Federal 150018,Pequeno,Nordeste,,
+UASG_150019,orgao,Órgão Público Federal 150019,Pequeno,Sudeste,,
+UASG_150020,orgao,Órgão Público Federal 150020,Pequeno,Sudeste,,
+UASG_150021,orgao,Órgão Público Federal 150021,Pequeno,Nordeste,,
+UASG_150022,orgao,Órgão Público Federal 150022,Pequeno,Sudeste,,
+UASG_150023,orgao,Órgão Público Federal 150023,Pequeno,Sudeste,,
+UASG_150024,orgao,Órgão Público Federal 150024,Pequeno,Sudeste,,
+UASG_150025,orgao,Órgão Público Federal 150025,Pequeno,Nordeste,,
+UASG_150026,orgao,Órgão Público Federal 150026,Pequeno,Sul,,
+UASG_150027,orgao,Órgão Público Federal 150027,Pequeno,Sudeste,,
+UASG_150028,orgao,Órgão Público Federal 150028,Pequeno,Nordeste,,
+UASG_150029,orgao,Órgão Público Federal 150029,Pequeno,Nordeste,,
+UASG_150030,orgao,Órgão Público Federal 150030,Pequeno,Sudeste,,
+UASG_150031,orgao,Órgão Público Federal 150031,Pequeno,Nordeste,,
+UASG_150032,orgao,Órgão Público Federal 150032,Pequeno,Sudeste,,
+UASG_150033,orgao,Órgão Público Federal 150033,Pequeno,Sudeste,,
+UASG_150034,orgao,Órgão Público Federal 150034,Pequeno,Norte,,
+UASG_150035,orgao,Órgão Público Federal 150035,Pequeno,Norte,,
+UASG_150036,orgao,Órgão Público Federal 150036,Pequeno,Centro-Oeste,,
+UASG_150037,orgao,Órgão Público Federal 150037,Pequeno,Sudeste,,
+UASG_150038,orgao,Órgão Público Federal 150038,Pequeno,Sudeste,,
+UASG_150039,orgao,Órgão Público Federal 150039,Pequeno,Sul,,
+UASG_150040,orgao,Órgão Público Federal 150040,Pequeno,Sudeste,,
+UASG_150041,orgao,Órgão Público Federal 150041,Médio,Sudeste,,
+UASG_150042,orgao,Órgão Público Federal 150042,Médio,Nordeste,,
+UASG_150043,orgao,Órgão Público Federal 150043,Médio,Sudeste,,
+UASG_150044,orgao,Órgão Público Federal 150044,Médio,Centro-Oeste,,
+UASG_150045,orgao,Órgão Público Federal 150045,Médio,Sudeste,,
+UASG_150046,orgao,Órgão Público Federal 150046,Médio,Sul,,
+UASG_150047,orgao,Órgão Público Federal 150047,Médio,Sudeste,,
+UASG_150048,orgao,Órgão Público Federal 150048,Médio,Nordeste,,
+UASG_150049,orgao,Órgão Público Federal 150049,Médio,Nordeste,,
+UASG_150050,orgao,Órgão Público Federal 150050,Médio,Sudeste,,
+UASG_150051,orgao,Órgão Público Federal 150051,Médio,Norte,,
+UASG_150052,orgao,Órgão Público Federal 150052,Médio,Sul,,
+UASG_150053,orgao,Órgão Público Federal 150053,Médio,Norte,,
+UASG_150054,orgao,Órgão Público Federal 150054,Médio,Centro-Oeste,,
+UASG_150055,orgao,Órgão Público Federal 150055,Médio,Nordeste,,
+UASG_150056,orgao,Órgão Público Federal 150056,Médio,Norte,,
+UASG_150057,orgao,Órgão Público Federal 150057,Médio,Sudeste,,
+UASG_150058,orgao,Órgão Público Federal 150058,Médio,Sudeste,,
+UASG_150059,orgao,Órgão Público Federal 150059,Médio,Sudeste,,
+UASG_150060,orgao,Órgão Público Federal 150060,Médio,Sudeste,,
+UASG_150061,orgao,Órgão Público Federal 150061,Médio,Sudeste,,
+UASG_150062,orgao,Órgão Público Federal 150062,Médio,Sudeste,,
+UASG_150063,orgao,Órgão Público Federal 150063,Médio,Centro-Oeste,,
+UASG_150064,orgao,Órgão Público Federal 150064,Médio,Sudeste,,
+UASG_150065,orgao,Órgão Público Federal 150065,Médio,Sudeste,,
+UASG_150066,orgao,Órgão Público Federal 150066,Médio,Nordeste,,
+UASG_150067,orgao,Órgão Público Federal 150067,Médio,Sudeste,,
+UASG_150068,orgao,Órgão Público Federal 150068,Médio,Centro-Oeste,,
+UASG_150069,orgao,Órgão Público Federal 150069,Médio,Sudeste,,
+UASG_150070,orgao,Órgão Público Federal 150070,Médio,Norte,,
+UASG_150071,orgao,Órgão Público Federal 150071,Médio,Sul,,
+UASG_150072,orgao,Órgão Público Federal 150072,Médio,Sudeste,,
+UASG_150073,orgao,Órgão Público Federal 150073,Médio,Sudeste,,
+UASG_150074,orgao,Órgão Público Federal 150074,Médio,Centro-Oeste,,
+UASG_150075,orgao,Órgão Público Federal 150075,Médio,Sul,,
+UASG_150076,orgao,Órgão Público Federal 150076,Médio,Sul,,
+UASG_150077,orgao,Órgão Público Federal 150077,Médio,Sul,,
+UASG_150078,orgao,Órgão Público Federal 150078,Médio,Sudeste,,
+UASG_150079,orgao,Órgão Público Federal 150079,Médio,Sudeste,,
+UASG_150080,orgao,Órgão Público Federal 150080,Médio,Sudeste,,
+UASG_150081,orgao,Órgão Público Federal 150081,Grande,Centro-Oeste,,
+UASG_150082,orgao,Órgão Público Federal 150082,Grande,Nordeste,,
+UASG_150083,orgao,Órgão Público Federal 150083,Grande,Sudeste,,
+UASG_150084,orgao,Órgão Público Federal 150084,Grande,Sudeste,,
+UASG_150085,orgao,Órgão Público Federal 150085,Grande,Sudeste,,
+UASG_150086,orgao,Órgão Público Federal 150086,Grande,Sudeste,,
+UASG_150087,orgao,Órgão Público Federal 150087,Grande,Sul,,
+UASG_150088,orgao,Órgão Público Federal 150088,Grande,Nordeste,,
+UASG_150089,orgao,Órgão Público Federal 150089,Grande,Centro-Oeste,,
+UASG_150090,orgao,Órgão Público Federal 150090,Grande,Nordeste,,
+UASG_150091,orgao,Órgão Público Federal 150091,Grande,Sudeste,,
+UASG_150092,orgao,Órgão Público Federal 150092,Grande,Sul,,
+UASG_150093,orgao,Órgão Público Federal 150093,Grande,Sul,,
+UASG_150094,orgao,Órgão Público Federal 150094,Grande,Nordeste,,
+UASG_150095,orgao,Órgão Público Federal 150095,Grande,Sul,,
+UASG_150096,orgao,Órgão Público Federal 150096,Grande,Nordeste,,
+UASG_150097,orgao,Órgão Público Federal 150097,Grande,Nordeste,,
+UASG_150098,orgao,Órgão Público Federal 150098,Grande,Sudeste,,
+UASG_150099,orgao,Órgão Público Federal 150099,Grande,Sudeste,,
+UASG_150100,orgao,Órgão Público Federal 150100,Grande,Sudeste,,
+CNPJ_12.345.678/0001-90,fornecedor,TechGlobal Servicos Ltda,,,Grande,Oligopólio
+CNPJ_98.765.432/0001-10,fornecedor,Integradora Brasil S.A.,,,Grande,Oligopólio
+CNPJ_45.678.901/0001-22,fornecedor,Sistemas e Dados Gov Ltda,,,Grande,Oligopólio
+CNPJ_72.963.842/0001-61,fornecedor,Tecnologia e Servicos TI 3,,,Média,Software
+CNPJ_32.330.848/0001-24,fornecedor,Tecnologia e Servicos TI 4,,,Micro/Eireli,Suporte
+CNPJ_41.938.798/0001-95,fornecedor,Tecnologia e Servicos TI 5,,,Média,Nuvem
+CNPJ_71.745.895/0001-37,fornecedor,Tecnologia e Servicos TI 6,,,Micro/Eireli,Hardware
+CNPJ_71.430.739/0001-98,fornecedor,Tecnologia e Servicos TI 7,,,Micro/Eireli,Software
+CNPJ_36.732.727/0001-86,fornecedor,Tecnologia e Servicos TI 8,,,Micro/Eireli,Nuvem
+CNPJ_81.510.748/0001-71,fornecedor,Tecnologia e Servicos TI 9,,,Micro/Eireli,Hardware
+CNPJ_53.763.926/0001-41,fornecedor,Tecnologia e Servicos TI 10,,,Média,Software
+CNPJ_71.596.541/0001-61,fornecedor,Tecnologia e Servicos TI 11,,,Média,Hardware
+CNPJ_12.212.712/0001-65,fornecedor,Tecnologia e Servicos TI 12,,,Média,Hardware
+CNPJ_11.319.665/0001-96,fornecedor,Tecnologia e Servicos TI 13,,,Grande,Software
+CNPJ_28.737.229/0001-62,fornecedor,Tecnologia e Servicos TI 14,,,Grande,Software
+CNPJ_41.346.935/0001-64,fornecedor,Tecnologia e Servicos TI 15,,,Micro/Eireli,Suporte
+CNPJ_47.379.936/0001-79,fornecedor,Tecnologia e Servicos TI 16,,,Média,Software
+CNPJ_25.708.300/0001-68,fornecedor,Tecnologia e Servicos TI 17,,,Micro/Eireli,Hardware
+CNPJ_29.863.502/0001-76,fornecedor,Tecnologia e Servicos TI 18,,,Micro/Eireli,Suporte
+CNPJ_80.919.588/0001-42,fornecedor,Tecnologia e Servicos TI 19,,,Micro/Eireli,Software
+CNPJ_10.878.572/0001-59,fornecedor,Tecnologia e Servicos TI 20,,,Média,Nuvem
+CNPJ_16.863.243/0001-69,fornecedor,Tecnologia e Servicos TI 21,,,Grande,Software
+CNPJ_21.552.136/0001-41,fornecedor,Tecnologia e Servicos TI 22,,,Micro/Eireli,Suporte
+CNPJ_28.915.307/0001-12,fornecedor,Tecnologia e Servicos TI 23,,,Micro/Eireli,Nuvem
+CNPJ_42.727.686/0001-81,fornecedor,Tecnologia e Servicos TI 24,,,Média,Suporte
+CNPJ_98.198.252/0001-27,fornecedor,Tecnologia e Servicos TI 25,,,Micro/Eireli,Hardware
+CNPJ_63.262.819/0001-70,fornecedor,Tecnologia e Servicos TI 26,,,Média,Hardware
+CNPJ_42.497.376/0001-57,fornecedor,Tecnologia e Servicos TI 27,,,Média,Suporte
+CNPJ_16.294.500/0001-42,fornecedor,Tecnologia e Servicos TI 28,,,Micro/Eireli,Software
+CNPJ_95.474.121/0001-39,fornecedor,Tecnologia e Servicos TI 29,,,Micro/Eireli,Nuvem
+CNPJ_63.875.382/0001-36,fornecedor,Tecnologia e Servicos TI 30,,,Micro/Eireli,Suporte
+CNPJ_37.978.580/0001-78,fornecedor,Tecnologia e Servicos TI 31,,,Micro/Eireli,Hardware
+CNPJ_13.646.291/0001-58,fornecedor,Tecnologia e Servicos TI 32,,,Grande,Hardware
+CNPJ_39.576.145/0001-15,fornecedor,Tecnologia e Servicos TI 33,,,Micro/Eireli,Software
+CNPJ_33.448.596/0001-55,fornecedor,Tecnologia e Servicos TI 34,,,Grande,Nuvem
+CNPJ_72.352.260/0001-76,fornecedor,Tecnologia e Servicos TI 35,,,Micro/Eireli,Hardware
+CNPJ_63.669.422/0001-55,fornecedor,Tecnologia e Servicos TI 36,,,Média,Hardware
+CNPJ_95.762.738/0001-36,fornecedor,Tecnologia e Servicos TI 37,,,Micro/Eireli,Software
+CNPJ_42.492.910/0001-57,fornecedor,Tecnologia e Servicos TI 38,,,Micro/Eireli,Software
+CNPJ_35.966.917/0001-34,fornecedor,Tecnologia e Servicos TI 39,,,Micro/Eireli,Suporte
+CNPJ_16.924.135/0001-54,fornecedor,Tecnologia e Servicos TI 40,,,Micro/Eireli,Hardware
+CNPJ_25.753.982/0001-96,fornecedor,Tecnologia e Servicos TI 41,,,Micro/Eireli,Hardware
+CNPJ_41.826.953/0001-60,fornecedor,Tecnologia e Servicos TI 42,,,Micro/Eireli,Software
+CNPJ_31.413.669/0001-95,fornecedor,Tecnologia e Servicos TI 43,,,Micro/Eireli,Software
+CNPJ_24.153.543/0001-17,fornecedor,Tecnologia e Servicos TI 44,,,Micro/Eireli,Suporte
+CNPJ_14.202.295/0001-15,fornecedor,Tecnologia e Servicos TI 45,,,Micro/Eireli,Hardware
+CNPJ_56.966.922/0001-49,fornecedor,Tecnologia e Servicos TI 46,,,Grande,Suporte
+CNPJ_39.758.756/0001-72,fornecedor,Tecnologia e Servicos TI 47,,,Média,Software
+CNPJ_71.890.226/0001-18,fornecedor,Tecnologia e Servicos TI 48,,,Micro/Eireli,Suporte
+CNPJ_10.850.901/0001-57,fornecedor,Tecnologia e Servicos TI 49,,,Grande,Hardware
+CNPJ_10.371.288/0001-73,fornecedor,Tecnologia e Servicos TI 50,,,Média,Software
+CNPJ_76.175.253/0001-25,fornecedor,Tecnologia e Servicos TI 51,,,Micro/Eireli,Hardware
+CNPJ_38.319.168/0001-56,fornecedor,Tecnologia e Servicos TI 52,,,Média,Hardware
+CNPJ_78.303.317/0001-57,fornecedor,Tecnologia e Servicos TI 53,,,Micro/Eireli,Suporte
+CNPJ_32.861.621/0001-78,fornecedor,Tecnologia e Servicos TI 54,,,Micro/Eireli,Nuvem
+CNPJ_19.861.758/0001-67,fornecedor,Tecnologia e Servicos TI 55,,,Micro/Eireli,Software
+CNPJ_13.115.891/0001-89,fornecedor,Tecnologia e Servicos TI 56,,,Micro/Eireli,Suporte
+CNPJ_41.574.951/0001-33,fornecedor,Tecnologia e Servicos TI 57,,,Micro/Eireli,Suporte
+CNPJ_42.790.526/0001-21,fornecedor,Tecnologia e Servicos TI 58,,,Grande,Software
+CNPJ_83.142.655/0001-38,fornecedor,Tecnologia e Servicos TI 59,,,Micro/Eireli,Hardware
+CNPJ_11.352.598/0001-44,fornecedor,Tecnologia e Servicos TI 60,,,Média,Software
+CNPJ_35.701.517/0001-16,fornecedor,Tecnologia e Servicos TI 61,,,Média,Hardware
+CNPJ_84.512.475/0001-45,fornecedor,Tecnologia e Servicos TI 62,,,Grande,Software
+CNPJ_45.493.968/0001-82,fornecedor,Tecnologia e Servicos TI 63,,,Micro/Eireli,Software
+CNPJ_45.195.763/0001-32,fornecedor,Tecnologia e Servicos TI 64,,,Média,Nuvem
+CNPJ_64.624.378/0001-98,fornecedor,Tecnologia e Servicos TI 65,,,Micro/Eireli,Hardware
+CNPJ_71.695.979/0001-98,fornecedor,Tecnologia e Servicos TI 66,,,Média,Software
+CNPJ_58.711.495/0001-70,fornecedor,Tecnologia e Servicos TI 67,,,Micro/Eireli,Nuvem
+CNPJ_80.895.817/0001-61,fornecedor,Tecnologia e Servicos TI 68,,,Média,Software
+CNPJ_78.198.495/0001-34,fornecedor,Tecnologia e Servicos TI 69,,,Micro/Eireli,Software
+CNPJ_62.250.243/0001-66,fornecedor,Tecnologia e Servicos TI 70,,,Grande,Hardware
+CNPJ_67.497.322/0001-14,fornecedor,Tecnologia e Servicos TI 71,,,Micro/Eireli,Suporte
+CNPJ_84.757.850/0001-85,fornecedor,Tecnologia e Servicos TI 72,,,Média,Suporte
+CNPJ_26.352.329/0001-16,fornecedor,Tecnologia e Servicos TI 73,,,Micro/Eireli,Software
+CNPJ_18.894.733/0001-75,fornecedor,Tecnologia e Servicos TI 74,,,Micro/Eireli,Hardware
+CNPJ_92.747.595/0001-74,fornecedor,Tecnologia e Servicos TI 75,,,Micro/Eireli,Nuvem
+CNPJ_80.316.400/0001-13,fornecedor,Tecnologia e Servicos TI 76,,,Média,Software
+CNPJ_28.544.975/0001-63,fornecedor,Tecnologia e Servicos TI 77,,,Micro/Eireli,Suporte
+CNPJ_28.138.225/0001-76,fornecedor,Tecnologia e Servicos TI 78,,,Micro/Eireli,Software
+CNPJ_67.759.575/0001-81,fornecedor,Tecnologia e Servicos TI 79,,,Média,Hardware
+CNPJ_10.486.447/0001-71,fornecedor,Tecnologia e Servicos TI 80,,,Micro/Eireli,Software
+CNPJ_34.923.216/0001-15,fornecedor,Tecnologia e Servicos TI 81,,,Grande,Suporte
+CNPJ_54.928.914/0001-30,fornecedor,Tecnologia e Servicos TI 82,,,Grande,Hardware
+CNPJ_45.326.758/0001-29,fornecedor,Tecnologia e Servicos TI 83,,,Micro/Eireli,Hardware
+CNPJ_58.625.242/0001-40,fornecedor,Tecnologia e Servicos TI 84,,,Média,Nuvem
+CNPJ_12.755.570/0001-66,fornecedor,Tecnologia e Servicos TI 85,,,Grande,Nuvem
+CNPJ_25.457.507/0001-37,fornecedor,Tecnologia e Servicos TI 86,,,Micro/Eireli,Software
+CNPJ_45.189.747/0001-67,fornecedor,Tecnologia e Servicos TI 87,,,Micro/Eireli,Hardware
+CNPJ_50.839.803/0001-36,fornecedor,Tecnologia e Servicos TI 88,,,Micro/Eireli,Suporte
+CNPJ_42.823.560/0001-38,fornecedor,Tecnologia e Servicos TI 89,,,Micro/Eireli,Hardware
+CNPJ_15.693.982/0001-78,fornecedor,Tecnologia e Servicos TI 90,,,Micro/Eireli,Suporte
+CNPJ_65.897.341/0001-14,fornecedor,Tecnologia e Servicos TI 91,,,Micro/Eireli,Hardware
+CNPJ_74.245.323/0001-58,fornecedor,Tecnologia e Servicos TI 92,,,Média,Software
+CNPJ_98.953.926/0001-36,fornecedor,Tecnologia e Servicos TI 93,,,Micro/Eireli,Software
+CNPJ_10.504.922/0001-15,fornecedor,Tecnologia e Servicos TI 94,,,Micro/Eireli,Suporte
+CNPJ_14.969.870/0001-62,fornecedor,Tecnologia e Servicos TI 95,,,Média,Software
+CNPJ_83.557.182/0001-26,fornecedor,Tecnologia e Servicos TI 96,,,Micro/Eireli,Hardware
+CNPJ_10.150.784/0001-86,fornecedor,Tecnologia e Servicos TI 97,,,Média,Hardware
+CNPJ_41.133.447/0001-81,fornecedor,Tecnologia e Servicos TI 98,,,Micro/Eireli,Hardware
+CNPJ_63.217.870/0001-59,fornecedor,Tecnologia e Servicos TI 99,,,Micro/Eireli,Nuvem
+CNPJ_14.833.862/0001-66,fornecedor,Tecnologia e Servicos TI 100,,,Micro/Eireli,Software
+CNPJ_32.306.328/0001-94,fornecedor,Tecnologia e Servicos TI 101,,,Média,Suporte
+CNPJ_47.803.863/0001-47,fornecedor,Tecnologia e Servicos TI 102,,,Média,Suporte
+CNPJ_88.958.534/0001-72,fornecedor,Tecnologia e Servicos TI 103,,,Micro/Eireli,Suporte
+CNPJ_97.434.641/0001-60,fornecedor,Tecnologia e Servicos TI 104,,,Média,Suporte
+CNPJ_19.283.500/0001-83,fornecedor,Tecnologia e Servicos TI 105,,,Micro/Eireli,Suporte
+CNPJ_78.645.873/0001-62,fornecedor,Tecnologia e Servicos TI 106,,,Micro/Eireli,Software
+CNPJ_52.851.982/0001-32,fornecedor,Tecnologia e Servicos TI 107,,,Micro/Eireli,Hardware
+CNPJ_25.619.459/0001-13,fornecedor,Tecnologia e Servicos TI 108,,,Média,Software
+CNPJ_76.766.192/0001-41,fornecedor,Tecnologia e Servicos TI 109,,,Micro/Eireli,Hardware
+CNPJ_28.888.104/0001-91,fornecedor,Tecnologia e Servicos TI 110,,,Micro/Eireli,Software
+CNPJ_30.937.612/0001-14,fornecedor,Tecnologia e Servicos TI 111,,,Micro/Eireli,Software
+CNPJ_43.177.829/0001-54,fornecedor,Tecnologia e Servicos TI 112,,,Micro/Eireli,Software
+CNPJ_56.220.313/0001-65,fornecedor,Tecnologia e Servicos TI 113,,,Grande,Nuvem
+CNPJ_70.436.125/0001-45,fornecedor,Tecnologia e Servicos TI 114,,,Média,Suporte
+CNPJ_61.818.402/0001-65,fornecedor,Tecnologia e Servicos TI 115,,,Média,Software
+CNPJ_96.177.315/0001-11,fornecedor,Tecnologia e Servicos TI 116,,,Micro/Eireli,Suporte
+CNPJ_65.982.106/0001-12,fornecedor,Tecnologia e Servicos TI 117,,,Micro/Eireli,Nuvem
+CNPJ_27.605.905/0001-24,fornecedor,Tecnologia e Servicos TI 118,,,Média,Hardware
+CNPJ_37.813.138/0001-66,fornecedor,Tecnologia e Servicos TI 119,,,Micro/Eireli,Suporte
+CNPJ_53.636.244/0001-22,fornecedor,Tecnologia e Servicos TI 120,,,Média,Software
+CNPJ_76.332.208/0001-27,fornecedor,Tecnologia e Servicos TI 121,,,Micro/Eireli,Hardware
+CNPJ_43.722.875/0001-49,fornecedor,Tecnologia e Servicos TI 122,,,Micro/Eireli,Software
+CNPJ_50.712.617/0001-61,fornecedor,Tecnologia e Servicos TI 123,,,Micro/Eireli,Suporte
+CNPJ_65.414.976/0001-79,fornecedor,Tecnologia e Servicos TI 124,,,Micro/Eireli,Suporte
+CNPJ_31.376.809/0001-79,fornecedor,Tecnologia e Servicos TI 125,,,Micro/Eireli,Hardware
+CNPJ_84.545.929/0001-33,fornecedor,Tecnologia e Servicos TI 126,,,Micro/Eireli,Nuvem
+CNPJ_40.139.328/0001-45,fornecedor,Tecnologia e Servicos TI 127,,,Média,Nuvem
+CNPJ_93.831.174/0001-13,fornecedor,Tecnologia e Servicos TI 128,,,Grande,Hardware
+CNPJ_60.673.540/0001-75,fornecedor,Tecnologia e Servicos TI 129,,,Micro/Eireli,Software
+CNPJ_60.272.399/0001-14,fornecedor,Tecnologia e Servicos TI 130,,,Micro/Eireli,Hardware
+CNPJ_28.823.324/0001-29,fornecedor,Tecnologia e Servicos TI 131,,,Micro/Eireli,Hardware
+CNPJ_23.419.649/0001-46,fornecedor,Tecnologia e Servicos TI 132,,,Grande,Software
+CNPJ_86.358.772/0001-15,fornecedor,Tecnologia e Servicos TI 133,,,Micro/Eireli,Software
+CNPJ_32.749.271/0001-11,fornecedor,Tecnologia e Servicos TI 134,,,Média,Software
+CNPJ_74.418.712/0001-82,fornecedor,Tecnologia e Servicos TI 135,,,Micro/Eireli,Suporte
+CNPJ_33.649.518/0001-58,fornecedor,Tecnologia e Servicos TI 136,,,Média,Nuvem
+CNPJ_59.433.984/0001-84,fornecedor,Tecnologia e Servicos TI 137,,,Micro/Eireli,Nuvem
+CNPJ_44.612.395/0001-73,fornecedor,Tecnologia e Servicos TI 138,,,Média,Software
+CNPJ_81.878.972/0001-23,fornecedor,Tecnologia e Servicos TI 139,,,Média,Suporte
+CNPJ_46.104.950/0001-87,fornecedor,Tecnologia e Servicos TI 140,,,Micro/Eireli,Software
+CNPJ_51.188.501/0001-49,fornecedor,Tecnologia e Servicos TI 141,,,Média,Software
+CNPJ_41.790.736/0001-47,fornecedor,Tecnologia e Servicos TI 142,,,Micro/Eireli,Software
+CNPJ_34.244.324/0001-75,fornecedor,Tecnologia e Servicos TI 143,,,Grande,Software
+CNPJ_60.138.297/0001-15,fornecedor,Tecnologia e Servicos TI 144,,,Média,Software
+CNPJ_51.547.599/0001-24,fornecedor,Tecnologia e Servicos TI 145,,,Micro/Eireli,Nuvem
+CNPJ_36.519.256/0001-47,fornecedor,Tecnologia e Servicos TI 146,,,Média,Suporte
+CNPJ_36.388.353/0001-77,fornecedor,Tecnologia e Servicos TI 147,,,Média,Software
+CNPJ_83.964.217/0001-47,fornecedor,Tecnologia e Servicos TI 148,,,Micro/Eireli,Software
+CNPJ_97.795.114/0001-38,fornecedor,Tecnologia e Servicos TI 149,,,Micro/Eireli,Software
+CNPJ_77.943.784/0001-11,fornecedor,Tecnologia e Servicos TI 150,,,Micro/Eireli,Hardware
+CNPJ_45.391.893/0001-52,fornecedor,Tecnologia e Servicos TI 151,,,Média,Software
+CNPJ_83.971.649/0001-15,fornecedor,Tecnologia e Servicos TI 152,,,Micro/Eireli,Software
+CNPJ_55.462.495/0001-22,fornecedor,Tecnologia e Servicos TI 153,,,Micro/Eireli,Hardware
+CNPJ_69.782.559/0001-77,fornecedor,Tecnologia e Servicos TI 154,,,Micro/Eireli,Suporte
+CNPJ_40.477.150/0001-38,fornecedor,Tecnologia e Servicos TI 155,,,Média,Hardware
+CNPJ_20.506.868/0001-55,fornecedor,Tecnologia e Servicos TI 156,,,Micro/Eireli,Hardware
+CNPJ_45.281.924/0001-10,fornecedor,Tecnologia e Servicos TI 157,,,Micro/Eireli,Nuvem
+CNPJ_49.760.530/0001-82,fornecedor,Tecnologia e Servicos TI 158,,,Micro/Eireli,Suporte
+CNPJ_66.216.765/0001-50,fornecedor,Tecnologia e Servicos TI 159,,,Micro/Eireli,Hardware
+CNPJ_84.905.485/0001-16,fornecedor,Tecnologia e Servicos TI 160,,,Média,Software
+CNPJ_26.739.975/0001-60,fornecedor,Tecnologia e Servicos TI 161,,,Micro/Eireli,Hardware
+CNPJ_61.809.600/0001-97,fornecedor,Tecnologia e Servicos TI 162,,,Média,Software
+CNPJ_31.765.255/0001-94,fornecedor,Tecnologia e Servicos TI 163,,,Grande,Software
+CNPJ_58.247.729/0001-95,fornecedor,Tecnologia e Servicos TI 164,,,Grande,Hardware
+CNPJ_58.426.868/0001-22,fornecedor,Tecnologia e Servicos TI 165,,,Micro/Eireli,Software
+CNPJ_65.822.417/0001-41,fornecedor,Tecnologia e Servicos TI 166,,,Média,Software
+CNPJ_39.243.523/0001-28,fornecedor,Tecnologia e Servicos TI 167,,,Média,Hardware
+CNPJ_56.293.601/0001-47,fornecedor,Tecnologia e Servicos TI 168,,,Micro/Eireli,Suporte
+CNPJ_17.154.970/0001-12,fornecedor,Tecnologia e Servicos TI 169,,,Micro/Eireli,Software
+CNPJ_43.479.186/0001-64,fornecedor,Tecnologia e Servicos TI 170,,,Média,Hardware
+CNPJ_17.932.412/0001-76,fornecedor,Tecnologia e Servicos TI 171,,,Média,Hardware
+CNPJ_81.153.860/0001-76,fornecedor,Tecnologia e Servicos TI 172,,,Micro/Eireli,Nuvem
+CNPJ_17.517.902/0001-97,fornecedor,Tecnologia e Servicos TI 173,,,Média,Suporte
+CNPJ_25.551.599/0001-46,fornecedor,Tecnologia e Servicos TI 174,,,Micro/Eireli,Hardware
+CNPJ_64.106.429/0001-16,fornecedor,Tecnologia e Servicos TI 175,,,Média,Suporte
+CNPJ_28.647.384/0001-69,fornecedor,Tecnologia e Servicos TI 176,,,Grande,Suporte
+CNPJ_78.622.845/0001-11,fornecedor,Tecnologia e Servicos TI 177,,,Micro/Eireli,Software
+CNPJ_29.360.904/0001-47,fornecedor,Tecnologia e Servicos TI 178,,,Micro/Eireli,Suporte
+CNPJ_62.966.599/0001-95,fornecedor,Tecnologia e Servicos TI 179,,,Micro/Eireli,Suporte
+CNPJ_39.731.158/0001-96,fornecedor,Tecnologia e Servicos TI 180,,,Micro/Eireli,Suporte
+CNPJ_90.625.620/0001-49,fornecedor,Tecnologia e Servicos TI 181,,,Micro/Eireli,Suporte
+CNPJ_82.857.377/0001-13,fornecedor,Tecnologia e Servicos TI 182,,,Grande,Hardware
+CNPJ_96.904.174/0001-79,fornecedor,Tecnologia e Servicos TI 183,,,Micro/Eireli,Nuvem
+CNPJ_50.133.116/0001-46,fornecedor,Tecnologia e Servicos TI 184,,,Média,Suporte
+CNPJ_96.728.973/0001-95,fornecedor,Tecnologia e Servicos TI 185,,,Grande,Hardware
+CNPJ_15.830.267/0001-21,fornecedor,Tecnologia e Servicos TI 186,,,Micro/Eireli,Suporte
+CNPJ_19.784.500/0001-35,fornecedor,Tecnologia e Servicos TI 187,,,Média,Software
+CNPJ_55.675.229/0001-63,fornecedor,Tecnologia e Servicos TI 188,,,Micro/Eireli,Suporte
+CNPJ_45.470.893/0001-38,fornecedor,Tecnologia e Servicos TI 189,,,Micro/Eireli,Software
+CNPJ_45.212.286/0001-48,fornecedor,Tecnologia e Servicos TI 190,,,Grande,Suporte
+CNPJ_64.722.763/0001-31,fornecedor,Tecnologia e Servicos TI 191,,,Micro/Eireli,Suporte
+CNPJ_45.850.247/0001-92,fornecedor,Tecnologia e Servicos TI 192,,,Micro/Eireli,Software
+CNPJ_71.606.464/0001-82,fornecedor,Tecnologia e Servicos TI 193,,,Micro/Eireli,Suporte
+CNPJ_82.395.116/0001-10,fornecedor,Tecnologia e Servicos TI 194,,,Média,Software
+CNPJ_51.124.138/0001-44,fornecedor,Tecnologia e Servicos TI 195,,,Média,Suporte
+CNPJ_53.534.577/0001-21,fornecedor,Tecnologia e Servicos TI 196,,,Micro/Eireli,Software
+CNPJ_58.116.429/0001-66,fornecedor,Tecnologia e Servicos TI 197,,,Micro/Eireli,Software
+CNPJ_71.691.315/0001-92,fornecedor,Tecnologia e Servicos TI 198,,,Média,Suporte
+CNPJ_96.584.473/0001-89,fornecedor,Tecnologia e Servicos TI 199,,,Micro/Eireli,Suporte
+CNPJ_98.367.754/0001-68,fornecedor,Tecnologia e Servicos TI 200,,,Grande,Nuvem
+CNPJ_56.387.877/0001-25,fornecedor,Tecnologia e Servicos TI 201,,,Micro/Eireli,Nuvem
+CNPJ_94.185.349/0001-16,fornecedor,Tecnologia e Servicos TI 202,,,Média,Hardware
+CNPJ_18.982.787/0001-81,fornecedor,Tecnologia e Servicos TI 203,,,Grande,Nuvem
+CNPJ_91.322.471/0001-48,fornecedor,Tecnologia e Servicos TI 204,,,Micro/Eireli,Software
+CNPJ_26.625.258/0001-33,fornecedor,Tecnologia e Servicos TI 205,,,Micro/Eireli,Hardware
+CNPJ_12.904.270/0001-49,fornecedor,Tecnologia e Servicos TI 206,,,Micro/Eireli,Software
+CNPJ_48.626.987/0001-13,fornecedor,Tecnologia e Servicos TI 207,,,Micro/Eireli,Suporte
+CNPJ_91.260.115/0001-51,fornecedor,Tecnologia e Servicos TI 208,,,Micro/Eireli,Nuvem
+CNPJ_51.645.513/0001-22,fornecedor,Tecnologia e Servicos TI 209,,,Grande,Software
+CNPJ_48.913.128/0001-71,fornecedor,Tecnologia e Servicos TI 210,,,Micro/Eireli,Hardware
+CNPJ_66.371.539/0001-19,fornecedor,Tecnologia e Servicos TI 211,,,Micro/Eireli,Hardware
+CNPJ_93.488.676/0001-58,fornecedor,Tecnologia e Servicos TI 212,,,Micro/Eireli,Hardware
+CNPJ_39.423.245/0001-71,fornecedor,Tecnologia e Servicos TI 213,,,Micro/Eireli,Software
+CNPJ_62.684.498/0001-58,fornecedor,Tecnologia e Servicos TI 214,,,Micro/Eireli,Software
+CNPJ_68.904.160/0001-52,fornecedor,Tecnologia e Servicos TI 215,,,Grande,Software
+CNPJ_72.401.443/0001-20,fornecedor,Tecnologia e Servicos TI 216,,,Grande,Nuvem
+CNPJ_80.663.871/0001-68,fornecedor,Tecnologia e Servicos TI 217,,,Média,Software
+CNPJ_63.984.342/0001-83,fornecedor,Tecnologia e Servicos TI 218,,,Micro/Eireli,Hardware
+CNPJ_50.852.605/0001-12,fornecedor,Tecnologia e Servicos TI 219,,,Média,Suporte
+CNPJ_63.146.826/0001-58,fornecedor,Tecnologia e Servicos TI 220,,,Micro/Eireli,Software
+CNPJ_70.990.589/0001-44,fornecedor,Tecnologia e Servicos TI 221,,,Média,Suporte
+CNPJ_97.102.259/0001-22,fornecedor,Tecnologia e Servicos TI 222,,,Micro/Eireli,Hardware
+CNPJ_82.679.456/0001-20,fornecedor,Tecnologia e Servicos TI 223,,,Micro/Eireli,Nuvem
+CNPJ_38.748.294/0001-34,fornecedor,Tecnologia e Servicos TI 224,,,Micro/Eireli,Nuvem
+CNPJ_88.139.636/0001-14,fornecedor,Tecnologia e Servicos TI 225,,,Micro/Eireli,Suporte
+CNPJ_88.137.427/0001-14,fornecedor,Tecnologia e Servicos TI 226,,,Micro/Eireli,Hardware
+CNPJ_46.415.787/0001-86,fornecedor,Tecnologia e Servicos TI 227,,,Grande,Nuvem
+CNPJ_49.400.323/0001-71,fornecedor,Tecnologia e Servicos TI 228,,,Média,Software
+CNPJ_65.139.965/0001-49,fornecedor,Tecnologia e Servicos TI 229,,,Micro/Eireli,Software
+CNPJ_15.315.246/0001-89,fornecedor,Tecnologia e Servicos TI 230,,,Média,Suporte
+CNPJ_68.915.780/0001-22,fornecedor,Tecnologia e Servicos TI 231,,,Média,Suporte
+CNPJ_51.455.290/0001-36,fornecedor,Tecnologia e Servicos TI 232,,,Micro/Eireli,Suporte
+CNPJ_54.925.860/0001-40,fornecedor,Tecnologia e Servicos TI 233,,,Micro/Eireli,Suporte
+CNPJ_62.769.650/0001-40,fornecedor,Tecnologia e Servicos TI 234,,,Micro/Eireli,Hardware
+CNPJ_86.623.394/0001-75,fornecedor,Tecnologia e Servicos TI 235,,,Média,Software
+CNPJ_26.459.322/0001-69,fornecedor,Tecnologia e Servicos TI 236,,,Média,Hardware
+CNPJ_79.566.513/0001-80,fornecedor,Tecnologia e Servicos TI 237,,,Grande,Software
+CNPJ_72.511.671/0001-88,fornecedor,Tecnologia e Servicos TI 238,,,Micro/Eireli,Nuvem
+CNPJ_77.963.583/0001-77,fornecedor,Tecnologia e Servicos TI 239,,,Média,Software
+CNPJ_31.500.985/0001-74,fornecedor,Tecnologia e Servicos TI 240,,,Micro/Eireli,Hardware
+CNPJ_91.405.369/0001-73,fornecedor,Tecnologia e Servicos TI 241,,,Micro/Eireli,Suporte
+CNPJ_61.480.559/0001-16,fornecedor,Tecnologia e Servicos TI 242,,,Média,Hardware
+CNPJ_88.558.669/0001-96,fornecedor,Tecnologia e Servicos TI 243,,,Micro/Eireli,Software
+CNPJ_38.615.198/0001-22,fornecedor,Tecnologia e Servicos TI 244,,,Micro/Eireli,Nuvem
+CNPJ_38.256.174/0001-41,fornecedor,Tecnologia e Servicos TI 245,,,Média,Hardware
+CNPJ_31.558.638/0001-76,fornecedor,Tecnologia e Servicos TI 246,,,Micro/Eireli,Nuvem
+CNPJ_30.402.968/0001-68,fornecedor,Tecnologia e Servicos TI 247,,,Média,Nuvem
+CNPJ_78.486.606/0001-10,fornecedor,Tecnologia e Servicos TI 248,,,Média,Software
+CNPJ_43.262.931/0001-34,fornecedor,Tecnologia e Servicos TI 249,,,Micro/Eireli,Suporte
+CNPJ_89.638.683/0001-69,fornecedor,Tecnologia e Servicos TI 250,,,Média,Hardware
+CNPJ_62.619.690/0001-36,fornecedor,Tecnologia e Servicos TI 251,,,Média,Suporte
+CNPJ_12.448.792/0001-33,fornecedor,Tecnologia e Servicos TI 252,,,Média,Nuvem
+CNPJ_55.626.252/0001-87,fornecedor,Tecnologia e Servicos TI 253,,,Média,Software
+CNPJ_93.839.620/0001-47,fornecedor,Tecnologia e Servicos TI 254,,,Micro/Eireli,Hardware
+CNPJ_95.600.216/0001-11,fornecedor,Tecnologia e Servicos TI 255,,,Micro/Eireli,Suporte
+CNPJ_86.820.171/0001-30,fornecedor,Tecnologia e Servicos TI 256,,,Micro/Eireli,Hardware
+CNPJ_47.643.110/0001-54,fornecedor,Tecnologia e Servicos TI 257,,,Grande,Suporte
+CNPJ_50.491.878/0001-95,fornecedor,Tecnologia e Servicos TI 258,,,Micro/Eireli,Suporte
+CNPJ_85.988.145/0001-41,fornecedor,Tecnologia e Servicos TI 259,,,Micro/Eireli,Hardware
+CNPJ_29.772.813/0001-49,fornecedor,Tecnologia e Servicos TI 260,,,Micro/Eireli,Hardware
+CNPJ_11.324.900/0001-86,fornecedor,Tecnologia e Servicos TI 261,,,Média,Hardware
+CNPJ_35.202.293/0001-47,fornecedor,Tecnologia e Servicos TI 262,,,Média,Software
+CNPJ_24.205.986/0001-53,fornecedor,Tecnologia e Servicos TI 263,,,Média,Hardware
+CNPJ_76.734.108/0001-15,fornecedor,Tecnologia e Servicos TI 264,,,Média,Suporte
+CNPJ_50.469.815/0001-17,fornecedor,Tecnologia e Servicos TI 265,,,Média,Nuvem
+CNPJ_93.417.210/0001-16,fornecedor,Tecnologia e Servicos TI 266,,,Micro/Eireli,Suporte
+CNPJ_15.413.121/0001-35,fornecedor,Tecnologia e Servicos TI 267,,,Micro/Eireli,Software
+CNPJ_69.973.113/0001-84,fornecedor,Tecnologia e Servicos TI 268,,,Micro/Eireli,Suporte
+CNPJ_21.636.400/0001-28,fornecedor,Tecnologia e Servicos TI 269,,,Micro/Eireli,Nuvem
+CNPJ_17.832.730/0001-62,fornecedor,Tecnologia e Servicos TI 270,,,Micro/Eireli,Suporte
+CNPJ_91.822.761/0001-46,fornecedor,Tecnologia e Servicos TI 271,,,Grande,Nuvem
+CNPJ_12.813.854/0001-44,fornecedor,Tecnologia e Servicos TI 272,,,Micro/Eireli,Hardware
+CNPJ_88.452.431/0001-58,fornecedor,Tecnologia e Servicos TI 273,,,Média,Nuvem
+CNPJ_70.123.503/0001-46,fornecedor,Tecnologia e Servicos TI 274,,,Micro/Eireli,Software
+CNPJ_29.251.661/0001-58,fornecedor,Tecnologia e Servicos TI 275,,,Micro/Eireli,Software
+CNPJ_75.434.517/0001-45,fornecedor,Tecnologia e Servicos TI 276,,,Micro/Eireli,Software
+CNPJ_67.345.736/0001-21,fornecedor,Tecnologia e Servicos TI 277,,,Micro/Eireli,Software
+CNPJ_30.836.966/0001-35,fornecedor,Tecnologia e Servicos TI 278,,,Grande,Suporte
+CNPJ_96.397.625/0001-87,fornecedor,Tecnologia e Servicos TI 279,,,Micro/Eireli,Software
+CNPJ_47.652.417/0001-69,fornecedor,Tecnologia e Servicos TI 280,,,Micro/Eireli,Software
+CNPJ_98.183.229/0001-79,fornecedor,Tecnologia e Servicos TI 281,,,Micro/Eireli,Suporte
+CNPJ_37.165.262/0001-14,fornecedor,Tecnologia e Servicos TI 282,,,Média,Software
+CNPJ_65.775.400/0001-32,fornecedor,Tecnologia e Servicos TI 283,,,Micro/Eireli,Software
+CNPJ_76.729.369/0001-89,fornecedor,Tecnologia e Servicos TI 284,,,Micro/Eireli,Software
+CNPJ_10.232.375/0001-17,fornecedor,Tecnologia e Servicos TI 285,,,Média,Suporte
+CNPJ_73.985.383/0001-46,fornecedor,Tecnologia e Servicos TI 286,,,Micro/Eireli,Software
+CNPJ_58.596.731/0001-53,fornecedor,Tecnologia e Servicos TI 287,,,Média,Software
+CNPJ_15.719.350/0001-70,fornecedor,Tecnologia e Servicos TI 288,,,Grande,Hardware
+CNPJ_82.610.392/0001-29,fornecedor,Tecnologia e Servicos TI 289,,,Média,Hardware
+CNPJ_44.297.584/0001-68,fornecedor,Tecnologia e Servicos TI 290,,,Micro/Eireli,Software
+CNPJ_87.111.589/0001-29,fornecedor,Tecnologia e Servicos TI 291,,,Grande,Nuvem
+CNPJ_52.225.316/0001-59,fornecedor,Tecnologia e Servicos TI 292,,,Micro/Eireli,Nuvem
+CNPJ_65.594.526/0001-59,fornecedor,Tecnologia e Servicos TI 293,,,Micro/Eireli,Software
+CNPJ_32.483.737/0001-54,fornecedor,Tecnologia e Servicos TI 294,,,Grande,Hardware
+CNPJ_17.440.228/0001-17,fornecedor,Tecnologia e Servicos TI 295,,,Micro/Eireli,Hardware
+CNPJ_95.274.901/0001-74,fornecedor,Tecnologia e Servicos TI 296,,,Grande,Suporte
+CNPJ_83.513.213/0001-91,fornecedor,Tecnologia e Servicos TI 297,,,Média,Suporte
+CNPJ_85.939.444/0001-55,fornecedor,Tecnologia e Servicos TI 298,,,Média,Nuvem
+CNPJ_40.753.152/0001-57,fornecedor,Tecnologia e Servicos TI 299,,,Micro/Eireli,Suporte
