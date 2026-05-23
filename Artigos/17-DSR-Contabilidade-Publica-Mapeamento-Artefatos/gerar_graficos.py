@@ -171,6 +171,7 @@ ax3.set_title(
     pad=14,
 )
 ax3.set_xticks(all_years)
+ax3.set_xticklabels([str(y) if y % 2 == 0 else "" for y in all_years], fontsize=9)
 ax3.set_xlim(min(all_years) - 0.5, max(all_years) + 0.5)
 ax3.yaxis.set_major_locator(mticker.MaxNLocator(integer=True))
 ax3.spines["top"].set_visible(False)
