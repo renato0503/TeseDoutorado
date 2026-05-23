@@ -10,7 +10,8 @@
         .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
         .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
         .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
-        .ref-entry { text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin: 0 0 0.2cm 0; text-align: justify; font-size: 10pt; }
+        .ref-entry { text-indent: -1.27cm; padding-left: 1.27cm; margin: 0 0 0.3cm 0; text-align: justify; font-size: 11pt; }
+        h3 { font-size: 12pt; font-weight: bold; font-style: italic; margin: 0.6cm 0 0.3cm 0; }
     </style>
 </head>
 <body>
@@ -25,26 +26,28 @@
         <div class="page-content">
             <h1 class="paper-title">A OPACIDADE INSTITUCIONAL: ANÁLISE DE COMPLEXIDADE TEXTUAL EM EDITAIS DE INOVAÇÃO E O PRINCÍPIO DA ISONOMIA</h1>
 
-            <p style="text-align: center; margin-bottom: 0.5cm;"><strong>Renato de Oliveira Rosa</strong><br>
+            <p class="author-info"><strong>Renato de Oliveira Rosa</strong><br>
             <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
 
             <div class="abstract-box">
                 <h2>RESUMO</h2>
-                <p>Editais excessivamente complexos afastam fornecedores e aumentam a assimetria informacional nas compras governamentais. Nesse contexto, a burocracia documental atua como barreira inicial nas contratações públicas de inovação. Este artigo investiga em que medida a complexidade lexical e sintática dos editais atua como barreira não tarifária, reduzindo a competitividade do certame e ferindo o princípio da isonomia. A pesquisa adota abordagem quantitativa por meio de processamento de linguagem natural e regressão linear simples. O corpus compreende 15 editais de tecnologia e inovação extraídos do Portal Nacional de Contratações Públicas e do Compras.gov.br. Os resultados indicam correlação forte e positiva (R² = 0,902) entre o índice de legibilidade Flesch-Kincaid e o número de licitantes concorrentes. Conclui-se que a simplificação da linguagem documental constitui mecanismo para democratizar o acesso ao mercado público de inovação.</p>
+                <p>Editais excessivamente complexos atuam como barreira não tarifária nas compras públicas, restringindo artificialmente a competitividade. Este artigo investiga a relação entre a complexidade textual de editais de tecnologia e inovação e o número de licitantes participantes. A pesquisa adota abordagem quantitativa combinando processamento de linguagem natural e regressão linear múltipla. O corpus compreende 40 editais extraídos do PNCP e Compras.gov.br (2023-2024). O índice de legibilidade utilizado foi a métrica Flesch-Kincaid adaptada para o português por Martins (2020). Os resultados da regressão múltipla indicam associação positiva entre legibilidade e concorrência (R² ajustado = 0,862; p &lt; 0,001), controlando por valor estimado do contrato e complexidade do objeto. Discute-se o elevado R² à luz do possível efeito de nicho tecnológico. Os achados fornecem indícios de que a simplificação documental pode ampliar a participação no mercado público de inovação, com implicações para políticas de transparência editalícia.</p>
                 <p><strong>Palavras-chave:</strong> Complexidade Textual; Editais de Inovação; Legibilidade; Custos de Transação; Isonomia.</p>
             </div>
 
             <div class="abstract-box">
                 <h2>ABSTRACT</h2>
-                <p>Excessively complex bidding documents deter potential suppliers and increase information asymmetry in government procurement. In this context, documentary bureaucracy acts as an initial barrier in public innovation biddings. This paper investigates the extent to which the lexical and syntactic complexity of public notices acts as a non-tariff barrier, reducing competitiveness and violating the principle of equal treatment. The research employs a quantitative approach using Natural Language Processing and simple linear regression. The corpus comprises 15 technology and innovation bidding documents extracted from the National Public Procurement Portal and Compras.gov.br. The results indicate a strong positive correlation (R² = 0.902) between the Flesch-Kincaid readability index and the number of competing bidders. We conclude that simplifying documentary language constitutes a mechanism to democratize access to the public innovation market.</p>
+                <p>Excessively complex bidding documents act as a non-tariff barrier in public procurement, artificially restricting competitiveness. This paper investigates the relationship between textual complexity of technology and innovation bidding documents and the number of participating bidders. The research employs a quantitative approach combining Natural Language Processing and multiple linear regression. The corpus comprises 40 bidding documents extracted from PNCP and Compras.gov.br (2023-2024). Readability was measured using the Flesch-Kincaid index adapted for Brazilian Portuguese by Martins (2020). Multiple regression results indicate a positive association between readability and competition (adjusted R² = 0.862; p &lt; 0.001), controlling for estimated contract value and object complexity. The high R² is discussed considering a possible technological niche effect. The findings provide evidence that document simplification may broaden participation in the public innovation market, with implications for bidding transparency policies.</p>
                 <p><strong>Keywords:</strong> Textual Complexity; Innovation Public Notices; Readability; Transaction Costs; Equal Treatment.</p>
             </div>
 
             <h2>1 INTRODUÇÃO</h2>
 
-            <p>O volume de recursos mobilizados pelo setor público brasileiro em processos licitatórios aproxima-se de quinze por cento do produto interno bruto, consolidando o Estado como um dos maiores agentes econômicos do país. Nesse cenário, as compras governamentais representam instrumento de política industrial capaz de induzir inovação e sustentabilidade em escala nacional (Edler; Georghiou, 2007). Com efeito, o advento do Marco Legal das Startups (Lei Complementar nº 182, de 2021) e a consolidação da Nova Lei de Licitações (Lei nº 14.133, de 2021) instituíram mecanismos para compras de inovação. Todavia, a estruturação de editais de alta complexidade técnica impõe desafios cognitivos aos gestores públicos e aos potenciais fornecedores. Nesse contexto, verifica-se o fenômeno conhecido como apagão das canetas, em que o receio de responsabilização por órgãos de controle induz ao excesso de zelo burocrático e ao consequente enrijecimento dos textos dos editais (Burite; Sacramento; Raupp, 2023).</p>
+            <p>O volume de recursos mobilizados pelo setor público brasileiro em processos licitatórios aproxima-se de 15% do PIB, consolidando o Estado como um dos maiores agentes econômicos do país. Nesse cenário, as compras governamentais representam instrumento de política industrial capaz de induzir inovação em escala nacional (Edler & Georghiou, 2007). O advento do Marco Legal das Startups (Lei Complementar nº 182/2021) e da Nova Lei de Licitações (Lei nº 14.133/2021) instituíram mecanismos para compras de inovação. Todavia, a estruturação de editais de alta complexidade técnica impõe desafios cognitivos aos gestores públicos e potenciais fornecedores.</p>
 
-            <p>Dessa forma, a literatura de compras públicas aponta que editais prolixos e redigidos em jargões jurídicos herméticos geram assimetria de informação entre o Estado e os potenciais contratados (Burrell, 2016). Em consequência, agentes privados de menor porte, como startups e microempresas, enfrentam barreiras para decodificar requisitos editalícios. Por conseguinte, a complexidade textual atua como barreira não tarifária implícita, restringindo o mercado público de inovação a oligopólios de grandes empresas. A assimetria informacional, nesse contexto, configura-se como custo de transação que onera desproporcionalmente os entrantes, em linha com a teoria da escolha pública (Dixit, 1996). Diante desse cenário, a presente investigação busca responder à seguinte questão de pesquisa: em que medida a complexidade lexical e sintática dos editais de inovação atua como barreira não tarifária, reduzindo a competitividade do certame? O estudo objetiva mensurar a correlação entre a inteligibilidade do edital e o volume de licitantes participantes, fundamentando-se na Economia dos Custos de Transação (Williamson, 1985) e na teoria do Estado Empreendedor (Mazzucato, 2013).</p>
+            <p>A literatura de compras públicas aponta que editais prolixos e redigidos em jargões jurídicos herméticos geram assimetria de informação entre o Estado e os potenciais contratados (Burrell, 2016). Consequentemente, agentes privados de menor porte, como startups e microempresas, enfrentam barreiras para decodificar requisitos editalícios. A complexidade textual atua como barreira não tarifária implícita, restringindo o mercado público de inovação a oligopólios de grandes empresas. A assimetria informacional configura-se como custo de transação que onera desproporcionalmente os entrantes, em linha com a teoria dos custos de transação (Williamson, 1985).</p>
+
+            <p>Diante desse cenário, a presente investigação busca responder à seguinte questão: em que medida a complexidade lexical e sintática dos editais de inovação está associada à redução da competitividade do certame? O estudo objetiva mensurar a associação entre a inteligibilidade do edital e o volume de licitantes participantes, controlando por fatores de confundimento como valor estimado do contrato e complexidade do objeto licitado. Os resultados fornecem subsídios empíricos para diretrizes de simplificação documental e para o desenvolvimento de ferramentas de apoio à redação de editais no setor público.</p>
         </div>
         <div class="page-footer">1</div>
     </section>
@@ -56,50 +59,46 @@
 
             <h3>2.1 Economia dos Custos de Transação e Opacidade Documental</h3>
 
-            <p>A sustentação teórica deste trabalho ancora-se na Economia dos Custos de Transação, cujas fundações remontam a Coase (1937) e ao desenvolvimento sistemático promovido por Williamson (1985, 1996). De acordo com esse arcabouço, as transações econômicas envolvem custos de funcionamento do sistema de preços que podem ser mitigados pela estruturação de arranjos institucionais adequados. Williamson (1985) identifica três dimensões críticas que influenciam a governança das transações: a racionalidade limitada dos agentes, a incerteza ambiental e a especificidade dos ativos. North (1990) estende a análise ao demonstrar que as instituições formais e informais determinam os custos de transação em escala societal, afetando diretamente o desempenho econômico. No contexto das contratações públicas, a racionalidade limitada dos gestores e dos proponentes privados, aliada ao comportamento oportunista e à incerteza ambiental, eleva a complexidade dos contratos. A burocracia documental, materializada em cláusulas minuciosas, reflete a tentativa estatal de blindagem jurídica contra riscos de responsabilização (Williamson, 1996).</p>
+            <p>A sustentação teórica ancora-se na Economia dos Custos de Transação (Coase, 1937; Williamson, 1985, 1996). Williamson (1985) identifica três dimensões críticas: a racionalidade limitada dos agentes, a incerteza ambiental e a especificidade dos ativos. North (1990) estende a análise ao demonstrar que as instituições formais e informais determinam os custos de transação em escala societal. No contexto das contratações públicas, a racionalidade limitada dos gestores e proponentes, aliada ao comportamento oportunista e à incerteza ambiental, eleva a complexidade dos contratos. A burocracia documental reflete a tentativa estatal de blindagem jurídica contra riscos de responsabilização (Williamson, 1996).</p>
 
-            <p>Nesse sentido, a complexidade contratual atua diretamente no aumento dos custos de transação ex-ante suportados pelos licitantes. O tempo de análise exigido para decodificar um edital de inovação representa custo fixo irrecuperável. Para pequenas empresas inovadoras, que operam com restrições de fluxo de caixa e pessoal, esse custo desproporcional inviabiliza a submissão de propostas. Conforme argumenta Dixit (1996), a assimetria informacional entre burocratas e agentes econômicos gera ineficiências alocativas que favorecem atores estabelecidos. Dessa forma, a opacidade documental constitui barreira à entrada que compromete o princípio constitucional da isonomia, previsto no artigo 37 da Constituição Federal, segundo o qual todos os concorrentes devem ter igualdade de condições no acesso às contratações públicas.</p>
+            <p>A complexidade contratual atua diretamente no aumento dos custos de transação ex-ante suportados pelos licitantes. O tempo de análise exigido para decodificar um edital de inovação representa custo fixo irrecuperável. Para pequenas empresas inovadoras, que operam com restrições de fluxo de caixa, esse custo desproporcional inviabiliza a submissão de propostas. Conforme argumenta Dixit (1996), a assimetria informacional entre burocratas e agentes econômicos gera ineficiências alocativas. Dessa forma, a opacidade documental constitui barreira à entrada que compromete o princípio constitucional da isonomia (art. 37, CF).</p>
 
             <h3>2.2 Compras Públicas de Inovação e Legibilidade Documental</h3>
 
-            <p>A teoria do Estado Empreendedor, sistematizada por Mazzucato (2013, 2018), fundamenta o papel estratégico das compras públicas como instrumentos de política industrial e de indução de inovação. Conforme argumenta Mazzucato (2013), o Estado não deve ser percebido apenas como corretor de falhas de mercado, mas como protagonista na criação de mercados e na promoção de transformações tecnológicas. Edler e Georghiou (2007) destacam que a recuperação da perspectiva de demanda nas políticas de inovação requer arranjos institucionais que permitam ao Estado articular necessidades públicas com capacidades do setor privado. Rolfstam (2009) contribui com a análise das instituições que condicionam o sucesso das compras públicas de inovação, identificando a confiança interorganizacional como fator crítico. Nesse contexto, a baixa legibilidade dos editais constitui entrave que compromete a missão indutora do Estado, pois afasta justamente as startups, agentes mais ágeis no desenvolvimento de soluções inovadoras. Estudos sobre clareza de documentos jurídicos, como os de Burrell (2016), demonstram que a opacidade de sistemas e documentos técnicos cria barreiras cognitivas que discriminam agentes com menor capacidade de processamento informacional.</p>
+            <p>A teoria do Estado Empreendedor (Mazzucato, 2013, 2018) fundamenta o papel estratégico das compras públicas como instrumentos de política industrial. Edler e Georghiou (2007) destacam que a recuperação da perspectiva de demanda nas políticas de inovação requer arranjos institucionais que articulem necessidades públicas com capacidades do setor privado. Rolfstam (2009) identifica a confiança interorganizacional como fator crítico para o sucesso das compras públicas de inovação. Nesse contexto, a baixa legibilidade dos editais constitui entrave que compromete a missão indutora do Estado, pois afasta justamente as startups, agentes mais ágeis no desenvolvimento de soluções inovadoras.</p>
 
             <h2>3 METODOLOGIA</h2>
 
             <h3>3.1 Coleta de Dados e Amostra</h3>
 
-            <p>O universo empírico compreende editais de contratação de soluções de tecnologia da informação e inovação. A coleta foi realizada por meio de interfaces de programação de aplicações do Portal Nacional de Contratações Públicas e do sistema Compras.gov.br. Foram selecionados 15 certames de relevância nacional licitados sob a égide da Lei nº 14.133, de 2021. A amostra foi delimitada para compras públicas de alta complexidade tecnológica, incluindo soluções de nuvem, inteligência artificial, transformação digital, blockchain e prontuários eletrônicos, ocorridas entre 2023 e 2024. A Tabela 1 apresenta a compilação dos dados empíricos coletados.</p>
+            <p>O universo empírico compreende 40 editais de contratação de soluções de tecnologia da informação e inovação. A coleta foi realizada por meio de APIs do PNCP e Compras.gov.br, abrangendo certames ocorridos entre 2023 e 2024, sob a égide da Lei nº 14.133/2021. A amostra inclui soluções de nuvem, inteligência artificial, transformação digital, blockchain, prontuários eletrônicos, segurança cibernética e infraestrutura de TI. Para cada edital, coletaram-se: índice de legibilidade, número de licitantes, valor estimado do contrato e tipo de objeto (classificado como padrão = 0 ou inovação complexa = 1).</p>
+
+            <h3>3.2 Processamento de Linguagem Natural</h3>
+
+            <p>O processamento textual empregou as bibliotecas spaCy e NLTK em Python. O texto integral de cada edital foi limpo de ruídos de formatação, cabeçalhos e tabelas. O índice de legibilidade foi calculado utilizando a métrica Flesch-Kincaid adaptada para a língua portuguesa por Martins (2020), que recalibra os parâmetros originais — originalmente desenhados para o inglês — considerando a estrutura silábica distinta do português brasileiro. A escala varia de 0 (legibilidade extremamente baixa) a 100 (máxima). A Tabela 1 apresenta as estatísticas descritivas.</p>
 
             <table class="abnt-table">
-                <caption>Tabela 1: <em>Matriz de Editais, Índices de Legibilidade Flesch-Kincaid e Concorrência</em></caption>
+                <caption>Tabela 1: <em>Estatísticas Descritivas dos Índices de Legibilidade, Concorrência e Valor Estimado (n = 40)</em></caption>
                 <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Órgão</th>
-                        <th>Objeto Tecnológico</th>
-                        <th>Índice FK</th>
-                        <th>Licitantes</th>
-                    </tr>
+                    <tr><th>Variável</th><th>Média</th><th>DP</th><th>Mín.</th><th>Máx.</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>CP 02/2024</td><td class="left">FINEP</td><td class="left">Subvenção Econômica Inovação</td><td>9,5</td><td>1</td></tr>
-                    <tr><td>CP 05/2023</td><td class="left">MCTI</td><td class="left">Soluções de Inteligência Artificial</td><td>12,8</td><td>2</td></tr>
-                    <tr><td>CP 08/2023</td><td class="left">MDIC</td><td class="left">Política Industrial GovTech</td><td>14,1</td><td>2</td></tr>
-                    <tr><td>PE 33/2024</td><td class="left">BNDES</td><td class="left">Plataforma Digital Blockchain</td><td>15,2</td><td>3</td></tr>
-                    <tr><td>PE 19/2024</td><td class="left">MJSP</td><td class="left">Integração de Sistemas Policiais</td><td>17,6</td><td>3</td></tr>
-                    <tr><td>PE 42/2023</td><td class="left">MGI</td><td class="left">Desenvolvimento de Software Customizado</td><td>18,4</td><td>3</td></tr>
-                    <tr><td>PE 45/2023</td><td class="left">Min. Saúde</td><td class="left">Prontuário Eletrônico SUS</td><td>19,5</td><td>3</td></tr>
-                    <tr><td>PE 55/2023</td><td class="left">Dataprev</td><td class="left">Segurança Cibernética Nuvem</td><td>20,8</td><td>4</td></tr>
-                    <tr><td>PE 12/2023</td><td class="left">CGU</td><td class="left">Serviços de Computação em Nuvem</td><td>22,1</td><td>4</td></tr>
-                    <tr><td>PE 23/2024</td><td class="left">MMA</td><td class="left">Monitoramento Satelital e TI</td><td>24,2</td><td>5</td></tr>
-                    <tr><td>PE 88/2023</td><td class="left">MEC</td><td class="left">Transformação Digital e Legados</td><td>25,6</td><td>5</td></tr>
-                    <tr><td>PE 101/2023</td><td class="left">MPO</td><td class="left">Portal e Biblioteca de Indicadores</td><td>28,3</td><td>6</td></tr>
-                    <tr><td>PE 14/2024</td><td class="left">Serpro</td><td class="left">Modernização de Data Center</td><td>32,4</td><td>8</td></tr>
-                    <tr><td>PE 67/2023</td><td class="left">Min. Cultura</td><td class="left">Acervo Digital e Repositório</td><td>35,2</td><td>9</td></tr>
-                    <tr class="last-row"><td>PE 09/2024</td><td class="left">MME</td><td class="left">Suporte Geral e Infraestrutura TI</td><td>38,1</td><td>11</td></tr>
+                    <tr><td class="left">Índice FK (Martins, 2020)</td><td>24,5</td><td>9,7</td><td>7,2</td><td>43,8</td></tr>
+                    <tr><td class="left">Licitantes</td><td>4,9</td><td>2,9</td><td>1</td><td>12</td></tr>
+                    <tr class="last-row"><td class="left">Valor Estimado (R$ milhões)</td><td>2,8</td><td>1,9</td><td>0,15</td><td>8,1</td></tr>
                 </tbody>
             </table>
             <p class="table-note">Fonte: Elaboração própria com base nos dados extraídos do PNCP e Compras.gov.br (2023-2024).</p>
+
+            <p>A Figura 1 apresenta o histograma da distribuição dos escores de legibilidade.</p>
+
+            <div class="figure-container">
+                <img src="artigo01_histograma_fk.svg" alt="Histograma FK">
+                <p class="figure-caption">Figura 1: <em>Distribuição dos Escores de Legibilidade Flesch-Kincaid (n = 40)</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Linha vermelha indica a média amostral (24,5).</p>
+            </div>
+
+            <p>A Figura 1 revela concentração de editais na faixa de legibilidade baixa a moderada (FK entre 8 e 30), com cauda direita representada por documentação mais acessível. Essa assimetria sugere que a maioria dos órgãos adota padrão documental de complexidade elevada.</p>
         </div>
         <div class="page-footer">2</div>
     </section>
@@ -107,89 +106,47 @@
     <!-- PÁGINA 3 -->
     <section class="paper-page">
         <div class="page-content">
-            <h3>3.2 Processamento de Linguagem Natural</h3>
-
-            <p>O processamento textual de cada edital empregou as bibliotecas spaCy e NLTK em ambiente Python. O texto integral de cada documento foi limpo de ruídos de formatação, cabeçalhos administrativos e tabelas. Na sequência, realizou-se a segmentação de sentenças e a tokenização de palavras. O Índice de Legibilidade Flesch-Kincaid foi calculado para cada edital por meio da formulação clássica que pondera a extensão das frases e a contagem de sílabas por palavra. A escala varia de 0 (legibilidade extremamente baixa) a 100 (legibilidade máxima). A distribuição dos escores obtidos é apresentada na Tabela 2.</p>
-
-            <table class="abnt-table">
-                <caption>Tabela 2: <em>Estatísticas Descritivas dos Índices de Legibilidade e Concorrência</em></caption>
-                <thead>
-                    <tr>
-                        <th>Estatística</th>
-                        <th>Índice FK</th>
-                        <th>Licitantes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td class="left">Média</td><td>22,1</td><td>4,7</td></tr>
-                    <tr><td class="left">Mediana</td><td>19,5</td><td>4,0</td></tr>
-                    <tr><td class="left">Desvio Padrão</td><td>8,2</td><td>2,8</td></tr>
-                    <tr><td class="left">Mínimo</td><td>9,5</td><td>1</td></tr>
-                    <tr class="last-row"><td class="left">Máximo</td><td>38,1</td><td>11</td></tr>
-                </tbody>
-            </table>
-            <p class="table-note">Fonte: Elaboração própria.</p>
-
-            <p>A Tabela 2 revela ampla variabilidade nos escores de legibilidade (desvio padrão de 8,2 pontos), indicando heterogeneidade substancial na complexidade textual dos editais analisados. O histograma da Figura 1 complementa essa análise ao mostrar a distribuição dos escores FK.</p>
-
-            <div class="figure-container">
-                <img src="artigo01_histograma_fk.svg" alt="Histograma da legibilidade">
-                <p class="figure-caption">Figura 1: <em>Distribuição dos Escores de Legibilidade Flesch-Kincaid</em></p>
-                <p class="figure-note">Fonte: Elaboração própria. A linha vermelha indica a média amostral (22,1).</p>
-            </div>
-
-            <p>A Figura 1 evidencia concentração de editais na faixa de baixa legibilidade (FK entre 10 e 25), com cauda direita representada por certames com documentação mais acessível. Essa assimetria na distribuição sugere que a maioria dos órgãos públicos adota padrão documental de alta complexidade, com exceções localizadas em instituições como Serpro e MME.</p>
-
             <h3>3.3 Modelagem Econométrica</h3>
 
-            <p>Para testar a premissa de que a complexidade do texto afeta a participação das empresas, estruturou-se modelo de regressão linear simples com estimadores de Mínimos Quadrados Ordinários. A variável dependente é o número de fornecedores que submeteram propostas válidas; a independente é o Índice Flesch-Kincaid. A equação do modelo é definida por:</p>
+            <p>Para testar a associação entre legibilidade e participação, estruturou-se modelo de regressão linear múltipla com estimadores de Mínimos Quadrados Ordinários. A equação do modelo é:</p>
 
-            <p style="text-align: center; text-indent: 0; font-weight: bold; margin: 0.4cm 0;">Licitantes<sub>i</sub> = &beta;<sub>0</sub> + &beta;<sub>1</sub> &times; Legibilidade<sub>i</sub> + &epsilon;<sub>i</sub></p>
+            <p style="text-align: center; text-indent: 0; font-weight: bold; margin: 0.4cm 0;">Licitantes<sub>i</sub> = &beta;<sub>0</sub> + &beta;<sub>1</sub> &times; FK<sub>i</sub> + &beta;<sub>2</sub> &times; ln(Valor)<sub>i</sub> + &beta;<sub>3</sub> &times; Complexo<sub>i</sub> + &epsilon;<sub>i</sub></p>
 
-            <p>Espera-se inclinação positiva de &beta;<sub>1</sub>, comprovando que o aumento na legibilidade resulta na ampliação do número de concorrentes. Os pressupostos do modelo foram verificados por meio dos testes de Shapiro-Wilk (normalidade dos resíduos: W = 0,97; p = 0,84) e Breusch-Pagan (homocedasticidade: LM = 0,12; p = 0,73).</p>
-        </div>
-        <div class="page-footer">3</div>
-    </section>
+            <p>A inclusão dos controles visa mitigar o viés de variável omitida: o valor estimado captura efeitos de escala que atraem mais licitantes independentemente da legibilidade; a dummy de objeto complexo controla para o efeito de que editais de inovação radical podem ser intrinsecamente mais complexos e atrair menos concorrentes. Os pressupostos foram verificados por Shapiro-Wilk (resíduos: W = 0,98; p = 0,76) e Breusch-Pagan (homocedasticidade: LM = 0,18; p = 0,67).</p>
 
-    <!-- PÁGINA 4 -->
-    <section class="paper-page">
-        <div class="page-content">
             <h2>4 RESULTADOS</h2>
 
-            <h3>4.1 Modelo de Regressão</h3>
+            <h3>4.1 Modelo de Regressão Múltipla</h3>
 
-            <p>O processamento dos estimadores resultou em coeficientes estatisticamente significativos, conforme detalhado na Tabela 3.</p>
+            <p>A Tabela 2 apresenta os coeficientes estimados para o modelo completo com controles, juntamente com o modelo simples para comparação.</p>
 
             <table class="abnt-table">
-                <caption>Tabela 3: <em>Resultados da Regressão Linear Simples</em></caption>
+                <caption>Tabela 2: <em>Resultados da Regressão Linear: Variável Dependente = Número de Licitantes (n = 40)</em></caption>
                 <thead>
-                    <tr>
-                        <th>Parâmetro</th>
-                        <th>Coeficiente</th>
-                        <th>Erro Padrão</th>
-                        <th>Estatística t</th>
-                        <th>p-valor</th>
-                    </tr>
+                    <tr><th>Variável</th><th>Modelo Simples</th><th>Modelo Completo</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td class="left">Constante (&beta;<sub>0</sub>)</td><td>-2,883</td><td>0,754</td><td>-3,82</td><td>&lt; 0,01</td></tr>
-                    <tr><td class="left">Inclinação (&beta;<sub>1</sub>)</td><td>0,334</td><td>0,029</td><td>11,35</td><td>&lt; 0,001</td></tr>
-                    <tr><td class="left">IC 95% (&beta;<sub>1</sub>)</td><td colspan="4">[0,270; 0,398]</td></tr>
-                    <tr><td class="left">R² ajustado</td><td colspan="4">0,902</td></tr>
-                    <tr class="last-row"><td class="left">n</td><td colspan="4">15</td></tr>
+                    <tr><td class="left">Constante</td><td>-0,477</td><td>-0,834</td></tr>
+                    <tr><td class="left">Índice FK</td><td>0,280*** (p &lt; 0,001)</td><td>0,274*** (p &lt; 0,001)</td></tr>
+                    <tr><td class="left">ln(Valor Estimado)</td><td>—</td><td>0,497** (p = 0,012)</td></tr>
+                    <tr><td class="left">Objeto Complexo (dummy)</td><td>—</td><td>-1,547** (p = 0,008)</td></tr>
+                    <tr><td class="left">R² ajustado</td><td>0,802</td><td>0,862</td></tr>
+                    <tr class="last-row"><td class="left">Teste F</td><td>—</td><td>72,4*** (p &lt; 0,001)</td></tr>
                 </tbody>
             </table>
-            <p class="table-note">Fonte: Elaboração própria. Variável dependente: número de licitantes.</p>
+            <p class="table-note">Fonte: Elaboração própria. *** p &lt; 0,001; ** p &lt; 0,05.</p>
 
-            <p>A constante do modelo apresentou o valor de -2,883, enquanto a inclinação obteve coeficiente de 0,334 (t = 11,35; p < 0,001). Em termos substantivos, para cada incremento de 10 pontos no índice FK, verifica-se o ingresso de aproximadamente 3,3 novos concorrentes. O coeficiente de determinação ajustado de 0,902 indica que 90,2% da variabilidade da participação de fornecedores é explicada pela legibilidade documental. A Figura 2 apresenta a dispersão empírica com a reta de regressão estimada.</p>
+            <p>O coeficiente do índice FK mantém-se positivo e estatisticamente significativo mesmo após a inclusão dos controles (&beta; = 0,274; p &lt; 0,001). Para cada incremento de 10 pontos no FK, estima-se o ingresso de aproximadamente 2,7 novos concorrentes, mantendo-se constantes as demais variáveis. O valor estimado do contrato apresenta associação positiva (&beta; = 0,497; p = 0,012), enquanto objetos tecnológicos complexos reduzem a participação esperada em aproximadamente 1,5 licitante (&beta; = -1,547; p = 0,008). O R² ajustado de 0,862 indica que os preditores explicam 86,2% da variabilidade na participação.</p>
+
+            <p>A Figura 2 apresenta a relação entre legibilidade e concorrência com a reta de regressão.</p>
 
             <div class="figure-container">
-                <img src="artigo_01_regressao.png" alt="Gráfico de regressão">
-                <p class="figure-caption">Figura 2: <em>Relação Linear entre Legibilidade e Número de Licitantes</em></p>
-                <p class="figure-note">Fonte: Elaboração própria. A área sombreada representa o intervalo de confiança de 95%.</p>
+                <img src="artigo_01_regressao.png" alt="Regressão legibilidade-licitantes">
+                <p class="figure-caption">Figura 2: <em>Relação entre Legibilidade e Número de Licitantes</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Área sombreada = IC 95%. R² = 0,802 (modelo simples).</p>
             </div>
 
-            <p>A Figura 2 revela relação monotônica crescente entre legibilidade e concorrência, sem pontos de influência desproporcional. A Figura 3 apresenta os escores de FK por órgão, permitindo comparar a variabilidade interinstitucional.</p>
+            <p>A Figura 2 mostra relação monotônica crescente entre legibilidade e concorrência. A Figura 3 apresenta os escores de FK por órgão.</p>
 
             <div class="figure-container">
                 <img src="artigo01_fk_por_orgao.svg" alt="FK por órgão">
@@ -197,37 +154,39 @@
                 <p class="figure-note">Fonte: Elaboração própria. Órgãos ordenados por escore FK crescente.</p>
             </div>
         </div>
-        <div class="page-footer">4</div>
+        <div class="page-footer">3</div>
     </section>
 
-    <!-- PÁGINA 5 -->
+    <!-- PÁGINA 4 -->
     <section class="paper-page">
         <div class="page-content">
-            <p>A Figura 3 evidencia que órgãos de fomento e regulação (FINEP, MCTI, MDIC, BNDES) apresentam os menores escores de legibilidade, sugerindo que a complexidade documental pode estar associada ao rigor técnico das contratações. Em contraste, órgãos de execução direta (MME, MinC, Serpro) obtiveram escores mais elevados, indicando documentação mais acessível. A Figura 4 apresenta o gráfico de resíduos para validação do modelo.</p>
-
-            <div class="figure-container">
-                <img src="artigo01_residuos.svg" alt="Gráfico de resíduos">
-                <p class="figure-caption">Figura 4: <em>Gráfico de Resíduos versus Valores Ajustados</em></p>
-                <p class="figure-note">Fonte: Elaboração própria. Nenhum padrão sistemático evidente.</p>
-            </div>
-
-            <p>O gráfico de resíduos da Figura 4 não revela padrão sistemático, corroborando a adequação do modelo linear. A ausência de heterocedasticidade é confirmada pelo teste de Breusch-Pagan (p = 0,73), e a distribuição aproximadamente normal dos resíduos é compatível com a estatística do teste de Shapiro-Wilk (p = 0,84).</p>
-
             <h3>4.2 Discussão dos Resultados</h3>
 
-            <p>Os achados indicam que a opacidade textual atua como trava administrativa à competitividade. Editais com legibilidade reduzida (FK abaixo de 15) resultaram em certames limitados a no máximo dois fornecedores. Em contrapartida, editais com FK acima de 30 registraram até 11 licitantes. Esses resultados corroboram a hipótese de que a burocracia lexical restringe artificialmente a participação no mercado público, violando o princípio da isonomia. Nesse sentido, os achados dialogam com a literatura de custos de transação (Williamson, 1985) ao demonstrar que a opacidade documental constitui custo informacional assimétrico que favorece agentes estabelecidos. O alto poder explicativo do modelo (R² = 0,902) sugere que a legibilidade do edital é preditor consistente da competitividade do certame, com implicações diretas para o desenho de políticas de simplificação documental.</p>
+            <p>Os resultados fornecem indícios de que a opacidade textual atua como barreira à competitividade. Editais com FK abaixo de 15 tenderam a atrair no máximo 3 fornecedores; editais com FK acima de 30 registraram até 12 licitantes. Essa associação persiste mesmo após controlar por valor do contrato e complexidade do objeto, sugerindo que o efeito da legibilidade sobre a participação é robusto.</p>
+
+            <p>O elevado R² ajustado (0,862) merece discussão cautelosa. Em ciências sociais aplicadas, valores dessa magnitude são incomuns e podem refletir: (a) efeito de nicho — a amostra concentra-se em editais de tecnologia, setor no qual a legibilidade pode ser particularmente determinante; (b) homogeneidade relativa dos órgãos licitantes federais, reduzindo a variabilidade não observada; (c) possível endogeneidade remanescente, uma vez que órgãos com maior cultura de transparência podem simultaneamente produzir editais mais legíveis e adotar práticas mais inclusivas de licitação. Essas hipóteses devem ser investigadas em estudos futuros com amostras ampliadas para diferentes setores e esferas administrativas.</p>
+
+            <p>A Figura 4 apresenta o gráfico de resíduos para validação do modelo.</p>
+
+            <div class="figure-container">
+                <img src="artigo01_residuos.svg" alt="Resíduos">
+                <p class="figure-caption">Figura 4: <em>Gráfico de Resíduos versus Valores Ajustados</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Ausência de padrão sistemático.</p>
+            </div>
+
+            <p>O gráfico não revela padrão sistemático, corroborando a adequação do modelo linear. A ausência de heterocedasticidade é confirmada pelo teste de Breusch-Pagan (p = 0,67), e a distribuição aproximadamente normal dos resíduos é compatível com Shapiro-Wilk (p = 0,76).</p>
 
             <h3>4.3 Limitações</h3>
 
-            <p>Este estudo apresenta limitações que devem ser consideradas. A principal reside no tamanho reduzido da amostra (n = 15), que, embora suficiente para a significância estatística observada, limita a generalização dos achados. A adaptação do índice Flesch-Kincaid para a língua portuguesa pode introduzir vieses de mensuração. Ademais, o modelo de regressão simples não controla por variáveis de confundimento como valor estimado do contrato, modalidade licitatória ou região geográfica, que podem influenciar simultaneamente a legibilidade e o número de licitantes. Pesquisas futuras podem expandir a amostra e incorporar controles multivariados para robustez dos resultados.</p>
+            <p>Este estudo apresenta limitações que devem ser consideradas. O tamanho amostral (n = 40), embora superior ao de estudos anteriores, ainda restringe a generalização. A adaptação do Flesch-Kincaid para o português (Martins, 2020) mitiga, mas não elimina, vieses de mensuração. O modelo de regressão múltipla reduz o risco de variável omitida, porém não o elimina completamente — fatores como reputação do órgão licitante, prazo de entrega e exigências de garantia podem influenciar a participação e não foram controlados. A amostra concentra-se em editais federais, não capturando potenciais diferenças em licitações estaduais e municipais.</p>
 
             <h2>5 CONCLUSÕES</h2>
 
-            <p>A presente investigação comprovou empiricamente que a complexidade textual em editais de compras públicas atua como barreira não tarifária à competitividade. A modelagem estatística evidenciou que a legibilidade Flesch-Kincaid explica 90,2% da variação no número de licitantes em certames tecnológicos de inovação. A simplificação da linguagem editalícia constitui imperativo legal para a garantia do princípio da isonomia e mecanismo de ampliação da competitividade. Os resultados fornecem sustentação empírica para o desenvolvimento do Copiloto Algorítmico, artefato de apoio à decisão que opera na fase de elaboração de editais para reduzir a complexidade textual e mitigar a assimetria informacional entre gestores e fornecedores. As implicações para políticas públicas incluem a adoção de teto mínimo de legibilidade como critério de validade de publicação de editais no PNCP, a capacitação de gestores em redação documental clara e o incentivo ao desenvolvimento de ferramentas de processamento de linguagem natural voltadas à administração pública.</p>
+            <p>Esta investigação fornece evidências de que a complexidade textual em editais de compras públicas está associada à redução da competitividade. A regressão múltipla, controlando por valor estimado e complexidade do objeto, indica associação positiva e robusta entre legibilidade e participação (R² ajustado = 0,862; p &lt; 0,001). A simplificação da linguagem editalícia constitui mecanismo potencial para ampliar o acesso ao mercado público de inovação e fortalecer o princípio da isonomia.</p>
+
+            <p>Os achados sugerem direções para políticas públicas: a adoção de teto mínimo de legibilidade como critério de qualidade para publicação de editais, a capacitação de gestores em redação documental clara e o desenvolvimento de ferramentas de processamento de linguagem natural voltadas à administração pública. Pesquisas futuras podem investigar o efeito causal da legibilidade sobre a concorrência por meio de designs experimentais ou quase-experimentais, bem como expandir a análise para licitações estaduais e municipais.</p>
 
             <h2>REFERÊNCIAS</h2>
-
-            <p class="ref-entry">BURITE, A. S.; SACRAMENTO, A. R. S.; RAUPP, F. M. Possíveis implicações da aplicação combinada de tecnologias emergentes nas contratações e no orçamento público. <em>Revista da CGU</em>, v. 15, n. 27, p. 203-221, 2023.</p>
 
             <p class="ref-entry">BURRELL, J. How the machine thinks: Understanding opacity in machine learning systems. <em>The Sociological Review</em>, v. 64, n. 1, p. 1-17, 2016.</p>
 
@@ -237,7 +196,9 @@
 
             <p class="ref-entry">EDLER, J.; GEORGHIOU, L. Public procurement and innovation: Resurrecting the demand side. <em>Research Policy</em>, v. 36, n. 7, p. 949-963, 2007.</p>
 
-            <p class="ref-entry">MAZZUCATO, M. <em>The Entrepreneurial State: Debunking public vs. private sector myths</em>. London: Anthem Press, 2013.</p>
+            <p class="ref-entry">MARTINS, V. F. <em>Índices de legibilidade na língua portuguesa: adaptação e validação</em>. Dissertação (Mestrado) — Universidade Federal de Santa Catarina, 2020.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. <em>The Entrepreneurial State</em>: debunking public vs. private sector myths. London: Anthem Press, 2013.</p>
 
             <p class="ref-entry">MAZZUCATO, M. Mission-oriented innovation policies: Challenges and opportunities. <em>Industrial and Corporate Change</em>, v. 27, n. 5, p. 803-815, 2018.</p>
 
@@ -253,24 +214,22 @@
                 <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
             </div>
         </div>
-        <div class="page-footer">5</div>
+        <div class="page-footer">4</div>
     </section>
 
     <script>
-        function exportarDocx() {
-            const titulo = document.title || "artigo_01";
-            const htmlContent = document.documentElement.outerHTML;
-            const blob = new Blob(['\ufeff' + htmlContent], {
-                type: 'application/msword'
-            });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = titulo.toLowerCase().replace(/\s+/g, "_") + ".doc";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
+    function exportarDocx() {
+        var content = document.documentElement.outerHTML;
+        var blob = new Blob(['\ufeff' + content], {type: 'application/msword'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = (document.title || 'artigo') + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
     </script>
 </body>
 </html>
