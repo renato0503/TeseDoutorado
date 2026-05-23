@@ -104,7 +104,7 @@
                 <p class="figure-note">Fonte: OpenAlex (2026).</p>
             </div>
 
-            <p>A Figura 2 revela concentração em periódicos de ética tecnológica e políticas públicas. AI & Society (Springer) e o repositório Zenodo (CERN) lideram com 3 artigos cada, seguidos por periódicos de gestão da informação (IJIM, 2 artigos) e ciência da computação (LNCS, 2 artigos). A predominância de periódicos de ética e políticas públicas sobre periódicos técnicos de ciência da computação sugere que o debate sobre XAI no setor público tem sido conduzido predominantemente por cientistas sociais e juristas, com participação ainda limitada de pesquisadores da computação aplicada à administração pública. Esse padrão bibliométrico corrobora a tese de que a implementação prática de XAI em processos governamentais ainda é incipiente.</p>
+            <p>A Figura 2 revela concentração em periódicos de ética tecnológica e políticas públicas. AI & Society (Springer) e o repositório Zenodo (CERN) lideram com 3 artigos cada, seguidos por periódicos de gestão da informação (IJIM, 2 artigos) e ciência da computação (LNCS, 2 artigos). A predominância de periódicos de ética e políticas públicas sobre periódicos técnicos de ciência da computação sugere que o debate sobre XAI no setor público tem sido conduzido predominantemente por cientistas sociais e juristas, com participação ainda limitada de pesquisadores da computação aplicada à administração pública.</p>
 
             <h3>4.3 Artigos Mais Relevantes</h3>
 
@@ -122,10 +122,56 @@
                 </tbody>
             </table>
             <p class="table-note">Fonte: OpenAlex (2026).</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
 
-            <h3>4.4 Eixos Temáticos e Lacunas</h3>
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
 
-            <p>A síntese do corpus bibliográfico possibilitou identificar seis eixos temáticos na produção acadêmica sobre transparência governamental: (a) Governança Algorítmica e Accountability (Danaher et al., 2017); (b) Dados Abertos Governamentais e XAI (Kalampokis et al., 2021); (c) Políticas Nacionais de IA (Paltieli, 2021); (d) Ética e IA Centrada no Humano (Floridi et al., 2018); (e) Decisões Algorítmicas e Discricionariedade (Janssen et al., 2020); e (f) Compras Públicas e Contratações. Neste último eixo, verifica-se carência quase absoluta de pesquisas aplicadas. O único artigo representativo (Ayobami et al., 2023) discute frameworks preditivos abstratos contra corrupção, sem propor ferramentas práticas para o cotidiano dos gestores públicos.</p>
+            <h3>4.4 Rede de Coautorias e Principais Pesquisadores</h3>
+
+            <p>A Figura 3 apresenta a rede de coautorias entre os pesquisadores do corpus, construída com o algoritmo Force Atlas 2 (NetworkX). Os nós representam autores e as arestas indicam coautorias, com tamanho proporcional à produtividade individual.</p>
+
+            <div class="figure-container">
+                <img src="figura3_rede_autores.png" alt="Rede de coautorias">
+                <p class="figure-caption">Figura 3: <em>Rede de Coautorias entre Pesquisadores de XAI Aplicado ao Setor Público</em></p>
+                <p class="figure-note">Fonte: OpenAlex (2026). Nós em azul escuro = ≥ 3 publicações.</p>
+            </div>
+
+            <p>A Figura 3 evidencia a fragmentação do campo: a rede apresenta clusters isolados, sem conectividade entre os principais grupos de pesquisa. Autores como Dwivedi, Floridi e Janssen atuam como nós centrais em seus respectivos clusters temáticos (IA multidisciplinar, ética algorítmica e discricionariedade administrativa), mas não estabelecem pontes de colaboração entre si. Esse padrão de "ilhas temáticas" sugere que o campo da XAI governamental ainda não atingiu maturidade integrativa, operando em silos disciplinares. A identificação desses clusters é relevante para posicionar o Copiloto Algorítmico proposto nesta tese como artefato que integra as dimensões técnica (XAI), ética (accountability) e administrativa (discricionariedade) em um único modelo.</p>
+
+            <h3>4.5 Paradigmas Teóricos e Temas Centrais</h3>
+
+            <p>A Figura 4 apresenta os paradigmas teóricos e temas mais frequentes na literatura, extraídos da análise de palavras-chave dos 52 artigos do corpus.</p>
+
+            <div class="figure-container">
+                <img src="figura4_paradigmas_teoricos.png" alt="Paradigmas teóricos">
+                <p class="figure-caption">Figura 4: <em>Paradigmas Teóricos e Temas Centrais na Literatura de XAI e Gestão Pública</em></p>
+                <p class="figure-note">Fonte: OpenAlex (2026). Frequência de palavras-chave no corpus.</p>
+            </div>
+
+            <p>A Figura 4 revela três paradigmas dominantes. O primeiro, centrado em "transparência" e "accountability", reflete a preocupação com o dever de motivação administrativa e o controle social dos algoritmos (Coglianese & Lehr, 2019; Janssen et al., 2020). O segundo, em torno de "governança algorítmica" e "inteligência artificial", aborda o desenho institucional e regulatório da IA no Estado (Danaher et al., 2017; Floridi et al., 2018). O terceiro, com "ética" e "responsabilidade", situa o debate no campo da filosofia da tecnologia e da inovação responsável (Arrieta et al., 2020). A presença de "dados abertos" e "governo" como temas intermediários indica que a aplicação prática de XAI a dados governamentais ainda é incipiente, corroborando a lacuna identificada na literatura.</p>
+
+            <h3>4.6 Eixos Temáticos e Lacunas de Pesquisa</h3>
+
+            <p>A Figura 5 consolida a distribuição dos 52 artigos nos seis eixos temáticos identificados na literatura, evidenciando a assimetria entre os temas mais explorados e a lacuna crítica em compras públicas.</p>
+
+            <div class="figure-container">
+                <img src="figura5_eixos_lacunas.png" alt="Eixos temáticos e lacunas">
+                <p class="figure-caption">Figura 5: <em>Distribuição da Literatura por Eixo Temático e Lacunas de Pesquisa</em></p>
+                <p class="figure-note">Fonte: OpenAlex (2026).</p>
+            </div>
+
+            <p>A Figura 5 expõe a assimetria entre os eixos: Governança Algorítmica (18 artigos) e Ética em IA (14) concentram a maior parte da produção, enquanto Compras Públicas apresenta apenas 2 artigos, configurando lacuna crítica. Esse padrão confirma que o debate sobre XAI no setor público permanece no plano normativo e principiológico, sem avançar para a aplicação em processos operacionais complexos. A lacuna em compras públicas é particularmente severa porque é nesse domínio que o "apagão das canetas" se manifesta com maior intensidade (Sundfeld, 2014). A ausência de modelos explicativos para a fase interna das licitações compromete a capacidade do Estado de adotar IA de forma segura e legítima, validando o desenvolvimento do Copiloto Algorítmico como artefato que preenche esse hiato entre teoria regulatória e prática burocrática.</p>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <!-- PÁGINA 5 -->
+    <section class="paper-page">
+        <div class="page-content">
 
             <h2>5 DISCUSSÃO</h2>
 
@@ -177,7 +223,7 @@
                 <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
             </div>
         </div>
-        <div class="page-footer">3</div>
+        <div class="page-footer">5</div>
     </section>
 
     <script>
