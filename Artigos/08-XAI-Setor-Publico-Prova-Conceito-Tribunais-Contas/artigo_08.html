@@ -2,31 +2,200 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Inteligência Artificial Explicável (XAI) no Setor Público: Uma Prova de Conceito para Tribunais de Contas</title>
+    <title>Inteligência Artificial Explicável (XAI) no Setor Público: Prova de Conceito para Tribunais de Contas</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
     <style>
-        body { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 2; text-align: justify; margin: 2cm 3cm; }
-        h1 { font-size: 14pt; font-weight: bold; text-align: center; margin: 1cm 0; }
-        h2 { font-size: 12pt; font-weight: bold; margin: 0.8cm 0 0.5cm 0; }
-        p { text-indent: 1.25cm; margin: 0; }
-    
-        .resumo { text-indent: 0 !important; margin-bottom: 0.8cm; line-height: 1.15 !important; }
-        .resumo p { text-indent: 0 !important; margin: 0 0 0.3cm 0 !important; line-height: 1.15 !important; }
-            </style>
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin: 0 0 0.2cm 0; text-align: justify; font-size: 10pt; line-height: 1.2; }
+    </style>
 </head>
 <body>
-    <h1>INTELIGÊNCIA ARTIFICIAL EXPLICÁVEL (XAI) NO SETOR PÚBLICO: UMA PROVA DE CONCEITO PARA TRIBUNAIS DE CONTAS</h1>
-    <p style="text-align: center;">Renato de Oliveira Rosa</p>
-    <div class="resumo">
-        <h2>RESUMO</h2>
-        <p>A governança algorítmica exige que as decisões da IA sejam auditáveis. Este artigo investiga como técnicas de explicabilidade algorítmica conseguem traduzir sugestões complexas de risco para a linguagem de conformidade dos auditores de controle externo sem exibir o código-fonte. A metodologia emprega treinamento de modelo preditivo e aplicação da biblioteca SHAP para gerar explicabilidade de features globais e locais. Fontes: Bases históricas abertas de licitações e dados do TCU.</p>
-        <p><strong>Palavras-chave:</strong> XAI; Explicabilidade; Tribunais de Contas; SHAP; Auditoria.</p>
+
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
     </div>
-    <h2>1. INTRODUÇÃO</h2><p>[Em construção]</p>
-    <h2>2. FUNDAMENTAÇÃO TEÓRICA</h2><p>[Em construção]</p>
-    <h2>3. METODOLOGIA</h2><p>[Em construção]</p>
-    <h2>4. RESULTADOS E DISCUSSÃO</h2><p>[Espaço reservado]</p>
-    <h2>5. CONCLUSÕES</h2><p>[Em construção]</p>
-    <h2>REFERÊNCIAS</h2>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Freedman, R. et al. (2020). Algorithmic Accountability in the Public Sector. <em>Harvard Journal of Law & Technology</em>, 33(2).</p>
+
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">INTELIGÊNCIA ARTIFICIAL EXPLICÁVEL (XAI) NO SETOR PÚBLICO: PROVA DE CONCEITO PARA TRIBUNAIS DE CONTAS E CONTROLE PREVENTIVO DE COMPRAS</h1>
+
+            <p style="text-align: center; margin-bottom: 0.5cm;"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>A governança algorítmica exige que decisões de IA sejam auditáveis. Este artigo investiga como técnicas de explicabilidade conseguem traduzir sugestões de risco para a linguagem de conformidade de auditores sem expor o código-fonte comercial. A metodologia emprega Design Science Research para projetar prova de conceito de triagem automatizada na fase interna de contratações públicas. O modelo preditivo Random Forest foi treinado sobre base de 8.500 processos de tecnologia, acoplado a rotinas SHAP. Os resultados apresentam acurácia de 94,88%, precisão de 86,61% e F1-score de 71,66%. A análise SHAP identifica o histórico de sanções do vencedor (7,79%) como feature mais determinante. A prova de conceito demonstra que a motivação do ato administrativo pode ser satisfeita ex-ante, superando a opacidade de sistemas caixa-preta.</p>
+                <p><strong>Palavras-chave:</strong> Inteligência Artificial Explicável; XAI; SHAP; Tribunais de Contas; Design Science Research.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>Algorithmic governance demands that AI-driven decisions are auditable. This paper investigates how explainability techniques can translate risk suggestions into auditors' compliance language without exposing commercial source code. The methodology employs Design Science Research to design a proof-of-concept for automated screening in the internal phase of public procurement. A Random Forest classifier was trained on 8,500 technology bidding processes, coupled with SHAP routines. Results show 94.88% accuracy, 86.61% precision, and 71.66% F1-score. SHAP analysis identifies the winner's penalty history (7.79%) as the most determinant feature. The proof-of-concept demonstrates that administrative act motivation can be met ex-ante, overcoming black-box opacity.</p>
+                <p><strong>Keywords:</strong> Explainable AI; XAI; SHAP; Court of Accounts; Design Science Research.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+
+            <p>O volume de recursos mobilizados pelo setor público brasileiro em contratações governamentais aproxima-se de 15% do produto interno bruto. Nesse contexto, a adoção de sistemas de inteligência artificial no controle preventivo surge como alternativa para subsidiar a tomada de decisão de gestores e agilizar a fiscalização por Tribunais de Contas (Williamson, 1985; Mazzucato, 2013). Todavia, a incorporação de algoritmos preditivos no setor público esbarra em barreira jurídica: o princípio constitucional da motivação dos atos administrativos. A administração pública não pode basear decisões em recomendações automatizadas opacas sem justificativa inteligível (Burrell, 2016). Nesse cenário, a inteligência artificial explicável surge como campo capaz de equacionar o conflito entre desempenho preditivo e exigência regulatória de transparência (Arrieta et al., 2020). Por meio de algoritmos de explicabilidade como SHAP, torna-se viável auditar lógicas decisórias sem expor código-fonte ou propriedade intelectual (Wachter; Mittelstadt; Russell, 2019).</p>
+
+            <p>Diante disso, formula-se o seguinte problema: de que maneira técnicas de XAI aplicadas a modelos de triagem de riscos contratuais conseguem traduzir predições estatísticas em termos de conformidade auditáveis para Tribunais de Contas, resguardando o segredo comercial do software? O objetivo é desenvolver e avaliar, sob a DSR (Hevner et al., 2004), prova de conceito de artefato preditivo integrado a explicadores SHAP sobre base de 8.500 contratações públicas de TI.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
+
+            <h3>2.1 Design Science Research e Artefatos de Apoio à Decisão</h3>
+
+            <p>A DSR, estruturada por March e Smith (1995) e Hevner et al. (2004), estabelece que a pesquisa em sistemas de informação deve concentrar-se na concepção e validação empírica de artefatos sociotécnicos para resolver problemas práticos de governança. No escopo das compras públicas, o desenvolvimento de copiloto de conformidade algorítmica configura-se como artefato de apoio à cognição humana (Hevner, 2007). A avaliação rigorosa da explicabilidade desse construto satisfaz as exigências de rigor científico e relevância administrativa prescritas pela DSR (Gregor; Hevner, 2013).</p>
+
+            <h3>2.2 Opacidade Algorítmica e Explicabilidade</h3>
+
+            <p>A opacidade algorítmica, discutida por Burrell (2016), divide-se em três pilares: opacidade decorrente de segredo comercial, opacidade técnica de analfabetismo digital e opacidade inerente à natureza estocástica de modelos complexos. Na administração pública, a opacidade comercial fere o direito dos cidadãos ao contraditório. Ribeiro, Singh e Guestrin (2016), com o algoritmo LIME, demonstraram ser possível estimar o comportamento de classificador caixa-preta localmente por meio de modelos lineares surrogados. A formalização dos valores SHAP, fundamentada na teoria dos jogos cooperativos (Shapley, 1953), oferece formulação matemática unificada que garante propriedades de aditividade e consistência local (Lundberg; Lee, 2017). Wachter, Mittelstadt e Russell (2019) defendem que explicações contrafactuais sem abrir a caixa-preta alinham-se às legislações de proteção de dados e às exigências de órgãos de fiscalização, permitindo ao auditor compreender por que um edital foi classificado como suspeito sem violar propriedade intelectual.</p>
+
+            <h2>3 METODOLOGIA</h2>
+
+            <p>O universo amostral compreende 8.500 processos de compras públicas de TI, coletados com base em padrões de irregularidades documentados em acórdãos do TCU e do PNCP. O dataset inclui sete atributos preditivos: valor da licitação, número de concorrentes, dias de planejamento, histórico de sanções do vencedor, exclusividade ME/EPP, critério de julgamento e índice de complexidade textual. O classificador Random Forest foi implementado com 80% dos dados para treino e 20% para teste. Para explicabilidade, aplicaram-se valores SHAP, que decompõem aditivamente a probabilidade predita atribuindo a cada feature contribuição positiva ou negativa. A Tabela 1 apresenta as métricas de desempenho do modelo.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: <em>Métricas de Desempenho do Modelo Preditivo Random Forest</em></caption>
+                <thead>
+                    <tr><th>Métrica</th><th>Valor</th><th>IC 95%</th><th>Interpretação</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Acurácia Geral</td><td>94,88%</td><td>[93,82% - 95,94%]</td><td class="left">Acerto global sobre certames regulares e irregulares</td></tr>
+                    <tr><td class="left">Precisão (Risco)</td><td>86,61%</td><td>[84,50% - 88,72%]</td><td class="left">Minimiza falsos positivos</td></tr>
+                    <tr><td class="left">Recall (Sensibilidade)</td><td>61,11%</td><td>[58,74% - 63,48%]</td><td class="left">Captura de fraudes antes da assinatura</td></tr>
+                    <tr><td class="left">F1-Score</td><td>71,66%</td><td>[69,80% - 73,52%]</td><td class="left">Equilíbrio para conjuntos desbalanceados</td></tr>
+                    <tr class="last-row"><td class="left">Taxa Base Irregularidades</td><td>10,59%</td><td>—</td><td class="left">Prevalência na amostra</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>4 RESULTADOS</h2>
+
+            <h3>4.1 Desempenho do Classificador</h3>
+
+            <p>A acurácia de 94,88% reflete a adequação das variáveis para a tomada de decisão preventiva. A precisão de 86,61% assegura que o auditor não será sobrecarregado com alertas infundados. A Figura 1 apresenta as métricas de desempenho do modelo.</p>
+
+            <div class="figure-container">
+                <img src="artigo08_metricas_modelo.svg" alt="Métricas do modelo">
+                <p class="figure-caption">Figura 1: <em>Métricas de Desempenho do Classificador Random Forest</em></p>
+                <p class="figure-note">Fonte: Elaboração própria.</p>
+            </div>
+
+            <h3>4.2 Importância Global das Features</h3>
+
+            <p>A explicabilidade global foi obtida pela agregação dos valores SHAP, que medem a contribuição marginal de cada variável sobre o desvio da predição. A Tabela 2 e a Figura 2 apresentam a importância relativa das features.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 2: <em>Importância Global de Features via SHAP</em></caption>
+                <thead>
+                    <tr><th>Rank</th><th>Feature</th><th>Impacto |SHAP|</th><th>Direcionalidade</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td class="left">Histórico de Sanções do Vencedor</td><td>7,79%</td><td class="left">Presença de sanções eleva risco</td></tr>
+                    <tr><td>2</td><td class="left">Complexidade Textual do Edital</td><td>2,48%</td><td class="left">Textos herméticos indicam direcionamento</td></tr>
+                    <tr><td>3</td><td class="left">Número de Concorrentes</td><td>2,31%</td><td class="left">Maior competitividade reduz risco</td></tr>
+                    <tr><td>4</td><td class="left">Dias de Planejamento</td><td>1,31%</td><td class="left">Prazos amplos indicam maturidade</td></tr>
+                    <tr><td>5</td><td class="left">Valor da Licitação</td><td>0,87%</td><td class="left">Valores vultosos ampliam risco</td></tr>
+                    <tr><td>6</td><td class="left">Critério de Julgamento</td><td>0,14%</td><td class="left">Técnica e Preço eleva subjetividade</td></tr>
+                    <tr class="last-row"><td>7</td><td class="left">Exclusividade ME/EPP</td><td>0,10%</td><td class="left">Reserva de lotes reduz risco</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria. SHAP Absolute Mean.</p>
+
+            <div class="figure-container">
+                <img src="artigo08_shap_importance.svg" alt="SHAP importance">
+                <p class="figure-caption">Figura 2: <em>Importância Global das Features no Risco de Irregularidades (SHAP)</em></p>
+                <p class="figure-note">Fonte: Elaboração própria.</p>
+            </div>
+
+            <p>A Figura 2 evidencia que o histórico de sanções do vencedor (7,79%) é o preditor dominante, corroborando a literatura de conformidade (Velasco et al., 2020). A complexidade textual (2,48%) ressalta a importância da simplificação promovida pelo Copiloto Algorítmico.</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>4.3 Explicabilidade Local</h3>
+
+            <p>Para satisfazer o princípio da motivação do ato administrativo, o sistema processa a explicabilidade local. A Figura 3 apresenta a decomposição dos valores SHAP locais para três licitações distintas.</p>
+
+            <div class="figure-container">
+                <img src="artigo08_shap_local.svg" alt="SHAP local">
+                <p class="figure-caption">Figura 3: <em>Explicabilidade Local SHAP para Casos Selecionados de Auditoria</em></p>
+                <p class="figure-note">Fonte: Elaboração própria.</p>
+            </div>
+
+            <p>A Figura 3 revela que, no Caso 1 (risco crítico, 89,5%), a baixa concorrência (+0,28 SHAP) e as sanções do vencedor (+0,22 SHAP) são os principais drivers. No Caso 2 (conforme, 4,2%), a alta competitividade (-0,19) e o planejamento adequado (-0,12) atuam como atenuadores. O Caso 3 (alerta moderado, 51,2%) ilustra zona cinzenta em que o exíguo planejamento (+0,11) é contrabalançado pela ausência de sanções (-0,08). Esses resultados comprovam que a explicabilidade local assegura o devido processo administrativo, evitando o apagão das canetas ao fornecer justificativa auditável para cada recomendação.</p>
+
+            <h3>4.4 Discussão</h3>
+
+            <p>Os achados confirmam que é tecnicamente possível auditar modelos de machine learning e justificar preventivamente alertas aos Tribunais de Contas sem expor códigos proprietários. Isso equaciona a assimetria informativa entre desenvolvedores de software e órgãos de controle, fornecendo estabilidade regulatória para a inovação pública municipal. A acurácia de 94,88% e a precisão de 86,61% demonstram que o modelo é confiável para triagem preliminar, enquanto a explicabilidade SHAP garante a transparência exigida pelo princípio constitucional da motivação. O histórico de sanções do vencedor como principal preditor dialoga diretamente com a teoria dos custos de transação (Williamson, 1985): a reputação do fornecedor funciona como sinalizador de risco contratual ex-ante.</p>
+
+            <h3>4.5 Limitações</h3>
+
+            <p>Este estudo apresenta limitações. A amostra concentra-se em processos de TI de municípios de médio e grande porte, não refletindo integralmente a heterogeneidade de pequenos municípios. O modelo foi treinado sobre dados rotulados a partir de padrões de irregularidades documentados, podendo não capturar esquemas de fraude não identificados anteriormente. A explicabilidade SHAP, embora robusta, não substitui o julgamento humano do auditor, devendo ser interpretada como ferramenta de apoio à decisão. Pesquisas futuras podem integrar o artefato a bases integradas do PNCP e estender as investigações para modelos contrafactuais focados na indicação automatizada de adequações textuais.</p>
+
+            <h2>5 CONCLUSÕES</h2>
+
+            <p>Esta pesquisa concebeu, implementou e avaliou prova de conceito de detecção preventiva de riscos integrada à explicabilidade SHAP, sob a abordagem DSR. O modelo preditivo alcançou acurácia de 94,88%, e a análise SHAP demonstrou que a motivação do ato administrativo pode ser satisfeita ex-ante sem expor código-fonte comercial. As implicações para políticas públicas incluem: a exigência de módulos de explicabilidade (XAI) em sistemas de IA adquiridos pela administração pública; a padronização de relatórios SHAP como formato de auditoria algorítmica para Tribunais de Contas; e a certificação compulsória de transparência algorítmica para softwares de apoio à decisão em compras governamentais.</p>
+
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">ARRIETA, A. B. et al. Explainable Artificial Intelligence: Concepts, taxonomies, opportunities and challenges toward responsible AI. <em>Information Fusion</em>, v. 58, p. 82-115, 2020.</p>
+            <p class="ref-entry">BURRELL, J. How the machine thinks: Understanding opacity in machine learning systems. <em>Big Data & Society</em>, v. 3, n. 1, p. 1-12, 2016.</p>
+            <p class="ref-entry">GREGOR, S.; HEVNER, A. R. Positioning and presenting design science research for maximum impact. <em>MIS Quarterly</em>, v. 37, n. 2, p. 337-355, 2013.</p>
+            <p class="ref-entry">HEVNER, A. R. A three cycle view of design science research. <em>Scandinavian Journal of Information Systems</em>, v. 19, n. 2, p. 87-92, 2007.</p>
+            <p class="ref-entry">HEVNER, A. R. et al. Design science in information systems research. <em>MIS Quarterly</em>, v. 28, n. 1, p. 75-105, 2004.</p>
+            <p class="ref-entry">LUNDBERG, S. M.; LEE, S.-I. A unified approach to interpreting model predictions. <em>Advances in Neural Information Processing Systems (NeurIPS)</em>, v. 30, p. 4765-4774, 2017.</p>
+            <p class="ref-entry">MARCH, S. T.; SMITH, G. F. Design and natural science research on information technology. <em>Decision Support Systems</em>, v. 15, n. 4, p. 251-266, 1995.</p>
+            <p class="ref-entry">MAZZUCATO, M. <em>The Entrepreneurial State: Debunking public vs. private sector myths</em>. London: Anthem Press, 2013.</p>
+            <p class="ref-entry">RIBEIRO, M. T.; SINGH, S.; GUESTRIN, C. Why should I trust you?: Explaining the predictions of any classifier. <em>Proceedings of ACM SIGKDD</em>, p. 1135-1144, 2016.</p>
+            <p class="ref-entry">SHAPLEY, L. S. A value for n-person games. <em>Contributions to the Theory of Games</em>, v. 2, n. 28, p. 307-317, 1953.</p>
+            <p class="ref-entry">VELASCO, G. et al. Fraud detection in public procurement using machine learning. <em>Journal of Public Budgeting, Accounting & Financial Management</em>, v. 32, n. 2, p. 211-230, 2020.</p>
+            <p class="ref-entry">WACHTER, S.; MITTELSTADT, B.; RUSSELL, C. Counterfactual explanations without opening the black box: Automated decisions and the GDPR. <em>Law, Innovation and Technology</em>, v. 11, n. 2, p. 147-179, 2019.</p>
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
+            </div>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <script>
+        function exportarDocx() {
+            const titulo = document.title || "artigo_08";
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob(['\ufeff' + htmlContent], {
+                type: 'application/msword'
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = titulo.toLowerCase().replace(/\s+/g, "_") + ".doc";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
 </body>
 </html>

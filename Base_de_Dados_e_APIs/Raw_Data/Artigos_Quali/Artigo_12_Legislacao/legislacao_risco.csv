@@ -1,0 +1,6 @@
+lei_id,lei_nome,nome_popular,tamanho_palavras,c1_controle_punicao,c1_densidade,c2_equilibrio_recomposicao,c2_densidade,c3_alocacao_mitigacao,c3_densidade,c4_aprendizado_experimentacao,c4_densidade
+L1993,Lei 8.666/1993,Antiga Lei de Licitações,12000,54,45.0,36,30.0,2,1.67,0,0.0
+L2011,Lei 12.462/2011,Regime Diferenciado de Contratações (RDC),8500,28,32.94,18,21.18,12,14.12,2,2.35
+L2016,Lei 13.303/2016,Lei das Estatais,10000,35,35.0,15,15.0,28,28.0,8,8.0
+L2021,Lei 14.133/2021,Nova Lei de Licitações e Contratos (NLLC),15000,78,52.0,42,28.0,65,43.33,18,12.0
+LCS2021,Lei Complementar 182/2021,Marco Legal das Startups (CPSI),6000,4,6.67,3,5.0,26,43.33,45,75.0

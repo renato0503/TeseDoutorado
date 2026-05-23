@@ -3,181 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <title>A "Caixa-Preta" do Setor Público: Revisão Sistemática sobre Inteligência Artificial Explicável na Gestão Pública</title>
-    <style>
-        body { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 2; text-align: justify; margin: 2cm 3cm; }
-        h1 { font-size: 14pt; font-weight: bold; text-align: center; margin: 1cm 0; }
-        h2 { font-size: 12pt; font-weight: bold; margin: 0.8cm 0 0.5cm 0; }
-        p { text-indent: 1.25cm; margin: 0; }
-    
-        .resumo { text-indent: 0 !important; margin-bottom: 0.8cm; line-height: 1.15 !important; }
-        .resumo p { text-indent: 0 !important; margin: 0 0 0.3cm 0 !important; line-height: 1.15 !important; }
-            </style>
+    <!-- CSS unificado de páginas simuladas -->
+    <link rel="stylesheet" href="../../css/style_academico.css">
 </head>
 <body>
-    <h1>A "CAIXA-PRETA" DO SETOR PÚBLICO: REVISÃO SISTEMÁTICA SOBRE INTELIGÊNCIA ARTIFICIAL EXPLICÁVEL NA GESTÃO PÚBLICA</h1>
-    <p style="text-align: center;">Renato de Oliveira Rosa</p>
-    <div class="resumo">
-        <h2>RESUMO</h2>
-        <p>A literatura sobre a interface entre transparência administrativa e algoritmos ainda é incipiente. Este artigo investiga como a literatura acadêmica tem conceituado e exigido metodologias de Explicabilidade algorítmica aplicadas ao direito e à gestão pública. A metodologia emprega Revisão Sistemática (Protocolo PRISMA) e Análise Bibliométrica. Fontes: Bases Scopus e Web of Science tratadas no VOSviewer.</p>
-        <p><strong>Palavras-chave:</strong> Revisão Sistemática; XAI; Gestão Pública; Transparência; Bibliometria.</p>
+
+    <!-- Painel de Controle Flutuante (não impresso) -->
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
     </div>
-    <h2>1. INTRODUÇÃO</h2>
-    <p>A integração de sistemas de inteligência artificial (IA) nos processos decisórios do setor público representa uma das transformações mais significativas na administração governamental contemporânea. Segundo Dwivedi et al. (2019), a IA oferece oportunidades sem precedentes para a melhoria da eficiência, eficácia e qualidade dos serviços públicos,然而也引发了关于透明度、问责制和伦理治理的深刻关切。</p>
-    
-    <p>No contexto das compras públicas, a adoção de algoritmos para análise de propostas, detecção de fraudes e previsão de riscos tem crescido exponencialmente. Contudo, conforme destacam Janssen et al. (2020), a utilização de IA pelo governo sem mecanismos adequados de explicabilidade pode resultar em decisões opacas que comprometem o princípio da transparência administrativa e o direito fundamental à motivação dos atos públicos.</p>
-    
-    <p>A literatura acadêmica sobre inteligência artificial explicável (XAI - Explainable Artificial Intelligence) tem se desenvolvido rapidamente na última década, 然而大多数研究集中在 aplicações médicas e financeiras, neglecting the specific challenges of the public sector. Estudos como os de Arrieta et al. (2020) estabeleceram taxonomias conceituais para a explicabilidade algorítmica, porém a aplicação desses frameworks ao contexto de compras públicas e contratos governamentais permanece como uma lacuna significativa.</p>
-    
-    <p>Especificamente no Brasil, donde o poder de compra do Estado representa aproximadamente 15% do PIB e as contratações públicas de inovação e sustentabilidade são estratégicas para a política industrial, a ausência de mecanismos de transparência algorítmica agrava o fenômeno conhecido como "apagão das canetas" - a paralisia decisória dos gestores públicos frente ao receio de responsabilização por decisões automatizadas não compreensíveis.</p>
-    
-    <p>Diante desse contexto, a presente revisão sistemática busca responder à seguinte pergunta de pesquisa: <em>Como a literatura acadêmica tem tratado a interface entre explicabilidade algorítmica e gestão pública, particularmente no que tange à transparência, accountability e tomada de decisão em Administrações Públicas?</em></p>
 
-    <h2>2. FUNDAMENTAÇÃO TEÓRICA</h2>
-    <p>A teoria da transparência algorítmica, sistematizada por Arrieta et al. (2020), distingue três dimensões fundamentais de explicabilidade: (a) transparência de dados, referente aos insumos utilizados no treinamento dos modelos; (b) transparência de modelo, concernente à arquitetura e parâmetros do sistema; e (c) transparência de decisão, relativa às razões específicas que levaram a determinado output.</p>
-    
-    <p>No âmbito do setor público, a exigência de explicabilidade decorre de princípios constitucionais da administração pública, particularmente o dever de motivação dos atos administrativos (Artigo 50, Lei 9.784/1999) e o direito de acesso à informação (Lei 12.527/2011). Contudo, como argumentam Freedman et al. (2020), a implementação de sistemas XAI no governo enfrenta trade-offs com valores como privacidade, segurança e viabilidade comercial.</p>
-    
-    <p>A Economia dos Custos de Transação (Williamson, 1985) oferece uma lente analítica complementar para compreender a importância da explicabilidade. A racionalidade limitada dos gestores, combinada com a complexidade dos algoritmos de IA, eleva a incerteza e os custos de transação nas contratações públicas, potencializando o fenômeno do "apagão das canetas".</p>
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">A "CAIXA-PRETA" DO SETOR PÚBLICO: REVISÃO SISTEMÁTICA E BIBLIOMETRIA SOBRE INTELIGÊNCIA ARTIFICIAL EXPLICÁVEL NA GESTÃO PÚBLICA</h1>
+            
+            <p style="text-align: center; margin-bottom: 0.5cm;"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado em Contabilidade e Administração</span></p>
+            
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>A integração de sistemas de Inteligência Artificial (IA) na administração governamental tem suscitado debates profundos sobre a discricionariedade e a motivação dos atos administrativos. Com efeito, a literatura sobre a interface entre transparência algorítmica e gestão pública ainda carece de sínteses sistemáticas estruturadas. Este artigo investiga como a literatura acadêmica tem conceituado e exigido metodologias de Explicabilidade Algorítmica (XAI - Explainable Artificial Intelligence) aplicadas ao setor público. A metodologia emprega uma Revisão Sistemática de Literatura fundamentada no protocolo PRISMA combinada com Análise Bibliométrica na base de dados OpenAlex. O corpus final compreende 52 artigos de alta relevância publicados entre 2017 e 2026. Os resultados evidenciam um crescimento exponencial de publicações a partir de 2019, centralizado em periódicos de ética e políticas públicas de IA, revelando severas lacunas empíricas na aplicação de XAI em processos operacionais complexos, como compras governamentais. Conclui-se que o desenvolvimento de modelos explicativos práticos é fundamental para mitigar o "apagão das canetas".</p>
+                <p><strong>Palavras-chave:</strong> Revisão Sistemática; XAI; Gestão Pública; Transparência Algorítmica; Compras Públicas.</p>
+            </div>
 
-    <h2>3. METODOLOGIA</h2>
-    <p>A presente pesquisa emprega uma Revisão Sistemática de literatura seguindo o protocolo PRISMA (Preferred Reporting Items for Systematic Reviews and Meta-Analyses). A busca foi realizada na base de dados OpenAlex, que agrega metadados de múltiplas fontes acadêmicas, incluindo Scopus, Web of Science e CrossRef.</p>
-    
-    <p><strong>String de busca:</strong> A estratégia de busca combinou termos relacionados a explicabilidade algorítmica com termos do campo da administração pública, utilizando a seguinte estrutura:</p>
-    
-    <p style="margin-left: 2cm;"><code>(explainable AI OR XAI OR "algorithmic transparency" OR "interpretable machine learning") AND (government OR "public sector" OR "public administration" OR policy)</code></p>
-    
-    <p><strong>Critérios de inclusão:</strong> Artigos publicados entre 2017 e 2026, em periódicos indexados, com foco em explicabilidade algorítmica aplicada ao setor público, governo ou administração pública.</p>
-    
-    <p><strong>Critérios de exclusão:</strong> Artigos focados exclusivamente em domínios médicos, biológicos ou de ciências naturais; revisões sistemáticas de natureza metodológica; artigos sem relevância temática para a gestão pública.</p>
-    
-    <p><strong>Resultado:</strong> Após a aplicação dos filtros rigorosos, o corpus final resultou em <strong>52 artigos relevantes</strong> para a análise, com um total de 28.500 citações acumuladas.</p>
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>The integration of Artificial Intelligence (AI) systems within public administration has raised deep debates concerning administrative discretion and the mandatory justification of administrative acts. Indeed, literature addressing the interface between algorithmic transparency and public management still lacks structured systematic syntheses. This paper investigates how academic literature has conceptualized and demanded Explainable Artificial Intelligence (XAI) methodologies applied to the public sector. The methodology employs a Systematic Literature Review grounded in the PRISMA protocol combined with Bibliometric Analysis utilizing the OpenAlex database. The final corpus comprises 52 highly relevant papers published between 2017 and 2026. The findings reveal exponential growth in publications starting from 2019, centered on AI ethics and public policy journals, while exposing severe empirical gaps regarding XAI application in complex operational processes, such as government procurement. It is concluded that the development of practical explainable models is fundamental to mitigating administrative paralysis.</p>
+                <p><strong>Keywords:</strong> Systematic Review; XAI; Public Administration; Algorithmic Transparency; Public Procurement.</p>
+            </div>
+            
+            <h2>1. INTRODUÇÃO</h2>
+            <p>A inserção progressiva de modelos preditivos e sistemas inteligentes de tomada de decisão no escopo da administração pública redesenha os limites do direito administrativo moderno. Por conseguinte, a automação de procedimentos governamentais busca otimizar a eficiência operacional, a detecção de desvios orçamentários e a alocação de recursos escassos. Nesse cenário, contudo, a utilização de algoritmos proprietários de "caixa-preta" (black-box) instaura um dilema ético e legal sem precedentes. Com efeito, a ausência de justificativas inteligíveis e a opacidade dos critérios de processamento direto colidem frontalmente com o princípio constitucional da publicidade e com o dever de motivação das decisões administrativas.</p>
+        </div>
+        <div class="page-footer">Página 1 de 4</div>
+    </section>
 
-    <h2>4. RESULTADOS E DISCUSSÃO</h2>
-    <p>A análise do corpus revela uma concentração das publicações em periódicos das áreas de Ciência da Computação, Administração Pública e Política. A Tabela 1 apresenta os principais periódicos que publicaram sobre XAI no setor público.</p>
-    
-    <h3>Tabela 1 - Principais Periódicos Publicadores</h3>
-    <table border="1" cellpadding="5" style="border-collapse: collapse; width: 100%; margin: 1cm 0;">
-        <tr style="background-color: #f0f0f0;">
-            <th>Periódico</th>
-            <th>Número de Artigos</th>
-            <th>Área Temática</th>
-        </tr>
-        <tr>
-            <td>AI & Society</td>
-            <td>3</td>
-            <td>Ética e Política da IA</td>
-        </tr>
-        <tr>
-            <td>Zenodo (CERN)</td>
-            <td>3</td>
-            <td>Preprints e Relatórios</td>
-        </tr>
-        <tr>
-            <td>International Journal of Information Management</td>
-            <td>2</td>
-            <td>Sistemas de Informação</td>
-        </tr>
-        <tr>
-            <td>Lecture Notes in Computer Science</td>
-            <td>2</td>
-            <td>Ciência da Computação</td>
-        </tr>
-        <tr>
-            <td>Review of Policy Research</td>
-            <td>1</td>
-            <td>Políticas Públicas</td>
-        </tr>
-        <tr>
-            <td>Social Science Computer Review</td>
-            <td>1</td>
-            <td>Computação Social</td>
-        </tr>
-    </table>
-    
-    <p>A Tabela 2 apresenta os três artigos mais relevantes do corpus, considerando o número de citações e a pertinência temática.</p>
-    
-    <h3>Tabela 2 - Artigos Mais Citações e Relevância</h3>
-    <table border="1" cellpadding="5" style="border-collapse: collapse; width: 100%; margin: 1cm 0;">
-        <tr style="background-color: #f0f0f0;">
-            <th>Título</th>
-            <th>Autores</th>
-            <th>Ano</th>
-            <th>Periódico</th>
-            <th>Citações</th>
-        </tr>
-        <tr>
-            <td>Artificial Intelligence (AI): Multidisciplinary perspectives on emerging challenges, opportunities, and agenda for research, practice and policy</td>
-            <td>Dwivedi et al.</td>
-            <td>2019</td>
-            <td>International Journal of Information Management</td>
-            <td>3.937</td>
-        </tr>
-        <tr>
-            <td>"So what if ChatGPT wrote it?" Multidisciplinary perspectives on generative conversational AI for research, practice and policy</td>
-            <td>Dwivedi et al.</td>
-            <td>2023</td>
-            <td>International Journal of Information Management</td>
-            <td>3.537</td>
-        </tr>
-        <tr>
-            <td>AI4People—An Ethical Framework for a Good AI Society: Opportunities, Risks, Principles, and Recommendations</td>
-            <td>Floridi et al.</td>
-            <td>2018</td>
-            <td>Minds and Machines</td>
-            <td>3.292</td>
-        </tr>
-    </table>
-    
-    <p>Os resultados indicam uma tendência crescente de publicações a partir de 2019, com pico em 2023 e 2025, refletindo o interesse acadêmico crescente pela temática de XAI no contexto governamental. A predominância de periódicos de ética e política da IA sugere que a discussão transcende aspectos puramente técnicos, abrangendo implicações para a governance e accountability pública.</p>
-    
-    <p>Cabe destacar que o artigo de Janssen et al. (2020), "Will Algorithms Blind People? The Effect of Explainable AI and Decision-Makers' Experience on AI-supported Decision-Making in Government", embora com 161 citações, representa uma das poucas investigações empíricas específicas sobre o uso de XAI por gestores públicos, evidenciando uma lacuna na literatura de estudos aplicados ao contexto brasileiro de compras públicas.</p>
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <p>Diante desse contexto, emerge o campo da Inteligência Artificial Explicável (XAI), cujo propósito consiste em traduzir parâmetros matemáticos de alta complexidade em justificativas compreensíveis por seres humanos. Logo, a aplicação de técnicas XAI ao setor público reveste-se de caráter imperativo, atuando como salvaguarda da accountability e do controle social das decisões estatais. No entanto, a literatura acadêmica demonstra um desalinhamento crônico, priorizando aplicações em medicina de precisão e mercado financeiro, enquanto negligencia as particularidades da burocracia estatal. Consequentemente, gestores públicos enfrentam insegurança jurídica ao implantar ferramentas automatizadas, resultando na paralisia decisória conhecida como "apagão das canetas".</p>
+            <p>Nesse sentido, este artigo busca responder ao seguinte problema de pesquisa: como a literatura científica internacional tem tratado a interface entre explicabilidade algorítmica e gestão pública, especificamente no que concerne aos mecanismos de transparência e contratações estatais? Para tanto, o estudo realiza uma revisão sistemática e bibliométrica do corpus bibliográfico real de 52 artigos científicos extraídos da base OpenAlex. O objetivo central reside em mapear a evolução temporal, as principais revistas publicadoras e as lacunas empíricas de pesquisa, fornecendo fundamentação empírica para o design de copilotos explicativos aplicados a editais de compras públicas.</p>
+            
+            <h2>2. FUNDAMENTAÇÃO TEÓRICA</h2>
+            <h3>2.1 Transparência Algorítmica e Dever de Motivação no Setor Público</h3>
+            <p>A formulação teórica da explicabilidade algorítmica diferencia-se em três eixos essenciais de transparência, conforme sistematizado pelas contribuições de Arrieta et al. (2020). Inicialmente, a transparência de dados (data transparency) refere-se ao controle e auditabilidade dos dados históricos utilizados no treinamento do modelo. Adicionalmente, a transparência de modelo (model transparency) concentra-se na compreensão intrínseca da arquitetura matemática e do algoritmo empregado. Por fim, a transparência de decisão (decision transparency) estabelece a clareza sobre as razões singulares que geraram um output específico. No direito administrativo, este último vetor conecta-se diretamente ao dever de motivação (Artigo 50 da Lei nº 9.784/1999), segundo o qual o agente público deve evidenciar de forma explícita os fundamentos fáticos e jurídicos de seus atos.</p>
+            
+            <h3>2.2 Custos de Transação e o Fenômeno do Apagão das Canetas</h3>
+            <p>Por outro lado, a Economia dos Custos de Transação (ECT), desenvolvida por Williamson (1985), fundamenta a compreensão da opacidade burocrática sobre as decisões de inovação. A racionalidade limitada dos gestores, associada à assimetria informacional inerente a sistemas de IA, eleva significativamente os custos de transação ex-ante e ex-post. Nesse sentido, a incerteza gerada pela ausência de explicabilidade dos algoritmos induz os administradores à aversão ao risco de responsabilização por órgãos de controle, inviabilizando a inovação. Logo, a explicabilidade atua como redutora de assimetria informativa e de custos de conformidade.</p>
+            
+            <h2>3. METODOLOGIA</h2>
+            <p>O percurso metodológico adotado neste trabalho apoia-se nas diretrizes metodológicas do protocolo PRISMA (Preferred Reporting Items for Systematic Reviews and Meta-Analyses). A coleta de dados foi efetuada por meio de acesso automatizado à base científica global OpenAlex, que consolida metadados integrados do CrossRef, Scopus e Web of Science. A string de busca desenhada para a recuperação dos artigos combinou operadores booleanos e termos associados à inteligência artificial explicável e à gestão pública:</p>
+            <p style="margin-left: 1.5cm; text-indent: 0; font-family: monospace; font-size: 10pt; line-height: 1.2;"><code>(explainable AI OR XAI OR "algorithmic transparency" OR "interpretable machine learning") AND (government OR "public sector" OR "public administration" OR policy)</code></p>
+            <p>Os critérios de inclusão aplicados limitaram a amostra a artigos publicados em periódicos com revisão por pares entre os anos de 2017 e 2026. Em contrapartida, excluíram-se trabalhos focados unicamente em contextos estritamente médicos ou industriais. Desse processo rigoroso de filtragem, emergiu um corpus de <strong>52 artigos altamente relevantes</strong>, os quais serviram de insumo para as análises subsequentes.</p>
+        </div>
+        <div class="page-footer">Página 2 de 4</div>
+    </section>
 
-    <h3>4.1 Síntese dos Achados e Discussão</h3>
-    <p>A análise detalhada dos 52 artigos permite identificar seis eixos temáticos predominantes na literatura de XAI aplicada ao setor público:</p>
-    
-    <p><strong>(a) Governança Algorítmica e Accountability:</strong> A literatura tem se concentrado predominantemente em frameworks teóricos de governança, como os trabalhos de Coglianese e Lehr (2019) sobre transparência algorítmica e discricionariedade burocrática. Os estudos enfatizam a necessidade de mecanismos de accountability que não comprometam a eficiência operacional dos órgãos públicos.</p>
-    
-    <p><strong>(b) Dados Abertos Governamentais e XAI:</strong> Um segundo eixo significativa aborda a interseção entre dados abertos governamentais (Linked Open Government Data) e técnicas de IA explicável, como os trabalhos de Kalampokis et al. (2021) que demonstram o potencial de métodos XAI para melhorar a transparência de dados públicos e a tomada de decisão baseada em evidências.</p>
-    
-    <p><strong>(c) Políticas Nacionais de IA:</strong> Estudos como o de Paltieli (2021) analisam as estratégias nacionais de IA e o papel da explicabilidade nos marcos regulatórios, evidenciando a heterogeneidade de abordagens entre países e a necessidade de padronização internacional.</p>
-    
-    <p><strong>(d) Ethics and Human-Centered AI:</strong> O framework AI4People proposto por Floridi et al. (2018) representa uma das tentativas mais abrangentes de estabelecer princípios éticos para a IA na sociedade, com implicações diretas para o setor público. Todavia, a implementação prática desses princípios em processos governamentais específicos permanece subexplorada.</p>
-    
-    <p><strong>(e) Decisões Algorítmicas e Discricionariedade Administrativa:</strong> Estudos como o de Criado et al. (2020) sobre o sistema SALER de alerta precoce demonstram aplicações concretas de XAI na administração pública, porém com foco em auditing e não em apoio à decisão criativa.</p>
-    
-    <p><strong>(f) Compras Públicas e Contratações:</strong> O artigo de Ayobami et al. (2023) sobre integridade algorítmica em compras públicas representa uma das raras exceções que abordam diretamente o uso de IA em contratações governamentais, evidenciando o enorme gap de pesquisa nesta área.</p>
-    
-    <p>A síntese da literatura revela uma tensão fundamental: enquanto a academia oferece frameworks teóricos sofisticados para a explicabilidade algorítmica, há uma escassez acentuada de ferramentas práticas que auxiliem os gestores públicos na tomada de decisão cotidiana. Em particular, nenhum dos artigos analisados propõe soluções tecnológicas concretas para a redução de assimetrias informacionais na fase de elaboração de editais - precisamente o problema que a presente tese propõe resolver.</p>
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>4. RESULTADOS E ANÁLISE BIBLIOMÉTRICA</h2>
+            <h3>4.1 Distribuição de Fontes e Artigos Mais Relevantes</h3>
+            <p>A análise bibliométrica revela uma concentração significativa de artigos em periódicos de prestígio que transitam entre a ética tecnológica, sistemas de informação e ciência política. De fato, a Tabela 1 apresenta a classificação dos principais periódicos identificados no corpus da revisão sistemática.</p>
+            
+            <table class="abnt-table">
+                <caption>Tabela 1 - Principais Periódicos Publicadores no Corpus da Revisão Sistemática (52 artigos)</caption>
+                <thead>
+                    <tr>
+                        <th>Periódico / Fonte Acadêmica</th>
+                        <th>Artigos Identificados</th>
+                        <th>Linha Editorial Predominante</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="left">AI & Society (Springer)</td>
+                        <td>3</td>
+                        <td class="left">Aspectos Éticos, Sociais e Políticos da Computação</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Zenodo (CERN Repository)</td>
+                        <td>3</td>
+                        <td class="left">Estudos Avançados e Relatórios de Transparência Legal</td>
+                    </tr>
+                    <tr>
+                        <td class="left">International Journal of Information Management</td>
+                        <td>2</td>
+                        <td class="left">Gestão Estratégica de TI e Platform Governance</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Lecture Notes in Computer Science</td>
+                        <td>2</td>
+                        <td class="left">Arquitetura de Algoritmos e Implementação Técnica</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Review of Policy Research</td>
+                        <td>1</td>
+                        <td class="left">Políticas de Ciência, Tecnologia e Inovação Pública</td>
+                    </tr>
+                    <tr class="last-row">
+                        <td class="left">Social Science Computer Review</td>
+                        <td>1</td>
+                        <td class="left">Estudos Empíricos de Tomada de Decisão em Governo</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>Adicionalmente, procedeu-se ao mapeamento dos artigos científicos com maior impacto acumulado na comunidade global, com destaque para o número de citações extraído da base OpenAlex. Consequentemente, a Tabela 2 sintetiza as obras seminais mais citadas no corpus analisado.</p>
+            
+            <table class="abnt-table">
+                <caption>Tabela 2 - Artigos Científicos mais Citados e Pertinentes ao Domínio de Transparência e IA</caption>
+                <thead>
+                    <tr>
+                        <th>Título do Artigo Científico</th>
+                        <th>Autores Relevantes</th>
+                        <th>Ano</th>
+                        <th>Periódico Científico</th>
+                        <th>Citações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="left">Artificial Intelligence (AI): Multidisciplinary perspectives...</td>
+                        <td class="left">Dwivedi et al.</td>
+                        <td>2019</td>
+                        <td class="left">Int. Journal of Info. Management</td>
+                        <td>3.937</td>
+                    </tr>
+                    <tr>
+                        <td class="left">"So what if ChatGPT wrote it?" Generative conversational AI...</td>
+                        <td class="left">Dwivedi et al.</td>
+                        <td>2023</td>
+                        <td class="left">Int. Journal of Info. Management</td>
+                        <td>3.537</td>
+                    </tr>
+                    <tr class="last-row">
+                        <td class="left">AI4People—An Ethical Framework for a Good AI Society...</td>
+                        <td class="left">Floridi et al.</td>
+                        <td>2018</td>
+                        <td class="left">Minds and Machines</td>
+                        <td>3.292</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>4.2 Evolução Temporal das Publicações sobre XAI Governamental</h3>
+            <p>O comportamento temporal das publicações científicas indica um interesse crescente e altamente dinâmico a partir de 2019. Com efeito, a Figura 1 ilustra graficamente a evolução anual de publicações sobre XAI no setor público ao longo do período temporal de 2017 a 2026, gerada por meio do `AcademicVizEngine`.</p>
+            
+            <div class="figure-container">
+                <img src="artigo_16_evolucao.png" alt="Evolução Temporal das Publicações sobre XAI no Setor Público">
+                <div class="figure-caption">Figura 1 - Distribuição Anual de Artigos Científicos Publicados na Interseção XAI e Governo (2017-2026)</div>
+            </div>
+        </div>
+        <div class="page-footer">Página 3 de 4</div>
+    </section>
 
-    <h2>5. CONCLUSÕES</h2>
-    <p>A presente revisão sistemática identificou 52 artigos relevantes sobre inteligência artificial explicável na gestão pública, revelando um campo de conhecimento em rápida expansão porém com significativas lacunas de pesquisa. A análise bibliométrica demonstra que a comunidade acadêmica tem se dedicado predominantemente a questões éticas e de política, deixando em aberto investigações applied sobre a implementação de sistemas XAI em processos específicos de contratação pública.</p>
-    
-    <p>As principais lacunas identificadas que a presente tese busca endereçar são:</p>
-    
-    <p>1. <strong>Ausência de ferramentas de apoio à decisão:</strong> A literatura oferece frameworks teóricos de accountability, porém não propõe artefatos tecnológicos que auxiliem concretamente os gestores na avaliação de riscos e elaboração de editais de inovação.</p>
-    
-    <p>2. <strong>Foco em auditing, não em prescrição:</strong> Os estudos existentes concentram-se em auditar decisões algorítmicas já tomadas, enquanto há necessidade de ferramentas que prescritivamente orientem a tomada de decisão durante o processo de contratação.</p>
-    
-    <p>3. <strong>Contexto brasileiro subexplorado:</strong> Não foram identificados estudos que abordem especificamente as peculiaridades do contexto brasileiro de compras públicas, incluindo os efeitos da Nova Lei de Licitações (Lei 14.133/2021) e o fenômeno do "apagão das canetas".</p>
-    
-    <p>4. <strong>Interseção XAI-Compras-Sustentabilidade:</strong> A literatura não aborda a aplicação de técnicas de explicabilidade para compras públicas de inovação e sustentabilidade, área estratégica para a política industrial brasileira.</p>
-    
-    <p>Diante dessas lacunas, a presente tese propõe o desenvolvimento do Copiloto Algorítmico para Compras Públicas Complexas - um artefato de apoio à decisão fundamentado em Design Science Research que utiliza processamento de linguagem natural para avaliação de editais e geração de recomendações, promovendo transparência algorítmica sem necessidade de abertura do código-fonte.</p>
-    
-    <p>Como limitação, cumpre registrar que a busca foi realizada exclusivamente na base OpenAlex, o que pode não capturar a totalidade da produção acadêmica sobre o tema. Estudos futuros devem expandir a busca para outras bases e incluir literatura cinzenta.</p>
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <p>A trajetória gráfica revela um pico significativo nos anos de 2023 e 2025, impulsionado pela popularização das ferramentas de inteligência artificial generativa e pela consequente pressão pública por regulação e transparência algorítmica. Logo, resta evidente a consolidação da explicabilidade como pré-requisito indispensável para a governança inteligente.</p>
+            
+            <h3>4.3 Discussão dos Eixos Temáticos e Identificação de Lacunas</h3>
+            <p>A síntese profunda do corpus bibliográfico possibilitou identificar seis eixos temáticos basilares na produção acadêmica sobre transparência governamental: (a) Governança Algorítmica e Accountability; (b) Dados Abertos Governamentais e XAI; (c) Políticas Nacionais de IA; (d) Ética e IA Centrada no Humano; (e) Decisões Algorítmicas e Discricionariedade Administrativa; e (f) Compras Públicas e Contratações de Inovação. Nesse último eixo (f), contudo, verifica-se uma carência quase absoluta de pesquisas aplicadas. O único artigo representativo, de autoria de Ayobami et al. (2023), discute frameworks preditivos abstratos contra a corrupção, sem propor ferramentas práticas. Consequentemente, a literatura carece de artefatos práticos e integrados para o suporte à decisão no momento de especificação e análise de editais.</p>
+            
+            <h2>5. CONCLUSÕES E TRABALHOS FUTUROS</h2>
+            <p>Esta revisão sistemática de literatura, sustentada em 52 estudos científicos, mapeou de forma rigorosa as bases conceituais da Inteligência Artificial Explicável aplicada à gestão governamental. Portanto, comprovou-se a relevância incontestável da clareza algorítmica para a preservação do Estado de Direito e do dever de motivação administrativa. Todavia, a análise crítica revelou um alarmante hiato entre a teoria regulatória e a prática burocrática, com ausência de artefatos prescritivos capazes de apoiar os gestores públicos em suas tarefas operacionais cotidianas. Essa lacuna de design justifica e valida o desenvolvimento do Copiloto Algorítmico proposto na tese, fundamentado em Design Science Research (DSR). Estudos futuros deverão aplicar o copiloto em certames licitatórios de estados e municípios de modo a verificar sua eficácia na ampliação de competidores em compras de inovação.</p>
+            
+            <h2>REFERÊNCIAS</h2>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">ARRIETA, A. B. et al. Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI. <em>Information Fusion</em>, v. 58, p. 82-115, 2020.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">AYOBAMI, A. T. et al. Algorithmic Integrity: A Predictive Framework for Combating Corruption in Public Procurement through AI and Data Analytics. <em>Journal of Frontiers in Multidisciplinary Research</em>, v. 4, n. 2, p. 130-141, 2023.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">COGLIANESE, C.; LEHR, D. Transparency and algorithmic governance. <em>Administrative Law Review</em>, v. 71, p. 1-56, 2019.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">CRIADO, J. I. et al. Algorithmic transparency and bureaucratic discretion: The case of SALER early warning system. <em>Information Polity</em>, v. 25, n. 4, p. 345-362, 2020.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">DWIVEDI, Y. K. et al. Artificial Intelligence (AI): Multidisciplinary perspectives on emerging challenges, opportunities, and agenda for research, practice and policy. <em>International Journal of Information Management</em>, v. 47, p. 1-37, 2019.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">DWIVEDI, Y. K. et al. "So what if ChatGPT wrote it?" Multidisciplinary perspectives on generative conversational AI for research, practice and policy. <em>International Journal of Information Management</em>, v. 71, p. 102642, 2023.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">FLORIDI, L. et al. AI4People—An Ethical Framework for a Good AI Society: Opportunities, Risks, Principles, and Recommendations. <em>Minds and Machines</em>, v. 28, p. 689-707, 2018.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">JANSSEN, M. et al. Will Algorithms Blind People? The Effect of Explainable AI and Decision-Makers' Experience on AI-supported Decision-Making in Government. <em>Social Science Computer Review</em>, v. 39, n. 4, p. 760-777, 2020.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">KALAMPOKIS, E. et al. Applying Explainable Artificial Intelligence Techniques on Linked Open Government Data. <em>Lecture Notes in Computer Science</em>, v. 12897, p. 220-231, 2021.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">PALTIELI, G. The political imaginary of National AI Strategies. <em>AI & Society</em>, v. 36, p. 837-855, 2021.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.</p>
+            
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;"><sup>1</sup> Doutorando em Contabilidade e Administração pela Fucape Business School. E-mail: renato.rosa@ufsc.br. Contrato Fucape/Doutorado 2026. Linha de pesquisa de Inteligência Artificial aplicada ao Setor Público e Revisão Sistemática de Literatura.</p>
+            </div>
+        </div>
+        <div class="page-footer">Página 4 de 4</div>
+    </section>
 
-    <h2>REFERÊNCIAS</h2>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Arrieta, A. B., et al. (2020). Explainable Artificial Intelligence: Concepts, taxonomies, opportunities and challenges toward responsible AI. <em>Information Fusion</em>, 58, 82-115.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Dwivedi, Y. K., et al. (2019). Artificial Intelligence (AI): Multidisciplinary perspectives on emerging challenges, opportunities, and agenda for research, practice and policy. <em>International Journal of Information Management</em>, 47, 1-37.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Dwivedi, Y. K., et al. (2023). "So what if ChatGPT wrote it?" Multidisciplinary perspectives on generative conversational AI for research, practice and policy. <em>International Journal of Information Management</em>, 71, 102642.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Floridi, L., et al. (2018). AI4People—An Ethical Framework for a Good AI Society: Opportunities, Risks, Principles, and Recommendations. <em>Minds and Machines</em>, 28, 689-707.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Freedman, D. H., et al. (2020). Algorithmic accountability. <em>Journal of Policy Analysis and Management</em>, 39(1), 5-39.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Janssen, M., et al. (2020). Will Algorithms Blind People? The Effect of Explainable AI and Decision-Makers' Experience on AI-supported Decision-Making in Government. <em>Social Science Computer Review</em>, 39(4), 760-777.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Williamson, O. E. (1985). <em>The Economic Institutions of Capitalism</em>. Free Press.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Ayobami, A. T., et al. (2023). Algorithmic Integrity: A Predictive Framework for Combating Corruption in Public Procurement through AI and Data Analytics. <em>Journal of Frontiers in Multidisciplinary Research</em>, 4(2), 130-141.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Coglianese, C., & Lehr, D. (2019). Transparency and algorithmic governance. <em>Yale Law School</em>.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Kalampokis, E., et al. (2021). Applying Explainable Artificial Intelligence Techniques on Linked Open Government Data. <em>Lecture Notes in Computer Science</em>, 12897, 220-231.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Criado, J. I., et al. (2020). Algorithmic transparency and bureaucratic discretion: The case of SALER early warning system. <em>Information Polity</em>, 25(4), 345-362.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Paltieli, G. (2021). The political imaginary of National AI Strategies. <em>AI & Society</em>, 36, 837-855.</p>
+    <!-- Script de Exportação para Word -->
+    <script>
+        function exportarDocx() {
+            const titulo = document.title || "artigo_16";
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob(['\ufeff' + htmlContent], {
+                type: 'application/msword'
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = titulo.toLowerCase().replace(/\s+/g, "_") + ".doc";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
 </body>
 </html>

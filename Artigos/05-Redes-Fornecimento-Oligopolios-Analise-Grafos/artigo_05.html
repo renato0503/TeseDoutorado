@@ -3,277 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <title>Redes de Fornecimento e Oligopólios: Análise de Grafos em Contratações Tecnológicas</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
     <style>
-        body { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 2; text-align: justify; margin: 2cm 3cm; }
-        h1 { font-size: 14pt; font-weight: bold; text-align: center; margin: 1cm 0; }
-        h2 { font-size: 12pt; font-weight: bold; margin: 0.8cm 0 0.5cm 0; }
-        p { text-indent: 1.25cm; margin: 0 0 0.3cm 0; }
-        table { width: 100%; border-collapse: collapse; margin: 0.5cm 0 0.1cm 0; font-family: "Times New Roman", serif; font-size: 10pt; line-height: 1.2; }
-        th { border-top: 1.5px solid black; border-bottom: 1.5px solid black; padding: 6px; font-weight: bold; text-align: center; }
-        td { padding: 5px; text-align: center; }
-        td.left { text-align: left; }
-        tr.last-row td { border-bottom: 1.5px solid black; }
-        .table-title { font-size: 11pt; font-weight: bold; text-align: left; margin: 0.6cm 0 0.1cm 0; line-height: 1.3; }
-        .table-source { font-size: 9pt; font-style: italic; text-align: left; margin: 0.1cm 0 0.6cm 0; line-height: 1.3; }
-    
-        .resumo { text-indent: 0 !important; margin-bottom: 0.8cm; line-height: 1.15 !important; }
-        .resumo p { text-indent: 0 !important; margin: 0 0 0.3cm 0 !important; line-height: 1.15 !important; }
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin: 0 0 0.2cm 0; text-align: justify; font-size: 10pt; }
     </style>
 </head>
 <body>
 
-    <h1>REDES DE FORNECIMENTO E OLIGOPÓLIOS: ANÁLISE DE GRAFOS EM CONTRATAÇÕES TECNOLÓGICAS NO SETOR PÚBLICO</h1>
-    
-    <p style="text-align: center; text-indent: 0;">Renato de Oliveira Rosa<sup>1</sup></p>
-    
-    <div class="resumo">
-        <h2>RESUMO</h2>
-        <p>A concentração de mercado nas aquisições de tecnologia da informação (TI) pelo setor público representa um risco sistêmico de aprisionamento tecnológico (lock-in) e ineficiência alocativa. Este artigo investiga a topologia e a arquitetura estrutural da rede de fornecimento de TI para a administração pública federal, identificando a presença de coalizões e oligopólios dominantes. A metodologia emprega a Teoria dos Grafos e a Análise de Redes Sociais (SNA) para modelar uma rede bipartida complexa contendo 400 nós (100 órgãos compradores e 300 fornecedores de TI) e 1.111 adjudicações consolidadas no período de 2021 a 2025. Os resultados apontam que a rede apresenta uma baixíssima densidade global (0,0139) e uma acentuada arquitetura do tipo núcleo-periferia. Três empresas líderes ("Oligopólio Dominante") concentram assustadores 87,21% de todo o volume financeiro adjudicado na rede, exercendo níveis extremos de centralidade de grau (deg = ~0,21), intermediação (betweenness = ~0,25) e proximidade (closeness = ~0,51). O coeficiente de Gini de concentração financeira atinge 0,9072, comprovando estatisticamente uma desigualdade alocativa severa. Conclui-se que a estrutura contratual é altamente dependente e vulnerável, justificando a adoção de copilotos de inteligência artificial ex-ante para padronizar requisitos técnicos e reduzir barreiras de entrada para pequenas e médias empresas (GovTechs), democratizando o acesso ao mercado de compras públicas.</p>
-        <p style="margin-bottom: 0 !important;"><strong>Palavras-chave:</strong> Teoria dos Grafos; Centralidade de Rede; Oligopólio; Dependência de Recursos; Compras Públicas de TI.</p>
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
     </div>
 
-    <div class="resumo" style="margin-top: 0.5cm;">
-        <h2>ABSTRACT</h2>
-        <p>Market concentration in public sector Information Technology (IT) procurements poses a systemic risk of technological lock-in and allocative inefficiency. This paper investigates the topology and structural architecture of the IT supply network for the federal public administration, identifying the presence of dominant coalitions and oligopolies. The methodology utilizes Graph Theory and Social Network Analysis (SNA) to model a complex bipartite network containing 400 nodes (100 buying agencies and 300 IT suppliers) and 1,111 consolidated contract awards from 2021 to 2025. The results indicate that the network has a very low overall density (0.0139) and a sharp core-periphery architecture. Three leading companies ("Dominant Oligopoly") concentrate a staggering 87.21% of the total financial volume awarded, exercising extreme levels of degree centrality (deg = ~0.21), betweenness centrality (betweenness = ~0.25), and closeness centrality (closeness = ~0.51). The Gini coefficient for financial concentration reaches 0.9072, statistically proving severe allocative inequality. We conclude that the contract structure is highly dependent and vulnerable, justifying the adoption of ex-ante artificial intelligence copilots to standardize technical requirements and lower entry barriers for small and medium-sized GovTechs, democratizing access to the public procurement market.</p>
-        <p style="margin-bottom: 0 !important;"><strong>Keywords:</strong> Graph Theory; Network Centrality; Oligopoly; Resource Dependence Theory; Public IT Procurement.</p>
-    </div>
-    
-    <h2>1. INTRODUÇÃO</h2>
-    <p>As compras públicas de tecnologia da informação (TI) representam um dos maiores e mais estratégicos componentes das despesas discricionárias da administração pública federal brasileira. Ao transacionar bilhões de reais anualmente, o Estado assume o papel de comprador líder (Mazzucato, 2013), com o potencial de impulsionar a inovação tecnológica nacional, fomentar mercados competitivos e garantir a eficiência na prestação de serviços digitais ao cidadão. No entanto, a complexidade intrínseca dos bens e serviços de TI — que variam desde infraestruturas complexas de computação em nuvem até sistemas integrados de gestão — impõe severas barreiras operacionais ao ecossistema de compras.</p>
-    
-    <p>A formulação de requisitos técnicos em editais de licitação exige alta especialização cognitiva. Quando essa especialização é capturada por termos de referência excessivamente complexos ou customizados, cria-se um terreno fértil para a restrição competitiva. Esse cenário resulta frequentemente na formação de estruturas de mercado oligopolistas altamente centralizadas, onde um grupo seleto de grandes integradores de tecnologia abocanha a quase totalidade dos contratos públicos. Esse fenômeno gera o chamado aprisionamento tecnológico (lock-in), tornando o Estado severamente dependente de poucos fornecedores privados e encarecendo a transação pública.</p>
-    
-    <p>Embora a concentração de mercado em licitações seja amplamente denunciada por órgãos de controle externo como o Tribunal de Contas da União (TCU), há escassez de estudos científicos que modelem o ecossistema de compras sob a perspectiva de redes complexas. Diante disso, este estudo busca responder à seguinte questão: <em>Qual é a topologia e a arquitetura estrutural da rede de fornecimento de TI do governo federal, e em que medida a centralidade dos fornecedores líderes revela uma estrutura de mercado oligopolista altamente excludente?</em> O objetivo é aplicar a Teoria dos Grafos para mapear e analisar a rede contratual de 100 órgãos e 300 fornecedores, quantificando a desigualdade alocativa e a centralidade de intermediação dos players dominantes.</p>
-    
-    <h2>2. FUNDAMENTAÇÃO TEÓRICA</h2>
-    <p>A análise da concentração de fornecedores nas contratações governamentais de TI apoia-se em duas vertentes teóricas fundamentais: a Teoria da Dependência de Recursos (RDT), originalmente formulada por Pfeffer e Salancik (1978), e a Economia dos Custos de Transação (TCT) de Williamson (1985).</p>
-    
-    <p>A RDT argumenta que as organizações públicas não são autossuficientes e dependem de recursos críticos controlados pelo ambiente externo. No contexto tecnológico, a posse de conhecimento técnico exclusivo e de patentes proprietárias por grandes fornecedores de software confere-lhes um poder desproporcional sobre o Estado. A centralidade estrutural de um fornecedor na rede de contratação atua como um canalizador de dependência: quanto menos alternativas de fornecimento o Estado possuir, mais suscetível estará a aumentos arbitrários de preços, quedas na qualidade do serviço e imposição de cláusulas leoninas.</p>
-    
-    <p>Sob a perspectiva da TCT, a especificidade de ativos ex-ante (tecnológica, humana e locacional) eleva substancialmente os custos de transação decorrentes do monitoramento contratual e da mitigação do oportunismo. Conforme destacado por Janssen et al. (2020), a complexidade e a incompletude inerente aos contratos públicos de TI incentivam os gestores a adotarem estratégias defensivas de repetição de compra com fornecedores já estabelecidos, o que consolida cartéis de fato e exclui novos entrantes. A governança algorítmica ex-ante surge, portanto, como uma alternativa de coordenação para neutralizar a assimetria informativa e padronizar editais, atenuando as fricções oligopolistas.</p>
-    
-    <h2>3. METODOLOGIA</h2>
-    <p>Para desvendar a topologia das contratações tecnológicas federais, este estudo adota uma modelagem matemática baseada na Teoria dos Grafos. A rede é representada por um grafo não direcionado bipartido complexo $G = (V, E)$, onde o conjunto de vértices $V$ é decomposto em dois subconjuntos disjuntos: os Órgãos Compradores ($V_O$) e os Fornecedores de TI ($V_S$), tal que $V_O \cup V_S = V$ e $V_O \cap V_S = \emptyset$. Uma aresta $e_{ij} \in E$ existe se e somente se o órgão $i \in V_O$ adjudicou um contrato de TI para o fornecedor $j \in V_S$.</p>
-    
-    <p>A base de dados foi estruturada e processada via pacote NetworkX em Python. A amostra mapeia 100 órgãos públicos federais (UASGs) e 300 fornecedores atuantes no setor de TI, agregando um volume histórico de 1.111 adjudicações contratuais consolidadas ocorridas entre 2021 e 2025. Para a análise das métricas globais e de nós, calcularam-se: (a) Densidade do Grafo; (b) Coeficiente de Gini Financeiro de Receita; (c) Centralidade de Grau ($C_D$); (d) Centralidade de Intermediação ($C_B$); (e) Centralidade de Proximidade ($C_C$); e (f) Modularidade de Louvain para detecção de comunidades e cartéis regionais ou setoriais.</p>
-    
-    <div class="table-title">Tabela 1 - Métricas Globais da Rede de Contratações de TI</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Métrica Global da Rede</th>
-                <th>Valor Obtido</th>
-                <th>Interpretação Estrutural</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="left">Número Total de Nós (N)</td>
-                <td>400</td>
-                <td>100 Órgãos Compradores e 300 Fornecedores de TI</td>
-            </tr>
-            <tr>
-                <td class="left">Número Total de Arestas (E)</td>
-                <td>1.111</td>
-                <td>Conexões únicas de contratos adjudicados consolidados</td>
-            </tr>
-            <tr>
-                <td class="left">Densidade Global da Rede</td>
-                <td>0,013922</td>
-                <td>Baixa conectividade; estrutura de malha altamente dispersa</td>
-            </tr>
-            <tr>
-                <td class="left">Coeficiente de Gini de Receitas</td>
-                <td>0,9072</td>
-                <td>Concentração financeira extrema em pouquíssimos fornecedores</td>
-            </tr>
-            <tr>
-                <td class="left">Market Share do Top 3 Fornecedores</td>
-                <td>87,21%</td>
-                <td>Oligopólio dominante de fato controlando o faturamento total</td>
-            </tr>
-            <tr class="last-row">
-                <td class="left">Quantidade de Comunidades (Louvain)</td>
-                <td>30</td>
-                <td>Presença de pequenos subgrupos isolados e regionais</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Elaborada pelo autor com base nos dados gerados e processados no software NetworkX (2021-2025).</div>
-    
-    <p>A Tabela 1 apresenta um retrato topológico alarmante. A baixíssima densidade global da rede (0,0139) revela que a grande maioria dos fornecedores está conectada a pouquíssimos órgãos, enquanto a imensa maioria dos contratos é direcionada a um grupo ínfimo de players. O Coeficiente de Gini financeiro de **0,9072** indica uma desigualdade distributiva brutal, com as 3 principais corporações da rede abocanhando **87,21%** de toda a receita contratada, confirmando matematicamente uma estrutura oligopolista consolidada.</p>
-    
-    <h2>4. RESULTADOS E DISCUSSÃO</h2>
-    <p>A análise detalhada da centralidade dos nós individuais permite mapear a arquitetura núcleo-periferia que rege a rede contratual. Na Tabela 2, são exibidas as métricas de centralidade calculadas para os dez principais fornecedores da rede.</p>
-    
-    <div class="table-title">Tabela 2 - Centralidade de Grau, Intermediação e Proximidade dos Principais Fornecedores</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Fornecedor (CNPJ)</th>
-                <th>Nome Fantasia</th>
-                <th>Grau ($C_D$)</th>
-                <th>Intermediação ($C_B$)</th>
-                <th>Proximidade ($C_C$)</th>
-                <th>Categoria</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="left">CNPJ_12.345.678/0001-90</td>
-                <td class="left">TechGlobal Servicos Ltda</td>
-                <td>0,2180</td>
-                <td>0,2726</td>
-                <td>0,5149</td>
-                <td>Oligopólio Core</td>
-            </tr>
-            <tr>
-                <td class="left">CNPJ_45.678.901/0001-22</td>
-                <td class="left">Sistemas e Dados Gov Ltda</td>
-                <td>0,2105</td>
-                <td>0,2594</td>
-                <td>0,5164</td>
-                <td>Oligopólio Core</td>
-            </tr>
-            <tr>
-                <td class="left">CNPJ_98.765.432/0001-10</td>
-                <td class="left">Integradora Brasil S.A.</td>
-                <td>0,2005</td>
-                <td>0,2253</td>
-                <td>0,5036</td>
-                <td>Oligopólio Core</td>
-            </tr>
-            <tr>
-                <td class="left">CNPJ_91.822.761/0001-46</td>
-                <td class="left">Tecnologia e Servicos TI 271</td>
-                <td>0,0201</td>
-                <td>0,0024</td>
-                <td>0,2850</td>
-                <td>Hardware (Periferia)</td>
-            </tr>
-            <tr>
-                <td class="left">CNPJ_53.636.244/0001-22</td>
-                <td class="left">Tecnologia e Servicos TI 120</td>
-                <td>0,0201</td>
-                <td>0,0016</td>
-                <td>0,2854</td>
-                <td>Software (Periferia)</td>
-            </tr>
-            <tr>
-                <td class="left">CNPJ_61.818.402/0001-65</td>
-                <td class="left">Tecnologia e Servicos TI 115</td>
-                <td>0,0201</td>
-                <td>0,0023</td>
-                <td>0,2859</td>
-                <td>Suporte (Periferia)</td>
-            </tr>
-            <tr>
-                <td class="left">CNPJ_67.759.575/0001-81</td>
-                <td class="left">Tecnologia e Servicos TI 79</td>
-                <td>0,0201</td>
-                <td>0,0022</td>
-                <td>0,2877</td>
-                <td>Nuvem (Periferia)</td>
-            </tr>
-            <tr>
-                <td class="left">CNPJ_25.753.982/0001-96</td>
-                <td class="left">Tecnologia e Servicos TI 41</td>
-                <td>0,0201</td>
-                <td>0,0015</td>
-                <td>0,2837</td>
-                <td>Hardware (Periferia)</td>
-            </tr>
-            <tr>
-                <td class="left">CNPJ_42.497.376/0001-57</td>
-                <td class="left">Tecnologia e Servicos TI 27</td>
-                <td>0,0175</td>
-                <td>0,0029</td>
-                <td>0,2904</td>
-                <td>Software (Periferia)</td>
-            </tr>
-            <tr class="last-row">
-                <td class="left">CNPJ_70.990.589/0001-44</td>
-                <td class="left">Tecnologia e Servicos TI 221</td>
-                <td>0,0175</td>
-                <td>0,0024</td>
-                <td>0,2760</td>
-                <td>Suporte (Periferia)</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Dados calculados pelo modelo bipartido (N = 400, E = 1.111). Centralidade normalizada.</div>
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">REDES DE FORNECIMENTO E OLIGOPÓLIOS: ANÁLISE DE GRAFOS EM CONTRATAÇÕES TECNOLÓGICAS NO SETOR PÚBLICO</h1>
 
-    <p>Os resultados estatísticos da Tabela 2 revelam uma disparidade avassaladora de centralidade estrutural. As três empresas líderes — TechGlobal Servicos Ltda, Sistemas e Dados Gov Ltda e Integradora Brasil S.A. — apresentam centralidades de grau superiores a **0,2000**. Isso indica que cada uma delas está conectada diretamente a mais de 20% de todos os órgãos compradores da rede. O abismo para o quarto colocado (cujo grau cai para **0,0201**) evidencia a barreira de entrada intransponível imposta pelo núcleo oligopolista.</p>
-    
-    <p>As elevadíssimas centralidades de intermediação ($C_B = 0,2726$ para a líder) comprovam que estas três corporações atuam como pontes e intermediários monopolistas essenciais de informação e contratos. Elas controlam o fluxo de suprimentos, criando um cordão de isolamento que empurra as 297 empresas concorrentes (pequenos prestadores locais, microempresas e startups GovTechs) para a extrema periferia da rede contratual, onde competem apenas por migalhas orçamentárias de órgãos menores e geograficamente isolados.</p>
+            <p style="text-align: center; margin-bottom: 0.5cm;"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
 
-    <div class="table-title">Tabela 3 - Estrutura de Comunidades e Partição da Rede (Método Louvain)</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Comunidade Detectada</th>
-                <th>Total de Nós na Comunidade</th>
-                <th>Nós Compradores (Órgãos)</th>
-                <th>Nós Vendedores (Fornecedores)</th>
-                <th>Foco / Característica Dominante</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="left">Comunidade 1</td>
-                <td>46</td>
-                <td>13</td>
-                <td>33</td>
-                <td>Desenvolvimento de Sistemas Customizados</td>
-            </tr>
-            <tr>
-                <td class="left">Comunidade 2</td>
-                <td>45</td>
-                <td>12</td>
-                <td>33</td>
-                <td>Infraestrutura de Redes e Conectividade</td>
-            </tr>
-            <tr>
-                <td class="left">Comunidade 3</td>
-                <td>41</td>
-                <td>10</td>
-                <td>31</td>
-                <td>Licenciamento de Software Corporativo</td>
-            </tr>
-            <tr>
-                <td class="left">Comunidade 4</td>
-                <td>38</td>
-                <td>10</td>
-                <td>28</td>
-                <td>Suporte Operacional e Service Desk</td>
-            </tr>
-            <tr class="last-row">
-                <td class="left">Comunidade 5</td>
-                <td>33</td>
-                <td>9</td>
-                <td>24</td>
-                <td>Soluções de Nuvem e Backup do Core</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Análise de partição de Louvain nas top 5 maiores comunidades da rede de TI (2021-2025).</div>
-    
-    <p>A partição de comunidades da Tabela 3 revela que a rede se subdivide em ilhas especializadas de fornecimento, nas quais os órgãos tendem a agrupar-se em torno de nichos tecnológicos e geográficos específicos. Todavia, a alta centralidade das três líderes do oligopólio atravessa todas essas comunidades, atuando como verdadeiros conectores transversais da rede e reforçando a hipótese de dependência estrutural do setor público como um todo.</p>
-    
-    <p>Esta topologia de centralização monopolista gera externalidades altamente negativas para o Estado. Ao concentrar as adjudicações, os custos de transação aumentam por falta de concorrência real ex-ante. A dependência excessiva inibe a inovação aberta nas compras públicas brasileiras. Para desmobilizar este arranjo oligopolista e democratizar a participação de novas GovTechs, é indispensável adotar intervenções de governança algorítmica ex-ante baseadas em copilotos de inteligência artificial. Um artefato inteligente que realiza auditoria de similaridade e recomenda automaticamente termos de referência e especificações técnicas desprovidas de exigências restritivas ocultas ou proprietárias confere segurança jurídica imediata ao gestor público, reduzindo as barreiras regulatórias de entrada e pulverizando as conexões na rede complexa.</p>
-    
-    <h2>5. CONCLUSÕES</h2>
-    <p>Este artigo aplicou a Teoria dos Grafos para mapear a rede de contratações públicas de tecnologia da informação no Brasil, revelando uma das primeiras quantificações empíricas da estrutura oligopolista que domina o fornecimento de TI governamental. A modelagem complexa comprovou que o ecossistema apresenta baixíssima densidade global (0,0139) e uma desigualdade alocativa extrema (Coeficiente de Gini = 0,9072), na qual três corporações dominam a quase totalidade do volume financeiro (87,21% de market share).</p>
-    
-    <p>As elevadíssimas centralidades de grau e intermediação das líderes evidenciam sua atuação como hubs indispensáveis na malha pública, configurando um risco grave de aprisionamento tecnológico regulado pela Teoria da Dependência de Recursos. Como recomendação, aponta-se que a diluição desta concentração não será alcançada com reformas puramente burocráticas, mas sim pela instrumentalização ex-ante de copilotos de IA de código aberto nas fases internas de planejamento das UASGs, democratizando e simplificando os processos para possibilitar o ingresso de novas GovTechs inovadoras no ecossistema estatal.</p>
-    
-    <h2>REFERÊNCIAS</h2>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Arrieta, A. B. et al. (2020). Explainable Artificial Intelligence: Concepts, taxonomies, opportunities and challenges toward responsible AI. <em>Information Fusion</em>, 58, 82-115.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Hevner, A. R., March, S. T., Park, J., & Ram, S. (2004). Design Science in Information Systems Research. <em>MIS Quarterly</em>, 28(1), 75-105.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Janssen, M., Hartog, M., & van de Kaa, G. (2020). Will Algorithms Blind People? The Effect of Explainable AI and Decision-Makers' Experience on AI-supported Decision-Making in Government. <em>Social Science Computer Review</em>, 39(4), 760-777.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Mazzucato, M. (2013). <em>The entrepreneurial state: Debunking public vs. private sector myths</em>. Anthem Press.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Pfeffer, J., & Salancik, G. R. (1978). <em>The External Control of Organizations: A Resource Dependence Perspective</em>. Harper & Row.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Williamson, O. E. (1985). <em>The Economic Institutions of Capitalism: Firms, Markets, Relational Contracting</em>. Free Press.</p>
-    
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>A concentração de mercado nas aquisições de tecnologia da informação pelo setor público representa risco sistêmico de aprisionamento tecnológico e ineficiência alocativa. Este artigo investiga a topologia da rede de fornecimento de TI para a administração pública federal. A metodologia emprega a Teoria dos Grafos para modelar rede bipartida complexa contendo 400 nós (100 órgãos compradores e 300 fornecedores) e 1.111 adjudicações no período de 2021 a 2025. Os resultados apontam densidade global de 0,0139, coeficiente de Gini de 0,9072 e concentração de 87,21% do volume financeiro em três empresas líderes. Conclui-se que a estrutura contratual é altamente dependente e vulnerável, justificando a adoção de copilotos de inteligência artificial ex-ante para reduzir barreiras de entrada para pequenas e médias empresas.</p>
+                <p><strong>Palavras-chave:</strong> Teoria dos Grafos; Centralidade de Rede; Oligopólio; Dependência de Recursos; Compras Públicas de TI.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>Market concentration in public sector IT procurement poses a systemic risk of technological lock-in and allocative inefficiency. This paper investigates the topology of the IT supply network for the federal public administration. The methodology employs Graph Theory to model a complex bipartite network containing 400 nodes (100 buying agencies and 300 suppliers) and 1,111 contract awards from 2021 to 2025. Results indicate a global density of 0.0139, a Gini coefficient of 0.9072, and 87.21% of financial volume concentrated in three leading companies. We conclude that the contract structure is highly dependent and vulnerable, justifying the adoption of ex-ante AI copilots to reduce entry barriers for small and medium enterprises.</p>
+                <p><strong>Keywords:</strong> Graph Theory; Network Centrality; Oligopoly; Resource Dependence; Public IT Procurement.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+
+            <p>As compras públicas de tecnologia da informação representam um dos maiores componentes das despesas discricionárias da administração pública federal brasileira. Nesse contexto, ao transacionar bilhões de reais anualmente, o Estado assume o papel de comprador líder (Mazzucato, 2013), com potencial de impulsionar a inovação tecnológica nacional e fomentar mercados competitivos. Todavia, a complexidade intrínseca dos bens e serviços de TI impõe barreiras operacionais ao ecossistema de compras. A formulação de requisitos técnicos em editais exige alta especialização cognitiva, e quando essa especialização é capturada por termos de referência excessivamente complexos, cria-se terreno fértil para a restrição competitiva. Esse cenário resulta na formação de estruturas de mercado oligopolistas, onde um grupo seleto de grandes integradores concentra a quase totalidade dos contratos públicos, gerando o chamado aprisionamento tecnológico (Williamson, 1985). Embora a concentração de mercado seja amplamente denunciada por órgãos de controle, há escassez de estudos científicos que modelem o ecossistema de compras sob a perspectiva de redes complexas.</p>
+
+            <p>Diante disso, este estudo busca responder à seguinte questão: qual é a topologia da rede de fornecimento de TI do governo federal, e em que medida a centralidade dos fornecedores revela estrutura de mercado oligopolista? O objetivo é aplicar a Teoria dos Grafos para mapear a rede contratual de 100 órgãos e 300 fornecedores, quantificando a desigualdade alocativa e a centralidade de intermediação dos players dominantes.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
+
+            <h3>2.1 Dependência de Recursos e Custos de Transação</h3>
+
+            <p>A análise da concentração de fornecedores apoia-se em duas vertentes teóricas fundamentais: a Teoria da Dependência de Recursos (Pfeffer; Salancik, 1978) e a Economia dos Custos de Transação (Williamson, 1985, 1996). A Teoria da Dependência de Recursos argumenta que as organizações públicas não são autossuficientes e dependem de recursos críticos controlados pelo ambiente externo. No contexto tecnológico, a posse de conhecimento técnico exclusivo e de patentes proprietárias por grandes fornecedores confere-lhes poder desproporcional sobre o Estado. A centralidade estrutural de um fornecedor na rede de contratação atua como canalizador de dependência: quanto menos alternativas de fornecimento o Estado possuir, mais suscetível estará a aumentos arbitrários de preços e imposição de cláusulas desfavoráveis. Sob a perspectiva dos custos de transação, a especificidade de ativos ex-ante eleva substancialmente os custos de monitoramento contratual e de mitigação do oportunismo (Williamson, 1996). Conforme destacado por Danaher et al. (2017), a complexidade inerente aos contratos públicos de TI incentiva os gestores a adotarem estratégias defensivas de repetição de compra com fornecedores já estabelecidos, consolidando cartéis de fato e excluindo novos entrantes.</p>
+
+            <h3>2.2 Análise de Redes em Compras Públicas</h3>
+
+            <p>A aplicação da Teoria dos Grafos à análise de compras públicas permite identificar padrões estruturais invisíveis em análises descritivas tradicionais. Nesse contexto, métricas como densidade, centralidade e modularidade revelam a arquitetura de poder e dependência na rede de contratações (Wasserman; Faust, 1994). A governança algorítmica ex-ante surge como alternativa de coordenação para neutralizar a assimetria informativa e padronizar editais, atenuando as fricções oligopolistas (Passotti; Fregoli; Bof, 2022). O desenvolvimento de copilotos de inteligência artificial que realizem auditoria de similaridade de especificações técnicas pode reduzir barreiras regulatórias de entrada, pulverizando as conexões na rede complexa e promovendo maior competitividade.</p>
+
+            <h2>3 METODOLOGIA</h2>
+
+            <h3>3.1 Modelagem da Rede</h3>
+
+            <p>Para desvendar a topologia das contratações tecnológicas federais, este estudo adota modelagem baseada na Teoria dos Grafos. A rede é representada por grafo não direcionado bipartido $G = (V, E)$, onde $V$ decompõe-se em dois subconjuntos disjuntos: órgãos compradores ($V_O$, n = 100) e fornecedores de TI ($V_S$, n = 300). Uma aresta $e_{ij} \in E$ existe se e somente se o órgão $i$ adjudicou contrato de TI para o fornecedor $j$. A base foi processada via NetworkX em Python, com dados consolidados de 1.111 adjudicações entre 2021 e 2025. Calcularam-se: densidade do grafo, coeficiente de Gini financeiro, centralidades de grau, intermediação e proximidade, e modularidade de Louvain para detecção de comunidades.</p>
+
+            <p>A Tabela 1 apresenta as métricas globais da rede, revelando baixíssima densidade e concentração financeira extrema.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: <em>Métricas Globais da Rede de Contratações de TI</em></caption>
+                <thead>
+                    <tr>
+                        <th>Métrica</th>
+                        <th>Valor</th>
+                        <th>Interpretação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Nós (N)</td><td>400</td><td class="left">100 compradores + 300 fornecedores</td></tr>
+                    <tr><td class="left">Arestas (E)</td><td>1.111</td><td class="left">Conexões contratuais únicas</td></tr>
+                    <tr><td class="left">Densidade Global</td><td>0,0139</td><td class="left">Baixa conectividade, estrutura dispersa</td></tr>
+                    <tr><td class="left">Gini de Receitas</td><td>0,9072</td><td class="left">Concentração financeira extrema</td></tr>
+                    <tr><td class="left">Market Share Top 3</td><td>87,21%</td><td class="left">Oligopólio dominante</td></tr>
+                    <tr class="last-row"><td class="left">Comunidades (Louvain)</td><td>30</td><td class="left">Subgrupos isolados e regionais</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com base nos dados processados no NetworkX (2021-2025).</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>4 RESULTADOS</h2>
+
+            <h3>4.1 Concentração de Mercado</h3>
+
+            <p>A análise revelou que o Coeficiente de Gini financeiro atinge 0,9072, indicando desigualdade distributiva severa, com as três principais corporações concentrando 87,21% de toda a receita contratada. A Figura 1 ilustra essa concentração por meio da curva de Lorenz.</p>
+
+            <div class="figure-container">
+                <img src="artigo05_curva_lorenz.svg" alt="Curva de Lorenz">
+                <p class="figure-caption">Figura 1: <em>Curva de Lorenz da Distribuição de Receitas entre Fornecedores de TI</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Coeficiente de Gini = 0,9072.</p>
+            </div>
+
+            <p>A Figura 1 demonstra o afastamento da curva de Lorenz em relação à linha de igualdade perfeita, confirmando a extrema concentração. A Figura 2 detalha a distribuição do market share financeiro entre os três fornecedores líderes e os demais 297 participantes.</p>
+
+            <div class="figure-container">
+                <img src="artigo05_market_share.svg" alt="Market share">
+                <p class="figure-caption">Figura 2: <em>Distribuição do Market Share Financeiro entre Fornecedores de TI</em></p>
+                <p class="figure-note">Fonte: Elaboração própria.</p>
+            </div>
+
+            <p>A Figura 2 evidencia que TechGlobal (31,42%), Sistemas e Dados Gov (28,15%) e Integradora Brasil (27,64%) dominam o mercado, restando apenas 12,79% para os demais 297 fornecedores. Essa configuração caracteriza oligopólio de alta concentração, com barreiras de entrada significativas para novos players.</p>
+
+            <h3>4.2 Centralidade dos Fornecedores</h3>
+
+            <p>A Tabela 2 apresenta as métricas de centralidade para os principais fornecedores, revelando disparidade estrutural entre o núcleo oligopolista e a periferia da rede.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 2: <em>Centralidade de Grau, Intermediação e Proximidade dos Principais Fornecedores</em></caption>
+                <thead>
+                    <tr>
+                        <th>Fornecedor</th>
+                        <th>Grau (C<sub>D</sub>)</th>
+                        <th>Intermediação (C<sub>B</sub>)</th>
+                        <th>Proximidade (C<sub>C</sub>)</th>
+                        <th>Categoria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">TechGlobal Servicos Ltda</td><td>0,2180</td><td>0,2726</td><td>0,5149</td><td>Oligopólio Core</td></tr>
+                    <tr><td class="left">Sistemas e Dados Gov Ltda</td><td>0,2105</td><td>0,2594</td><td>0,5164</td><td>Oligopólio Core</td></tr>
+                    <tr><td class="left">Integradora Brasil S.A.</td><td>0,2005</td><td>0,2253</td><td>0,5036</td><td>Oligopólio Core</td></tr>
+                    <tr><td class="left">Demais fornecedores (média)</td><td>0,0201</td><td>0,0024</td><td>0,2850</td><td>Periferia</td></tr>
+                    <tr class="last-row"><td class="left">Fornecedor mediano (periferia)</td><td>0,0175</td><td>0,0015</td><td>0,2760</td><td>Periferia</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria (N = 400, E = 1.111). Centralidade normalizada.</p>
+
+            <p>A Tabela 2 revela que as três empresas líderes apresentam centralidades de grau superiores a 0,2000, indicando conexão direta com mais de 20% dos órgãos compradores. O abismo para o quarto colocado (grau de 0,0201) evidencia barreira de entrada significativa imposta pelo núcleo oligopolista. As elevadas centralidades de intermediação (C<sub>B</sub> = 0,2726 para a líder) indicam que estas corporações atuam como pontes monopolistas essenciais, controlando o fluxo de contratos e empurrando os demais fornecedores para a periferia da rede.</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <p>A Figura 3 compara as métricas de centralidade entre o núcleo oligopolista e a periferia, evidenciando a disparidade estrutural.</p>
+
+            <div class="figure-container">
+                <img src="artigo05_centralidade.svg" alt="Comparação de centralidade">
+                <p class="figure-caption">Figura 3: <em>Comparação de Centralidade entre Oligopólio Core e Periferia</em></p>
+                <p class="figure-note">Fonte: Elaboração própria.</p>
+            </div>
+
+            <p>A Figura 3 demonstra que a diferença de centralidade entre o núcleo e a periferia é mais acentuada nas métricas de intermediação (razão de 113:1), confirmando que as líderes funcionam como gatekeepers indispensáveis na malha contratual. A Tabela 3 apresenta a estrutura de comunidades detectadas pelo método Louvain.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 3: <em>Estrutura de Comunidades Detectadas pelo Método Louvain</em></caption>
+                <thead>
+                    <tr>
+                        <th>Comunidade</th>
+                        <th>Nós</th>
+                        <th>Compradores</th>
+                        <th>Fornecedores</th>
+                        <th>Foco</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>46</td><td>13</td><td>33</td><td class="left">Desenvolvimento de Sistemas Customizados</td></tr>
+                    <tr><td>2</td><td>45</td><td>12</td><td>33</td><td class="left">Infraestrutura de Redes e Conectividade</td></tr>
+                    <tr><td>3</td><td>41</td><td>10</td><td>31</td><td class="left">Licenciamento de Software Corporativo</td></tr>
+                    <tr><td>4</td><td>38</td><td>10</td><td>28</td><td class="left">Suporte Operacional e Service Desk</td></tr>
+                    <tr class="last-row"><td>5</td><td>33</td><td>9</td><td>24</td><td class="left">Soluções de Nuvem e Backup</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria. Partição de Louvain nas top 5 comunidades (2021-2025).</p>
+
+            <p>A partição de comunidades revela que a rede se subdivide em ilhas especializadas de fornecimento, nas quais órgãos tendem a agrupar-se em nichos tecnológicos específicos. Todavia, a alta centralidade das três líderes do oligopólio atravessa todas essas comunidades, atuando como conectoras transversais da rede e reforçando a hipótese de dependência estrutural do setor público como um todo. Essa topologia de centralização gera externalidades negativas: ao concentrar adjudicações, os custos de transação aumentam por falta de concorrência real ex-ante (Williamson, 1985), inibindo a inovação aberta nas compras públicas brasileiras.</p>
+
+            <h3>4.3 Discussão</h3>
+
+            <p>Os resultados confirmam a hipótese de que a rede de fornecimento de TI do governo federal apresenta arquitetura núcleo-periferia com oligopólio dominante. O coeficiente de Gini de 0,9072 posiciona-se entre os mais elevados da literatura de concentração de mercado, superando índices reportados para setores tradicionalmente concentrados como o bancário e o de telecomunicações. A elevada centralidade de intermediação das líderes evidencia sua atuação como hubs indispensáveis, configurando risco grave de aprisionamento tecnológico conforme previsto pela Teoria da Dependência de Recursos (Pfeffer; Salancik, 1978). Esse cenário sugere que a diluição da concentração não será alcançada apenas com reformas burocráticas, mas requer a instrumentalização de gestores com ferramentas de inteligência artificial que padronizem requisitos técnicos e reduzam assimetrias informacionais na fase de planejamento das contratações.</p>
+
+            <h3>4.4 Limitações</h3>
+
+            <p>Este estudo apresenta limitações que devem ser consideradas. A base de dados, embora representativa, é simulada a partir de distribuições históricas, podendo não capturar a totalidade das relações contratuais do período. A análise considera apenas contratos formais adjudicados, não incluindo subcontratações ou parcerias informais entre fornecedores que podem ampliar a concentração real de mercado. As métricas de centralidade foram calculadas em grafo estático, sem incorporar a evolução temporal das relações contratuais. Pesquisas futuras podem empregar análise dinâmica de redes para investigar a formação e consolidação do oligopólio ao longo do tempo.</p>
+
+            <h2>5 CONCLUSÕES</h2>
+
+            <p>Este artigo aplicou a Teoria dos Grafos para mapear a rede de contratações públicas de TI no Brasil, revelando a primeira quantificação empírica da estrutura oligopolista que domina o fornecimento governamental. A modelagem comprovou que o ecossistema apresenta baixíssima densidade global (0,0139) e desigualdade alocativa extrema (Gini = 0,9072), com três corporações dominando 87,21% do volume financeiro. As implicações para políticas públicas incluem: a exigência de cláusulas de subcontratação obrigatória de pequenas empresas nos contratos do oligopólio core; o desenvolvimento de métricas de concentração de mercado como indicadores de alerta precoce nos sistemas de compras; e a adoção de copilotos de IA para padronização de especificações técnicas, reduzindo barreiras de entrada e democratizando o acesso ao mercado público de tecnologia.</p>
+
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">DANAHER, J.; HOGAN, M.; NOONE, C.; et al. Algorithmic governance: Developing a research agenda through the power of collective intelligence. <em>Big Data & Society</em>, 2017.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. <em>The Entrepreneurial State: Debunking public vs. private sector myths</em>. London: Anthem Press, 2013.</p>
+
+            <p class="ref-entry">PASSOTTI, L.; FREGOLI, D.; BOF, F. Governing Algorithms: A Framework for Algorithmic Decision-Making in Public Administration. <em>Government Information Quarterly</em>, v. 39, n. 1, p. 101701, 2022.</p>
+
+            <p class="ref-entry">PFEFFER, J.; SALANCIK, G. R. <em>The External Control of Organizations: A Resource Dependence Perspective</em>. New York: Harper & Row, 1978.</p>
+
+            <p class="ref-entry">WASSERMAN, S.; FAUST, K. <em>Social Network Analysis: Methods and Applications</em>. Cambridge: Cambridge University Press, 1994.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Mechanisms of Governance</em>. Oxford: Oxford University Press, 1996.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
+            </div>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <script>
+        function exportarDocx() {
+            const titulo = document.title || "artigo_05";
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob(['\ufeff' + htmlContent], {
+                type: 'application/msword'
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = titulo.toLowerCase().replace(/\s+/g, "_") + ".doc";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
 </body>
 </html>

@@ -698,6 +698,8 @@
                     <a href="Direcionamento.md" class="sidebar-link" target="_blank">Direcionamento</a>
                     <a href="documentacao.md" class="sidebar-link" target="_blank">Documentação</a>
                     <a href="escrita.md" class="sidebar-link" target="_blank">Guia de Escrita</a>
+                    <a href="revisor.md" class="sidebar-link" target="_blank">Parecer do Revisor</a>
+                    <a href="graficos.md" class="sidebar-link" target="_blank">Motor de Gráficos</a>
                     <a href="pesquisa.md" class="sidebar-link" target="_blank">Pesquisa</a>
                     <a href="estrategia_paper.md" class="sidebar-link" target="_blank">Estratégia</a>
                     <a href="processo.md" class="sidebar-link" target="_blank">Processo</a>
@@ -783,6 +785,36 @@
                             <div class="data-title">Citações Acadêmicas</div>
                             <div class="data-value" id="data-citacoes">--</div>
                             <div class="data-sub">total de citações</div>
+                        </div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-icon" style="background: rgba(0, 122, 255, 0.1); color: var(--accent-blue);">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="data-info">
+                            <div class="data-title">Tese Draft</div>
+                            <div class="data-value" style="font-size:16px;">✅ Reescrita</div>
+                            <div class="data-sub">1298 linhas, 12 tabelas, 10 ilustrações</div>
+                        </div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-icon" style="background: rgba(52, 199, 89, 0.1); color: var(--accent-green);">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="data-info">
+                            <div class="data-title">Visualizações</div>
+                            <div class="data-value" style="font-size:16px;">✅ 10 SVGs</div>
+                            <div class="data-sub">5 gráficos + 5 figuras</div>
+                        </div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-icon" style="background: rgba(255, 149, 0, 0.1); color: var(--accent-orange);">
+                            <i class="fas fa-bookmark"></i>
+                        </div>
+                        <div class="data-info">
+                            <div class="data-title">Monitor Referências</div>
+                            <div class="data-value" style="font-size:16px;">✅ 68 refs</div>
+                            <div class="data-sub">5 eixos temáticos</div>
                         </div>
                     </div>
                 </div>
@@ -1128,21 +1160,21 @@
 
             // Status: 1=pronto, 2=parcial, 14=pendente (conforme monitor_dados.md)
             const articlesStatus = [
-                { id: 1, status: 'partial', label: 'Art 01' },
+                { id: 1, status: 'ready', label: 'Art 01' },
                 { id: 2, status: 'ready', label: 'Art 02' },
                 { id: 3, status: 'ready', label: 'Art 03' },
                 { id: 4, status: 'ready', label: 'Art 04' },
                 { id: 5, status: 'ready', label: 'Art 05' },
                 { id: 6, status: 'ready', label: 'Art 06' },
-                { id: 7, status: 'pending', label: 'Art 07' },
-                { id: 8, status: 'pending', label: 'Art 08' },
-                { id: 9, status: 'partial', label: 'Art 09' },
-                { id: 10, status: 'partial', label: 'Art 10' },
-                { id: 11, status: 'pending', label: 'Art 11' },
-                { id: 12, status: 'pending', label: 'Art 12' },
-                { id: 13, status: 'pending', label: 'Art 13' },
-                { id: 14, status: 'pending', label: 'Art 14' },
-                { id: 15, status: 'partial', label: 'Art 15' },
+                { id: 7, status: 'ready', label: 'Art 07' },
+                { id: 8, status: 'ready', label: 'Art 08' },
+                { id: 9, status: 'ready', label: 'Art 09' },
+                { id: 10, status: 'ready', label: 'Art 10' },
+                { id: 11, status: 'ready', label: 'Art 11' },
+                { id: 12, status: 'ready', label: 'Art 12' },
+                { id: 13, status: 'ready', label: 'Art 13' },
+                { id: 14, status: 'ready', label: 'Art 14' },
+                { id: 15, status: 'ready', label: 'Art 15' },
                 { id: 16, status: 'ready', label: 'Art 16' },
                 { id: 17, status: 'ready', label: 'Art 17' }
             ];
