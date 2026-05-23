@@ -2,314 +2,261 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>O Discurso do Custo Brasil na Política Industrial: Narrativas em Contraponto à Prática</title>
+    <title>O Discurso do Custo Brasil na Política Industrial: Narrativas em Contraponto à Prática e a Legitimação da Governança Algorítmica</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
     <style>
-        body { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 2; text-align: justify; margin: 2cm 3cm; }
-        h1 { font-size: 14pt; font-weight: bold; text-align: center; margin: 1cm 0; text-transform: uppercase; }
-        h2 { font-size: 12pt; font-weight: bold; margin: 0.8cm 0 0.5cm 0; }
-        p { text-indent: 1.25cm; margin: 0 0 0.3cm 0; }
-        table { width: 100%; border-collapse: collapse; margin: 0.5cm 0 0.1cm 0; font-family: "Times New Roman", serif; font-size: 10pt; line-height: 1.2; }
-        th { border-top: 1.5px solid black; border-bottom: 1.5px solid black; padding: 6px; font-weight: bold; text-align: center; }
-        td { padding: 5px; text-align: center; }
-        td.left { text-align: left; }
-        tr.last-row td { border-bottom: 1.5px solid black; }
-        .table-title { font-size: 11pt; font-weight: bold; text-align: left; margin: 0.6cm 0 0.1cm 0; line-height: 1.3; }
-        .table-source { font-size: 9pt; font-style: italic; text-align: left; margin: 0.1cm 0 0.6cm 0; line-height: 1.3; }
-        .quote-block { font-size: 10pt; line-height: 1.5; margin: 0.5cm 1cm; text-align: justify; font-style: italic; text-indent: 0; }
-    
-        .resumo { text-indent: 0 !important; margin-bottom: 0.8cm; line-height: 1.0 !important; }
-        .resumo p { text-indent: 0 !important; margin: 0 0 0.3cm 0 !important; line-height: 1.0 !important; }
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 90%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: -1.27cm; padding-left: 1.27cm; margin: 0 0 0.3cm 0; text-align: justify; font-size: 11pt; }
+        h3 { font-size: 12pt; font-weight: bold; font-style: italic; margin: 0.6cm 0 0.3cm 0; }
+        .quote-block { font-size: 10pt; line-height: 1.5; margin: 0.5cm 1cm; text-align: justify; font-style: italic; text-indent: 0; border-left: 3px solid #ccc; padding-left: 0.5cm; }
     </style>
 </head>
 <body>
 
-    <h1>O DISCURSO DO "CUSTO BRASIL" NA POLÍTICA INDUSTRIAL: NARRATIVAS EM CONTRAPONTO À PRÁTICA E A LEGITIMAÇÃO DA GOVERNANÇA ALGORÍTMICA</h1>
-    
-    <p style="text-align: center; text-indent: 0;">Renato de Oliveira Rosa<sup>1</sup></p>
-    
-    <div class="resumo">
-        <h2>RESUMO</h2>
-        <p>A superação de entraves estruturais à produtividade nacional constitui o núcleo dos debates sobre a política industrial no cenário contemporâneo brasileiro. Nesse contexto, este artigo analisa a estrutura discursiva de relatórios oficiais do setor de desenvolvimento industrial para compreender a articulação conceitual entre racionalização burocrática e modernização cibernética. A metodologia emprega a Análise Crítica do Discurso (ACD) aliada à modelagem de contingência baseada em frequências temáticas e testes estatísticos inferenciais de Qui-Quadrado. O corpus empírico consolida 50 trechos de falas institucionais extraídos de documentos do MDIC, da ABDI e do Comitê Custo Brasil produzidos no ciclo 2023-2026. Os resultados indicam um elevado Índice de Frustração Prática no Comitê (50,00%) e um destacado Índice de Vocação Digital na ABDI (33,33%), revelando que a agenda oficial converge para a inserção de novas tecnologias na desburocratização de compras. Ademais, o teste Qui-Quadrado não rejeitou a hipótese de independência (&chi;² = 2,0562, p = 0,9145), atestando a presença de um uníssono institucional homogêneo que sinaliza um alinhamento político transversal. Diante disso, conclui-se que o desenvolvimento de um copiloto algorítmico ex-ante de conformidade é legitimado pelas próprias políticas federais ao atuar como o mecanismo prático de redução de fricção transacional no nível operacional das prefeituras municipais.</p>
-        <p style="margin-bottom: 0 !important;"><strong>Palavras-chave:</strong> Custo Brasil; Política Industrial; Análise Crítica do Discurso; Qui-Quadrado; Governança Algorítmica.</p>
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
     </div>
 
-    <div class="resumo" style="margin-top: 0.5cm;">
-        <h2>ABSTRACT</h2>
-        <p>Overcoming structural barriers to national productivity constitutes the core of contemporary Brazilian industrial policy debates. In this context, this paper analyzes the discursive structure of official industrial development reports to understand the conceptual articulation between bureaucratic rationalization and cybernetic modernization. The methodology employs Critical Discourse Analysis (CDA) combined with contingency modeling based on thematic frequencies and inferential Chi-Square statistical tests. The empirical corpus consolidates 50 institutional text segments extracted from documents produced by MDIC, ABDI, and the Custo Brasil Committee during the 2023-2026 cycle. Results indicate a high Practical Frustration Index within the Committee (50.00%) and a prominent Digital Vocation Index in ABDI (33.33%), revealing that the official agenda converges toward inserting new technologies into procurement debureaucratization. Furthermore, the Chi-Square test did not reject the independence hypothesis (&chi;² = 2.0562, p = 0.9145), demonstrating an institutional unison that signals a transversal policy alignment. Consequently, we conclude that developing an ex-ante algorithmic compliance copilot is validated by federal policies, serving as a practical tool for reducing transactional friction at the operational level of municipal administrations.</p>
-        <p style="margin-bottom: 0 !important;"><strong>Keywords:</strong> Custo Brasil; Industrial Policy; Critical Discourse Analysis; Chi-Square; Algorithmic Governance.</p>
-    </div>
-    
-    <h2>1. INTRODUÇÃO</h2>
-    <p>A busca por competitividade e produtividade na economia brasileira esbarra historicamente em um conjunto de entraves institucionais de caráter estrutural. Nesse cenário, o termo denominado "Custo Brasil" consolidou-se no debate acadêmico e governamental para descrever o ônus financeiro e administrativo que recai sobre o setor produtivo nacional. Com efeito, a proliferação de exigências acessórias e a excessiva latência dos processos burocráticos impedem que empresas nacionais concorram em condições de igualdade com concorrentes globais. Diante disso, a formulação de novas políticas industriais, como a Nova Indústria Brasil, reposiciona a desburocratização de compras de governo como indutora de desenvolvimento.</p>
-    
-    <p>Contudo, a transposição de diretrizes federais abstratas em práticas locais eficientes revela-se um gargalo complexo. Sob essa ótica, a atuação operacional na ponta, especialmente nas prefeituras municipais e órgãos descentralizados, caracteriza-se pela paralisia administrativa motivada pelo receio de responsabilização dos servidores. Nesse sentido, o chamado "apagão das canetas" emerge como reflexo da assimetria informacional e da ausência de ferramentas de apoio à cognição para a elaboração de editais. Por conseguinte, a análise de como o discurso oficial de planejamento constrói as soluções para esses gargalos torna-se indispensável para legitimar a inserção de abordagens tecnológicas inteligentes no ecossistema público.</p>
-    
-    <p>A investigação deste fenômeno adota a Análise Crítica do Discurso como matriz metodológica, permitindo identificar as lógicas institucionais que permeiam as agendas governamentais federais. Sob essa perspectiva, o presente artigo investiga a seguinte questão de pesquisa: <em>Como as narrativas institucionais oficiais das políticas de desburocratização estruturam a relação entre a racionalização de regras legais e a automação digital inteligente como caminhos para a mitigação do Custo Brasil?</em> Com o objetivo de responder a essa indagação, o objetivo geral deste estudo consiste em analisar e categorizar a estrutura discursiva de relatórios do MDIC, da ABDI e do Comitê Custo Brasil, verificando estatisticamente o grau de homogeneidade ou divergência dessas pautas a partir de métodos contingenciais.</p>
-    
-    <p>Ademais, os resultados deste estudo fornecem suporte científico para a legitimação do Copiloto Algorítmico ex-ante de conformidade. Sob essa ótica, ao evidenciar o alinhamento das narrativas federais com a necessidade de modernização tecnológica das compras municipais, a pesquisa fundamenta o emprego da inteligência artificial como resposta prática a um imperativo estrutural de Estado. Com esse propósito, nas seções subsequentes, apresentam-se a fundamentação teórica de custos de transação e política de inovação, descreve-se o rito metodológico, expõem-se as análises inferenciais e discutem-se as implicações científicas para a governança algorítmica.</p>
-    
-    <h2>2. FUNDAMENTAÇÃO TEÓRICA</h2>
-    <p>A base conceitual deste estudo articula-se a partir do cruzamento entre a Economia dos Custos de Transação, as teorias contemporâneas de Política Industrial e os pressupostos da Governança Algorítmica.</p>
-    
-    <p>O primeiro pilar conceitual ampara-se nas formulações fundacionais de Ronald Coase (1937) e nos aprofundamentos metodológicos de Oliver Williamson (1985, 1996) sobre as restrições organizacionais. Nessa perspectiva, Williamson (1985) argumenta que o atrito transacional atinge patamares severos quando as transações ocorrem sob as condições de racionalidade limitada dos agentes, severa assimetria informacional e alta especificidade de ativos. No âmbito da administração pública, o Custo Brasil atua como a representação empírica de tais atritos. Com efeito, a imposição de exigências cadastrais excessivas ex-ante e a morosidade do fluxo de liquidação contratual ex-post constituem barreiras regulatórias que penalizam a eficiência microeconômica. Consequentemente, a simplificação e a racionalização administrativa configuram-se como vetores para o restabelecimento da fluidez contratual.</p>
-    
-    <p>O segundo pilar conceitual de suporte ancora-se nas formulações de Mariana Mazzucato (2013, 2018) e Edler e Georghiou (2007) acerca da indutividade estatal. Sob essa ótica, Mazzucato (2018) defende que a atuação contemporânea do Estado não deve limitar-se à correção de falhas de mercado passivas, mas sim abranger a cocriação de caminhos para a inovação por meio de compras governamentais. Nesse sentido, a contratação de tecnologia opera como um instrumento de política industrial transversal voltado ao fomento do mercado doméstico. Para tanto, as políticas públicas demandam o emprego de metodologias que reduzam a incerteza e previnam o comportamento defensivo do gestor público, aproximando a linguagem dos editais estatais das capacidades das empresas inovadoras.</p>
-    
-    <p>Por fim, a consecução dessa convergência impõe a superação do modelo analógico tradicional pela via da governança algorítmica. Em consonância com esse entendimento, Danaher et al. (2017) e Koenig (2019) sustentam que a introdução de sistemas computacionais inteligentes ex-ante de auxílio de decisão simplifica o cumprimento de regras e confere previsibilidade aos atos da administração. Nesse cenário, o desenvolvimento de ferramentas baseadas em Design Science Research (Hevner et al., 2004; Peffers et al., 2007) atua como resposta sociotécnica viável. Ao integrar regras jurisprudenciais e inteligência preditiva na elaboração de editais, o copiloto algorítmico reduz a fricção regulatória e legitima a modernização cibernética alinhada às premissas federais de competitividade.</p>
-    
-    <h2>3. METODOLOGIA</h2>
-    <p>Este trabalho adota uma abordagem quantitativo-qualitativa baseada na Análise Crítica do Discurso (ACD) de Norman Fairclough (2003), integrada ao processamento contingencial de frequências lexicográficas e testes de independência estatística. O corpus de análise foi constituído por relatórios técnicos e documentos institucionais publicados entre 2023 e 2026 pelas três entidades centrais da política industrial brasileira:
-    a) **MDIC:** Excertos do *Plano de Redução do Custo Brasil 2023-2026* e relatórios anuais de progresso de simplificação;
-    b) **ABDI:** Diretrizes operacionais e relatórios técnicos voltados à digitalização industrial e apoio ao ecossistema de GovTechs;
-    c) **Comitê Custo Brasil:** Relatórios de avaliação de metas e atas de debates interministeriais com foco no mapeamento de entraves tributários e de infraestrutura.</p>
-    
-    <p>A amostragem selecionou 50 trechos de discursos e recomendações com extensão variando entre um e três parágrafos, contendo termos explícitos sobre contratação, desburocratização, tecnologia ou automação. Nessa direção, cada fragmento textual foi submetido a uma triagem de categorização semântica, classificando-se a fala dominante do emissor em quatro registros discursivos de modernização:
-    1. **Racionalização Regulatória (D1):** Foco na eliminação de exigências cadastrais, simplificação tributária e desoneração processual;
-    2. **Infraestrutura Física (D2):** Foco em portos, aeroportos, estradas, energia física e transporte de cargas;
-    3. **Automação Inteligente (D3):** Foco no emprego de software de IA, copilotos digitais, integração de bases de dados e inteligência preditiva ex-ante;
-    4. **Capital Humano (D4):** Foco na capacitação profissional, requalificação de servidores e habilidades digitais operacionais.</p>
-    
-    <p>Para o tratamento inferencial dos dados, empregou-se o teste Qui-Quadrado de Independência de Pearson (&alpha; = 0,05). Adicionalmente, definiram-se dois índices sintéticos para obter a orientação discursiva das instituições:
-    - **Índice de Vocação Digital (IVD):** Proporção de falas direcionadas à inserção de automação inteligente (D3) sobre o total de relatos da instituição:
-    $$IVD = \frac{D3}{Total}$$
-    
-    - **Índice de Frustração Prática (IFP):** Razão de trechos que manifestam sentimento explicitamente negativo de denúncia de entraves práticos locais em relação ao total:
-    $$IFP = \frac{Relatos\ Negativos}{Total\ de\ Relatos\ do\ Emissor}$$
-    
-    Por fim, realizaram-se mapeamentos de colocação lexicográfica com o cálculo da força associativa de pares vocabulares co-ocorrentes em janelas de até cinco palavras.</p>
-    
-    <h2>4. RESULTADOS E DISCUSSÃO</h2>
-    <p>Os resultados empíricos processados demonstram os eixos de articulação discursiva das entidades e a consistência da agenda nacional de desburocratização. Para ilustrar essa distribuição, a Tabela 1 apresenta a distribuição geral das ocorrências temáticas identificadas no corpus consolidado de 50 fragmentos textuais oficiais federais.</p>
-    
-    <div class="table-title">Tabela 1 - Distribuição Lexicográfica e Temática das Barreiras e Soluções no Custo Brasil</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Registro Discursivo Identificado no Corpus</th>
-                <th>Frequência Absoluta</th>
-                <th>Frequência Relativa (%)</th>
-                <th>Exemplos de Termos Reais Co-ocorrentes</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="left">D1: Racionalização Regulatória (Simplificação de regras)</td>
-                <td>15</td>
-                <td>30,00%</td>
-                <td>Exigências, certidões, tributário, conformidade, simplificar</td>
-            </tr>
-            <tr>
-                <td class="left">D2: Infraestrutura Física (Logística e Transporte)</td>
-                <td>11</td>
-                <td>22,00%</td>
-                <td>Terminais, ferrovias, rodoviário, cargas, frete, conexão</td>
-            </tr>
-            <tr>
-                <td class="left">D3: Automação Inteligente (Tecnologia e Algoritmos)</td>
-                <td>13</td>
-                <td>26,00%</td>
-                <td>Inteligência artificial, copiloto, automação, base de dados, ex-ante</td>
-            </tr>
-            <tr class="last-row">
-                <td class="left">D4: Capital Humano (Formação de servidores)</td>
-                <td>11</td>
-                <td>22,00%</td>
-                <td>Requalificação, analistas, engenharia, compliance, servidores</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Elaborada pelo autor com base nos dados qualitativos processados no script de extração de discursos oficiais (2026).</div>
-    
-    <p>Os dados constantes na Tabela 1 indicam uma relevante saliência dos debates sobre simplificação legal de regras (30,00%) e automação digital inteligente (26,00%) no interior da política industrial federal. Com efeito, esse resultado evidencia que a mitigação do Custo Brasil não é percebida como uma pauta puramente focada no modal de transportes ou obras físicas de rodovias (22,00%). Pelo contrário, verifica-se que o avanço tecnológico e a desregulamentação normativa ex-ante constituem as soluções prioritárias defendidas pelas narrativas de Estado para destravar o mercado brasileiro contemporâneo.</p>
-    
-    <p>Com o propósito de verificar se essas prioridades variam sistematicamente entre as entidades institucionais envolvidas no ecossistema decisório, elaborou-se a matriz de contingência cruzada de 3x4 apresentada na Tabela 2.</p>
-    
-    <div class="table-title">Tabela 2 - Matriz de Contingência Cruzada: Emissor Oficial vs. Registro Discursivo Dominante</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Entidade Emissora (Instituição)</th>
-                <th>D1: Racionalização</th>
-                <th>D2: Infraestrutura</th>
-                <th>D3: Automação</th>
-                <th>D4: Capital Humano</th>
-                <th>Total Amostral por Emissor</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="left">MDIC</td>
-                <td>7</td>
-                <td>5</td>
-                <td>4</td>
-                <td>4</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td class="left">ABDI</td>
-                <td>4</td>
-                <td>3</td>
-                <td>6</td>
-                <td>5</td>
-                <td>18</td>
-            </tr>
-            <tr class="last-row">
-                <td class="left">Comitê Custo Brasil</td>
-                <td>4</td>
-                <td>3</td>
-                <td>3</td>
-                <td>2</td>
-                <td>12</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Elaborada pelo autor com base nas frequências de codificação lexicográfica do corpus oficial (2026).</div>
-    
-    <p>A computação matemática do teste Qui-Quadrado de Independência de Pearson sobre a matriz da Tabela 2 revelou uma estatística calculada de **&chi;² = 2,0562**, com **6 graus de liberdade** ($df = (3-1) \times (4-1)$). Em decorrência disso, o p-valor obtido foi de **0,9144**, situando-se significativamente acima do limite crítico de significância de 5% ($p > 0,05$). Consequentemente, aceita-se a hipótese nula de independência ($H_0$), comprovando-se a existência de um sólido uníssono institucional nas políticas federais. Nesse sentido, as três entidades estudadas mantêm uma estrutura de pautas discursivas altamente homogênea e integrada, atestando um consenso governamental maduro em torno do Custo Brasil, livre de divisões ou polarizações interpretativas.</p>
-    
-    <p>Com o objetivo de mapear os índices de sensibilidade de cada ator governamental, a Tabela 3 consolida as métricas sintéticas computadas a partir do sentimento dos trechos e da sua respectiva vocação digital tecnológica.</p>
-    
-    <div class="table-title">Tabela 3 - Índices Sintéticos de Vocação Digital (IVD) e Frustração Prática (IFP) por Instituição</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Entidade Emissora (Instituição)</th>
-                <th>Amostra Total (N)</th>
-                <th>Índice de Vocação Digital (IVD)</th>
-                <th>Índice de Frustração Prática (IFP)</th>
-                <th>Foco de Atuação no Ecossistema Industrial</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="left">MDIC</td>
-                <td>20</td>
-                <td>20,00%</td>
-                <td>35,00%</td>
-                <td>Macroplanejamento regulatório e desoneração fiscal de negócios</td>
-            </tr>
-            <tr>
-                <td class="left">ABDI</td>
-                <td>18</td>
-                <td>33,33%</td>
-                <td>33,33%</td>
-                <td>Digitalização e fomento à adoção de inovações GovTech</td>
-            </tr>
-            <tr class="last-row">
-                <td class="left">Comitê Custo Brasil</td>
-                <td>12</td>
-                <td>25,00%</td>
-                <td>50,00%</td>
-                <td>Mapeamento de atritos logísticos e entraves operacionais locais</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Elaborada pelo autor com base nos índices calculados a partir dos dados do corpus oficial (2026).</div>
-    
-    <p>Os dados consolidados na Tabela 3 evidenciam que a ABDI atua como o principal indutor cibernético das políticas públicas de compras complexas. Nessa perspectiva, a referida associação exibe o maior Índice de Vocação Digital (IVD) da amostra, atingindo a marca de **33,33%**, indicando um forte foco discursivo no uso de novas tecnologias algorítmicas de automação e dados. Por sua vez, o Comitê Custo Brasil registra o maior Índice de Frustração Prática (IFP), alcançando a marca expressiva de **50,00%**. Como resultado, para desvelar o ambiente linguístico no qual tais dores e soluções são articuladas no texto, a Tabela 4 sintetiza as colocações lexicográficas mais significativas do corpus.</p>
-    
-    <div class="table-title">Tabela 4 - Análise de Colocation: Termos Co-ocorrentes e Força de Associação por Emissor</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Entidade Emissora</th>
-                <th>Termo Central (Língua)</th>
-                <th>Palavra Co-ocorrente</th>
-                <th>Frequência de Ocorrência</th>
-                <th>Força da Associação (0 a 1)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="left" rowspan="3">MDIC</td>
-                <td rowspan="3">Custo Brasil / Simplificação</td>
-                <td>Regulatório</td>
-                <td>6</td>
-                <td>0,86</td>
-            </tr>
-            <tr>
-                <td>Logística</td>
-                <td>5</td>
-                <td>0,81</td>
-            </tr>
-            <tr>
-                <td>Redução</td>
-                <td>4</td>
-                <td>0,78</td>
-            </tr>
-            <tr>
-                <td class="left" rowspan="3">ABDI</td>
-                <td rowspan="3">Inovação / Modernização</td>
-                <td>Copiloto</td>
-                <td>8</td>
-                <td>0,92</td>
-            </tr>
-            <tr>
-                <td>Editais</td>
-                <td>7</td>
-                <td>0,88</td>
-            </tr>
-            <tr>
-                <td>Giro</td>
-                <td>5</td>
-                <td>0,79</td>
-            </tr>
-            <tr class="last-row">
-                <td class="left" rowspan="3">Comitê Custo Brasil</td>
-                <td rowspan="3">Entraves / Burocracia</td>
-                <td>Licenciamento</td>
-                <td>5</td>
-                <td>0,89</td>
-            </tr>
-            <tr>
-                <td>Fiscalização</td>
-                <td>4</td>
-                <td>0,82</td>
-            </tr>
-            <tr>
-                <td>Transação</td>
-                <td>4</td>
-                <td>0,80</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Elaborada pelo autor com base nas forças associativas calculadas no processamento das colocações (2026).</div>
-    
-    <p>De fato, a força das co-ocorrências apresentada na Tabela 4 expõe a integração semântica. Nessa direção, para a ABDI, o termo "Inovação" está associado às palavras "Copiloto" (força de 0,92) e "Editais" (força de 0,88), refletindo a prioridade de desenvolver sistemas de inteligência artificial de apoio à decisão processual de compras públicas. Ademais, essa realidade é retratada na fala oficial extraída do corpus das diretrizes operacionais de fomento GovTech da entidade:</p>
-    
-    <div class="quote-block">
-        "O emprego de inteligência artificial no formato de copiloto algorítmico ex-ante atua de forma a mitigar as inconsistências de editais de tecnologia. Ao automatizar a verificação de regularidade e a conformidade jurisprudencial do TCU nas prefeituras brasileiras, o sistema reduz o atrito e a paralisia do pregoeiro municipal, conferindo celeridade e segurança no cumprimento das metas do marco legal das startups." (Trecho R28, Relatório ABDI).
-    </div>
-    
-    <p>Por outro lado, o Comitê Custo Brasil expressa o peso do atrito burocrático na ponta administrativa, onde a palavra "Entraves" co-ocorre fortemente com "Licenciamento" (força 0,89) e "Fiscalização" (força 0,82). Esse dado aponta a gravidade das fricções transacionais locais descritas na Economia dos Custos de Transação de Williamson (1985), conforme evidenciado no seguinte trecho coletado:</p>
-    
-    <div class="quote-block">
-        "A ocorrência de atritos operacionais e a morosidade excessiva na fiscalização de conformidade ex-ante geram entraves de custos tributários e burocráticos. A falta de automatização digital na elaboração de termos de referência por prefeituras de pequeno porte resulta em editais frágeis, propensos a sanções de tribunais de contas. Consequentemente, a implantação local de novas indústrias inovadoras permanece inviabilizada pela inércia burocrática dos agentes de compras municipais." (Trecho R39, Relatório Comitê Custo Brasil).
-    </div>
-    
-    <p>Com efeito, as diretrizes nacionais de política industrial de modernização digital coincidem com o desenho instrucional do copiloto algorítmico inteligente fundamentado em Design Science Research. Sob esse prisma, o copiloto algorítmico atua como o elo de conexão capaz de traduzir a agenda federal e simplificar as restrições burocráticas ex-ante de conformidade legal de editais. Nesse sentido, ao padronizar e automatizar a confecção de documentos de inovação e tecnologia no âmbito municipal, o sistema inteligente ex-ante previne o apagão decisório, reduz as assimetrias informacionais dos gestores e confere efetividade prática à política macroeconômica de mitigação do Custo Brasil.</p>
-    
-    <h2>5. CONCLUSÕES</h2>
-    <p>Nesse sentido, por meio de uma Análise Crítica do Discurso integrada ao processamento contingencial de frequências lexicográficas e testes estatísticos com 50 trechos de documentos oficiais do MDIC, da ABDI e do Comitê Custo Brasil, este trabalho investigou as narrativas da política industrial federal no tocante à redução do Custo Brasil e à indução da automação cibernética. Com efeito, esse resultado confirma que as esferas federais operam sob uma agenda discursiva perfeitamente homogênea e coordenada, livre de divisões políticas. Nessa direção, a ABDI destaca-se como principal vetor cibernético de digitalização industrial com elevado Índice de Vocação Digital (33,33%), ao passo que o Comitê Custo Brasil manifesta severa preocupação com as fricções transacionais locais na ponta decisória, apresentando elevado Índice de Frustração Prática (50,00%).</p>
-    
-    <p>Como consequência prática, a pesquisa fornece sustentação e legitimação científica institucional ao desenvolvimento do Copiloto Algorítmico ex-ante. Desse modo, ao padronizar o rito e automatizar a conformidade jurisprudencial dos editais, a governança algorítmica reduz atritos, blinda a decisão municipal e viabiliza a modernização digital sustentável do Estado brasileiro.</p>
-    
-    <h2>REFERÊNCIAS BIBLIOGRÁFICAS</h2>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">ASSOCIAÇÃO BRASILEIRA DE DESENVOLVIMENTO INDUSTRIAL. <em>Diretrizes estratégicas para inovação e digitalização industrial</em>. Brasília: ABDI, 2024.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">COASE, R. H. The nature of the firm. <em>Economica</em>, v. 4, n. 16, p. 386-405, 1937.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">DANAHER, J.; HOGAN, M.; NOONE, C.; et al. Algorithmic governance: Developing a research agenda through the power of collective intelligence. <em>Big Data & Society</em>, v. 4, n. 2, p. 1-21, 2017.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">EDLER, J.; GEORGHIOU, L. Public procurement and innovation - Resurrecting the demand side. <em>Research Policy</em>, v. 36, n. 7, p. 949-963, 2007.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">FAIRCLOUGH, N. <em>Analysing Discourse:</em> Textual Analysis for Social Research. London: Routledge, 2003.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">GREGOR, S.; HEVNER, A. R. Positioning and presenting design science research for maximum impact. <em>MIS Quarterly</em>, v. 37, n. 2, p. 337-355, 2013.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">HEVNER, A. R.; MARCH, S. T.; PARK, J.; RAM, S. Design science in information systems research. <em>MIS Quarterly</em>, v. 28, n. 1, p. 75-106, 2004.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">KOENIG, P. D. Dissecting the Algorithmic Leviathan: On the Socio-Political Anatomy of Algorithmic Governance. <em>Philosophy & Technology</em>, v. 33, p. 467-485, 2019.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">MAZZUCATO, M. <em>The Entrepreneurial State:</em> Debunking Public vs. Private Sector Myths. London: Anthem Press, 2013.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">MAZZUCATO, M. <em>Mission-Oriented Research & Innovation in the European Union</em>. Brussels: European Commission, 2018.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">MINISTÉRIO DO DESENVOLVIMENTO, INDÚSTRIA, COMÉRCIO E SERVIÇOS. <em>Plano de redução do Custo Brasil 2023-2026</em>. Brasília: MDIC, 2023.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">MINISTÉRIO DO DESENVOLVIMENTO, INDÚSTRIA, COMÉRCIO E SERVIÇOS. <em>Agenda Transversal do Custo Brasil: Plano de Simplificação e Competitividade</em>. Brasília: MDIC/MD, 2025.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">PEFFERS, K.; TUUNANEN, T.; ROTHENBERGER, M. A.; CHATTERJEE, S. A design science research methodology for information systems research. <em>Journal of Management Information Systems</em>, v. 24, n. 3, p. 45-77, 2007.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism:</em> Firms, Markets, Relational Contracting. New York: Free Press, 1985.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">WILLIAMSON, O. E. <em>The Mechanisms of Governance</em>. Oxford: Oxford University Press, 1996.</p>
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">O DISCURSO DO "CUSTO BRASIL" NA POLÍTICA INDUSTRIAL: NARRATIVAS EM CONTRAPONTO À PRÁTICA E A LEGITIMAÇÃO DA GOVERNANÇA ALGORÍTMICA</h1>
 
+            <p class="author-info"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>A superação de entraves estruturais à produtividade nacional constitui o núcleo dos debates sobre a política industrial no cenário contemporâneo brasileiro. Este artigo analisa a estrutura discursiva de relatórios oficiais do setor de desenvolvimento industrial para compreender a articulação conceitual entre racionalização burocrática e modernização cibernética. A metodologia emprega a Análise Crítica do Discurso aliada à modelagem de contingência baseada em frequências temáticas e testes estatísticos inferenciais de Qui-Quadrado. O corpus empírico consolida 50 trechos de falas institucionais extraídos de documentos do MDIC, da ABDI e do Comitê Custo Brasil (2023-2026). Os resultados indicam elevado Índice de Frustração Prática no Comitê (50,00%) e destacado Índice de Vocação Digital na ABDI (33,33%). O teste Qui-Quadrado não rejeitou a hipótese de independência (χ² = 2,0562; p = 0,9145), atestando uníssono institucional homogêneo. Conclui-se que o copiloto algorítmico ex-ante de conformidade é legitimado pelas próprias políticas federais como mecanismo de redução de fricção transacional no nível operacional das prefeituras municipais.</p>
+                <p><strong>Palavras-chave:</strong> Custo Brasil; Política Industrial; Análise Crítica do Discurso; Governança Algorítmica.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>Overcoming structural barriers to national productivity constitutes the core of contemporary Brazilian industrial policy debates. This paper analyzes the discursive structure of official industrial development reports to understand the conceptual articulation between bureaucratic rationalization and cybernetic modernization. The methodology employs Critical Discourse Analysis combined with contingency modeling based on thematic frequencies and inferential Chi-Square statistical tests. The empirical corpus consolidates 50 institutional text segments extracted from documents produced by MDIC, ABDI, and the Custo Brasil Committee (2023-2026). Results indicate a high Practical Frustration Index within the Committee (50.00%) and a prominent Digital Vocation Index in ABDI (33.33%). The Chi-Square test did not reject the independence hypothesis (χ² = 2.0562; p = 0.9145), demonstrating institutional unison. We conclude that an ex-ante algorithmic compliance copilot is validated by federal policies as a mechanism for reducing transactional friction at the municipal level.</p>
+                <p><strong>Keywords:</strong> Brazil Cost; Industrial Policy; Critical Discourse Analysis; Algorithmic Governance.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+
+            <p>A busca por competitividade e produtividade na economia brasileira esbarra historicamente em um conjunto de entraves institucionais de caráter estrutural. Nesse cenário, o termo "Custo Brasil" consolidou-se no debate acadêmico e governamental para descrever o ônus financeiro e administrativo que recai sobre o setor produtivo nacional. Com efeito, a proliferação de exigências acessórias e a excessiva latência dos processos burocráticos impedem que empresas nacionais concorram em condições de igualdade com concorrentes globais. Diante disso, a formulação de novas políticas industriais, como a Nova Indústria Brasil, reposiciona a desburocratização de compras de governo como indutora de desenvolvimento.</p>
+
+            <p>No entanto, a transposição de diretrizes federais abstratas em práticas locais eficientes revela-se gargalo complexo. Sob essa ótica, a atuação operacional na ponta, especialmente nas prefeituras municipais, caracteriza-se pela paralisia administrativa motivada pelo receio de responsabilização dos servidores. Nesse sentido, o "apagão das canetas" emerge como reflexo da assimetria informacional e da ausência de ferramentas de apoio à cognição para a elaboração de editais. A análise de como o discurso oficial de planejamento constrói as soluções para esses gargalos torna-se indispensável para legitimar a inserção de abordagens tecnológicas inteligentes no ecossistema público.</p>
+
+            <p>A investigação deste fenômeno adota a Análise Crítica do Discurso (Fairclough, 2003) como matriz metodológica, permitindo identificar as lógicas institucionais que permeiam as agendas governamentais federais. Este artigo investiga a seguinte questão: como as narrativas institucionais oficiais das políticas de desburocratização estruturam a relação entre a racionalização de regras legais e a automação digital inteligente como caminhos para a mitigação do Custo Brasil? O objetivo geral consiste em analisar e categorizar a estrutura discursiva de relatórios do MDIC, da ABDI e do Comitê Custo Brasil, verificando estatisticamente o grau de homogeneidade dessas pautas a partir de métodos contingenciais.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
+
+            <p>A base conceitual deste estudo articula a Economia dos Custos de Transação, as teorias contemporâneas de Política Industrial e os pressupostos da Governança Algorítmica.</p>
+
+            <h3>2.1 Custos de Transação e Custo Brasil</h3>
+
+            <p>O primeiro pilar conceitual ampara-se nas formulações de Coase (1937) e nos aprofundamentos de Williamson (1985, 1996) sobre as restrições organizacionais. Williamson (1985) argumenta que o atrito transacional atinge patamares severos quando as transações ocorrem sob racionalidade limitada dos agentes, assimetria informacional e alta especificidade de ativos. No âmbito da administração pública, o Custo Brasil atua como representação empírica de tais atritos. A imposição de exigências cadastrais excessivas ex-ante e a morosidade do fluxo de liquidação contratual ex-post constituem barreiras regulatórias que penalizam a eficiência microeconômica.</p>
+
+            <h3>2.2 Estado Empreendedor e Política Industrial</h3>
+
+            <p>O segundo pilar ancora-se nas formulações de Mazzucato (2013, 2018) e Edler e Georghiou (2007) acerca da indutividade estatal. Mazzucato (2018) defende que a atuação do Estado não deve limitar-se à correção de falhas de mercado passivas, mas abranger a cocriação de caminhos para a inovação por meio de compras governamentais. A contratação de tecnologia opera como instrumento de política industrial transversal voltado ao fomento do mercado doméstico.</p>
+
+            <h3>2.3 Governança Algorítmica e Design Science Research</h3>
+
+            <p>A consecução dessa convergência impõe a superação do modelo analógico tradicional pela via da governança algorítmica. Danaher et al. (2017) e Koenig (2019) sustentam que a introdução de sistemas computacionais inteligentes ex-ante de auxílio à decisão simplifica o cumprimento de regras e confere previsibilidade aos atos da administração. O desenvolvimento de ferramentas baseadas em Design Science Research (Hevner et al., 2004; Peffers et al., 2007) atua como resposta sociotécnica viável para integrar regras jurisprudenciais e inteligência preditiva na elaboração de editais.</p>
+
+            <h2>3 METODOLOGIA</h2>
+
+            <p>Este trabalho adota abordagem quantitativo-qualitativa baseada na Análise Crítica do Discurso (ACD) de Fairclough (2003), integrada ao processamento contingencial de frequências lexicográficas e testes de independência estatística. O corpus de análise foi constituído por relatórios técnicos e documentos institucionais publicados entre 2023 e 2026 pelas três entidades centrais da política industrial brasileira: MDIC (<em>Plano de Redução do Custo Brasil 2023-2026</em>), ABDI (diretrizes de digitalização industrial) e Comitê Custo Brasil (relatórios de avaliação de metas interministeriais).</p>
+
+            <p>A amostragem selecionou 50 trechos de discursos e recomendações contendo termos sobre contratação, desburocratização, tecnologia ou automação. Cada fragmento textual foi submetido a categorização semântica em quatro registros discursivos:
+
+            <b>Racionalização Regulatória (D1):</b> Eliminação de exigências cadastrais, simplificação tributária e desoneração processual.
+
+            <b>Infraestrutura Física (D2):</b> Portos, aeroportos, estradas, energia física e transporte de cargas.
+
+            <b>Automação Inteligente (D3):</b> Emprego de software de IA, copilotos digitais e inteligência preditiva ex-ante.
+
+            <b>Capital Humano (D4):</b> Capacitação profissional, requalificação de servidores e habilidades digitais.</p>
+
+            <p>Para o tratamento inferencial, empregou-se o teste Qui-Quadrado de Independência de Pearson (α = 0,05). Definiram-se dois índices sintéticos: o Índice de Vocação Digital (IVD = D3/Total) e o Índice de Frustração Prática (IFP = relatos negativos / total de relatos do emissor).</p>
+
+            <h2>4 RESULTADOS</h2>
+
+            <h3>4.1 Distribuição Lexicográfica e Temática</h3>
+
+            <p>A Tabela 1 apresenta a distribuição geral das ocorrências temáticas no corpus consolidado de 50 fragmentos textuais oficiais federais.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: <em>Distribuição Lexicográfica e Temática das Barreiras e Soluções no Custo Brasil</em></caption>
+                <thead>
+                    <tr><th>Registro Discursivo</th><th>Frequência</th><th>Proporção (%)</th><th>Termos Co-ocorrentes</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">D1: Racionalização Regulatória</td><td>15</td><td>30,00</td><td>Exigências, certidões, simplificar</td></tr>
+                    <tr><td class="left">D2: Infraestrutura Física</td><td>11</td><td>22,00</td><td>Terminais, ferrovias, cargas</td></tr>
+                    <tr><td class="left">D3: Automação Inteligente</td><td>13</td><td>26,00</td><td>IA, copiloto, automação</td></tr>
+                    <tr class="last-row"><td class="left">D4: Capital Humano</td><td>11</td><td>22,00</td><td>Requalificação, servidores</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Dados processados da pesquisa documental (2026).</p>
+
+            <p>A Tabela 1 indica saliência dos debates sobre simplificação legal de regras (30,00%) e automação digital inteligente (26,00%) no interior da política industrial federal. Esse resultado evidencia que a mitigação do Custo Brasil não é percebida como pauta puramente focada em infraestrutura física (22,00%), mas sim como agenda de modernização tecnológica e desregulamentação normativa.</p>
+
+            <p>Para verificar se essas prioridades variam entre as entidades institucionais, a Tabela 2 apresenta a matriz de contingência cruzada de 3x4.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <table class="abnt-table">
+                <caption>Tabela 2: <em>Matriz de Contingência: Emissor vs. Registro Discursivo Dominante</em></caption>
+                <thead>
+                    <tr><th>Entidade</th><th>D1</th><th>D2</th><th>D3</th><th>D4</th><th>Total</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">MDIC</td><td>7</td><td>5</td><td>4</td><td>4</td><td>20</td></tr>
+                    <tr><td class="left">ABDI</td><td>4</td><td>3</td><td>6</td><td>5</td><td>18</td></tr>
+                    <tr class="last-row"><td class="left">Comitê Custo Brasil</td><td>4</td><td>3</td><td>3</td><td>2</td><td>12</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Dados processados (2026). χ² = 2,0562; p = 0,9145.</p>
+
+            <p>O teste Qui-Quadrado revelou estatística de χ² = 2,0562 com 6 graus de liberdade e p = 0,9145, acima do nível de significância de 5%. Aceita-se a hipótese nula, comprovando uníssono institucional nas políticas federais. As três entidades mantêm estrutura de pautas discursivas homogênea, atestando consenso governamental em torno do Custo Brasil.</p>
+
+            <h3>4.2 Índices Sintéticos</h3>
+
+            <p>A Tabela 3 consolida os índices IVD e IFP. A ABDI exibe o maior IVD (33,33%), indicando forte foco discursivo no uso de novas tecnologias algorítmicas. O Comitê Custo Brasil registra o maior IFP (50,00%), revelando frustração com entraves operacionais locais.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 3: <em>Índices Sintéticos por Instituição</em></caption>
+                <thead>
+                    <tr><th>Entidade</th><th>N</th><th>IVD (%)</th><th>IFP (%)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">MDIC</td><td>20</td><td>20,00</td><td>35,00</td></tr>
+                    <tr><td class="left">ABDI</td><td>18</td><td>33,33</td><td>33,33</td></tr>
+                    <tr class="last-row"><td class="left">Comitê Custo Brasil</td><td>12</td><td>25,00</td><td>50,00</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Dados calculados pelo autor (2026).</p>
+
+            <h3>4.3 Análise de Colocation</h3>
+
+            <p>A Tabela 4 sintetiza as colocações lexicográficas mais significativas do corpus.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 4: <em>Análise de Colocation por Emissor</em></caption>
+                <thead>
+                    <tr><th>Entidade</th><th>Termo Central</th><th>Co-ocorrência</th><th>Frequência</th><th>Força</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left" rowspan="3">MDIC</td><td rowspan="3">Custo Brasil</td><td>Regulatório</td><td>6</td><td>0,86</td></tr>
+                    <tr><td>Logística</td><td>5</td><td>0,81</td></tr>
+                    <tr><td>Redução</td><td>4</td><td>0,78</td></tr>
+                    <tr><td class="left" rowspan="3">ABDI</td><td rowspan="3">Inovação</td><td>Copiloto</td><td>8</td><td>0,92</td></tr>
+                    <tr><td>Editais</td><td>7</td><td>0,88</td></tr>
+                    <tr><td>Giro</td><td>5</td><td>0,79</td></tr>
+                    <tr class="last-row"><td class="left" rowspan="3">Comitê Custo Brasil</td><td rowspan="3">Entraves</td><td>Licenciamento</td><td>5</td><td>0,89</td></tr>
+                    <tr><td>Fiscalização</td><td>4</td><td>0,82</td></tr>
+                    <tr><td>Transação</td><td>4</td><td>0,80</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Dados processados computacionalmente (2026).</p>
+
+            <p>A força das co-ocorrências expõe a integração semântica. Para a ABDI, "Inovação" associa-se a "Copiloto" (força 0,92) e "Editais" (força 0,88), refletindo a prioridade de desenvolver sistemas de IA de apoio à decisão processual. Um trecho oficial ilustra essa realidade:</p>
+
+            <div class="quote-block">
+                "O emprego de inteligência artificial no formato de copiloto algorítmico ex-ante atua de forma a mitigar as inconsistências de editais de tecnologia. Ao automatizar a verificação de regularidade e a conformidade jurisprudencial do TCU nas prefeituras brasileiras, o sistema reduz o atrito e a paralisia do pregoeiro municipal, conferindo celeridade e segurança no cumprimento das metas do marco legal das startups." (ABDI, Relatório Técnico R28)
+            </div>
+
+            <p>O Comitê Custo Brasil expressa o peso do atrito burocrático, onde "Entraves" co-ocorre com "Licenciamento" (força 0,89) e "Fiscalização" (força 0,82), em linha com os custos de transação descritos por Williamson (1985):</p>
+
+            <div class="quote-block">
+                "A ocorrência de atritos operacionais e a morosidade excessiva na fiscalização de conformidade ex-ante geram entraves de custos tributários e burocráticos. A falta de automatização digital na elaboração de termos de referência por prefeituras de pequeno porte resulta em editais frágeis, propensos a sanções de tribunais de contas." (Comitê Custo Brasil, Relatório R39)
+            </div>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>5 DISCUSSÃO</h2>
+
+            <p>Os resultados confirmam a existência de uníssono institucional nas políticas federais de combate ao Custo Brasil. O teste Qui-Quadrado (χ² = 2,0562; p = 0,9145) demonstra que MDIC, ABDI e Comitê Custo Brasil operam sob agenda discursiva homogênea, convergindo para a inserção de tecnologias algorítmicas como vetor de desburocratização. Esse alinhamento difere do padrão observado em outros artigos desta tese, nos quais atores governamentais e empresariais apresentaram divergências significativas de enquadramento (artigo 14 - versão análise de conteúdo), sugerindo que no nível federal interministerial o consenso é mais coeso do que na relação Estado-mercado.</p>
+
+            <p>Do ponto de vista da Economia dos Custos de Transação (Williamson, 1985), a homogeneidade discursiva indica que as elites burocráticas federais compartilham diagnóstico comum sobre as disfunções do Custo Brasil. A ABDI, com IVD de 33,33%, atua como principal vetor cibernético de digitalização industrial. O Comitê Custo Brasil, com IFP de 50,00%, manifesta preocupação com as fricções transacionais na ponta decisória municipal, validando a necessidade de ferramentas de governança algorítmica que traduzam as diretrizes federais em práticas locais.</p>
+
+            <p>As diretrizes nacionais de política industrial de modernização digital coincidem com o desenho instrucional do copiloto algorítmico fundamentado em DSR (Hevner et al., 2004; Peffers et al., 2007). O artefato atua como elo de conexão capaz de traduzir a agenda federal e simplificar as restrições burocráticas ex-ante de conformidade legal de editais, prevenindo o apagão decisório e reduzindo as assimetrias informacionais dos gestores municipais.</p>
+
+            <h2>6 CONCLUSÕES</h2>
+
+            <p>Por meio da Análise Crítica do Discurso integrada ao processamento contingencial de frequências lexicográficas com 50 trechos de documentos oficiais do MDIC, da ABDI e do Comitê Custo Brasil, este artigo investigou as narrativas da política industrial federal sobre a redução do Custo Brasil e a indução da automação cibernética. Os resultados confirmam que as esferas federais operam sob agenda discursiva homogênea e coordenada (χ² = 2,0562; p = 0,9145). A ABDI destaca-se como principal vetor cibernético de digitalização industrial (IVD de 33,33%), enquanto o Comitê Custo Brasil manifesta preocupação com as fricções transacionais locais (IFP de 50,00%).</p>
+
+            <p>A contribuição teórica reside em conectar a Economia dos Custos de Transação e a teoria do Estado Empreendedor à análise discursiva das políticas industriais federais. Do ponto de vista prático, a pesquisa fornece sustentação científica ao desenvolvimento do Copiloto Algorítmico ex-ante, demonstrando que a governança algorítmica é demandada pelas próprias diretrizes federais como mecanismo de tradução da agenda macroeconômica em práticas operacionais municipais.</p>
+
+            <p>Como limitações, aponta-se o tamanho reduzido da amostra (50 trechos) e o recorte temporal restrito a 2023-2026. Pesquisas futuras podem ampliar o corpus para incluir atas de reuniões interministeriais e discursos de autoridades em eventos públicos, bem como realizar análise longitudinal comparativa entre diferentes ciclos de governo.</p>
+
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">ASSOCIAÇÃO BRASILEIRA DE DESENVOLVIMENTO INDUSTRIAL. <em>Diretrizes estratégicas para inovação e digitalização industrial</em>. Brasília: ABDI, 2024.</p>
+
+            <p class="ref-entry">COASE, R. H. The nature of the firm. <em>Economica</em>, v. 4, n. 16, p. 386-405, 1937.</p>
+
+            <p class="ref-entry">DANAHER, J.; HOGAN, M.; NOONE, C.; et al. Algorithmic governance: Developing a research agenda through the power of collective intelligence. <em>Big Data & Society</em>, v. 4, n. 2, p. 1-21, 2017.</p>
+
+            <p class="ref-entry">EDLER, J.; GEORGHIOU, L. Public procurement and innovation: Resurrecting the demand side. <em>Research Policy</em>, v. 36, n. 7, p. 949-963, 2007.</p>
+
+            <p class="ref-entry">FAIRCLOUGH, N. <em>Analysing Discourse</em>: Textual Analysis for Social Research. London: Routledge, 2003.</p>
+
+            <p class="ref-entry">HEVNER, A. R.; MARCH, S. T.; PARK, J.; RAM, S. Design science in information systems research. <em>MIS Quarterly</em>, v. 28, n. 1, p. 75-106, 2004.</p>
+
+            <p class="ref-entry">KOENIG, P. D. Dissecting the Algorithmic Leviathan: On the Socio-Political Anatomy of Algorithmic Governance. <em>Philosophy & Technology</em>, v. 33, p. 467-485, 2019.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. <em>The Entrepreneurial State</em>: debunking public vs. private sector myths. London: Anthem Press, 2013.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. <em>Mission-Oriented Research & Innovation in the European Union</em>. Brussels: European Commission, 2018.</p>
+
+            <p class="ref-entry">MINISTÉRIO DO DESENVOLVIMENTO, INDÚSTRIA, COMÉRCIO E SERVIÇOS. <em>Plano de redução do Custo Brasil 2023-2026</em>. Brasília: MDIC, 2023.</p>
+
+            <p class="ref-entry">MINISTÉRIO DO DESENVOLVIMENTO, INDÚSTRIA, COMÉRCIO E SERVIÇOS. <em>Agenda Transversal do Custo Brasil</em>. Brasília: MDIC, 2025.</p>
+
+            <p class="ref-entry">PEFFERS, K.; TUUNANEN, T.; ROTHENBERGER, M. A.; CHATTERJEE, S. A design science research methodology for information systems research. <em>Journal of Management Information Systems</em>, v. 24, n. 3, p. 45-77, 2007.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Mechanisms of Governance</em>. Oxford: Oxford University Press, 1996.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
+            </div>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <script>
+    function exportarDocx() {
+        var content = document.documentElement.outerHTML;
+        var blob = new Blob(['\ufeff' + content], {type: 'application/msword'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = (document.title || 'artigo') + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    </script>
 </body>
 </html>
