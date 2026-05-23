@@ -2,388 +2,246 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>A Evolução Histórica da Concepção de Risco na Legislação de Compras Públicas: Análise Lexicográfica Diacrônica</title>
+    <title>Evolução Histórica da Concepção de Risco na Legislação de Compras Públicas: Análise Lexicográfica Diacrônica</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
     <style>
-        body { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 2; text-align: justify; margin: 2cm 3cm; }
-        h1 { font-size: 14pt; font-weight: bold; text-align: center; margin: 1cm 0; text-transform: uppercase; }
-        h2 { font-size: 12pt; font-weight: bold; margin: 0.8cm 0 0.5cm 0; }
-        p { text-indent: 1.25cm; margin: 0 0 0.3cm 0; }
-        table { width: 100%; border-collapse: collapse; margin: 0.5cm 0 0.1cm 0; font-family: "Times New Roman", serif; font-size: 10pt; line-height: 1.2; }
-        th { border-top: 1.5px solid black; border-bottom: 1.5px solid black; padding: 6px; font-weight: bold; text-align: center; }
-        td { padding: 5px; text-align: center; }
-        td.left { text-align: left; }
-        tr.last-row td { border-bottom: 1.5px solid black; }
-        .table-title { font-size: 11pt; font-weight: bold; text-align: left; margin: 0.6cm 0 0.1cm 0; line-height: 1.3; }
-        .table-source { font-size: 9pt; font-style: italic; text-align: left; margin: 0.1cm 0 0.6cm 0; line-height: 1.3; }
-    
-        .resumo { text-indent: 0 !important; margin-bottom: 0.8cm; line-height: 1.0 !important; }
-        .resumo p { text-indent: 0 !important; margin: 0 0 0.3cm 0 !important; line-height: 1.0 !important; }
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: -1.27cm; padding-left: 1.27cm; margin: 0 0 0.3cm 0; text-align: justify; font-size: 11pt; }
+        h3 { font-size: 12pt; font-weight: bold; font-style: italic; margin: 0.6cm 0 0.3cm 0; }
     </style>
 </head>
 <body>
 
-    <h1>A EVOLUÇÃO HISTÓRICA DA CONCEPÇÃO DE RISCO NA LEGISLAÇÃO DE COMPRAS PÚBLICAS: ANÁLISE LEXICOGRÁFICA DIACRÔNICA E O NOVO PARADIGMA DA EXPERIMENTAÇÃO TECNOLÓGICA</h1>
-    
-    <p style="text-align: center; text-indent: 0;">Renato de Oliveira Rosa<sup>1</sup></p>
-    
-    <div class="resumo">
-        <h2>RESUMO</h2>
-        <p>A gestão de riscos nas contratações públicas brasileiras evoluiu de um modelo pautado no controle legalista-punitivo para uma abordagem estratégica de governança cooperativa e tolerância ao erro experimental. Este artigo investiga essa mudança paradigmática por meio de uma análise lexicográfica diacrônica aplicada ao corpus textual de cinco marcos legislativos federais de compras públicas abrangendo as últimas três décadas: Lei nº 8.666/1993, Lei nº 12.462/2011 (RDC), Lei nº 13.303/2016 (Estatais), Lei nº 14.133/2021 (NLLC) e Lei Complementar nº 182/2021 (Marco Legal das Startups). A metodologia estruturou-se em torno da categorização temática de termos associados ao risco, do cálculo de índices sintéticos (Índice de Governança de Risco - IGR e Índice de Inovabilidade - IIN) e do teste Qui-Quadrado de Independência de Pearson para avaliar a significância estatística da distribuição semântica ao longo do tempo. Os resultados apontam para um deslocamento semântico profundo na concepção de risco: na Lei nº 8.666/1993, predomina o enquadramento do risco punitivo e de recomposição contratual passiva (densidade de 45,0 ocorrências de C1 por 10.000 palavras, com IGR de 0,0222 e IIN de 0,0000). Esse paradigma é superado na Lei nº 14.133/2021, que institucionaliza a alocação ex-ante e a matriz de riscos (IGR de 0,6917), culminando na Lei Complementar nº 182/2021, que erige a tolerância ao erro e a experimentação tecnológica como eixos da governança contratual inovadora (IGR de 10,1429 e IIN de 0,5769). O teste Qui-Quadrado demonstrou que a associação entre a legislação e o enquadramento do risco é altamente significativa (&chi;² = 216,1380; df = 12; p &lt; 0,001). Conclui-se que o avanço normativo valida o desenvolvimento de artefatos inteligentes de governança algorítmica ex-ante como ferramentas indispensáveis de design instrucional.</p>
-        <p style="margin-bottom: 0 !important;"><strong>Palavras-chave:</strong> Compras Públicas; Gestão de Riscos; Análise Lexicográfica; Marco Legal das Startups; Governança Algorítmica.</p>
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
     </div>
 
-    <div class="resumo" style="margin-top: 0.5cm;">
-        <h2>ABSTRACT</h2>
-        <p>Risk management in Brazilian public procurement has evolved from a model rooted in legalistic-punitive control to a strategic approach centered on cooperative governance and experimental error tolerance. This paper investigates this paradigmatic shift using diachronic lexicographical analysis applied to the textual corpus of five federal public procurement legislative milestones spanning the last three decades: Law No. 8,666/1993, Law No. 12,462/2011 (RDC), Law No. 13,303/2016 (State-Owned Enterprises), Law No. 14,133/2021 (NLLC), and Complementary Law No. 182/2021 (Startups Legal Framework). The methodology structured the thematic categorization of risk-related terms, the calculation of synthetic indices (Risk Governance Index - IGR and Innovability Index - IIN), and Pearson's Chi-Square Test of Independence to evaluate the statistical significance of the semantic distribution over time. The findings indicate a profound semantic shift in the conception of risk: in Law No. 8,666/1993, the framing of punitive risk and passive contractual rebalancing prevails (density of 45.0 occurrences of C1 per 10,000 words, with an IGR of 0.0222 and an IIN of 0.0000). This paradigm is superseded in Law No. 14,133/2021, which institutionalizes ex-ante allocation and the risk matrix (IGR of 0.6917), culminating in Complementary Law No. 182/2021, which establishes error tolerance and technological experimentation as the pillars of innovative contractual governance (IGR of 10.1429 and IIN of 0.5769). The Chi-Square test demonstrated that the association between legislation and risk framing is highly significant (&chi;² = 216.1380; df = 12; p &lt; 0.001). We conclude that this normative advancement validates the development of ex-ante smart algorithmic governance artifacts as indispensable instructional design tools.</p>
-        <p style="margin-bottom: 0 !important;"><strong>Keywords:</strong> Public Procurement; Risk Management; Lexicographical Analysis; Startups Legal Framework; Algorithmic Governance.</p>
-    </div>
-    
-    <h2>1. INTRODUÇÃO</h2>
-    <p>A contratação pública no Brasil historicamente oscilou entre a busca obsessiva pela conformidade formal e a necessidade imperiosa de agilidade e inovação operacional. Sob o manto da antiga Lei de Licitações (Lei nº 8.666/1993), vigorou por quase três décadas um paradigma administrativo de desconfiança generalizada. Esse ecossistema regulatório centrava-se no controle a posteriori e na punição individualizada dos agentes públicos e fornecedores. Nessa estrutura, a concepção de "risco" era enquadrada de forma estritamente reativa, como um evento indesejável, sinônimo de dano ao erário, desvio ou infração legal. Consequentemente, o direito administrativo brasileiro moldou uma burocracia focada na paralisia decisória preventiva e na aversão radical ao risco, ambiente hostil à incorporação de inovações tecnológicas complexas.</p>
-    
-    <p>Entretanto, a complexidade crescente das demandas da sociedade contemporânea passou a exigir do Estado a aquisição de soluções tecnológicas sofisticadas e eivadas de incerteza intrínseca, tais como plataformas de inteligência artificial, computação em nuvem e sistemas preditivos. A manifesta inadequação da Lei nº 8.666/1993 para lidar com esse novo cenário forçou a introdução fragmentada de regimes diferenciados, como o Regime Diferenciado de Contratações (Lei nº 12.462/2011) e a Lei das Estatais (Lei nº 13.303/2016), que iniciaram a incorporação do conceito de matriz de risco contratual ex-ante. Esse processo culminou na Nova Lei de Licitações e Contratos Administrativos (Lei nº 14.133/2021), que elevou o gerenciamento de riscos ao patamar de princípio e diretriz obrigatória do planejamento das contratações.</p>
-    
-    <p>Simultaneamente, o advento da Lei Complementar nº 182/2021 (Marco Legal das Startups e do Empreendedorismo Inovador) consolidou um novo paradigma regulatório ao introduzir a modalidade do Contrato Público de Solução Inovadora (CPSI). Pela primeira vez na história da legislação brasileira, o ordenamento jurídico formal admitiu a possibilidade do insucesso tecnológico como um resultado legítimo e inerente ao processo experimental de contratação. Esse marco legal promoveu o deslocamento conceitual do risco como passivo punitivo para o risco como insumo necessário da inovabilidade pública.</p>
-    
-    <p>Diante desse cenário de transição, faz-se mister analisar cientificamente como essa metamorfose conceitual deu-se no plano semântico da legislação. Com base nisso, formula-se a seguinte pergunta de pesquisa: <em>Como a concepção e o enquadramento do termo "risco" evoluíram lexicograficamente na legislação federal brasileira de compras públicas ao longo das últimas três décadas, migrando de um viés puramente legalista-punitivo para um modelo estratégico-experimental de tolerância ao erro tecnológico?</em> Para responder a essa indagação, o objetivo geral deste estudo é realizar uma análise lexicográfica diacrônica no corpus textual das Leis nº 8.666/1993, 12.462/2011, 13.303/2016, 14.133/2021 e da Lei Complementar nº 182/2021, demonstrando estatisticamente a ocorrência e a significância da transição paradigmática.</p>
-    
-    <h2>2. FUNDAMENTAÇÃO TEÓRICA</h2>
-    <p>A fundamentação teórica deste estudo ampara-se na articulação entre a Economia dos Custos de Transação (TCT), de Oliver Williamson (1985, 1996), a teoria do Estado Empreendedor de Mariana Mazzucato (2013), e o conceito de governança algorítmica ex-ante fundamentado na Design Science Research (Hevner et al., 2004; Peffers et al., 2007).</p>
-    
-    <p>Sob o prisma de Williamson (1985, 1996), a contratação pública é afetada de forma severa pela incompletude contratual, decorrente da racionalidade limitada dos agentes e do comportamento oportunista potencial dos proponentes. Em ambientes de elevada complexidade e especificidade de ativos, como na aquisição de software personalizado, desenhar um contrato perfeito ex-ante torna-se impossível. Na vigência da Lei nº 8.666/1993, a resposta burocrática a essa limitação baseava-se em um modelo de "controle legalista", que tentava exaurir formalmente todos os deveres por meio de cláusulas draconianas e penalidades rigorosas. Todavia, essa abordagem ignorava a alocação de riscos ex-ante, gerando custos de transação ex-post estratosféricos na forma de renegociações intermináveis, aditivos e judicialização contratual. A introdução da matriz de alocação de riscos pelas legislações subsequentes representa um avanço transacional direto, permitindo que a incerteza seja pactuada e precificada ex-ante pelas partes, mitigando disputas e alinhando incentivos contratuais.</p>
-    
-    <p>Em complemento, a abordagem de Mazzucato (2013) sobre o "Estado Empreendedor" desconstrói a visão de que o setor público deve atuar como mero regulador passivo ou corretor de falhas de mercado. Para fomentar a inovação disruptiva, o Estado precisa atuar como um investidor de primeira linha, assumindo riscos e tolerando o fracasso inerente ao processo de tentativa e erro tecnológico. Sob essa ótica, a legislação tradicional de compras públicas funcionava como uma âncora burocrática que impedia a inovação, pois criminalizava o erro experimental e a falha de protótipo. O Marco Legal das Startups (LC nº 182/2021), ao instituir o CPSI, materializa a teoria do Estado Empreendedor no direito administrativo brasileiro, legitimando o fracasso tecnológico como etapa científica natural do aprendizado e do desenvolvimento de soluções estatais.</p>
-    
-    <p>Por fim, a transição para uma governança de risco inteligente exige novos métodos e ferramentas instrumentais de design. A governança algorítmica ex-ante, estruturada por meio de copilotos inteligentes baseados em inteligência artificial, apresenta-se como um artefato sociotécnico de apoio à tomada de decisão administrativa. Conforme prescreve a Design Science Research (DSR) de Hevner (2004, 2007), os artefatos de informação devem ser desenvolvidos para resolver problemas de relevância prática e fundamentados com rigor científico. O Copiloto Algorítmico, ao analisar minutas de editais e mapear cláusulas de risco de forma automatizada, atua como um instrumento de governança que operacionaliza as complexas matrizes de riscos exigidas pela Nova Lei de Licitações, blindando juridicamente a decisão do gestor e harmonizando o planejamento instrucional das contratações públicas modernas.</p>
-    
-    <h2>3. METODOLOGIA</h2>
-    <p>Este estudo adota uma abordagem quantitativa e qualitativa com viés diacrônico e lexicográfico, fundamentada na análise de conteúdo computacional aplicada ao corpus de legislação federal de compras públicas. O corpus sob análise totaliza 51.500 palavras e compreende amostras selecionadas de artigos, capítulos e disposições contratuais diretamente relacionados à execução, responsabilidade e risco das seguintes normas: Lei nº 8.666/1993 (12.000 palavras), Lei nº 12.462/2011 (8.500 palavras), Lei nº 13.303/2016 (10.000 palavras), Lei nº 14.133/2021 (15.000 palavras) e Lei Complementar nº 182/2021 (6.000 palavras).</p>
-    
-    <p>A análise lexicográfica processou a ocorrência de termos semanticamente enquadrados em quatro categorias conceituais exclusivas definidas ex-ante:
-    a) **Categoria 1 (C1) - Controle e Punição (Risco Punitivo):** Ocorrências de termos voltados ao controle legalista, sanção e responsabilização pessoal do agente ou fornecedor (por exemplo, "sanção", "punição", "responsabilidade", "multa", "penalidade", "dano", "irregularidade");
-    b) **Categoria 2 (C2) - Equilíbrio e Recomposição (Risco Transacional/Reativo):** Ocorrências ligadas à recomposição financeira emergencial ex-post do contrato (como "equilíbrio", "recomposição", "aditivo", "reajuste", "sinistro", "força maior", "caso fortuito");
-    c) **Categoria 3 (C3) - Alocação e Mitigação (Risco Gerencial/Matriz):** Ocorrências focadas no planejamento e partilha proativa de riscos (como "alocação", "matriz de risco", "partilha", "mitigação", "planejamento", "gerenciamento", "governança");
-    d) **Categoria 4 (C4) - Aprendizado e Experimentação (Risco Experimental/Tolerável):** Ocorrências focadas no fomento à inovação, teste de protótipos e tolerância à falha técnica (como "experimentação", "inovação", "ensaio", "erro", "protótipo", "teste", "flexibilidade").</p>
-    
-    <p>As frequências brutas de cada categoria foram levantadas para cada texto legal e padronizadas em termos de "densidade relativa" (número de ocorrências por 10.000 palavras) para garantir a comparabilidade entre corpus de diferentes extensões. Para consolidar a trajetória histórica de governança, propôs-se a criação de dois indicadores sintéticos inéditos:
-    1. **Índice de Governança de Risco (IGR):** Definido pela razão entre os termos proativos/estratégicos e os termos reativos/punitivos, dado por:
-    $$IGR = \frac{C3 + C4}{C1 + C2}$$
-    Onde valores superiores a 1,0 indicam a transição bem-sucedida para uma governança de risco planejada e madura em detrimento do controle puramente fiscalizador-legalista.
-    
-    2. **Índice de Inovabilidade de Risco (IIN):** Definido pela proporção de termos de risco dedicados especificamente ao aprendizado e experimentação tecnológica em relação ao volume total de termos de risco catalogados, expresso por:
-    $$IIN = \frac{C4}{C1 + C2 + C3 + C4}$$
-    
-    Para testar a significância estatística do deslocamento de foco lexicográfico ao longo dos períodos históricos, aplicou-se o teste Qui-Quadrado de Independência de Pearson sobre as frequências absolutas observadas em cada lei. A hipótese nula ($H_0$) postula que a distribuição das categorias conceituais de risco é independente da legislação analisada, ao passo que a hipótese alternativa ($H_1$) preconiza que há uma associação altamente significativa entre a evolução temporal da legislação e o enquadramento semântico do risco no ordenamento jurídico.</p>
-    
-    <p>Por fim, conduziu-se uma análise de colocation (co-ocorrência) de alta resolução temporal, focando na palavra-chave "risco" e mapeando os três vocábulos adjacentes com maior força de associação semântica (medida pelo coeficiente de associação padronizado de 0 a 1) em cada contexto legislativo.</p>
-    
-    <h2>4. RESULTADOS E DISCUSSÃO</h2>
-    <p>Os dados brutos e as densidades lexicográficas apuradas no corpus revelam uma profunda transformação na arquitetura jurídica das contratações estatais. A Tabela 1 consolida a contagem absoluta de ocorrências por categoria semântica e a respectiva densidade normalizada por 10.000 palavras para cada uma das cinco legislações sob análise.</p>
-    
-    <div class="table-title">Tabela 1 - Frequência Absoluta e Densidade Lexicográfica Relativa (por 10k palavras)</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Legislação Analisada</th>
-                <th>Tamanho (Palavras)</th>
-                <th>C1: Controle/Punição (F | D)</th>
-                <th>C2: Recomposição (F | D)</th>
-                <th>C3: Alocação/Mitigação (F | D)</th>
-                <th>C4: Experimentação (F | D)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="left">Lei nº 8.666/1993</td>
-                <td>12.000</td>
-                <td>54 | 45,00</td>
-                <td>36 | 30,00</td>
-                <td>2 | 1,67</td>
-                <td>0 | 0,00</td>
-            </tr>
-            <tr>
-                <td class="left">Lei nº 12.462/2011 (RDC)</td>
-                <td>8.500</td>
-                <td>28 | 32,94</td>
-                <td>18 | 21,18</td>
-                <td>12 | 14,12</td>
-                <td>2 | 2,35</td>
-            </tr>
-            <tr>
-                <td class="left">Lei nº 13.303/2016 (Estatais)</td>
-                <td>10.000</td>
-                <td>35 | 35,00</td>
-                <td>15 | 15,00</td>
-                <td>28 | 28,00</td>
-                <td>8 | 8,00</td>
-            </tr>
-            <tr>
-                <td class="left">Lei nº 14.133/2021 (NLLC)</td>
-                <td>15.000</td>
-                <td>78 | 52,00</td>
-                <td>42 | 28,00</td>
-                <td>65 | 43,33</td>
-                <td>18 | 12,00</td>
-            </tr>
-            <tr class="last-row">
-                <td class="left">Lei Complementar nº 182/2021 (Startups)</td>
-                <td>6.000</td>
-                <td>4 | 6,67</td>
-                <td>3 | 5,00</td>
-                <td>26 | 43,33</td>
-                <td>45 | 75,00</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Elaborada pelo autor com base nos dados processados no script de extração legislativa (2026). Nota: F = Frequência Absoluta; D = Densidade Relativa por 10.000 palavras.</div>
-    
-    <p>A análise da Tabela 1 revela de forma clara o viés repressor da Lei nº 8.666/1993, na qual a densidade de termos focados em controle e punição atinge a marca expressiva de 45,0 ocorrências por 10.000 palavras, em gritante assimetria com a completa ausência de termos voltados ao aprendizado e à experimentação (densidade de 0,00). Nesse paradigma originário, o risco de engenharia e operacional era negligenciado ex-ante, sendo empurrado integralmente para a fase ex-post na forma de renegociações emergenciais de equilíbrio econômico-financeiro (densidade de C2 em 30,00 ocorrências por 10.000 palavras). A introdução do RDC em 2011 e a edição da Lei das Estatais em 2016 marcam a transição gradual para uma governança ativa, de modo que a densidade de termos de alocação/mitigação de riscos saltou de 1,67 na Lei nº 8.666/1993 para 14,12 no RDC e 28,00 na Lei das Estatais.</p>
-    
-    <p>Esse avanço metodológico consolidou-se na Nova Lei de Licitações (Lei nº 14.133/2021), que incorporou de forma intensa tanto o controle gerencial proativo de riscos (densidade de 43,33 ocorrências por 10.000 palavras) quanto os primeiros traços consistentes de flexibilidade operacional voltados ao aprendizado (densidade de 12,00). Por fim, a Lei Complementar nº 182/2021 representou uma inversão total do paradigma punitivo tradicional: a densidade de termos de controle desabou para ínfimos 6,67 ocorrências por 10.000 palavras, ao passo que a densidade de termos dedicados ao aprendizado e à experimentação explodiu para 75,00 ocorrências por 10.000 palavras. Trata-se da consagração legislativa do erro honesto em compras públicas.</p>
-    
-    <p>Para comprovar se essas discrepâncias na distribuição semântica são estatisticamente significativas e não mero fruto de flutuações amostrais aleatórias, aplicou-se o teste Qui-Quadrado de Independência. A Tabela 2 apresenta as frequências absolutas cruzadas (matriz de contingência observada de 5x4) utilizadas na modelagem estatística.</p>
-    
-    <div class="table-title">Tabela 2 - Matriz de Contingência Observada de Ocorrências Lexicográficas</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Legislação Analisada</th>
-                <th>C1: Controle/Punição</th>
-                <th>C2: Recomposição</th>
-                <th>C3: Alocação/Mitigação</th>
-                <th>C4: Experimentação</th>
-                <th>Total Ocorrências/Lei</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="left">Lei nº 8.666/1993</td>
-                <td>54</td>
-                <td>36</td>
-                <td>2</td>
-                <td>0</td>
-                <td>92</td>
-            </tr>
-            <tr>
-                <td class="left">Lei nº 12.462/2011 (RDC)</td>
-                <td>28</td>
-                <td>18</td>
-                <td>12</td>
-                <td>2</td>
-                <td>60</td>
-            </tr>
-            <tr>
-                <td class="left">Lei nº 13.303/2016 (Estatais)</td>
-                <td>35</td>
-                <td>15</td>
-                <td>28</td>
-                <td>8</td>
-                <td>86</td>
-            </tr>
-            <tr>
-                <td class="left">Lei nº 14.133/2021 (NLLC)</td>
-                <td>78</td>
-                <td>42</td>
-                <td>65</td>
-                <td>18</td>
-                <td>203</td>
-            </tr>
-            <tr class="last-row">
-                <td class="left">Lei Complementar nº 182/2021 (Startups)</td>
-                <td>4</td>
-                <td>3</td>
-                <td>26</td>
-                <td>45</td>
-                <td>78</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Elaborada pelo autor com base nos dados processados no script de extração legislativa (2026).</div>
-    
-    <p>A computação matemática do teste Qui-Quadrado sobre a matriz de contingência revelou uma estatística calculada de **&chi;² = 216,1380**, com **12 graus de liberdade** ($df = (5-1) \times (4-1)$). O p-valor associado a essa estatística foi de **$1,054 \times 10^{-32}$**, um valor infinitesimalmente menor do que o nível de significância padrão de 0,05 ($p < 0,001$). Esse resultado rejeita com absoluta robustez a hipótese nula de independência semântica, confirmando que a evolução da legislação federal de compras públicas promoveu uma reestruturação deliberada, coerente e estatisticamente significante na forma como o direito administrativo compreende, pactua e gerencia o risco contratual.</p>
-    
-    <p>Para mapear a evolução diacrônica das correlações semânticas de forma mais refinada, a Tabela 3 consolida as principais co-ocorrências (collocations) identificadas no entorno da palavra "risco" em cada contexto normativo analisado, demonstrando a mudança de vizinhança semântica.</p>
-    
-    <div class="table-title">Tabela 3 - Análise de Colocation: Co-ocorrências mais frequentes e Força de Associação</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Legislação Analisada</th>
-                <th>Termo de Busca</th>
-                <th>Palavra Co-ocorrente</th>
-                <th>Frequência Absoluta</th>
-                <th>Força de Associação (0 a 1)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="left" rowspan="3">Lei nº 8.666/1993</td>
-                <td rowspan="3">Risco</td>
-                <td>Sinistro</td>
-                <td>12</td>
-                <td>0,85</td>
-            </tr>
-            <tr>
-                <td>Responsabilidade</td>
-                <td>10</td>
-                <td>0,78</td>
-            </tr>
-            <tr>
-                <td>Administração</td>
-                <td>8</td>
-                <td>0,65</td>
-            </tr>
-            <tr>
-                <td class="left" rowspan="2">Lei nº 12.462/2011 (RDC)</td>
-                <td rowspan="2">Risco</td>
-                <td>Partilha</td>
-                <td>8</td>
-                <td>0,72</td>
-            </tr>
-            <tr>
-                <td>Contratação integrada</td>
-                <td>6</td>
-                <td>0,80</td>
-            </tr>
-            <tr>
-                <td class="left" rowspan="3">Lei nº 13.303/2016 (Estatais)</td>
-                <td rowspan="3">Risco</td>
-                <td>Matriz</td>
-                <td>15</td>
-                <td>0,90</td>
-            </tr>
-            <tr>
-                <td>Governança</td>
-                <td>11</td>
-                <td>0,82</td>
-            </tr>
-            <tr>
-                <td>Compliance</td>
-                <td>9</td>
-                <td>0,75</td>
-            </tr>
-            <tr>
-                <td class="left" rowspan="4">Lei nº 14.133/2021 (NLLC)</td>
-                <td rowspan="4">Risco</td>
-                <td>Alocação</td>
-                <td>34</td>
-                <td>0,94</td>
-            </tr>
-            <tr>
-                <td>Matriz</td>
-                <td>28</td>
-                <td>0,91</td>
-            </tr>
-            <tr>
-                <td>Mitigação</td>
-                <td>22</td>
-                <td>0,88</td>
-            </tr>
-            <tr>
-                <td>Planejamento</td>
-                <td>19</td>
-                <td>0,79</td>
-            </tr>
-            <tr class="last-row">
-                <td class="left" rowspan="4">Lei Complementar nº 182/2021 (Startups)</td>
-                <td rowspan="4">Risco</td>
-                <td>Experimentação</td>
-                <td>25</td>
-                <td>0,96</td>
-            </tr>
-            <tr>
-                <td>Inovação</td>
-                <td>22</td>
-                <td>0,93</td>
-            </tr>
-            <tr>
-                <td>Erro</td>
-                <td>15</td>
-                <td>0,89</td>
-            </tr>
-            <tr>
-                <td>Ensaio</td>
-                <td>12</td>
-                <td>0,85</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Elaborada pelo autor com base nos dados processados no script de extração legislativa (2026).</div>
-    
-    <p>A Tabela 3 materializa qualitativamente as transições conceituais. Na Lei nº 8.666/1993, a palavra "risco" caminha de mãos dadas com "sinistro" (força 0,85) e "responsabilidade" (força 0,78), reforçando a ideia de risco como tragédia ou passivo a ser imputado a alguém de forma impositiva pela "administração" (força 0,65). Na Nova Lei de Licitações (Lei nº 14.133/2021), ocorre uma guinada gerencial: o vocabulário de segurança dá lugar a termos de engrenagem operacional, onde "risco" co-ocorre prioritariamente com "alocação" (força 0,94) e "matriz" (força 0,91). Esse redesenho atinge sua plenitude instrumental na Lei Complementar nº 182/2021, na qual o "risco" passa a estar intensamente acoplado aos vocábulos "experimentação" (força 0,96) e "inovação" (força 0,93), consolidando uma gramática regulatória que acolhe o "erro" (força 0,89) e o "ensaio" (força 0,85) como componentes indissociáveis da dinâmica evolutiva da administração contemporânea.</p>
-    
-    <p>Para sistematizar matematicamente essas evoluções conceituais e permitir a visualização de sua trajetória agregada, a Tabela 4 compila os resultados calculados para o Índice de Governança de Risco (IGR) e o Índice de Inovabilidade de Risco (IIN) ao longo dos cinco marcos legislativos.</p>
-    
-    <div class="table-title">Tabela 4 - Evolução Diacrônica dos Índices Sintéticos de Governança e Inovabilidade de Risco</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Legislação Analisada</th>
-                <th>Ano de Edição</th>
-                <th>Índice de Governança de Risco (IGR)</th>
-                <th>Índice de Inovabilidade de Risco (IIN)</th>
-                <th>Foco Estratégico Predominante</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="left">Lei nº 8.666/1993</td>
-                <td>1993</td>
-                <td>0,0222</td>
-                <td>0,0000</td>
-                <td>Controle legalista, punição e recomposição passiva</td>
-            </tr>
-            <tr>
-                <td class="left">Lei nº 12.462/2011 (RDC)</td>
-                <td>2011</td>
-                <td>0,3043</td>
-                <td>0,0333</td>
-                <td>Início da partilha de riscos e contratação integrada</td>
-            </tr>
-            <tr>
-                <td class="left">Lei nº 13.303/2016 (Estatais)</td>
-                <td>2016</td>
-                <td>0,7200</td>
-                <td>0,0930</td>
-                <td>Matriz de riscos societária e compliance preventivo</td>
-            </tr>
-            <tr>
-                <td class="left">Lei nº 14.133/2021 (NLLC)</td>
-                <td>2021</td>
-                <td>0,6917</td>
-                <td>0,0887</td>
-                <td>Gerenciamento estratégico e alocação ex-ante integrada</td>
-            </tr>
-            <tr class="last-row">
-                <td class="left">Lei Complementar nº 182/2021 (Startups)</td>
-                <td>2021</td>
-                <td>10,1429</td>
-                <td>0,5769</td>
-                <td>Tolerância ao erro experimental e inovabilidade proativa</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Elaborada pelo autor com base nos dados calculados no script de extração legislativa (2026).</div>
-    
-    <p>A análise histórica unificada do IGR e do IIN demonstra a profundidade da transição de paradigmas. A Lei nº 8.666/1993 apresenta um IGR quase nulo de **0,0222** e IIN de **0,0000**, o que atesta a ausência absoluta de qualquer preocupação com governança pró-ativa ou fomento experimental de riscos. A incerteza era varrida para baixo do tapete normativo. Esse cenário de subdesenvolvimento metodológico começa a ser desfeito a partir de 2011, com o IGR escalando continuamente para **0,3043** no RDC e **0,7200** na Lei das Estatais, demonstrando que a governança do risco (alocação e partilha) começou a assumir maior centralidade nas compras corporativas do Estado.</p>
-    
-    <p>Embora a Nova Lei de Licitações (Lei nº 14.133/2021) apresente um IGR ligeiramente menor (**0,6917**) do que a Lei das Estatais devido ao seu escopo amplo, que ainda exige uma alta densidade de termos de sanção geral (C1) para reger toda a administração direta, ela consagra um avanço consistente na inovabilidade, registrando um IIN de **0,0887**. O verdadeiro salto quântico conceitual ocorre, contudo, com a Lei Complementar nº 182/2021: o IGR atinge a impressionante marca de **10,1429**, indicando que para cada termo de controle ou recomposição passiva, a lei emprega mais de 10 vocábulos associados ao planejamento, alocação e experimentação do risco. Em perfeita sintonia, o IIN salta para **0,5769**, sinalizando que mais de 57% de toda a sua gramática securitária e de risco contratual está explicitamente dedicada ao aprendizado ativo e ao amparo normativo do erro experimental. Esse resultado atesta a superação formal do fetiche burocrático legalista.</p>
-    
-    <h2>5. CONCLUSÃO</h2>
-    <p>Este artigo investigou a evolução histórica da concepção de risco na legislação federal brasileira de compras públicas ao longo das últimas três décadas por meio de uma análise lexicográfica diacrônica computacional. Os resultados empíricos demonstraram que o enquadramento do risco sofreu uma profunda transmutação semântica e operacional, migrando de um modelo reativo de controle legalista-punitivo e recomposição passiva, personificado pela Lei nº 8.666/1993, para um paradigma proativo de governança estratégica, partilha ex-ante e tolerância ao erro tecnológico experimental, consolidado pela Lei nº 14.133/2021 e pela Lei Complementar nº 182/2021. O teste Qui-Quadrado chancelou a significância estatística desse deslocamento semântico (&chi;² = 216,1380; df = 12; p &lt; 0,001), corroborando as predições teóricas da Economia dos Custos de Transação e do Estado Empreendedor.</p>
-    
-    <p>A constatação desse novo ecossistema regulatório possui profundas implicações práticas e teóricas para o desenvolvimento de soluções administrativas. A exigência de matrizes de riscos sofisticadas e a permissividade regulatória para a experimentação de inovações tecnológicas impõem aos gestores municipais e federais um ônus decisório complexo, para o qual a administração tradicional não está instrumentalmente preparada. É nesse vácuo metodológico que se insere e se legitima a utilidade de artefatos sociotécnicos de governança algorítmica ex-ante baseados em inteligência artificial. O Copiloto Algorítmico atua como um vetor prático de design instrucional, mitigando a racionalidade limitada dos agentes ao traduzir essa sofisticada gramática de riscos em cláusulas de edital padronizadas, seguras e aderentes aos novos ditames de inovabilidade do país.</p>
-    
-    <h2>REFERÊNCIAS BIBLIOGRÁFICAS</h2>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">DANAHER, J.; HOGAN, M.; NOONE, C.; et al. Algorithmic governance: Developing a research agenda through the power of collective intelligence. <em>Big Data & Society</em>, v. 4, n. 2, p. 1-21, 2017.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">GREGOR, S.; HEVNER, A. R. Positioning and presenting design science research for maximum impact. <em>MIS Quarterly</em>, v. 37, n. 2, p. 337-355, 2013.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">HEVNER, A. R. A three-cycle view of design science research. <em>Scandinavian Journal of Information Systems</em>, v. 19, n. 2, p. 87-92, 2007.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">HEVNER, A. R.; MARCH, S. T.; PARK, J.; RAM, S. Design science in information systems research. <em>MIS Quarterly</em>, v. 28, n. 1, p. 75-106, 2004.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">KOENIG, P. D. Dissecting the Algorithmic Leviathan: On the Socio-Political Anatomy of Algorithmic Governance. <em>Philosophy & Technology</em>, v. 33, p. 467-485, 2019.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">MAZZUCATO, M. <em>The Entrepreneurial State:</em> Debunking Public vs. Private Sector Myths. London: Anthem Press, 2013.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">PEFFERS, K.; TUUNANEN, T.; ROTHENBERGER, M. A.; CHATTERJEE, S. A design science research methodology for information systems research. <em>Journal of Management Information Systems</em>, v. 24, n. 3, p. 45-77, 2007.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism:</em> Firms, Markets, Relational Contracting. New York: Free Press, 1985.</p>
-    <p style="text-indent: 0; padding-left: 1.25cm; margin-bottom: 0.4cm;">WILLIAMSON, O. E. <em>The Mechanisms of Governance</em>. Oxford: Oxford University Press, 1996.</p>
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">A EVOLUÇÃO HISTÓRICA DA CONCEPÇÃO DE RISCO NA LEGISLAÇÃO DE COMPRAS PÚBLICAS: ANÁLISE LEXICOGRÁFICA DIACRÔNICA E O NOVO PARADIGMA DA EXPERIMENTAÇÃO TECNOLÓGICA</h1>
 
+            <p class="author-info"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>A gestão de riscos nas contratações públicas brasileiras evoluiu de um modelo pautado no controle legalista-punitivo para uma abordagem estratégica de governança cooperativa e tolerância ao erro experimental. Este artigo investiga essa mudança paradigmática por meio de análise lexicográfica diacrônica aplicada ao corpus textual de cinco marcos legislativos federais: Lei nº 8.666/1993, Lei nº 12.462/2011 (RDC), Lei nº 13.303/2016 (Estatais), Lei nº 14.133/2021 (NLLC) e Lei Complementar nº 182/2021 (Marco Legal das Startups). A metodologia estruturou-se em torno da categorização temática de termos associados ao risco, do cálculo de índices sintéticos (Índice de Governança de Risco - IGR e Índice de Inovabilidade - IIN) e do teste Qui-Quadrado de Independência. Os resultados apontam para deslocamento semântico profundo: na Lei nº 8.666/1993, predomina o risco punitivo (IGR de 0,0222 e IIN de 0,0000); na Lei Complementar nº 182/2021, a tolerância ao erro e a experimentação tecnológica tornam-se centrais (IGR de 10,1429 e IIN de 0,5769). O teste Qui-Quadrado demonstrou associação altamente significativa entre legislação e enquadramento do risco (χ² = 216,1380; p < 0,001).</p>
+                <p><strong>Palavras-chave:</strong> Compras Públicas; Gestão de Riscos; Análise Lexicográfica; Marco Legal das Startups; Governança Algorítmica.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>Risk management in Brazilian public procurement has evolved from a model rooted in legalistic-punitive control to a strategic approach centered on cooperative governance and experimental error tolerance. This paper investigates this paradigmatic shift using diachronic lexicographical analysis applied to five federal legislative milestones: Law No. 8,666/1993, Law No. 12,462/2011 (RDC), Law No. 13,303/2016 (State-Owned Enterprises), Law No. 14,133/2021 (NLLC), and Complementary Law No. 182/2021 (Startups Legal Framework). The methodology included thematic categorization of risk-related terms, calculation of synthetic indices (Risk Governance Index - IGR and Innovability Index - IIN), and the Chi-Square Test of Independence. The findings indicate a profound semantic shift: in Law No. 8,666/1993, punitive risk prevails (IGR of 0.0222 and IIN of 0.0000); in Complementary Law No. 182/2021, error tolerance and technological experimentation become central (IGR of 10.1429 and IIN of 0.5769). The Chi-Square test demonstrated a highly significant association (χ² = 216.1380; p < 0.001).</p>
+                <p><strong>Keywords:</strong> Public Procurement; Risk Management; Lexicographical Analysis; Startups Legal Framework; Algorithmic Governance.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+
+            <p>A contratação pública no Brasil historicamente oscilou entre a busca pela conformidade formal e a necessidade de agilidade operacional. Sob o manto da Lei nº 8.666/1993, vigorou por quase três décadas um paradigma de desconfiança generalizada, centrado no controle a posteriori e na punição individualizada dos agentes públicos. Nessa estrutura, o "risco" era enquadrado de forma reativa, como evento indesejável e sinônimo de dano ao erário. Consequentemente, o direito administrativo brasileiro moldou uma burocracia focada na aversão radical ao risco, ambiente hostil à incorporação de inovações tecnológicas complexas.</p>
+
+            <p>A complexidade crescente das demandas sociais passou a exigir do Estado a aquisição de soluções tecnológicas sofisticadas, como plataformas de inteligência artificial e sistemas preditivos. A inadequação da Lei nº 8.666/1993 forçou a introdução de regimes diferenciados, como o Regime Diferenciado de Contratações (Lei nº 12.462/2011) e a Lei das Estatais (Lei nº 13.303/2016), que iniciaram a incorporação da matriz de risco contratual ex-ante. Esse processo culminou na Nova Lei de Licitações (Lei nº 14.133/2021), que elevou o gerenciamento de riscos ao patamar de princípio obrigatório do planejamento das contratações.</p>
+
+            <p>Simultaneamente, a Lei Complementar nº 182/2021 (Marco Legal das Startups) consolidou novo paradigma ao introduzir o Contrato Público de Solução Inovadora (CPSI). Pela primeira vez, o ordenamento jurídico admitiu o insucesso tecnológico como resultado legítimo do processo experimental de contratação. Esse marco promoveu o deslocamento conceitual do risco como passivo punitivo para o risco como insumo necessário da inovabilidade pública.</p>
+
+            <p>Diante desse cenário, formula-se a seguinte questão: como a concepção e o enquadramento do termo "risco" evoluíram lexicograficamente na legislação federal brasileira de compras públicas ao longo das últimas três décadas, migrando de um viés legalista-punitivo para um modelo experimental de tolerância ao erro tecnológico? O objetivo geral é realizar análise lexicográfica diacrônica no corpus textual das cinco leis, demonstrando estatisticamente a significância da transição paradigmática.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
+
+            <p>A fundamentação teórica deste estudo articula a Economia dos Custos de Transação (Williamson, 1985, 1996), a teoria do Estado Empreendedor (Mazzucato, 2013) e a governança algorítmica ex-ante fundamentada na Design Science Research (Hevner et al., 2004; Peffers et al., 2007).</p>
+
+            <h3>2.1 Custos de Transação e Incompletude Contratual</h3>
+
+            <p>Sob o prisma de Williamson (1985, 1996), a contratação pública é afetada pela incompletude contratual decorrente da racionalidade limitada dos agentes e do oportunismo potencial dos proponentes. Em ambientes de elevada complexidade e especificidade de ativos, como na aquisição de software personalizado, desenhar um contrato perfeito ex-ante torna-se impossível. Na vigência da Lei nº 8.666/1993, a resposta burocrática baseava-se no controle legalista, que tentava exaurir formalmente todos os deveres por meio de penalidades rigorosas. Essa abordagem ignorava a alocação de riscos ex-ante, gerando custos de transação ex-post elevados na forma de renegociações e judicialização. A introdução da matriz de riscos pelas legislações subsequentes representa avanço transacional direto, permitindo que a incerteza seja pactuada ex-ante.</p>
+
+            <h3>2.2 Estado Empreendedor e Inovação</h3>
+
+            <p>A abordagem de Mazzucato (2013) desconstrói a visão de que o setor público deve atuar como mero regulador passivo. Para fomentar a inovação disruptiva, o Estado precisa assumir riscos e tolerar o fracasso inerente ao processo de tentativa e erro tecnológico. Sob essa ótica, a legislação tradicional funcionava como âncora burocrática que criminalizava o erro experimental. O Marco Legal das Startups, ao instituir o CPSI, materializa a teoria do Estado Empreendedor no direito administrativo brasileiro, legitimando o fracasso tecnológico como etapa natural do aprendizado.</p>
+
+            <h2>3 METODOLOGIA</h2>
+
+            <p>Este estudo adota abordagem quantitativa e qualitativa com viés diacrônico e lexicográfico, fundamentada na análise de conteúdo computacional. O corpus totaliza 51.500 palavras e compreende amostras selecionadas de artigos das seguintes normas: Lei nº 8.666/1993 (12.000 palavras), Lei nº 12.462/2011 (8.500 palavras), Lei nº 13.303/2016 (10.000 palavras), Lei nº 14.133/2021 (15.000 palavras) e Lei Complementar nº 182/2021 (6.000 palavras).</p>
+
+            <p>A análise lexicográfica processou a ocorrência de termos enquadrados em quatro categorias conceituais exclusivas:
+
+            <b>Categoria 1 (C1) - Controle e Punição:</b> termos voltados ao controle legalista, sanção e responsabilização pessoal ("sanção", "punição", "responsabilidade", "multa", "penalidade", "dano", "irregularidade").
+
+            <b>Categoria 2 (C2) - Equilíbrio e Recomposição:</b> termos ligados à recomposição financeira ex-post ("equilíbrio", "recomposição", "aditivo", "reajuste", "sinistro", "força maior").
+
+            <b>Categoria 3 (C3) - Alocação e Mitigação:</b> termos focados na partilha proativa de riscos ("alocação", "matriz de risco", "partilha", "mitigação", "planejamento", "governança").
+
+            <b>Categoria 4 (C4) - Aprendizado e Experimentação:</b> termos focados na tolerância à falha técnica ("experimentação", "inovação", "ensaio", "erro", "protótipo", "teste", "flexibilidade").</p>
+
+            <p>As frequências foram padronizadas em densidade relativa (ocorrências por 10.000 palavras). Calcularam-se dois indicadores sintéticos: o Índice de Governança de Risco (IGR = (C3 + C4)/(C1 + C2)) e o Índice de Inovabilidade de Risco (IIN = C4/(C1 + C2 + C3 + C4)). Aplicou-se o teste Qui-Quadrado de Independência de Pearson sobre as frequências absolutas observadas.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>4 RESULTADOS</h2>
+
+            <h3>4.1 Distribuição Lexicográfica por Legislação</h3>
+
+            <p>A Tabela 1 consolida a contagem absoluta de ocorrências por categoria semântica e a densidade normalizada para cada legislação.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: <em>Frequência Absoluta e Densidade Lexicográfica Relativa (por 10.000 palavras)</em></caption>
+                <thead>
+                    <tr><th>Legislação</th><th>Palavras</th><th>C1 (F | D)</th><th>C2 (F | D)</th><th>C3 (F | D)</th><th>C4 (F | D)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Lei nº 8.666/1993</td><td>12.000</td><td>54 | 45,00</td><td>36 | 30,00</td><td>2 | 1,67</td><td>0 | 0,00</td></tr>
+                    <tr><td class="left">Lei nº 12.462/2011 (RDC)</td><td>8.500</td><td>28 | 32,94</td><td>18 | 21,18</td><td>12 | 14,12</td><td>2 | 2,35</td></tr>
+                    <tr><td class="left">Lei nº 13.303/2016 (Estatais)</td><td>10.000</td><td>35 | 35,00</td><td>15 | 15,00</td><td>28 | 28,00</td><td>8 | 8,00</td></tr>
+                    <tr><td class="left">Lei nº 14.133/2021 (NLLC)</td><td>15.000</td><td>78 | 52,00</td><td>42 | 28,00</td><td>65 | 43,33</td><td>18 | 12,00</td></tr>
+                    <tr class="last-row"><td class="left">LC nº 182/2021 (Startups)</td><td>6.000</td><td>4 | 6,67</td><td>3 | 5,00</td><td>26 | 43,33</td><td>45 | 75,00</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Dados processados no script de extração legislativa (2026). F = Frequência Absoluta; D = Densidade por 10.000 palavras.</p>
+
+            <p>A Tabela 1 revela o viés repressor da Lei nº 8.666/1993, com densidade de C1 de 45,0 ocorrências por 10.000 palavras e completa ausência de C4. A LC nº 182/2021 inverte esse paradigma: a densidade de C1 cai para 6,67, enquanto a de C4 atinge 75,00.</p>
+
+            <h3>4.2 Teste Qui-Quadrado</h3>
+
+            <p>A Tabela 2 apresenta as frequências absolutas para o teste estatístico.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 2: <em>Matriz de Contingência Observada de Ocorrências Lexicográficas</em></caption>
+                <thead>
+                    <tr><th>Legislação</th><th>C1</th><th>C2</th><th>C3</th><th>C4</th><th>Total</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Lei nº 8.666/1993</td><td>54</td><td>36</td><td>2</td><td>0</td><td>92</td></tr>
+                    <tr><td class="left">Lei nº 12.462/2011</td><td>28</td><td>18</td><td>12</td><td>2</td><td>60</td></tr>
+                    <tr><td class="left">Lei nº 13.303/2016</td><td>35</td><td>15</td><td>28</td><td>8</td><td>86</td></tr>
+                    <tr><td class="left">Lei nº 14.133/2021</td><td>78</td><td>42</td><td>65</td><td>18</td><td>203</td></tr>
+                    <tr class="last-row"><td class="left">LC nº 182/2021</td><td>4</td><td>3</td><td>26</td><td>45</td><td>78</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Dados processados no script de extração legislativa (2026).</p>
+
+            <p>O teste Qui-Quadrado revelou estatística de χ² = 216,1380 com 12 graus de liberdade e p < 0,001. Esse resultado rejeita a hipótese nula, confirmando que a evolução legislativa promoveu reestruturação deliberada na forma como o direito administrativo enquadra o risco contratual.</p>
+
+            <h3>4.3 Análise de Colocation</h3>
+
+            <p>A Tabela 3 consolida as principais co-ocorrências da palavra "risco" em cada contexto normativo.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 3: <em>Análise de Colocation - Co-ocorrências e Força de Associação</em></caption>
+                <thead>
+                    <tr><th>Legislação</th><th>Co-ocorrência</th><th>Força de Associação</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left" rowspan="3">Lei nº 8.666/1993</td><td>Sinistro</td><td>0,85</td></tr>
+                    <tr><td>Responsabilidade</td><td>0,78</td></tr>
+                    <tr><td>Administração</td><td>0,65</td></tr>
+                    <tr><td class="left" rowspan="2">Lei nº 12.462/2011</td><td>Partilha</td><td>0,72</td></tr>
+                    <tr><td>Contratação integrada</td><td>0,80</td></tr>
+                    <tr><td class="left" rowspan="3">Lei nº 13.303/2016</td><td>Matriz</td><td>0,90</td></tr>
+                    <tr><td>Governança</td><td>0,82</td></tr>
+                    <tr><td>Compliance</td><td>0,75</td></tr>
+                    <tr><td class="left" rowspan="4">Lei nº 14.133/2021</td><td>Alocação</td><td>0,94</td></tr>
+                    <tr><td>Matriz</td><td>0,91</td></tr>
+                    <tr><td>Mitigação</td><td>0,88</td></tr>
+                    <tr><td>Planejamento</td><td>0,79</td></tr>
+                    <tr class="last-row"><td class="left" rowspan="4">LC nº 182/2021</td><td>Experimentação</td><td>0,96</td></tr>
+                    <tr><td>Inovação</td><td>0,93</td></tr>
+                    <tr><td>Erro</td><td>0,89</td></tr>
+                    <tr><td>Ensaio</td><td>0,85</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Dados processados no script de extração legislativa (2026).</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>4.4 Índices Sintéticos</h3>
+
+            <p>A Tabela 4 compila os resultados do IGR e do IIN ao longo dos cinco marcos legislativos.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 4: <em>Evolução Diacrônica dos Índices Sintéticos de Governança e Inovabilidade de Risco</em></caption>
+                <thead>
+                    <tr><th>Legislação</th><th>Ano</th><th>IGR</th><th>IIN</th><th>Foco Predominante</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Lei nº 8.666/1993</td><td>1993</td><td>0,0222</td><td>0,0000</td><td>Controle legalista e punição</td></tr>
+                    <tr><td class="left">Lei nº 12.462/2011</td><td>2011</td><td>0,3043</td><td>0,0333</td><td>Partilha de riscos</td></tr>
+                    <tr><td class="left">Lei nº 13.303/2016</td><td>2016</td><td>0,7200</td><td>0,0930</td><td>Matriz de riscos e compliance</td></tr>
+                    <tr><td class="left">Lei nº 14.133/2021</td><td>2021</td><td>0,6917</td><td>0,0887</td><td>Gerenciamento estratégico</td></tr>
+                    <tr class="last-row"><td class="left">LC nº 182/2021</td><td>2021</td><td>10,1429</td><td>0,5769</td><td>Tolerância ao erro experimental</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Dados calculados pelo autor (2026).</p>
+
+            <p>A Lei nº 8.666/1993 apresenta IGR quase nulo (0,0222) e IIN de 0,0000, atestando a ausência de governança proativa. O IGR escala para 0,3043 no RDC e 0,7200 na Lei das Estatais. A LC nº 182/2021 atinge IGR de 10,1429 e IIN de 0,5769, indicando que mais de 57% de sua gramática de risco está dedicada ao aprendizado ativo e ao amparo normativo do erro experimental.</p>
+
+            <h2>5 DISCUSSÃO</h2>
+
+            <p>Os resultados confirmam que a transição paradigmática na concepção de risco é empiricamente mensurável e estatisticamente significativa. A Lei nº 8.666/1993 operava sob lógica de desconfiança generalizada, em que o risco era tratado como passivo a ser evitado a todo custo. A evolução para a Lei nº 14.133/2021 e a LC nº 182/2021 demonstra amadurecimento institucional, com a adoção de mecanismos de alocação ex-ante e tolerância ao erro experimental.</p>
+
+            <p>Do ponto de vista da Economia dos Custos de Transação (Williamson, 1985), a evolução legislativa reduziu os custos de transação ex-post ao institucionalizar a partilha de riscos ex-ante. A matriz de riscos, a alocação proativa e a tolerância ao erro são mecanismos que alinham incentivos e reduzem disputas contratuais.</p>
+
+            <p>A constatação desse novo ecossistema regulatório legitima o desenvolvimento de artefatos de governança algorítmica ex-ante. O Copiloto Algorítmico pode traduzir a sofisticada gramática de riscos em cláusulas de edital padronizadas e seguras, mitigando a racionalidade limitada dos agentes e conferindo segurança jurídica aos gestores. A ferramenta opera como vetor de design instrucional, operacionalizando as complexas matrizes de riscos exigidas pela Nova Lei de Licitações.</p>
+
+            <h2>6 CONCLUSÕES</h2>
+
+            <p>Este artigo investigou a evolução histórica da concepção de risco na legislação federal brasileira de compras públicas por meio de análise lexicográfica diacrônica. Os resultados demonstraram que o enquadramento do risco migrou de um modelo reativo de controle legalista-punitivo, personificado pela Lei nº 8.666/1993, para um paradigma proativo de governança estratégica e tolerância ao erro experimental, consolidado pela LC nº 182/2021. O teste Qui-Quadrado confirmou a significância estatística desse deslocamento semântico (χ² = 216,1380; p < 0,001).</p>
+
+            <p>As contribuições teóricas residem em conectar a Economia dos Custos de Transação e a teoria do Estado Empreendedor à análise lexicográfica da legislação de compras públicas. Do ponto de vista prático, a constatação do novo paradigma regulatório valida o desenvolvimento do Copiloto Algorítmico ex-ante como ferramenta de governança que traduz a gramática de riscos em cláusulas padronizadas e seguras.</p>
+
+            <p>Como limitação, aponta-se o foco exclusivo no texto legal sem análise da aplicação jurisprudencial. Pesquisas futuras podem correlacionar a evolução lexicográfica com a taxa de acolhimento de impugnações e a efetividade da alocação de riscos em contratações reais.</p>
+
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">HEVNER, A. R.; MARCH, S. T.; PARK, J.; RAM, S. Design science in information systems research. <em>MIS Quarterly</em>, v. 28, n. 1, p. 75-106, 2004.</p>
+
+            <p class="ref-entry">HEVNER, A. R. A three-cycle view of design science research. <em>Scandinavian Journal of Information Systems</em>, v. 19, n. 2, p. 87-92, 2007.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. <em>The Entrepreneurial State:</em> debunking public vs. private sector myths. London: Anthem Press, 2013.</p>
+
+            <p class="ref-entry">PEFFERS, K.; TUUNANEN, T.; ROTHENBERGER, M. A.; CHATTERJEE, S. A design science research methodology for information systems research. <em>Journal of Management Information Systems</em>, v. 24, n. 3, p. 45-77, 2007.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Mechanisms of Governance</em>. Oxford: Oxford University Press, 1996.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
+            </div>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <script>
+    function exportarDocx() {
+        var content = document.documentElement.outerHTML;
+        var blob = new Blob(['\ufeff' + content], {type: 'application/msword'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = (document.title || 'artigo') + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    </script>
 </body>
 </html>

@@ -3,429 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <title>A Voz do Mercado: Análise dos Pedidos de Impugnação em Editais de Tecnologia</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
     <style>
-        body { 
-            font-family: "Times New Roman", serif; 
-            font-size: 12pt; 
-            line-height: 2.0; 
-            text-align: justify; 
-            margin: 2cm 3cm; 
-            color: #111111;
-        }
-        h1 { 
-            font-size: 14pt; 
-            font-weight: bold; 
-            text-align: center; 
-            margin: 1.5cm 0 1cm 0; 
-            text-transform: uppercase;
-        }
-        h2 { 
-            font-size: 12pt; 
-            font-weight: bold; 
-            margin: 1.2cm 0 0.6cm 0; 
-            text-transform: uppercase;
-            text-align: left;
-        }
-        h3 { 
-            font-size: 12pt; 
-            font-weight: bold; 
-            font-style: italic;
-            margin: 0.8cm 0 0.4cm 0; 
-            text-align: left;
-        }
-        p { 
-            text-indent: 1.25cm; 
-            margin: 0 0 0.5cm 0; 
-        }
-        
-        .resumo-section {
-            line-height: 1.5;
-            margin-bottom: 1.5cm;
-            text-align: justify;
-        }
-        .resumo-title {
-            font-weight: bold;
-            font-size: 11pt;
-            text-transform: uppercase;
-            margin-top: 0.8cm;
-            margin-bottom: 0.3cm;
-        }
-        .resumo-text {
-            font-size: 11pt;
-            text-indent: 0 !important;
-            margin-bottom: 0.3cm;
-        }
-        .palavras-chave {
-            font-size: 11pt;
-            text-indent: 0 !important;
-            margin-bottom: 0.8cm;
-        }
-
-        .citacao-longa {
-            font-size: 10pt;
-            line-height: 1.5;
-            margin: 0.5cm 0 0.5cm 4cm;
-            text-align: justify;
-            text-indent: 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0.8cm 0;
-            font-size: 10pt;
-            line-height: 1.5;
-        }
-        caption {
-            font-family: "Times New Roman", serif;
-            font-size: 10pt;
-            font-weight: bold;
-            text-align: left;
-            margin-bottom: 0.2cm;
-            color: #111111;
-        }
-        th {
-            border-top: 1.5pt solid black;
-            border-bottom: 1pt solid black;
-            padding: 8px;
-            font-weight: bold;
-            text-align: center;
-        }
-        td {
-            padding: 8px;
-            border-bottom: 1pt solid #dddddd;
-            text-align: left;
-        }
-        tr:last-child td {
-            border-bottom: 1.5pt solid black;
-        }
-        .source-table {
-            font-size: 9pt;
-            font-style: italic;
-            text-align: left;
-            margin-top: -0.4cm;
-            margin-bottom: 0.8cm;
-            text-indent: 0 !important;
-        }
-
-        .ref-item {
-            text-indent: -2cm;
-            padding-left: 2cm;
-            margin-bottom: 0.4cm;
-            text-align: justify;
-            font-size: 12pt;
-            line-height: 1.5;
-        }
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: -1.27cm; padding-left: 1.27cm; margin: 0 0 0.3cm 0; text-align: justify; font-size: 11pt; }
+        h3 { font-size: 12pt; font-weight: bold; font-style: italic; margin: 0.6cm 0 0.3cm 0; }
     </style>
 </head>
 <body>
 
-    <h1>A VOZ DO MERCADO: ANÁLISE DOS PEDIDOS DE IMPUGNAÇÃO EM EDITAIS DE TECNOLOGIA</h1>
-    
-    <p style="text-align: center; font-weight: bold; text-indent: 0; margin-top: -0.5cm;">Renato de Oliveira Rosa</p>
-    <p style="text-align: center; font-size: 10pt; text-indent: 0; margin-top: -0.3cm; font-style: italic;">Doutorando em Administração — Fucape Business School</p>
-
-    <div class="resumo-section">
-        <div class="resumo-title">Resumo</div>
-        <p class="resumo-text">
-            A assimetria informacional e os limites cognitivos de planejamento geram atritos sistemáticos entre a administração pública e o ecossistema de fornecedores de tecnologia. Este artigo investiga as incongruências técnicas e restrições à concorrência denunciadas pelo mercado privado em certames de contratação de Tecnologia da Informação (TI). Empregando a metodologia de Análise de Conteúdo de Bardin, categorizamos tematicamente um corpus empírico de 150 impugnações formais extraídas do portal Compras.gov.br. A classificação lexicográfica revelou quatro grandes eixos de contestação: Direcionamento de Edital (39,33%), Superespecificação de Exigências Técnicas (26,67%), Incompatibilidade com Práticas de Mercado (23,33%) e Incongruência no Orçamento Estimado (10,67%). O teste Qui-Quadrado de Independência de Pearson revelou uma forte associação estatística entre a complexidade do objeto tecnológico e o resultado final da impugnação (&chi;&sup2; = 25,6464; p = 4,100 &times; 10&sup{-7}, p < 0,001). Em contratações de objetos tecnológicos complexos/inovadores, a taxa de acolhimento das impugnações atinge 62,50%, contra apenas 21,43% nos certames de bens comuns de TI. As evidências empíricas confirmam que o Estado sofre com severas limitações técnicas ex-ante ao desenhar especificações de ponta, corroborando a urgência regulatória de um Copiloto Algorítmico ex-ante sob o paradigma de Design Science Research para prevenir desvios contratuais antes da publicação dos editais.
-        </p>
-        <p class="palavras-chave"><strong>Palavras-chave:</strong> A Voz do Mercado; Impugnações de Editais; Tecnologia da Informação; Custos de Transação; Design Science Research.</p>
-
-        <div class="resumo-title">Abstract</div>
-        <p class="resumo-text" style="font-style: italic;">
-            Information asymmetry and bounded cognitive planning capacity generate systematic friction between public administration and the ecosystem of private technology vendors. This article investigates technical inconsistencies and restrictions on competition denounced by the private market in government Information Technology (IT) procurement. Employing Laurence Bardin's Content Analysis methodology, we thematically categorized an empirical corpus of 150 formal challenges (impugnações) extracted from the Compras.gov.br portal. The lexicographical classification revealed four main lines of dispute: Brand/Specification Bias (39.33%), Over-specification of Technical Requirements (26.67%), Incompatibility with Market Practices (23.33%), and Estimated Budget Incongruence (10.67%). Pearson's Chi-Square Test of Independence revealed a strong statistical association between the complexity of the technological object and the final outcome of the challenge (&chi;&sup2; = 25.6464; p = 4.100 &times; 10&sup{-7}, p < 0.001). In complex/innovative technological procurements, the challenge acceptance rate reaches 62.50%, compared to only 21.43% in standard IT tenders. The empirical evidence confirms that the State suffers from severe ex-ante technical constraints when drafting advanced specifications, corroborating the regulatory urgency of an ex-ante Decision Support Copilot under the Design Science Research paradigm to prevent contractual deviations before public tender launch.
-        </p>
-        <p class="palavras-chave" style="margin-bottom: 0;"><strong>Keywords:</strong> Market Voice; Tender Challenges; Information Technology; Transaction Costs; Design Science Research.</p>
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
     </div>
 
-    <h2>1. Introdução</h2>
-    <p>
-        O mercado de compras públicas no Brasil movimenta cifras de grande relevância macroeconômica, constituindo-se em uma das ferramentas mais poderosas para o fomento da infraestrutura e para a indução do desenvolvimento científico nacional (Edler & Georghiou, 2007; Mazzucato, 2013). No entanto, a materialização desse potencial indutor de inovação depara-se com severas barreiras operacionais. À medida que o objeto da contratação pública se desloca de commodities e suprimentos homogeneizados para soluções de alta densidade tecnológica — como infraestruturas de nuvem complexas, arquiteturas de Inteligência Artificial e sistemas integrados de gestão —, a administração pública defronta-se com um grave abismo cognitivo.
-    </p>
-    <p>
-        Este abismo decorre da assimetria informacional e da racionalidade limitada dos agentes públicos responsáveis pela fase de planejamento interno da compra (Williamson, 1985). Sem o domínio pleno das rápidas inovações promovidas pelo setor de tecnologia privado, os órgãos públicos recorrem frequentemente à reprodução mecânica de especificações desatualizadas, exigências desproporcionais ou termos restritivos que direcionam artificialmente o mercado. A consequência imediata dessa patologia na fase preparatória é a proliferação das impugnações de editais apresentadas pelas empresas concorrentes. No Compras.gov.br (antigo Comprasnet), maior plataforma de contratações do país, os pedidos de impugnação funcionam como um termômetro ex-ante da qualidade técnica dos editais, revelando a extensão dos conflitos público-privados.
-    </p>
-    <p>
-        Sob a ótica de políticas públicas e governança administrativa, o atrito excessivo entre o comprador público e o mercado fornecedor gera elevados custos de transação ex-post, tais como atrasos prolongados nos cronogramas de transição digital, licitações desertas ou fracassadas e processos judiciais desgastantes. Compreender de forma estruturada a "Voz do Mercado" — isto é, as denúncias, gargalos e incongruências reais mapeadas nas impugnações apresentadas pelas empresas privadas — torna-se indispensável para aprimorar a engenharia jurídica e procedimental dos editais. Diante disso, este estudo responde à seguinte pergunta: <i>De que forma as contestações formais apresentadas pelas empresas revelam os gargalos, direcionamentos e inconsistências na elaboração de editais tecnológicos públicos?</i>
-    </p>
-    <p>
-        O objetivo deste artigo consiste em analisar de forma lexicográfica, temática e inferencial o conteúdo de 150 peças reais e representativas de impugnações formais a editais de tecnologia no Compras.gov.br, identificando os eixos de reclamação mais frequentes e testando a hipótese de que a complexidade do objeto licitado afeta de forma significativa a probabilidade de acolhimento (procedência) dos recursos de impugnação. A comprovação de que os editais complexos sofrem de erros técnicos sistemáticos que culminam em correções forçadas pelo mercado serve como justificativa metodológica e científica de <i>Design Science Research</i> (Hevner et al., 2004) para o desenvolvimento de um **Copiloto Algorítmico ex-ante de apoio à decisão**. A ferramenta, ao incorporar a base histórica de erros mapeados na "Voz do Mercado", atua ativamente na blindagem de minutas, mitigando o retrabalho procedimental e o direcionamento ilícito de certames.
-    </p>
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">A VOZ DO MERCADO: ANÁLISE DOS PEDIDOS DE IMPUGNAÇÃO EM EDITAIS DE TECNOLOGIA</h1>
 
-    <h2>2. Fundamentação Teórica</h2>
-    
-    <h3>2.1. Custos de Transação e Assimetria de Informação nas Contratações Públicas</h3>
-    <p>
-        A análise econômica dos processos licitatórios de tecnologia apoia-se fortemente na Economia dos Custos de Transação (ECT), pioneiramente formulada por Ronald Coase (1937) e aprofundada por Oliver Williamson (1985, 1996). De acordo com Williamson, as transações de mercado não ocorrem de forma fluida e sem atritos, sendo moldadas por duas premissas comportamentais centrais: a racionalidade limitada e o oportunismo dos agentes. A racionalidade limitada impede que o gestor público, ao estruturar um edital complexo de TI, consiga antever todas as contingências futuras da execução de software ou descrever ex-ante de forma perfeita os requisitos técnicos do objeto licitado.
-    </p>
-    <p>
-        Esta limitação cognitiva acentua-se pela assimetria de informação (Akerlof, 1970) existente entre o Estado comprador e as empresas especializadas do ecossistema privado. O mercado fornecedor detém o domínio das metodologias ágeis, das patentes emergentes e dos custos operacionais reais, ao passo que o órgão público opera muitas vezes sob severa defasagem técnica. Quando a administração tenta sanar essa defasagem desenhando termos de referência sem o devido diálogo técnico, incorre em custos de transação ex-ante proibitivos. As inconsistências e os direcionamentos embutidos nos editais geram, por conseguinte, atritos sob a forma de impugnações formais e recursos administrativos, elevando o tempo de processamento das licitações e, no limite, gerando falhas catastróficas de execução ex-post (Williamson, 1996).
-    </p>
+            <p class="author-info"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
 
-    <h3>2.2. A Relação Público-Privada e Barreiras de Entrada no Ecossistema de Compras</h3>
-    <p>
-        A imposição de exigências excessivas em editais licitatórios funciona, na prática, como uma barreira artificial de entrada (Bain, 1956), limitando drasticamente o caráter competitivo exigido pela Constituição Federal de 1988 (Art. 37, XXI) e pela Nova Lei de Licitações (Lei nº 14.133/2021). O direcionamento de marcas proprietárias ou a exigência de certificações exclusivas e raras de equipe técnica atuam como mecanismos de exclusão de pequenas e médias empresas e de startups de base tecnológica (GovTechs), consolidando oligopólios estruturais no mercado de fornecimento ao Estado (Passotti et al., 2022).
-    </p>
-    <p>
-        Nesse contexto, os pedidos de impugnação previstos na legislação brasileira funcionam como um canal formal de democratização e controle social ex-ante das compras governamentais. Ao provocar a manifestação obrigatória da assessoria jurídica e da equipe de planejamento da contratação, o mercado privado restabelece os limites da isonomia concorrencial, forçando a retificação de termos abusivos antes da abertura física do certame. Portanto, a análise sistemática desse fluxo discursivo não apenas evidencia os pontos de estrangulamento da modelagem pública, mas atua como um insumo empírico valioso para a calibração de políticas públicas indutoras de concorrência e sustentabilidade.
-    </p>
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>A assimetria informacional e os limites cognitivos de planejamento geram atritos sistemáticos entre a administração pública e o ecossistema de fornecedores de tecnologia. Este artigo investiga as incongruências técnicas e restrições à concorrência denunciadas pelo mercado privado em certames de contratação de Tecnologia da Informação (TI). Empregando a Análise de Conteúdo de Bardin (2016), categorizou-se tematicamente um corpus empírico de 150 impugnações formais extraídas do portal Compras.gov.br. A classificação revelou quatro eixos de contestação: Direcionamento de Edital (39,33%), Superespecificação de Exigências Técnicas (26,67%), Incompatibilidade com Práticas de Mercado (23,33%) e Incongruência no Orçamento Estimado (10,67%). O teste Qui-Quadrado revelou associação estatística forte entre a complexidade do objeto tecnológico e o resultado da impugnação (χ² = 25,6464; p < 0,001). Em contratações de objetos tecnológicos complexos, a taxa de acolhimento das impugnações atinge 62,50%, contra 21,43% em certames de bens comuns. As evidências confirmam limitações técnicas ex-ante do Estado, corroborando a urgência de um Copiloto Algorítmico ex-ante para prevenir desvios contratuais.</p>
+                <p><strong>Palavras-chave:</strong> Impugnações de Editais; Tecnologia da Informação; Custos de Transação; Design Science Research; Compras Públicas.</p>
+            </div>
 
-    <h3>2.3. A Abordagem de Design Science Research na Calibração de Editais Ex-ante</h3>
-    <p>
-        A correção reativa de editais por meio de impugnações representa um processo ineficiente, lento e que desgasta a credibilidade institucional das organizações estatais. O paradigma da <i>Design Science Research</i> (DSR) de Alan Hevner (Hevner et al., 2004; Peffers et al., 2007) propõe uma mudança de postura metodológica: em vez de apenas diagnosticar as falhas do sistema analógico de compras, deve-se projetar, construir e validar um artefato prescritivo que evite tais desvios ex-ante.
-    </p>
-    <p>
-        A utilidade prática do **Copiloto Algorítmico ex-ante** baseia-se exatamente na integração da "Voz do Mercado" em sua inteligência preditiva. Ao mapear o banco de dados histórico de cláusulas que motivaram impugnações acolhidas e retificações forçadas, os modelos de Processamento de Linguagem Natural (NLP) do copiloto analisam as minutas de editais na fase preparatória, identificando traços de direcionamento ou exigências técnicas sabidamente contestadas e propondo substituições automáticas. Esta intervenção inteligente resguarda a conformidade, reduz drasticamente a taxa de recursos formais e viabiliza um fluxo transacional muito mais rápido e isonômico na transição de tecnologia no setor público brasileiro.
-    </p>
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>Information asymmetry and bounded cognitive planning capacity generate systematic friction between public administration and technology vendors. This article investigates technical inconsistencies denounced by the private market in Information Technology (IT) procurement. Employing Content Analysis (Bardin, 2016), we thematically categorized 150 formal challenges extracted from Compras.gov.br. The classification revealed four lines of dispute: Brand/Specification Bias (39.33%), Over-specification of Technical Requirements (26.67%), Incompatibility with Market Practices (23.33%), and Estimated Budget Incongruence (10.67%). The Chi-Square Test revealed a strong statistical association between technological complexity and challenge outcome (χ² = 25.6464; p < 0.001). In complex technological procurements, the challenge acceptance rate reaches 62.50%, compared to 21.43% in standard IT tenders. The evidence confirms ex-ante technical limitations of the State, corroborating the urgency of an ex-ante Algorithmic Copilot to prevent contractual deviations.</p>
+                <p><strong>Keywords:</strong> Tender Challenges; Information Technology; Transaction Costs; Design Science Research; Public Procurement.</p>
+            </div>
 
-    <h2>3. Metodologia</h2>
-    <p>
-        A metodologia empregada nesta pesquisa baseia-se em um desenho de métodos mistos que articula a Análise de Conteúdo clássica proposta por Laurence Bardin (2016) com testes inferenciais e modelagem estatística. O corpus de análise é constituído por 150 peças formais de pedidos de impugnação de editais de tecnologia extraídas do portal de compras públicas do Governo Federal, o Compras.gov.br, abrangendo processos de contratação de órgãos municipais, estaduais e federais concluídos entre 2021 e 2026.
-    </p>
-    <p>
-        A fase de exploração do material e codificação de Bardin seguiu três etapas estritas: a pré-análise (leitura flutuante e seleção do material), a exploração lexicográfica (recorte de unidades de registro) e o tratamento e interpretação dos resultados. Com base na taxonomia doutrinária de falhas em licitações e na literatura sobre custos de transação, as 150 observações foram classificadas em quatro categorias exclusivas de contestação formuladas pelo mercado privado:
-    </p>
-    <p>
-        <b>1. Direcionamento de Edital (DIR_EDI):</b> Denúncias formais focadas no estabelecimento de especificações técnicas exclusivas que restringem a disputa a fabricantes específicos (<i>vendor lock-in</i>), exigência injustificada de marcas proprietárias ou privilégios de propriedade intelectual que esvaziam a concorrência ampla de mercado.
-    </p>
-    <p>
-        <b>2. Superespecificação de Exigências Técnicas (SUP_EXI):</b> Recursos voltados contra a exigência abusiva e desproporcional de atestados de capacidade técnica contendo exigências quantitativas excessivas, certificações raras de equipe profissional ou comprovações de experiência em infraestruturas raras não compatíveis com a dimensão real do contrato.
-    </p>
-    <p>
-        <b>3. Incompatibilidade com Práticas de Mercado (INC_MER):</b> Questionamentos legais que combatem a exigência de prazos de implantação/entrega inexequíveis, níveis de serviço (SLA) draconianos desprovidos de razoabilidade operacional ou condições contratuais abusivas de garantia de suporte técnico.
-    </p>
-    <p>
-        <b>4. Incongruência no Orçamento Estimado (INC_ORC):</b> Impugnações motivadas pela precificação irreal ou obsoleta da administração pública, que desconsidera os custos de insumos tecnológicos de mercado, as margens de lucro operacional e a inflação de pessoal de TI, resultando em subestimação orçamentária extrema com grave risco de licitações desertas.
-    </p>
-    <p>
-        Adicionalmente, coletou-se de cada certame a variável independente **Complexidade do Objeto** (0 = Bens e Serviços Comuns de TI, tais como aquisição de notebooks, suporte a helpdesk básico ou licenças padronizadas; 1 = Soluções Tecnológicas Complexas / Inovação, compreendendo desenvolvimento de sistemas customizados, computação em nuvem governamental, segurança cibernética avançada e IA). A variável dependente foi definida como o **Resultado da Impugnação** (0 = Rejeitada/Improcedente pela administração pública; 1 = Acolhida/Procedente de forma parcial ou integral, exigindo retificação e republicação do edital).
-    </p>
-    <p>
-        Formulou-se a hipótese nula de que a complexidade do objeto tecnológico não possui influência sobre o acolhimento ou rejeição das impugnações apresentadas pelo mercado ($H_0$), contra a hipótese alternativa de dependência institucional ($H_1$). A matriz de contingência $2 \times 2$ foi submetida ao teste Qui-Quadrado de Independência de Pearson ($\chi^2$) com um nível de significância clássico de $\alpha = 0,05$, avaliando as implicações da limitação técnica na fase interna de modelagem dos editais complexos.
-    </p>
+            <h2>1 INTRODUÇÃO</h2>
 
-    <h2>4. Resultados e Discussão</h2>
-    <p>
-        A codificação e categorização de conteúdo do corpus de 150 observações evidenciaram uma distribuição marcante dos pontos de atrito mais denunciados pelas empresas privadas de tecnologia. A Tabela 1 apresenta a distribuição de frequências absolutas e relativas das categorias temáticas de Bardin identificadas no material empírico.
-    </p>
+            <p>O mercado de compras públicas no Brasil movimenta cifras de grande relevância macroeconômica, constituindo-se em ferramenta poderosa para fomento da infraestrutura e indução do desenvolvimento científico nacional (Edler & Georghiou, 2007; Mazzucato, 2013). Contudo, a materialização desse potencial indutor depara-se com severas barreiras operacionais. À medida que o objeto da contratação pública se desloca de commodities para soluções de alta densidade tecnológica, como infraestruturas de nuvem, arquiteturas de inteligência artificial e sistemas integrados de gestão, a administração pública defronta-se com grave abismo cognitivo.</p>
 
-    <table id="tabela1">
-        <caption>Tabela 1 — Distribuição de Frequências das Categorias de Impugnação no Compras.gov.br</caption>
-        <thead>
-            <tr>
-                <th>Categoria Temática (Bardin)</th>
-                <th>Código</th>
-                <th>Frequência Absoluta (N)</th>
-                <th>Incidência Relativa (%)</th>
-                <th>Foco da Contestação no Edital</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><b>Direcionamento de Edital</b></td>
-                <td>DIR_EDI</td>
-                <td style="text-align: center;">59</td>
-                <td style="text-align: center;">39,33%</td>
-                <td>Exclusividade de marca, patentes ou especificações restritivas.</td>
-            </tr>
-            <tr>
-                <td><b>Superespecificação de Exigências</b></td>
-                <td>SUP_EXI</td>
-                <td style="text-align: center;">40</td>
-                <td style="text-align: center;">26,67%</td>
-                <td>Atestados técnicos desproporcionais e certificações abusivas.</td>
-            </tr>
-            <tr>
-                <td><b>Incompatibilidade com o Mercado</b></td>
-                <td>INC_MER</td>
-                <td style="text-align: center;">35</td>
-                <td style="text-align: center;">23,33%</td>
-                <td>Prazos de entrega inexequíveis e acordos de nível de serviço abusivos.</td>
-            </tr>
-            <tr>
-                <td><b>Incongruência no Orçamento</b></td>
-                <td>INC_ORC</td>
-                <td style="text-align: center;">16</td>
-                <td style="text-align: center;">10,67%</td>
-                <td>Subestimação extrema de preços e planilhas orçamentárias obsoletas.</td>
-            </tr>
-            <tr>
-                <td><b>Total Geral</b></td>
-                <td><b>TOTAL</b></td>
-                <td style="text-align: center;"><b>150</b></td>
-                <td style="text-align: center;"><b>100,00%</b></td>
-                <td><b>Análise sistemática baseada em 150 impugnações de TI.</b></td>
-            </tr>
-        </tbody>
-    </table>
-    <p class="source-table">Fonte: Dados empíricos compilados via portal Compras.gov.br pelo autor (2026).</p>
+            <p>Esse abismo decorre da assimetria informacional e da racionalidade limitada dos agentes públicos responsáveis pelo planejamento interno da compra (Williamson, 1985). Sem o domínio pleno das inovações promovidas pelo setor privado, os órgãos públicos recorrem à reprodução de especificações desatualizadas ou exigências desproporcionais que direcionam artificialmente o mercado. A consequência imediata é a proliferação de impugnações de editais apresentadas pelas empresas concorrentes. No Compras.gov.br, os pedidos de impugnação funcionam como termômetro ex-ante da qualidade técnica dos editais, revelando a extensão dos conflitos público-privados.</p>
 
-    <p>
-        Os dados da Tabela 1 revelam que o **Direcionamento de Edital (DIR_EDI) é o principal motor de contestação pelo mercado privado**, respondendo por 39,33% de todas as impugnações. Esta prevalência indica que o ecossistema fornecedor monitora e reage de forma imediata contra tentativas explícitas ou sutis de monopolização contratual ou privilégio a fornecedores parceiros de fabricantes proprietários. A Superespecificação de Exigências Técnicas desponta como a segunda maior dor (26,67%), evidenciando a persistência histórica de exigências de habilitação abusivas que anulam o caráter isonômico da contratação pública brasileira.
-    </p>
-    <p>
-        Para compreender a taxa de sucesso dessas contestações perante os órgãos licitantes, cruzaram-se as categorias de Bardin com as decisões administrativas de acolhimento ou rejeição da impugnação. A Tabela 2 sintetiza as decisões finais de conformidade por eixo temático.
-    </p>
+            <p>Sob a ótica de políticas públicas, o atrito excessivo entre comprador público e mercado fornecedor gera custos de transação ex-post elevados, como atrasos em cronogramas de transição digital e licitações desertas. Compreender a "Voz do Mercado", isto é, as denúncias e incongruências mapeadas nas impugnações, torna-se indispensável para aprimorar a engenharia jurídica dos editais. Diante disso, formula-se a seguinte questão: de que forma as contestações formais apresentadas pelas empresas revelam os gargalos, direcionamentos e inconsistências na elaboração de editais tecnológicos públicos?</p>
 
-    <table id="tabela2">
-        <caption>Tabela 2 — Resultados Finais e Taxa de Acolhimento por Categoria Temática de Bardin</caption>
-        <thead>
-            <tr>
-                <th>Categoria Temática (Bardin)</th>
-                <th>Rejeitada (Improcedente)</th>
-                <th>Acolhida (Procedente)</th>
-                <th>Total Licitado (N)</th>
-                <th>Taxa de Acolhimento (%)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Direcionamento de Edital (DIR_EDI)</td>
-                <td style="text-align: center;">36</td>
-                <td style="text-align: center;">23</td>
-                <td style="text-align: center;">59</td>
-                <td style="text-align: center;">38,98%</td>
-            </tr>
-            <tr>
-                <td>Superespecificação de Exigências (SUP_EXI)</td>
-                <td style="text-align: center;">22</td>
-                <td style="text-align: center;">18</td>
-                <td style="text-align: center;">40</td>
-                <td style="text-align: center;">45,00%</td>
-            </tr>
-            <tr>
-                <td>Incompatibilidade com o Mercado (INC_MER)</td>
-                <td style="text-align: center;">20</td>
-                <td style="text-align: center;">15</td>
-                <td style="text-align: center;">35</td>
-                <td style="text-align: center;">42,86%</td>
-            </tr>
-            <tr>
-                <td>Incongruência no Orçamento (INC_ORC)</td>
-                <td style="text-align: center;">7</td>
-                <td style="text-align: center;">9</td>
-                <td style="text-align: center;">16</td>
-                <td style="text-align: center;">56,25%</td>
-            </tr>
-            <tr>
-                <td><b>Média / Total Geral</b></td>
-                <td style="text-align: center;"><b>85</b></td>
-                <td style="text-align: center;"><b>65</b></td>
-                <td style="text-align: center;"><b>150</b></td>
-                <td style="text-align: center;"><b>43,33%</b></td>
-            </tr>
-        </tbody>
-    </table>
-    <p class="source-table">Fonte: Dados empíricos compilados via portal Compras.gov.br pelo autor (2026).</p>
+            <p>O objetivo consiste em analisar lexicográfica, temática e inferencialmente o conteúdo de 150 peças de impugnações formais a editais de tecnologia, identificando os eixos de reclamação mais frequentes e testando a hipótese de que a complexidade do objeto licitado afeta significativamente a probabilidade de acolhimento dos recursos. A comprovação de que editais complexos sofrem de erros técnicos sistemáticos serve como justificativa para o desenvolvimento de um Copiloto Algorítmico ex-ante de apoio à decisão, fundamentado em Design Science Research (Hevner et al., 2004).</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
 
-    <p>
-        Os dados revelam que as impugnações baseadas em Incongruência no Orçamento Estimado (INC_ORC) apresentam a maior taxa de acolhimento relativo (56,25%), demonstrando que quando as empresas provam matematicamente que o valor de referência estimado pela administração impede a exequibilidade operacional dos serviços, os órgãos são obrigados a retroceder e reajustar seus preços históricos para evitar a frustração do certame. A Superespecificação de Exigências (45,00%) e a Incompatibilidade com as Práticas de Mercado (42,86%) também registram expressivos níveis de correção imposta pelas empresas privadas.
-    </p>
-    <p>
-        A fim de explorar se o estrangulamento técnico e cognitivo da administração pública acentua-se na modelagem de projetos de tecnologia complexa, procedeu-se ao cruzamento entre a Complexidade do Objeto e o Resultado da Impugnação na matriz de contingência apresentada na Tabela 3.
-    </p>
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
 
-    <table id="tabela3">
-        <caption>Tabela 3 — Matriz de Contingência: Complexidade do Objeto vs. Resultado da Impugnação</caption>
-        <thead>
-            <tr>
-                <th rowspan="2">Complexidade do Objeto Tecnológico</th>
-                <th colspan="2" style="border-bottom: 0.5pt solid black;">Resultado da Decisão Administrativa</th>
-                <th rowspan="2">Total por Linha</th>
-            </tr>
-            <tr>
-                <th>Rejeitada (Improcedente)</th>
-                <th>Acolhida (Procedente)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><b>Bens e Serviços Comuns de TI</b> (Objeto Comum)</td>
-                <td style="text-align: center;">55 (78,57%)</td>
-                <td style="text-align: center;">15 (21,43%)</td>
-                <td style="text-align: center;">70 (100,00%)</td>
-            </tr>
-            <tr>
-                <td><b>Soluções Complexas / Inovação</b> (Objeto Complexo)</td>
-                <td style="text-align: center;">30 (37,50%)</td>
-                <td style="text-align: center;">50 (62,50%)</td>
-                <td style="text-align: center;">80 (100,00%)</td>
-            </tr>
-            <tr>
-                <td><b>Total Observado</b></td>
-                <td style="text-align: center;"><b>85 (56,67%)</b></td>
-                <td style="text-align: center;"><b>65 (43,33%)</b></td>
-                <td style="text-align: center;"><b>150 (100,00%)</b></td>
-            </tr>
-        </tbody>
-    </table>
-    <p class="source-table">Fonte: Dados empíricos compilados via portal Compras.gov.br pelo autor (2026).</p>
+            <h3>2.1 Custos de Transação e Assimetria de Informação</h3>
 
-    <p>
-        O cruzamento de contingência expõe um contraste marcante nos padrões de conflito. Nos certames destinados à aquisição de bens e serviços comuns de TI (notebooks padrão, licenças comuns de escritório ou manutenção simples), a esmagadora maioria das impugnações apresentadas pelo mercado é rejeitada pela administração pública (78,57%). Isso demonstra que a modelagem procedimental e os termos de referência para objetos padronizados já estão amplamente consolidados na rotina administrativa do Estado, de forma que as reclamações de fornecedores tendem a ser meramente protelatórias ou desprovidas de fundamento jurídico legítimo.
-    </p>
-    <p>
-        Contudo, o cenário inverte-se drasticamente ao analisarmos a contratação de **Soluções Tecnológicas Complexas e de Inovação: a taxa de acolhimento das impugnações salta para 62,50%** (50 acolhidas contra apenas 30 rejeitadas). Este indicador de robustez empírica extrema comprova que os órgãos públicos enfrentam graves limitações técnicas e cognitivas ex-ante ao tentar modelar objetos inovadores e complexos. Na ausência de ferramentas de apoio à especificação inteligente, as equipes de planejamento falham na ponta, redigindo cláusulas que de fato direcionam o certame ou impõem condições inexequíveis para o mercado, tornando as contestações formais do mercado privado amplamente procedentes.
-    </p>
-    <p>
-        A aplicação do teste Qui-Quadrado de Independência de Pearson sobre os dados observados resultou na estatística de **&chi;&sup2; = 25,6464**. Com 1 grau de liberdade ($dof = 1$), a probabilidade crítica associada (P-Value) foi calculada em **4,100 &times; 10&sup{-7}**, patamar infinitamente inferior ao nível de significância convencional de $\alpha = 0,05$ (e altamente significativo a $p < 0,001$). Com este resultado empírico, rejeita-se de forma peremptória a hipótese nula ($H_0$), confirmando que a probabilidade de procedência e acolhimento das impugnações de TI está intimamente vinculada e dependente da complexidade do objeto tecnológico licitado pelo Estado.
-    </p>
-    <p>
-        As severas implicações operacionais desse atrito sistemático legitimam a premissa de intervenção prescritiva de Design Science Research representada pelo **Copiloto Algorítmico ex-ante**. A inteligência do módulo auditor ataca cirurgicamente esta fragilidade. Ao processar as minutas documentais da fase de planejamento interno, os algoritmos inteligentes avaliam se as cláusulas de habilitação técnica e escopos contratuais assemelham-se a padrões discursivos historicamente associados a impugnações acolhidas (como exigências de marcas específicas *Gold* ou SLAs incompatíveis com a engenharia de software real). O copiloto gera alertas ex-ante e sugere substituições por minutas parametrizadas e validadas, estancando a latência processual de recursos e promovendo concorrência limpa e ampla nas licitações de inovação tecnológica no Brasil.
-    </p>
+            <p>A análise econômica dos processos licitatórios de tecnologia apoia-se na Economia dos Custos de Transação (ECT), formulada por Coase (1937) e aprofundada por Williamson (1985, 1996). De acordo com Williamson, as transações são moldadas por duas premissas comportamentais centrais: a racionalidade limitada e o oportunismo dos agentes. A racionalidade limitada impede que o gestor público, ao estruturar um edital complexo de TI, anteveja todas as contingências futuras da execução do contrato ou descreva ex-ante de forma perfeita os requisitos técnicos do objeto licitado.</p>
 
-    <h2>5. Conclusões</h2>
-    <p>
-        A presente investigação científica atingiu integralmente os objetivos estabelecidos ao analisar empiricamente a "Voz do Mercado" expressa em 150 pedidos de impugnação do portal Compras.gov.br. A categorização baseada em Bardin revelou que as reclamações de fornecedores privados de tecnologia centram-se primariamente em Direcionamento de Edital (39,33%) e Superespecificação de Exigências Técnicas (26,67%). Ademais, o teste Qui-Quadrado comprovou uma correlação estatística de alta relevância: em certames complexos e inovadores de TI, as impugnações registram um índice expressivo de procedência e acolhimento de 62,50% ($p < 0,001$), evidenciando a fragilidade estrutural da fase interna de planejamento analógico do Estado.
-    </p>
-    <p>
-        As principais contribuições teóricas deste trabalho residem em aproximar a Economia dos Custos de Transação e o arcabouço das barreiras de entrada às contestações formais do ecossistema de GovTechs no Brasil. Sob o ponto de vista prático e tecnológico, os achados fornecem a calibração de dados e a validação empírica indispensáveis para a construção do **Copiloto Algorítmico ex-ante** no âmbito desta tese metodológica de DSR. O sistema revela-se fundamental para reduzir os custos procedimentais de latência e garantir segurança jurídica integral ao servidor público e ampla competitividade ao mercado tecnológico.
-    </p>
-    <p>
-        Dentre as limitações metodológicas desta pesquisa, cita-se a restrição de escopo às impugnações de editais de âmbito federal e compras centralizadas no Compras.gov.br. Sugere-se que frentes futuras de investigação estendam a aplicação da Análise de Conteúdo combinada com NLP a minutas contratuais de empresas de saneamento e estatais submetidas à Lei das Estatais (Lei nº 13.303/2016), avaliando se a tipologia estrutural de disputas público-privadas de tecnologia mantém a mesma matriz topológica de direcionamento e superespecificação de exigências.
-    </p>
+            <p>Essa limitação acentua-se pela assimetria de informação (Akerlof, 1970) entre o Estado comprador e as empresas do ecossistema privado. O mercado fornecedor detém domínio das metodologias ágeis, patentes emergentes e custos operacionais reais, enquanto o órgão público opera sob severa defasagem técnica. Quando a administração tenta sanar essa defasagem desenhando termos de referência sem o devido diálogo técnico, incorre em custos de transação ex-ante proibitivos. As inconsistências embutidas nos editais geram atritos sob a forma de impugnações formais, elevando o tempo de processamento das licitações e, no limite, gerando falhas de execução ex-post (Williamson, 1996).</p>
 
-    <h2>Referências</h2>
-    <div class="ref-item">
-        AKERLOF, G. A. The market for "lemons": Quality uncertainty and the market mechanism. <em>Quarterly Journal of Economics</em>, v. 84, n. 3, p. 488-500, 1970.
-    </div>
-    <div class="ref-item">
-        BAIN, J. S. <em>Barriers to New Competition</em>. Cambridge: Harvard University Press, 1956.
-    </div>
-    <div class="ref-item">
-        BARDIN, L. <em>Análise de Conteúdo</em>. Lisboa: Edições 70, 2016.
-    </div>
-    <div class="ref-item">
-        COASE, R. H. The nature of the firm. <em>Economica</em>, v. 4, n. 16, p. 386-405, 1937.
-    </div>
-    <div class="ref-item">
-        EDLER, J.; GEORGHIOU, L. Public procurement and innovation: Resurrecting the demand side. <em>Research Policy</em>, v. 36, n. 7, p. 949-963, 2007.
-    </div>
-    <div class="ref-item">
-        GREGOR, S.; JONES, D. The anatomy of a design theory. <em>Journal of the Association for Information Systems</em>, v. 8, n. 5, p. 312-335, 2007.
-    </div>
-    <div class="ref-item">
-        HEVNER, A. R.; MARCH, S. T.; PARK, J.; RAM, S. Design science in information systems research. <em>MIS Quarterly</em>, v. 28, n. 1, p. 75-106, 2004.
-    </div>
-    <div class="ref-item">
-        MAZZUCATO, M. <em>The Entrepreneurial State: debunking public vs. private sector myths</em>. London: Anthem Press, 2013.
-    </div>
-    <div class="ref-item">
-        MAZZUCATO, M. Mission-oriented innovation policies: challenges and opportunities. <em>Industrial and Corporate Change</em>, v. 27, n. 5, p. 803-815, 2018.
-    </div>
-    <div class="ref-item">
-        PASSOTTI, J.; et al. Limits of automation in government: algorithmic opacity, vendor lock-in, and bounded rationality. <em>Government Information Quarterly</em>, v. 39, n. 2, p. 101-118, 2022.
-    </div>
-    <div class="ref-item">
-        PEFFERS, K.; TUUNANEN, T.; ROTHENBERGER, M. A.; CHATTERJEE, S. A design science research methodology for information systems research. <em>Journal of Management Information Systems</em>, v. 24, n. 3, p. 45-77, 2007.
-    </div>
-    <div class="ref-item">
-        WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.
-    </div>
-    <div class="ref-item">
-        WILLIAMSON, O. E. <em>The Mechanisms of Governance</em>. Oxford: Oxford University Press, 1996.
-    </div>
+            <h3>2.2 Barreiras de Entrada no Ecossistema de Compras</h3>
 
+            <p>A imposição de exigências excessivas em editais licitatórios funciona como barreira artificial de entrada (Bain, 1956), limitando o caráter competitivo exigido pela Constituição Federal e pela Nova Lei de Licitações (Lei nº 14.133/2021). O direcionamento de marcas proprietárias ou a exigência de certificações exclusivas atuam como mecanismos de exclusão de pequenas e médias empresas e de startups de base tecnológica (GovTechs), consolidando oligopólios estruturais no mercado de fornecimento ao Estado (Passotti et al., 2022).</p>
+
+            <p>Nesse contexto, os pedidos de impugnação funcionam como canal formal de democratização e controle social ex-ante das compras governamentais. Ao provocar a manifestação da assessoria jurídica e da equipe de planejamento, o mercado privado restabelece os limites da isonomia concorrencial, forçando a retificação de termos abusivos antes da abertura do certame. A análise sistemática desse fluxo discursivo evidencia os pontos de estrangulamento da modelagem pública e atua como insumo empírico para a calibração de políticas públicas indutoras de concorrência.</p>
+
+            <h3>2.3 Análise de Conteúdo como Arcabouço Metodológico</h3>
+
+            <p>A Análise de Conteúdo, conforme sistematizada por Laurence Bardin (2016), constitui o arcabouço metodológico para investigação de fenômenos discursivos em textos documentais. Bardin propõe três polos cronológicos: a pré-análise (leitura flutuante e seleção do material), a exploração do material (recorte de unidades de registro e codificação) e o tratamento e interpretação dos resultados. Essa abordagem permite a codificação sistemática de categorias temáticas e a inferência de conhecimentos relativos às condições de produção das mensagens. No presente estudo, a Análise de Conteúdo foi aplicada à codificação das impugnações formais, permitindo mapear a prevalência de cada tipo de contestação do mercado privado.</p>
+
+            <h2>3 METODOLOGIA</h2>
+
+            <p>A pesquisa emprega delineamento de métodos mistos que articula a Análise de Conteúdo de Bardin (2016) com testes inferenciais. O corpus de análise é constituído por 150 peças formais de pedidos de impugnação de editais de tecnologia extraídas do portal Compras.gov.br, abrangendo processos de órgãos municipais, estaduais e federais concluídos entre 2021 e 2026.</p>
+
+            <p>Com base na taxonomia de falhas em licitações e na literatura sobre custos de transação, as 150 observações foram classificadas em quatro categorias exclusivas de contestação:
+
+            <b>1. Direcionamento de Edital:</b> Denúncias focadas no estabelecimento de especificações técnicas exclusivas que restringem a disputa a fabricantes específicos (<em>vendor lock-in</em>), exigência injustificada de marcas proprietárias ou privilégios de propriedade intelectual.
+
+            <b>2. Superespecificação de Exigências Técnicas:</b> Recursos contra a exigência abusiva e desproporcional de atestados de capacidade técnica contendo exigências quantitativas excessivas ou certificações raras.
+
+            <b>3. Incompatibilidade com Práticas de Mercado:</b> Questionamentos que combatem a exigência de prazos de implantação inexequíveis, níveis de serviço draconianos ou condições contratuais abusivas.
+
+            <b>4. Incongruência no Orçamento Estimado:</b> Impugnações motivadas pela precificação irreal da administração pública, que desconsidera os custos reais de insumos tecnológicos.</p>
+
+            <p>Adicionalmente, coletou-se a variável independente Complexidade do Objeto (0 = Bens e Serviços Comuns de TI; 1 = Soluções Tecnológicas Complexas/Inovação). A variável dependente foi o Resultado da Impugnação (0 = Rejeitada; 1 = Acolhida). A matriz de contingência foi submetida ao teste Qui-Quadrado de Independência de Pearson.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>4 RESULTADOS</h2>
+
+            <h3>4.1 Distribuição das Categorias de Impugnação</h3>
+
+            <p>A codificação do corpus de 150 observações evidenciou a distribuição dos pontos de atrito denunciados pelas empresas privadas de tecnologia. A Tabela 1 apresenta as frequências das categorias temáticas.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: <em>Distribuição de Frequências das Categorias de Impugnação no Compras.gov.br</em></caption>
+                <thead>
+                    <tr><th>Categoria Temática</th><th>Código</th><th>Frequência Absoluta (N)</th><th>Incidência Relativa (%)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Direcionamento de Edital</td><td>DIR_EDI</td><td>59</td><td>39,33</td></tr>
+                    <tr><td class="left">Superespecificação de Exigências</td><td>SUP_EXI</td><td>40</td><td>26,67</td></tr>
+                    <tr><td class="left">Incompatibilidade com o Mercado</td><td>INC_MER</td><td>35</td><td>23,33</td></tr>
+                    <tr class="last-row"><td class="left">Incongruência no Orçamento</td><td>INC_ORC</td><td>16</td><td>10,67</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Dados compilados via portal Compras.gov.br (2026).</p>
+
+            <p>Os dados da Tabela 1 revelam que o Direcionamento de Edital é o principal motor de contestação, respondendo por 39,33% das impugnações. Essa prevalência indica que o ecossistema fornecedor monitora e reage contra tentativas de monopolização contratual. A Superespecificação de Exigências Técnicas desponta como segunda maior dor (26,67%), evidenciando a persistência de exigências de habilitação abusivas.</p>
+
+            <p>A Tabela 2 apresenta as taxas de acolhimento por categoria temática.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 2: <em>Resultados e Taxa de Acolhimento por Categoria Temática</em></caption>
+                <thead>
+                    <tr><th>Categoria Temática</th><th>Rejeitada</th><th>Acolhida</th><th>Total</th><th>Taxa de Acolhimento (%)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Direcionamento de Edital</td><td>36</td><td>23</td><td>59</td><td>38,98</td></tr>
+                    <tr><td class="left">Superespecificação de Exigências</td><td>22</td><td>18</td><td>40</td><td>45,00</td></tr>
+                    <tr><td class="left">Incompatibilidade com o Mercado</td><td>20</td><td>15</td><td>35</td><td>42,86</td></tr>
+                    <tr class="last-row"><td class="left">Incongruência no Orçamento</td><td>7</td><td>9</td><td>16</td><td>56,25</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Dados compilados via portal Compras.gov.br (2026).</p>
+
+            <p>As impugnações baseadas em Incongruência no Orçamento apresentam a maior taxa de acolhimento (56,25%), demonstrando que quando as empresas provam que o valor de referência estimado impede a exequibilidade, os órgãos são obrigados a retroceder.</p>
+
+            <h3>4.2 Associação entre Complexidade do Objeto e Resultado</h3>
+
+            <p>A Tabela 3 apresenta o cruzamento entre Complexidade do Objeto e Resultado da Impugnação.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 3: <em>Matriz de Contingência: Complexidade do Objeto vs. Resultado da Impugnação</em></caption>
+                <thead>
+                    <tr><th>Complexidade do Objeto</th><th>Rejeitada</th><th>Acolhida</th><th>Total</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Bens e Serviços Comuns de TI</td><td>55 (78,57%)</td><td>15 (21,43%)</td><td>70 (100%)</td></tr>
+                    <tr><td class="left">Soluções Complexas/Inovação</td><td>30 (37,50%)</td><td>50 (62,50%)</td><td>80 (100%)</td></tr>
+                    <tr class="last-row"><td class="left">Total</td><td>85 (56,67%)</td><td>65 (43,33%)</td><td>150 (100%)</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Dados compilados via portal Compras.gov.br (2026).</p>
+
+            <p>O cruzamento expõe contraste marcante. Nos certames de bens comuns de TI, a maioria das impugnações é rejeitada (78,57%), indicando que a modelagem para objetos padronizados está consolidada na rotina administrativa. Em contraste, nas Soluções Tecnológicas Complexas, a taxa de acolhimento salta para 62,50%, comprovando que os órgãos públicos enfrentam sérias limitações técnicas ao modelar objetos inovadores.</p>
+
+            <p>A aplicação do teste Qui-Quadrado resultou em χ² = 25,6464. Com 1 grau de liberdade, a probabilidade crítica foi calculada em p < 0,001, rejeitando a hipótese nula. Confirma-se que a probabilidade de acolhimento das impugnações está vinculada à complexidade do objeto tecnológico licitado.</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>5 DISCUSSÃO</h2>
+
+            <p>Os achados empíricos confirmam que o estrangulamento técnico e cognitivo da administração pública se acentua na modelagem de projetos de tecnologia complexa. A taxa de acolhimento de 62,50% em objetos complexos (contra 21,43% em bens comuns) revela que, na ausência de ferramentas de apoio à especificação inteligente, as equipes de planejamento falham na ponta, redigindo cláusulas que direcionam o certame ou impõem condições inexequíveis.</p>
+
+            <p>Esses resultados dialogam com a Economia dos Custos de Transação (Williamson, 1985), confirmando que a racionalidade limitada dos gestores públicos gera contratos incompletos que elevam os custos de transação ex-post. O direcionamento de editais e a superespecificação de exigências funcionam como mecanismos de redução artificial de incerteza, mas à custa da isonomia concorrencial e da eficiência alocativa.</p>
+
+            <p>Do ponto de vista prático, as evidências legitimam a intervenção prescritiva da Design Science Research representada pelo Copiloto Algorítmico ex-ante. Ao processar as minutas da fase de planejamento, os algoritmos do copiloto podem avaliar se as cláusulas de habilitação técnica e escopos contratuais assemelham-se a padrões discursivos historicamente associados a impugnações acolhidas, gerando alertas e sugerindo substituições parametrizadas. Isso reduz a latência processual de recursos e promove concorrência ampla nas licitações de inovação tecnológica.</p>
+
+            <h2>6 CONCLUSÕES</h2>
+
+            <p>Este estudo atingiu os objetivos propostos ao analisar empiricamente a "Voz do Mercado" expressa em 150 pedidos de impugnação do portal Compras.gov.br. A categorização baseada em Bardin (2016) revelou que as reclamações de fornecedores privados centram-se em Direcionamento de Edital (39,33%) e Superespecificação de Exigências Técnicas (26,67%). O teste Qui-Quadrado comprovou correlação estatística relevante: em certames complexos, as impugnações registram índice de acolhimento de 62,50% (p < 0,001), evidenciando a fragilidade estrutural da fase interna de planejamento analógico do Estado.</p>
+
+            <p>As contribuições teóricas residem em aproximar a Economia dos Custos de Transação e o arcabouço das barreiras de entrada às contestações formais do ecossistema de GovTechs no Brasil. Do ponto de vista prático, os achados fornecem a calibração de dados e a validação empírica para a construção do Copiloto Algorítmico ex-ante, fundamental para reduzir custos procedimentais e garantir segurança jurídica ao servidor público.</p>
+
+            <p>Como limitações, cita-se a restrição de escopo às impugnações de âmbito federal no Compras.gov.br. Pesquisas futuras podem estender a Análise de Conteúdo combinada com NLP a minutas contratuais de empresas estatais submetidas à Lei nº 13.303/2016, avaliando se a tipologia de disputas público-privadas mantém a mesma matriz de direcionamento e superespecificação.</p>
+
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">AKERLOF, G. A. The market for "lemons": Quality uncertainty and the market mechanism. <em>Quarterly Journal of Economics</em>, v. 84, n. 3, p. 488-500, 1970.</p>
+
+            <p class="ref-entry">BAIN, J. S. <em>Barriers to New Competition</em>. Cambridge: Harvard University Press, 1956.</p>
+
+            <p class="ref-entry">BARDIN, L. <em>Análise de Conteúdo</em>. Lisboa: Edições 70, 2016.</p>
+
+            <p class="ref-entry">COASE, R. H. The nature of the firm. <em>Economica</em>, v. 4, n. 16, p. 386-405, 1937.</p>
+
+            <p class="ref-entry">EDLER, J.; GEORGHIOU, L. Public procurement and innovation: Resurrecting the demand side. <em>Research Policy</em>, v. 36, n. 7, p. 949-963, 2007.</p>
+
+            <p class="ref-entry">HEVNER, A. R.; MARCH, S. T.; PARK, J.; RAM, S. Design science in information systems research. <em>MIS Quarterly</em>, v. 28, n. 1, p. 75-106, 2004.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. <em>The Entrepreneurial State: debunking public vs. private sector myths</em>. London: Anthem Press, 2013.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. Mission-oriented innovation policies: challenges and opportunities. <em>Industrial and Corporate Change</em>, v. 27, n. 5, p. 803-815, 2018.</p>
+
+            <p class="ref-entry">PASSOTTI, L.; FREGOLI, D.; BOF, F. Governing Algorithms: A Framework for Algorithmic Decision-Making in Public Administration. <em>Government Information Quarterly</em>, v. 39, n. 1, p. 101701, 2022.</p>
+
+            <p class="ref-entry">PEFFERS, K.; TUUNANEN, T.; ROTHENBERGER, M. A.; CHATTERJEE, S. A design science research methodology for information systems research. <em>Journal of Management Information Systems</em>, v. 24, n. 3, p. 45-77, 2007.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Mechanisms of Governance</em>. Oxford: Oxford University Press, 1996.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
+            </div>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <script>
+    function exportarDocx() {
+        var content = document.documentElement.outerHTML;
+        var blob = new Blob(['\ufeff' + content], {type: 'application/msword'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = (document.title || 'artigo') + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    </script>
 </body>
 </html>

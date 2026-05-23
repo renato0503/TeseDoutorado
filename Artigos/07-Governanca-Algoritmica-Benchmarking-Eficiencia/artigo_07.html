@@ -221,20 +221,18 @@
     </section>
 
     <script>
-        function exportarDocx() {
-            const titulo = document.title || "artigo_07";
-            const htmlContent = document.documentElement.outerHTML;
-            const blob = new Blob(['\ufeff' + htmlContent], {
-                type: 'application/msword'
-            });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = titulo.toLowerCase().replace(/\s+/g, "_") + ".doc";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
+    function exportarDocx() {
+        var content = document.documentElement.outerHTML;
+        var blob = new Blob(['\ufeff' + content], {type: 'application/msword'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = (document.title || 'artigo') + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
     </script>
 </body>
 </html>
