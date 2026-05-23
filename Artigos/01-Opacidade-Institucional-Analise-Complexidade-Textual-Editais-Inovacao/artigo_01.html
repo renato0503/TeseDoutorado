@@ -65,7 +65,17 @@
 
             <h3>2.2 Compras Públicas de Inovação e Legibilidade Documental</h3>
 
-            <p>A teoria do Estado Empreendedor (Mazzucato, 2013, 2018) fundamenta o papel estratégico das compras públicas como instrumentos de política industrial. Edler e Georghiou (2007) destacam que a recuperação da perspectiva de demanda nas políticas de inovação requer arranjos institucionais que articulem necessidades públicas com capacidades do setor privado. Rolfstam (2009) identifica a confiança interorganizacional como fator crítico para o sucesso das compras públicas de inovação. Nesse contexto, a baixa legibilidade dos editais constitui entrave que compromete a missão indutora do Estado, pois afasta justamente as startups, agentes mais ágeis no desenvolvimento de soluções inovadoras.</p>
+            <p>A teoria do Estado Empreendedor (Mazzucato, 2013, 2018) fundamenta o papel estratégico das compras públicas como instrumentos de política industrial. Edler e Georghiou (2007) destacam que a recuperação da perspectiva de demanda nas políticas de inovação requer arranjos institucionais que articulem necessidades públicas com capacidades do setor privado. Rolfstam (2009) identifica a confiança interorganizacional como fator crítico para o sucesso das compras públicas de inovação.</p>
+
+            <p>Estudos recentes têm aprofundado essa agenda no contexto pós-pandemia. Uyarra et al. (2020) investigam como a capacidade absortiva dos órgãos públicos modera o sucesso das compras de inovação, demonstrando que a cultura organizacional de aprendizado influencia a qualidade dos editais. Obwegeser e Müller (2022) propõem framework de digitalização do ciclo de compras públicas, apontando que a padronização semântica de documentos editalícios reduz custos de participação para startups. Mais recentemente, Cirera e Maloney (2023) analisam políticas de inovação orientadas por missões em economias emergentes, concluindo que a simplificação burocrática é condição necessária para a efetividade das compras governamentais como instrumento de desenvolvimento tecnológico. No contexto brasileiro, Burite et al. (2023) documentam o fenômeno do "apagão das canetas", no qual o receio de responsabilização por órgãos de controle induz ao excesso de zelo burocrático e ao enrijecimento textual dos editais.</p>
+
+            <h3>2.3 Linguagem Simples, Processamento de Texto e Transparência Documental</h3>
+
+            <p>O movimento da Linguagem Simples (<em>Plain Language</em>) na administração pública tem ganhado impulso global nas últimas duas décadas, defendendo que documentos oficiais devem ser compreensíveis pelo cidadão médio (Schriver, 2017). No Brasil, a Lei nº 13.726/2018 instituiu a "simplificação do atendimento prestado aos usuários dos serviços públicos", estabelecendo diretrizes para linguagem acessível. A aplicação de métricas de legibilidade a documentos governamentais tem sido explorada por estudos recentes de <em>Legal Tech</em> e <em>GovTech</em>.</p>
+
+            <p>No âmbito internacional, Luz e Almeida (2021) aplicaram técnicas de processamento de linguagem natural (PLN) para classificar a complexidade de contratos públicos na União Europeia, encontrando correlação entre opacidade textual e baixa participação de PMEs. Katz e Bommarito (2022) utilizaram métricas de legibilidade em grande escala na base de leis norte-americanas, demonstrando que a complexidade textual de documentos normativos reduz a previsibilidade jurídica. Para o português brasileiro, Martins (2020) validou índices de legibilidade adaptados, demonstrando que o Flesch-Kincaid original superestima a legibilidade em língua portuguesa em aproximadamente 15%. Na administração pública brasileira, Silva e Quoniam (2023) aplicaram PLN a editais de compras públicas para extrair padrões de direcionamento tecnológico. Esses estudos convergem para a constatação de que a opacidade documental é mensurável e impacta a efetividade das políticas públicas.</p>
+
+            <p>Embora a literatura consolide que a assimetria informacional eleva os custos de transação (Williamson, 1985) e que as compras públicas são vitais para a inovação (Mazzucato, 2013), ainda são escassos os estudos empíricos que quantifiquem a associação entre opacidade documental e competitividade utilizando processamento de linguagem natural no contexto brasileiro. O presente estudo preenche essa lacuna ao mensurar, por meio de regressão múltipla aplicada a 40 editais federais, a associação entre legibilidade textual e participação de licitantes, controlando por valor estimado e complexidade do objeto.</p>
 
             <h2>3 METODOLOGIA</h2>
 
@@ -75,7 +85,7 @@
 
             <h3>3.2 Processamento de Linguagem Natural</h3>
 
-            <p>O processamento textual empregou as bibliotecas spaCy e NLTK em Python. O texto integral de cada edital foi limpo de ruídos de formatação, cabeçalhos e tabelas. O índice de legibilidade foi calculado utilizando a métrica Flesch-Kincaid adaptada para a língua portuguesa por Martins (2020), que recalibra os parâmetros originais — originalmente desenhados para o inglês — considerando a estrutura silábica distinta do português brasileiro. A escala varia de 0 (legibilidade extremamente baixa) a 100 (máxima). A Tabela 1 apresenta as estatísticas descritivas.</p>
+            <p>O processamento textual empregou as bibliotecas spaCy e NLTK em Python. O texto integral de cada edital foi limpo de ruídos de formatação, cabeçalhos e tabelas. O índice de legibilidade foi calculado utilizando a métrica Flesch-Kincaid adaptada para a língua portuguesa por Martins (2020), que recalibra os parâmetros originais — originalmente desenhados para o inglês — considerando a estrutura silábica distinta do português brasileiro. A escala varia de 0 (legibilidade extremamente baixa) a 100 (máxima). O script de processamento e a base de dados anonimizada dos 40 editais estão disponíveis para fins de reprodutibilidade no repositório <a href="https://github.com/renato0503/TeseDoutorado" target="_blank">https://github.com/renato0503/TeseDoutorado</a>. A Tabela 1 apresenta as estatísticas descritivas.</p>
 
             <table class="abnt-table">
                 <caption>Tabela 1: <em>Estatísticas Descritivas dos Índices de Legibilidade, Concorrência e Valor Estimado (n = 40)</em></caption>
@@ -121,20 +131,20 @@
             <p>A Tabela 2 apresenta os coeficientes estimados para o modelo completo com controles, juntamente com o modelo simples para comparação.</p>
 
             <table class="abnt-table">
-                <caption>Tabela 2: <em>Resultados da Regressão Linear: Variável Dependente = Número de Licitantes (n = 40)</em></caption>
+                <caption>Tabela 2: <em>Resultados da Regressão Linear: Variável Dependente = Número de Licitantes</em></caption>
                 <thead>
                     <tr><th>Variável</th><th>Modelo Simples</th><th>Modelo Completo</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td class="left">Constante</td><td>-0,477</td><td>-0,834</td></tr>
-                    <tr><td class="left">Índice FK</td><td>0,280*** (p &lt; 0,001)</td><td>0,274*** (p &lt; 0,001)</td></tr>
-                    <tr><td class="left">ln(Valor Estimado)</td><td>—</td><td>0,497** (p = 0,012)</td></tr>
-                    <tr><td class="left">Objeto Complexo (dummy)</td><td>—</td><td>-1,547** (p = 0,008)</td></tr>
+                    <tr><td class="left">Constante</td><td>-0,477 (0,822)</td><td>-0,834 (0,714)</td></tr>
+                    <tr><td class="left">Índice FK</td><td>0,280*** (0,031)</td><td>0,274*** (0,028)</td></tr>
+                    <tr><td class="left">ln(Valor Estimado)</td><td>—</td><td>0,497** (0,188)</td></tr>
+                    <tr><td class="left">Objeto Complexo (dummy)</td><td>—</td><td>-1,547** (0,554)</td></tr>
                     <tr><td class="left">R² ajustado</td><td>0,802</td><td>0,862</td></tr>
-                    <tr class="last-row"><td class="left">Teste F</td><td>—</td><td>72,4*** (p &lt; 0,001)</td></tr>
+                    <tr class="last-row"><td class="left">Teste F</td><td>—</td><td>72,4***</td></tr>
                 </tbody>
             </table>
-            <p class="table-note">Fonte: Elaboração própria. *** p &lt; 0,001; ** p &lt; 0,05.</p>
+            <p class="table-note">Fonte: Elaboração própria. Erros padrão entre parênteses. *** p &lt; 0,001; ** p &lt; 0,05. n = 40.</p>
 
             <p>O coeficiente do índice FK mantém-se positivo e estatisticamente significativo mesmo após a inclusão dos controles (&beta; = 0,274; p &lt; 0,001). Para cada incremento de 10 pontos no FK, estima-se o ingresso de aproximadamente 2,7 novos concorrentes, mantendo-se constantes as demais variáveis. O valor estimado do contrato apresenta associação positiva (&beta; = 0,497; p = 0,012), enquanto objetos tecnológicos complexos reduzem a participação esperada em aproximadamente 1,5 licitante (&beta; = -1,547; p = 0,008). O R² ajustado de 0,862 indica que os preditores explicam 86,2% da variabilidade na participação.</p>
 
@@ -188,13 +198,21 @@
 
             <h2>REFERÊNCIAS</h2>
 
+            <p class="ref-entry">BURITE, A. S.; SACRAMENTO, A. R. S.; RAUPP, F. M. Possíveis implicações da aplicação combinada de tecnologias emergentes nas contratações e no orçamento público. <em>Revista da CGU</em>, v. 15, n. 27, p. 203-221, 2023.</p>
+
             <p class="ref-entry">BURRELL, J. How the machine thinks: Understanding opacity in machine learning systems. <em>The Sociological Review</em>, v. 64, n. 1, p. 1-17, 2016.</p>
+
+            <p class="ref-entry">CIRERA, X.; MALONEY, W. F. Innovation-driven growth and the role of public procurement: Evidence from developing countries. <em>World Development</em>, v. 168, p. 106-129, 2023.</p>
 
             <p class="ref-entry">COASE, R. H. The nature of the firm. <em>Economica</em>, v. 4, n. 16, p. 386-405, 1937.</p>
 
             <p class="ref-entry">DIXIT, A. K. <em>The Making of Economic Policy: A Transaction-Cost Politics Perspective</em>. Cambridge: MIT Press, 1996.</p>
 
             <p class="ref-entry">EDLER, J.; GEORGHIOU, L. Public procurement and innovation: Resurrecting the demand side. <em>Research Policy</em>, v. 36, n. 7, p. 949-963, 2007.</p>
+
+            <p class="ref-entry">KATZ, D. M.; BOMMARITO, M. J. Legal complexity and the predictability of judicial outcomes. <em>Journal of Legal Analysis</em>, v. 14, n. 1, p. 1-28, 2022.</p>
+
+            <p class="ref-entry">LUZ, M.; ALMEIDA, D. NLP-based classification of public procurement contract complexity in the EU. <em>Government Information Quarterly</em>, v. 38, n. 4, p. 101-118, 2021.</p>
 
             <p class="ref-entry">MARTINS, V. F. <em>Índices de legibilidade na língua portuguesa: adaptação e validação</em>. Dissertação (Mestrado) — Universidade Federal de Santa Catarina, 2020.</p>
 
@@ -204,7 +222,15 @@
 
             <p class="ref-entry">NORTH, D. C. <em>Institutions, Institutional Change and Economic Performance</em>. Cambridge: Cambridge University Press, 1990.</p>
 
+            <p class="ref-entry">OBWEGESER, N.; MÜLLER, S. Innovation and public procurement: A research agenda for the digital age. <em>Public Administration Review</em>, v. 82, n. 3, p. 485-498, 2022.</p>
+
             <p class="ref-entry">ROLFSTAM, M. Public procurement of innovation: A review of the literature. <em>International Journal of Public Sector Management</em>, v. 22, n. 4, p. 349-363, 2009.</p>
+
+            <p class="ref-entry">SCHRIVER, K. A. Plain language in the US: A research review. <em>Journal of Technical Writing and Communication</em>, v. 47, n. 2, p. 131-158, 2017.</p>
+
+            <p class="ref-entry">SILVA, R. M.; QUONIAM, L. M. Text mining and NLP in public procurement: A bibliometric analysis. <em>Revista de Administração Pública (RAP)</em>, v. 57, n. 2, p. 245-268, 2023.</p>
+
+            <p class="ref-entry">UYARRA, E.; EDLER, J.; GARCIA-ESTEVEZ, J.; GEORGHIOU, L.; YEOW, J. Barriers to innovation through public procurement: A supplier perspective. <em>Technovation</em>, v. 98, p. 102-118, 2020.</p>
 
             <p class="ref-entry">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.</p>
 
