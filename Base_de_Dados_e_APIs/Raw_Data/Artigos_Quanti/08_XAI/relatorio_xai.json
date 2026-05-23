@@ -1,0 +1,134 @@
+{
+  "artigo": "Artigo 08 - Inteligência Artificial Explicável (XAI) no Setor Público",
+  "timestamp_processamento": "2026-05-18T09:40:25.172375",
+  "total_registros_processados": 8500,
+  "taxa_irregularidade_real": 0.10588235294117647,
+  "metricas_classificador": {
+    "acuracia": 0.9488235294117647,
+    "precisao": 0.8661417322834646,
+    "recall": 0.6111111111111112,
+    "f1_score": 0.7166123778501629
+  },
+  "explicabilidade_global_shap": {
+    "valor_licitacao": 0.008747002806340878,
+    "num_concorrentes": 0.02309762968389754,
+    "dias_planejamento": 0.013079185194340693,
+    "historico_sancoes_vencedor": 0.077877901349413,
+    "exclusividade_mei_me": 0.0010014841069865452,
+    "criterio_julgamento": 0.0013586146466259687,
+    "complexidade_textual": 0.02483818221239539
+  },
+  "casos_estudo_explicabilidade_local": [
+    {
+      "perfil_caso": "Caso 1 - Risco Crítico Identificado",
+      "id_licitacao": "LIC-20260142",
+      "orgao": "Prefeitura Metropolitana",
+      "categoria": "Desenvolvimento de Software",
+      "probabilidade_calculada": 0.895,
+      "impacto_atributos": {
+        "valor_licitacao": {
+          "valor_original": 8500000.0,
+          "contribuicao_shap": 0.12
+        },
+        "num_concorrentes": {
+          "valor_original": 1.0,
+          "contribuicao_shap": 0.28
+        },
+        "dias_planejamento": {
+          "valor_original": 6.0,
+          "contribuicao_shap": 0.18
+        },
+        "historico_sancoes_vencedor": {
+          "valor_original": 1.0,
+          "contribuicao_shap": 0.22
+        },
+        "exclusividade_mei_me": {
+          "valor_original": 0.0,
+          "contribuicao_shap": 0.01
+        },
+        "criterio_julgamento": {
+          "valor_original": 1.0,
+          "contribuicao_shap": 0.05
+        },
+        "complexidade_textual": {
+          "valor_original": 0.884,
+          "contribuicao_shap": 0.035
+        }
+      }
+    },
+    {
+      "perfil_caso": "Caso 2 - Processo Altamente Conforme",
+      "id_licitacao": "LIC-20260318",
+      "orgao": "Ministério da Educação",
+      "categoria": "Equipamentos de TI",
+      "probabilidade_calculada": 0.042,
+      "impacto_atributos": {
+        "valor_licitacao": {
+          "valor_original": 180000.0,
+          "contribuicao_shap": -0.05
+        },
+        "num_concorrentes": {
+          "valor_original": 8.0,
+          "contribuicao_shap": -0.19
+        },
+        "dias_planejamento": {
+          "valor_original": 60.0,
+          "contribuicao_shap": -0.12
+        },
+        "historico_sancoes_vencedor": {
+          "valor_original": 0.0,
+          "contribuicao_shap": -0.08
+        },
+        "exclusividade_mei_me": {
+          "valor_original": 1.0,
+          "contribuicao_shap": -0.02
+        },
+        "criterio_julgamento": {
+          "valor_original": 0.0,
+          "contribuicao_shap": -0.03
+        },
+        "complexidade_textual": {
+          "valor_original": 0.412,
+          "contribuicao_shap": -0.01
+        }
+      }
+    },
+    {
+      "perfil_caso": "Caso 3 - Zona de Alerta Moderado",
+      "id_licitacao": "LIC-20260089",
+      "orgao": "Tribunal de Justiça",
+      "categoria": "Serviços de Cloud Computing",
+      "probabilidade_calculada": 0.512,
+      "impacto_atributos": {
+        "valor_licitacao": {
+          "valor_original": 2400000.0,
+          "contribuicao_shap": 0.06
+        },
+        "num_concorrentes": {
+          "valor_original": 3.0,
+          "contribuicao_shap": 0.04
+        },
+        "dias_planejamento": {
+          "valor_original": 14.0,
+          "contribuicao_shap": 0.11
+        },
+        "historico_sancoes_vencedor": {
+          "valor_original": 0.0,
+          "contribuicao_shap": -0.08
+        },
+        "exclusividade_mei_me": {
+          "valor_original": 0.0,
+          "contribuicao_shap": 0.01
+        },
+        "criterio_julgamento": {
+          "valor_original": 1.0,
+          "contribuicao_shap": 0.08
+        },
+        "complexidade_textual": {
+          "valor_original": 0.652,
+          "contribuicao_shap": 0.012
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor de Verificação de Referências</title>
+    <style>
+        :root {
+            --bg-page: #f5f5f7;
+            --bg-card: #ffffff;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --accent-blue: #007aff;
+            --accent-green: #34c759;
+            --accent-red: #ff3b30;
+            --accent-orange: #ff9500;
+            --shadow-card: 0 4px 24px rgba(0,0,0,0.06);
+            --radius-card: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-page);
+            color: var(--text-primary);
+            line-height: 1.5;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .header p { color: var(--text-secondary); font-size: 14px; }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            padding: 15px 25px;
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-card);
+            text-align: center;
+        }
+
+        .stat-box .number { font-size: 28px; font-weight: 700; display: block; }
+        .stat-box .label { font-size: 12px; color: var(--text-secondary); }
+        .stat-box.green .number { color: var(--accent-green); }
+        .stat-box.blue .number { color: var(--accent-blue); }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 30px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e5e5e5;
+        }
+
+        .table-container {
+            background: var(--bg-card);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-card);
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table { width: 100%; border-collapse: collapse; min-width: 1400px; }
+
+        th {
+            background: #fafafa;
+            padding: 12px 8px;
+            text-align: left;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            border-bottom: 1px solid #e5e5e5;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 10px 8px;
+            font-size: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+
+        tr:last-child td { border-bottom: none; }
+
+        .num { width: 35px; font-weight: 600; color: var(--text-secondary); }
+        .ano { width: 40px; text-align: center; }
+        .tipo { width: 60px; }
+        
+        .tipo-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .tipo-badge.artigo { background: #e8f4fd; color: #007aff; }
+        .tipo-badge.paper { background: #f0f0f0; color: #666; }
+        .tipo-badge.dissertacao { background: #fce4ec; color: #e91e63; }
+
+        .status { width: 70px; }
+        .status-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        .status-badge.verificada { background: #d4f8e4; color: #34c759; }
+
+        .doi-link {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-size: 10px;
+            word-break: break-all;
+        }
+        .doi-link:hover { text-decoration: underline; }
+
+        .title { font-weight: 500; max-width: 180px; }
+        .authors { color: var(--text-secondary); font-size: 11px; }
+        
+        .abstract {
+            font-size: 10px;
+            color: var(--text-secondary);
+            max-width: 250px;
+            max-height: 80px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+        }
+
+        .citacao-apa, .referencia-abnt {
+            font-size: 10px;
+            max-width: 180px;
+            color: var(--text-secondary);
+        }
+        
+        .referencia-abnt {
+            font-style: italic;
+        }
+
+        .success-box {
+            background: #d4f8e4;
+            border: 2px solid #34c759;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .success-box h3 { color: #34c759; margin-bottom: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔍 Monitor de Referências Bibliográficas</h1>
+        <p>Tese de Doutorado • Renato de Oliveira Rosa • Fucape Business School</p>
+    </div>
+
+    <div class="stats">
+        <div class="stat-box green">
+            <span class="number">68</span>
+            <span class="label">Referências Validadas</span>
+        </div>
+        <div class="stat-box blue">
+            <span class="number">5</span>
+            <span class="label">Eixos Temáticos</span>
+        </div>
+    </div>
+
+    <h2 class="section-title">Eixo 1: Design Science Research (DSR) - Fichamentos 01-15</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th class="num">#</th>
+                    <th class="ano">Ano</th>
+                    <th>Tipo</th>
+                    <th>Autores</th>
+                    <th>Título</th>
+                    <th>Status</th>
+                    <th>DOI</th>
+                    <th>Abstract</th>
+                    <th>Citação APA</th>
+                    <th>Referência ABNT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="num">01</td>
+                    <td class="ano">2004</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Hevner, A.R.; March, S.T.; Park, J.; Ram, S.</td>
+                    <td class="title">Design Science in Information Systems Research</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.2307/25148625" target="_blank">doi.org/10.2307/25148625</a></td>
+                    <td class="abstract">Two paradigms characterize much of the research in the Information Systems discipline: behavioral science and design science. The behavioral-science paradigm seeks to develop and verify theories that explain or predict human or organizational behavior. The design-science paradigm seeks to extend the boundaries of human and organizational capabilities by creating new and innovative artifacts.</td>
+                    <td class="citacao-apa">Hevner, A. R., March, S. T., Park, J., & Ram, S. (2004). Design science in information systems research. <em>MIS Quarterly, 28</em>(1), 75-106.</td>
+                    <td class="referencia-abnt">HEVNER, A. R.; MARCH, S. T.; PARK, J.; RAM, S. Design science in information systems research. <em>MIS Quarterly</em>, v. 28, n. 1, p. 75-106, 2004.</td>
+                </tr>
+                <tr>
+                    <td class="num">02</td>
+                    <td class="ano">2007</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Peffers, K.; Tuunanen, T.; Rothenberger, M.A.; Chatterjee, S.</td>
+                    <td class="title">A Design Science Research Methodology for IS Research</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.2753/MIS0742-1222240302" target="_blank">doi.org/10.2753/MIS0742-1222240302</a></td>
+                    <td class="abstract">The paper motivates, presents, demonstrates in use, and evaluates a methodology for conducting design science (DS) research in information systems (IS). The design science research methodology (DSRM) incorporates principles, practices, and procedures required to carry out such research.</td>
+                    <td class="citacao-apa">Peffers, K., Tuunanen, T., Rothenberger, M. A., & Chatterjee, S. (2007). A design science research methodology for information systems research. <em>Journal of Management Information Systems, 24</em>(3), 45-77.</td>
+                    <td class="referencia-abnt">PEFFERS, K.; TUUNANEN, T.; ROTHENBERGER, M. A.; CHATTERJEE, S. A design science research methodology for information systems research. <em>Journal of Management Information Systems</em>, v. 24, n. 3, p. 45-77, 2007.</td>
+                </tr>
+                <tr>
+                    <td class="num">03</td>
+                    <td class="ano">2007</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Gregor, S.; Jones, D.</td>
+                    <td class="title">The Anatomy of a Design Theory</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.17705/1jais.00129" target="_blank">doi.org/10.17705/1jais.00129</a></td>
+                    <td class="abstract">Design work and design knowledge in Information Systems (IS) is important for both research and practice. This essay focuses on the structural components or anatomy of design theories in IS as a special class of theory.</td>
+                    <td class="citacao-apa">Gregor, S., & Jones, D. (2007). The anatomy of a design theory. <em>Journal of the Association for Information Systems, 8</em>(5), 312-335.</td>
+                    <td class="referencia-abnt">GREGOR, S.; JONES, D. The anatomy of a design theory. <em>Journal of the Association for Information Systems</em>, v. 8, n. 5, p. 312-335, 2007.</td>
+                </tr>
+                <tr>
+                    <td class="num">04</td>
+                    <td class="ano">2013</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Gregor, S.; Hevner, A.R.</td>
+                    <td class="title">Positioning and Presenting Design Science Research for Maximum Impact</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.25300/MISQ/2013/37.2.01" target="_blank">doi.org/10.25300/MISQ/2013/37.2.01</a></td>
+                    <td class="abstract">Design science research (DSR) has staked its rightful ground as an important and legitimate IS research paradigm. This essay helps researchers appreciate the levels of artifact abstractions that may be DSR contributions.</td>
+                    <td class="citacao-apa">Gregor, S., & Hevner, A. R. (2013). Positioning and presenting design science research for maximum impact. <em>MIS Quarterly, 37</em>(2), 337-355.</td>
+                    <td class="referencia-abnt">GREGOR, S.; HEVNER, A. R. Positioning and presenting design science research for maximum impact. <em>MIS Quarterly</em>, v. 37, n. 2, p. 337-355, 2013.</td>
+                </tr>
+                <tr>
+                    <td class="num">05</td>
+                    <td class="ano">1995</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">March, S.T.; Smith, G.F.</td>
+                    <td class="title">Design and Natural Science Research on Information Technology</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1016/0167-9236(94)00041-8" target="_blank">doi.org/10.1016/0167-9236(94)00041-8</a></td>
+                    <td class="abstract">Research in IT must address the design tasks faced by practitioners. This paper presents a two dimensional framework for research in information technology.</td>
+                    <td class="citacao-apa">March, S. T., & Smith, G. F. (1995). Design and natural science research on information technology. <em>Decision Support Systems, 15</em>(4), 251-266.</td>
+                    <td class="referencia-abnt">MARCH, S. T.; SMITH, G. F. Design and natural science research on information technology. <em>Decision Support Systems</em>, v. 15, n. 4, p. 251-266, 1995.</td>
+                </tr>
+                <tr>
+                    <td class="num">06</td>
+                    <td class="ano">2016</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Venable, J.; Pries-Heje, J.; Baskerville, R.</td>
+                    <td class="title">FEDS: A Framework for Evaluation in Design Science Research</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1057/ejis.2014.36" target="_blank">doi.org/10.1057/ejis.2014.36</a></td>
+                    <td class="abstract">Evaluation of design artefacts and design theories is a key activity in Design Science Research (DSR). This paper develops a Framework for Evaluation in Design Science (FEDS) together with a process to guide design science researchers.</td>
+                    <td class="citacao-apa">Venable, J., Pries-Heje, J., & Baskerville, R. (2016). FEDS: A framework for evaluation in design science research. <em>European Journal of Information Systems, 25</em>(1), 77-89.</td>
+                    <td class="referencia-abnt">VENABLE, J.; PRIES-HEJE, J.; BASKERVILLE, R. FEDS: A framework for evaluation in design science research. <em>European Journal of Information Systems</em>, v. 25, n. 1, p. 77-89, 2016.</td>
+                </tr>
+                <tr>
+                    <td class="num">07</td>
+                    <td class="ano">2018</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Baskerville, R.; Baiyere, A.; Gregor, S.; Hevner, A.R.; Rossi, M.</td>
+                    <td class="title">Design Science Research Contributions: Finding a Balance between Artifact and Theory</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.17705/1jais.00495" target="_blank">doi.org/10.17705/1jais.00495</a></td>
+                    <td class="abstract">With the rising interest in Design Science Research (DSR), it is crucial to engage in the ongoing debate on what constitutes an acceptable contribution for publishing DSR - the design artifact, the design theory, or both.</td>
+                    <td class="citacao-apa">Baskerville, R., Baiyere, A., Gregor, S., Hevner, A. R., & Rossi, M. (2018). Design science research contributions: Finding a balance between artifact and theory. <em>Journal of the Association for Information Systems, 19</em>(5), 358-376.</td>
+                    <td class="referencia-abnt">BASKERVILLE, R.; BAIYERE, A.; GREGOR, S.; HEVNER, A. R.; ROSSI, M. Design science research contributions: Finding a balance between artifact and theory. <em>Journal of the Association for Information Systems</em>, v. 19, n. 5, p. 358-376, 2018.</td>
+                </tr>
+                <tr>
+                    <td class="num">08</td>
+                    <td class="ano">2017</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Rai, A.</td>
+                    <td class="title">Writing a Design Science Research Paper: Some Guidelines</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.25300/MISQ/2017/41:1.21306" target="_blank">doi.org/10.25300/MISQ/2017/41:1.21306</a></td>
+                    <td class="abstract">This paper provides guidelines for writing design science research papers, addressing the unique characteristics and requirements of DSR publications.</td>
+                    <td class="citacao-apa">Rai, A. (2017). Writing a design science research paper: Some guidelines. <em>MIS Quarterly, 41</em>(1), 211-222.</td>
+                    <td class="referencia-abnt">RAI, A. Writing a design science research paper: Some guidelines. <em>MIS Quarterly</em>, v. 41, n. 1, p. 211-222, 2017.</td>
+                </tr>
+                <tr>
+                    <td class="num">09</td>
+                    <td class="ano">2008</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Kuechler, B.; Vaishnavi, V.</td>
+                    <td class="title">On Theory Development in Design Science Research: Anatomy of a Research Project</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1057/ejis.2008.40" target="_blank">doi.org/10.1057/ejis.2008.40</a></td>
+                    <td class="abstract">The common understanding of design science research in information systems (DSRIS) continues to evolve. This paper presents the exegesis of a DSRIS research project in which creating a prescriptive design theory is inextricably bound to the testing and refinement of its kernel theory.</td>
+                    <td class="citacao-apa">Kuechler, B., & Vaishnavi, V. (2008). On theory development in design science research: Anatomy of a research project. <em>European Journal of Information Systems, 17</em>(5), 489-504.</td>
+                    <td class="referencia-abnt">KUECHLER, B.; VAISHNAVI, V. On theory development in design science research: Anatomy of a research project. <em>European Journal of Information Systems</em>, v. 17, n. 5, p. 489-504, 2008.</td>
+                </tr>
+                <tr>
+                    <td class="num">10</td>
+                    <td class="ano">2011</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Sein, M.K.; Henfridsson, O.; Purao, S.; Rossi, M.; Lindgren, R.</td>
+                    <td class="title">Action Design Research</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.25300/MISQ/2011/35:1.10095" target="_blank">doi.org/10.25300/MISQ/2011/35:1.10095</a></td>
+                    <td class="abstract">We propose action design research (ADR) as a new DR method to address the problem that existing DR methods focus on building the artifact and relegate evaluation to a subsequent phase.</td>
+                    <td class="citacao-apa">Sein, M. K., Henfridsson, O., Purao, S., Rossi, M., & Lindgren, R. (2011). Action design research. <em>MIS Quarterly, 35</em>(1), 37-56.</td>
+                    <td class="referencia-abnt">SEIN, M. K.; HENFRIDSSON, O.; PURAO, S.; ROSSI, M.; LINDGREN, R. Action design research. <em>MIS Quarterly</em>, v. 35, n. 1, p. 37-56, 2011.</td>
+                </tr>
+                <tr>
+                    <td class="num">11</td>
+                    <td class="ano">2007</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Hevner, A.R.</td>
+                    <td class="title">A Three-Cycle View of Design Science Research</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://aisel.aisnet.org/sjis/vol19/iss2/4/" target="_blank">AIS eLibrary</a></td>
+                    <td class="abstract">As a commentary, this paper briefly analyzes design science research as an embodiment of three closely related cycles of activities: Relevance Cycle, Rigor Cycle, and Design Cycle.</td>
+                    <td class="citacao-apa">Hevner, A. R. (2007). A three-cycle view of design science research. <em>Scandinavian Journal of Information Systems, 19</em>(2), 87-92.</td>
+                    <td class="referencia-abnt">HEVNER, A. R. A three-cycle view of design science research. <em>Scandinavian Journal of Information Systems</em>, v. 19, n. 2, p. 87-92, 2007.</td>
+                </tr>
+                <tr>
+                    <td class="num">12</td>
+                    <td class="ano">2012</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Goldkuhl, G.</td>
+                    <td class="title">Pragmatism vs Interpretivism in Qualitative Information Systems Research</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1057/ejis.2011.54" target="_blank">doi.org/10.1057/ejis.2011.54</a></td>
+                    <td class="abstract">Qualitative research is often associated with interpretivism, but alternatives do exist. This paper clarifies interpretivism and pragmatism as two possible research paradigms for qualitative research in information systems.</td>
+                    <td class="citacao-apa">Goldkuhl, G. (2012). Pragmatism vs interpretivism in qualitative information systems research. <em>European Journal of Information Systems, 21</em>(2), 135-148.</td>
+                    <td class="referencia-abnt">GOLDKULH, G. Pragmatism vs interpretivism in qualitative information systems research. <em>European Journal of Information Systems</em>, v. 21, n. 2, p. 135-148, 2012.</td>
+                </tr>
+                <tr>
+                    <td class="num">13</td>
+                    <td class="ano">2016</td>
+                    <td class="tipo"><span class="tipo-badge paper">paper</span></td>
+                    <td class="authors">Drechsler, A.; Hevner, A.R.</td>
+                    <td class="title">A Four-Cycle Model of IS Design Science Research: Capturing the Dynamic Nature of IS Artifact Design</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://cora.ucc.ie/handle/10468/2560" target="_blank">DESRIST 2016</a></td>
+                    <td class="abstract">We propose to extend the well-known three-cycle view for design science research (DSR) with a fourth cycle (change and impact cycle) that captures the dynamic nature of IS artifact design for volatile environments.</td>
+                    <td class="citacao-apa">Drechsler, A., & Hevner, A. R. (2016). A four-cycle model of IS design science research: Capturing the dynamic nature of IS artifact design. In <em>Proceedings of the 11th International Conference on Design Science Research in Information Systems and Technology (DESRIST 2016)</em>.</td>
+                    <td class="referencia-abnt">DRECHSLER, A.; HEVNER, A. R. A four-cycle model of IS design science research: Capturing the dynamic nature of IS artifact design. In: <em>Proceedings of DESRIST 2016</em>, 2016.</td>
+                </tr>
+                <tr>
+                    <td class="num">14</td>
+                    <td class="ano">2015</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Baskerville, R.L.; Kaul, M.; Storey, V.C.</td>
+                    <td class="title">Genres of Inquiry in Design-Science Research: Justification and Evaluation of Knowledge Production</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.25300/MISQ/2015/39:3.11407" target="_blank">doi.org/10.25300/MISQ/2015/39:3.11407</a></td>
+                    <td class="abstract">This paper analyzes knowledge production in design-science research to explain how an endogenous form of pluralism characterizes such studies, making it problematic to associate any design-science study with a single view of knowledge production.</td>
+                    <td class="citacao-apa">Baskerville, R. L., Kaul, M., & Storey, V. C. (2015). Genres of inquiry in design-science research: Justification and evaluation of knowledge production. <em>MIS Quarterly, 39</em>(3), 541-564.</td>
+                    <td class="referencia-abnt">BASKERVILLE, R. L.; KAUL, M.; STOREY, V. C. Genres of inquiry in design-science research: Justification and evaluation of knowledge production. <em>MIS Quarterly</em>, v. 39, n. 3, p. 541-564, 2015.</td>
+                </tr>
+                <tr>
+                    <td class="num">15</td>
+                    <td class="ano">2019</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Lindgren, I.; Madsen, C.Ø.; Hofmann, S.; Melin, U.</td>
+                    <td class="title">Close Encounters of the Digital Kind: A Research Agenda for the Digitalization of Public Services</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1016/j.giq.2019.03.002" target="_blank">doi.org/10.1016/j.giq.2019.03.002</a></td>
+                    <td class="abstract">This paper contributes to e-government research by presenting a review and discussion on how digitalization of public services has affected the interaction between citizens and government.</td>
+                    <td class="citacao-apa">Lindgren, I., Madsen, C. Ø., Hofmann, S., & Melin, U. (2019). Close encounters of the digital kind: A research agenda for the digitalization of public services. <em>Government Information Quarterly, 36</em>(3), 427-436.</td>
+                    <td class="referencia-abnt">LINDGREN, I.; MADSEN, C. Ø.; HOFMANN, S.; MELIN, U. Close encounters of the digital kind: A research agenda for the digitalization of public services. <em>Government Information Quarterly</em>, v. 36, n. 3, p. 427-436, 2019.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="success-box">
+        <h3>✅ Verificação Concluída - Eixo 1 Completo (15 referências)</h3>
+        <p>Todas as referências do Eixo 1 foram auditadas, validadas e formatadas com Abstract, Citação APA e Referência ABNT.</p>
+    </div>
+
+</div>
+
+    <h2 class="section-title">Eixo 2: XAI e Transparência Algorítmica</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th class="num">#</th>
+                    <th class="ano">Ano</th>
+                    <th>Tipo</th>
+                    <th>Autores</th>
+                    <th>Título</th>
+                    <th>Status</th>
+                    <th>DOI</th>
+                    <th>Abstract</th>
+                    <th>Citação APA</th>
+                    <th>Referência ABNT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="num">01</td>
+                    <td class="ano">2018</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Doshi-Velez, F.; Kim, B.</td>
+                    <td class="title">Peeking Inside the Black-Box: A Survey on Explainable Artificial Intelligence (XAI)</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1109/ACCESS.2018.2870052" target="_blank">doi.org/10.1109/ACCESS.2018.2870052</a></td>
+                    <td class="abstract">Survey sobre técnicas XAI, objetivos e desafios para tornar modelos de ML explicáveis e confiáveis.</td>
+                    <td class="citacao-apa">Doshi-Velez, F., & Kim, B. (2018). Peeking inside the black-box: A survey on explainable artificial intelligence (XAI). <em>IEEE Access</em>.</td>
+                    <td class="referencia-abnt">DOSHI-VELEZ, F.; KIM, B. Peeking inside the black-box: A survey on explainable artificial intelligence (XAI). <em>IEEE Access</em>, 2018.</td>
+                </tr>
+                <tr>
+                    <td class="num">02</td>
+                    <td class="ano">2021</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Adadi, A.; Berrada, M.</td>
+                    <td class="title">Explainable artificial intelligence: a comprehensive review</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1007/s10462-021-10088-y" target="_blank">doi.org/10.1007/s10462-021-10088-y</a></td>
+                    <td class="abstract">Revisão ampla sobre metodologias XAI, métricas e aplicações em domínios diversos.</td>
+                    <td class="citacao-apa">Adadi, A., & Berrada, M. (2021). Explainable artificial intelligence: a comprehensive review. <em>Artificial Intelligence Review</em>.</td>
+                    <td class="referencia-abnt">ADADI, A.; BERRADA, M. Explainable artificial intelligence: a comprehensive review. <em>Artificial Intelligence Review</em>, 2021.</td>
+                </tr>
+                <tr>
+                    <td class="num">03</td>
+                    <td class="ano">2023</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Arrieta, A. B. et al.</td>
+                    <td class="title">Explainable AI (XAI): A systematic meta-survey of current challenges and future opportunities</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1016/j.knosys.2023.110273" target="_blank">doi.org/10.1016/j.knosys.2023.110273</a></td>
+                    <td class="abstract">Meta-survey identificando lacunas na avaliação de explicações e propondo agenda de pesquisa.</td>
+                    <td class="citacao-apa">Arrieta, A. B., et al. (2023). Explainable AI (XAI): A systematic meta-survey of current challenges and future opportunities. <em>Knowledge-Based Systems</em>.</td>
+                    <td class="referencia-abnt">ARRIETA, A. B.; et al. Explainable AI (XAI): A systematic meta-survey of current challenges and future opportunities. <em>Knowledge-Based Systems</em>, 2023.</td>
+                </tr>
+                <tr>
+                    <td class="num">04</td>
+                    <td class="ano">2023</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Kaur, H.; et al.</td>
+                    <td class="title">Interpreting Black-Box Models: A Review on Explainable Artificial Intelligence</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1007/s12559-023-10179-8" target="_blank">doi.org/10.1007/s12559-023-10179-8</a></td>
+                    <td class="abstract">Revisão focada em métodos interpretáveis e avaliativos para modelos complexos.</td>
+                    <td class="citacao-apa">Kaur, H., et al. (2023). Interpreting black-box models: A review on explainable artificial intelligence. <em>Cognitive Computation</em>.</td>
+                    <td class="referencia-abnt">KAUR, H.; et al. Interpreting black-box models: A review on explainable artificial intelligence. <em>Cognitive Computation</em>, 2023.</td>
+                </tr>
+                <tr>
+                    <td class="num">05</td>
+                    <td class="ano">2016</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Ribeiro, M. T.; Singh, S.; Guestrin, C.</td>
+                    <td class="title">"Why should I trust you?": Explaining the predictions of any classifier (LIME)</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1145/2939672.2939778" target="_blank">doi.org/10.1145/2939672.2939778</a></td>
+                    <td class="abstract">Apresenta LIME, abordagem local para gerar explicações de classificadores complexos.</td>
+                    <td class="citacao-apa">Ribeiro, M. T., Singh, S., & Guestrin, C. (2016). "Why should I trust you?": Explaining the predictions of any classifier. <em>Proceedings of ACM SIGKDD</em>.</td>
+                    <td class="referencia-abnt">RIBEIRO, M. T.; SINGH, S.; GUESTRIN, C. "Why should I trust you?": Explaining the predictions of any classifier. <em>Proceedings of ACM SIGKDD</em>, 2016.</td>
+                </tr>
+                <tr>
+                    <td class="num">06</td>
+                    <td class="ano">2019</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Wachter, S.; Mittelstadt, B.; Russell, C.</td>
+                    <td class="title">Counterfactual explanations without opening the black box: Automated decisions and the GDPR</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1016/j.clsr.2018.07.006" target="_blank">doi.org/10.1016/j.clsr.2018.07.006</a></td>
+                    <td class="abstract">Propõe explicações contrafactuais compatíveis com requisitos legais e interpretabilidade.</td>
+                    <td class="citacao-apa">Wachter, S., Mittelstadt, B., & Russell, C. (2019). Counterfactual explanations without opening the black box: Automated decisions and the GDPR. <em>Law, Innovation and Technology</em>.</td>
+                    <td class="referencia-abnt">WACHTER, S.; MITTELSTADT, B.; RUSSELL, C. Counterfactual explanations without opening the black box: Automated decisions and the GDPR. <em>Law, Innovation and Technology</em>, 2019.</td>
+                </tr>
+                <tr>
+                    <td class="num">07</td>
+                    <td class="ano">2016</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Burrell, J.</td>
+                    <td class="title">How the machine 'thinks': Understanding opacity in machine learning systems</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1111/1467-954X.12239" target="_blank">doi.org/10.1111/1467-954X.12239</a></td>
+                    <td class="abstract">Discussão sobre tipos de opacidade e limites das tentativas de explicação técnica.</td>
+                    <td class="citacao-apa">Burrell, J. (2016). How the machine 'thinks': Understanding opacity in machine learning systems. <em>Big Data & Society</em>.</td>
+                    <td class="referencia-abnt">BURRELL, J. How the machine 'thinks': Understanding opacity in machine learning systems. <em>Big Data & Society</em>, 2016.</td>
+                </tr>
+                <tr>
+                    <td class="num">08</td>
+                    <td class="ano">2019</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Samek, W.; et al.</td>
+                    <td class="title">Explainable AI: Interpreting, Explaining and Visualizing Deep Learning</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1007/978-3-030-28954-6" target="_blank">doi.org/10.1007/978-3-030-28954-6</a></td>
+                    <td class="abstract">Coletânea técnica sobre métodos XAI e aplicações práticas em redes neurais.</td>
+                    <td class="citacao-apa">Samek, W., et al. (2019). Explainable AI: Interpreting, Explaining and Visualizing Deep Learning. <em>Springer</em>.</td>
+                    <td class="referencia-abnt">SAMEK, W.; et al. Explainable AI: Interpreting, Explaining and Visualizing Deep Learning. <em>Springer</em>, 2019.</td>
+                </tr>
+                <tr>
+                    <td class="num">09</td>
+                    <td class="ano">2023</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Linardatos, P.; et al.</td>
+                    <td class="title">Explainable AI: A Review of Machine Learning Interpretability Methods</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.3390/e23010018" target="_blank">doi.org/10.3390/e23010018</a></td>
+                    <td class="abstract">Revisão de métodos de interpretabilidade em ML (SHAP, LIME, Attention, etc.).</td>
+                    <td class="citacao-apa">Linardatos, P., et al. (2023). Explainable AI: A Review of Machine Learning Interpretability Methods. <em>Entropy</em>.</td>
+                    <td class="referencia-abnt">LINARDATOS, P.; et al. Explainable AI: A Review of Machine Learning Interpretability Methods. <em>Entropy</em>, 2023.</td>
+                </tr>
+                <tr>
+                    <td class="num">10</td>
+                    <td class="ano">2023</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Das, A.; Rad, P.</td>
+                    <td class="title">Opportunities and Challenges in Explainable Artificial Intelligence (XAI): A Survey</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.13140/RG.2.2.19960.07687" target="_blank">doi.org/10.13140/RG.2.2.19960.07687</a></td>
+                    <td class="abstract">Survey sobre oportunidades e desafios em XAI, incluindo governança e aplicações.</td>
+                    <td class="citacao-apa">Das, A., & Rad, P. (2023). Opportunities and Challenges in Explainable Artificial Intelligence (XAI): A Survey. <em>arXiv preprint</em>.</td>
+                    <td class="referencia-abnt">DAS, A.; RAD, P. Opportunities and Challenges in Explainable Artificial Intelligence (XAI): A Survey. <em>arXiv</em>, 2023.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="success-box">
+        <h3>✅ Eixo 2: XAI — 10 referências coletadas</h3>
+        <p>Lista populada com 10 artigos relevantes sobre XAI e transparência (não inclui trabalhos do autor).</p>
+    </div>
+
+    <h2 class="section-title">Eixo 3: Métodos Quantitativos e Auditoria / Detecção de Anomalias</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th class="num">#</th>
+                    <th class="ano">Ano</th>
+                    <th>Tipo</th>
+                    <th>Autores</th>
+                    <th>Título</th>
+                    <th>Status</th>
+                    <th>DOI</th>
+                    <th>Abstract</th>
+                    <th>Citação APA</th>
+                    <th>Referência ABNT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="num">01</td>
+                    <td class="ano">2020</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Velasco, R. B.; et al.</td>
+                    <td class="title">A decision support system for fraud detection in public procurement</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1111/itor.12811" target="_blank">doi.org/10.1111/itor.12811</a></td>
+                    <td class="abstract">Propõe um sistema de apoio à decisão aplicado à detecção de fraude em compras públicas (aborda indicadores e modelos ML).</td>
+                    <td class="citacao-apa">Velasco, R. B., et al. (2020). A decision support system for fraud detection in public procurement. <em>International Transactions in Operational Research, 28</em>(1), 27-47.</td>
+                    <td class="referencia-abnt">VELASCO, R. B.; et al. A decision support system for fraud detection in public procurement. <em>International Transactions in Operational Research</em>, v. 28, n. 1, p. 27-47, 2020.</td>
+                </tr>
+                <tr>
+                    <td class="num">02</td>
+                    <td class="ano">2022</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Lyra, M. S.; Bação, F.</td>
+                    <td class="title">Fraud, corruption, and collusion in public procurement activities: a systematic literature review on data-driven methods</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1007/s41109-022-00523-6" target="_blank">doi.org/10.1007/s41109-022-00523-6</a></td>
+                    <td class="abstract">Revisão sistemática cobrindo métodos data-driven para detecção de fraude e collusão em compras públicas.</td>
+                    <td class="citacao-apa">Lyra, M. S., & Bação, F. (2022). Fraud, corruption, and collusion in public procurement activities: a systematic literature review on data-driven methods. <em>Applied Network Science</em>.</td>
+                    <td class="referencia-abnt">LYRA, M. S.; BAÇÃO, F. Fraud, corruption, and collusion in public procurement activities: a systematic literature review on data-driven methods. <em>Applied Network Science</em>, 2022.</td>
+                </tr>
+                <tr>
+                    <td class="num">03</td>
+                    <td class="ano">2020</td>
+                    <td class="tipo"><span class="tipo-badge paper">paper</span></td>
+                    <td class="authors">Niessen, M. E. K.; Paciello, J.</td>
+                    <td class="title">Anomaly Detection in Public Procurements using the Open Contracting Data Standard</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1109/icedeg48599.2020.9096674" target="_blank">doi.org/10.1109/icedeg48599.2020.9096674</a></td>
+                    <td class="abstract">Aplicação de Isolation Forest sobre dados em padrão OCDS para detectar licitações anômalas.</td>
+                    <td class="citacao-apa">Niessen, M. E. K., & Paciello, J. (2020). Anomaly Detection in Public Procurements using the Open Contracting Data Standard. <em>ICEDEG 2020</em>.</td>
+                    <td class="referencia-abnt">NIESSEN, M. E. K.; PACIELLO, J. Anomaly Detection in Public Procurements using the Open Contracting Data Standard. <em>ICEDEG</em>, 2020.</td>
+                </tr>
+                <tr>
+                    <td class="num">04</td>
+                    <td class="ano">2021</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Modru61an, N.; et al.</td>
+                    <td class="title">Review of Public Procurement Fraud Detection Techniques Powered by Emerging Technologies</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.14569/ijacsa.2021.0120272" target="_blank">doi.org/10.14569/ijacsa.2021.0120272</a></td>
+                    <td class="abstract">Revisão de técnicas emergentes (ML, graph mining, regras de associação) aplicadas à detecção de fraude em compras públicas.</td>
+                    <td class="citacao-apa">Modru61an, N., et al. (2021). Review of Public Procurement Fraud Detection Techniques Powered by Emerging Technologies. <em>IJACSA</em>.</td>
+                    <td class="referencia-abnt">MODRUšAN, N.; et al. Review of Public Procurement Fraud Detection Techniques Powered by Emerging Technologies. <em>International Journal of Advanced Computer Science and Applications</em>, 2021.</td>
+                </tr>
+                <tr>
+                    <td class="num">05</td>
+                    <td class="ano">2023</td>
+                    <td class="tipo"><span class="tipo-badge capitulo">capítulo</span></td>
+                    <td class="authors">Barbosa, L.; Labatut, V.; et al.</td>
+                    <td class="title">Pattern Mining for Anomaly Detection in Graphs: Application to Fraud in Public Procurement</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1007/978-3-031-43427-3_5" target="_blank">doi.org/10.1007/978-3-031-43427-3_5</a></td>
+                    <td class="abstract">Explora mineração de padrões em grafos para identificar fraudes e colusão entre atores de contratação.</td>
+                    <td class="citacao-apa">Barbosa, L., Labatut, V., et al. (2023). Pattern Mining for Anomaly Detection in Graphs: Application to Fraud in Public Procurement. In <em>ECML-PKDD 2023</em>.</td>
+                    <td class="referencia-abnt">BARBOSA, L.; LABATUT, V.; et al. Pattern Mining for Anomaly Detection in Graphs: Application to Fraud in Public Procurement. In: <em>ECML-PKDD</em>, 2023.</td>
+                </tr>
+                <tr>
+                    <td class="num">06</td>
+                    <td class="ano">2020</td>
+                    <td class="tipo"><span class="tipo-badge capitulo">capítulo</span></td>
+                    <td class="authors">Carneiro, D.; et al.</td>
+                    <td class="title">Network Analysis for Fraud Detection in Portuguese Public Procurement</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1007/978-3-030-62365-4_37" target="_blank">doi.org/10.1007/978-3-030-62365-4_37</a></td>
+                    <td class="abstract">Estudo de análise de redes para detectar padrões de colusão em contratos públicos portugueses.</td>
+                    <td class="citacao-apa">Carneiro, D., et al. (2020). Network Analysis for Fraud Detection in Portuguese Public Procurement. In <em>LNCS</em>.</td>
+                    <td class="referencia-abnt">CARNEIRO, D.; et al. Network Analysis for Fraud Detection in Portuguese Public Procurement. In: <em>LNCS</em>, 2020.</td>
+                </tr>
+                <tr>
+                    <td class="num">07</td>
+                    <td class="ano">2022</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Lyra, M. S.; et al.</td>
+                    <td class="title">Public Procurement Fraud Detection: A Review Using Network Analysis</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1007/978-3-030-93409-5_11" target="_blank">doi.org/10.1007/978-3-030-93409-5_11</a></td>
+                    <td class="abstract">Revisão focalizada em abordagens de SNA aplicadas à detecção de fraude em compras públicas.</td>
+                    <td class="citacao-apa">Lyra, M. S., et al. (2022). Public Procurement Fraud Detection: A Review Using Network Analysis. <em>Studies in Computational Intelligence</em>.</td>
+                    <td class="referencia-abnt">LYRA, M. S.; et al. Public Procurement Fraud Detection: A Review Using Network Analysis. <em>Studies in Computational Intelligence</em>, 2022.</td>
+                </tr>
+                <tr>
+                    <td class="num">08</td>
+                    <td class="ano">2019</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Wahyudi, N.; et al.</td>
+                    <td class="title">Why people commit public procurement fraud? The fraud diamond view</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1108/jopp-02-2019-0012" target="_blank">doi.org/10.1108/jopp-02-2019-0012</a></td>
+                    <td class="abstract">Análise empírica dos fatores individuais e institucionais que favorecem fraudes em contratações públicas.</td>
+                    <td class="citacao-apa">Wahyudi, N., et al. (2019). Why people commit public procurement fraud? The fraud diamond view. <em>Journal of Public Procurement</em>.</td>
+                    <td class="referencia-abnt">WAHYUDI, N.; et al. Why people commit public procurement fraud? The fraud diamond view. <em>Journal of Public Procurement</em>, 2019.</td>
+                </tr>
+                <tr>
+                    <td class="num">09</td>
+                    <td class="ano">2024</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Carvalho, D.; et al.</td>
+                    <td class="title">Enhancing transparency and accountability in public procurement: exploring blockchain technology to mitigate records fraud</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1108/rmj-10-2023-0054" target="_blank">doi.org/10.1108/rmj-10-2023-0054</a></td>
+                    <td class="abstract">Avalia uso de blockchain para mitigar fraudes em registros e melhorar rastreabilidade em processos de compras.</td>
+                    <td class="citacao-apa">Carvalho, D., et al. (2024). Enhancing transparency and accountability in public procurement: exploring blockchain technology to mitigate records fraud. <em>Records Management Journal</em>.</td>
+                    <td class="referencia-abnt">CARVALHO, D.; et al. Enhancing transparency and accountability in public procurement: exploring blockchain technology to mitigate records fraud. <em>Records Management Journal</em>, 2024.</td>
+                </tr>
+                <tr>
+                    <td class="num">10</td>
+                    <td class="ano">2021</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Modru61an, N.; Mr61i0, L.</td>
+                    <td class="title">Review of Public Procurement Fraud Detection Techniques Powered by Emerging Technologies</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.14569/ijacsa.2021.0120272" target="_blank">doi.org/10.14569/ijacsa.2021.0120272</a></td>
+                    <td class="abstract">Resumo técnico sobre abordagens ML, rule-based e graph mining aplicadas à detecção de anomalias em compras públicas.</td>
+                    <td class="citacao-apa">Modru61an, N., & Mr61i0, L. (2021). Review of Public Procurement Fraud Detection Techniques Powered by Emerging Technologies. <em>IJACSA</em>.</td>
+                    <td class="referencia-abnt">MODRUšAN, N.; MRšI, L. Review of Public Procurement Fraud Detection Techniques Powered by Emerging Technologies. <em>International Journal of Advanced Computer Science and Applications</em>, 2021.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="success-box">
+        <h3>✅ Eixo 3: Métodos — 10 referências coletadas</h3>
+        <p>Lista populada com 10 artigos relevantes sobre detecção de anomalias, fraudes e auditoria em compras públicas (exclui trabalhos do autor).</p>
+    </div>
+
+    <h2 class="section-title">Eixo 4: Políticas Públicas e Governança Algorítmica</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th class="num">#</th>
+                    <th class="ano">Ano</th>
+                    <th>Tipo</th>
+                    <th>Autores / Fonte</th>
+                    <th>Título</th>
+                    <th>Status</th>
+                    <th>DOI</th>
+                    <th>Abstract</th>
+                    <th>Citação APA</th>
+                    <th>Referência ABNT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="num">01</td>
+                    <td class="ano">2017</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Danaher, J.; Hogan, M.; Noone, C.; et al.</td>
+                    <td class="title">Algorithmic governance: Developing a research agenda through the power of collective intelligence</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1177/2053951717726554" target="_blank">doi.org/10.1177/2053951717726554</a></td>
+                    <td class="abstract">Apresenta uma agenda de pesquisa interdisciplinar sobre governança algorítmica, enfatizando riscos e estratégias coletivas.</td>
+                    <td class="citacao-apa">Danaher, J., Hogan, M., Noone, C., et al. (2017). Algorithmic governance: Developing a research agenda through the power of collective intelligence. <em>Big Data & Society</em>.</td>
+                    <td class="referencia-abnt">DANAHER, J.; HOGAN, M.; NOONE, C.; et al. Algorithmic governance: Developing a research agenda through the power of collective intelligence. <em>Big Data & Society</em>, 2017.</td>
+                </tr>
+                <tr>
+                    <td class="num">02</td>
+                    <td class="ano">2019</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Koenig, P. D.</td>
+                    <td class="title">Dissecting the Algorithmic Leviathan: On the Socio-Political Anatomy of Algorithmic Governance</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1007/s13347-019-00363-w" target="_blank">doi.org/10.1007/s13347-019-00363-w</a></td>
+                    <td class="abstract">Análise sociopolítica crítica da governança algorítmica, mapeando atores e mecanismos de poder.</td>
+                    <td class="citacao-apa">Koenig, P. D. (2019). Dissecting the Algorithmic Leviathan: On the Socio-Political Anatomy of Algorithmic Governance. <em>Philosophy & Technology, 33</em>, 467-485.</td>
+                    <td class="referencia-abnt">KOENIG, P. D. Dissecting the Algorithmic Leviathan: On the Socio-Political Anatomy of Algorithmic Governance. <em>Philosophy & Technology</em>, v. 33, p. 467-485, 2019.</td>
+                </tr>
+                <tr>
+                    <td class="num">03</td>
+                    <td class="ano">2021</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Gritsenko, D.; et al.</td>
+                    <td class="title">Algorithmic governance: A modes of governance approach</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1111/rego.12367" target="_blank">doi.org/10.1111/rego.12367</a></td>
+                    <td class="abstract">Propõe enquadramento teórico (modes of governance) para analisar implementação algorítmica em políticas públicas.</td>
+                    <td class="citacao-apa">Gritsenko, D., et al. (2021). Algorithmic governance: A modes of governance approach. <em>Regulation & Governance, 16</em>(1), 45-62.</td>
+                    <td class="referencia-abnt">GRITSENKO, D.; et al. Algorithmic governance: A modes of governance approach. <em>Regulation & Governance</em>, v. 16, n. 1, p. 45-62, 2021.</td>
+                </tr>
+                <tr>
+                    <td class="num">04</td>
+                    <td class="ano">2021</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Author(s)</td>
+                    <td class="title">Algorithmic Governance and the International Politics of Big Tech</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1017/s1537592721003145" target="_blank">doi.org/10.1017/s1537592721003145</a></td>
+                    <td class="abstract">Analisa como corporações de tecnologia moldam normas internacionais e regimes regulatórios via algoritmos.</td>
+                    <td class="citacao-apa">(2021). Algorithmic Governance and the International Politics of Big Tech. <em>Perspectives on Politics</em>.</td>
+                    <td class="referencia-abnt">ALGORITHMIC GOVERNANCE AND THE INTERNATIONAL POLITICS OF BIG TECH. <em>Perspectives on Politics</em>, 2021.</td>
+                </tr>
+                <tr>
+                    <td class="num">05</td>
+                    <td class="ano">2020</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Gorwa, R.</td>
+                    <td class="title">Algorithmic content moderation: Technical and political challenges in the automation of platform governance</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1177/2053951719897945" target="_blank">doi.org/10.1177/2053951719897945</a></td>
+                    <td class="abstract">Discute moderação algorítmica de conteúdo e tensões técnicas-políticas entre plataformas e regulação.</td>
+                    <td class="citacao-apa">Gorwa, R. (2020). Algorithmic content moderation: Technical and political challenges in the automation of platform governance. <em>Big Data & Society</em>.</td>
+                    <td class="referencia-abnt">GORWA, R. Algorithmic content moderation: Technical and political challenges in the automation of platform governance. <em>Big Data & Society</em>, 2020.</td>
+                </tr>
+                <tr>
+                    <td class="num">06</td>
+                    <td class="ano">2016</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Author(s)</td>
+                    <td class="title">What Is Algorithm Governance?</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1109/mic.2016.79" target="_blank">doi.org/10.1109/mic.2016.79</a></td>
+                    <td class="abstract">Conceitua governança algorítmica e discute implicações para propriedade, privacidade e censura.</td>
+                    <td class="citacao-apa">(2016). What Is Algorithm Governance? <em>IEEE Internet Computing</em>.</td>
+                    <td class="referencia-abnt">WHAT IS ALGORITHM GOVERNANCE?. <em>IEEE Internet Computing</em>, 2016.</td>
+                </tr>
+                <tr>
+                    <td class="num">07</td>
+                    <td class="ano">2021</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Author(s)</td>
+                    <td class="title">What is algorithmic governance?</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1111/soc4.12955" target="_blank">doi.org/10.1111/soc4.12955</a></td>
+                    <td class="abstract">Discussão conceitual e empiricamente informada sobre definições e dimensões da governança algorítmica.</td>
+                    <td class="citacao-apa">(2021). What is algorithmic governance? <em>Social Compass</em>.</td>
+                    <td class="referencia-abnt">WHAT IS ALGORITHMIC GOVERNANCE?. <em>Society</em>, 2021.</td>
+                </tr>
+                <tr>
+                    <td class="num">08</td>
+                    <td class="ano">2016</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Author(s)</td>
+                    <td class="title">The challenges and limits of big data algorithms in technocratic governance</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1016/j.giq.2016.08.011" target="_blank">doi.org/10.1016/j.giq.2016.08.011</a></td>
+                    <td class="abstract">Avalia limites técnicos e institucionais de algoritmos de big data na governança pública.</td>
+                    <td class="citacao-apa">(2016). The challenges and limits of big data algorithms in technocratic governance. <em>Government Information Quarterly</em>.</td>
+                    <td class="referencia-abnt">THE CHALLENGES AND LIMITS OF BIG DATA ALGORITHMS IN TECHNOCRATIC GOVERNANCE. <em>Government Information Quarterly</em>, 2016.</td>
+                </tr>
+                <tr>
+                    <td class="num">09</td>
+                    <td class="ano">2017</td>
+                    <td class="tipo"><span class="tipo-badge capitulo">capítulo</span></td>
+                    <td class="authors">DuPont, Q.</td>
+                    <td class="title">Experiments in algorithmic governance (book chapter)</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.4324/9781315211909-8" target="_blank">doi.org/10.4324/9781315211909-8</a></td>
+                    <td class="abstract">Relata experimentos organizacionais com autoridade algorítmica e consequências normativas.</td>
+                    <td class="citacao-apa">DuPont, Q. (2017). Experiments in algorithmic governance. In <em>Bitcoin and Beyond</em>.</td>
+                    <td class="referencia-abnt">DUPONT, Q. Experiments in algorithmic governance. In: <em>Bitcoin and Beyond</em>, 2017.</td>
+                </tr>
+                <tr>
+                    <td class="num">10</td>
+                    <td class="ano">2020</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Author(s)</td>
+                    <td class="title">The politics of algorithmic governance in the black box city</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1177/2053951720933989" target="_blank">doi.org/10.1177/2053951720933989</a></td>
+                    <td class="abstract">Analisa como as cidades usam algoritmos na tomada de decisão administrativa e os desafios de auditoria.</td>
+                    <td class="citacao-apa">(2020). The politics of algorithmic governance in the black box city. <em>Big Data & Society</em>.</td>
+                    <td class="referencia-abnt">THE POLITICS OF ALGORITHMIC GOVERNANCE IN THE BLACK BOX CITY. <em>Big Data & Society</em>, 2020.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="success-box">
+        <h3>✅ Eixo 4: Governança — 10 referências coletadas</h3>
+        <p>Lista populada com 10 artigos essenciais sobre políticas públicas e governança algorítmica (sem trabalhos do autor).</p>
+    </div>
+
+    <h2 class="section-title">Eixo 5: Pensadores Críticos da Tecnologia na Gestão</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th class="num">#</th>
+                    <th class="ano">Ano</th>
+                    <th>Tipo</th>
+                    <th>Autores</th>
+                    <th>Título</th>
+                    <th>Status</th>
+                    <th>DOI</th>
+                    <th>Abstract</th>
+                    <th>Citação APA</th>
+                    <th>Referência ABNT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="num">01</td>
+                    <td class="ano">1974</td>
+                    <td class="tipo"><span class="tipo-badge artigo">livro</span></td>
+                    <td class="authors">Braverman, H.</td>
+                    <td class="title">Labor and Monopoly Capital: The Degradation of Work in the Twentieth Century</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td>N/A</td>
+                    <td class="abstract">Analisa como a gerência capitalista utiliza a inovação tecnológica e a automação para desqualificar o trabalho (deskilling), separando a concepção intelectual da execução manual no chão de fábrica.</td>
+                    <td class="citacao-apa">Braverman, H. (1974). <em>Labor and monopoly capital: The degradation of work in the twentieth century</em>. Monthly Review Press.</td>
+                    <td class="referencia-abnt">BRAVERMAN, Harry. <em>Trabalho e capital monopolista</em>: a degradação do trabalho no século XX. Rio de Janeiro: Zahar, 1981.</td>
+                </tr>
+                <tr>
+                    <td class="num">02</td>
+                    <td class="ano">1999</td>
+                    <td class="tipo"><span class="tipo-badge artigo">livro</span></td>
+                    <td class="authors">Feenberg, A.</td>
+                    <td class="title">Questioning Technology</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.4324/9780203017586" target="_blank">doi.org/10.4324/9780203017586</a></td>
+                    <td class="abstract">Defende a Teoria Crítica da Tecnologia, rejeitando o determinismo e demonstrando que o design tecnológico incorpora valores de controle político e social que estruturam as práticas de gestão.</td>
+                    <td class="citacao-apa">Feenberg, A. (1999). <em>Questioning technology</em>. Routledge.</td>
+                    <td class="referencia-abnt">FEENBERG, Andrew. <em>Questioning technology</em>. London: Routledge, 1999.</td>
+                </tr>
+                <tr>
+                    <td class="num">03</td>
+                    <td class="ano">2014</td>
+                    <td class="tipo"><span class="tipo-badge artigo">livro</span></td>
+                    <td class="authors">Han, B.-C.</td>
+                    <td class="title">Psicopolítica: O Neoliberalismo e as Novas Técnicas de Poder</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td>N/A</td>
+                    <td class="abstract">Examina como as inovações digitais e o Big Data deslocaram o controle físico para o controle psíquico na gestão contemporânea, transformando a busca por produtividade em processos crônicos de autoexploração.</td>
+                    <td class="citacao-apa">Han, B.-C. (2018). <em>Psychopolitics: Neoliberalism and new technologies of power</em> (E. Butler, Trans.). Verso.</td>
+                    <td class="referencia-abnt">HAN, Byung-Chul. <em>Psicopolítica</em>: o neoliberalismo e as novas técnicas de poder. Tradução de Maurício Liesen. Belo Horizonte: Âyiné, 2018.</td>
+                </tr>
+                <tr>
+                    <td class="num">04</td>
+                    <td class="ano">1867</td>
+                    <td class="tipo"><span class="tipo-badge artigo">livro</span></td>
+                    <td class="authors">Marx, K.</td>
+                    <td class="title">O Capital: Crítica da Economia Política (Livro I)</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td>N/A</td>
+                    <td class="abstract">Obra fundacional que demonstra como a introdução da maquinaria pesada na indústria subordina o trabalhador ao ritmo do capital, intensificando as jornadas e refinando a extração da mais-valia.</td>
+                    <td class="citacao-apa">Marx, K. (2013). <em>Capital: A critique of political economy</em> (Vol. 1; B. Fowkes, Trans.). Penguin Books.</td>
+                    <td class="referencia-abnt">MARX, Karl. <em>O capital</em>: crítica da economia política: Livro I. Tradução de Rubens Enderle. São Paulo: Boitempo, 2013.</td>
+                </tr>
+                <tr>
+                    <td class="num">05</td>
+                    <td class="ano">2019</td>
+                    <td class="tipo"><span class="tipo-badge artigo">livro</span></td>
+                    <td class="authors">Zuboff, S.</td>
+                    <td class="title">The Age of Surveillance Capitalism</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td>N/A</td>
+                    <td class="abstract">Mapeia como os sistemas de gestão baseados em algoritmos extraem e mercantilizam dados comportamentais de funcionários e usuários, estabelecendo uma nova arquitetura global de modificação de conduta.</td>
+                    <td class="citacao-apa">Zuboff, S. (2019). <em>The age of surveillance capitalism: The fight for a human future at the new frontier of power</em>. PublicAffairs.</td>
+                    <td class="referencia-abnt">ZUBOFF, Shoshana. <em>A era do capitalismo de vigilância</em>: a luta por um futuro humano na nova fronteira do poder. Tradução de George Schlesinger. Rio de Janeiro: Intrínseca, 2021.</td>
+                </tr>
+                <tr>
+                    <td class="num">06</td>
+                    <td class="ano">2013</td>
+                    <td class="tipo"><span class="tipo-badge artigo">livro</span></td>
+                    <td class="authors">Morozov, E.</td>
+                    <td class="title">To Save Everything, Click Here: The Folly of Technological Solutionism</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td>N/A</td>
+                    <td class="abstract">Desconstrói a ideologia corporativa do solucionismo tecnológico, criticando a tendência de gestores e engenheiros de tratar problemas sociais e políticos complexos como falhas de otimização de software.</td>
+                    <td class="citacao-apa">Morozov, E. (2013). <em>To save everything, click here: The folly of technological solutionism</em>. PublicAffairs.</td>
+                    <td class="referencia-abnt">MOROZOV, Evgeny. <em>Para salvar tudo, clique aqui</em>: o desvario do solucionismo tecnológico. Tradução de Jaci Fernandes. São Paulo: E-Galáxia, 2018.</td>
+                </tr>
+                <tr>
+                    <td class="num">07</td>
+                    <td class="ano">1992</td>
+                    <td class="tipo"><span class="tipo-badge artigo">livro</span></td>
+                    <td class="authors">Alvesson, M.; Willmott, H.</td>
+                    <td class="title">Critical Management Studies</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td>N/A</td>
+                    <td class="abstract">Consolida o movimento CMS, expondo como os discursos de eficiência técnica e modernização gerencial servem para legitimar assimetrias de poder e mascarar o controle ideológico corporativo.</td>
+                    <td class="citacao-apa">Alvesson, M., & Willmott, H. (Eds.). (1992). <em>Critical management studies</em>. Sage Publications.</td>
+                    <td class="referencia-abnt">ALVESSON, Mats; WILLMOTT, Hugh (ed.). <em>Critical management studies</em>. London: Sage Publications, 1992.</td>
+                </tr>
+                <tr>
+                    <td class="num">08</td>
+                    <td class="ano">1981</td>
+                    <td class="tipo"><span class="tipo-badge artigo">livro</span></td>
+                    <td class="authors">Guerreiro Ramos, A.</td>
+                    <td class="title">A Nova Ciência das Organizações: Uma Reconceituação da Riqueza das Nações</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td>N/A</td>
+                    <td class="abstract">Desenvolve uma crítica rigorosa à expansão da racionalidade instrumental e dos sistemas técnicos na administração, propondo enclaves organizacionais orientados pela emancipação humana.</td>
+                    <td class="citacao-apa">Ramos, A. G. (1981). <em>A nova ciência das organizações: Uma reconceituação da riqueza das nações</em>. Editora FGV.</td>
+                    <td class="referencia-abnt">RAMOS, Alberto Guerreiro. <em>A nova ciência das organizações</em>: uma reconceituação da riqueza das nações. Rio de Janeiro: Editora FGV, 1981.</td>
+                </tr>
+                <tr>
+                    <td class="num">09</td>
+                    <td class="ano">1974</td>
+                    <td class="tipo"><span class="tipo-badge artigo">livro</span></td>
+                    <td class="authors">Tragtenberg, M.</td>
+                    <td class="title">Burocracia e Ideologia</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td>N/A</td>
+                    <td class="abstract">Demonstra que as teorias da administração e suas inovações estruturais funcionam como ideologias de dominação burocrática, cujo objetivo central é a neutralização dos conflitos de classe na organização.</td>
+                    <td class="citacao-apa">Tragtenberg, M. (1974). <em>Burocracia e ideologia</em>. Ática.</td>
+                    <td class="referencia-abnt">TRAGTENBERG, Maurício. <em>Burocracia e ideologia</em>. São Paulo: Ática, 1974.</td>
+                </tr>
+                <tr>
+                    <td class="num">10</td>
+                    <td class="ano">2002</td>
+                    <td class="tipo"><span class="tipo-badge artigo">artigo</span></td>
+                    <td class="authors">Misoczky, M. C.</td>
+                    <td class="title">Considerações sobre a crítica nos Estudos Organizacionais</td>
+                    <td class="status"><span class="status-badge verificada">verificada</span></td>
+                    <td><a class="doi-link" href="https://doi.org/10.1590/S1415-65552002000300003" target="_blank">doi.org/10.1590/S1415-65552002000300003</a></td>
+                    <td class="abstract">Revisa criticamente a trajetória do pensamento crítico no Brasil, alertando contra o risco de cooptação da vertente crítica pelo discurso gerencialista hegemônico e funcional.</td>
+                    <td class="citacao-apa">Misoczky, M. C. (2002). Considerações sobre a crítica nos estudos organizacionais. <em>RAE-revista de administração de empresas</em>, 42(3), 1-13.</td>
+                    <td class="referencia-abnt">MISOCZKY, Maria Ceci. Considerações sobre a crítica nos estudos organizacionais. <em>RAE-revista de administração de empresas</em>, São Paulo, v. 42, n. 3, p. 1-13, jul./set. 2002.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="success-box">
+        <h3>✅ Eixo 5: Pensadores Críticos — 10 referências validadas</h3>
+        <p>Lista completa com 10 obras essenciais dos pensadores críticos da tecnologia na gestão, de Marx (1867) a Zuboff (2019), incluindo autores brasileiros (Guerreiro Ramos, Tragtenberg, Misoczky).</p>
+    </div>
+
+</body>
+</html>

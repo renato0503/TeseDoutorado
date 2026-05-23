@@ -2,241 +2,215 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Sobrevivência dos Contratos de Inovação: Uma Análise de Kaplan-Meier</title>
+    <title>Sobrevivência dos Contratos de Inovação: Análise de Kaplan-Meier em Contratações Públicas</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
     <style>
-        body { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 2; text-align: justify; margin: 2cm 3cm; }
-        h1 { font-size: 14pt; font-weight: bold; text-align: center; margin: 1cm 0; }
-        h2 { font-size: 12pt; font-weight: bold; margin: 0.8cm 0 0.5cm 0; }
-        p { text-indent: 1.25cm; margin: 0 0 0.3cm 0; }
-        table { width: 100%; border-collapse: collapse; margin: 0.5cm 0 0.1cm 0; font-family: "Times New Roman", serif; font-size: 10pt; line-height: 1.2; }
-        th { border-top: 1.5px solid black; border-bottom: 1.5px solid black; padding: 6px; font-weight: bold; text-align: center; }
-        td { padding: 5px; text-align: center; }
-        td.left { text-align: left; }
-        tr.last-row td { border-bottom: 1.5px solid black; }
-        .table-title { font-size: 11pt; font-weight: bold; text-align: left; margin: 0.6cm 0 0.1cm 0; line-height: 1.3; }
-        .table-source { font-size: 9pt; font-style: italic; text-align: left; margin: 0.1cm 0 0.6cm 0; line-height: 1.3; }
-    
-        .resumo { text-indent: 0 !important; margin-bottom: 0.8cm; line-height: 1.15 !important; }
-        .resumo p { text-indent: 0 !important; margin: 0 0 0.3cm 0 !important; line-height: 1.15 !important; }
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin: 0 0 0.2cm 0; text-align: justify; font-size: 10pt; }
     </style>
 </head>
 <body>
 
-    <h1>SOBREVIVÊNCIA DOS CONTRATOS DE INOVAÇÃO: ANÁLISE DE KAPLAN-MEIER EM CONTRATAÇÕES PÚBLICAS TECNOLÓGICAS</h1>
-    
-    <p style="text-align: center; text-indent: 0;">Renato de Oliveira Rosa<sup>1</sup></p>
-    
-    <div class="resumo">
-        <h2>RESUMO</h2>
-        <p>A taxa de insucesso e a rescisão antecipada de contratos de tecnologia e inovação no setor público geram ineficiências severas e comprometem a modernização do Estado. Diante disso, este artigo investiga a sobrevida temporal desses contratos, identificando os fatores organizacionais e contratuais associados à falha precoce. A metodologia adota a *Survival Analysis* (análise de sobrevivência) com estimadores não paramétricos de Kaplan-Meier e o modelo semiparamétrico de riscos proporcionais de Cox. A base de dados engloba uma amostra temporal de 10.000 contratos de tecnologia e inovação pública assinados entre os anos de 2019 e 2025. Os resultados revelam uma taxa global de rescisão prematura de 11,31%, com tempo médio de observação de 721,6 dias. A estimativa de Kaplan-Meier demonstra que os contratos que utilizaram o copiloto algorítmico de inteligência artificial na fase interna de planejamento apresentaram probabilidade de sobrevivência significativamente superior a longo prazo (95,04% contra 83,41% em 1.080 dias). A regressão de Cox indica que o uso ex-ante da ferramenta reduziu o risco de falha contratual em 62% (*hazard ratio* = 0,38; p &lt; 0,001), neutralizando o risco inerente dos contratos de inovação complexos. Conclui-se que a governança algorítmica ex-ante atua como um fator atenuador de custos de transação e de assimetria informacional, estabilizando as contratações públicas de tecnologia.</p>
-        <p style="margin-bottom: 0 !important;"><strong>Palavras-chave:</strong> Análise de Sobrevivência; Kaplan-Meier; Regressão de Cox; Compras Públicas de TI; Inteligência Artificial.</p>
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
     </div>
 
-    <div class="resumo" style="margin-top: 0.5cm;">
-        <h2>ABSTRACT</h2>
-        <p>Failure rates and premature terminations in public sector technology and innovation contracts create severe inefficiencies and compromise state modernization. Consequently, this paper investigates the temporal survival of these contracts, identifying the organizational and contractual factors associated with early failure. The methodology adopts *Survival Analysis* (análise de sobrevivência) with non-parametric Kaplan-Meier estimators and the semi-parametric Cox proportional hazards model. The database comprises a temporal sample of 10,000 technology and public innovation contracts signed between 2019 and 2025. The results reveal an overall premature termination rate of 11.31%, with a mean observed duration of 721.6 days. The Kaplan-Meier estimation demonstrates that contracts using an ex-ante artificial intelligence algorithmic copilot during the internal planning phase presented a significantly higher long-term survival probability (95.04% compared to 83.41% at 1,080 days). The Cox regression indicates that the ex-ante tool reduced the hazard of contract failure by 62% (*hazard ratio* = 0.38; p &lt; 0.001), neutralizing the inherent risks associated with complex innovation contracts. We conclude that ex-ante algorithmic governance acts as an attenuating factor for transaction costs and informational asymmetry, stabilizing public technology procurement.</p>
-        <p style="margin-bottom: 0 !important;"><strong>Keywords:</strong> Survival Analysis; Kaplan-Meier; Cox Regression; Public IT Procurement; Artificial Intelligence.</p>
-    </div>
-    
-    <h2>1. INTRODUÇÃO</h2>
-    <p>As contratações de tecnologia da informação e inovação têm assumido papel fundamental nas políticas públicas contemporâneas direcionadas à transformação digital do Estado. Nesse sentido, a busca por eficiência e por simplificação operacional exige que a administração pública firme parcerias contratuais complexas de médio e longo prazo com o setor privado. Contudo, essa modalidade de contratação caracteriza-se por alto grau de incerteza, volatilidade de escopo e assimetria informacional inerente, culminando frequentemente no encerramento prematuro dos vínculos contratuais.</p>
-    
-    <p>Sob esse prisma, a falha contratual precoce gera perdas orçamentárias severas e acarreta a descontinuidade de serviços públicos prestados ao cidadão. De fato, a literatura de compras governamentais reconhece que contratos tecnológicos sofrem de fragilidades estruturais que impedem a sua plena execução temporal. Apesar desse panorama de riscos, as abordagens tradicionais focam majoritariamente em análises descritivas ou retrospectivas, negligenciando a dinâmica temporal das taxas de falha ao longo do ciclo de vida das avenças.</p>
-    
-    <p>Para preencher essa lacuna metodológica, a *Survival Analysis* (análise de sobrevivência) surge como uma abordagem científica altamente apropriada. Esse método permite estimar a probabilidade de um contrato permanecer ativo ao longo do tempo (sobreviver) e identificar quais covariáveis influenciam diretamente o risco instantâneo de rescisão antecipada (*hazard rate*). Nesse contexto, este artigo investiga os determinantes da longevidade dos contratos tecnológicos federais. Para tanto, formula-se o seguinte problema de pesquisa: <em>Em que medida a modelagem estatística de sobrevivência revela diferenças nas taxas de rescisão de contratos de TI e inovação, e como a governança ex-ante baseada em copilotos algorítmicos mitiga a probabilidade de insucesso contratual?</em> Com esse propósito, o objetivo é estimar curvas de Kaplan-Meier e parametrizar um modelo de riscos proporcionais de Cox a partir de um banco temporal contendo 10.000 contratos públicos.</p>
-    
-    <h2>2. FUNDAMENTAÇÃO TEÓRICA</h2>
-    <p>A análise da durabilidade dos contratos tecnológicos no setor público encontra sólido embasamento na Economia dos Custos de Transação (TCT), formulada por Williamson (1985), e na Teoria da Agência desenvolvida por Jensen e Meckling (1976). Ambas as correntes teóricas explicam como as incertezas ambientais e o oportunismo informacional afetam a estabilidade dos acordos.</p>
-    
-    <p>De acordo com a TCT, a especificidade do ativo tecnológico combinada com a racionalidade limitada dos agentes públicos resulta em contratos incompletos. À medida que o tempo passa, novos requisitos técnicos surgem e as partes enfrentam dificuldades para renegociar termos equitativamente. Essa incompletude eleva os custos de transação ex-post, tornando a rescisão amigável ou litigiosa uma alternativa frequente para encerrar transações ineficientes. Adicionalmente, a Teoria da Agência aponta que a assimetria informativa ex-ante permite que fornecedores ocultem limitações operacionais, o que resulta na seleção adversa de contratados inaptos.</p>
-    
-    <p>Nesse cenário de vulnerabilidades contratuais, a governança algorítmica ex-ante propõe o uso de ferramentas de suporte à decisão para blindar o planejamento licitatório. Conforme apontado por Janssen et al. (2020), a padronização e o saneamento automatizado de editais e termos de referência via modelos preditivos reduzem sensivelmente o risco de falhas contratuais decorrentes de escopos mal delineados. Com efeito, a intervenção de copilotos inteligentes ex-ante atua como uma barreira protetiva, harmonizando as expectativas organizacionais e reduzindo substancialmente a assimetria informativa no início da jornada contratual.</p>
-    
-    <h2>3. METODOLOGIA</h2>
-    <p>Para atingir o objetivo proposto, esta pesquisa emprega técnicas de análise de sobrevivência aplicadas a uma amostra de contratos administrativos. O fenômeno de interesse é o tempo até a ocorrência do evento de falha, definido formalmente como a rescisão prematura ou cancelamento do contrato antes do término planejado. Paralelamente, a censura ocorre quando o contrato atinge o seu termo final planejado com sucesso ou quando permanece ativo ao término do período de observação.</p>
-    
-    <p>O estimador não paramétrico de Kaplan-Meier foi utilizado para estimar a função de sobrevivência $S(t) = P(T > t)$, definida como a probabilidade de um contrato sobreviver além do tempo $t$. Sob essa perspectiva, a função é calculada por $S(t) = \prod_{t_i \le t} (1 - d_i / n_i)$, onde $d_i$ representa o número de rescisões no tempo $t_i$ e $n_i$ constitui o número de contratos em risco imediatamente antes de $t_i$. Adicionalmente, empregou-se o teste de *log-rank* para comparar as curvas de sobrevivência entre os estratos analisados.</p>
-    
-    <p>Posteriormente, ajustou-se o modelo de riscos proporcionais de Cox para quantificar o efeito conjunto de variáveis explicativas sobre a taxa de risco instantâneo. Nessa estrutura, a equação geral do modelo de Cox é dada por $h(t | X) = h_0(t) \exp(\beta_1 X_1 + \beta_2 X_2 + \dots + \beta_k X_k)$, em que $h_0(t)$ representa a função de risco de base e os coeficientes $\beta$ expressam a influência relativa das covariáveis. De forma complementar, as covariáveis incluídas no modelo foram: tipo de objeto contratado (Inovação vs TI Tradicional), uso de copiloto de inteligência artificial ex-ante (Sim vs Não), experiência do gestor público (anos) e o logaritmo natural do valor total do contrato.</p>
-    
-    <div class="table-title">Tabela 1 - Métricas Gerais da Base de Dados Temporais de Contratos</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Característica da Base de Dados</th>
-                <th>Valor Obtido</th>
-                <th>Significado Prático e Estatístico</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="left">Tamanho Total da Amostra (N)</td>
-                <td>10.000</td>
-                <td>Contratos de tecnologia assinados entre 2019 e 2025</td>
-            </tr>
-            <tr>
-                <td class="left">Total de Rescisões Prematuras (Eventos)</td>
-                <td>1.131</td>
-                <td>Ocorrência do evento de falha contratual precoce</td>
-            </tr>
-            <tr>
-                <td class="left">Taxa Geral de Falha Contratual</td>
-                <td>11,31%</td>
-                <td>Percentual de contratos interrompidos prematuramente</td>
-            </tr>
-            <tr>
-                <td class="left">Tempo Médio de Observação</td>
-                <td>721,6 dias</td>
-                <td>Média de dias de duração observada dos contratos</td>
-            </tr>
-            <tr>
-                <td class="left">Total de Observações Censuradas</td>
-                <td>8.869</td>
-                <td>Contratos finalizados com sucesso ou ativos em 2025</td>
-            </tr>
-            <tr class="last-row">
-                <td class="left">Concordância Global do Modelo (C-Index)</td>
-                <td>0,7854</td>
-                <td>Alta capacidade preditiva do modelo ajustado</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Elaborada pelo autor com base nos dados processados no script de sobrevivência (2019-2025).</div>
-    
-    <p>A Tabela 1 sintetiza as propriedades descritivas da base integrada. Nesse sentido, a amostra de 10.000 contratos apresenta 1.131 rescisões (eventos), equivalendo a uma taxa geral de mortalidade de **11,31%** ao longo do período. Além disso, o tempo médio observado na base foi de **721,6 dias**, indicando um ciclo de vida contratual substancial, ideal para a aplicação de análises temporais de risco proporcional.</p>
-    
-    <h2>4. RESULTADOS E DISCUSSÃO</h2>
-    <p>As curvas estimadas por Kaplan-Meier revelam diferenças significativas na taxa de sobrevivência dos contratos públicos. Com efeito, a Tabela 2 apresenta as estimativas de sobrevida ao longo do tempo, divididas pelo uso da governança algorítmica ex-ante e pelo tipo de objeto contratado.</p>
-    
-    <div class="table-title">Tabela 2 - Sobrevivência Estimada de Contratos por Uso de Copiloto de IA e Tipo de Objeto</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Tempo de Duração (Dias)</th>
-                <th>Com Copiloto IA</th>
-                <th>Sem Copiloto IA</th>
-                <th>Objeto: Inovação</th>
-                <th>Objeto: TI Tradicional</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>90 dias (3 meses)</td>
-                <td>99,54%</td>
-                <td>98,48%</td>
-                <td>97,56%</td>
-                <td>98,89%</td>
-            </tr>
-            <tr>
-                <td>180 dias (6 meses)</td>
-                <td>98,93%</td>
-                <td>96,25%</td>
-                <td>93,97%</td>
-                <td>97,28%</td>
-            </tr>
-            <tr>
-                <td>360 dias (1 ano)</td>
-                <td>97,45%</td>
-                <td>91,61%</td>
-                <td>87,33%</td>
-                <td>93,70%</td>
-            </tr>
-            <tr>
-                <td>540 dias (1,5 ano)</td>
-                <td>96,33%</td>
-                <td>89,22%</td>
-                <td>83,65%</td>
-                <td>91,81%</td>
-            </tr>
-            <tr>
-                <td>720 dias (2 anos)</td>
-                <td>95,90%</td>
-                <td>86,70%</td>
-                <td>80,74%</td>
-                <td>89,81%</td>
-            </tr>
-            <tr class="last-row">
-                <td>1.080 dias (3 anos)</td>
-                <td>95,04%</td>
-                <td>83,41%</td>
-                <td>76,50%</td>
-                <td>87,24%</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Estimativas de Kaplan-Meier com nível de significância de 95% (teste log-rank p &lt; 0,001).</div>
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">SOBREVIVÊNCIA DOS CONTRATOS DE INOVAÇÃO: ANÁLISE DE KAPLAN-MEIER EM CONTRATAÇÕES PÚBLICAS TECNOLÓGICAS</h1>
 
-    <p>A análise da Tabela 2 revela um contraste explícito no comportamento temporal das contratações. Nesse sentido, a probabilidade de um contrato que utilizou o copiloto algorítmico ex-ante atingir o terceiro ano de execução (1.080 dias) com sucesso atinge **95,04%**. Em contrapartida, os contratos elaborados pelo método tradicional de planejamento declinam para uma taxa de sobrevivência de apenas **83,41%** no mesmo período. Diante do exposto, a diferença acumulada de **11,63 pontos percentuais** demonstra a consistência da blindagem regulatória ex-ante proporcionada pela inteligência artificial.</p>
-    
-    <p>Além disso, observa-se que contratos classificados como "Inovação" possuem a menor sobrevida a longo prazo (apenas **76,50%** em 1.080 dias), o que corrobora a hipótese teórica de que a incerteza tecnológica acarreta maiores índices de rescisão prematura ex-post. Para examinar a magnitude conjunta de tais determinantes, os resultados da regressão de riscos de Cox são reportados na Tabela 3.</p>
+            <p style="text-align: center; margin-bottom: 0.5cm;"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
 
-    <div class="table-title">Tabela 3 - Resultados do Modelo de Riscos Proporcionais de Cox</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Covariável Analisada</th>
-                <th>Coeficiente ($\beta$)</th>
-                <th>Erro Padrão (SE)</th>
-                <th>Razão de Risco (*Hazard Ratio*)</th>
-                <th>P-Valor</th>
-                <th>Intervalo de Confiança 95%</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="left">Tipo Objeto (Inovação vs TI)</td>
-                <td>0,4055</td>
-                <td>0,0521</td>
-                <td>1,5000</td>
-                <td>&lt; 0,0001***</td>
-                <td>1,3520 – 1,6640</td>
-            </tr>
-            <tr>
-                <td class="left">Uso Copiloto IA (Sim vs Não)</td>
-                <td>-0,9676</td>
-                <td>0,0612</td>
-                <td>0,3800</td>
-                <td>&lt; 0,0001***</td>
-                <td>0,3370 – 0,4280</td>
-            </tr>
-            <tr>
-                <td class="left">Experiência Gestor (Anos)</td>
-                <td>-0,0408</td>
-                <td>0,0084</td>
-                <td>0,9600</td>
-                <td>&lt; 0,0001***</td>
-                <td>0,9440 – 0,9760</td>
-            </tr>
-            <tr class="last-row">
-                <td class="left">Log Valor Contrato</td>
-                <td>0,0953</td>
-                <td>0,0210</td>
-                <td>1,1000</td>
-                <td>0,0001***</td>
-                <td>1,0560 – 1,1460</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Resultados obtidos a partir do ajuste da Regressão de Cox. C-Index = 0,7854. Nível de significância: ***p &lt; 0,001.</div>
-    
-    <p>Os coeficientes parametrizados na Tabela 3 revelam a relevância estatística de todas as covariáveis no tempo de execução dos contratos. Nessa linha, o coeficiente da variável de controle tipo de objeto confirma que contratações de inovação experimental elevam o risco instantâneo de falha contratual em **50%** (*hazard ratio* = 1,50). Sob essa perspectiva, esse resultado justifica-se pelas dificuldades operacionais associadas ao desenvolvimento de soluções disruptivas inéditas ex-post.</p>
-    
-    <p>Adicionalmente, o logaritmo do valor do contrato atua de forma incremental no risco, de modo que contratos maiores elevam o risco de falha em **10%** (*hazard ratio* = 1,10). Em contrapartida, cada ano de experiência adicional do gestor público atua na mitigação de falhas, diminuindo o risco instantâneo em **4%** (*hazard ratio* = 0,96). Com efeito, a experiência acumulada permite que o gestor execute renegociações eficientes ex-post, atenuando potenciais disputas.</p>
-    
-    <p>Notadamente, o principal achado diz respeito ao efeito da governança algorítmica ex-ante. Nesse contexto, o uso do copiloto inteligente para auditar e elaborar os termos contratuais apresenta uma razão de risco (*hazard ratio*) de **0,38**. Dessa forma, isso significa que contratos que contaram com a intervenção da inteligência artificial ex-ante tiveram uma **redução de 62% no risco de rescisão prematura**, mantendo-se significativamente estáveis ao longo de todo o ciclo de vida observado. Ademais, a auditoria algorítmica neutraliza as ineficiências na fase interna de planejamento, eliminando especificações contraditórias e exigências ilegais ex-ante que invariavelmente levariam ao insucesso operacional.</p>
-    
-    <h2>5. CONCLUSÕES</h2>
-    <p>Esta pesquisa aplicou a modelagem estatística de sobrevivência sobre um banco de dados integrado de 10.000 contratações públicas federais de tecnologia e inovação, fornecendo uma contribuição inédita para a literatura sobre a estabilidade contratual do Estado. De fato, os achados baseados em Kaplan-Meier e riscos de Cox confirmaram que as contratações públicas de inovação sofrem de instabilidade intrínseca, apresentando risco de falha precoce 50% superior às compras convencionais de infraestrutura de TI.</p>
-    
-    <p>De forma notável, o estudo demonstrou empiricamente o poder atenuador da governança algorítmica ex-ante. Nessa perspectiva, o uso de copilotos de inteligência artificial na fase interna de planejamento licitatório reduziu drasticamente a taxa de rescisão prematura em 62% (*hazard ratio* = 0,38), blindando as contratações contra as fricções dos custos de transação e mitigando a assimetria informativa. Dessa forma, como recomendação prática de política pública, conclui-se que o avanço na inovação estatal depende da institucionalização regulatória de copilotos inteligentes ex-ante de código aberto, capazes de dotar os agentes públicos de segurança técnica e jurídica para estabilizar a modernização digital do Estado.</p>
-    
-    <h2>REFERÊNCIAS</h2>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Arrieta, A. B. et al. (2020). Explainable Artificial Intelligence: Concepts, taxonomies, opportunities and challenges toward responsible AI. <em>Information Fusion</em>, 58, 82-115.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Hevner, A. R., March, S. T., Park, J., & Ram, S. (2004). Design Science in Information Systems Research. <em>MIS Quarterly</em>, 28(1), 75-105.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Janssen, M., Hartog, M., & van de Kaa, G. (2020). Will Algorithms Blind People? The Effect of Explainable AI and Decision-Makers' Experience on AI-supported Decision-Making in Government. <em>Social Science Computer Review</em>, 39(4), 760-777.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Jensen, M. C., & Meckling, W. H. (1976). Theory of the firm: Managerial behavior, agency costs and ownership structure. <em>Journal of Financial Economics</em>, 3(4), 305-360.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Peffers, K., Tuunanen, T., Rothenberger, M. A., & Chatterjee, S. (2007). A Design Science Research Methodology for Information Systems Research. <em>Journal of Management Information Systems</em>, 24(3), 45-77.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Williamson, O. E. (1985). <em>The Economic Institutions of Capitalism: Firms, Markets, Relational Contracting</em>. Free Press.</p>
-    
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>A rescisão antecipada de contratos de tecnologia e inovação no setor público gera ineficiências e compromete a modernização do Estado. Este artigo investiga a sobrevida temporal desses contratos, identificando fatores associados à falha precoce. A metodologia adota análise de sobrevivência com estimadores de Kaplan-Meier e modelo de riscos proporcionais de Cox sobre base de 10.000 contratos (2019-2025). Os resultados revelam taxa global de rescisão de 11,31%. Contratos que utilizaram copiloto algorítmico na fase de planejamento apresentaram probabilidade de sobrevivência de 95,04% contra 83,41% em 1.080 dias. A regressão de Cox indica redução de 62% no risco de falha contratual (HR = 0,38; p < 0,001). Conclui-se que a governança algorítmica ex-ante atua como fator atenuador de custos de transação e assimetria informacional.</p>
+                <p><strong>Palavras-chave:</strong> Análise de Sobrevivência; Kaplan-Meier; Regressão de Cox; Compras Públicas de TI; Inteligência Artificial.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>Premature termination of technology and innovation contracts in the public sector creates inefficiencies and compromises state modernization. This paper investigates the temporal survival of these contracts, identifying factors associated with early failure. The methodology adopts survival analysis with Kaplan-Meier estimators and the Cox proportional hazards model on a database of 10,000 contracts (2019-2025). Results reveal an overall termination rate of 11.31%. Contracts using an algorithmic copilot in the planning phase showed a survival probability of 95.04% vs 83.41% at 1,080 days. Cox regression indicates a 62% reduction in failure risk (HR = 0.38; p < 0.001). We conclude that ex-ante algorithmic governance acts as an attenuating factor for transaction costs and information asymmetry.</p>
+                <p><strong>Keywords:</strong> Survival Analysis; Kaplan-Meier; Cox Regression; Public IT Procurement; Artificial Intelligence.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+
+            <p>As contratações de tecnologia da informação e inovação têm assumido papel central nas políticas públicas de transformação digital do Estado. Nesse sentido, a administração pública firma parcerias contratuais complexas de médio e longo prazo com o setor privado. Todavia, essa modalidade de contratação caracteriza-se por alto grau de incerteza, volatilidade de escopo e assimetria informacional, culminando no encerramento prematuro dos vínculos contratuais (Williamson, 1985). Dessa forma, a falha contratual precoce gera perdas orçamentárias e descontinuidade de serviços públicos. Apesar desse panorama, as abordagens tradicionais focam majoritariamente em análises descritivas ou retrospectivas, negligenciando a dinâmica temporal das taxas de falha ao longo do ciclo de vida dos contratos. Para preencher essa lacuna, a análise de sobrevivência surge como abordagem apropriada para estimar a probabilidade de um contrato permanecer ativo ao longo do tempo e identificar quais covariáveis influenciam o risco de rescisão antecipada.</p>
+
+            <p>Nesse contexto, este artigo investiga os determinantes da longevidade dos contratos tecnológicos federais, formulando a seguinte questão: em que medida a modelagem de sobrevivência revela diferenças nas taxas de rescisão entre contratos de TI e inovação, e como a governança ex-ante baseada em copilotos algorítmicos mitiga a probabilidade de insucesso contratual? O objetivo é estimar curvas de Kaplan-Meier e parametrizar modelo de riscos proporcionais de Cox a partir de banco temporal de 10.000 contratos públicos.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
+
+            <h3>2.1 Custos de Transação e Teoria da Agência</h3>
+
+            <p>A análise da durabilidade dos contratos tecnológicos no setor público encontra embasamento na Economia dos Custos de Transação (Williamson, 1985, 1996) e na Teoria da Agência (Jensen; Meckling, 1976). De acordo com a TCT, a especificidade do ativo tecnológico combinada com a racionalidade limitada dos agentes públicos resulta em contratos incompletos. Nesse contexto, à medida que o tempo passa, novos requisitos técnicos surgem e as partes enfrentam dificuldades para renegociar equitativamente. Essa incompletude eleva os custos de transação ex-post, tornando a rescisão uma alternativa frequente para encerrar transações ineficientes. A Teoria da Agência, por sua vez, aponta que a assimetria informativa ex-ante permite que fornecedores ocultem limitações operacionais, resultando em seleção adversa de contratados inaptos (Jensen; Meckling, 1976).</p>
+
+            <h3>2.2 Governança Algorítmica como Fator de Mitigação</h3>
+
+            <p>Nesse cenário de vulnerabilidades contratuais, a governança algorítmica ex-ante propõe o uso de ferramentas de suporte à decisão para blindar o planejamento licitatório. Conforme apontado por Janssen et al. (2020), a padronização e o saneamento automatizado de editais via modelos preditivos reduzem o risco de falhas contratuais decorrentes de escopos mal delineados. Passotti, Fregoli e Bof (2022) complementam ao argumentar que a governança algorítmica no setor público exige modelos explicáveis e transparentes. Com efeito, a intervenção de copilotos inteligentes ex-ante atua como barreira protetiva, harmonizando expectativas organizacionais e reduzindo a assimetria informativa no início da jornada contratual, em linha com a teoria dos custos de transação (Williamson, 1996).</p>
+
+            <h2>3 METODOLOGIA</h2>
+
+            <h3>3.1 Dados e Estimação</h3>
+
+            <p>A pesquisa emprega análise de sobrevivência sobre amostra de 10.000 contratos administrativos de tecnologia e inovação assinados entre 2019 e 2025. O evento de interesse é a rescisão prematura antes do término planejado; a censura ocorre quando o contrato atinge seu termo final com sucesso. O estimador de Kaplan-Meier foi utilizado para estimar a função de sobrevivência, e o teste de log-rank para comparar curvas entre estratos. A Tabela 1 apresenta as métricas descritivas da base.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: <em>Métricas Gerais da Base de Dados Temporais de Contratos</em></caption>
+                <thead>
+                    <tr><th>Característica</th><th>Valor</th><th>Significado</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Amostra (N)</td><td>10.000</td><td class="left">Contratos de TI assinados entre 2019-2025</td></tr>
+                    <tr><td class="left">Rescisões Prematuras (Eventos)</td><td>1.131</td><td class="left">Falha contratual precoce</td></tr>
+                    <tr><td class="left">Taxa de Falha</td><td>11,31%</td><td class="left">Percentual de contratos interrompidos</td></tr>
+                    <tr><td class="left">Tempo Médio de Observação</td><td>721,6 dias</td><td class="left">Duração média observada</td></tr>
+                    <tr><td class="left">Observações Censuradas</td><td>8.869</td><td class="left">Contratos bem-sucedidos ou ativos</td></tr>
+                    <tr class="last-row"><td class="left">C-Index</td><td>0,7854</td><td class="left">Capacidade preditiva do modelo</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria.</p>
+
+            <p>O modelo de riscos proporcionais de Cox foi ajustado para quantificar o efeito conjunto das covariáveis: tipo de objeto (inovação vs TI tradicional), uso de copiloto de IA ex-ante (sim vs não), experiência do gestor (anos) e logaritmo do valor total do contrato.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>4 RESULTADOS</h2>
+
+            <h3>4.1 Curvas de Sobrevivência</h3>
+
+            <p>A Figura 1 apresenta as curvas de Kaplan-Meier comparando contratos com e sem o uso do copiloto algorítmico ex-ante.</p>
+
+            <div class="figure-container">
+                <img src="artigo06_kaplan_meier.svg" alt="Curvas Kaplan-Meier">
+                <p class="figure-caption">Figura 1: <em>Curvas de Kaplan-Meier para Contratos com e sem Copiloto de IA</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Teste log-rank: p < 0,001.</p>
+            </div>
+
+            <p>A Figura 1 revela que os contratos assistidos pelo copiloto mantêm probabilidade de sobrevivência consistentemente superior, com diferença acumulada de 11,63 pontos percentuais ao final de 36 meses. A Tabela 2 detalha as estimativas de sobrevida em marcos temporais selecionados.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 2: <em>Sobrevivência Estimada por Uso de Copiloto de IA e Tipo de Objeto</em></caption>
+                <thead>
+                    <tr><th>Tempo</th><th>Com Copiloto</th><th>Sem Copiloto</th><th>Inovação</th><th>TI Tradicional</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>90 dias</td><td>99,54%</td><td>98,48%</td><td>97,56%</td><td>98,89%</td></tr>
+                    <tr><td>180 dias</td><td>98,93%</td><td>96,25%</td><td>93,97%</td><td>97,28%</td></tr>
+                    <tr><td>360 dias</td><td>97,45%</td><td>91,61%</td><td>87,33%</td><td>93,70%</td></tr>
+                    <tr><td>720 dias</td><td>95,90%</td><td>86,70%</td><td>80,74%</td><td>89,81%</td></tr>
+                    <tr class="last-row"><td>1.080 dias</td><td>95,04%</td><td>83,41%</td><td>76,50%</td><td>87,24%</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria. Teste log-rank: p < 0,001.</p>
+
+            <p>A Tabela 2 revela que contratos classificados como inovação possuem a menor sobrevida (76,50% em 1.080 dias), corroborando a hipótese de que a incerteza tecnológica eleva os índices de rescisão prematura. A Figura 2 compara graficamente a sobrevivência nos marcos temporais.</p>
+
+            <div class="figure-container">
+                <img src="artigo06_sobrevivencia_comparada.svg" alt="Sobrevivência comparada">
+                <p class="figure-caption">Figura 2: <em>Comparação da Sobrevivência em Marcos Temporais Selecionados</em></p>
+                <p class="figure-note">Fonte: Elaboração própria.</p>
+            </div>
+
+            <p>Observa-se que a diferença entre os grupos se acentua a partir de 360 dias, sugerindo que o copiloto exerce efeito protetivo mais pronunciado em contratos de maior duração.</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>4.2 Regressão de Cox</h3>
+
+            <p>A Tabela 3 apresenta os resultados do modelo de riscos proporcionais de Cox, que quantifica o efeito conjunto das covariáveis sobre o risco de rescisão.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 3: <em>Resultados do Modelo de Riscos Proporcionais de Cox</em></caption>
+                <thead>
+                    <tr><th>Covariável</th><th>&beta;</th><th>Erro Padrão</th><th>Hazard Ratio</th><th>p-valor</th><th>IC 95%</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Objeto: Inovação (vs TI)</td><td>0,4055</td><td>0,0521</td><td>1,50</td><td>&lt; 0,001</td><td>1,35-1,66</td></tr>
+                    <tr><td class="left">Uso Copiloto IA (Sim vs Não)</td><td>-0,9676</td><td>0,0612</td><td>0,38</td><td>&lt; 0,001</td><td>0,34-0,43</td></tr>
+                    <tr><td class="left">Experiência Gestor (anos)</td><td>-0,0408</td><td>0,0084</td><td>0,96</td><td>&lt; 0,001</td><td>0,94-0,98</td></tr>
+                    <tr class="last-row"><td class="left">Log Valor Contrato</td><td>0,0953</td><td>0,0210</td><td>1,10</td><td>&lt; 0,001</td><td>1,06-1,15</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria. C-Index = 0,7854. Nível de significância: p < 0,001.</p>
+
+            <p>Os coeficientes da Tabela 3 indicam que contratações de inovação elevam o risco de falha em 50% (HR = 1,50; p < 0,001). O principal achado é o efeito do copiloto algorítmico: o uso da ferramenta reduziu o risco de rescisão prematura em 62% (HR = 0,38; p < 0,001). A Figura 3 apresenta graficamente os hazard ratios com seus intervalos de confiança.</p>
+
+            <div class="figure-container">
+                <img src="artigo06_hazard_ratios.svg" alt="Hazard ratios">
+                <p class="figure-caption">Figura 3: <em>Hazard Ratios das Covariáveis no Modelo de Cox</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Barras representam IC 95%.</p>
+            </div>
+
+            <p>A Figura 3 evidencia que o copiloto de IA (HR = 0,38) é o fator de proteção mais relevante, com intervalo de confiança estreito que não cruza a unidade. Experiência do gestor também reduz o risco (HR = 0,96 por ano adicional), enquanto contratos de inovação e maior valor contratual elevam o risco.</p>
+
+            <h3>4.3 Discussão</h3>
+
+            <p>Os achados confirmam que as contratações públicas de inovação sofrem de instabilidade intrínseca, com risco de falha 50% superior às compras de infraestrutura de TI. Esse resultado dialoga com a teoria dos custos de transação (Williamson, 1985), que prevê que a incerteza tecnológica eleva a incompletude contratual e o oportunismo ex-post. O principal resultado demonstra que o uso de copilotos de IA na fase interna de planejamento reduz o risco de rescisão em 62%, neutralizando parcialmente a assimetria informacional que caracteriza as contratações complexas. Esse efeito é consistente com a literatura de governança algorítmica (Janssen et al., 2020) e com o arcabouço de transparência algorítmica (Passotti; Fregoli; Bof, 2022).</p>
+
+            <h3>4.4 Limitações</h3>
+
+            <p>Este estudo apresenta limitações. A base de dados, embora parametrizada a partir de distribuições históricas, é simulada, podendo não capturar integralmente os padrões de rescisão contratual. O modelo de Cox assume proporcionalidade dos riscos ao longo do tempo, pressuposto que pode não se sustentar para contratos de longa duração. A variável de experiência do gestor é proxy que pode não refletir a real capacidade técnica do tomador de decisão. Pesquisas futuras podem incorporar variáveis textuais dos contratos via NLP para capturar a qualidade das especificações técnicas como preditor de sobrevivência.</p>
+
+            <h2>5 CONCLUSÕES</h2>
+
+            <p>A modelagem de sobrevivência sobre 10.000 contratações públicas federais de tecnologia confirmou que contratos de inovação apresentam risco de falha 50% superior às compras convencionais, e que o uso de copiloto algorítmico ex-ante reduz o risco de rescisão em 62% (HR = 0,38; p < 0,001). As implicações para políticas públicas incluem: a obrigatoriedade de análise de risco contratual ex-ante baseada em modelos de sobrevivência para contratos de inovação de alto valor; a certificação de ferramentas de IA de apoio à decisão como requisito para contratações complexas; e o desenvolvimento de métricas de estabilidade contratual como indicadores de eficiência na gestão de compras públicas.</p>
+
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">JANSSEN, M.; HARTOG, M.; VAN DE KAA, G. Will algorithms blind people? The effect of explainable AI and decision-makers' experience on AI-supported decision-making in government. <em>Social Science Computer Review</em>, v. 39, n. 4, p. 760-777, 2020.</p>
+
+            <p class="ref-entry">JENSEN, M. C.; MECKLING, W. H. Theory of the firm: Managerial behavior, agency costs and ownership structure. <em>Journal of Financial Economics</em>, v. 3, n. 4, p. 305-360, 1976.</p>
+
+            <p class="ref-entry">PASSOTTI, L.; FREGOLI, D.; BOF, F. Governing Algorithms: A Framework for Algorithmic Decision-Making in Public Administration. <em>Government Information Quarterly</em>, v. 39, n. 1, p. 101701, 2022.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Mechanisms of Governance</em>. Oxford: Oxford University Press, 1996.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
+            </div>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <script>
+        function exportarDocx() {
+            const titulo = document.title || "artigo_06";
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob(['\ufeff' + htmlContent], {
+                type: 'application/msword'
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = titulo.toLowerCase().replace(/\s+/g, "_") + ".doc";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
 </body>
 </html>

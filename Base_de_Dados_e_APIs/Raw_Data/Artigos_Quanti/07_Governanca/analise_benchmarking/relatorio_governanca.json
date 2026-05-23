@@ -1,0 +1,50 @@
+{
+    "total_municipios_analisados": 180,
+    "media_tempo_manual_horas": 45.66,
+    "media_tempo_algoritmico_horas": 5.14,
+    "diferenca_media_tempo_horas": 40.52,
+    "reducao_percentual_tempo": 88.74,
+    "t_stat_pareado": 89.1972,
+    "p_valor_t_test": 1.12e-84,
+    "estatisticas_por_porte": [
+        {
+            "porte": "Grande",
+            "municipios_n": 40,
+            "media_processos": 68.8,
+            "horas_manual_media": 46.55,
+            "horas_algo_media": 4.89,
+            "score_eficiencia_manual_media": 0.0652,
+            "score_eficiencia_algoritmico_media": 0.6275,
+            "economia_anual_media_reais": 138293.73
+        },
+        {
+            "porte": "Médio",
+            "municipios_n": 70,
+            "media_processos": 29.1,
+            "horas_manual_media": 46.03,
+            "horas_algo_media": 5.27,
+            "score_eficiencia_manual_media": 0.0661,
+            "score_eficiencia_algoritmico_media": 0.5847,
+            "economia_anual_media_reais": 56635.78
+        },
+        {
+            "porte": "Pequeno",
+            "municipios_n": 70,
+            "media_processos": 9.9,
+            "horas_manual_media": 44.79,
+            "horas_algo_media": 5.15,
+            "score_eficiencia_manual_media": 0.0684,
+            "score_eficiencia_algoritmico_media": 0.5902,
+            "economia_anual_media_reais": 18895.4
+        }
+    ],
+    "impacto_total_amostra": {
+        "horas_poupadas_anual": 225394.7,
+        "economia_financeira_anual_reais": 10818932.3
+    },
+    "projecao_nacional_custo_brasil": {
+        "municipios_totais": 5570,
+        "horas_poupadas_anual_estimadas": 6974713.8,
+        "economia_financeira_anual_estimada_reais": 334785849.51
+    }
+}

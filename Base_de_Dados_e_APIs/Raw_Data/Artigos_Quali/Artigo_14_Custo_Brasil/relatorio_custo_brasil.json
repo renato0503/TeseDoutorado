@@ -1,0 +1,141 @@
+{
+    "data_processamento": "2026-05-18",
+    "amostra": {
+        "total_registros": 50,
+        "por_instituicao": {
+            "MDIC": 20,
+            "ABDI": 18,
+            "Comite_Custo_Brasil": 12
+        },
+        "por_registro": {
+            "Racionalizacao": 15,
+            "Infraestrutura": 11,
+            "Automacao_Inteligente": 13,
+            "Capital_Humano": 11
+        }
+    },
+    "matriz_contingencia": {
+        "linhas_instituicoes": [
+            "MDIC",
+            "ABDI",
+            "Comite_Custo_Brasil"
+        ],
+        "colunas_registros": [
+            "Racionalizacao",
+            "Infraestrutura",
+            "Automacao_Inteligente",
+            "Capital_Humano"
+        ],
+        "valores": [
+            [
+                7,
+                5,
+                4,
+                4
+            ],
+            [
+                4,
+                3,
+                6,
+                5
+            ],
+            [
+                4,
+                3,
+                3,
+                2
+            ]
+        ]
+    },
+    "estatistica_qui_quadrado": {
+        "chi2_calculado": 2.0562,
+        "graus_liberdade": 6,
+        "p_valor": 0.914458,
+        "resultado": "Aceita H0 (Independência)"
+    },
+    "indices_sinteticos": {
+        "MDIC": {
+            "total": 20,
+            "d3_automacao": 4,
+            "negativo": 7,
+            "IVD": 20.0,
+            "IFP": 35.0
+        },
+        "ABDI": {
+            "total": 18,
+            "d3_automacao": 6,
+            "negativo": 6,
+            "IVD": 33.33,
+            "IFP": 33.33
+        },
+        "Comite_Custo_Brasil": {
+            "total": 12,
+            "d3_automacao": 3,
+            "negativo": 6,
+            "IVD": 25.0,
+            "IFP": 50.0
+        }
+    },
+    "colocacoes_semanticas": {
+        "MDIC": [
+            {
+                "termo_a": "regulatório",
+                "termo_b": "conformidade",
+                "freq": 6,
+                "forca": 0.86
+            },
+            {
+                "termo_a": "infraestrutura",
+                "termo_b": "logística",
+                "freq": 5,
+                "forca": 0.81
+            },
+            {
+                "termo_a": "tempo",
+                "termo_b": "redução",
+                "freq": 4,
+                "forca": 0.78
+            }
+        ],
+        "ABDI": [
+            {
+                "termo_a": "copiloto",
+                "termo_b": "automação",
+                "freq": 8,
+                "forca": 0.92
+            },
+            {
+                "termo_a": "govtechs",
+                "termo_b": "editais",
+                "freq": 7,
+                "forca": 0.88
+            },
+            {
+                "termo_a": "capital",
+                "termo_b": "giro",
+                "freq": 5,
+                "forca": 0.79
+            }
+        ],
+        "Comite_Custo_Brasil": [
+            {
+                "termo_a": "licenciamento",
+                "termo_b": "morosidade",
+                "freq": 5,
+                "forca": 0.89
+            },
+            {
+                "termo_a": "inteligente",
+                "termo_b": "fiscalização",
+                "freq": 4,
+                "forca": 0.82
+            },
+            {
+                "termo_a": "transação",
+                "termo_b": "redução",
+                "freq": 4,
+                "forca": 0.8
+            }
+        ]
+    }
+}

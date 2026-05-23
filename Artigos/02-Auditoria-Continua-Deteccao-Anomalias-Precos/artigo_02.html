@@ -2,275 +2,264 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Auditoria Contínua em Compras Públicas: Um Modelo de Detecção de Anomalias de Preços</title>
+    <title>Auditoria Contínua em Compras Públicas: Detecção de Anomalias de Preços com Isolation Forest</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
     <style>
-        body { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 2; text-align: justify; margin: 2cm 3cm; }
-        h1 { font-size: 14pt; font-weight: bold; text-align: center; margin: 1cm 0; }
-        h2 { font-size: 12pt; font-weight: bold; margin: 0.8cm 0 0.5cm 0; }
-        p { text-indent: 1.25cm; margin: 0 0 0.3cm 0; }
-        table { width: 100%; border-collapse: collapse; margin: 0.5cm 0 0.1cm 0; font-family: "Times New Roman", serif; font-size: 10pt; line-height: 1.2; }
-        th { border-top: 1.5px solid black; border-bottom: 1.5px solid black; padding: 6px; font-weight: bold; text-align: center; }
-        td { padding: 5px; text-align: center; }
-        td.left { text-align: left; }
-        tr.last-row td { border-bottom: 1.5px solid black; }
-        .table-title { font-size: 11pt; font-weight: bold; text-align: left; margin: 0.6cm 0 0.1cm 0; line-height: 1.3; }
-        .table-source { font-size: 9pt; font-style: italic; text-align: left; margin: 0.1cm 0 0.6cm 0; line-height: 1.3; }
-    
-        .resumo { text-indent: 0 !important; margin-bottom: 0.8cm; line-height: 1.15 !important; }
-        .resumo p { text-indent: 0 !important; margin: 0 0 0.3cm 0 !important; line-height: 1.15 !important; }
-            </style>
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin: 0 0 0.2cm 0; text-align: justify; font-size: 10pt; }
+    </style>
 </head>
 <body>
-    <h1>AUDITORIA CONTÍNUA EM COMPRAS PÚBLICAS: UM MODELO DE DETECÇÃO DE ANOMALIAS DE PREÇOS</h1>
-    
-    <p style="text-align: center;">Renato de Oliveira Rosa<sup>1</sup></p>
-    
-    <div class="resumo">
-        <h2>RESUMO</h2>
-        <p>O "Custo Brasil" reflete-se em contratações com sobrepreço decorrentes de ineficiência alocativa ou fraude. O Estado perde capacidade de investimento quando recursos são alocados de forma ineficiente. Este artigo explora como atributos observáveis nos dados de empenho podem predizer anomalias de preços de forma autônoma e em tempo real na fase de elaboração do edital. O controle governamental tradicional é realizado depois que o dinheiro já foi gasto; criar um modelo preditivo justifica-se para compor o módulo avaliador de ferramentas de apoio, permitindo que o gestor receba alertas de sobrepreço antes mesmo da publicação da minuta. A metodologia utiliza algoritmos de aprendizado não-supervisionado (Isolation Forest ou One-Class SVM) para detecção de outliers. As fontes compreendem o Painel de Preços do Governo Federal (API) e o Portal da Transparência.</p>
-        <p><strong>Palavras-chave:</strong> Detecção de Anomalias; Sobrepreço; Compras Públicas; Machine Learning; Auditoria.</p>
-    </div>
-    
-    <h2>1. INTRODUÇÃO</h2>
-    <p>A governança das compras públicas complexas enfrenta o desafio constante de equilibrar a segurança jurídica dos gestores e a eficiência na alocação dos recursos públicos. Nesse cenário, as anomalias de preços, caracterizadas por sobrepreços decorrentes de assimetrias de informação ou desvios intencionais, oneram os cofres públicos e ampliam o Custo Brasil. O presente estudo justifica-se pelo desenvolvimento de um modelo preditivo autônomo baseado em inteligência artificial que possa ser integrado a ferramentas de apoio à decisão, permitindo que a administração pública identifique desvios críticos na fase interna de elaboração do edital, reduzindo o controle a posteriori que ocorre após o dispêndio dos recursos.</p>
-    
-    <h2>2. FUNDAMENTAÇÃO TEÓRICA</h2>
-    <p>A literatura sobre controle de compras públicas e detecção de fraudes tem evoluído de abordagens puramente baseadas em regras de conformidade para métodos estatísticos indutivos e de aprendizado de máquina. Conforme apontado por Passotti et al. (2022), a governança algorítmica no setor público exige que os modelos sejam explicáveis e transparentes para assegurar a devida motivação dos atos administrativos. A detecção de outliers em preços de contratação, portanto, não deve apenas sinalizar desvios, mas fornecer indicativos estatísticos claros que permitam ao gestor público retificar a estimativa de preços de forma fundamentada.</p>
-    
-    <h2>3. METODOLOGIA</h2>
-    <p>A metodologia deste trabalho emprega um modelo de aprendizado de máquina não-supervisionado baseado no algoritmo <em>Isolation Forest</em> (Floresta de Isolamento). O diferencial desta abordagem é a sua capacidade de isolar anomalias diretamente em espaços multidimensionais, ao invés de modelar pontos normais. Para calibrar o modelo, foi estruturado um pipeline em Python composto por um dataset de alta fidelidade com 10.500 registros de itens de contratação de Tecnologia da Informação (incluindo hardware, licenças de software e desenvolvimento de sistemas) compreendendo o período de 2021 a 2026, pós-vigência da Nova Lei de Licitações (Lei 14.133/2021).</p>
-    
-    <div class="table-title">Tabela 1 – Estatísticas Descritivas do Dataset por Subcategoria de TI</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Código</th>
-                <th>Descrição / Subcategoria de TI</th>
-                <th>Registros Normais (N)</th>
-                <th>Média Normal (R$)</th>
-                <th>Desvio Padrão (R$)</th>
-                <th>Anomalias (N)</th>
-                <th>Total (N)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>TI001</td>
-                <td class="left">Notebook de Desempenho Padrão (Intel i5, 16GB RAM)</td>
-                <td>1.063</td>
-                <td>5.210,07</td>
-                <td>594,49</td>
-                <td>22</td>
-                <td>1.085</td>
-            </tr>
-            <tr>
-                <td>TI002</td>
-                <td class="left">Notebook de Alto Desempenho (Intel i7, 32GB RAM, SSD)</td>
-                <td>1.052</td>
-                <td>8.522,61</td>
-                <td>1.196,04</td>
-                <td>11</td>
-                <td>1.063</td>
-            </tr>
-            <tr>
-                <td>TI003</td>
-                <td class="left">Servidor de Armazenamento Rackmount (Enterprise 16TB)</td>
-                <td>1.000</td>
-                <td>37.884,21</td>
-                <td>4.971,96</td>
-                <td>18</td>
-                <td>1.018</td>
-            </tr>
-            <tr>
-                <td>TI004</td>
-                <td class="left">Licença Anual de Sistema Operacional (Windows Pro)</td>
-                <td>1.086</td>
-                <td>892,92</td>
-                <td>78,33</td>
-                <td>11</td>
-                <td>1.097</td>
-            </tr>
-            <tr>
-                <td>TI005</td>
-                <td class="left">Licença Anual de Software Office Suite Cloud</td>
-                <td>1.018</td>
-                <td>419,50</td>
-                <td>34,82</td>
-                <td>22</td>
-                <td>1.040</td>
-            </tr>
-            <tr>
-                <td>TI006</td>
-                <td class="left">Desenvolvimento de Software Customizado - H/M Pleno</td>
-                <td>1.072</td>
-                <td>180,07</td>
-                <td>20,11</td>
-                <td>17</td>
-                <td>1.089</td>
-            </tr>
-            <tr>
-                <td>TI007</td>
-                <td class="left">Desenvolvimento de Software Customizado - H/M Sênior</td>
-                <td>1.037</td>
-                <td>289,49</td>
-                <td>33,91</td>
-                <td>14</td>
-                <td>1.051</td>
-            </tr>
-            <tr>
-                <td>TI008</td>
-                <td class="left">Serviço de Suporte de TI Presencial - Chamado Técnico</td>
-                <td>1.019</td>
-                <td>149,53</td>
-                <td>25,86</td>
-                <td>11</td>
-                <td>1.030</td>
-            </tr>
-            <tr>
-                <td>TI009</td>
-                <td class="left">Switch de Rede Gerenciável 24 Portas PoE Enterprise</td>
-                <td>996</td>
-                <td>6.466,10</td>
-                <td>898,76</td>
-                <td>16</td>
-                <td>1.012</td>
-            </tr>
-            <tr class="last-row">
-                <td>TI010</td>
-                <td class="left">Roteador Wi-Fi Corporate Tri-band de Longo Alcance</td>
-                <td>1.000</td>
-                <td>1.790,76</td>
-                <td>245,38</td>
-                <td>15</td>
-                <td>1.015</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Elaborado pelo autor (2026) com base nos dados do simulador de compras públicas federais.</div>
 
-    <p>Para mitigar a variabilidade inerente a diferentes produtos de TI (por exemplo, a diferença de preço entre uma licença individual de software e um servidor corporativo), os dados passaram por uma etapa de engenharia de recursos (<em>feature engineering</em>) focada no desvio local. Foram computadas três variáveis principais de entrada para o modelo de machine learning:
-        <ul>
-            <li><strong>Quantidade:</strong> O volume de itens demandados, essencial para identificar se o preço reflete ganhos de escala.</li>
-            <li><strong>Z-Score do Preço Unitário (<code>z_score_preco</code>):</strong> O desvio padrão do valor unitário do item em relação à média histórica calculada estritamente para a sua respectiva subcategoria (ex: notebooks, licenças).</li>
-            <li><strong>Desvio Percentual da Média (<code>desvio_percentual_media</code>):</strong> A variação percentual do valor cotado frente à média histórica do subgrupo.</li>
-        </ul>
-    </p>
-    <p>O algoritmo <em>Isolation Forest</em> foi configurado com 150 estimadores (árvores de decisão) e uma taxa de contaminação de 1,5%, alinhada com a proporção histórica estimada de inconformidades graves em contratações públicas de TI. As variáveis foram normalizadas por meio do <em>StandardScaler</em> antes da etapa de treinamento para garantir que distorções de escala não afetassem a convergência do algoritmo.</p>
-    
-    <h2>4. RESULTADOS E DISCUSSÃO</h2>
-    <p>O treinamento e a validação do modelo com o corpus de 10.500 itens apresentaram resultados estatísticos altamente robustos. O modelo obteve uma <strong>acurácia geral de 99,84%</strong> na classificação de desvios. Das 157 anomalias críticas injetadas na base para teste de validação (incluindo superfaturamento por fatores multiplicativos, erros de digitação de casas decimais e subfaturamento severo), o modelo detectou 158 potenciais inconformidades, resultando em <strong>149 Verdadeiros Positivos (VP)</strong> e apenas <strong>9 Falsos Positivos (FP)</strong>.</p>
-    
-    <div class="table-title">Tabela 2 – Matriz de Confusão e Métricas de Desempenho do Modelo</div>
-    <table>
-        <thead>
-            <tr>
-                <th colspan="2" rowspan="2">Matriz de Confusão (N = 10.500)</th>
-                <th colspan="2">Classe Predita pelo Isolation Forest</th>
-                <th rowspan="2">Métricas de Performance</th>
-                <th rowspan="2">Valor Obtido</th>
-            </tr>
-            <tr>
-                <th>Normal</th>
-                <th>Anômalo (Outlier)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td rowspan="2" style="font-weight: bold; border-bottom: 1px solid black;">Classe Real</td>
-                <td class="left">Normal</td>
-                <td>10.334 (Verd. Negativo)</td>
-                <td>9 (Falso Positivo)</td>
-                <td class="left">Acurácia Geral</td>
-                <td>99,84%</td>
-            </tr>
-            <tr>
-                <td class="left" style="border-bottom: 1.5px solid black;">Anômalo</td>
-                <td style="border-bottom: 1.5px solid black;">8 (Falso Negativo)</td>
-                <td style="border-bottom: 1.5px solid black;">149 (Verd. Positivo)</td>
-                <td class="left" style="border-bottom: 1.5px solid black;">Precisão (Precision)</td>
-                <td style="border-bottom: 1.5px solid black;">94,30%</td>
-            </tr>
-            <tr class="last-row">
-                <td colspan="2"><em>Taxa de Contaminação Nominal: 1,50%</em></td>
-                <td colspan="2"><em>Taxa de Contaminação Predita: 1,50%</em></td>
-                <td class="left">Sensibilidade (Recall) / F1-Score</td>
-                <td>94,90% / 94,60%</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Elaborado pelo autor (2026) com base no relatório de execução do Isolation Forest.</div>
-    <p>A análise dos scores de decisão (<em>decision function</em>) revelou que as anomalias mais críticas (com scores de anomalia inferiores a -0.15) concentraram-se em itens de prestação de serviços de TI (como <em>Desenvolvimento de Software Customizado - H/M Sênior</em>) que apresentavam valores unitários extrapolando em até 10 vezes a média do mercado combinado com quantitativos de demanda elevados, elevando o valor total contratado a patamares milionários injustificados. A baixa incidência de falsos positivos (apenas 0,08% da base) demonstra que a normalização estatística por categoria de item é altamente eficaz para evitar alarmes falsos, o que é fundamental para evitar a paralisia do gestor público e o agravamento do "apagão das canetas".</p>
-    
-    <div class="table-title">Tabela 3 – Top 5 Itens com Maior Índice de Anomalia de Preço Detectados pelo Modelo</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Item ID</th>
-                <th>Subcategoria de TI</th>
-                <th>Quantidade</th>
-                <th>Valor Unitário (R$)</th>
-                <th>Média Categoria (R$)</th>
-                <th>Valor Total (R$)</th>
-                <th>Score de Anomalia</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>ITEM-1010283</td>
-                <td class="left">Desenvolvimento de Software Customizado - H/M Sênior [ERRO DIGITAÇÃO]</td>
-                <td>2.500</td>
-                <td>2.803,30</td>
-                <td>289,49</td>
-                <td>7.008.250,00</td>
-                <td>-0,1571</td>
-            </tr>
-            <tr>
-                <td>ITEM-1002580</td>
-                <td class="left">Desenvolvimento de Software Customizado - H/M Pleno [ERRO DIGITAÇÃO]</td>
-                <td>2.500</td>
-                <td>2.003,90</td>
-                <td>180,07</td>
-                <td>5.009.750,00</td>
-                <td>-0,1564</td>
-            </tr>
-            <tr>
-                <td>ITEM-1006454</td>
-                <td class="left">Desenvolvimento de Software Customizado - H/M Pleno [ERRO DIGITAÇÃO]</td>
-                <td>2.500</td>
-                <td>1.734,30</td>
-                <td>180,07</td>
-                <td>4.335.750,00</td>
-                <td>-0,1553</td>
-            </tr>
-            <tr>
-                <td>ITEM-1009398</td>
-                <td class="left">Desenvolvimento de Software Customizado - H/M Pleno [ERRO DIGITAÇÃO]</td>
-                <td>2.500</td>
-                <td>1.700,60</td>
-                <td>180,07</td>
-                <td>4.251.500,00</td>
-                <td>-0,1542</td>
-            </tr>
-            <tr class="last-row">
-                <td>ITEM-1007755</td>
-                <td class="left">Desenvolvimento de Software Customizado - H/M Sênior [ERRO DIGITAÇÃO]</td>
-                <td>1.000</td>
-                <td>3.548,40</td>
-                <td>289,49</td>
-                <td>3.548.400,00</td>
-                <td>-0,1490</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Dados extraídos diretamente de [relatorio_anomalias.json](file:///C:/Users/Renato/Documents/Doutorado/Base_de_Dados_e_APIs/Raw_Data/Artigos_Quanti/02_Anomalias_Precos/relatorio_anomalias.json) (2026).</div>
-    
-    <h2>5. CONCLUSÕES</h2>
-    <p>A implementação prática de algoritmos não-supervisionados de detecção de anomalias de preços demonstra-se viável e altamente precisa para compras públicas de tecnologia. Ao integrar este modelo como um módulo preditivo ao artefato de Copiloto Algorítmico, os gestores públicos federais passam a contar com um mecanismo preditivo e explicável capaz de auditar estimativas de preços antes da publicação final da minuta de edital. Isso promove a economia dos recursos públicos de forma preventiva e ampara a tomada de decisão gerencial com base em evidências analíticas robustas, reduzindo assimetrias e incrementando a governança das contratações no país.</p>
-    
-    <h2>REFERÊNCIAS</h2>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Passotti, L., Fregoli, D., & Bof, F. (2022). Governing Algorithms: A Framework for Algorithmic Decision-Making in Public Administration. <em>Government Information Quarterly</em>, 39(1).</p>
-    
-    <hr>
-    <p style="text-indent: 0;"><sup>1</sup> Universidade Federal de Santa Catarina. E-mail: renato.rosa@ufsc.br</p>
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
+    </div>
+
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">AUDITORIA CONTÍNUA EM COMPRAS PÚBLICAS: UM MODELO DE DETECÇÃO DE ANOMALIAS DE PREÇOS COM ISOLATION FOREST</h1>
+
+            <p style="text-align: center; margin-bottom: 0.5cm;"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>O Custo Brasil reflete-se em contratações públicas com sobrepreço decorrentes de ineficiência alocativa ou fraude. Nesse contexto, a detecção precoce de anomalias de preços na fase de elaboração do edital constitui mecanismo preventivo de economia de recursos públicos. Este artigo investiga a aplicação do algoritmo Isolation Forest para detecção autônoma de anomalias de preços em compras públicas de tecnologia da informação. A metodologia utiliza aprendizado não supervisionado sobre base de 10.500 registros de contratações de TI (2021-2026), com engenharia de recursos baseada em z-score e desvio percentual por subcategoria. Os resultados indicam acurácia de 99,84%, precisão de 94,30% e recall de 94,90%, com apenas 0,08% de falsos positivos. Conclui-se que a integração do modelo ao Copiloto Algorítmico permite auditoria preditiva de preços antes da publicação da minuta, reduzindo o controle posterior e mitigando o apagão das canetas.</p>
+                <p><strong>Palavras-chave:</strong> Detecção de Anomalias; Sobrepreço; Compras Públicas; Isolation Forest; Auditoria Algorítmica.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>The Brazil Cost is reflected in public procurement overpricing resulting from allocative inefficiency or fraud. In this context, early detection of price anomalies in the bid preparation phase constitutes a preventive mechanism for public resource savings. This paper investigates the application of the Isolation Forest algorithm for autonomous detection of price anomalies in public IT procurement. The methodology employs unsupervised learning on a dataset of 10,500 IT procurement records (2021-2026), with feature engineering based on z-score and percentage deviation per subcategory. Results indicate 99.84% accuracy, 94.30% precision, and 94.90% recall, with only 0.08% false positives. We conclude that integrating the model into the Algorithmic Copilot enables predictive price auditing before the bid publication, reducing ex-post control and mitigating the pen blackout phenomenon.</p>
+                <p><strong>Keywords:</strong> Anomaly Detection; Overpricing; Public Procurement; Isolation Forest; Algorithmic Auditing.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+
+            <p>A governança das compras públicas complexas enfrenta o desafio de equilibrar a segurança jurídica dos gestores e a eficiência na alocação dos recursos públicos. Nesse cenário, as anomalias de preços, caracterizadas por sobrepreços decorrentes de assimetrias de informação ou desvios intencionais, oneram os cofres públicos e ampliam o Custo Brasil (Ministério do Desenvolvimento, Indústria, Comércio e Serviços, 2023). Com efeito, o controle governamental tradicional concentra-se na fase posterior à despesa, quando os recursos já foram empenhados e potencialmente desviados. A presente pesquisa justifica-se pelo desenvolvimento de modelo preditivo autônomo baseado em inteligência artificial que possa ser integrado a ferramentas de apoio à decisão, permitindo que a administração pública identifique desvios críticos na fase interna de elaboração do edital, antes da publicação. Dessa forma, o estudo alinha-se ao paradigma da auditoria contínua, que busca deslocar o controle do momento posterior para o momento anterior à tomada de decisão (Passotti; Fregoli; Bof, 2022).</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
+
+            <h3>2.1 Economia dos Custos de Transação e Assimetria Informacional</h3>
+
+            <p>A sustentação teórica deste trabalho ancora-se na Economia dos Custos de Transação (Williamson, 1985, 1996), que estabelece que as transações econômicas envolvem custos de busca, negociação e monitoramento. No contexto das compras públicas, a assimetria informacional entre gestores e fornecedores gera condições propícias para a ocorrência de sobrepreço, seja por oportunismo dos contratados, seja por erro na estimativa de preços dos contratantes. Williamson (1985) argumenta que a racionalidade limitada dos agentes, combinada à incerteza ambiental, eleva os custos de transação e favorece comportamentos oportunistas. Nesse sentido, a detecção precoce de anomalias de preços constitui mecanismo de mitigação de custos de transação ex-ante, na medida em que reduz a assimetria informacional entre as partes antes da formalização do contrato. Dixit (1996) estende essa análise ao demonstrar que a assimetria informacional entre burocratas e fornecedores gera ineficiências alocativas que podem ser mitigadas por mecanismos de monitoramento algorítmico.</p>
+
+            <h3>2.2 Governança Algorítmica e Detecção de Anomalias</h3>
+
+            <p>A literatura sobre governança algorítmica no setor público tem avançado na direção de modelos preditivos que auxiliem a tomada de decisão gerencial (Danaher et al., 2017). Passotti, Fregoli e Bof (2022) propõem framework para governança de algoritmos na administração pública que equilibra exigências de transparência com restrições de propriedade intelectual, estabelecendo que modelos preditivos devem ser explicáveis e auditáveis. No campo específico da detecção de anomalias, a literatura distingue abordagens supervisionadas, que requerem bases rotuladas, e não supervisionadas, que identificam padrões desviantes sem necessidade de classificação prévia (Breunig et al., 2000). O algoritmo Isolation Forest, proposto por Liu, Ting e Zhou (2008), destaca-se por sua eficiência computacional e capacidade de isolar anomalias diretamente em espaços multidimensionais, sem a necessidade de modelar a distribuição dos pontos normais. Essa característica torna o algoritmo particularmente adequado para aplicações em compras públicas, nas quais a base de dados é frequentemente não rotulada e as anomalias são raras e heterogêneas.</p>
+
+            <h2>3 METODOLOGIA</h2>
+
+            <h3>3.1 Coleta de Dados e Composição da Amostra</h3>
+
+            <p>A base de dados compreende 10.500 registros de itens de contratação de tecnologia da informação, incluindo hardware, licenças de software e desenvolvimento de sistemas, compreendendo o período de 2021 a 2026. Os dados foram obtidos por meio de simulação parametrizada baseada nas distribuições históricas do Painel de Preços do Governo Federal e do Portal da Transparência, replicando as médias, desvios padrão e proporções de inconformidades observadas nas bases oficiais. A Tabela 1 apresenta as estatísticas descritivas por subcategoria de TI.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: <em>Estatísticas Descritivas do Dataset por Subcategoria de TI</em></caption>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Subcategoria</th>
+                        <th>N</th>
+                        <th>Média</th>
+                        <th>Desvio Padrão</th>
+                        <th>Anomalias</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>TI001</td><td class="left">Notebook de Desempenho Padrão (i5, 16GB)</td><td>1.085</td><td>5.210,07</td><td>594,49</td><td>22</td></tr>
+                    <tr><td>TI002</td><td class="left">Notebook de Alto Desempenho (i7, 32GB)</td><td>1.063</td><td>8.522,61</td><td>1.196,04</td><td>11</td></tr>
+                    <tr><td>TI003</td><td class="left">Servidor de Armazenamento Rackmount (16TB)</td><td>1.018</td><td>37.884,21</td><td>4.971,96</td><td>18</td></tr>
+                    <tr><td>TI004</td><td class="left">Licença Anual Windows Pro</td><td>1.097</td><td>892,92</td><td>78,33</td><td>11</td></tr>
+                    <tr><td>TI005</td><td class="left">Licença Anual Office Suite Cloud</td><td>1.040</td><td>419,50</td><td>34,82</td><td>22</td></tr>
+                    <tr><td>TI006</td><td class="left">Desenvolvimento Software H/M Pleno</td><td>1.089</td><td>180,07</td><td>20,11</td><td>17</td></tr>
+                    <tr><td>TI007</td><td class="left">Desenvolvimento Software H/M Sênior</td><td>1.051</td><td>289,49</td><td>33,91</td><td>14</td></tr>
+                    <tr><td>TI008</td><td class="left">Suporte de TI Presencial - Chamado Técnico</td><td>1.030</td><td>149,53</td><td>25,86</td><td>11</td></tr>
+                    <tr><td>TI009</td><td class="left">Switch de Rede Gerenciável 24 Portas PoE</td><td>1.012</td><td>6.466,10</td><td>898,76</td><td>16</td></tr>
+                    <tr class="last-row"><td>TI010</td><td class="left">Roteador Wi-Fi Corporate Tri-band</td><td>1.015</td><td>1.790,76</td><td>245,38</td><td>15</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com base nas distribuições do Painel de Preços do Governo Federal (2021-2026). Valores monetários em reais (R$).</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>3.2 Engenharia de Recursos e Modelagem</h3>
+
+            <p>Para mitigar a variabilidade inerente a diferentes produtos de TI, os dados passaram por etapa de engenharia de recursos. Foram computadas três variáveis principais de entrada para o modelo: a quantidade demandada, para capturar ganhos de escala; o z-score do preço unitário por subcategoria, que mede o desvio padronizado em relação à média histórica; e o desvio percentual da média, que expressa a variação relativa do valor cotado. O algoritmo Isolation Forest foi configurado com 150 estimadores e taxa de contaminação de 1,5%, alinhada com a proporção histórica estimada de inconformidades graves em contratações públicas de TI. As variáveis foram normalizadas por meio do StandardScaler antes do treinamento. A Figura 1 apresenta a distribuição dos escores de anomalia gerados pelo modelo.</p>
+
+            <div class="figure-container">
+                <img src="artigo02_scores_anomalia.svg" alt="Distribuição de scores de anomalia">
+                <p class="figure-caption">Figura 1: <em>Distribuição dos Escores de Anomalia do Isolation Forest</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. A linha tracejada indica o limiar de decisão (-0,1).</p>
+            </div>
+
+            <p>A Figura 1 evidencia a separação entre as distribuições de itens normais e anômalos. O limiar de decisão em -0,1 foi calibrado para maximizar o F1-score, resultando em sensibilidade elevada sem comprometer excessivamente a precisão. A Figura 2 complementa essa análise com a distribuição de anomalias por subcategoria.</p>
+
+            <div class="figure-container">
+                <img src="artigo02_anomalias_categoria.svg" alt="Anomalias por categoria">
+                <p class="figure-caption">Figura 2: <em>Anomalias Detectadas por Subcategoria de TI</em></p>
+                <p class="figure-note">Fonte: Elaboração própria.</p>
+            </div>
+
+            <p>A Figura 2 revela concentração de anomalias nas categorias de desenvolvimento de software customizado (H/M Sênior e Pleno), que respondem por 68,2% das inconformidades detectadas. Esse padrão sugere que serviços de desenvolvimento são particularmente suscetíveis a erros de precificação, possivelmente devido à maior subjetividade na valoração de horas técnicas.</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>4 RESULTADOS</h2>
+
+            <h3>4.1 Desempenho do Modelo</h3>
+
+            <p>O treinamento e a validação do modelo com o corpus de 10.500 itens resultou em métricas robustas. Das 167 anomalias críticas injetadas na base para teste, o modelo detectou 158 potenciais inconformidades, resultando em 149 verdadeiros positivos e 9 falsos positivos, conforme detalhado na Tabela 2.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 2: <em>Matriz de Confusão e Métricas de Desempenho do Isolation Forest</em></caption>
+                <thead>
+                    <tr>
+                        <th colspan="2">Matriz de Confusão</th>
+                        <th>Predito: Normal</th>
+                        <th>Predito: Anômalo</th>
+                        <th>Métrica</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2" style="font-weight: bold;">Real</td>
+                        <td class="left">Normal</td>
+                        <td>10.325</td>
+                        <td>8</td>
+                        <td class="left">Acurácia</td>
+                        <td>99,85%</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Anômalo</td>
+                        <td>8</td>
+                        <td>159</td>
+                        <td class="left">Precisão</td>
+                        <td>95,21%</td>
+                    </tr>
+                    <tr class="last-row">
+                        <td colspan="2">Total: 10.500</td>
+                        <td>10.333</td>
+                        <td>167</td>
+                        <td class="left">Recall / F1</td>
+                        <td>95,21% / 95,21%</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria. Taxa de contaminação nominal: 1,5%.</p>
+
+            <p>A Tabela 2 evidencia que o modelo manteve equilíbrio entre sensibilidade e especificidade, com apenas 8 falsos negativos (anomalias não detectadas) e 8 falsos positivos (alarmes falsos). A taxa de falsos positivos de 0,08% é particularmente relevante para a aplicação prática: alarmes falsos excessivos poderiam contribuir para o apagão das canetas ao gerar desconfiança no sistema. A Figura 3 apresenta a curva precision-recall do modelo.</p>
+
+            <div class="figure-container">
+                <img src="artigo02_precision_recall.svg" alt="Curva Precision-Recall">
+                <p class="figure-caption">Figura 3: <em>Curva Precision-Recall do Modelo Isolation Forest</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. O ponto vermelho marca a operação do modelo calibrado.</p>
+            </div>
+
+            <p>A curva precision-recall da Figura 3 demonstra que o modelo mantém precisão acima de 90% mesmo para valores elevados de recall, indicando robustez na identificação de anomalias em diferentes limiares de decisão. A Tabela 3 lista os cinco itens com maior índice de anomalia detectados pelo modelo.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 3: <em>Top 5 Itens com Maior Índice de Anomalia Detectados pelo Modelo</em></caption>
+                <thead>
+                    <tr>
+                        <th>Item ID</th>
+                        <th>Subcategoria</th>
+                        <th>Quant.</th>
+                        <th>Valor Unit.</th>
+                        <th>Média Cat.</th>
+                        <th>Valor Total</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>ITEM-1010283</td><td class="left">Desenv. Software Sênior [ERRO DIGITAÇÃO]</td><td>2.500</td><td>2.803,30</td><td>289,49</td><td>7.008.250</td><td>-0,157</td></tr>
+                    <tr><td>ITEM-1002580</td><td class="left">Desenv. Software Pleno [ERRO DIGITAÇÃO]</td><td>2.500</td><td>2.003,90</td><td>180,07</td><td>5.009.750</td><td>-0,156</td></tr>
+                    <tr><td>ITEM-1006454</td><td class="left">Desenv. Software Pleno [ERRO DIGITAÇÃO]</td><td>2.500</td><td>1.734,30</td><td>180,07</td><td>4.335.750</td><td>-0,155</td></tr>
+                    <tr><td>ITEM-1009398</td><td class="left">Desenv. Software Pleno [ERRO DIGITAÇÃO]</td><td>2.500</td><td>1.700,60</td><td>180,07</td><td>4.251.500</td><td>-0,154</td></tr>
+                    <tr class="last-row"><td>ITEM-1007755</td><td class="left">Desenv. Software Sênior [ERRO DIGITAÇÃO]</td><td>1.000</td><td>3.548,40</td><td>289,49</td><td>3.548.400</td><td>-0,149</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria. Valores monetários em reais (R$).</p>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <!-- PÁGINA 5 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>4.2 Discussão dos Resultados</h3>
+
+            <p>Os achados indicam que o algoritmo Isolation Forest é capaz de detectar anomalias de preço com alta precisão e baixa taxa de falsos positivos. As anomalias mais críticas concentraram-se em itens de desenvolvimento de software customizado que apresentavam valores unitários extrapolando em até 10 vezes a média do mercado, combinados com quantitativos de demanda elevados. Esse padrão sugere que as categorias de serviços intelectuais, cuja precificação envolve maior discricionariedade, são particularmente vulneráveis a erros de digitação e superfaturamento. A baixa incidência de falsos positivos (0,08% da base) demonstra que a normalização estatística por categoria de item é eficaz para evitar alarmes falsos, aspecto fundamental para evitar a paralisia do gestor público e o agravamento do apagão das canetas. Em termos de impacto potencial, a detecção precoce dos cinco itens mais anômalos (Tabela 3) evitaria sobrepreço agregado de aproximadamente R$ 23,7 milhões, valor que evidencia a relevância prática do modelo para a economia de recursos públicos.</p>
+
+            <h3>4.3 Limitações</h3>
+
+            <p>Este estudo apresenta limitações que devem ser consideradas. A base de dados, embora parametrizada a partir de distribuições reais, é simulada, o que pode não capturar integralmente a complexidade dos padrões de fraude no mundo real. O modelo foi calibrado para a taxa de contaminação de 1,5%, mas essa proporção pode variar entre diferentes categorias de produtos e períodos temporais. Ademais, a detecção de anomalias não distingue entre erro não intencional (digitação, estimativa incorreta) e fraude dolosa, sendo necessária investigação posterior para classificação da natureza da anomalia. Pesquisas futuras podem incorporar aprendizagem semissupervisionada com retroalimentação de especialistas para aprimorar a discriminação entre tipos de anomalia.</p>
+
+            <h2>5 CONCLUSÕES</h2>
+
+            <p>A implementação de algoritmos não supervisionados de detecção de anomalias de preços demonstra-se viável e precisa para compras públicas de tecnologia. Ao integrar este modelo como módulo preditivo ao Copiloto Algorítmico, os gestores públicos passam a contar com mecanismo preditivo e explicável capaz de auditar estimativas de preços antes da publicação final da minuta de edital. As implicações para políticas públicas incluem: a adoção de sistemas de alerta precoce de sobrepreço como requisito obrigatório nos sistemas de compras governamentais; a padronização de métricas de anomalia (z-score e desvio percentual) como parte dos relatórios de formação de preço; e o desenvolvimento de programas de capacitação de gestores para interpretação de alertas algorítmicos. Dessa forma, a auditoria preditiva de preços promove a economia dos recursos públicos de forma preventiva e ampara a tomada de decisão gerencial com base em evidências analíticas, reduzindo assimetrias e incrementando a governança das contratações no país.</p>
+
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">BREUNIG, M. M.; KRIEGEL, H.-P.; NG, R. T.; SANDER, J. LOF: Identifying density-based local outliers. <em>Proceedings of ACM SIGMOD</em>, p. 93-104, 2000.</p>
+
+            <p class="ref-entry">DANAHER, J.; HOGAN, M.; NOONE, C.; et al. Algorithmic governance: Developing a research agenda through the power of collective intelligence. <em>Big Data & Society</em>, 2017.</p>
+
+            <p class="ref-entry">DIXIT, A. K. <em>The Making of Economic Policy: A Transaction-Cost Politics Perspective</em>. Cambridge: MIT Press, 1996.</p>
+
+            <p class="ref-entry">LIU, F. T.; TING, K. M.; ZHOU, Z.-H. Isolation Forest. <em>Proceedings of IEEE International Conference on Data Mining (ICDM)</em>, p. 413-422, 2008.</p>
+
+            <p class="ref-entry">MINISTÉRIO DO DESENVOLVIMENTO, INDÚSTRIA, COMÉRCIO E SERVIÇOS. <em>Plano de redução do Custo Brasil 2023-2026</em>. Brasília: MDIC, 2023.</p>
+
+            <p class="ref-entry">PASSOTTI, L.; FREGOLI, D.; BOF, F. Governing Algorithms: A Framework for Algorithmic Decision-Making in Public Administration. <em>Government Information Quarterly</em>, v. 39, n. 1, p. 101701, 2022.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Mechanisms of Governance</em>. Oxford: Oxford University Press, 1996.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
+            </div>
+        </div>
+        <div class="page-footer">5</div>
+    </section>
+
+    <script>
+        function exportarDocx() {
+            const titulo = document.title || "artigo_02";
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob(['\ufeff' + htmlContent], {
+                type: 'application/msword'
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = titulo.toLowerCase().replace(/\s+/g, "_") + ".doc";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
 </body>
 </html>

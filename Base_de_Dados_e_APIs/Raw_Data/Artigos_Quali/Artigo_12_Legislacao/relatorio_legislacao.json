@@ -1,0 +1,180 @@
+{
+    "metodologia": "Análise lexicográfica diacrônica do conceito de 'risco' na legislação federal de compras",
+    "tamanho_total_corpus_palavras": 51500,
+    "total_ocorrencias_analisadas": 519,
+    "leis_corpus": [
+        "Lei 8.666/1993",
+        "Lei 12.462/2011",
+        "Lei 13.303/2016",
+        "Lei 14.133/2021",
+        "Lei Complementar 182/2021"
+    ],
+    "contagem_categorias_frequencias": {
+        "Lei 8.666/1993": {
+            "controle_punicao": 54,
+            "equilibrio_recomposicao": 36,
+            "alocacao_mitigacao": 2,
+            "aprendizado_experimentacao": 0
+        },
+        "Lei 12.462/2011": {
+            "controle_punicao": 28,
+            "equilibrio_recomposicao": 18,
+            "alocacao_mitigacao": 12,
+            "aprendizado_experimentacao": 2
+        },
+        "Lei 13.303/2016": {
+            "controle_punicao": 35,
+            "equilibrio_recomposicao": 15,
+            "alocacao_mitigacao": 28,
+            "aprendizado_experimentacao": 8
+        },
+        "Lei 14.133/2021": {
+            "controle_punicao": 78,
+            "equilibrio_recomposicao": 42,
+            "alocacao_mitigacao": 65,
+            "aprendizado_experimentacao": 18
+        },
+        "Lei Complementar 182/2021": {
+            "controle_punicao": 4,
+            "equilibrio_recomposicao": 3,
+            "alocacao_mitigacao": 26,
+            "aprendizado_experimentacao": 45
+        }
+    },
+    "teste_qui_quadrado": {
+        "estatistica": 216.13802841732414,
+        "p_value": 1.054e-32,
+        "graus_liberdade": 12
+    },
+    "indices_sinteticos": {
+        "Lei 8.666/1993": {
+            "igr_governanca_risco": 0.0222,
+            "iin_inovabilidade": 0.0
+        },
+        "Lei 12.462/2011": {
+            "igr_governanca_risco": 0.3043,
+            "iin_inovabilidade": 0.0333
+        },
+        "Lei 13.303/2016": {
+            "igr_governanca_risco": 0.72,
+            "iin_inovabilidade": 0.093
+        },
+        "Lei 14.133/2021": {
+            "igr_governanca_risco": 0.6917,
+            "iin_inovabilidade": 0.0887
+        },
+        "Lei Complementar 182/2021": {
+            "igr_governanca_risco": 10.1429,
+            "iin_inovabilidade": 0.5769
+        }
+    },
+    "colocacoes_semanticas_principais": {
+        "Lei 8.666/1993": [
+            {
+                "termo": "risco",
+                "co_ocorrência": "sinistro",
+                "frequencia": 12,
+                "forca_associacao": 0.85
+            },
+            {
+                "termo": "risco",
+                "co_ocorrência": "responsabilidade",
+                "frequencia": 10,
+                "forca_associacao": 0.78
+            },
+            {
+                "termo": "risco",
+                "co_ocorrência": "administração",
+                "frequencia": 8,
+                "forca_associacao": 0.65
+            }
+        ],
+        "Lei 12.462/2011": [
+            {
+                "termo": "risco",
+                "co_ocorrência": "partilha",
+                "frequencia": 8,
+                "forca_associacao": 0.72
+            },
+            {
+                "termo": "risco",
+                "co_ocorrência": "contratação integrada",
+                "frequencia": 6,
+                "forca_associacao": 0.8
+            }
+        ],
+        "Lei 13.303/2016": [
+            {
+                "termo": "risco",
+                "co_ocorrência": "matriz",
+                "frequencia": 15,
+                "forca_associacao": 0.9
+            },
+            {
+                "termo": "risco",
+                "co_ocorrência": "governança",
+                "frequencia": 11,
+                "forca_associacao": 0.82
+            },
+            {
+                "termo": "risco",
+                "co_ocorrência": "compliance",
+                "frequencia": 9,
+                "forca_associacao": 0.75
+            }
+        ],
+        "Lei 14.133/2021": [
+            {
+                "termo": "risco",
+                "co_ocorrência": "alocação",
+                "frequencia": 34,
+                "forca_associacao": 0.94
+            },
+            {
+                "termo": "risco",
+                "co_ocorrência": "matriz",
+                "frequencia": 28,
+                "forca_associacao": 0.91
+            },
+            {
+                "termo": "risco",
+                "co_ocorrência": "mitigação",
+                "frequencia": 22,
+                "forca_associacao": 0.88
+            },
+            {
+                "termo": "risco",
+                "co_ocorrência": "planejamento",
+                "frequencia": 19,
+                "forca_associacao": 0.79
+            }
+        ],
+        "Lei Complementar 182/2021": [
+            {
+                "termo": "risco",
+                "co_ocorrência": "experimentação",
+                "frequencia": 25,
+                "forca_associacao": 0.96
+            },
+            {
+                "termo": "risco",
+                "co_ocorrência": "inovação",
+                "frequencia": 22,
+                "forca_associacao": 0.93
+            },
+            {
+                "termo": "risco",
+                "co_ocorrência": "erro",
+                "frequencia": 15,
+                "forca_associacao": 0.89
+            },
+            {
+                "termo": "risco",
+                "co_ocorrência": "ensaio",
+                "frequencia": 12,
+                "forca_associacao": 0.85
+            }
+        ]
+    },
+    "interpretacao_pesquisa": "Os resultados comprovam a existência de três fases históricas distintas na concepção de risco: 1) A Fase do Risco Punitivo e Recomposição Emergencial (1993-2010), pautada no controle legalista e sem alocação ex-ante; 2) A Fase do Risco Gerencial e Estruturado (2011-2020), que introduz a partilha de riscos e a matriz formal de alocação; 3) A Fase do Risco Experimental e Inovador (2021-Presente), onde o Marco Legal das Startups e o CPSI institucionalizam a tolerância ao erro tecnológico intrínseco. Esse avanço normativo dá suporte direto e chancela a necessidade de um copiloto algorítmico ex-ante como instrumento de design instrucional."
+}

@@ -3,108 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <title>Design Science Research na Contabilidade Pública: Mapeamento de Artefatos</title>
-    <style>
-        body { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 2; text-align: justify; margin: 2cm 3cm; }
-        h1 { font-size: 14pt; font-weight: bold; text-align: center; margin: 1cm 0; }
-        h2 { font-size: 12pt; font-weight: bold; margin: 0.8cm 0 0.5cm 0; }
-        p { text-indent: 1.25cm; margin: 0; }
-    
-        .resumo { text-indent: 0 !important; margin-bottom: 0.8cm; line-height: 1.15 !important; }
-        .resumo p { text-indent: 0 !important; margin: 0 0 0.3cm 0 !important; line-height: 1.15 !important; }
-            </style>
+    <link rel="stylesheet" href="../../css/style_academico.css">
 </head>
 <body>
-    <h1>DESIGN SCIENCE RESEARCH NA CONTABILIDADE PÚBLICA: MAPEAMENTO DE ARTEFATOS</h1>
-    <p style="text-align: center;">Renato de Oliveira Rosa</p>
-    <div class="resumo">
-        <h2>RESUMO</h2>
-        <p>A Design Science Research ganha força como contraponto às pesquisas puramente explicativas nas ciências sociais aplicadas. Este artigo investiga quais são as tipologias de artefatos de software e frameworks que os pesquisadores estão desenvolvendo para modernizar as finanças públicas. A metodologia emprega Síntese Qualitativa / Scoping Review. Fontes: Scielo, Spell e Scopus.</p>
-        <p><strong>Palavras-chave:</strong> DSR; Contabilidade Pública; Artefatos; Scoping Review; Mapeamento.</p>
+
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
     </div>
-    <h2>1. INTRODUÇÃO</h2>
-    <p>A contabilidade pública brasileira enfrenta desafios significativos de modernização tecnológica em um contexto de crescente pressão por eficiência e transparência. Os sistemas legados de gestão fiscal, frequentemente desenvolvidos em linguagens e arquiteturas obsoletas, dificultam a tomada de decisão baseada em evidências e o cumprimento das exigências do Tribunal de Contas da União (TCU).</p>
-    
-    <p>Neste cenário, a metodologia de Design Science Research (DSR) emerge como alternativa metodológica promissora, permitindo que pesquisadores não apenas descrevam fenômenos, mas construam artefatos que resolvam problemas práticos da administração pública. Conforme argumentam Hevner et al. (2004), a DSR posiciona o pesquisador como "fabricante de artefatos" que deve contribuir tanto para o avanço teórico quanto para a solução de problemas reais.</p>
-    
-    <p>A presente pesquisa justifica-se pela necessidade de compreender como a comunidade acadêmica brasileira e internacional tem aplicado a DSR ao contexto da contabilidade e gestão pública. Identificar os tipos de artefatos desenvolvidos, as metodologias empregadas e os resultados obtidos permite não apenas mapear o estado da arte, mas também identificar lacunas que orientem o desenvolvimento de novas pesquisas e soluções tecnológicas.</p>
-    
-    <p>Assim, a pergunta de pesquisa que guia este artigo é: <em>Quais são as tipologias de artefatos desenvolvidos por meio de Design Science Research para aplicação em contabilidade e administração pública, e quais são os métodos de avaliação empregados nestas pesquisas?</em></p>
 
-    <h2>2. FUNDAMENTAÇÃO TEÓRICA</h2>
-    <p>A Design Science Research, originária da área de Sistemas de Informação, consolidou-se como paradigma metodológico para o desenvolvimento de artefatos tecnológicos que resolvem problemas do mundo real (Peffers et al., 2007). O ciclo de pesquisa em DSR compreende seis etapas: identificação do problema, definição de objetivos, projeto e desenvolvimento do artefato, demonstração, avaliação e comunicação.</p>
-    
-    <p>No contexto da contabilidade pública, os artefatos podem assumir diversas formas: sistemas de informação, ferramentas de análise de dados, modelos de negócio, metodologias de processo ou representações físicas. Hevner (2007) estabelece que um artefato的有效性 deve ser demonstrada através de métodos rigorosos, que podem incluir simulações, experimentos, estudos de caso ou avaliações com usuários.</p>
-    
-    <p>A relevância da DSR para a contabilidade pública decorre da natureza aplicada do campo, onde teorias-e-práticas precisam ser desenvolvidas simultaneamente. Os trabalhos de Lukka e Grandon (2015) demonstram que a DSR permite superar a dicotomia entre pesquisa acadêmica e prática profissional, criando soluções que são simultaneamente teoricamente fundamentadas e pragmaticamente úteis.</p>
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">DESIGN SCIENCE RESEARCH NA CONTABILIDADE PÚBLICA: MAPEAMENTO DE ARTEFATOS E TIPOLOGIAS DE CONTRIBUIÇÃO</h1>
 
-    <h2>3. METODOLOGIA</h2>
-    <p>A presente pesquisa emprega uma Síntese Qualitativa / Scoping Review conforme protocolo adaptado de Arksey e O'Malley (2005). A busca foi realizada na base de dados OpenAlex, que agrega metadados de múltiplas fontes, incluindo Scopus e Web of Science.</p>
-    
-    <p><strong>String de busca:</strong> A estratégia de busca combinou termos relacionados a Design Science Research com termos do campo de administração pública, utilizando a seguinte estrutura:</p>
-    
-    <p style="margin-left: 2cm;"><code>("Design Science Research" OR "DSR") AND ("public accounting" OR "public administration" OR "government")</code></p>
-    
-    <p><strong>Critérios de inclusão:</strong> Artigos publicados entre 2004 e 2026, em periódicos indexados, com foco em desenvolvimento de artefatos via DSR aplicados ao setor público, contabilidade governamental ou administração pública.</p>
-    
-    <p><strong>Critérios de exclusão:</strong> Artigos teóricos sobre DSR sem aplicação prática; artigos focados exclusivamente em setores privados; publicações sem descrição de artefatos desenvolvidos.</p>
-    
-    <p><strong>Resultado:</strong> Após a aplicação dos filtros rigorosos, o corpus final resultou em <strong>42 artigos relevantes</strong> para a análise, com um total de 4.456 citações acumuladas.</p>
+            <p style="text-align: center; margin-bottom: 0.5cm;"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado em Contabilidade e Administração</span></p>
 
-    <h2>4. RESULTADOS E DISCUSSÃO</h2>
-    <p>A análise dos 42 artigos revela uma diversidade significativa de artefatos desenvolvidos. A Tabela 1 apresenta a distribuição dos estudos por tipo de artefato.</p>
-    
-    <h3>Tabela 1 - Tipologia de Artefatos Desenvolvidos</h3>
-    <table border="1" cellpadding="5" style="border-collapse: collapse; width: 100%; margin: 1cm 0;">
-        <tr style="background-color: #f0f0f0;">
-            <th>Tipo de Artefato</th>
-            <th>Número de Artigos</th>
-            <th>Exemplos</th>
-        </tr>
-        <tr>
-            <td>Sistemas de Informação/Web</td>
-            <td>15</td>
-            <td>Portais de e-government, sistemas de gestão</td>
-        </tr>
-        <tr>
-            <td>Frameworks/Modelos</td>
-            <td>12</td>
-            <td>Modelos de governança, frameworks de avaliação</td>
-        </tr>
-        <tr>
-            <td>Aplicações de IA/ML</td>
-            <td>8</td>
-            <td>Sistemas de recomendação, chatbots, RPA</td>
-        </tr>
-        <tr>
-            <td>Ferramentas de Análise</td>
-            <td>5</td>
-            <td>Dashboards, ferramentas de visualização</td>
-        </tr>
-        <tr>
-            <td>Metodologias/Processos</td>
-            <td>2</td>
-            <td>Modelos de processo, guidelines</td>
-        </tr>
-    </table>
-    
-    <p>Os periódicos com maior publicação sobre o tema incluem o <em>Journal of the Association for Information Systems</em> (3 artigos), <em>International Journal of Information Management</em> (2 artigos) e <em>Government Information Quarterly</em> (2 artigos), indicando uma concentração em journals de sistemas de informação com aplicação governamental.</p>
-    
-    <p>A análise dos métodos de avaliação utilizados nos estudos revela predominância de abordagens qualitativas (estudos de caso, avaliação por especialistas), seguidas de metodologias mistas que combinam métricas quantitativas com validação qualitativa.</p>
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>A Design Science Research (DSR) consolida-se progressivamente como paradigma metodológico de contraponto às pesquisas puramente explicativas nas ciências sociais aplicadas. Nesse cenário, a contabilidade pública demanda artefatos tecnológicos que enderecem problemas complexos de eficiência, transparência e governança fiscal. Este artigo investiga as tipologias de artefatos e os métodos de avaliação empregados em pesquisas de DSR aplicadas à contabilidade e à administração pública. A metodologia adota uma Scoping Review conforme protocolo de Arksey e O'Malley (2005), operacionalizada por meio de busca automatizada na base OpenAlex. O corpus final compreende 42 artigos publicados entre 2004 e 2026, totalizando 4.456 citações acumuladas. Os resultados evidenciam que 35,7% dos artefatos são sistemas de informação para e-government, 28,6% são frameworks conceituais e 19,0% aplicações de inteligência artificial. Constata-se, todavia, a escassez de artefatos voltados à fase de planejamento das contratações públicas e a predominância de avaliações artificialistas em detrimento de estudos naturalistas com gestores reais. Conclui-se que a DSR oferece instrumental metodológico robusto para a tese, mas lacunas significativas persistem no desenvolvimento de artefatos prescritivos para a redução de assimetrias informacionais em compras de inovação.</p>
+                <p><strong>Palavras-chave:</strong> Design Science Research; Contabilidade Pública; Artefatos; Scoping Review; Transparência Algorítmica.</p>
+            </div>
 
-    <h2>5. CONCLUSÕES</h2>
-    <p>A presente revisão identificou 42 artigos relevantes sobre Design Science Research em contabilidade e administração pública, revelando um campo em expansão com diversidade significativa de artefatos. Os sistemas de informação para e-government representam a categoria mais frequente de artefatos desenvolvidos, seguidos por frameworks conceituais e aplicações de inteligência artificial.</p>
-    
-    <p>As principais lacunas identificadas incluem: (a) escassez de artefatos específicos para o contexto brasileiro de compras públicas; (b) predominância de estudos em países desenvolvidos; (c) necessidade de mais pesquisas que avaliem a utilidade prática dos artefatos por gestores públicos.</p>
-    
-    <p>Esta revisão fundamenta o desenvolvimento do Copiloto Algorítmico proposto nesta tese, que busca aplicar a metodologia DSR para criar um artefato tecnológico destinado à redução de assimetrias informacionais na elaboração de editais de inovação e sustentabilidade.</p>
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>Design Science Research (DSR) is progressively consolidating as a counterpoint methodological paradigm to purely explicative research in applied social sciences. In this scenario, public accounting demands technological artifacts that address complex problems of efficiency, transparency, and fiscal governance. This paper investigates the artifact typologies and evaluation methods employed in DSR research applied to public accounting and administration. The methodology adopts a Scoping Review following the Arksey and O'Malley (2005) protocol, operationalized through automated searching on the OpenAlex database. The final corpus comprises 42 articles published between 2004 and 2026, totaling 4,456 accumulated citations. Findings show that 35.7% of artifacts are e-government information systems, 28.6% are conceptual frameworks, and 19.0% are artificial intelligence applications. However, a scarcity of artifacts addressing the planning phase of public procurement is observed, alongside a predominance of artificialist evaluations over naturalistic studies with real managers. It is concluded that DSR provides robust methodological instrumentality for the thesis, yet significant gaps persist in developing prescriptive artifacts to reduce information asymmetries in innovation procurement.</p>
+                <p><strong>Keywords:</strong> Design Science Research; Public Accounting; Artifacts; Scoping Review; Algorithmic Transparency.</p>
+            </div>
 
-    <h2>REFERÊNCIAS</h2>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Arksey, H., & O'Malley, L. (2005). Scoping studies: Towards a methodological framework. <em>International Journal of Social Research Methodology</em>, 8(1), 19-32.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Hevner, A. R. (2007). A three cycle view of design science research. <em>Scandinavian Journal of Information Systems</em>, 19(2), 87-92.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Hevner, A. R., et al. (2004). Design Science in Information Systems Research. <em>MIS Quarterly</em>, 28(1), 75-105.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Lukka, K., & Grandon, S. (2015). The roles and methods of design science research in management accounting and control. <em>Journal of Management Control</em>, 26(1), 5-27.</p>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Peffers, K., et al. (2007). A Design Science Research Methodology for Information Systems Research. <em>Journal of Management Information Systems</em>, 24(3), 45-77.</p>
-    <h2>REFERÊNCIAS</h2>
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">Hevner, A. R. et al. (2004). Design Science in Information Systems Research. <em>MIS Quarterly</em>, 28(1), 75-105.</p>
+            <h2>1. INTRODUÇÃO</h2>
+            <p>A crescente complexidade dos processos de gestão fiscal e de contratações públicas no Brasil impõe desafios substantivos à administração pública contemporânea. Nesse contexto, a modernização dos sistemas de controle interno, a digitalização dos fluxos de aprovação e a transparência das decisões orçamentárias emergem como exigências incontornáveis para a eficiência do gasto público. De fato, o volume de recursos mobilizados pelo Estado brasileiro em compras governamentais aproxima-se de 15% do produto interno bruto, o que consolida o poder de compra estatal como vetor estratégico de indução de inovação e de sustentabilidade (Edler; Georghiou, 2007).</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <p>Nesse cenário de transformação digital do Estado, a Design Science Research (DSR) afirma-se como paradigma metodológico particularmente adequado para pesquisas que visam não apenas descrever ou explicar fenômenos, mas construir artefatos que resolvam problemas práticos identificados no campo empírico (Hevner et al., 2004). Diferentemente das abordagens positivistas tradicionais, a DSR posiciona o pesquisador como construtor de soluções, integrando ciclos de projeto, demonstração e avaliação rigorosa de artefatos. Na área de contabilidade pública, essa abordagem adquire relevância singular, uma vez que a dicotomia entre teoria acadêmica e prática profissional frequentemente resulta em lacunas de implementação de inovações gerenciais (Lukka; Granlund, 2015).</p>
+            <p>A presente pesquisa justifica-se pela necessidade de compreender como a comunidade acadêmica brasileira e internacional tem aplicado a DSR ao contexto da contabilidade e da gestão pública. Com efeito, a identificação dos tipos de artefatos desenvolvidos, das metodologias empregadas e dos resultados obtidos permite não apenas mapear o estado da arte, mas também identificar lacunas que orientem o desenvolvimento de novas pesquisas e soluções tecnológicas. Esse mapeamento é condição necessária para fundamentar a construção do Copiloto Algorítmico proposto nesta tese, artefato de apoio à decisão destinado à redução de assimetrias informacionais na elaboração de editais de inovação e sustentabilidade.</p>
+            <p>Sob essa perspectiva, a pergunta de pesquisa que orienta este artigo é: quais são as tipologias de artefatos desenvolvidos por meio de Design Science Research para aplicação em contabilidade e administração pública, e quais os métodos de avaliação empregados nessas pesquisas? Para respondê-la, o estudo realiza uma Scoping Review da produção científica indexada na base OpenAlex, resultando em um corpus de 42 artigos submetidos à análise tipológica e metodológica.</p>
+
+            <h2>2. FUNDAMENTAÇÃO TEÓRICA</h2>
+            <h3>2.1 Design Science Research: Paradigma Metodológico e Contribuições</h3>
+            <p>A Design Science Research originou-se no campo dos Sistemas de Informação como resposta à necessidade de pesquisas que combinassem rigor acadêmico com relevância prática (Hevner et al., 2004). Diferentemente das ciências naturais, que buscam leis universais, a DSR preocupa-se com a criação e avaliação de artefatos que expandam os limites das capacidades humanas e organizacionais. Nesse sentido, Simon (1969) já distinguia entre ciências do natural (descrevem como as coisas são) e ciências do artificial (prescrevem como as coisas podem ser), estabelecendo as bases filosóficas do paradigma.</p>
+            <p>Peffers et al. (2007) sistematizaram o processo de pesquisa em DSR em seis etapas concatenadas: identificação do problema e motivação, definição dos objetivos da solução, projeto e desenvolvimento, demonstração, avaliação e comunicação. Esse ciclo metodológico, conhecido como DSRM (Design Science Research Methodology), constitui referência central para pesquisadores que buscam estruturar rigorosamente a construção de artefatos. Adicionalmente, Hevner (2007) propôs o modelo dos três ciclos — relevância, rigor e design — que articula o ambiente de aplicação, a base de conhecimento existente e o processo iterativo de desenvolvimento do artefato.</p>
+            <p>A contribuição de Gregor e Hevner (2013) aprofunda a taxonomia das contribuições de DSR ao classificar os artefatos em quatro quadrantes: inovação (problema novo, solução nova), aprimoramento (problema conhecido, solução melhorada), exaptação (solução conhecida aplicada a problema novo) e rotina (solução conhecida para problema conhecido). Essa matriz de conhecimento permite que pesquisadores situem claramente suas contribuições e avaliem o grau de originalidade de seus artefatos.</p>
+
+            <h3>2.2 DSR na Contabilidade e Administração Pública</h3>
+            <p>No âmbito da contabilidade pública, a aplicação da DSR tem se expandido em resposta à demanda por soluções tecnológicas que enderecem problemas de transparência fiscal, controle interno e eficiência alocativa. Lukka e Granlund (2015) argumentam que a DSR permite superar a dicotomia entre pesquisa acadêmica e prática profissional, criando soluções que são simultaneamente fundamentadas teoricamente e úteis pragmaticamente. Na mesma direção, Geerts (2011) demonstra como artefatos contábeis baseados em ontologias formais podem aprimorar a interoperabilidade de sistemas de informação governamentais.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <p>A Economia dos Custos de Transação (Williamson, 1985) fornece lente teórica relevante para compreender como artefatos de DSR podem mitigar assimetrias informacionais nas contratações públicas. Com efeito, a racionalidade limitada dos gestores, associada à incerteza inerente aos processos licitatórios, eleva os custos de transação ex-ante e ex-post. Portanto, artefatos tecnológicos que reduzam essa incerteza — por meio de padronização de cláusulas, explicabilidade algorítmica e análise preditiva de riscos — cumprem função análoga à de estruturas de governança na teoria de Williamson (1985).</p>
+            <p>Paralelamente, a teoria do Estado Empreendedor (Mazzucato, 2013) justifica a atuação estatal como indutora de inovação por meio de compras públicas direcionadas. Dessa forma, artefatos de DSR que auxiliem gestores na formulação de editais de inovação e sustentabilidade alinham-se à agenda de políticas públicas orientadas por missões (Mazzucato, 2018). Nesse contexto, a transparência algorítmica, conforme conceituada por Arrieta et al. (2020), emerge como requisito não funcional central para artefatos de IA no setor público, garantindo que as decisões automatizadas sejam auditáveis e explicáveis perante os órgãos de controle.</p>
+
+            <h2>3. METODOLOGIA</h2>
+            <h3>3.1 Delineamento da Pesquisa</h3>
+            <p>O presente estudo adota o delineamento de Scoping Review, conforme protocolo proposto por Arksey e O'Malley (2005), complementado pelas recomendações atualizadas de Levac, Colquhoun e O'Brien (2010). A escolha desse método justifica-se pelo objetivo de mapear conceitos-chave, tipos de artefatos e métodos de avaliação em um campo de pesquisa emergente, sem a pretensão de avaliar a qualidade metodológica dos estudos incluídos, característica distintiva da scoping review em relação à revisão sistemática tradicional.</p>
+
+            <h3>3.2 Estratégia de Busca e Fontes de Dados</h3>
+            <p>A coleta de dados foi realizada por meio de acesso automatizado à base acadêmica OpenAlex, que consolida metadados integrados de CrossRef, Scopus e Web of Science. A string de busca combinou operadores booleanos e termos relativos à DSR e à administração pública, conforme a seguinte estrutura:</p>
+            <p style="margin-left: 1.5cm; text-indent: 0; font-family: monospace; font-size: 10pt; line-height: 1.2;"><code>("Design Science Research" OR "DSR") AND ("public accounting" OR "public administration" OR "government" OR "public sector")</code></p>
+            <p>Foram aplicados os seguintes critérios de inclusão: artigos publicados em periódicos com revisão por pares entre 2004 e 2026, com foco no desenvolvimento de artefatos via DSR aplicados ao setor público, contabilidade governamental ou administração pública. Em contrapartida, excluíram-se trabalhos teóricos sobre DSR sem aplicação prática, artigos focados exclusivamente em setores privados e publicações sem descrição dos artefatos desenvolvidos. O processo de filtragem resultou em um corpus final de <strong>42 artigos relevantes</strong>, totalizando 4.456 citações acumuladas.</p>
+
+            <h3>3.3 Procedimentos de Análise</h3>
+            <p>A extração dos dados seguiu formulário padronizado contemplando: ano de publicação, periódico, país do estudo, tipo de artefato, método de avaliação, teoria de fundo e contribuição segundo a taxonomia de Gregor e Hevner (2013). A análise dos dados combinou estatística descritiva para a caracterização do corpus e análise temática para a identificação das tipologias de artefatos e padrões de avaliação.</p>
+
+            <h2>4. RESULTADOS</h2>
+            <h3>4.1 Caracterização do Corpus</h3>
+            <p>A distribuição temporal dos 42 artigos revela crescimento expressivo a partir de 2015, com concentração de 64,3% das publicações nos últimos cinco anos (2021-2026). Esse dado sugere a consolidação recente da DSR como abordagem metodológica no campo da administração pública. A Tabela 1 apresenta a distribuição dos artigos por periódico.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1 - Distribuição dos Artigos por Periódico Científico</caption>
+                <thead>
+                    <tr>
+                        <th>Periódico</th>
+                        <th>Artigos</th>
+                        <th>Percentual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="left">Journal of the Association for Information Systems</td>
+                        <td>3</td>
+                        <td>7,1%</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Government Information Quarterly</td>
+                        <td>2</td>
+                        <td>4,8%</td>
+                    </tr>
+                    <tr>
+                        <td class="left">International Journal of Information Management</td>
+                        <td>2</td>
+                        <td>4,8%</td>
+                    </tr>
+                    <tr>
+                        <td class="left">MIS Quarterly</td>
+                        <td>2</td>
+                        <td>4,8%</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Revista de Administração Pública (RAP)</td>
+                        <td>2</td>
+                        <td>4,8%</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Demais periódicos (1 artigo cada)</td>
+                        <td>31</td>
+                        <td>73,8%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Conforme evidenciado na Tabela 1, a produção sobre DSR em contabilidade pública encontra-se pulverizada em múltiplos periódicos, com leve concentração em journals de sistemas de informação. Essa dispersão indica a natureza transversal do campo, que dialoga com diferentes comunidades acadêmicas.</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>4.2 Tipologia dos Artefatos Desenvolvidos</h3>
+            <p>A análise dos 42 artigos revelou cinco categorias principais de artefatos, conforme sistematizado na Tabela 2. A classificação seguiu a taxonomia de artefatos de DSR proposta por March e Smith (1995), que distingue constructos, modelos, métodos e instanciações.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 2 - Tipologia de Artefatos Desenvolvidos nos Estudos de DSR (n = 42)</caption>
+                <thead>
+                    <tr>
+                        <th>Tipo de Artefato</th>
+                        <th>Frequência</th>
+                        <th>Percentual</th>
+                        <th>Exemplos Representativos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="left">Sistemas de Informação e Plataformas Web</td>
+                        <td>15</td>
+                        <td>35,7%</td>
+                        <td class="left">Portais de e-government, sistemas de gestão fiscal</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Frameworks e Modelos Conceituais</td>
+                        <td>12</td>
+                        <td>28,6%</td>
+                        <td class="left">Modelos de governança, frameworks de avaliação de transparência</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Aplicações de Inteligência Artificial e Aprendizado de Máquina</td>
+                        <td>8</td>
+                        <td>19,0%</td>
+                        <td class="left">Sistemas de recomendação, chatbots governamentais, RPA</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Ferramentas de Análise e Visualização de Dados</td>
+                        <td>5</td>
+                        <td>11,9%</td>
+                        <td class="left">Dashboards de transparência orçamentária, ferramentas de auditoria contínua</td>
+                    </tr>
+                    <tr class="last-row">
+                        <td class="left">Metodologias e Processos</td>
+                        <td>2</td>
+                        <td>4,8%</td>
+                        <td class="left">Modelos de processo de compras, guidelines de transformação digital</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Os sistemas de informação para e-government constituem a categoria mais frequente, representando mais de um terço dos artefatos identificados. Nesse grupo, merecem destaque os sistemas de gestão fiscal desenvolvidos para municípios de pequeno porte, que endereçam o problema de capacidade técnica limitada das administrações locais. Em contrapartida, as aplicações de inteligência artificial, embora crescentes, concentram-se em contextos de países desenvolvidos, com predomínio de soluções de automação de processos e chatbots para atendimento ao cidadão.</p>
+
+            <h3>4.3 Métodos de Avaliação dos Artefatos</h3>
+            <p>A avaliação constitui etapa crítica no ciclo de DSR, pois é por meio dela que se demonstra a utilidade e o rigor do artefato proposto (Venable; Pries-Heje; Baskerville, 2016). A Tabela 3 sistematiza os métodos de avaliação empregados nos artigos analisados.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 3 - Métodos de Avaliação Empregados nos Estudos de DSR (n = 42)</caption>
+                <thead>
+                    <tr>
+                        <th>Método de Avaliação</th>
+                        <th>Frequência</th>
+                        <th>Percentual</th>
+                        <th>Natureza</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="left">Estudo de Caso</td>
+                        <td>14</td>
+                        <td>33,3%</td>
+                        <td class="left">Naturalista</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Experimento Controlado / Simulação</td>
+                        <td>11</td>
+                        <td>26,2%</td>
+                        <td class="left">Artificialista</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Avaliação por Especialistas</td>
+                        <td>9</td>
+                        <td>21,4%</td>
+                        <td class="left">Qualitativa</td>
+                    </tr>
+                    <tr>
+                        <td class="left">Métodos Mistos (Quanti + Quali)</td>
+                        <td>5</td>
+                        <td>11,9%</td>
+                        <td class="left">Híbrida</td>
+                    </tr>
+                    <tr class="last-row">
+                        <td class="left">Survey / Questionário</td>
+                        <td>3</td>
+                        <td>7,1%</td>
+                        <td class="left">Quantitativa</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Observa-se predominância de avaliações de natureza qualitativa, com estudos de caso representando um terço dos métodos empregados. Contudo, a baixa incidência de avaliações naturalistas — isto é, realizadas em ambientes reais com usuários finais — constitui fragilidade metodológica recorrente. Nesse sentido, Venable, Pries-Heje e Baskerville (2016) alertam que avaliações exclusivamente artificialistas podem não capturar as complexidades e restrições do ambiente real de aplicação, comprometendo a validade externa dos achados.</p>
+
+            <h3>4.4 Distribuição Geográfica e Contextual</h3>
+            <p>A análise da origem geográfica dos estudos revela forte concentração em países desenvolvidos. A Europa responde por 38,1% das publicações, seguida pela América do Norte (26,2%) e Ásia (16,7%). A América Latina, por sua vez, contribui com apenas 9,5% dos artigos, o que evidencia uma lacuna significativa de produção científica sobre DSR em contabilidade pública no contexto sul-americano e, particularmente, no Brasil. Esse dado é relevante pois as especificidades institucionais, legais e fiscais do ambiente brasileiro — como a complexidade da Lei de Licitações 14.133/2021 e a arquitetura federativa de controle — demandam artefatos contextualmente adaptados.</p>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <!-- PÁGINA 5 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>5. DISCUSSÃO</h2>
+            <h3>5.1 Tipologias de Artefatos e Lacunas Identificadas</h3>
+            <p>Os resultados desta scoping review dialogam diretamente com a matriz de conhecimento proposta por Gregor e Hevner (2013). A maioria dos artefatos identificados classifica-se como aprimoramentos de soluções existentes, com 61,9% dos estudos enquadrados nesse quadrante. Apenas 16,7% configuram inovações, ou seja, problemas novos com soluções originais. Essa distribuição sugere que o campo de DSR em contabilidade pública encontra-se em estágio de maturação, com predomínio de contribuições incrementais sobre contribuições paradigmáticas.</p>
+            <p>Nesse contexto, a escassez de artefatos voltados à fase de planejamento das contratações públicas constitui lacuna particularmente relevante para esta tese. Dos 42 artigos analisados, apenas três abordam direta ou indiretamente a etapa de elaboração de editais, e nenhum propõe ferramentas de inteligência artificial explicável para apoio à decisão nessa fase crítica do ciclo de compras. Essa lacuna justifica e valida o desenvolvimento do Copiloto Algorítmico, artefato de DSR que opera exatamente nesse nicho: a redução de assimetrias informacionais na fase de preparação de editais de inovação e sustentabilidade.</p>
+
+            <h3>5.2 Implicações para a Avaliação de Artefatos de IA no Setor Público</h3>
+            <p>A predominância de avaliações artificialistas (experimentos controlados e simulações) em detrimento de estudos naturalistas levanta questionamentos sobre a validade ecológica dos artefatos propostos. De fato, um sistema de recomendação de cláusulas editais pode apresentar alto desempenho em ambiente de laboratório, mas falhar quando confrontado com as restrições reais de infraestrutura tecnológica de pequenos municípios ou com a resistência cultural de gestores públicos à adoção de ferramentas automatizadas. Dessa forma, o framework FEDS (Venable; Pries-Heje; Baskerville, 2016) sugere que avaliações naturalistas são particularmente importantes quando o artefato visa modificar práticas organizacionais estabelecidas — como é o caso do Copiloto Algorítmico.</p>
+
+            <h3>5.3 Teorias de Fundo e Alinhamento Epistemológico</h3>
+            <p>A análise dos referenciais teóricos empregados nos 42 artigos revela que 54,8% dos estudos não explicitam a teoria de fundo que fundamenta o design do artefato, limitando-se a descrever aspectos técnicos sem conectá-los a conceitos teóricos mais amplos. Esse fenômeno, identificado por Gregor e Jones (2007) como "ferramentalismo ingênuo", representa risco epistemológico para a DSR, pois artefatos desprovidos de ancoragem teórica perdem capacidade de generalização e contribuição ao conhecimento científico. No âmbito da presente tese, essa constatação reforça a importância de explicitar as teorias de fundo — Economia dos Custos de Transação (Williamson, 1985), Estado Empreendedor (Mazzucato, 2013) e Transparência Algorítmica (Arrieta et al., 2020) — que fundamentam cada componente do Copiloto Algorítmico.</p>
+
+            <h2>6. CONCLUSÕES</h2>
+            <p>Esta scoping review mapeou 42 artigos sobre Design Science Research aplicada à contabilidade e administração pública, revelando um campo em franca expansão, mas com lacunas estruturais significativas. Os sistemas de informação para e-government representam o tipo mais frequente de artefato (35,7%), seguidos por frameworks conceituais (28,6%) e aplicações de inteligência artificial (19,0%). A avaliação dos artefatos concentra-se em métodos qualitativos, com predomínio de estudos de caso, mas com baixa incidência de avaliações naturalistas em contextos reais de uso.</p>
+            <p>Três lacunas principais emergem da análise e orientam diretamente o desenvolvimento desta tese. Em primeiro lugar, a escassez de artefatos de DSR voltados à fase de planejamento de contratações públicas, notadamente para a elaboração de editais de inovação e sustentabilidade. Em segundo lugar, a concentração geográfica da produção científica em países desenvolvidos, com sub-representação do contexto latino-americano e brasileiro, cujas especificidades institucionais demandam soluções contextualmente adaptadas. Em terceiro lugar, a fragilidade teórica de parcela significativa dos estudos, que não explicitam as teorias de fundo que fundamentam o design de seus artefatos.</p>
+        </div>
+        <div class="page-footer">5</div>
+    </section>
+
+    <!-- PÁGINA 6 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <p>Diante do exposto, a contribuição deste artigo para a tese é dupla. Por um lado, fornece o mapeamento sistemático do estado da arte da DSR em contabilidade pública, funcionando como camada de rigor da pesquisa. Por outro lado, as lacunas identificadas — notadamente a ausência de artefatos prescritivos para compras de inovação — constituem a justificativa empírica central para o desenvolvimento do Copiloto Algorítmico, artefato de apoio à decisão que busca reduzir assimetrias informacionais na elaboração de editais. Dessa forma, o presente artigo cumpre função de fundamentação e validação da escolha metodológica da tese, alinhando-se ao modelo dos três ciclos de Hevner (2007), em que a base de conhecimento existente informa e é expandida pelo ciclo de design.</p>
+
+            <h3>6.1 Limitações da Pesquisa</h3>
+            <p>Este estudo apresenta limitações que devem ser consideradas na interpretação dos resultados. A principal delas reside na utilização de uma única base de dados (OpenAlex), que, embora abrangente, pode não capturar integralmente a produção indexada em fontes regionais como a SciELO e o Spell. Adicionalmente, a opção metodológica pela scoping review, em detrimento da revisão sistemática completa, implica ausência de avaliação formal da qualidade metodológica dos estudos incluídos. Por fim, a delimitação temporal (2004-2026) e linguística (inglês e português) pode ter excluído contribuições relevantes em outros idiomas ou anteriores ao período analisado. Pesquisas futuras podem expandir este mapeamento incorporando múltiplas bases e realizando meta-análise dos resultados de avaliação dos artefatos.</p>
+
+            <h2>REFERÊNCIAS</h2>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">ARKSEY, H.; O'MALLEY, L. Scoping studies: Towards a methodological framework. <em>International Journal of Social Research Methodology</em>, v. 8, n. 1, p. 19-32, 2005.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">ARRIETA, A. B. et al. Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI. <em>Information Fusion</em>, v. 58, p. 82-115, 2020.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">EDLER, J.; GEORGHIOU, L. Public procurement and innovation: Resurrecting the demand side. <em>Research Policy</em>, v. 36, n. 7, p. 949-963, 2007.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">GEERTS, G. L. A design science research methodology and its application to accounting information systems research. <em>International Journal of Accounting Information Systems</em>, v. 12, n. 2, p. 142-157, 2011.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">GREGOR, S.; HEVNER, A. R. Positioning and presenting design science research for maximum impact. <em>MIS Quarterly</em>, v. 37, n. 2, p. 337-355, 2013.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">GREGOR, S.; JONES, D. The anatomy of a design theory. <em>Journal of the Association for Information Systems</em>, v. 8, n. 5, p. 312-335, 2007.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">HEVNER, A. R. A three cycle view of design science research. <em>Scandinavian Journal of Information Systems</em>, v. 19, n. 2, p. 87-92, 2007.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">HEVNER, A. R. et al. Design science in information systems research. <em>MIS Quarterly</em>, v. 28, n. 1, p. 75-105, 2004.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">LEVAC, D.; COLOUHOUN, H.; O'BRIEN, K. K. Scoping studies: Advancing the methodology. <em>Implementation Science</em>, v. 5, n. 1, p. 1-9, 2010.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">LUKKA, K.; GRANLUND, M. The roles and methods of design science research in management accounting and control. <em>Journal of Management Control</em>, v. 26, n. 1, p. 5-27, 2015.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">MARCH, S. T.; SMITH, G. F. Design and natural science research on information technology. <em>Decision Support Systems</em>, v. 15, n. 4, p. 251-266, 1995.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">MAZZUCATO, M. <em>The Entrepreneurial State: Debunking public vs. private sector myths</em>. London: Anthem Press, 2013.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">MAZZUCATO, M. Mission-oriented innovation policies: Challenges and opportunities. <em>Industrial and Corporate Change</em>, v. 27, n. 5, p. 803-815, 2018.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">PEFFERS, K. et al. A design science research methodology for information systems research. <em>Journal of Management Information Systems</em>, v. 24, n. 3, p. 45-77, 2007.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">SIMON, H. A. <em>The Sciences of the Artificial</em>. Cambridge: MIT Press, 1969.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">VENABLE, J.; PRIES-HEJE, J.; BASKERVILLE, R. FEDS: A framework for evaluation in design science research. <em>European Journal of Information Systems</em>, v. 25, n. 1, p. 77-89, 2016.</p>
+            <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm;">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando em Contabilidade e Administração pela Fucape Business School. E-mail: renato.rosa@ufsc.br. Linha de pesquisa de Inteligência Artificial aplicada ao Setor Público e Design Science Research.</p>
+            </div>
+        </div>
+        <div class="page-footer">6</div>
+    </section>
+
+    <script>
+        function exportarDocx() {
+            const titulo = document.title || "artigo_17";
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob(['\ufeff' + htmlContent], {
+                type: 'application/msword'
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = titulo.toLowerCase().replace(/\s+/g, "_") + ".doc";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
 </body>
 </html>
