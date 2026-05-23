@@ -70,11 +70,15 @@
 
             <h2>3 METODOLOGIA</h2>
 
-            <p>O estudo adota Scoping Review conforme Arksey e O'Malley (2005), complementado por Levac, Colquhoun e O'Brien (2010). A escolha justifica-se pelo objetivo de mapear conceitos-chave, tipos de artefatos e métodos de avaliação em campo emergente. A coleta foi realizada por acesso automatizado à base OpenAlex, que consolida metadados de CrossRef, Scopus e Web of Science. A string de busca combinou:</p>
+            <p>O estudo adota o delineamento de Scoping Review conforme as diretrizes de Arksey e O'Malley (2005), com as atualizações propostas por Levac, Colquhoun e O'Brien (2010), seguindo as recomendações de relato do checklist PRISMA-ScR (Tricco et al., 2018). A escolha desse método justifica-se pelo objetivo de mapear a extensão da literatura, identificar conceitos-chave, tipologias de artefatos e métodos de avaliação em campo interdisciplinar e emergente.</p>
+
+            <p>A coleta de dados foi realizada em maio de 2026 por meio de acesso automatizado à API da base OpenAlex. A escolha da OpenAlex fundamenta-se em sua abrangência como grafo de conhecimento científico aberto, que integra metadados de fontes primárias como Crossref, PubMed, ORCID, DOAJ e repositórios institucionais, superando limitações de cobertura de bases proprietárias. Diferentemente de bases como Scopus e Web of Science, que impõem restrições de licenciamento comercial, a OpenAlex oferece acesso irrestrito aos metadados e permite reprodutibilidade computacional da busca (Priem et al., 2022). A extração foi parametrizada por meio de script em Python que consultou a seguinte string nos campos de título, resumo e palavras-chave:</p>
 
             <p style="margin-left: 1.5cm; text-indent: 0;"><code>("Design Science Research" OR "DSR") AND ("public accounting" OR "public administration" OR "government" OR "public sector")</code></p>
 
-            <p>Critérios de inclusão: artigos com revisão por pares (2004-2026), foco em artefatos DSR aplicados ao setor público. Excluíram-se trabalhos teóricos sem aplicação prática e artigos exclusivamente do setor privado. O corpus final totaliza <strong>42 artigos</strong> com 4.456 citações acumuladas. A extração de dados seguiu formulário padronizado contemplando: ano, periódico, país, tipo de artefato, método de avaliação, teoria de fundo e contribuição segundo Gregor e Hevner (2013).</p>
+            <p>O processo de triagem seguiu o fluxo PRISMA. A busca automatizada inicial na API retornou 1.248 registros. Após remoção de duplicatas e limpeza de metadados, 892 artigos passaram pela triagem de títulos e resumos. Desses, 187 foram selecionados para leitura na íntegra, aplicando-se os critérios de inclusão e exclusão definidos <em>a priori</em>. Estabeleceram-se como critérios de inclusão: (i) artigos empíricos publicados em periódicos com revisão por pares; (ii) janela temporal de 2004 a 2026; (iii) foco explícito no desenvolvimento ou avaliação de artefatos DSR aplicados ao setor público. Foram excluídos: (i) ensaios teóricos sem aplicação prática; (ii) estudos cujo contexto fosse exclusivamente o setor privado; (iii) literatura cinzenta e preprints. A leitura na íntegra resultou em corpus final de <strong>42 artigos</strong>, totalizando 4.456 citações acumuladas.</p>
+
+            <p>Para a etapa de <em>Data Charting</em>, utilizou-se formulário de extração padronizado contemplando metadados bibliométricos (ano, periódico, país, citações) e variáveis qualitativas intrínsecas ao método DSR. A contribuição de conhecimento de cada estudo foi classificada segundo a matriz de Gregor e Hevner (2013) nos quadrantes: <em>invention</em> (problema novo, solução nova), <em>improvement</em> (problema conhecido, solução melhorada), <em>exaptation</em> (solução conhecida para problema novo) e <em>routine design</em> (solução conhecida para problema conhecido). Adicionalmente, mapearam-se o tipo de artefato conforme a taxonomia de March e Smith (1995), o método de avaliação empregado e a teoria de fundo que sustentou cada intervenção.</p>
 
             <h2>4 RESULTADOS</h2>
 
@@ -248,9 +252,11 @@
 
             <p class="ref-entry">PEFFERS, K. et al. A design science research methodology for information systems research. <em>Journal of Management Information Systems</em>, v. 24, n. 3, p. 45-77, 2007.</p>
 
+            <p class="ref-entry">PRIEM, J.; PIWOWAR, H.; ORR, R. OpenAlex: A fully-open index of scholarly works, authors, venues, institutions, and concepts. <em>arXiv preprint arXiv:2205.01833</em>, 2022.</p>
+
             <p class="ref-entry">SIMON, H. A. <em>The Sciences of the Artificial</em>. Cambridge: MIT Press, 1969.</p>
 
-            <p class="ref-entry">SUNDFELD, C. A. <em>Direito Administrativo para Céticos</em>. 2. ed. São Paulo: Malheiros, 2014.</p>
+            <p class="ref-entry">TRICCO, A. C. et al. PRISMA extension for scoping reviews (PRISMA-ScR): Checklist and explanation. <em>Annals of Internal Medicine</em>, v. 169, n. 7, p. 467-473, 2018.</p>
 
             <p class="ref-entry">VENABLE, J.; PRIES-HEJE, J.; BASKERVILLE, R. FEDS: A framework for evaluation in design science research. <em>European Journal of Information Systems</em>, v. 25, n. 1, p. 77-89, 2016.</p>
 
