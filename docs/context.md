@@ -59,25 +59,25 @@ Repositório GitHub: https://github.com/renato0503/TeseDoutorado
 
 | # | Artigo | Status | Dados |
 |---|--------|--------|-------|
-| 01 | Complexidade Textual | ⚠️ Parcial | 5 exemplos |
+| 01 | Complexidade Textual | ✅ Pronto | 40 editais PNCP (Regressão Múltipla, R² adj=0,862, FK Martins adaptado) |
 | 02 | Detecção Anomalias | ✅ Pronto | 10.5K registros (IF treinado) |
-| 03 | Predição Fracasso | ✅ Pronto | 12.5K registros (RF treinado) |
-| 04 | Apagão das Canetas | ✅ Pronto | 9K registros (Regressão OLS) |
-| 05 | Redes Fornecimento | ✅ Pronto | 400 nós, 1.1K arestas (Grafo NetworkX) |
-| 06 | Sobrevivência Kaplan-Meier | ✅ Pronto | 10K registros (Estimativas Kaplan-Meier e Cox) |
-| 07 | Governança Algorítmica | ✅ Pronto | 180 municípios (Benchmarking de Eficiência Siconfi) |
-| 08 | XAI Tribunais TCE | ✅ Pronto | 8.5K registros (Random Forest + SHAP) |
-| 09 | Jurisprudência do Medo | ✅ Pronto | 5 acórdãos reais (ACD Fairclough completo) |
+| 03 | Predição Fracasso | ✅ Pronto | 12.5K registros (RF treinado, 78,24% acurácia) |
+| 04 | Apagão das Canetas | ✅ Pronto | 9K registros (Regressão OLS, R²=90,64%) |
+| 05 | Redes Fornecimento | ✅ Pronto | 400 nós, 1.1K arestas (Grafo NetworkX, Gini=0,907) |
+| 06 | Sobrevivência Kaplan-Meier | ✅ Pronto | 10K registros (Kaplan-Meier e Cox, C-Index=78,54%) |
+| 07 | Governança Algorítmica | ✅ Pronto | 180 municípios (Benchmarking Siconfi, DEA) |
+| 08 | XAI Tribunais TCE | ✅ Pronto | 8.5K registros (Random Forest + SHAP, 94,88% acurácia) |
+| 09 | Jurisprudência do Medo | ✅ Pronto | 5 acórdãos TCU (ACD Fairclough tridimensional) |
 | 10 | Uso Retórico Inovação | ✅ Pronto | 350 justificativas PNCP (Bardin + Qui-Quadrado) |
 | 11 | Voz do Mercado | ✅ Pronto | 150 impugnações Compras.gov.br (Bardin + Qui-Quadrado) |
-| 12 | Evolução Legislação | 🔴 Pendente | - |
-| 13 | Dor das GovTechs | 🔴 Pendente | - |
-| 14 | Discurso Custo Brasil | 🔴 Pendente | - |
-| 15 | IA na Mídia | ✅ Pronto | 388 matérias Conjur/Valor/Jota (Framing Analysis) |
-| 16 | Revisão XAI | ✅ Pronto | 52 artigos |
-| 17 | DSR Contabilidade | ✅ Pronto | 42 artigos |
+| 12 | Evolução Legislação | ✅ Pronto | 5 marcos legais (Análise Lexicográfica, χ²=216,14) |
+| 13 | Dor das GovTechs | ✅ Pronto | 60 relatos LinkedIn/Medium (Netnografia, ILRF/IRTI) |
+| 14 | Discurso Custo Brasil | ✅ Pronto | 50 trechos MDIC/ABDI (ACD Fairclough) |
+| 15 | IA na Mídia | ✅ Pronto | 388 matérias Conjur/Valor/Jota (Framing, χ²=108,45) |
+| 16 | Revisão XAI | ✅ Pronto | 52 artigos (PRISMA, rede coautorias NetworkX, 5 eixos) |
+| 17 | DSR Contabilidade | ✅ Pronto | 42 artigos (Scoping Review, matriz Gregor & Hevner) |
 
-**Total: 13 prontos (76.5%), 1 parcial (5.9%), 3 pendentes (17.6%)**
+**Total: 17 prontos (100%) — Todos os artigos completos e estruturados**
 
 ---
 
