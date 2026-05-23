@@ -8,11 +8,11 @@
 
 **Aluno:** Renato de Oliveira Rosa
 
-**Programa:** PPGCont - Universidade Federal de Santa Catarina
-
 **Orientador:** Prof. Dr. Olavo Venturim Caldas
 
 **Instituição:** Fucape Business School - Vitória/ES
+
+**Padrão de Formatação:** APA 7ª Edição (unificado para todos os artigos)
 
 ---
 
@@ -24,78 +24,85 @@ Doutorado/
 │   └── tese_draft.html          # Draft da tese em formato multipaper
 │
 ├── Artigos/
-│   ├── 01-Opacidade-Institucional-Analise-Complexidade-Textual-Editais-Inovacao/
-│   │   └── artigo_01.html
-│   ├── 02-Auditoria-Continua-Deteccao-Anomalias-Precos/
-│   │   └── artigo_02.html
-│   ├── 03-Predicao-Fracasso-Risco-Aditivos-Cancelamentos/
-│   │   └── artigo_03.html
-│   ├── 04-Apagao-Canetas-Quantificado-Latencia-Decisoria/
-│   │   └── artigo_04.html
-│   ├── 05-Redes-Fornecimento-Oligopolios-Analise-Grafos/
-│   │   └── artigo_05.html
-│   ├── 06-Sobrevivencia-Contratos-Inovacao-Analise-Kaplan-Meier/
-│   │   └── artigo_06.html
-│   ├── 07-Governanca-Algoritmica-Benchmarking-Eficiencia/
-│   │   └── artigo_07.html
-│   ├── 08-XAI-Setor-Publico-Prova-Conceito-Tribunais-Contas/
-│   │   └── artigo_08.html
-│   ├── 09-Jurisprudencia-Medo-Analise-Discurso-Acordaos/
-│   │   └── artigo_09.html
-│   ├── 10-Uso-Retorico-Inovacao-Analise-Conteudo-Justificativas/
-│   │   └── artigo_10.html
-│   ├── 11-Voz-Mercado-Analise-Impugnacoes-Editais-Tecnologia/
-│   │   └── artigo_11.html
-│   ├── 12-Evolucao-Risco-Legislacao-Compras-8.666-Marco-Startups/
-│   │   └── artigo_12.html
-│   ├── 13-Dor-GovTechs-Netnografia-Ecosistema-Inovacao-Publica/
-│   │   └── artigo_13.html
-│   ├── 14-Discurso-Custo-Brasil-Politica-Industrial-Narrativas-Pratica/
-│   │   └── artigo_14.html
-│   ├── 15-Enquadramento-IA-Controle-Publico-Midia/
-│   │   └── artigo_15.html
-│   ├── 16-Caixa-Preta-Setor-Publico-Revisao-Sistematica-XAI-Gestao-Publica/
-│   │   └── artigo_16.html
-│   └── 17-DSR-Contabilidade-Publica-Mapeamento-Artefatos/
-│       └── artigo_17.html
+│   ├── 01-Opacidade-Institucional/
+│   ├── 02-Auditoria-Continua/
+│   ├── 03-Predicao-Fracasso/
+│   ├── 04-Apagao-Canetas/
+│   ├── 05-Redes-Fornecimento/
+│   ├── 06-Sobrevivencia-Contratos/
+│   ├── 07-Governanca-Algoritmica/
+│   ├── 08-XAI-Tribunais-Contas/
+│   ├── 09-Jurisprudencia-Medo/
+│   ├── 10-Uso-Retorico-Inovacao/
+│   ├── 11-Voz-Mercado/
+│   ├── 12-Evolucao-Risco-Legislacao/
+│   ├── 13-Dor-GovTechs/
+│   ├── 14-Discurso-Custo-Brasil/
+│   ├── 15-Enquadramento-IA-Midia/
+│   ├── 16-Caixa-Preta-XAI/
+│   └── 17-DSR-Contabilidade/
 │
-├── Direcionamento.md            # Documento de direcionamento da pesquisa
-├── escrita.md                   # Guia de escrita acadêmica
-├── pesquisa.md                  # Guia de pesquisa e APIs
-├── estrategia_paper.md          # Estratégia de geração de artigos
-└── processo.md                  # Padrões de engenharia de software
+├── css/
+│   └── style_academico.css      # CSS unificado APA
+│
+├── docs/
+│   ├── Direcionamento.md        # Documento de direcionamento
+│   ├── escrita.md               # Guia de escrita APA
+│   ├── regras_tabelas.md       # Regras de tabelas APA
+│   ├── pesquisa.md              # Guia de pesquisa e APIs
+│   └── processo.md              # Padrões de engenharia
+│
+└── Base_de_Dados_e_APIs/         # Dados e scripts
 ```
+
+---
+
+## Padrão APA 7ª Edição
+
+Todos os artigos seguem o **padrão APA 7ª edição** conforme documento `docs/escrita.md`.
+
+### Elementos Principais
+
+| Elemento | Especificação |
+|----------|---------------|
+| Fonte | Times New Roman 12pt |
+| Espaçamento | Duplo |
+| Margens | 2,54 cm em todos os lados |
+| Recuo de parágrafo | 1,27 cm (0,5 polegada) |
+| Alinhamento | À esquerda |
+| Citações | Sistema autor-data |
+| Referências | Recuo francês (hanging indent) |
 
 ---
 
 ## Frente Quantitativa (8 artigos)
 
-| # | Artigo | Metodologia | Fonte de Dados |
-|---|--------|-------------|----------------|
-| 1 | Opacidade Institucional | NLP - Legibilidade | API PNCP |
-| 2 | Auditoria Contínua | ML - Detecção anomalias | Portal Transparência |
-| 3 | Predição de Fracasso | ML - Classificação | PNCP + Transparência |
-| 4 | Apagão das Canetas | Séries Temporais | API TCU + Compras.gov |
-| 5 | Redes de Fornecimento | Teoria Grafos | CNPJs + PNCP |
-| 6 | Sobrevivência Contratos | Kaplan-Meier | Portal Transparência |
-| 7 | Governança Algorítmica | DSR + Benchmarking | Siconfi |
-| 8 | XAI Tribunais de Contas | SHAP | Dados TCU |
+| # | Artigo | Metodologia | Status |
+|---|--------|-------------|--------|
+| 1 | Opacidade Institucional | NLP - Legibilidade | ✅ |
+| 2 | Auditoria Contínua | ML - Detecção anomalias | ✅ |
+| 3 | Predição de Fracasso | ML - Classificação | ✅ |
+| 4 | Apagão das Canetas | Séries Temporais | ✅ |
+| 5 | Redes de Fornecimento | Teoria Grafos | ✅ |
+| 6 | Sobrevivência Contratos | Kaplan-Meier | ✅ |
+| 7 | Governança Algorítmica | DSR + Benchmarking | ✅ |
+| 8 | XAI Tribunais de Contas | SHAP | ✅ |
 
 ---
 
 ## Frente Qualitativa (9 artigos)
 
-| # | Artigo | Metodologia | Fonte de Dados |
-|---|--------|-------------|----------------|
-| 9 | Jurisprudência do Medo | ACD | API TCU |
-| 10 | Uso Retórico Inovação | Análise Conteúdo | Termos Referência PNCP |
-| 11 | Voz do Mercado | Análise Impugnações | Compras.gov.br |
-| 12 | Evolução Risco Legislação | Análise Diacrônica | LexML |
-| 13 | Dor das GovTechs | Netnografia | LinkedIn + Medium |
-| 14 | Discurso Custo Brasil | ACD | Relatórios MDIC |
-| 15 | IA na Mídia | Framing Analysis | NewsAPI |
-| 16 | Caixa-Preta Setor Público | Revisão Sistemática | Scopus + WoS |
-| 17 | DSR Contabilidade Pública | Scoping Review | Scielo + Spell |
+| # | Artigo | Metodologia | Status |
+|---|--------|-------------|--------|
+| 9 | Jurisprudência do Medo | ACD | ✅ |
+| 10 | Uso Retórico Inovação | Análise Conteúdo | ✅ |
+| 11 | Voz do Mercado | Análise Impugnações | ✅ |
+| 12 | Evolução Risco Legislação | Análise Diacrônica | 🔄 |
+| 13 | Dor das GovTechs | Netnografia | 🔄 |
+| 14 | Discurso Custo Brasil | ACD | 🔄 |
+| 15 | IA na Mídia | Framing Analysis | ✅ |
+| 16 | Caixa-Preta Setor Público | Revisão Sistemática | ✅ |
+| 17 | DSR Contabilidade Pública | Scoping Review | ✅ |
 
 ---
 
@@ -103,26 +110,15 @@ Doutorado/
 
 **URL:** https://github.com/renato0503/TeseDoutorado
 
-**GitHub Pages:** https://renato0503.github.io/TeseDoutorado/
-
----
-
-## Cronograma Estimado
-
-- **Ano 1:** Revisão de literatura + Desenvolvimento biblioteca de dados
-- **Ano 2:** Desenvolvimento do artefato + Artigos quantitativos
-- **Ano 3:** Validação Delphi + Artigos qualitativos
-- **Ano 4:** Defesa da tese
-
 ---
 
 ## Referências Principais
 
 ### Teóricas
-- Economia dos Custos de Transação (Williamson)
-- Estado Empreendedor (Mazzucato)
-- Transparência Algorítmica (Arrieta et al.)
-- Design Science Research (Hevner et al., Peffers et al.)
+- Economia dos Custos de Transação (Williamson, 1985)
+- Estado Empreendedor (Mazzucato, 2013)
+- Transparência Algorítmica (Arrieta et al., 2020)
+- Design Science Research (Hevner et al., 2004; Peffers et al., 2007)
 
 ### Metodológicas
 - Revisão Sistemática (PRISMA)
@@ -138,135 +134,55 @@ Doutorado/
 
 ---
 
-## Arquitetura de Extração de Dados
+## Estrutura CSS Unificada
 
-### Estrutura de Diretórios
+O arquivo `css/style_academico.css` fornece:
 
-```
-Base_de_Dados_e_APIs/
-├── Raw_Data/                          # Dados brutos extraídos
-│   ├── Artefato_Copiloto/            # Dados para o Copiloto Algorítmico
-│   │   ├── editais_json/             # Editais de inovação/TI/sustentabilidade
-│   │   ├── contratos_json/           # Contratos processados
-│   │   └──预处理/                    # Dados pré-processados para IA
-│   │
-│   ├── Artigos_Quanti/               # Dados para artigos quantitativos
-│   │   ├── Artigo_01_Opacidade/     # Complexidade textual (PNCP)
-│   │   ├── Artigo_02_Auditoria/      # Detecção anomalias (Portal Transparência)
-│   │   ├── Artigo_03_Predicao/       # Predição fracasso (PNCP + Transparência)
-│   │   ├── Artigo_04_Apagao/         # Latência decisória (TCU)
-│   │   ├── Artigo_05_Redes/          # Redes fornecimento (CNPJs)
-│   │   ├── Artigo_06_Sobrevivencia/  # Análise sobrevivência (Transparência)
-│   │   ├── Artigo_07_Governanca/      # Benchmarking (Siconfi)
-│   │   └── Artigo_08_XAI/            # Explicabilidade SHAP (TCU)
-│   │
-│   ├── Artigos_Quali/                # Dados para artigos qualitativos
-│   │   ├── Artigo_09_Jurisprudencia/ # Acórdãos TCU
-│   │   ├── Artigo_10_Retorico/       # Justificativas PNCP
-│   │   ├── Artigo_11_Mercado/        # Impugnações Compras.gov
-│   │   ├── Artigo_12_Legislacao/      # LexML + Planalto
-│   │   ├── Artigo_13_GovTechs/        # LinkedIn + Medium
-│   │   ├── Artigo_14_Custo_Brasil/   # Relatórios MDIC
-│   │   └── Artigo_15_Midia/           # NewsAPI
-│   │
-│   └── Revisao_Sistematica/           # Dados para revisão sistemática
-│       ├── artigos_xai_gestao_publica.json
-│       ├── referencias_revisao.bib
-│       └── analise_bibliometrica.csv
-│
-├── Scripts_Extracao/                  # Códigos de consumo de API
-│   ├── extrator_pncp.py              # Cliente Python para PNCP ✓
-│   ├── extrator_academico.py         # Extrator acadêmico ✓
-│   ├── extrator_transparencia.py     # Portal Transparência
-│   ├── extrator_tcu.py               # Jurisprudência TCU
-│   └── pipeline.py                   # Pipeline de ETL completo
-│
-└── README.md                          # Documentação técnica
-```
-Base_de_Dados_e_APIs/
-├── Raw_Data/                    # Dados brutos extraídos
-│   ├── editais_json/           # Editais em formato JSON
-│   ├── contratos_json/         # Contratos em formato JSON
-│   └── preprocessamento/      # Dados processados antes do treinamento
-│
-├── Scripts_Extracao/            # Códigos de consumo de API
-│   ├── pncp_client.py          # Cliente Python para PNCP
-│   ├── transparencia_client.py # Cliente para Portal Transparência
-│   └── pipeline.py             # Pipeline de ETL completo
-│
-└── README.md                    # Documentação técnica
+1. **Visualização em tela**: Páginas simuladas A4 com margens
+2. **Impressão**: PDF formatado corretamente
+3. **Exportação**: HTML para abrir no Word
+
+### Classes Principais
+
+| Classe | Uso |
+|--------|-----|
+| `.paper-page` | Container de página simulada |
+| `.abstract-box` | Box de Resumo/Abstract |
+| `.abnt-table` | Tabela formatada APA |
+| `.figure-container` | Container de figura/gráfico |
+| `.control-panel` | Botões de exportação (não impresso) |
+| `.ref-entry` | Entrada de referência bibliográfica |
+
+---
+
+## Exportação para Word
+
+### Método Recomendado
+
+1. Clique em **"Imprimir / Salvar PDF"** para obter PDF formatado
+2. Ou use **"Baixar HTML (abrir no Word)"** e abra o arquivo no Microsoft Word
+3. No Word, use "Salvar como" → "Documento Word (.docx)"
+
+### Script de Exportação
+
+```html
+<script>
+function exportarHTML() {
+    const htmlContent = document.documentElement.outerHTML;
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = document.title + '.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+</script>
 ```
 
-### Endpoints Principais
+---
 
-#### PNCP (Portal Nacional de Contratações Públicas)
-| Endpoint | Método | Descrição |
-|----------|--------|------------|
-| `/api/v1/orgaos` | GET | Lista órgãos cadastrados |
-| `/api/v1/contratacoes` | GET | Busca editais por filtros |
-| `/api/v1/contratacoes/{id}` | GET | Detalhes de contratação |
-| `/api/v1/fornecedores` | GET | Busca fornecedores |
-
-#### Portal da Transparência
-| Endpoint | Método | Descrição |
-|----------|--------|------------|
-| `/api/v1/contratos` | GET | Lista contratos |
-| `/api/v1/empenhos` | GET | Lista empenhos |
-| `/api/v1/fornecedores/{cpf-cnpj}` | GET | Dados fornecedor |
-
-### Dicionário de Dados (Campos para Alimentação da IA)
-
-| Campo | Tipo | Descrição | Prioridade |
-|-------|------|-----------|------------|
-| `numero_edital` | string | Número único do edital | Alta |
-| `objeto` | text | Descrição do objeto da contratação | Alta |
-| `modalidade` | string | Pregão, RDC, etc. | Alta |
-| `valor_estimado` | decimal | Valor estimado da contratação | Alta |
-| `data_publicacao` | date | Data de publicação no DOU | Alta |
-| `unidade_compradora` | string | Nome do órgão comprador | Alta |
-| `cnpj_unidade` | string | CNPJ da unidade | Alta |
-| `regime_contratual` | string | Lei 8.666, Pregão, etc. | Média |
-| `criterio_julgamento` | string | Menor preço, técnica e preço | Média |
-| `prazo_execucao` | integer | Prazo em meses | Média |
-| `garantia` | string | Tipo de garantia exigida | Baixa |
-| `anexos` | array | Links para arquivos PDF | Alta |
-| `categorias` | array | Tags: inovação, TI, sustentabilidade | Alta |
-| `clausulas_especificas` | text | Cláusulas especiais identificadas | Alta |
-| `fornecedores_participantes` | array | CNPJ/CPF participantes | Média |
-| `resultado` | string | Fracassado, Homologado, etc. | Média |
-
-### Pipeline de Extração
-
-```
-1. Coleta (Extract)
-   ├─ API PNCP → JSON editais
-   ├─ API Transparência → JSON contratos
-   └─ Web Scraping → PDFs de anexos (se necessário)
-
-2. Transformação (Transform)
-   ├─ Limpeza de texto (normalização)
-   ├─ Extração de entidades (NER)
-   ├─ Classificação de categoria (inovação/TI/sustentabilidade)
-   └─ Identificação de cláusulas específicas
-
-3. Carregamento (Load)
-   ├─ Armazenamento em JSON estruturado
-   ├─ Indexação para busca vetorial
-   └─ Exportação para treinamento do modelo
-```
-
-### Tecnologias Recomendadas
-
-- **Linguagem:** Python 3.10+
-- **Bibliotecas:** requests, pandas, BeautifulSoup4, spacy
-- **Armazenamento:** JSON local + vector database (opcional)
-- **Orquestração:** Apache Airflow ou Prefect (para pipelines)
-
-### Status de Implementação
-
-- [ ] Registro no PNCP para API Key
-- [ ] Desenvolvimento cliente Python
-- [ ] Teste de endpoints
-- [ ] Extração de amostra (100 editais)
-- [ ] Validação de estrutura de dados
-- [ ] Indexação para Copiloto
+*Última atualização: Maio 2026*
+*Padrão: APA 7ª Edição*

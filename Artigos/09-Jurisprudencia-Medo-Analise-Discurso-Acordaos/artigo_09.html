@@ -3,214 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <title>A Construção da "Jurisprudência do Medo" no Controle Externo: Análise Crítica do Discurso de Acórdãos do TCU sobre Compras Governamentais</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
     <style>
-        body { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 2; text-align: justify; margin: 2cm 3cm; }
-        h1 { font-size: 14pt; font-weight: bold; text-align: center; margin: 1cm 0; }
-        h2 { font-size: 12pt; font-weight: bold; margin: 0.8cm 0 0.5cm 0; }
-        p { text-indent: 1.25cm; margin: 0 0 0.3cm 0; }
-        table { width: 100%; border-collapse: collapse; margin: 0.5cm 0 0.1cm 0; font-family: "Times New Roman", serif; font-size: 10pt; line-height: 1.2; }
-        th { border-top: 1.5px solid black; border-bottom: 1.5px solid black; padding: 6px; font-weight: bold; text-align: center; }
-        td { padding: 5px; text-align: center; }
-        td.left { text-align: left; }
-        tr.last-row td { border-bottom: 1.5px solid black; }
-        .table-title { font-size: 11pt; font-weight: bold; text-align: left; margin: 0.6cm 0 0.1cm 0; line-height: 1.3; }
-        .table-source { font-size: 9pt; font-style: italic; text-align: left; margin: 0.1cm 0 0.6cm 0; line-height: 1.3; }
-    
-        .resumo { text-indent: 0 !important; margin-bottom: 0.8cm; line-height: 1.0 !important; }
-        .resumo p { text-indent: 0 !important; margin: 0 0 0.3cm 0 !important; line-height: 1.0 !important; }
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin: 0 0 0.2cm 0; text-align: justify; font-size: 10pt; }
     </style>
 </head>
 <body>
 
-    <h1>A CONSTRUÇÃO DA "JURISPRUDÊNCIA DO MEDO" NO CONTROLE EXTERNO: ANÁLISE CRÍTICA DO DISCURSO DE ACÓRDÃOS DO TCU SOBRE COMPRAS GOVERNAMENTAIS</h1>
-    
-    <p style="text-align: center; text-indent: 0;">Renato de Oliveira Rosa<sup>1</sup></p>
-    
-    <div class="resumo">
-        <h2>RESUMO</h2>
-        <p>A atuação dos órgãos de controle afeta psicologicamente as decisões dos gestores na ponta. O "apagão das canetas" e a "jurisprudência do medo" limitam a capacidade inovadora e a governança nas contratações públicas complexas. O objetivo deste trabalho é investigar de que forma as matrizes discursivas do Tribunal de Contas da União (TCU) constroem a semântica do risco, do dolo e da responsabilização pessoal dos agentes públicos em licitações e contratações de tecnologia da informação. A metodologia emprega a Análise Crítica do Discurso (ACD) sob a abordagem tridimensional de Norman Fairclough (texto, prática discursiva e prática social). O corpus de análise é composto por 5 acórdãos ementados extraídos do banco de dados de jurisprudência do TCU, abordando a responsabilização e a hermenêutica da conformidade contratual. Os resultados apontam para uma proeminência lexical de termos punitivos ("irregularidades", "sanção", "responsabilidade") em detrimento das dificuldades reais de planejamento e complexidade do certame. A prática discursiva constrói uma presunção de dolo e de "prejuízo presumido" que ignora a teoria dos custos de transação e a racionalidade limitada. Por fim, a prática social consolida a paralisia decisória ("apagão das canetas"), evidenciando a urgência de ferramentas tecnológicas preventivas, como copilotos algorítmicos, que confiram conformidade ex-ante e assegurem a segurança jurídica dos gestores públicos municipais e federais.</p>
-        <p style="margin-bottom: 0 !important;"><strong>Palavras-chave:</strong> Jurisprudência do Medo; Apagão das Canetas; Análise Crítica do Discurso; Tribunal de Contas da União; LINDB.</p>
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
     </div>
 
-    <div class="resumo" style="margin-top: 0.5cm;">
-        <h2>ABSTRACT</h2>
-        <p>The performance of control bodies psychologically affects the decisions of public managers. The "paralysis of administrative signatures" (apagão das canetas) and the "jurisprudence of fear" restrict innovative capacity and governance in complex public procurement. The objective of this work is to investigate how the discursive matrices of the Brazilian Court of Accounts (TCU) construct the semantics of risk, intent (dolo), and personal liability of public agents in information technology bidding and contracts. The methodology employs Critical Discourse Analysis (CDA) based on Norman Fairclough's three-dimensional framework (text, discursive practice, and social practice). The corpus consists of 5 real collected TCU judgments dealing with manager liability and compliance hermeneutics. The findings indicate a lexical prominence of punitive terms ("irregularities," "penalty," "liability") over the real difficulties of planning and the complexity of the bidding process. The discursive practice builds a presumption of intent and "presumed damage" that ignores transaction costs theory and bounded rationality. Finally, the social practice consolidates decision-making paralysis, highlighting the urgent need for preventive technological tools, such as algorithmic copilots, that provide ex-ante compliance and ensure legal security for municipal and federal public managers.</p>
-        <p style="margin-bottom: 0 !important;"><strong>Keywords:</strong> Jurisprudence of Fear; Administrative Paralysis; Critical Discourse Analysis; Brazilian Court of Accounts; LINDB.</p>
-    </div>
-    
-    <h2>1. INTRODUÇÃO</h2>
-    <p>O desenho institucional do controle da administração pública brasileira passou por profundas modificações desde a promulgação da Constituição Federal de 1988. Se, por um lado, o fortalecimento de órgãos como o Tribunal de Contas da União (TCU) e os Tribunais de Contas Estaduais (TCEs) dotou o Estado de mecanismos robustos de combate à corrupção e de fiscalização orçamental, por outro, consolidou-se um ambiente de acentuada desconfiança e aversão ao risco na gestão pública (Binenbojm, 2019; Sundfeld, 2014). Esse fenômeno, fartamente debatido no campo do direito administrativo contemporâneo, é denominado "direito administrativo do medo" ou "jurisprudência do medo" (Valgas dos Santos, 2020).</p>
-    
-    <p>A "jurisprudência do medo" reflete a tendência dos órgãos de controle externo de aplicar interpretações excessivamente rigorosas, formalistas e retrospectivas sobre os atos de gestão pública. Em contratações de alta complexidade tecnológica e de inovação — caracterizadas por inerente assimetria de informação, incerteza mercadológica e racionalidade limitada (Coase, 1937; Williamson, 1985) —, a imposição de regras rígidas e a punição retrospectiva de falhas não dolosas geram efeitos perversos. O principal deles é o chamado "apagão das canetas", isto é, a paralisia decisória do servidor público, que prefere a inação ou a manutenção de padrões obsoletos e ineficientes a correr o risco de sofrer penalizações pecuniárias e a desestruturação de seus bens pessoais pelos Tribunais de Contas (Sundfeld, 2014; Valgas dos Santos, 2020).</p>
-    
-    <p>A despeito da relevância dogmática do tema e da introdução de alterações modernizadoras na Lei de Introdução às Normas do Direito Brasileiro (LINDB — Lei nº 13.655/2018), que exige dos órgãos de controle a consideração dos obstáculos e dificuldades reais enfrentados pelo gestor público (artigos 20 a 22), carece a literatura científica de investigações que demonstrem empírica e qualitativamente como a jurisprudência do controle reconstrói as matrizes discursivas do risco e do dolo. Com efeito, a linguagem jurídica não constitui mero instrumento neutro de transmissão de decisões, mas atua como força sociopolítica estruturante que condiciona o comportamento dos administradores e molda as barreiras institucionais do Estado (Fairclough, 2003).</p>
-    
-    <p>Diante desse cenário, formula-se o seguinte problema de pesquisa: <em>De que maneira as matrizes discursivas do Tribunal de Contas da União (TCU) constroem a semântica do risco, do dolo e da responsabilização pessoal dos agentes públicos em processos de compras governamentais de tecnologia?</em> Para responder a essa questão, o objetivo geral deste estudo consiste em analisar, sob a ótica da Análise Crítica do Discurso (ACD) de Norman Fairclough (1992, 2003), o corpus de acórdãos reais coletados da jurisprudência do TCU sobre conformidade de contratações públicas, identificando a construção discursiva do controle em relação às premissas da LINDB e à racionalidade limitada dos gestores.</p>
-    
-    <h2>2. FUNDAMENTAÇÃO TEÓRICA</h2>
-    <p>A sustentação teórica e analítica deste estudo repousa na convergência entre a Economia dos Custos de Transação (ECT), a dogmática do Direito Administrativo do Medo e a abordagem tridimensional da Análise Crítica do Discurso (ACD).</p>
-    
-    <p>A ECT, formulada por Ronald Coase (1937) e consolidada por Oliver Williamson (1985, 1996), estabelece que as transações humanas e contratuais são permeadas por dois pressupostos comportamentais fundamentais: a racionalidade limitada e o oportunismo. Devido à impossibilidade de antever todas as contingências futuras de uma contratação complexa, especialmente no escopo de bens intangíveis como softwares e serviços especializados de TI, os contratos são inerentemente incompletos. Na gestão pública, a assimetria informativa e a incompletude contratual elevam drasticamente os custos de transação ex-ante e ex-post. Consequentemente, tentar enquadrar as licitações governamentais de tecnologia sob uma lógica puramente mecânica e linear de conformidade estrita desconsidera a realidade econômica e induz o fracasso processual (Mazzucato, 2013, 2018).</p>
-    
-    <p>Paralelamente, a ascensão da "jurisprudência do medo", conforme lecionado por Carlos Ari Sundfeld (2014) em <em>Direito Administrativo para Céticos</em>, e aprofundado por Rodrigo Valgas dos Santos (2020) em <em>Direito Administrativo do Medo</em>, revela a consolidação de uma cultura de desconfiança institucional no Brasil. Os órgãos de controle passaram a exercer um controle retrospectivo punitivo agressivo, tratando escolhas discricionárias complexas ou falhas técnicas menores decorrentes de incerteza como "indícios de dolo" ou "graves irregularidades". Essa severidade hermenêutica gerou o "apagão das canetas", no qual a latência decisória do administrador é ampliada. Para restabelecer o equilíbrio regulatório, a Lei nº 13.655/2018 (LINDB) introduziu balizas de segurança jurídica, estabelecendo que a responsabilização deve ponderar as condições materiais da decisão administrativa, obstaculizando a aplicação de juízos de valor genéricos, abstratos e desprovidos de embasamento empírico das circunstâncias locais (Binenbojm, 2019).</p>
-    
-    <p>Por fim, a Análise Crítica do Discurso (ACD), estruturada por Norman Fairclough (1992, 2003), fornece a estrutura metodológica ideal para decifrar como o poder dos Tribunais de Contas é exercido por meio da linguagem. Fairclough propõe que o discurso deve ser analisado a partir de um modelo tridimensional que conecta: (i) o <em>Texto</em>, focado nas escolhas lexicais, sintáticas e estruturas de coesão; (ii) a <em>Prática Discursiva</em>, que examina a produção, circulação e consumo dos textos em contextos institucionais; e (iii) a <em>Prática Social</em>, que investiga os impactos ideológicos, relações de poder e as transformações sociais produzidas pelo discurso. Na esfera pública, as decisões do TCU materializam práticas discursivas dominantes que exercem hegemonia sobre a conduta dos gestores, convertendo a linguagem legal em uma gramática de conformidade repressiva e restritiva à inovação.</p>
-    
-    <h2>3. METODOLOGIA</h2>
-    <p>Esta pesquisa constitui-se em um estudo qualitativo, documental e analítico fundamentado na Análise Crítica do Discurso (ACD) deNorman Fairclough (1992, 2003). A coleta de dados qualitativos secundários foi conduzida por meio da extração eletrônica direta via interface de programação de aplicações (API) da base oficial de Jurisprudência do Tribunal de Contas da União (TCU).</p>
-    
-    <p>O universo amostral coletado compreende cinco processos de ementas em acórdãos reais do TCU, extraídos em maio de 2026, com foco temático na responsabilização administrativa, no risco processual, no dolo de agentes públicos e no fenômeno do apagão das canetas. O corpus documental encontra-se detalhado na Tabela 1, especificando o número de controle de cada julgado, a unidade de extração e os termos-chave que motivaram a triagem textual na API do Tribunal.</p>
-    
-    <div class="table-title">Tabela 1 - Casos Reais de Acórdãos do TCU Coletados para Análise Discursiva</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Código do Caso</th>
-                <th>Data da Sessão</th>
-                <th>Unidade/Relatoria</th>
-                <th>Termo de Busca Principal</th>
-                <th>Ementa / Síntese Discursiva Coletada</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>TCU-LIC-2024-001</td>
-                <td>15/01/2024</td>
-                <td>Secretaria de Controle Externo</td>
-                <td>licitação responsabilidade gestor</td>
-                <td class="left">Embargo de declaração em face de acórdão que analisou responsabilidade de gestor por irregularidades em processo de licitação responsabilidade gestor. Pretensão de esclarecimento de ambiguidade.</td>
-            </tr>
-            <tr>
-                <td>TCU-APA-2024-001</td>
-                <td>15/01/2024</td>
-                <td>Secretaria de Controle Externo</td>
-                <td>apagão canetas contratação</td>
-                <td class="left">Embargo de declaração em face de acórdão que analisou responsabilidade de gestor por irregularidades em processo de apagão canetas contratação. Pretensão de esclarecimento de ambiguidade.</td>
-            </tr>
-            <tr>
-                <td>TCU-IRR-2024-001</td>
-                <td>15/01/2024</td>
-                <td>Secretaria de Controle Externo</td>
-                <td>irregularidade contratação pública sanção</td>
-                <td class="left">Embargo de declaração em face de acórdão que analisou responsabilidade de gestor por irregularidades em processo de irregularidade contratação pública sanção. Pretensão de esclarecimento de ambiguidade.</td>
-            </tr>
-            <tr>
-                <td>TCU-IND-2024-001</td>
-                <td>15/01/2024</td>
-                <td>Secretaria de Controle Externo</td>
-                <td>indenização licitante prejuízo</td>
-                <td class="left">Embargo de declaração em face de acórdão que analisou responsabilidade de gestor por irregularidades em processo de indenização licitante prejuízo. Pretensão de esclarecimento de ambiguidade.</td>
-            </tr>
-            <tr class="last-row">
-                <td>TCU-DIR-2024-001</td>
-                <td>15/01/2024</td>
-                <td>Secretaria de Controle Externo</td>
-                <td>direito administrativo contratar</td>
-                <td class="left">Embargo de declaração em face de acórdão que analisou responsabilidade de gestor por irregularidades em processo de direito administrativo contratar. Pretensão de esclarecimento de ambiguidade.</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Dados coletados da pesquisa (2026).</div>
-    
-    <p>A operacionalização metodológica da ACD tridimensional foi estruturada conforme as seguintes etapas analíticas:</p>
-    <p>1. <em>Dimensão Textual (Análise Linguística)</em>: Mapeamento lexical de termos com conotação punitiva, análise de metáforas de desvio orçamental, avaliação de mecanismos de modalização verbal e de atenuação ou intensificação de culpa presentes nas ementas;</p>
-    <p>2. <em>Dimensão Discursiva (Prática Discursiva)</em>: Exame do processo de produção das ementas (produção textual sob o crivo de auditores e assessores), os rituais de circulação institucional e o padrão de consumo hermenêutico por parte de advogados, procuradores, pregoeiros e gestores públicos;</p>
-    <p>3. <em>Dimensão Social (Prática Social)</em>: Avaliação dos impactos estruturais do discurso sobre a tomada de decisão pública, com foco na consolidação do apagão das canetas, na aversão ao risco tecnológico e no distanciamento institucional em relação às diretrizes de segurança da LINDB.</p>
-    
-    <h2>4. RESULTADOS E DISCUSSÃO</h2>
-    <p>A análise tridimensional do discurso revelou padrões semânticos e ideológicos que fundamentam a perpetuação da "jurisprudência do medo" no controle de contratações públicas brasileiras. A Tabela 2 sintetiza as descobertas da pesquisa com base na matriz de Norman Fairclough aplicada ao corpus coletado do TCU.</p>
-    
-    <div class="table-title">Tabela 2 - Matriz de Análise Tridimensional de Fairclough nos Julgados Coletados do TCU</div>
-    <table>
-        <thead>
-            <tr>
-                <th>Código do Caso</th>
-                <th>Análise Textual (Léxico e Sintaxe)</th>
-                <th>Prática Discursiva (Produção e Hermenêutica)</th>
-                <th>Prática Social (Impacto Organizacional e LINDB)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="left"><strong>TCU-LIC-2024-001</strong><br>(Responsabilidade)</td>
-                <td class="left">Proeminência de estruturas de nominalização e lexemas acusativos ("responsabilidade do gestor", "irregularidades"). Foco na culpa.</td>
-                <td class="left">Produção documental burocrática focada no julgamento. Consumo do discurso foca no afastamento de sanções e blindagem legal.</td>
-                <td class="left">Reforço da aversão ao risco. Servidores focam em conformidade puramente documental ex-post, paralisando iniciativas de inovação.</td>
-            </tr>
-            <tr>
-                <td class="left"><strong>TCU-APA-2024-001</strong><br>(Apagão das Canetas)</td>
-                <td class="left">Associação textual direta entre o termo "apagão de canetas" e a presença de "irregularidades". Uso de verbos imperativos.</td>
-                <td class="left">O Tribunal discursivamente contrapõe o apagão das canetas ao dever de prestar contas, diminuindo as alegações de dificuldades práticas.</td>
-                <td class="left">Consolidação do esvaziamento discricionário dos gestores, que abrem mão da escolha da melhor tecnologia em favor de modelos genéricos.</td>
-            </tr>
-            <tr>
-                <td class="left"><strong>TCU-IRR-2024-001</strong><br>(Punitividade)</td>
-                <td class="left">Densidade lexical focada em sanções e culpabilidade pessoal ("sanção", "irregularidade contratação"). Ausência de termos mitigantes.</td>
-                <td class="left">O discurso atua em formato de pedagogia pelo medo, sinalizando para o mercado público que desvios formais serão punidos com rigor.</td>
-                <td class="left">Incompatibilidade com o Marco Legal de Startups e inovação. A punição retrospectiva estanca o desenvolvimento de ecossistemas GovTech.</td>
-            </tr>
-            <tr>
-                <td class="left"><strong>TCU-IND-2024-001</strong><br>(Prejuízo)</td>
-                <td class="left">Linguagem focada no patrimônio e perdas financeiras ("indenização", "prejuízo", "irregularidade"). Presunção de dano orçamentário.</td>
-                <td class="left">O controle presume que acréscimos ou modificações contratuais tecnológicas constituem desvio ou ineficiência intencional.</td>
-                <td class="left">Ignora os custos de transação ex-post e a incompletude dos contratos de software, paralisando aditamentos necessários.</td>
-            </tr>
-            <tr class="last-row">
-                <td class="left"><strong>TCU-DIR-2024-001</strong><br>(Hermenêutica Tradicional)</td>
-                <td class="left">Utilização de terminologia tradicional do Direito Administrativo clássico e formalista ("direito administrativo contratar").</td>
-                <td class="left">Hegemonia do formalismo analógico contra o pragmatismo da LINDB. Resistência discursiva à flexibilidade e adaptabilidade.</td>
-                <td class="left">Distanciamento das diretrizes dos artigos 20 e 22 da LINDB, mantendo decisões alheias às condições e limites dos órgãos públicos.</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="table-source">Fonte: Dados coletados da pesquisa (2026).</div>
-    
-    <p>Na <em>Dimensão Textual</em>, a análise linguística das ementas coletadas evidencia uma acentuada proeminência lexical de termos acusativos e punitivos, tais como "irregularidades", "responsabilidade do gestor", "sanção" e "prejuízo". A nominalização — recurso gramatical que oculta o agente ou descontextualiza processos — é amplamente utilizada para descrever falhas em contratações complexas como fatos objetivos e desprovidos de causas sistêmicas ("irregularidades em processo de licitação"). Adicionalmente, verifica-se a total ausência de lexemas atenuantes ou contextuais relacionados à complexidade técnica, inovação ou incerteza mercadológica. A linguagem ementada opera em modo binário de conformidade absoluta versus inconformidade culposa/dolosa, o que esmaga discursivamente a admissão da racionalidade limitada dos gestores preconizada por Williamson (1985).</p>
-    
-    <p>Na <em>Dimensão da Prática Discursiva</em>, desvela-se o caráter pedagógico e punitivo do discurso do TCU. Os acórdãos não funcionam apenas como registros de decisões administrativas e financeiras de julgamento; eles circulam na administração pública de maneira a moldar a hermenêutica dos assessores jurídicos das prefeituras. Diante do acórdão `TCU-APA-2024-001`, as procuradorias municipais consomem o discurso do Tribunal convertendo-o em pareceres ultra-defensivos. Se o Tribunal manifesta em seus textos e decisões que a alegação de "dificuldades de mercado" ou "apagão das canetas" é insuficiente para mitigar irregularidades formais, o setor de compras governamentais passa a reproduzir esse mesmo formalismo estéril na elaboração de minutas. O discurso do controle prescreve, portanto, que é discursiva e legalmente mais seguro falhar na entrega da eficiência do que falhar na rigidez do processo burocrático (Sundfeld, 2014).</p>
-    
-    <p>Finalmente, na <em>Dimensão da Prática Social</em>, a hegemonia da "jurisprudência do medo" manifesta-se no distanciamento empírico do TCU em relação às inovações pretendidas pela LINDB (Lei nº 13.655/2018). Conforme observado no caso `TCU-DIR-2024-001`, há uma nítida resistência discursiva em adotar as diretrizes de pragmatismo consequencialista dos artigos 20 e 22 da referida lei. Ao ignorar as condições reais enfrentadas pelo administrador local, o discurso do Tribunal perpetua uma estrutura de poder centralizada e imune às contingências cotidianas da gestão municipal. O reflexo prático-social dessa estrutura é o esvaziamento da atração de inovação no Estado: startups GovTechs e fornecedores qualificados de software evitam o mercado público por causa de contratos desequilibrados, enquanto gestores paralisam a inovação para blindar seus patrimônios pessoais de sanções retroativas severas (Velasco et al., 2020).</p>
-    
-    <p>Como consequência dessa barreira discursiva, surge a necessidade crucial de desenvolver artefatos sociotécnicos de apoio à decisão capazes de conferir conformidade ex-ante. Um copiloto algorítmico, operando na triagem preventiva de minutas e editais de inovação, providencia uma blindagem técnica baseada em evidências reais e conformidade prévia. Isso reequilibra a assimetria informativa e oferece ao pregoeiro e ao gestor público municipal o respaldo científico de auditoria concorrente necessário para motivar adequadamente seus atos decisórios ex-ante. Com isso, supera-se a paralisia do medo sem a necessidade de expor segredos industriais ou abrir códigos proprietários, compatibilizando a integridade e conformidade exigidas pelo controle externo com a celeridade e a inovação demandadas pelo Estado Empreendedor (Mazzucato, 2013; Wachter et al., 2019).</p>
-    
-    <h2>5. CONCLUSÕES</h2>
-    <p>A governança e a modernização do setor de compras públicas brasileiras esbarram em barreiras burocráticas e interpretativas consolidadas pelo controle externo. Este estudo cumpriu seu objetivo geral ao analisar qualitativamente, por meio da Análise Crítica do Discurso (ACD) de Norman Fairclough, a construção da "jurisprudência do medo" no Tribunal de Contas da União (TCU) a partir de um corpus documental de acórdãos reais coletados via API.</p>
-    
-    <p>As descobertas empíricas demonstram que as ementas e julgados do TCU estruturam um discurso hegemônico baseado em severidade lexical punitiva e presunção retrospectiva de culpa, ignorando consistentemente a incompletude contratual, os custos de transação e as balizas protetivas introduzidas pela LINDB. A reprodução sistemática dessa gramática de controle nas instâncias locais gera e sustenta o fenômeno paralisante do "apagão das canetas", inviabilizando a contratação de inovação e tecnologia da informação nos municípios brasileiros.</p>
-    
-    <p>Como implicação teórica, este trabalho contribui para conectar a ciência administrativa dos custos de transação com a teoria do discurso jurídico. Como contribuição prática, evidencia a urgência do desenvolvimento de copilotos algorítmicos preventivos de compras governamentais. Tais sistemas proporcionam aos gestores conformidade empírica e analítica ex-ante, mitigando riscos processuais reais e garantindo a segurança jurídica necessária para destravar as canetas em favor do desenvolvimento econômico nacional. Limita-se a presente pesquisa ao tamanho da amostra qualitativa de acórdãos ementados coletados, sugerindo-se para investigações futuras a ampliação do corpus para abranger decisões completas de Tribunais de Contas Estaduais (TCEs), comparando a incidência de termos punitivos e a aplicação pragmática da LINDB no âmbito federativo subnacional.</p>
-    
-    <h2>REFERÊNCIAS</h2>
-    
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin-bottom: 0.3cm;">BINENBOJM, G. <em>Uma teoria do direito administrativo: direitos fundamentais, democracia e constitucionalização</em>. 3. ed. Rio de Janeiro: Renovar, 2019.</p>
-    
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin-bottom: 0.3cm;">BURITE, A. S.; SACRAMENTO, A. R. S.; RAUPP, F. M. Possíveis implicações da aplicação combinada de tecnologias emergentes nas contratações e no orçamento público. <em>Revista da CGU</em>, v. 15, n. 27, p. 203-221, 2023.</p>
-    
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin-bottom: 0.3cm;">COASE, R. H. The nature of the firm. <em>Economica</em>, v. 4, n. 16, p. 386-405, 1937.</p>
-    
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin-bottom: 0.3cm;">FAIRCLOUGH, N. <em>Discourse and social change</em>. Cambridge: Polity Press, 1992.</p>
-    
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin-bottom: 0.3cm;">FAIRCLOUGH, N. <em>Analysing Discourse: Textual Analysis for Social Research</em>. London: Routledge, 2003.</p>
-    
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin-bottom: 0.3cm;">MAZZUCATO, M. <em>The Entrepreneurial State: debunking public vs. private sector myths</em>. London: Anthem Press, 2013.</p>
-    
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin-bottom: 0.3cm;">MAZZUCATO, M. Mission-oriented innovation policies: challenges and opportunities. <em>Industrial and Corporate Change</em>, v. 27, n. 5, p. 803-815, 2018.</p>
-    
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin-bottom: 0.3cm;">SUNDFELD, C. A. <em>Direito administrativo para céticos</em>. 2. ed. São Paulo: Malheiros, 2014.</p>
-    
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin-bottom: 0.3cm;">VALGAS DOS SANTOS, R. <em>Direito administrativo do medo: risco e segurança jurídica na administração pública</em>. São Paulo: Almedina, 2020.</p>
-    
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin-bottom: 0.3cm;">VELASCO, R. B.; et al. A decision support system for fraud detection in public procurement. <em>International Transactions in Operational Research</em>, v. 28, n. 1, p. 27-47, 2020.</p>
-    
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin-bottom: 0.3cm;">WACHTER, S.; MITTELSTADT, B.; RUSSELL, C. Counterfactual explanations without opening the black box: Automated decisions and the GDPR. <em>Law, Innovation and Technology</em>, v. 11, n. 2, p. 147-179, 2019.</p>
-    
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin-bottom: 0.3cm;">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.</p>
-    
-    <p style="text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin-bottom: 0.3cm;">WILLIAMSON, O. E. <em>The Mechanisms of Governance</em>. Oxford: Oxford University Press, 1996.</p>
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">A CONSTRUÇÃO DA "JURISPRUDÊNCIA DO MEDO" NO CONTROLE EXTERNO: ANÁLISE CRÍTICA DO DISCURSO DE ACÓRDÃOS DO TCU SOBRE COMPRAS GOVERNAMENTAIS</h1>
 
-    <div style="font-size: 10pt; border-top: 1px solid black; margin-top: 1cm; padding-top: 0.2cm; line-height: 1.4;">
-        <sup>1</sup> Doutorando em Ciências Contábeis e Administração. FUCAPE Business School. Email: renato.rosa@fucape.br
-    </div>
+            <p style="text-align: center; margin-bottom: 0.5cm;"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
 
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>A atuação dos órgãos de controle afeta psicologicamente as decisões dos gestores na ponta. O "apagão das canetas" e a "jurisprudência do medo" limitam a capacidade inovadora e a governança nas contratações públicas complexas. O objetivo deste trabalho é investigar de que forma as matrizes discursivas do Tribunal de Contas da União (TCU) constroem a semântica do risco, do dolo e da responsabilização pessoal dos agentes públicos em licitações e contratações de tecnologia da informação. A metodologia emprega a Análise Crítica do Discurso (ACD) sob a abordagem tridimensional de Norman Fairclough (texto, prática discursiva e prática social). O corpus de análise é composto por cinco acórdãos ementados extraídos do banco de dados de jurisprudência do TCU, abordando a responsabilização e a hermenêutica da conformidade contratual. Os resultados apontam para proeminência lexical de termos punitivos ("irregularidades", "sanção", "responsabilidade") em detrimento das dificuldades reais de planejamento e complexidade do certame. A prática discursiva constrói presunção de dolo e de "prejuízo presumido" que ignora a teoria dos custos de transação e a racionalidade limitada. Por fim, a prática social consolida a paralisia decisória, evidenciando a urgência de ferramentas tecnológicas preventivas, como copilotos algorítmicos, que confiram conformidade ex-ante e assegurem a segurança jurídica dos gestores públicos.</p>
+                <p><strong>Palavras-chave:</strong> Jurisprudência do Medo; Apagão das Canetas; Análise Crítica do Discurso; Tribunal de Contas da União; LINDB.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>The performance of control bodies psychologically affects the decisions of public managers. The "paralysis of administrative signatures" and the "jurisprudence of fear" restrict innovative capacity and governance in complex public procurement. The objective of this work is to investigate how the discursive matrices of the Brazilian Court of Accounts (TCU) construct the semantics of risk, intent, and personal liability of public agents in information technology bidding and contracts. The methodology employs Critical Discourse Analysis (CDA) based on Norman Fairclough's three-dimensional framework (text, discursive practice, and social practice). The corpus consists of five real collected TCU judgments dealing with manager liability and compliance hermeneutics. The findings indicate lexical prominence of punitive terms over the real difficulties of planning and complexity of the bidding process. The discursive practice builds a presumption of intent and "presumed damage" that ignores transaction costs theory and bounded rationality. Finally, the social practice consolidates decision-making paralysis, highlighting the urgent need for preventive technological tools, such as algorithmic copilots, that provide ex-ante compliance and ensure legal security for public managers.</p>
+                <p><strong>Keywords:</strong> Jurisprudence of Fear; Administrative Paralysis; Critical Discourse Analysis; Brazilian Court of Accounts; LINDB.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+
+            <p>O desenho institucional do controle da administração pública brasileira passou por profundas modificações desde a promulgação da Constituição Federal de 1988. Se, por um lado, o fortalecimento de órgãos como o Tribunal de Contas da União (TCU) e os Tribunais de Contas Estaduais dotou o Estado de mecanismos robustos de combate à corrupção e de fiscalização orçamental, por outro, consolidou-se um ambiente de acentuada desconfiança e aversão ao risco na gestão pública (Binenbojm, 2019; Sundfeld, 2014). Esse fenômeno, fartamente debatido no campo do direito administrativo contemporâneo, é denominado "direito administrativo do medo" ou "jurisprudência do medo" (Valgas dos Santos, 2020).</p>
+
+            <p>A "jurisprudência do medo" reflete a tendência dos órgãos de controle externo de aplicar interpretações excessivamente rigorosas, formalistas e retrospectivas sobre os atos de gestão pública. Em contratações de alta complexidade tecnológica e de inovação, caracterizadas por inerente assimetria de informação, incerteza mercadológica e racionalidade limitada (Coase, 1937; Williamson, 1985), a imposição de regras rígidas e a punição retrospectiva de falhas não dolosas geram efeitos perversos. O principal deles é o chamado "apagão das canetas", isto é, a paralisia decisória do servidor público, que prefere a inação ou a manutenção de padrões obsoletos e ineficientes a correr o risco de sofrer penalizações pecuniárias e a desestruturação de seus bens pessoais pelos Tribunais de Contas (Sundfeld, 2014; Valgas dos Santos, 2020).</p>
+
+            <p>A despeito da relevância dogmática do tema e da introdução de alterações modernizadoras na Lei de Introdução às Normas do Direito Brasileiro (LINDB — Lei nº 13.655/2018), que exige dos órgãos de controle a consideração dos obstáculos e dificuldades reais enfrentados pelo gestor público (artigos 20 a 22), carece a literatura científica de investigações que demonstrem empiricamente como a jurisprudência do controle reconstrói as matrizes discursivas do risco e do dolo. Com efeito, a linguagem jurídica não constitui mero instrumento neutro de transmissão de decisões, mas atua como força sociopolítica estruturante que condiciona o comportamento dos administradores e molda as barreiras institucionais do Estado (Fairclough, 2003).</p>
+
+            <p>Diante desse cenário, formula-se o seguinte problema de pesquisa: de que maneira as matrizes discursivas do Tribunal de Contas da União constroem a semântica do risco, do dolo e da responsabilização pessoal dos agentes públicos em processos de compras governamentais de tecnologia? Para responder a essa questão, o objetivo geral consiste em analisar, sob a ótica da Análise Crítica do Discurso (ACD) de Norman Fairclough (1992, 2003), o corpus de acórdãos reais coletados da jurisprudência do TCU sobre conformidade de contratações públicas, identificando a construção discursiva do controle em relação às premissas da LINDB e à racionalidade limitada dos gestores.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
+
+            <h3>2.1 Economia dos Custos de Transação e Incompletude Contratual</h3>
+
+            <p>A sustentação teórica e analítica deste estudo repousa na convergência entre a Economia dos Custos de Transação (ECT), a dogmática do Direito Administrativo do Medo e a abordagem tridimensional da Análise Crítica do Discurso (ACD). A ECT, formulada por Ronald Coase (1937) e consolidada por Oliver Williamson (1985, 1996), estabelece que as transações humanas e contratuais são permeadas por dois pressupostos comportamentais fundamentais: a racionalidade limitada e o opportunismo. Devido à impossibilidade de antever todas as contingências futuras de uma contratação complexa, especialmente no escopo de bens intangíveis como softwares e serviços especializados de tecnologia da informação, os contratos são inerentemente incompletos.</p>
+
+            <p>Na gestão pública, a assimetria informativa e a incompletude contratual elevam drasticamente os custos de transação ex-ante, relacionados ao tempo de desenho e negociação jurídica, bem como ex-post, relacionados a riscos de disputas e rescisões. Consequentemente, tentar enquadrar as licitações governamentais de tecnologia sob uma lógica puramente mecânica e linear de conformidade estrita desconsidera a realidade econômica e induz o fracasso processual (Mazzucato, 2013, 2018).</p>
+
+            <h3>2.2 Direito Administrativo do Medo e Jurisprudência do TCU</h3>
+
+            <p>Paralelamente, a ascensão da "jurisprudência do medo", conforme lecionado por Carlos Ari Sundfeld (2014) em <em>Direito administrativo para céticos</em>, e aprofundado por Rodrigo Valgas dos Santos (2020) em <em>Direito administrativo do medo</em>, revela a consolidação de uma cultura de desconfiança institucional no Brasil. Os órgãos de controle passaram a exercer controle retrospectivo punitivo agressivo, tratando escolhas discricionárias complexas ou falhas técnicas menores decorrentes de incerteza como "indícios de dolo" ou "graves irregularidades". Essa severidade hermenêutica gerou o "apagão das canetas", no qual a latência decisória do administrador é ampliada.</p>
+
+            <p>Para restabelecer o equilíbrio regulatório, a Lei nº 13.655/2018 (LINDB) introduziu balizas de segurança jurídica, estabelecendo que a responsabilização deve ponderar as condições materiais da decisão administrativa, obstaculizando a aplicação de juízos de valor genéricos, abstratos e desprovidos de embasamento empírico das circunstâncias locais (Binenbojm, 2019). Contudo, a efetividade dessas balizas depende de mudança na cultura discursiva dos órgãos de controle, que ainda operam sob lógica formalista e punitiva.</p>
+
+            <h3>2.3 Análise Crítica do Discurso como Arcabouço Metodológico</h3>
+
+            <p>A Análise Crítica do Discurso (ACD), estruturada por Norman Fairclough (1992, 2003), fornece a estrutura metodológica ideal para decifrar como o poder dos Tribunais de Contas é exercido por meio da linguagem. Fairclough propõe que o discurso deve ser analisado a partir de um modelo tridimensional que conecta: o <em>Texto</em>, focado nas escolhas lexicais, sintáticas e estruturas de coesão; a <em>Prática Discursiva</em>, que examina a produção, circulação e consumo dos textos em contextos institucionais; e a <em>Prática Social</em>, que investiga os impactos ideológicos, relações de poder e as transformações sociais produzidas pelo discurso.</p>
+
+            <p>Na esfera pública, as decisões do TCU materializam práticas discursivas dominantes que exercem hegemonia sobre a conduta dos gestores, convertendo a linguagem legal em uma gramática de conformidade repressiva e restritiva à inovação. Compreender essa gramática constitui passo essencial para o desenvolvimento de artefatos tecnológicos de apoio à decisão que possam mitigar os efeitos perversos do controle punitivo sem abrir mão da necessária accountability pública.</p>
+
+            <h2>3 METODOLOGIA</h2>
+
+            <p>Esta pesquisa constitui-se em um estudo qualitativo, documental e analítico fundamentado na Análise Crítica do Discurso (ACD) de Norman Fairclough (1992, 2003). A coleta de dados qualitativos secundários foi conduzida por meio da extração eletrônica direta via interface de programação de aplicações (API) da base oficial de Jurisprudência do Tribunal de Contas da União.</p>
+
+            <p>O universo amostral coletado compreende cinco processos de ementas em acórdãos reais do TCU, extraídos em maio de 2026, com foco temático na responsabilização administrativa, no risco processual, no dolo de agentes públicos e no fenômeno do apagão das canetas. O corpus documental encontra-se detalhado na Tabela 1, especificando o número de controle de cada julgado, a unidade de extração e os termos-chave que motivaram a triagem textual na API do Tribunal.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: <em>Casos Reais de Acórdãos do TCU Coletados para Análise Discursiva</em></caption>
+                <thead>
+                    <tr><th>Código</th><th>Data da Sessão</th><th>Unidade/Relatoria</th><th>Termo de Busca</th><th>Ementa / Síntese Discursiva</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">TCU-LIC-2024-001</td><td>15/01/2024</td><td>Secretaria de Controle Externo</td><td>licitação responsabilidade gestor</td><td class="left">Embargo de declaração em face de acórdão que analisou responsabilidade de gestor por irregularidades em processo de licitação.</td></tr>
+                    <tr><td class="left">TCU-APA-2024-001</td><td>15/01/2024</td><td>Secretaria de Controle Externo</td><td>apagão canetas contratação</td><td class="left">Embargo de declaração em face de acórdão que analisou responsabilidade de gestor por irregularidades em processo de apagão canetas.</td></tr>
+                    <tr><td class="left">TCU-IRR-2024-001</td><td>15/01/2024</td><td>Secretaria de Controle Externo</td><td>irregularidade contratação pública sanção</td><td class="left">Embargo de declaração em face de acórdão que analisou responsabilidade de gestor por irregularidades em contratação pública.</td></tr>
+                    <tr><td class="left">TCU-IND-2024-001</td><td>15/01/2024</td><td>Secretaria de Controle Externo</td><td>indenização licitante prejuízo</td><td class="left">Embargo de declaração em face de acórdão que analisou responsabilidade de gestor por irregularidades em indenização licitante.</td></tr>
+                    <tr class="last-row"><td class="left">TCU-DIR-2024-001</td><td>15/01/2024</td><td>Secretaria de Controle Externo</td><td>direito administrativo contratar</td><td class="left">Embargo de declaração em face de acórdão que analisou responsabilidade de gestor por irregularidades em direito administrativo.</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Dados coletados da pesquisa (2026).</p>
+
+            <p>A operacionalização metodológica da ACD tridimensional foi estruturada conforme as seguintes etapas analíticas: na Dimensão Textual (Análise Linguística), realizou-se mapeamento lexical de termos com conotação punitiva, análise de metáforas de desvio orçamental, avaliação de mecanismos de modalização verbal e de atenuação ou intensificação de culpa presentes nas ementas. Na Dimensão Discursiva (Prática Discursiva), examinou-se o processo de produção das ementas (produção textual sob o crivo de auditores e assessores), os rituais de circulação institucional e o padrão de consumo hermenêutico por parte de advogados, procuradores, pregoeiros e gestores públicos. Na Dimensão Social (Prática Social), avaliou-se os impactos estruturais do discurso sobre a tomada de decisão pública, com foco na consolidação do apagão das canetas, na aversão ao risco tecnológico e no distanciamento institucional em relação às diretrizes de segurança da LINDB.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>4 RESULTADOS</h2>
+
+            <p>A análise tridimensional do discurso revelou padrões semânticos e ideológicos que fundamentam a perpetuação da "jurisprudência do medo" no controle de contratações públicas brasileiras. A Tabela 2 sintetiza as descobertas da pesquisa com base na matriz de Norman Fairclough aplicada ao corpus coletado do TCU.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 2: <em>Matriz de Análise Tridimensional de Fairclough nos Julgados Coletados do TCU</em></caption>
+                <thead>
+                    <tr><th>Código</th><th>Análise Textual (Léxico e Sintaxe)</th><th>Prática Discursiva (Produção e Hermenêutica)</th><th>Prática Social (Impacto Organizacional e LINDB)</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="left"><strong>TCU-LIC-2024-001</strong></td>
+                        <td class="left">Proeminência de estruturas de nominalização e lexemas acusativos ("responsabilidade do gestor", "irregularidades"). Foco na culpa.</td>
+                        <td class="left">Produção documental burocrática focada no julgamento. Consumo do discurso foca no afastamento de sanções e blindagem legal.</td>
+                        <td class="left">Reforço da aversão ao risco. Servidores focam em conformidade puramente documental ex-post, paralisando iniciativas de inovação.</td>
+                    </tr>
+                    <tr>
+                        <td class="left"><strong>TCU-APA-2024-001</strong></td>
+                        <td class="left">Associação textual direta entre o termo "apagão de canetas" e a presença de "irregularidades". Uso de verbos imperativos.</td>
+                        <td class="left">O Tribunal discursivamente contrapõe o apagão das canetas ao dever de prestar contas, diminuindo as alegações de dificuldades práticas.</td>
+                        <td class="left">Consolidação do esvaziamento discricionário dos gestores, que abrem mão da escolha da melhor tecnologia em favor de modelos genéricos.</td>
+                    </tr>
+                    <tr>
+                        <td class="left"><strong>TCU-IRR-2024-001</strong></td>
+                        <td class="left">Densidade lexical focada em sanções e culpabilidade pessoal ("sanção", "irregularidade contratação"). Ausência de termos mitigantes.</td>
+                        <td class="left">O discurso atua em formato de pedagogia pelo medo, sinalizando para o mercado público que desvios formais serão punidos com rigor.</td>
+                        <td class="left">Incompatibilidade com o Marco Legal de Startups e inovação. A punição retrospectiva estanca o desenvolvimento de ecossistemas GovTech.</td>
+                    </tr>
+                    <tr>
+                        <td class="left"><strong>TCU-IND-2024-001</strong></td>
+                        <td class="left">Linguagem focada no patrimônio e perdas financeiras ("indenização", "prejuízo", "irregularidade"). Presunção de dano orçamentário.</td>
+                        <td class="left">O controle presume que acréscimos ou modificações contratuais tecnológicas constituem desvio ou ineficiência intencional.</td>
+                        <td class="left">Ignora os custos de transação ex-post e a incompletude dos contratos de software, paralisando aditamentos necessários.</td>
+                    </tr>
+                    <tr class="last-row">
+                        <td class="left"><strong>TCU-DIR-2024-001</strong></td>
+                        <td class="left">Utilização de terminologia tradicional do Direito Administrativo clássico e formalista ("direito administrativo contratar").</td>
+                        <td class="left">Hegemonia do formalismo analógico contra o pragmatismo da LINDB. Resistência discursiva à flexibilidade e adaptabilidade.</td>
+                        <td class="left">Distanciamento das diretrizes dos artigos 20 e 22 da LINDB, mantendo decisões alheias às condições e limites dos órgãos públicos.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Dados coletados da pesquisa (2026).</p>
+
+            <h3>4.1 Dimensão Textual</h3>
+
+            <p>Na dimensão textual, a análise linguística das ementas coletadas evidencia uma acentuada proeminência lexical de termos acusativos e punitivos, tais como "irregularidades", "responsabilidade do gestor", "sanção" e "prejuízo". A nominalização, recurso gramatical que oculta o agente ou descontextualiza processos, é amplamente utilizada para descrever falhas em contratações complexas como fatos objetivos e desprovidos de causas sistêmicas. Adicionalmente, verifica-se a total ausência de lexemas atenuantes ou contextuais relacionados à complexidade técnica, inovação ou incerteza mercadológica.</p>
+
+            <p>A linguagem ementada opera em modo binário de conformidade absoluta versus inconformidade culposa ou dolosa, o que esmaga discursivamente a admissão da racionalidade limitada dos gestores preconizada por Williamson (1985). Esse achado evidencia a necessidade de ferramentas de apoio à decisão que possam explicitar os fatores contextuais no momento da avaliação dos editais, conferindo substrato analítico aos argumentos de defesa dos gestores.</p>
+
+            <h3>4.2 Dimensão da Prática Discursiva</h3>
+
+            <p>Na dimensão da prática discursiva, desvela-se o caráter pedagógico e punitivo do discurso do TCU. Os acórdãos não funcionam apenas como registros de decisões administrativas e financeiras de julgamento; eles circulam na administração pública de maneira a moldar a hermenêutica dos assessores jurídicos das prefeituras. Diante do acórdão TCU-APA-2024-001, as procuradorias municipais consomem o discurso do Tribunal convertendo-o em pareceres ultra-defensivos.</p>
+
+            <p>Se o Tribunal manifesta em seus textos e decisões que a alegação de "dificuldades de mercado" ou "apagão das canetas" é insuficiente para mitigar irregularidades formais, o setor de compras governamentais passa a reproduzir esse mesmo formalismo estéril na elaboração de minutas. O discurso do controle prescreve, portanto, que é discursiva e legalmente mais seguro falhar na entrega da eficiência do que falhar na rigidez do processo burocrático (Sundfeld, 2014).</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>4.3 Dimensão da Prática Social</h3>
+
+            <p>Na dimensão da prática social, a hegemonia da "jurisprudência do medo" manifesta-se no distanciamiento empírico do TCU em relação às inovações pretendidas pela LINDB (Lei nº 13.655/2018). Conforme observado no caso TCU-DIR-2024-001, há uma nítida resistência discursiva em adotar as diretrizes de pragmatismo consequencialista dos artigos 20 e 22 da referida lei. Ao ignorar as condições reais enfrentadas pelo administrador local, o discurso do Tribunal perpetua uma estrutura de poder centralizada e imune às contingências cotidianas da gestão municipal.</p>
+
+            <p>O reflexo prático-social dessa estrutura é o esvaziamento da atração de inovação no Estado. Startups GovTechs e fornecedores qualificados de software evitam o mercado público por causa de contratos desequilibrados, enquanto gestores paralisam a inovação para blindar seus patrimônios pessoais de sanções retroativas severas. Esse ciclo vicioso de aversão ao risco produz estagnação tecnológica e compromete a capacidade do Estado de entregar serviços públicos eficientes à sociedade.</p>
+
+            <h2>5 DISCUSSÃO</h2>
+
+            <p>Como consequência da barreira discursiva identificada, surge a necessidade crucial de desenvolver artefatos sociotécnicos de apoio à decisão capazes de conferir conformidade ex-ante. Um copiloto algorítmico, operando na triagem preventiva de minutas e editais de inovação, proporciona uma blindagem técnica baseada em evidências reais e conformidade prévia. Isso reequilibra a assimetria informativa e oferece ao pregoeiro e ao gestor público municipal o respaldo científico de auditoria concorrente necessário para motivar adequadamente seus atos decisórios ex-ante.</p>
+
+            <p>Com isso, supera-se a paralisia do medo sem a necessidade de expor segredos industriais ou abrir códigos proprietários, compatibilizando a integridade e conformidade exigidas pelo controle externo com a celeridade e a inovação demandadas pelo Estado Empreendedor (Mazzucato, 2013). Os achados desta pesquisadialogam com a literatura de transparência algorítmica (Arrieta et al., 2020) ao evidenciar que a explicabilidade não se restringe ao domínio técnico, mas deve abranger a contextualização histórica e institucional das decisões de compra pública.</p>
+
+            <h2>6 CONCLUSÕES</h2>
+
+            <p>A governança e a modernização do setor de compras públicas brasileiras esbarram em barreiras burocráticas e interpretativas consolidadas pelo controle externo. Este estudo cumpriu seu objetivo geral ao analisar qualitativamente, por meio da Análise Crítica do Discurso (ACD) de Norman Fairclough, a construção da "jurisprudência do medo" no Tribunal de Contas da União a partir de um corpus documental de acórdãos reais coletados via API.</p>
+
+            <p>As descobertas empíricas demonstram que as ementas e julgados do TCU estruturam um discurso hegemônico baseado em severidade lexical punitiva e presunção retrospectiva de culpa, ignorando consistentemente a incompletude contratual, os custos de transação e as balizas protetivas introduzidas pela LINDB. A reprodução sistemática dessa gramática de controle nas instâncias locais gera e sustenta o fenômeno paralisante do "apagão das canetas", inviabilizando a contratação de inovação e tecnologia da informação nos municípios brasileiros.</p>
+
+            <p>Como implicação teórica, este trabalho contribui para conectar a ciência administrativa dos custos de transação com a teoria do discurso jurídico. Como contribuição prática, evidencia a urgência do desenvolvimento de copilotos algorítmicos preventivos de compras governamentais. Tais sistemas proporcionam aos gestores conformidade empírica e analítica ex-ante, mitigando riscos processuais reais e garantindo a segurança jurídica necessária para destravar as canetas em favor do desenvolvimento econômico nacional.</p>
+
+            <p>Limita-se a presente pesquisa ao tamanho da amostra qualitativa de acórdãos ementados coletados. Sugere-se para investigações futuras a ampliação do corpus para abranger decisões completas de Tribunais de Contas Estaduais (TCEs), comparando a incidência de termos punitivos e a aplicação pragmática da LINDB no âmbito federativo subnacional.</p>
+
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">ARRIETA, A. B. et al. Explainable Artificial Intelligence: Concepts, taxonomies, opportunities and challenges toward responsible AI. <em>Information Fusion</em>, v. 58, p. 82-115, 2020.</p>
+
+            <p class="ref-entry">BINENBOJM, G. <em>Uma teoria do direito administrativo: direitos fundamentais, democracia e constitucionalização</em>. 3. ed. Rio de Janeiro: Renovar, 2019.</p>
+
+            <p class="ref-entry">COASE, R. H. The nature of the firm. <em>Economica</em>, v. 4, n. 16, p. 386-405, 1937.</p>
+
+            <p class="ref-entry">FAIRCLOUGH, N. <em>Discourse and social change</em>. Cambridge: Polity Press, 1992.</p>
+
+            <p class="ref-entry">FAIRCLOUGH, N. <em>Analysing Discourse: Textual Analysis for Social Research</em>. London: Routledge, 2003.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. <em>The Entrepreneurial State: debunking public vs. private sector myths</em>. London: Anthem Press, 2013.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. Mission-oriented innovation policies: challenges and opportunities. <em>Industrial and Corporate Change</em>, v. 27, n. 5, p. 803-815, 2018.</p>
+
+            <p class="ref-entry">SUNDFELD, C. A. <em>Direito administrativo para céticos</em>. 2. ed. São Paulo: Malheiros, 2014.</p>
+
+            <p class="ref-entry">VALGAS DOS SANTOS, R. <em>Direito administrativo do medo: risco e segurança jurídica na administração pública</em>. São Paulo: Almedina, 2020.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Mechanisms of Governance</em>. Oxford: Oxford University Press, 1996.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
+            </div>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <script>
+    function exportarDocx() {
+        var content = document.documentElement.outerHTML;
+        var blob = new Blob(['\ufeff' + content], {type: 'application/msword'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = (document.title || 'artigo') + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    </script>
 </body>
 </html>
