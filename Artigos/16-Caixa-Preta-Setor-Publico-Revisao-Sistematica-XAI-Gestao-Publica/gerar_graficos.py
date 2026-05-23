@@ -29,18 +29,30 @@ with open(csv_path, "r", encoding="utf-8") as f:
             journals.append(j)
 
 # ============================================================
-# FIGURA 1: Publicacoes por Ano
+# FIGURA 1: Publicacoes por Ano (grafico de linha - serie temporal)
 # ============================================================
 year_counts = Counter(years)
 all_years = sorted(year_counts.keys())
 counts = [year_counts[y] for y in all_years]
 
-fig1, ax1 = plt.subplots(figsize=(6, 4.2))
-ax1.bar(all_years, counts, width=0.6, color="#1A365D", edgecolor="black", linewidth=0.4)
+fig1, ax1 = plt.subplots(figsize=(6.5, 4.2))
+ax1.plot(
+    all_years,
+    counts,
+    marker="o",
+    linestyle="-",
+    linewidth=2,
+    color="#1A365D",
+    markersize=7,
+    markerfacecolor="#1A365D",
+    markeredgecolor="white",
+    markeredgewidth=0.8,
+)
+ax1.fill_between(all_years, counts, alpha=0.10, color="#1A365D")
 for y_val, c_val in zip(all_years, counts):
     ax1.text(
         y_val,
-        c_val + 0.3,
+        c_val + 0.6,
         str(c_val),
         ha="center",
         va="bottom",
@@ -56,6 +68,7 @@ ax1.set_title(
     pad=14,
 )
 ax1.set_xticks(all_years)
+ax1.set_xlim(min(all_years) - 0.3, max(all_years) + 0.3)
 ax1.yaxis.set_major_locator(mticker.MaxNLocator(integer=True))
 ax1.spines["top"].set_visible(False)
 ax1.spines["right"].set_visible(False)
