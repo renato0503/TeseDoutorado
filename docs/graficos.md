@@ -1,5 +1,3 @@
-<!-- NOTE: Movido para docs/ em 2026-05-23 -->
-
 # Gráficos e Figuras da Tese
 
 ## Gráficos (5)
@@ -9,4 +7,11 @@
 4. **Gráfico 4** — SHAP Summary (importância de features)
 5. **Gráfico 5** — Framing Mídia (barras empilhadas, Conjur/Valor/Jota)
 
-... (conteúdo original mantido)
+## Figuras (5)
+1. **Figura 1** — Modelo dos Três Ciclos da DSR (Hevner, 2007)
+2. **Figura 2** — Arquitetura do Copiloto Algorítmico
+3. **Figura 3** — Pipeline de NLP (PDF → RAG)
+4. **Figura 4** — Rede de Fornecimento (NetworkX)
+5. **Figura 5** — Interface do Módulo de Avaliação
+
+Todas geradas via `Tese/gerar_graficos.py` com matplotlib.

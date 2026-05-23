@@ -1,4 +1,3 @@
-# NOTE: Movido para scripts/ em 2026-05-23
 import numpy as np
 import os
 from viz_engine import AcademicVizEngine

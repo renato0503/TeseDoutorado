@@ -1,4 +1,3 @@
-# NOTE: Movido para scripts/ em 2026-05-23
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -177,8 +176,8 @@ class AcademicVizEngine:
         # Colorir valores positivos em azul e negativos em vermelho
         for i, bar in enumerate(bars):
             if df["Impacto (SHAP)"].iloc[i] < 0:
-                bar.set_color(self.colors["accent"]) 
-        
+                bar.set_color(self.colors["accent"])
+                
         ax.axvline(0, color=self.colors["secondary"], linewidth=0.8, linestyle="--")
         ax.set_xlabel("Impacto médio na decisão do modelo (|SHAP value|)")
         ax.set_title(title, pad=15)

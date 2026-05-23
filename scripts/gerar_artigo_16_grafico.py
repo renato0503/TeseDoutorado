@@ -1,4 +1,3 @@
-# NOTE: Movido para scripts/ em 2026-05-23
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
