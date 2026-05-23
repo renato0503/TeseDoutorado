@@ -320,6 +320,9 @@
                     <button class="filter-btn" data-filter="quanti">📊 Quantitativos</button>
                     <button class="filter-btn" data-filter="quali">🔬 Qualitativos</button>
                     <button class="filter-btn" data-filter="produto">⚙️ Produto</button>
+                    <span style="width:1px;height:20px;background:#e5e5e5;margin:0 4px;"></span>
+                    <button class="filter-btn" data-filter="maior" id="sort-maior" style="font-weight:600;">📈 Maior %</button>
+                    <button class="filter-btn" data-filter="menor" id="sort-menor" style="font-weight:600;">📉 Menor %</button>
                     <span class="filter-count" id="filter-count"></span>
                 </div>
                 <div class="articles-grid" id="articles-grid"></div>
@@ -504,6 +507,12 @@
                         if (filterType === 'inicial') return pct < 10;
                         return true;
                     });
+                } else if (filterType === 'maior' || filterType === 'menor') {
+                    filtered = [...ARTIGOS].sort((a, b) => {
+                        const pctA = Math.min(100, Math.round(((articlesData[a.id]?.words || 0) / a.meta) * 100));
+                        const pctB = Math.min(100, Math.round(((articlesData[b.id]?.words || 0) / b.meta) * 100));
+                        return filterType === 'maior' ? pctB - pctA : pctA - pctB;
+                    });
                 } else {
                     filtered = ARTIGOS.filter(art => art.tipo === filterType);
                 }
@@ -602,6 +611,18 @@
                     renderArticles(allArticlesData, currentFilter);
                 });
             });
+            // Sort buttons toggle on re-click
+            document.addEventListener('click', function(e) {
+                const btn = e.target.closest('.filter-btn');
+                if (btn && (btn.dataset.filter === 'maior' || btn.dataset.filter === 'menor')) {
+                    // Apply active style to sort buttons specifically
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        if (b.dataset.filter !== 'maior' && b.dataset.filter !== 'menor') {
+                            b.classList.remove('active','active-green','active-red','active-orange');
+                        }
+                    });
+                }
+            }, true);
         }
 
         // ========== INIT ==========
