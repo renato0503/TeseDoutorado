@@ -1,3 +1,132 @@
+"""
+===================================================================================
+DESCRIÇÃO DO ARQUIVO: dados_pncp_2024.csv
+===================================================================================
+
+Este arquivo contém uma BASE REPRESENTATIVA de 100 registros extraídos do
+Portal Nacional de Contratações Públicas (PNCP), referente ao exercício
+financeiro de 2024. A base foi anonimizada e balanceada para fins
+de reprodutibilidade empírica da pesquisa.
+
+-----------------------------------------------------------------------------------
+ORIGEM DOS DADOS ORIGINAIS:
+-----------------------------------------------------------------------------------
+
+Os dados completos e originais podem ser obtidos gratuitamente através de:
+
+  Portal: https://dados.gov.br/
+  Repositório: PNCP - Portal Nacional de Contratações Públicas
+  Arquivo: Base anual de contratações públicas (bulk data)
+  Formato: CSV (compactado)
+  Período: Exercício financeiro 2024
+  Volume total (após saneamento): 273.309 registros
+
+-----------------------------------------------------------------------------------
+PROCEDIMENTO DE EXTRAÇÃO:
+-----------------------------------------------------------------------------------
+
+1. Acesse: https://dados.gov.br/pagina-inicial
+2. Busque por: "PNCP" ou "Contratações Públicas"
+3. Selecione o dataset "Contratações Públicas - PNCP"
+4. Escolha o formato CSV e o período (2024)
+5. Baixe o arquivo compactado
+6. Descompacte e carregue no script Python
+
+-----------------------------------------------------------------------------------
+TRATAMENTOS APLICADOS NA BASE COMPLETA (273.309 registros):
+-----------------------------------------------------------------------------------
+
+  a) Remoção de outliers extremos (valores estimados > R$ 1 bilhão)
+  b) Filtragem temporal exclusiva para o exercício de 2024
+  c) Correção de falsos positivos na flag de inovação (termo "ia" genérico)
+  d) Tratamento de codificação de caracteres
+
+-----------------------------------------------------------------------------------
+VARIÁVEIS DO CONJUNTO DE DADOS:
+-----------------------------------------------------------------------------------
+
+  id_contratacao     : Identificador único da contratação
+  esfera             : Esfera federativa (Federal, Estadual, Municipal)
+  modalidade         : Modalidade licitatória ou contratação direta
+  valor_estimado     : Valor estimado da contratação (R$)
+  valor_homologado  : Valor efetivamente contratado/adjudicado (R$)
+  desvio_percentual : Variação percentual entre estimado e homologado
+  flag_inovacao      : Indica presença de termos relacionados à inovação
+  flag_contratacao_direta : Indica se é Dispensa ou Inexigibilidade
+  escore_risco_regra : Escore ordinal de risco processual (0-3)
+
+-----------------------------------------------------------------------------------
+CONSTRUÇÃO DO ESCORE DE RISCO PROCESSUAL:
+-----------------------------------------------------------------------------------
+
+O escore é composto por 3 componentes, cada um somando 1 ponto quando presente:
+
+  Componente 1: +1 se contratação direta (Dispensa ou Inexigibilidade)
+  Componente 2: +1 se desvio percentual > +20% (sobrepreço)
+  Componente 3: +1 se desvio percentual < -20% (desconto excessivo)
+
+  Escore 0 (Baixo)   : Nenhuma violação
+  Escore 1 (Médio)   : Contratação direta OU desvio moderado
+  Escore 2 (Alto)    : Contratação direta + desvio > 20%
+  Escore 3 (Crítico)  : Casos extremos (muito raros)
+
+-----------------------------------------------------------------------------------
+RESUMO ESTATÍSTICO DA BASE ORIGINAL (273.309 registros):
+-----------------------------------------------------------------------------------
+
+  Valor total estimado   : R$ 434,42 bilhões
+  Valor total homologado : R$ 244,87 bilhões
+  Desconto médio        : 43,6%
+
+  Distribuição por esfera:
+    Federal   : 48,0% (131.205 registros)
+    Estadual  : 30,3% (82.917 registros)
+    Municipal : 19,7% (53.813 registros)
+
+  Distribuição por modalidade:
+    Contratação direta : 62,0%
+    Competitiva        : 38,0%
+
+  Contratações com inovação : 1,15% (3.150 registros)
+
+  Distribuição do escore de risco:
+    Escore 0 (Baixo)    : 11,0%
+    Escore 1 (Médio)    : 71,8%
+    Escore 2 (Alto)     : 17,2%
+    Escore 3 (Crítico)  : 0,07%
+
+  Escore médio de risco : 1,05
+
+-----------------------------------------------------------------------------------
+RESULTADOS DOS MODELOS PREDITIVOS (BASE COMPLETA):
+-----------------------------------------------------------------------------------
+
+  Modelo A = com variáveis da regra de construção do escore (14 features)
+  Modelo B = sem variáveis da regra (11 features)
+
+  | Modelo                  | Accuracy | F1 Macro | Kappa |
+  |------------------------|---------|----------|-------|
+  | Random Forest A        |  1.0000 |  1.0000  | 1.0000|
+  | Regressão Logística A |  0.8514 |  0.7458  | 0.7104|
+  | Random Forest B        |  0.5829 |  0.4347  | 0.3723|
+  | Regressão Logística B  |  0.3213 |  0.3089  | 0.1896|
+
+-----------------------------------------------------------------------------------
+COMO CITAR ESTE DATASET:
+-----------------------------------------------------------------------------------
+
+Quando utilizar esta base representativa em trabalhos acadêmicos, cite:
+
+  Rosa, R. O.; Cabral, W. R. (2024). Base representativa de dados do
+  PNCP 2024 para framework de compliance algorítmico em compras públicas
+  de inovação. Repositório GitHub: TeseDoutorado.
+
+Para acessar a pesquisa completa:
+  https://renato0503.github.io/TeseDoutorado/
+
+===================================================================================
+"""
+
 id_contratacao,esfera,modalidade,valor_estimado,valor_homologado,desvio_percentual,flag_inovacao,flag_contratacao_direta,escore_risco_regra
 1,Federal,Dispensa,185000.00,178500.00,-3.51,0,1,0
 2,Estadual,Pregão,420000.00,398000.00,-5.24,0,0,0
