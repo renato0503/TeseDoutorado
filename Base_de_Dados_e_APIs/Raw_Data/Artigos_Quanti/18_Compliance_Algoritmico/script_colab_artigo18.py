@@ -6,19 +6,28 @@ Artigo 18 - Doutorado Fucape Business School
 Autores: Renato de Oliveira Rosa; Walter Reis Cabral
 
 DESCRIÇÃO:
-Este script implementa o framework de compliance algorítmico para compras públicas
-de inovação, incluindo:
-  - Tratamento e saneamento da base PNCP 2024
-  - Construção do escore ordinal de risco processual
-  - Estimação de Regressão Logística e Random Forest
-  - Avaliação de performance com métricas de classificação
-  - Extração de matrizes de confusão e feature importance
-  - Geração de visualizações
+Este script foi desenvolvido para processar a base de dados do PNCP 2024 e aplicar
+os modelos de classificação que sustentam o framework de compliance algorítmico
+proposto no artigo. O objetivo é permitir a reprodutibilidadeempírica da pesquisa.
 
-LINK GOOGLE COLAB: [INSERIR LINK APÓS UPLOAD]
-LINK BASE DE DADOS: [INSERIR LINK APÓS UPLOAD]
+O QUE ESTE SCRIPT FAZ:
+  1. Carrega e audita a base de dados do PNCP (273.309 registros)
+  2. Remove outliers e corrige inconsistências nos dados
+  3. Constrói o escore ordinal de risco processual (0 a 3)
+  4. Treina e avalia dois modelos: Regressão Logística e Random Forest
+  5. Compara o desempenho com e sem as variáveis da regra de construção
+  6. Gera visualizações e salva os resultados em CSV
 
-REQUISITOS (instale antes de executar):
+LINK DA BASE DE DADOS:
+https://raw.githubusercontent.com/renato0503/TeseDoutorado/main/Base_de_Dados_e_APIs/Raw_Data/Artigos_Quanti/18_Compliance_Algoritmico/dados_pncp_2024.csv
+
+COMO USAR:
+  1. Baixe a base de dados CSV do link acima
+  2. Carregue o CSV no Google Colab ou VS Code
+  3. Execute as células em ordem
+  4. Os resultados serão salvos automaticamente na pasta
+
+BIBLIOTECAS NECESSÁRIAS:
   pip install pandas numpy matplotlib seaborn scikit-learn shap
 
 ===================================================================================
@@ -647,15 +656,24 @@ ARQUIVOS GERADOS:
 """)
 
 print("\n" + "=" * 80)
-print("SCRIPT CONCLUÍDO COM SUCESSO")
+print("SCRIPT EXECUTADO COM SUCESSO!")
 print("=" * 80)
 
 print("""
-PRÓXIMOS PASSOS:
-----------------
-1. Substituir LINK_DADOS pelo link público do CSV
-2. Fazer upload do CSV para o Google Colab
-3. Executar o script completo
-4. Baixar os arquivos de saída gerados
-5. Verificar se os resultados batem com o artigo
+RESULTADOS OBTIDOS:
+-------------------
+Os arquivos de saída foram salvos na mesma pasta deste script.
+Você pode usar esses arquivos para comparar com os resultados do artigo.
+
+DÚVIDAS?
+--------
+Entre em contato: gestor.renatorosa@gmail.com
+
+MAIS INFORMAÇÕES:
+-----------------
+Consulte o artigo completo em:
+https://renato0503.github.io/TeseDoutorado/Artigos/18-Compliance-Algoritmico-Integrado/artigo_18.html
+
+Calculadora interativa do escore de risco:
+https://renato0503.github.io/TeseDoutorado/docs/calculadora_compliance.html
 """)
