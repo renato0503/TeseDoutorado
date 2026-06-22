@@ -121,8 +121,8 @@ graph TD
 
 ## 🔗 EIXO VI: INTEGRIDADE DA TESE E ALINHAMENTO
 
-### 16. Fio Condutor da Tese (Macrocoerência dos 17 Artigos)
-*   **O Escrutínio do Avaliador:** A tese possui um fio condutor unificado e coerente ou parece uma colcha de retalhos de 17 artigos desconectados? Como a análise estatística dos primeiros capítulos fundamenta e culmina nas investigações empíricas e qualitativas finais?
+### 16. Fio Condutor da Tese (Macrocoerência dos 18 Artigos)
+*   **O Escrutínio do Avaliador:** A tese possui um fio condutor unificado e coerente ou parece uma colcha de retalhos de 18 artigos desconectados? Como a análise estatística dos primeiros capítulos fundamenta e culmina nas investigações empíricas e qualitativas finais?
 *   **Red Flags (Sinais de Alerta):** Artigos que usam nomenclaturas e bases de dados totalmente conflitantes, sem justificar como cada um contribui para a macro-tese de um *Copiloto Algorítmico*.
 *   **Diretriz de Correção Rigorosa:** A introdução geral da tese e as conclusões devem costurar sistematicamente a lógica de dependência dos artigos. Mostrar que os artigos iniciais diagnosticam a opacidade e as falhas de eficiência, os intermediários validam as métricas de controle algorítmico, e os finais avaliam a recepção social e o discurso público.
 

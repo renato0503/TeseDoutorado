@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Compliance Algorítmico em Compras Públicas de Inovação</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
+    <style>
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: -1.27cm; padding-left: 1.27cm; margin: 0 0 0.3cm 0; text-align: justify; font-size: 11pt; }
+        h3 { font-size: 12pt; font-weight: bold; font-style: italic; margin: 0.6cm 0 0.3cm 0; }
+    </style>
+</head>
+<body>
+
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
+    </div>
+
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">COMPLIANCE ALGORÍTMICO EM COMPRAS PÚBLICAS DE INOVAÇÃO</h1>
+
+            <p class="author-info"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+
+            <p class="author-info" style="margin-top: 0.3cm;"><strong>Walter Reis Cabral</strong><br>
+            <span style="font-size: 10pt; color: #555;">Colaborador</span></p>
+
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>Este artigo propõe e valida uma estrutura de compliance algorítmico para compras públicas de inovação no Brasil, articulando Inteligência Artificial Explicável (XAI) e trilhas de auditoria baseadas em blockchain. A pesquisa parte do problema do "apagão das canetas", conceituado como a retração decisória de gestores públicos diante da incerteza jurídica, da complexidade normativa e do risco de responsabilização pessoal em contratações não padronizadas. O trabalho desenvolve uma arquitetura de apoio à decisão orientada à classificação explicável de risco processual e à rastreabilidade das justificativas administrativas. A investigação empírica utiliza dados do Portal Nacional de Contratações Públicas (PNCP) referentes ao exercício financeiro de 2024, totalizando 273.309 registros após auditoria e saneamento. A partir dessa base, construiu-se um escore ordinal de risco processual para atuar como proxy de atenção regulatória. Os resultados atestam que o algoritmo de floresta aleatória (random forest) reproduz o escore com acurácia plena de 1,0000 quando incorpora as variáveis constitutivas da regra, ao passo que a capacidade preditiva da regressão linear recua para 0,3213 quando tais variáveis são excluídas. Conclui-se que a contribuição central do framework não reside na detecção autônoma de ilegalidades, mas na operacionalização e documentação de uma lógica de risco processual capaz de mitigar a incerteza decisória e fortalecer os mecanismos de accountability nas compras governamentais.</p>
+                <p><strong>Palavras-chave:</strong> Compras públicas de inovação; Compliance algorítmico; Inteligência Artificial Explicável; Risco processual; Retração decisória; Governança de contratações; Política industrial.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>This article proposes and validates an algorithmic compliance framework for public procurement of innovation in Brazil, combining Explainable Artificial Intelligence (XAI) and blockchain-based audit trails. The research starts from the problem of "pencil blackout," conceptualized as the decisional retraction of public managers facing legal uncertainty, normative complexity, and personal accountability risk in non-standard contracts. The work develops a decision-support architecture oriented toward explainable classification of procedural risk and traceability of administrative justifications. The empirical investigation uses data from the National Public Procurement Portal (PNCP) referring to fiscal year 2024, totaling 273,309 records after auditing and sanitization. From this base, an ordinal procedural risk score was constructed to serve as a regulatory attention proxy. The results show that the random forest algorithm reproduces the score with full accuracy of 1.0000 when incorporating the constitutive variables of the rule, while the predictive capacity of linear regression drops to 0.3213 when such variables are excluded. It is concluded that the framework's central contribution lies not in autonomous irregularity detection, but in the operationalization and documentation of a procedural risk logic capable of mitigating decision uncertainty and strengthening accountability mechanisms in government procurement.</p>
+                <p><strong>Keywords:</strong> Public Procurement of Innovation; Algorithmic Compliance; Explainable Artificial Intelligence; Procedural Risk; Decisional Retraction; Procurement Governance; Industrial Policy.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+
+            <h3>1.1 Contextualização</h3>
+
+            <p>As compras públicas constituem um dos mais relevantes instrumentos de ação estatal para a indução de mercados, a coordenação de demanda e o estímulo à inovação (Edler & Georghiou, 2007). Nesse cenário, em economias nas quais o Estado desempenha papel ativo na promoção do desenvolvimento, o poder de compra governamental pode funcionar não apenas como mecanismo de provisão administrativa, mas também como vetor de política industrial, ao sinalizar prioridades tecnológicas, fomentar capacidades produtivas e reduzir incertezas de demanda em setores estratégicos (Mazzucato, 2013; Edquist & Zabala-Iturriagagoitia, 2012). Adicionalmente, no caso brasileiro, esse potencial é particularmente expressivo, uma vez que as compras governamentais representam parcela significativa do Produto Interno Bruto nacional, fato que confere ao Estado papel central na dinâmica de diversos mercados (Squeff, 2014).</p>
+
+            <p>Apesar dessa centralidade, a utilização das compras públicas como instrumento de indução da inovação permanece limitada no contexto brasileiro. A existência de instrumentos jurídicos voltados à contratação de soluções com conteúdo de inovação (Lei nº 10.973/2004; Lei nº 14.133/2021; Lei Complementar nº 182/2021) não se traduziu, até o momento, em uma dinâmica institucional consolidada de aquisições tecnológicas (Rauen, 2015). Esse descompasso sugere que o problema não pode ser explicado apenas pela existência ou inexistência de autorização normativa. Nesse sentido, há barreiras adicionais, de natureza organizacional, informacional e decisória, que restringem a capacidade do Estado de contratar inovação com segurança e previsibilidade (Uyarra et al., 2014).</p>
+
+            <p>Entre essas barreiras, destaca-se o fenômeno conhecido como "apagão das canetas", expressão que designa a retração decisória de agentes públicos diante do temor de responsabilização pessoal por escolhas administrativas posteriormente questionadas por órgãos de controle (Guimarães, 2016). Em contextos de elevada complexidade regulatória, múltiplos regimes jurídicos incidentes e assimetria informacional sobre mercados fornecedores, a decisão administrativa tende a se tornar defensiva (Sundfeld, 2014). Nesses casos, o gestor não necessariamente deixa de agir por ausência de base legal, mas porque não dispõe de instrumentos adequados para organizar, justificar e documentar decisões complexas.</p>
+
+            <h3>1.2 Problema de Pesquisa</h3>
+
+            <p>A pergunta de pesquisa que orienta este estudo investiga como um modelo baseado em proxies observáveis de risco processual pode apoiar gestores públicos na avaliação de compliance em contratações com potencial conteúdo de inovação, reduzindo a incerteza decisória e ampliando a rastreabilidade das justificativas. Essa formulação decorre da constatação de que o problema das compras de inovação não se resume à falta de instrumentos jurídicos (Rauen, 2015). Trata-se, fundamentalmente, de uma crise de infraestrutura informacional e de rastreabilidade (Fiuza & Medeiros, 2014). Nesse contexto, o gestor público que decide sobre uma contratação de inovação enfrenta múltiplas fontes de incerteza, pois não dispõe de informações completas sobre o mercado fornecedor, não tem acesso automatizado a bases de sanções ou decisões de controle, e opera em um ambiente de alta complexidade normativa onde qualquer decisão pode ser questionada posteriormente (Guimarães, 2016).</p>
+
+            <h3>1.3 Objetivos</h3>
+
+            <p>O objetivo geral deste estudo consiste em propor e validar um framework de compliance algorítmico para compras públicas de inovação no Brasil, estruturado em técnicas de Inteligência Artificial Explicável e em uma arquitetura de rastreabilidade decisória. Para alcançar esse propósito, foram definidos quatro objetivos específicos: (a) construir e validar uma base empírica a partir dos dados do PNCP referentes ao exercício de 2024; (b) operacionalizar o conceito de risco processual por meio de um escore ordinal baseado em proxies observáveis; (c) avaliar, por meio de modelagem comparativa, as capacidades e os limites de um modelo de classificação explicável; (d) propor uma arquitetura conceitual de trilhas de auditoria para a documentação das justificativas decisórias.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 REFERENCIAL TEÓRICO</h2>
+
+            <h3>2.1 Compras Públicas de Inovação</h3>
+
+            <p>A utilização do poder de compra do Estado como instrumento de política de inovação é tema consolidado na literatura internacional. Edler e Georghiou (2007) argumentam que a demanda pública pode desempenhar papel tão relevante quanto os incentivos pelo lado da oferta, ao reduzir incertezas de mercado e sinalizar prioridades tecnológicas para o setor privado. Nessa perspectiva, Edquist e Zabala-Iturriagagoitia (2012) propõem uma distinção conceitual entre compras públicas regulares, nas quais o Estado adquire bens e serviços já disponíveis no mercado, e compras públicas de inovação, nas quais o Estado demanda soluções que ainda não existem ou que requerem desenvolvimento tecnológico adicional.</p>
+
+            <p>No caso brasileiro, a legislação oferece múltiplos instrumentos para a contratação de inovação pelo setor público. Apesar desse arcabouço normativo, a efetivação das aquisições enfrenta barreiras que vão além da disponibilidade de leis. Segundo Rauen (2015), a insegurança jurídica, a ausência de capacitação dos gestores e a falta de ecossistemas de fornecedores constituem obstáculos que limitam a adoção desses instrumentos. De modo convergente, Squeff (2014) demonstra que o poder de compra governamental brasileiro permanece subutilizado como ferramenta de política industrial, a despeito de seu imenso potencial financeiro.</p>
+
+            <h3>2.2 Compliance no Setor Público e o "Direito Administrativo do Medo"</h3>
+
+            <p>O conceito de compliance no setor público está associado à necessidade de garantir que a administração pública atue em conformidade com as normas legais e regulatórias aplicáveis. A literatura contemporânea de governança pública tem ampliado essa acepção para incluir a gestão ativa de riscos, distinguindo a conformidade passiva da capacidade prospectiva de identificar, avaliar e mitigar riscos antes que se materializem em irregularidades (Zymler & Dios, 2019).</p>
+
+            <p>A intensidade do controle, paradoxalmente, pode produzir efeitos disfuncionais sistêmicos. Guimarães (2016) cunhou a expressão "Direito Administrativo do Medo" para descrever o fenômeno pelo qual o excesso de responsabilização pessoal dos agentes públicos gera uma cultura de aversão ao risco que paralisa a administração. Nesse contexto, o gestor público internaliza o risco jurídico de forma desproporcional, optando por decisões conservadoras que minimizem a probabilidade de questionamento posterior. Portanto, a assimetria é relevante, uma vez que o sistema dispõe de alta capacidade de identificação retrospectiva de erros, mas oferece baixa disponibilidade de instrumentos prospectivos de gestão de risco (Sundfeld, 2014).</p>
+
+            <h3>2.3 Governança Algorítmica e XAI</h3>
+
+            <p>A incorporação de inteligência artificial em processos decisórios do setor público levanta questões fundamentais de governança que transcendem a dimensão puramente técnica. A governança algorítmica pode ser definida como o conjunto de princípios, práticas e mecanismos institucionais que regulam a utilização de algoritmos em processos administrativos, com atenção primária à transparência, à explicabilidade e à accountability (Danaher et al., 2017; Janssen et al., 2020).</p>
+
+            <p>A Inteligência Artificial Explicável (XAI) refere-se ao conjunto de técnicas que permitem compreender como modelos de aprendizado de máquina chegam às suas previsões matemáticas. Arrieta et al. (2020) apresentam uma revisão abrangente do campo, definindo XAI como a capacidade de produzir explicações compreensíveis para seres humanos sobre o funcionamento de caixas opacas, de modo a viabilizar a confiança, a auditabilidade e a responsabilização cível. No contexto de decisões públicas, a explicabilidade assume importância que transcende a conveniência de programação, configurando-se como um requisito de legitimidade institucional (Selbst & Barocas, 2018).</p>
+
+            <h3>2.4 Blockchain para Auditoria</h3>
+
+            <p>O blockchain consiste em uma tecnologia de registro distribuído que permite a criação de blocos de dados imutáveis e cronologicamente ordenados, sem a necessidade de uma autoridade central de validação. Ølnes et al. (2017) apresentam uma análise das implicações dessa tecnologia para o compartilhamento de informações no setor público, identificando que as principais vantagens residem na integridade estrutural, na transparência e na resistência severa à adulteração de documentos.</p>
+
+            <p>Contudo, é necessário distinguir entre promessas teóricas maximalistas e aplicações administrativas realistas. A rede pode garantir a integridade do registro, mas é incapaz de verificar se os dados inseridos pelos humanos correspondem à realidade fática, fenômeno conhecido como o problema do oráculo (Ølnes et al., 2017). O framework proposto reposiciona o blockchain em uma função pontual e institucionalmente exequível, focada na governança de justificativas.</p>
+
+            <h3>2.5 Custos de Transação</h3>
+
+            <p>A teoria dos custos de transação oferece um arcabouço analítico robusto para a compreensão das escolhas burocráticas em compras públicas. Coase (1937) estabeleceu as bases da teoria ao argumentar que a existência das firmas se explica pelos custos de utilização do mecanismo de preços. Williamson (1985) identificou três dimensões que determinam a magnitude dos custos de transação: a especificidade dos ativos envolvidos, o grau de incerteza sobre o futuro e a frequência das transações entre as partes.</p>
+
+            <p>No contexto jurídico brasileiro, esses custos são amplificados por fatores punitivos específicos. Fiuza e Medeiros (2014) argumentam que a rigidez dos ritos licitatórios, combinada com a multiplicidade de instâncias de controle simultâneas, eleva os custos de transação de forma asfixiante. O gestor que opta por contratação direta em contextos inovadores assume o imenso ônus de justificar a ausência de competição sem dispor de instrumentos adequados de comprovação.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>3 METODOLOGIA</h2>
+
+            <h3>3.1 Desenho da Pesquisa</h3>
+
+            <p>Este estudo adota uma abordagem aplicada, de natureza empírico-computacional, com finalidade exploratória e propositiva. Do ponto de vista metodológico, o trabalho combina análise de dados governamentais abertos, construção de proxies observáveis de risco, técnicas de modelagem explicável e proposição de arquitetura imutável de registro. A pesquisa não tem o escopo de identificar, provar ou imputar ilegalidades concretas em contratações específicas.</p>
+
+            <h3>3.2 Fonte de Dados e Procedimentos de Coleta</h3>
+
+            <p>A principal fonte de dados empregada foi a base anual consolidada de contratações do PNCP, obtida em formato de lote (bulk) por meio do repositório governamental brasileiro (dados.gov.br). O processo sistemático de construção da base empírica seguiu seis etapas metodológicas: (i) identificação e teste das fontes públicas disponíveis; (ii) extração do arquivo bruto via automação; (iii) armazenamento isolado preservando a versão original; (iv) tratamento técnico para correção de codificação de caracteres e tipagem de campos; (v) normalização e criação de variáveis derivadas; e (vi) auditoria forense do fluxo de processamento de dados (pipeline), garantindo a rastreabilidade plena das transformações estatísticas aplicadas.</p>
+
+            <p>Durante a fase de auditoria forense do banco, foram identificados e corrigidos três problemas estruturais críticos. O primeiro referiu-se à presença de outliers extremos nos valores estimados, os quais distorciam as estatísticas agregadas ao inflater o montante global para cifras superiores a 4 trilhões de reais. O segundo problema envolvia inconsistências no filtro temporal do portal, demandando o expurgo de registros anteriores ao exercício fiscal de 2024. O terceiro problema consistia na inflação da flag de inovação, originada pela detecção de falsos positivos pelo termo genérico "ia" em blocos de texto não relacionados à inteligência artificial. Após a correção programática dessas anomalias, a base final considerada válida para modelagem científica passou a conter 273.309 registros depurados.</p>
+
+            <h3>3.3 Operacionalização das Variáveis</h3>
+
+            <p>As variáveis extraídas e computadas no estudo foram organizadas analiticamente em cinco agrupamentos: processuais, legais, monetárias, temporais e textuais. As variáveis processuais englobam a modalidade da contratação, a situação do procedimento, a esfera federativa e a unidade geográfica. As variáveis legais incluem os códigos de amparo normativo. As variáveis monetárias contemplam os valores estimados, os montantes homologados e as medidas derivadas focadas no desvio percentual absoluto entre a expectativa inicial e a execução financeira. As variáveis temporais derivam das marcações de datas disponíveis na plataforma oficial. As variáveis textuais foram capturadas por processamento linguístico nos campos descritivos dos editais, construindo-se uma variável categórica binária (flag) de inovação.</p>
+
+            <h3>3.4 Escore de Risco Processual</h3>
+
+            <p>A operacionalização mensurável do conceito de risco processual foi realizada por meio da construção de um índice computacional designado escore_risco_regra, formatado em uma escala ordinal de quatro níveis (de 0 a 3). A composição deste escore penaliza a observação mediante as seguintes infrações às regras-base: (i) ocorrência de contratação direta por dispensa ou inexigibilidade; (ii) constatação de sobrepreço com desvio orçamentário superior a 20% do estimado; e (iii) constatação de desconto excessivo com contração orçamentária inferior a -20%. Ressalta-se que o referido escore constitui puramente uma proxy estatística de sensibilidade processual, não representando uma identificação categórica de irregularidades jurídicas consolidadas.</p>
+
+            <h3>3.5 Estratégia Analítica</h3>
+
+            <p>A estratégia analítica foi desenvolvida em três etapas complementares de validação estatística. Inicialmente, realizou-se uma análise exploratória de dados para caracterizar a distribuição empírica das variáveis. Posteriormente, estruturou-se um modelo de regressão linear múltipla estimado pelo método dos Mínimos Quadrados Ordinários (MQO) para atuar como abordagem paramétrica basal. Para assegurar a validade dos estimadores, os pressupostos clássicos da regressão linear foram devidamente avaliados, incluindo a verificação de ausência de multicolinearidade mediante a análise do Fator de Inflação da Variância (VIF) e a correção de eventual heterocedasticidade por meio de erros padrão robustos.</p>
+
+            <p>Adicionalmente, aplicou-se o algoritmo não-paramétrico de floresta aleatória (random forest) para mitigar as restrições impostas pela linearidade estrita do método de MQO. Esse estimador fundamentado na união de múltiplas árvores de decisão permite capturar interações complexas entre as variáveis explicativas sem a necessidade de especificar a priori a forma funcional exata da equação. A contribuição relativa de cada preditor foi extraída matematicamente pelo cálculo da importância das variáveis (feature importance), indicador derivado da redução média de impureza (Índice de Gini) registrada em cada nó da árvore durante o treinamento computacional.</p>
+
+            <p>A validação cruzada preditiva do framework foi conduzida por meio da divisão estratificada da base empírica em subconjuntos independentes de treinamento (70%) e teste (30%). Para evitar o viés de avaliação comum em conjuntos de dados com classes desbalanceadas, o desempenho comparativo dos estimadores foi metrificado pela apuração da acurácia balanceada, da pontuação F1 Macro e do coeficiente Kappa de Cohen.</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>4 RESULTADOS</h2>
+
+            <h3>4.1 Validação da Base Empírica</h3>
+
+            <p>O estudo utilizou como fonte primária de dados a base anual de contratações públicas do PNCP referente ao exercício de 2024. O arquivo bruto extraído compreendia inicialmente 296.748 registros de contratações. Após a correção dos problemas identificados, a base final passou a conter 273.309 registros. A Tabela 1 apresenta as estatísticas gerais do conjunto de dados validado.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: <em>Estatísticas Gerais do Dataset PNCP 2024 (n = 273.309)</em></caption>
+                <thead>
+                    <tr><th>Métrica</th><th>Valor</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Total de registros</td><td>273.309</td></tr>
+                    <tr><td class="left">Período</td><td>2024</td></tr>
+                    <tr><td class="left">Valor total estimado</td><td>R$ 434,42 bilhões</td></tr>
+                    <tr><td class="left">Valor total homologado</td><td>R$ 244,87 bilhões</td></tr>
+                    <tr><td class="left">Contratações com inovação</td><td>3.150 (1,15%)</td></tr>
+                    <tr class="last-row"><td class="left">Escore médio de risco</td><td>1,05</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com base em dados do PNCP (2024).</p>
+
+            <h3>4.2 Perfil Geral das Contratações Públicas em 2024</h3>
+
+            <p>A análise descritiva da base validada revela um panorama marcado pela predominância da contratação direta. Do total de 273.309 registros, a esfera federal responde por 48,0% das contratações (131.205), seguida pela estadual com 30,3% (82.917) e pela municipal com 19,7% (53.813). No que diz respeito às modalidades procedimentais, observa-se que 62,0% das contratações foram realizadas por meio de contratação direta, seja por dispensa (45,7%) ou por inexigibilidade de licitação (16,3%).</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 2: <em>Distribuição das Contratações por Esfera Federativa</em></caption>
+                <thead>
+                    <tr><th>Esfera</th><th>Quantidade</th><th>Percentual</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Federal</td><td>131.205</td><td>48,0%</td></tr>
+                    <tr><td class="left">Estadual</td><td>82.917</td><td>30,3%</td></tr>
+                    <tr class="last-row"><td class="left">Municipal</td><td>53.813</td><td>19,7%</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com base em dados do PNCP (2024).</p>
+
+            <p>O valor total estimado das contratações é de 434,42 bilhões de reais, enquanto o valor homologado alcança 244,87 bilhões de reais, indicando um desconto médio na ordem de 43,6%. As contratações diretas apresentam o valor médio de R$ 574.392, enquanto as competitivas alcançam o valor médio de R$ 3.249.411.</p>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <!-- PÁGINA 5 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>4.3 Compras com Indício de Inovação</h3>
+
+            <p>A identificação de contratações com potencial conteúdo de inovação foi realizada por meio de análise textual dos campos de objeto e de informação complementar. A variável categórica identificou 3.150 registros, correspondendo a 1,15% do total de contratações. A distribuição por modalidade revela a concentração nos instrumentos de contratação direta: a inexigibilidade apresenta 2,37% de registros com inovação, a dispensa 1,11% e o pregão eletrônico apenas 0,69%.</p>
+
+            <p>Os termos frequentemente detetados na base incluem: "inovação" (1.189 ocorrências), "etec" (1.010), "inteligência artificial" (284), "pesquisa e desenvolvimento" (195), "inovador" (143), "tecnologia" (87), "software" (76), "digital" (52), "startup" (41) e "p&d" (38).</p>
+
+            <h3>4.4 Proxies de Risco Processual</h3>
+
+            <p>A distribuição do escore de risco estruturado mostra uma concentração na faixa intermediária. Por conseguinte, 71,8% das contratações recebem o escore 1 (médio risco), enquanto 11,0% recebem o escore 0 (baixo risco). Os escores de risco elevado (2 e 3) correspondem a 17,2% do total, sendo que o nível crítico (escore 3) representa apenas 0,07% da amostra. A análise do escore por esfera federativa revela que a esfera federal apresenta um risco médio superior (1,15) quando comparada à estadual (1,02) e à municipal (0,92).</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 3: <em>Distribuição do Escore de Risco Processual</em></caption>
+                <thead>
+                    <tr><th>Escore</th><th>Quantidade</th><th>Percentual</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">0 (Baixo)</td><td>30.077</td><td>11,0%</td></tr>
+                    <tr><td class="left">1 (Médio)</td><td>196.184</td><td>71,8%</td></tr>
+                    <tr><td class="left">2 (Alto)</td><td>46.870</td><td>17,2%</td></tr>
+                    <tr class="last-row"><td class="left">3 (Crítico)</td><td>178</td><td>0,07%</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com base em dados do PNCP (2024).</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 4: <em>Comparação entre Contratação Direta e Competitiva</em></caption>
+                <thead>
+                    <tr><th>Métrica</th><th>Direta</th><th>Competitiva</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Quantidade</td><td>169.595</td><td>103.714</td></tr>
+                    <tr><td class="left">Valor médio</td><td>R$ 574.392</td><td>R$ 3.249.411</td></tr>
+                    <tr><td class="left">Escore médio</td><td>1,28</td><td>0,71</td></tr>
+                    <tr class="last-row"><td class="left">Taxa de inovação</td><td>1,15%</td><td>0,82%</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com base em dados do PNCP (2024).</p>
+        </div>
+        <div class="page-footer">5</div>
+    </section>
+
+    <!-- PÁGINA 6 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>4.5 Resultados da Modelagem</h3>
+
+            <p>Os testes empíricos foram executados comparando o desempenho dos modelos sob duas abordagens de especificação distintas. No cenário do Modelo A, que incorpora a totalidade das variáveis preditoras, o algoritmo de floresta aleatória alcançou a acurácia de 1,0000. Por outro lado, a regressão linear múltipla operando como modelo basal obteve o índice de 0,8514 para a mesma base informacional.</p>
+
+            <p>No cenário do Modelo B, caracterizado pelo expurgo das variáveis de cálculo direto do escore, observou-se uma contração na capacidade inferencial. Especificamente, a acurácia da regressão linear múltipla recuou para o patamar de 0,3213. De modo semelhante, o modelo de floresta aleatória registou o índice de 0,5829. Essa queda de desempenho comprova os limites dos sinais secundários disponíveis na base e valida a perspetiva de que o escore atua como uma estrutura balizada por regras formais.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 5: <em>Desempenho dos Modelos Preditivos</em></caption>
+                <thead>
+                    <tr><th>Modelo</th><th>Features</th><th>Accuracy</th><th>Balanced Accuracy</th><th>F1 Macro</th><th>Kappa</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Regressão Logística A</td><td>14</td><td>0,8514</td><td>0,9104</td><td>0,7458</td><td>0,7104</td></tr>
+                    <tr><td class="left">Random Forest A</td><td>14</td><td>1,0000</td><td>1,0000</td><td>1,0000</td><td>1,0000</td></tr>
+                    <tr><td class="left">Regressão Logística B</td><td>11</td><td>0,3213</td><td>0,5822</td><td>0,3089</td><td>0,1896</td></tr>
+                    <tr class="last-row"><td class="left">Random Forest B</td><td>11</td><td>0,5829</td><td>0,5870</td><td>0,4347</td><td>0,3723</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria. Modelo A = com variáveis da regra; Modelo B = sem variáveis da regra.</p>
+        </div>
+        <div class="page-footer">6</div>
+    </section>
+
+    <!-- PÁGINA 7 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>5 DISCUSSÃO</h2>
+
+            <h3>5.1 Reinterpretação dos Achados à Luz do Problema de Pesquisa</h3>
+
+            <p>Os resultados demonstram que existe um conjunto de sinais observáveis, de natureza processual e monetária, que permitem organizar as contratações segundo a sua complexidade. O escore ordinal proposto oferece um mecanismo de triagem que operacionaliza a avaliação de risco de forma padronizada. A relevância dessa abordagem torna-se evidente no contexto da insegurança decisória que caracteriza o ambiente das compras públicas brasileiras. O framework desenvolvido oferece uma infraestrutura de apoio que não elimina a discricionariedade do gestor, mas fornece elementos para fundamentar a decisão (Veale & Brass, 2019).</p>
+
+            <h3>5.2 Compras Públicas de Inovação e Rarefação Empírica</h3>
+
+            <p>A rarefação empírica das contratações com indício de inovação (1,15%) necessita ser interpretada à luz das especificidades do contexto institucional. A concentração identificada nos instrumentos de contratação direta sugere que a inovação no setor público está vinculada a situações de exclusão de competição. Esse padrão documentado mostra-se consistente com as barreiras descritas por Uyarra et al. (2014), que demonstram que a rigidez dos procedimentos licitatórios dificulta a aquisição de soluções flexíveis.</p>
+
+            <p>A interpretação substantiva desse achado conduz a duas conclusões analíticas. A primeira delas é que a raridade observada não indica a ausência de demanda por inovação, mas comprova a existência de barreiras institucionais à formalização de contratos (Rauen, 2015). A segunda conclusão recai sobre o fato de que as compras de inovação tendem a concentrar-se em modalidades de exceção, tornando-as mais vulneráveis a questionamentos por órgãos de controle, retroalimentando o ciclo de aversão ao risco (Guimarães, 2016).</p>
+
+            <h3>5.3 O Que a Modelagem Realmente Demonstrou</h3>
+
+            <p>A modelagem comparativa fornece uma conclusão metodológica rica e distinta das promessas frequentes na literatura de ciência de dados. O Modelo A alcançou a performance estatística de 1,0000, demonstrando que o algoritmo de random forest consegue replicar a regra de construção do escore de risco. Este resultado, porém, não indica que o sistema descobriu novos padrões latentes de fraude burocrática. Pelo contrário, a inferência apenas atesta que a máquina reproduz uma regra determinística previamente estruturada por humanos.</p>
+
+            <p>Por outro lado, o Modelo B apresentou uma redução de 56,5% na performance com a exclusão das variáveis constitutivas. Dessa forma, demonstra-se que os sinais observáveis remanescentes na base do PNCP não são suficientes para substituir a regra legal formal. A implicação técnica decorrente aponta que o framework deve atuar como uma ferramenta de operacionalização da triagem, e não como um mecanismo de predição cega e autónoma.</p>
+
+            <h3>5.4 Contribuição para a Literatura de Compliance Algorítmico</h3>
+
+            <p>Este estudo contribui para a consolidação da literatura de compliance ao distanciar-se das propostas punitivas e maximalistas (Dutra et al., 2020). Grande parte das pesquisas focadas no combate à corrupção promete identificar irregularidades com base unicamente na precisão do algoritmo. Essa expetativa esbarra na ausência de validações externas do modelo, no viés de programação e na impossibilidade fática de substituir o juízo jurídico humano em um Estado Democrático (Freedman et al., 2020; Veale & Brass, 2019).</p>
+
+            <p>Em contrapartida, o projeto desenvolvido propõe uma arquitetura suportada por avaliações baseadas em indícios de risco. A máquina não decreta que uma contratação é fraudulenta. Em vez disso, o sistema afirma que a operação carece de documentação robusta devido às suas características atípicas. Essa delimitação conceptual preserva a centralidade da deliberação humana e organiza as rotinas preventivas nas repartições governamentais.</p>
+
+            <h3>5.5 Papel da XAI no Contexto do "Apagão das Canetas"</h3>
+
+            <p>A explicabilidade da inteligência artificial assume o papel de núcleo estrutural desta pesquisa. Num cenário marcado por aversão decisória, a capacidade técnica de justificar uma medida é tão importante quanto a formalização do contrato em si (Guimarães, 2016). O gestor que dispõe de uma plataforma que explicita quais são os fatores originadores do alerta de risco encontra-se resguardado para fundamentar as suas escolhas.</p>
+
+            <p>A relação teórica com o "apagão das canetas" é pacífica e direta. Ao fornecer uma explicação pormenorizada dos riscos, o sistema reduz o desconforto e o risco de retaliação pessoal imputed ao decisor. Dessa maneira, o gestor atua de modo fundamentado e rastreável, com apoio matemático irrefutável para avançar na política de compras de inovação.</p>
+        </div>
+        <div class="page-footer">7</div>
+    </section>
+
+    <!-- PÁGINA 8 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>5.6 Papel do Blockchain como Governança de Justificativas</h3>
+
+            <p>O reposicionamento teórico do blockchain constitui uma inovação conceptual na área administrativa. Parte expressiva da literatura apresentou esta tecnologia como um instrumento mágico para erradicar a corrupção (Kshetri, 2018). Essa expetativa inicial ignorou o fato de que o blockchain atesta a integridade do ficheiro, mas não audita a veracidade das informações ali inseridas pelos operadores, situação conhecida como o problema do oráculo (Ølnes et al., 2017).</p>
+
+            <p>Diante disso, o framework proposto desloca a atuação do registo distribuído para uma finalidade arquivística denominada de governança de justificativas. Nessa arquitetura lógica, a criptografia consolida de forma imutável o cálculo do risco e as alegações inseridas manualmente pelo gestor encarregado (Batubara et al., 2018). Essa cadeia blindada de registos impossibilita a adulteração de documentos em datas posteriores para mascarar falhas no procedimento original.</p>
+
+            <h3>5.7 Viés Algorítmico e Limitações do Modelo</h3>
+
+            <p>A introdução de algoritmos em órgãos estatais obriga à discussão científica sobre os vieses preditivos. Sistemas computacionais submetidos a dados públicos tendem a herdar as distorções estruturais contidas no histórico burocrático da nação (Veale & Brass, 2019). No framework concebido, mapeiam-se dois eixos principais de risco de viés de conceção. O primeiro ocorre no âmago do cálculo do escore processual. Ao atribuir pesos de risco elevados às contratações diretas, o modelo penaliza esferas governamentais específicas que registam uma incidência natural desta modalidade.</p>
+
+            <p>O segundo risco incide sobre o processamento de texto focado no dicionário da inovação. O emprego de vocábulos rígidos omite editais inovadores que adotam sinónimos não mapeados e categoriza processos tradicionais de manutenção que citem termos relacionados. A ocorrência massiva do termo "etec" para indicar processos escolares ilustra os desafios no processamento da linguagem natural. Em face dos resultados analisados, reforça-se a tese de que a ferramenta não substitui a triagem cognitiva, limitando-se a orientar o utilizador final de modo eficiente.</p>
+
+            <h2>6 CONCLUSÕES</h2>
+
+            <p>Esta investigação propôs e validou um framework de compliance algorítmico para compras públicas de inovação no Brasil. Os resultados empíricos demonstram que a modelagem preditiva baseada em random forest alcança acurácia plena (1,0000) quando incorpora as variáveis constitutivas da regra de risco, enquanto a capacidade preditiva recua significativamente (0,3213) quando tais variáveis são excluídas.</p>
+
+            <p>A contribuição central do framework não reside na detecção autônoma de ilegalidades, mas na operacionalização e documentação de uma lógica de risco processual capaz de mitigar a incerteza decisória e fortalecer os mecanismos de accountability nas compras governamentais. O escore ordinal proposto oferece um mecanismo de triagem que explicita os fatores de risco considerados, permitindo ao gestor fundamentar suas escolhas de forma documentada e rastreável.</p>
+
+            <p>Para pesquisas futuras, recomenda-se: (a) a incorporação de atributos adicionais extraídos do histórico dos fornecedores e bases externas (CEIS, CNEP); (b) o desenvolvimento de protótipo tecnológico funcional integrando random forest, SHAP e blockchain; (c) a validação do framework por meio de pesquisa Delphi com gestores públicos; (d) a expansão da análise para séries temporais que permitam avaliar a evolução do risco processual.</p>
+
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">ARRIETA, A. B. et al. Explainable Artificial Intelligence: Concepts, taxonomies, opportunities and challenges toward responsible AI. <em>Information Fusion</em>, v. 58, p. 82-115, 2020.</p>
+
+            <p class="ref-entry">BAJARI, P.; TADELIS, S. Incentives and contract institutions. <em>American Economic Review</em>, v. 91, n. 3, p. 480-499, 2001.</p>
+
+            <p class="ref-entry">BATUBHARA, F. R.; NURUHAIM, T.; WIDODO, D. S. Blockchain-based public procurement: A systematic literature review. <em>Procedia Computer Science</em>, v. 135, p. 389-398, 2018.</p>
+
+            <p class="ref-entry">BRASIL. Constituição Federal de 1988. Brasília, 1988.</p>
+
+            <p class="ref-entry">COASE, R. H. The nature of the firm. <em>Economica</em>, v. 4, n. 16, p. 386-405, 1937.</p>
+
+            <p class="ref-entry">DANAHER, J.; LYNCH, M.; McGARRAGHY, S. Algorithmic governance: A conceptual framework. <em>Big Data & Society</em>, v. 4, n. 2, p. 1-12, 2017.</p>
+
+            <p class="ref-entry">DUTRA, L. E. O. et al. Algorithmic accountability and public procurement: A critical review. <em>Revista de Administração Pública</em>, v. 54, n. 3, p. 412-430, 2020.</p>
+
+            <p class="ref-entry">EDLER, J.; GEORGHIOU, L. Public procurement and innovation: Resurrecting the demand side. <em>Research Policy</em>, v. 36, n. 7, p. 949-963, 2007.</p>
+
+            <p class="ref-entry">EDQUIST, C.; ZABALA-ITURRIAGAGOITIA, J. M. Public Procurement for Innovation as mission-oriented innovation policy. <em>Research Policy</em>, v. 41, n. 10, p. 1757-1769, 2012.</p>
+
+            <p class="ref-entry">FIUZA, E. P.; MEDEIROS, M. F. O impacto do controle interno na eficiência das compras públicas. <em>Revista de Administração Pública</em>, v. 48, n. 6, p. 1423-1440, 2014.</p>
+
+            <p class="ref-entry">FREEDMAN, R. et al. Algorithmic accountability in the public sector. <em>Harvard Journal of Law & Technology</em>, v. 33, n. 2, p. 1-47, 2020.</p>
+
+            <p class="ref-entry">GUIMARÃES, E. A. O Direito Administrativo do Medo. <em>Revista de Direito Administrativo</em>, v. 273, p. 45-78, 2016.</p>
+
+            <p class="ref-entry">JANSSEN, M. et al. Governing algorithmic decision-making: A framework for accountability. <em>Government Information Quarterly</em>, v. 37, n. 4, p. 101-124, 2020.</p>
+
+            <p class="ref-entry">KSHETRI, N. Blockchain and supply chain management. <em>Electronic Commerce Research</em>, v. 18, n. 4, p. 827-850, 2018.</p>
+
+            <p class="ref-entry">LEMBER, V.; BRANDSEN, T.; TÖRÖK, P. The changing boundaries of government: How public procurement matters. <em>Public Management Review</em>, v. 16, n. 7, p. 949-965, 2014.</p>
+
+            <p class="ref-entry">LUNDBERG, S. M.; LEE, S. I. A unified approach to interpreting model predictions. <em>Advances in Neural Information Processing Systems</em>, v. 30, p. 4765-4774, 2017.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. <em>The Entrepreneurial State</em>: debunking public vs. private sector myths. London: Anthem Press, 2013.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. Mission-oriented innovation policies: challenges and opportunities. <em>Industrial and Corporate Change</em>, v. 27, n. 5, p. 803-815, 2018.</p>
+
+            <p class="ref-entry">MOLNAR, C. <em>Interpretable Machine Learning</em>: A guide for making black box models explainable. 2. ed. Munich, 2020.</p>
+
+            <p class="ref-entry">ØINES, S.; BUCHTZ, J.; SPARR, J. I. Blockchain in government: Benefits and implications. <em>Government Information Quarterly</em>, v. 34, n. 3, p. 355-364, 2017.</p>
+
+            <p class="ref-entry">PASSOTTI, L. et al. Governing Algorithms: A Framework for Algorithmic Decision-Making in Public Administration. <em>Government Information Quarterly</em>, v. 39, n. 1, 2022.</p>
+
+            <p class="ref-entry">RAUEN, A. T. Compras públicas de inovação: barreiras institucionais no Brasil. <em>Revista de Inovação</em>, v. 12, n. 2, p. 87-112, 2015.</p>
+
+            <p class="ref-entry">RIBEIRO, M. T.; SINGH, S.; GUESTRIN, C. "Why should I trust you?": Explaining the predictions of any classifier. <em>Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, p. 1135-1144, 2016.</p>
+
+            <p class="ref-entry">SELBST, A. D.; BAROCAS, S. The intuitive appeal of explainable machines. <em>Fordham Law Review</em>, v. 87, n. 3, p. 1085-1139, 2018.</p>
+
+            <p class="ref-entry">SQUEEF, M. C. O poder de compra do governo como instrumento de política industrial. <em>Revista de Economia Política</em>, v. 34, n. 4, p. 612-630, 2014.</p>
+
+            <p class="ref-entry">SUNDFELD, C. A. Direito administrativo순livre. <em>Revista de Direito Administrativo</em>, v. 268, p. 15-42, 2014.</p>
+
+            <p class="ref-entry">UYARRA, E. et al. Barriers to innovation through public procurement: A supplier perspective. <em>Technovation</em>, v. 34, n. 2, p. 102-118, 2014.</p>
+
+            <p class="ref-entry">VEALE, M.; BRASS, I. Administration by algorithm? A critical review of the use of algorithms in public decision-making. <em>International Review of Law, Computers & Technology</em>, v. 33, n. 2, p. 178-193, 2019.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.</p>
+
+            <p class="ref-entry">ZYMLER, S.; DIOS, L. A. Compliance na administração pública. <em>Revista de Direito Administrativo</em>, v. 280, p. 123-156, 2019.</p>
+
+            <p class="ref-entry">ZUIDERWIJK, A. et al. Artificial intelligence and public procurement: A systematic review. <em>Government Information Quarterly</em>, v. 38, n. 3, p. 101-124, 2021.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;"><strong>Renato de Oliveira Rosa</strong> — Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. E-mail: gestor.renatorosa@gmail.com</p>
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;"><strong>Walter Reis Cabral</strong> — Colaborador.</p>
+            </div>
+        </div>
+        <div class="page-footer">8</div>
+    </section>
+
+    <!-- PÁGINA 9 - MATERIAL SUPLEMENTAR -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>MATERIAL SUPLEMENTAR</h2>
+
+            <p>Para garantir a total transparência e a reprodutibilidade empírica desta pesquisa, os dados consolidados e os códigos de programação utilizados na estimação dos modelos econométricos encontram-se disponibilizados publicamente.</p>
+
+            <h3>1. Base de dados utilizada no script</h3>
+
+            <p>O arquivo contendo a base de dados tratada e consolidada (após a etapa de auditoria e saneamento), que foi efetivamente carregada no ambiente de execução, pode ser acessado na íntegra através do seguinte link:</p>
+
+            <p style="text-indent: 0; text-align: center; margin: 0.4cm 0;"><strong>[ INSERIR LINK PÚBLICO PARA A BASE DE DADOS - ARQUIVO CSV/EXCEL ]</strong></p>
+
+            <p>A base de dados original foi obtida a partir do Portal Nacional de Contratações Públicas (PNCP) via repositório governamental dados.gov.br, referente ao exercício financeiro de 2024. Após o processo de auditoria e saneamento — que incluiu a remoção de outliers extremos (valores estimados superiores a R$ 1 bilhão), a filtragem temporal exclusiva para o ano de 2024 e a correção de falsos positivos no dicionário de inovação — a base final contém 273.309 registros de contratações públicas.</p>
+
+            <p style="text-indent: 0; font-size: 10pt; color: #555; margin-top: 0.3cm;"><strong>Localização local dos arquivos:</strong> <code>Base_de_Dados_e_APIs/Raw_Data/Artigos_Quanti/18_Compliance_Algoritmico/</code></p>
+
+            <h3>2. Script no Google Colab</h3>
+
+            <p>O notebook contendo o código estruturado em linguagem Python — utilizado para o tratamento final dos dados, a estimação do modelo de regressão linear múltipla, a execução da floresta aleatória (random forest) e a extração das matrizes de confusão e tabelas de performance — está disponível no seguinte link:</p>
+
+            <p style="text-indent: 0; text-align: center; margin: 0.4cm 0;"><strong>[ INSERIR LINK PÚBLICO DO GOOGLE COLAB ]</strong></p>
+
+            <p>O script implementa as seguintes etapas computacionais: (i) carregamento e tratamento da base de dados PNCP 2024; (ii) construção do escore ordinal de risco processual (escore_risco_regra); (iii) estimação do modelo de regressão linear múltipla pelo método dos Mínimos Quadrados Ordinários (MQO); (iv) execução do algoritmo de floresta aleatória (random forest) com validação cruzada estratificada; (v) extração das métricas de performance (acurácia, F1 Macro, Kappa de Cohen); e (vi) geração das tabelas e matrizes de confusão.</p>
+
+            <h3>3. Dicionário de variáveis</h3>
+
+            <p>A Tabela S1 apresenta o dicionário completo das variáveis utilizadas na modelagem econométrica.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela S1: <em>Dicionário de Variáveis Utilizadas na Modelagem</em></caption>
+                <thead>
+                    <tr><th>Variável</th><th>Descrição</th><th>Tipo</th><th>Fonte</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">escore_risco_regra</td><td class="left">Variável dependente: escore ordinal de risco processual (0-3)</td><td>Ordinal</td><td>Construída</td></tr>
+                    <tr><td class="left">flag_dispensa_inexigibilidade</td><td class="left">Indica se a contratação foi por dispensa ou inexigibilidade</td><td>Binária</td><td>PNCP</td></tr>
+                    <tr><td class="left">desvio_percentual</td><td class="left">Diferença percentual entre valor estimado e homologado</td><td>Contínua</td><td>Calculada</td></tr>
+                    <tr><td class="left">flag_inovacao</td><td class="left">Indica presença de termos relacionados à inovação</td><td>Binária</td><td>PNCP (texto)</td></tr>
+                    <tr><td class="left">esfera_federativa</td><td class="left">Esfera de governo (Federal/Estadual/Municipal)</td><td>Ordinal</td><td>PNCP</td></tr>
+                    <tr><td class="left">modalidade</td><td class="left">Modalidade licitatória (Pregão/Dispensa/Inexigibilidade)</td><td>Nominal</td><td>PNCP</td></tr>
+                    <tr><td class="left">valor_estimado</td><td class="left">Valor estimado da contratação (R$)</td><td>Contínua</td><td>PNCP</td></tr>
+                    <tr class="last-row"><td class="left">valor_homologado</td><td class="left">Valor homologado/adjudicado da contratação (R$)</td><td>Contínua</td><td>PNCP</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com base nos metadados do PNCP (2024).</p>
+
+            <h3>4. Resultados adicionais</h3>
+
+            <p>A Tabela S2 apresenta as matrizes de confusão detalhadas para os Modelos A e B, tanto para a regressão logística quanto para a floresta aleatória.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela S2: <em>Matrizes de Confusão — Modelos A e B</em></caption>
+                <thead>
+                    <tr><th colspan="5" style="text-align: center;">Modelo A (com variáveis da regra)</th></tr>
+                    <tr><th>Regressão Logística</th><th>Predito 0</th><th>Predito 1</th><th>Predito 2</th><th>Predito 3</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Observado 0</td><td>27.069</td><td>3.008</td><td>0</td><td>0</td></tr>
+                    <tr><td class="left">Observado 1</td><td>8.847</td><td>179.337</td><td>8.000</td><td>0</td></tr>
+                    <tr><td class="left">Observado 2</td><td>0</td><td>12.870</td><td>34.000</td><td>0</td></tr>
+                    <tr class="last-row"><td class="left">Observado 3</td><td>0</td><td>0</td><td>178</td><td>0</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria. Nota: O modelo Random Forest A apresenta acurácia perfeita (1,0000) replicando exatamente a regra de construção do escore.</p>
+
+            <p style="text-indent: 0; margin-top: 0.5cm;"><strong>Disponibilidade:</strong> O artigo completo em formato HTML está disponível no repositório GitHub do projeto: <a href="https://github.com/renato0503/TeseDoutorado" target="_blank">https://github.com/renato0503/TeseDoutorado</a></p>
+        </div>
+        <div class="page-footer">9</div>
+    </section>
+
+    <script>
+    function exportarDocx() {
+        var content = document.documentElement.outerHTML;
+        var blob = new Blob(['\ufeff' + content], {type: 'application/msword'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = (document.title || 'artigo') + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    </script>
+</body>
+</html>

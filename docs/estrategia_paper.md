@@ -4,7 +4,7 @@
 
 ## Visão Geral
 
-Este documento define a estratégia de publicação para os 17 artigos planejados no doutorado de Copiloto Algorítmico para Compras Públicas Complexas.
+Este documento define a estratégia de publicação para os 18 artigos planejados no doutorado de Copiloto Algorítmico para Compras Públicas Complexas.
 
 ---
 

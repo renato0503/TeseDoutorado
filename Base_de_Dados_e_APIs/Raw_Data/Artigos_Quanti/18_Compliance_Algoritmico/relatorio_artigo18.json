@@ -1,0 +1,145 @@
+{
+  "artigo": "18 - Compliance Algorítmico em Compras Públicas de Inovação",
+  "autores": ["Renato de Oliveira Rosa", "Walter Reis Cabral"],
+  "material_suplementar": {
+    "link_base_dados": "[PENDENTE - INSERIR LINK PÚBLICO]",
+    "link_colab": "[PENDENTE - INSERIR LINK GOOGLE COLAB]",
+    "script_local": "Base_de_Dados_e_APIs/Raw_Data/Artigos_Quanti/18_Compliance_Algoritmico/script_colab_artigo18.py",
+    "status": "Pronto para upload - script funcional incluso"
+  },
+  "fonte": "PNCP - Portal Nacional de Contratações Públicas",
+  "periodo": "2024",
+  "total_registros_originais": 296748,
+  "total_registros_saneados": 273309,
+  "problemas_identificados": [
+    "Outliers extremos em valores estimados (>1 bilhão)",
+    "Registros anteriores ao exercício de 2024",
+    "Falsos positivos no dicionário de inovação (termo 'ia' genérico)"
+  ],
+  "estatisticas_gerais": {
+    "valor_total_estimado": 434.42,
+    "valor_total_homologado": 244.87,
+    "desconto_medio": 43.6,
+    "contratacoes_com_inovacao": 3150,
+    "percentual_inovacao": 1.15,
+    "escore_medio_risco": 1.05,
+    "contratacao_direta_percentual": 62.0
+  },
+  "distribuicao_esfera": {
+    "federal": {"quantidade": 131205, "percentual": 48.0},
+    "estadual": {"quantidade": 82917, "percentual": 30.3},
+    "municipal": {"quantidade": 53813, "percentual": 19.7}
+  },
+  "distribuicao_modalidade": {
+    "contratacao_direta": 62.0,
+    "dispensa": 45.7,
+    "inexigibilidade": 16.3,
+    "competitivas": 37.3
+  },
+  "distribuicao_escore_risco": {
+    "0_baixo": {"quantidade": 30077, "percentual": 11.0},
+    "1_medio": {"quantidade": 196184, "percentual": 71.8},
+    "2_alto": {"quantidade": 46870, "percentual": 17.2},
+    "3_critico": {"quantidade": 178, "percentual": 0.07}
+  },
+  "comparacao_direta_competitiva": {
+    "direta": {
+      "quantidade": 169595,
+      "valor_medio": 574392,
+      "escore_medio": 1.28,
+      "taxa_inovacao": 1.15
+    },
+    "competitiva": {
+      "quantidade": 103714,
+      "valor_medio": 3249411,
+      "escore_medio": 0.71,
+      "taxa_inovacao": 0.82
+    }
+  },
+  "termos_inovacao": {
+    "inovacao": 1189,
+    "etec": 1010,
+    "inteligencia_artificial": 284,
+    "pesquisa_e_desenvolvimento": 195,
+    "inovador": 143,
+    "tecnologia": 87,
+    "software": 76,
+    "digital": 52,
+    "startup": 41,
+    "p_d": 38
+  },
+  "modelos": {
+    "modelo_a": {
+      "descricao": "Com variáveis da regra (14 features)",
+      "regressao_logistica": {
+        "accuracy": 0.8514,
+        "balanced_accuracy": 0.9104,
+        "f1_macro": 0.7458,
+        "kappa": 0.7104
+      },
+      "random_forest": {
+        "accuracy": 1.0000,
+        "balanced_accuracy": 1.0000,
+        "f1_macro": 1.0000,
+        "kappa": 1.0000
+      }
+    },
+    "modelo_b": {
+      "descricao": "Sem variáveis da regra (11 features)",
+      "regressao_logistica": {
+        "accuracy": 0.3213,
+        "balanced_accuracy": 0.5822,
+        "f1_macro": 0.3089,
+        "kappa": 0.1896
+      },
+      "random_forest": {
+        "accuracy": 0.5829,
+        "balanced_accuracy": 0.5870,
+        "f1_macro": 0.4347,
+        "kappa": 0.3723
+      }
+    }
+  },
+  "construcao_escore": {
+    "formula": "escore_risco_regra (0-3)",
+    "componentes": [
+      "flag_dispensa_inexigibilidade (+1 se contratação direta)",
+      "flag_sobrepreco (+1 se desvio > 20% acima do estimado)",
+      "flag_desconto_excessivo (+1 se desvio < -20% abaixo do estimado)"
+    ],
+    "natureza": "proxy estatística de sensibilidade processual - NÃO é identificação de irregularidades"
+  },
+  "framework_proposto": {
+    "modulo_1": {
+      "nome": "Classificação Explicável de Risco",
+      "tecnicas": ["Random Forest", "SHAP (explicabilidade local)", "Feature Importance (explicabilidade global)"],
+      "objetivo": "Operacionalizar triagem e fundamentar decisões"
+    },
+    "modulo_2": {
+      "nome": "Trilha de Auditoria Blockchain",
+      "componentes": ["Registro imutável do cálculo do escore", "Justificativas do gestor", "Decisão final"],
+      "objetivo": "Governança de justificativas - prevenir adulteração posterior"
+    }
+  },
+  "principais_achados": [
+    "62% das contratações são por contratação direta (dispensa/inexigibilidade)",
+    "Apenas 1,15% das contratações têm indício de inovação",
+    "Inovação concentrada em contratação direta (2,37% em inexigibilidade)",
+    "71,8% das contratações têm escore de risco médio (1)",
+    "Esfera federal tem risco médio superior (1,15) vs municipal (0,92)",
+    "Random Forest reproduz escore perfeitamente (F1=1,0) quando inclui variáveis da regra",
+    "Queda de 56,5% na performance quando variáveis da regra são removidas"
+  ],
+  "limitacoes": [
+    "Ausência de validação externa via CEIS/CNEP/TCU (APIs indisponíveis)",
+    "Flag de inovação com falsos positivos (ex: 'etec' processos escolares)",
+    "Modelo B com performance limitada - não substitui regra formal",
+    "Classes desbalanceadas (0,07% em escore 3)"
+  ],
+  "implicacoes": [
+    "Framework deve atuar como ferramenta de operacionalização, não predição autônoma",
+    "XAI reduz 'apagão das canetas' ao explicitar fatores de risco",
+    "Blockchain garante integridade documental, não veracidade (problema do oráculo)",
+    "Escore funciona como infraestrutura de justificativa de regras predefinidas"
+  ]
+}
