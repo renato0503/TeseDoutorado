@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora - Compliance Algorítmico</title>
+    <title>Calculadora de Risco Processual - Framework de Compliance Algorítmico</title>
     <link rel="stylesheet" href="../css/style_academico.css">
     <style>
         :root {
             --bg-page: #f5f5f7;
             --bg-card: #ffffff;
             --text-primary: #1d1d1f;
-            --text-secondary: #86868b;
-            --accent-blue: #007aff;
-            --accent-green: #34c759;
-            --accent-orange: #ff9500;
-            --accent-red: #ff3b30;
-            --accent-purple: #af52de;
+            --text-secondary: #6b7280;
+            --accent-blue: #2563eb;
+            --accent-green: #059669;
+            --accent-orange: #d97706;
+            --accent-red: #dc2626;
+            --border-color: #e5e7eb;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -27,368 +27,365 @@
             padding: 40px 20px;
         }
         .container { max-width: 1000px; margin: 0 auto; }
-        
-        .header {
-            background: linear-gradient(135deg, #1A365D 0%, #2a4d7c 100%);
+
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--accent-blue);
             color: white;
-            padding: 40px;
-            border-radius: 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        .nav-link:hover { background: #1d4ed8; }
+
+        .page-header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 16px;
             margin-bottom: 30px;
             text-align: center;
         }
-        .header h1 { font-size: 28px; margin-bottom: 10px; }
-        .header p { opacity: 0.9; font-size: 14px; }
-        
+        .page-header h1 { font-size: 28px; font-weight: 600; margin-bottom: 10px; }
+        .page-header .subtitle { font-size: 15px; opacity: 0.9; }
+
         .card {
             background: var(--bg-card);
-            border-radius: 16px;
+            border-radius: 12px;
             padding: 30px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
         }
         .card h2 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             margin-bottom: 20px;
-            color: #1A365D;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 10px;
+            color: #1e3a5f;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
         }
-        
+
         .formula-box {
             background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
             padding: 25px;
             margin: 20px 0;
-            font-family: 'Courier New', monospace;
+            text-align: center;
         }
         .formula-title {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             color: var(--text-secondary);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             letter-spacing: 1px;
         }
         .formula {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
-            color: #1A365D;
-            text-align: center;
-            padding: 15px;
-            background: white;
-            border-radius: 8px;
-            border: 2px dashed #cbd5e1;
+            color: #1e3a5f;
+            font-family: 'Times New Roman', serif;
         }
-        
-        .calc-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-        .calc-group {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-        }
-        .calc-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .calc-group select, .calc-group input {
-            width: 100%;
-            padding: 14px 16px;
-            font-size: 16px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            background: white;
-            transition: all 0.2s;
-            appearance: none;
-        }
-        .calc-group select:focus, .calc-group input:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px rgba(0,122,255,0.1);
-        }
-        .calc-group select {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2386868b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            padding-right: 45px;
-        }
-        
-        .result-box {
-            background: linear-gradient(135deg, #1A365D 0%, #2a4d7c 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 16px;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .result-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.8;
-            margin-bottom: 10px;
-        }
-        .result-value {
-            font-size: 64px;
-            font-weight: bold;
-            line-height: 1;
-            margin-bottom: 15px;
-        }
-        .result-label-risk {
-            font-size: 20px;
-            font-weight: 600;
-            padding: 8px 20px;
-            border-radius: 50px;
-            display: inline-block;
-        }
-        .risk-low { background: var(--accent-green); }
-        .risk-medium { background: var(--accent-orange); color: white; }
-        .risk-high { background: #e67e22; color: white; }
-        .risk-critical { background: var(--accent-red); color: white; }
-        
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        .info-item {
-            background: #f8fafc;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-        }
-        .info-item .value {
-            font-size: 24px;
-            font-weight: bold;
-            color: #1A365D;
-        }
-        .info-item .label {
-            font-size: 11px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 5px;
-        }
-        
-        .table-explanation {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 14px;
-        }
-        .table-explanation th {
-            background: #1A365D;
-            color: white;
-            padding: 12px 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-        .table-explanation td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .table-explanation tr:hover { background: #f8fafc; }
-        .table-explanation .component {
-            font-weight: 600;
-            color: #1A365D;
-        }
-        .table-explanation .formula-col {
-            font-family: 'Courier New', monospace;
-            background: #f8fafc;
-        }
-        
-        .step-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
-        }
-        .step-header {
+
+        .methodology-steps {
             display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .step {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
         }
         .step-number {
-            width: 40px;
-            height: 40px;
-            background: #1A365D;
+            width: 36px;
+            height: 36px;
+            background: #1e3a5f;
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 18px;
+            font-weight: 600;
+            font-size: 15px;
             flex-shrink: 0;
         }
-        .step-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #1A365D;
-        }
-        .step-desc {
-            color: var(--text-secondary);
-            font-size: 14px;
-            padding-left: 55px;
-        }
-        
-        .alert-box {
-            background: #fef3c7;
-            border: 1px solid #fbbf24;
-            border-radius: 10px;
-            padding: 20px;
+        .step-content { flex: 1; }
+        .step-title { font-weight: 600; color: #1e3a5f; margin-bottom: 4px; font-size: 14px; }
+        .step-desc { font-size: 13px; color: var(--text-secondary); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
             margin: 20px 0;
         }
-        .alert-box.info {
-            background: #dbeafe;
-            border-color: #3b82f6;
-        }
-        .alert-title {
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .nav-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: #1A365D;
+        th {
+            background: #1e3a5f;
             color: white;
-            text-decoration: none;
-            border-radius: 50px;
+            padding: 12px 14px;
+            text-align: left;
             font-weight: 600;
-            font-size: 14px;
-            transition: all 0.2s;
+            font-size: 12px;
+        }
+        td {
+            padding: 11px 14px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 13px;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background: #f8fafc; }
+        .component-cell { font-weight: 600; color: #1e3a5f; }
+        .formula-cell { font-family: 'Courier New', monospace; background: #f8fafc; font-size: 12px; }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .calc-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .calc-group select, .calc-group input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: white;
+            transition: border-color 0.2s;
+        }
+        .calc-group select:focus, .calc-group input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .result-panel {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 25px;
+        }
+        .result-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+        .result-value {
+            font-size: 72px;
+            font-weight: bold;
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+        .result-tag {
+            font-size: 16px;
+            font-weight: 600;
+            padding: 8px 24px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+        .risk-0 { background: #059669; }
+        .risk-1 { background: #d97706; }
+        .risk-2 { background: #ea580c; }
+        .risk-3 { background: #dc2626; }
+
+        .result-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 25px;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .detail-item { text-align: center; }
+        .detail-value { font-size: 24px; font-weight: bold; margin-bottom: 4px; }
+        .detail-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; }
+
+        .calc-breakdown {
             margin-top: 20px;
+            padding: 18px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
         }
-        .nav-link:hover {
-            background: #2a4d7c;
-            transform: translateY(-2px);
+        .breakdown-title { font-weight: 600; color: #1e3a5f; margin-bottom: 12px; font-size: 13px; }
+        .breakdown-list { list-style: none; }
+        .breakdown-list li {
+            padding: 8px 0;
+            font-size: 13px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
         }
-        
-        @media print {
-            body { background: white; padding: 20px; }
-            .card { box-shadow: none; border: 1px solid #e2e8f0; }
-            .no-print { display: none; }
+        .breakdown-list li:last-child { border-bottom: none; }
+        .breakdown-list li.positive { color: #059669; }
+        .breakdown-list li.negative { color: #6b7280; }
+
+        .alert {
+            padding: 18px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 13px;
+        }
+        .alert-info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+        .alert-warning { background: #fef3c7; border: 1px solid #fcd34d; color: #92400e; }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .link-item {
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        .link-item a { color: var(--accent-blue); text-decoration: none; font-weight: 500; font-size: 13px; }
+        .link-item a:hover { text-decoration: underline; }
+
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .page-header { padding: 30px 20px; }
+            .page-header h1 { font-size: 22px; }
+            .result-value { font-size: 56px; }
+            .result-details { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="nav-link">← Voltar ao Dashboard</a>
-        
-        <div class="header">
+        <a href="../index.html" class="nav-link">Voltar ao Dashboard</a>
+
+        <div class="page-header">
             <h1>Calculadora de Risco Processual</h1>
-            <p>Framework de Compliance Algorítmico — Artigo 18</p>
+            <p class="subtitle">Framework de Compliance Algoritmico em Compras Publicas de Inovacao</p>
         </div>
-        
+
         <div class="card">
-            <h2>📊 Entenda o Escore de Risco</h2>
-            
+            <h2>Fundamentacao do Escore de Risco</h2>
+
             <div class="formula-box">
-                <div class="formula-title">Fórmula do Escore de Risco Processual</div>
-                <div class="formula">
-                    Escore = f(dispensa) + f(desvio) + f(desconto)
-                </div>
+                <div class="formula-title">Formula de Construcao do Escore</div>
+                <div class="formula">Escore = f(contratacao_direta) + f(desvio_percentual)</div>
             </div>
-            
-            <p style="margin: 20px 0; color: var(--text-secondary);">
-                O escore de risco processual é uma <strong>proxy estatística</strong> que indica o nível de atenção regulatória recomendado para uma contratação pública. 
-                Ele é construído a partir de <strong>3 componentes</strong>, cada um somando 1 ponto quando satisfeita a condição.
+
+            <p style="margin: 20px 0; color: var(--text-secondary); font-size: 14px; text-align: justify;">
+                O escore de risco processual constitui uma <strong>proxy estatistica</strong> de nivel de atencao regulatoria recomendada para cada contratação publica. A composicao do escore segue tres componentes formais, cada qual somando um ponto quando satisfeita a condicao correspondiente.
             </p>
-            
-            <table class="table-explanation">
+
+            <table>
                 <thead>
                     <tr>
-                        <th>Componente</th>
-                        <th>Condição</th>
-                        <th>Regra de Pontuação</th>
+                        <th style="width: 15%;">Componente</th>
+                        <th style="width: 40%;">Condicao</th>
+                        <th>Regra de Pontuacao</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="component">Contratação Direta</td>
-                        <td>Modalidade é Dispensa ou Inexigibilidade</td>
-                        <td class="formula-col">+1 se modalidad ∈ {Dispensa, Inexigibilidade}</td>
+                        <td class="component-cell">Contratacao Direta</td>
+                        <td>Modalidade e Dispensa ou Inexigibilidade</td>
+                        <td class="formula-cell">+1 se modalidade e {Dispensa, Inexigibilidade}</td>
                     </tr>
                     <tr>
-                        <td class="component">Sobrepreço</td>
-                        <td>Valor homologado > 20% acima do estimado</td>
-                        <td class="formula-col">+1 se (V<sub>h</sub> - V<sub>e</sub>) / V<sub>e</sub> > 20%</td>
+                        <td class="component-cell">Sobrepreco</td>
+                        <td>Valor homologado superior em mais de 20% ao estimado</td>
+                        <td class="formula-cell">+1 se (Vh - Ve) / Ve &gt; 20%</td>
                     </tr>
                     <tr>
-                        <td class="component">Desconto Excessivo</td>
-                        <td>Valor homologado > 20% abaixo do estimado</td>
-                        <td class="formula-col">+1 se (V<sub>h</sub> - V<sub>e</sub>) / V<sub>e</sub> < -20%</td>
+                        <td class="component-cell">Desconto Excessivo</td>
+                        <td>Valor homologado inferior em mais de 20% ao estimado</td>
+                        <td class="formula-cell">+1 se (Vh - Ve) / Ve &lt; -20%</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        
+
         <div class="card">
-            <h2>🎯 Interpretação do Escore (0-3)</h2>
-            
-            <div class="info-grid">
-                <div class="info-item">
-                    <div class="value" style="color: var(--accent-green);">0</div>
-                    <div class="label">Baixo Risco</div>
-                    <div style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">Nenhuma violação identificada</div>
-                </div>
-                <div class="info-item">
-                    <div class="value" style="color: var(--accent-orange);">1</div>
-                    <div class="label">Médio Risco</div>
-                    <div style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">Contratação direta OU desvio moderado</div>
-                </div>
-                <div class="info-item">
-                    <div class="value" style="color: #e67e22;">">= 2</div>
-                    <div class="label">Alto Risco</div>
-                    <div style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">Contratação direta + desvio significativo</div>
-                </div>
-                <div class="info-item">
-                    <div class="value" style="color: var(--accent-red);">3</div>
-                    <div class="label">Crítico</div>
-                    <div style="font-size: 12px; color: var(--text-secondary); margin-top: 5px;">Casos extremos muito raros (0,07%)</div>
-                </div>
-            </div>
-            
-            <div class="alert-box info">
-                <div class="alert-title">⚠️ Importante</div>
-                <p style="font-size: 14px;">
-                    O escore é uma <strong>ferramenta de triagem</strong>, não uma identificação de ilegalidade. 
-                    Ele serve para <strong>orientar o gestor</strong> sobre quais contratações merecem atenção especial na documentação, 
-                    não para acusar ou condenar.
-                </p>
+            <h2>Escala de Interpretacao do Escore</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Escore</th>
+                        <th>Nivel de Risco</th>
+                        <th>Descricao</th>
+                        <th>Proporcao na Base</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>0</strong></td>
+                        <td>Baixo</td>
+                        <td>Nenhuma violacao identificada</td>
+                        <td>11,0%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>1</strong></td>
+                        <td>Medio</td>
+                        <td>Contratacao direta OU desvio moderado</td>
+                        <td>71,8%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2</strong></td>
+                        <td>Alto</td>
+                        <td>Contratacao direta com desvio superior a 20%</td>
+                        <td>17,2%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3</strong></td>
+                        <td>Critico</td>
+                        <td>Casos extremos (muito raros)</td>
+                        <td>0,07%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-warning">
+                <strong>Nota metodologica:</strong> O escore representa uma ferramenta de triagem para orientacao do gestor, nao constituindo identificacao de illegalidade. O sistema destina-se a fundamentar decisoes e documentar justificativas, preservando a centralidade da deliberacao humana.
             </div>
         </div>
-        
+
         <div class="card">
-            <h2>🧮 Simule uma Contratação</h2>
-            
+            <h2>Simulacao Interativa</h2>
+
             <div class="calc-grid">
                 <div class="calc-group">
-                    <label>Modalidade da Contratação</label>
+                    <label>Modalidade da Contratacao</label>
                     <select id="modalidade">
-                        <option value="competitiva">Licitação Competitiva (Pregão/Concorrência)</option>
-                        <option value="dispensa">Dispensa de Licitação</option>
-                        <option value="inexigibilidade">Inexigibilidade de Licitação</option>
+                        <option value="competitiva">Licitacao Competitiva</option>
+                        <option value="dispensa">Dispensa de Licitacao</option>
+                        <option value="inexigibilidade">Inexigibilidade de Licitacao</option>
                     </select>
                 </div>
                 <div class="calc-group">
@@ -400,85 +397,71 @@
                     <input type="number" id="valor_homologado" value="100000" min="0" step="1000">
                 </div>
             </div>
-            
-            <div class="result-box">
+
+            <div class="result-panel">
                 <div class="result-label">Escore de Risco Processual</div>
                 <div class="result-value" id="escore_resultado">0</div>
-                <span class="result-label-risk risk-low" id="risco_label">BAIXO RISCO</span>
-                
-                <div class="info-grid" style="margin-top: 25px; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 12px;">
-                    <div class="info-item" style="background: transparent; color: white;">
-                        <div class="value" id="desvio_pct" style="color: white;">0%</div>
-                        <div class="label" style="color: rgba(255,255,255,0.7);">Desvio Percentual</div>
+                <span class="result-tag risk-0" id="risco_label">BAIXO RISCO</span>
+
+                <div class="result-details">
+                    <div class="detail-item">
+                        <div class="detail-value" id="desvio_pct">0%</div>
+                        <div class="detail-label">Desvio Percentual</div>
                     </div>
-                    <div class="info-item" style="background: transparent; color: white;">
-                        <div class="value" id="componentes" style="color: white;">0/3</div>
-                        <div class="label" style="color: rgba(255,255,255,0.7);">Componentes de Risco</div>
+                    <div class="detail-item">
+                        <div class="detail-value" id="componentes">0/3</div>
+                        <div class="detail-label">Componentes de Risco</div>
                     </div>
                 </div>
             </div>
-            
-            <div style="margin-top: 20px; padding: 15px; background: #f8fafc; border-radius: 10px; font-size: 14px;">
-                <strong>Detalhamento do Cálculo:</strong>
-                <ul id="detalhamento" style="margin-top: 10px; padding-left: 20px; color: var(--text-secondary);">
-                    <li>Aguardando simulação...</li>
+
+            <div class="calc-breakdown">
+                <div class="breakdown-title">Detalhamento do Calculo</div>
+                <ul class="breakdown-list" id="detalhamento">
+                    <li>Aguardando simulacao...</li>
                 </ul>
             </div>
         </div>
-        
+
         <div class="card">
-            <h2>📈 Como o Modelo foi Construído</h2>
-            
-            <div class="step-card">
-                <div class="step-header">
+            <h2>Metodologia de Construcao do Modelo</h2>
+
+            <div class="methodology-steps">
+                <div class="step">
                     <div class="step-number">1</div>
-                    <div class="step-title">Extração dos Dados PNCP</div>
+                    <div class="step-content">
+                        <div class="step-title">Extracao dos Dados PNCP</div>
+                        <div class="step-desc">Dados brutos obtidos via bulk data do Portal Nacional de Contratacoes Publicas (dados.gov.br), exercicio 2024. Volume inicial: 296.748 registros.</div>
+                    </div>
                 </div>
-                <div class="step-desc">
-                    Dados brutos do Portal Nacional de Contratações Públicas (2024) foram extraídos via bulk data do dados.gov.br. 
-                    Total inicial: <strong>296.748 registros</strong>.
-                </div>
-            </div>
-            
-            <div class="step-card">
-                <div class="step-header">
+                <div class="step">
                     <div class="step-number">2</div>
-                    <div class="step-title">Auditoria e Saneamento</div>
+                    <div class="step-content">
+                        <div class="step-title">Auditoria e Saneamento</div>
+                        <div class="step-desc">Remocao de outliers extremos (valores > R$ 1 bilhao), filtragem temporal para 2024, e correcao de falsos positivos na flag de inovacao. Resultado: 273.309 registros validos.</div>
+                    </div>
                 </div>
-                <div class="step-desc">
-                    Três problemas foram corrigidos: (1) outliers extremos removidos (valores > R$ 1 bilhão), 
-                    (2) inconsistências temporais filtradas, (3) falsos positivos de inovação eliminados. 
-                    Resultado: <strong>273.309 registros válidos</strong>.
-                </div>
-            </div>
-            
-            <div class="step-card">
-                <div class="step-header">
+                <div class="step">
                     <div class="step-number">3</div>
-                    <div class="step-title">Construção do Escore</div>
+                    <div class="step-content">
+                        <div class="step-title">Construcao do Escore</div>
+                        <div class="step-desc">Aplicacao das tres regras de pontuacao para cada registro, gerando o escore ordinal de 0 a 3.</div>
+                    </div>
                 </div>
-                <div class="step-desc">
-                    Aplicação das 3 regras de pontuação descritas acima para cada registro, 
-                    gerando o escore ordinal de 0 a 3.
-                </div>
-            </div>
-            
-            <div class="step-card">
-                <div class="step-header">
+                <div class="step">
                     <div class="step-number">4</div>
-                    <div class="step-title">Modelagem Comparativa</div>
-                </div>
-                <div class="step-desc">
-                    Dois algoritmos foram treinados e comparados: <strong>Regressão Logística</strong> e <strong>Random Forest</strong>. 
-                    Cada um foi executado em dois cenários: com variáveis da regra (Modelo A) e sem elas (Modelo B).
+                    <div class="step-content">
+                        <div class="step-title">Modelagem Comparativa</div>
+                        <div class="step-desc">Dois algoritmos treinados: Regressao Logistica e Random Forest. Cada um executado em dois cenarios: com variaveis da regra (Modelo A) e sem elas (Modelo B).</div>
+                    </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="card">
-            <h2>📊 Resultados do Modelo (273.309 registros)</h2>
-            
-            <table class="table-explanation">
+            <h2>Resultados dos Modelos Preditivos</h2>
+
+            <table>
                 <thead>
                     <tr>
                         <th>Modelo</th>
@@ -491,152 +474,134 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="component">Random Forest A</td>
+                        <td class="component-cell">Random Forest A</td>
                         <td>14</td>
-                        <td style="color: var(--accent-green); font-weight: bold;">1.0000</td>
-                        <td style="color: var(--accent-green); font-weight: bold;">1.0000</td>
-                        <td style="color: var(--accent-green); font-weight: bold;">1.0000</td>
-                        <td style="color: var(--accent-green); font-weight: bold;">1.0000</td>
+                        <td style="color: var(--accent-green); font-weight: bold;">1,0000</td>
+                        <td style="color: var(--accent-green);">1,0000</td>
+                        <td style="color: var(--accent-green);">1,0000</td>
+                        <td style="color: var(--accent-green);">1,0000</td>
                     </tr>
                     <tr>
-                        <td class="component">Regressão Logística A</td>
+                        <td class="component-cell">Regressao Logistica A</td>
                         <td>14</td>
-                        <td>0.8514</td>
-                        <td>0.9104</td>
-                        <td>0.7458</td>
-                        <td>0.7104</td>
+                        <td>0,8514</td>
+                        <td>0,9104</td>
+                        <td>0,7458</td>
+                        <td>0,7104</td>
                     </tr>
                     <tr>
-                        <td class="component">Random Forest B</td>
+                        <td class="component-cell">Random Forest B</td>
                         <td>11</td>
-                        <td style="color: var(--accent-orange);">0.5829</td>
-                        <td style="color: var(--accent-orange);">0.5870</td>
-                        <td style="color: var(--accent-orange);">0.4347</td>
-                        <td style="color: var(--accent-orange);">0.3723</td>
+                        <td style="color: var(--accent-orange);">0,5829</td>
+                        <td style="color: var(--accent-orange);">0,5870</td>
+                        <td style="color: var(--accent-orange);">0,4347</td>
+                        <td style="color: var(--accent-orange);">0,3723</td>
                     </tr>
                     <tr>
-                        <td class="component">Regressão Logística B</td>
+                        <td class="component-cell">Regressao Logistica B</td>
                         <td>11</td>
-                        <td style="color: var(--accent-red);">0.3213</td>
-                        <td style="color: var(--accent-red);">0.5822</td>
-                        <td style="color: var(--accent-red);">03089</td>
-                        <td style="color: var(--accent-red);">0.1896</td>
+                        <td style="color: var(--accent-red);">0,3213</td>
+                        <td style="color: var(--accent-red);">0,5822</td>
+                        <td style="color: var(--accent-red);">0,3089</td>
+                        <td style="color: var(--accent-red);">0,1896</td>
                     </tr>
                 </tbody>
             </table>
-            
-            <div class="alert-box">
-                <div class="alert-title">🔍 Interpretação dos Resultados</div>
-                <p style="font-size: 14px;">
-                    O <strong>Modelo A (Random Forest)</strong> alcança performance perfeita (F1=1.0) porque ele simplesmente 
-                    <strong>replica a regra de construção</strong> do escore — não descobre padrões ocultos. <br><br>
-                    Quando removemos as variáveis da regra (<strong>Modelo B</strong>), a performance cai ~57%, 
-                    provando que o escore é uma <strong>regra formal determinística</strong>, não um padrão estatístico latente.
-                </p>
+
+            <div class="alert alert-info">
+                <strong>Interpretacao:</strong> O Modelo A (Random Forest) alcanca performance perfeita (F1 = 1,0) porque replica a regra de construcao do escore, nao descobrindo padroes latentes. Quando removidas as variaveis da regra (Modelo B), a performance cai aproximadamente 57%, comprovando que o escore constitui uma regra formal deterministica, nao um padrao estatistico oculto.
             </div>
         </div>
-        
+
         <div class="card">
-            <h2>🔗 Material Complementar</h2>
-            
-            <div class="info-grid">
-                <div class="info-item">
-                    <div class="value" style="font-size: 18px;">📄</div>
-                    <div class="label"><a href="../Artigos/18-Compliance-Algoritmico-Integrado/artigo_18.html" target="_blank" style="color: var(--accent-blue);">Artigo Completo (HTML)</a></div>
+            <h2>Material Complementar</h2>
+
+            <div class="links-grid">
+                <div class="link-item">
+                    <a href="../Artigos/18-Compliance-Algoritmico-Integrado/artigo_18.html" target="_blank">Artigo Completo (HTML)</a>
                 </div>
-                <div class="info-item">
-                    <div class="value" style="font-size: 18px;">🗃️</div>
-                    <div class="label"><a href="#" style="color: var(--accent-blue);">[Pendente] Base de Dados</a></div>
+                <div class="link-item">
+                    <a href="https://raw.githubusercontent.com/renato0503/TeseDoutorado/main/Base_de_Dados_e_APIs/Raw_Data/Artigos_Quanti/18_Compliance_Algoritmico/dados_pncp_2024.csv" target="_blank">Base de Dados (CSV)</a>
                 </div>
-                <div class="info-item">
-                    <div class="value" style="font-size: 18px;">📓</div>
-                    <div class="label"><a href="#" style="color: var(--accent-blue);">[Pendente] Script Python</a></div>
+                <div class="link-item">
+                    <a href="https://raw.githubusercontent.com/renato0503/TeseDoutorado/main/Base_de_Dados_e_APIs/Raw_Data/Artigos_Quanti/18_Compliance_Algoritmico/framework_compliance_pncp.py" target="_blank">Script Python</a>
                 </div>
-                <div class="info-item">
-                    <div class="value" style="font-size: 18px;">📊</div>
-                    <div class="label"><a href="../docs/monitor_dados.md" style="color: var(--accent-blue);">Monitor de Dados</a></div>
+                <div class="link-item">
+                    <a href="https://github.com/renato0503/TeseDoutorado" target="_blank">Repositorio GitHub</a>
                 </div>
             </div>
         </div>
-        
-        <div style="text-align: center; margin-top: 40px; padding: 20px; color: var(--text-secondary); font-size: 12px;">
-            <p>Framework de Compliance Algorítmico — Artigo 18</p>
-            <p>Doutorado Fucape Business School | Renato de Oliveira Rosa & Walter Reis Cabral</p>
+
+        <div class="footer">
+            <p>Framework de Compliance Algoritmico em Compras Publicas de Inovacao</p>
+            <p>Doutorado em Ciencias Contabeis e Administracao | Fucape Business School</p>
         </div>
     </div>
-    
+
     <script>
         const modalidadeSelect = document.getElementById('modalidade');
         const valorEstimadoInput = document.getElementById('valor_estimado');
         const valorHomologadoInput = document.getElementById('valor_homologado');
-        
+
         const escoreDisplay = document.getElementById('escore_resultado');
         const riscoLabel = document.getElementById('risco_label');
         const desvioPct = document.getElementById('desvio_pct');
         const componentes = document.getElementById('componentes');
         const detalhamento = document.getElementById('detalhamento');
-        
+
         function calcularRisco() {
             const modalidad = modalidadeSelect.value;
             const valorEstimado = parseFloat(valorEstimadoInput.value) || 0;
             const valorHomologado = parseFloat(valorHomologadoInput.value) || 0;
-            
+
             let escore = 0;
             const detalhes = [];
-            
-            // Componente 1: Contratação Direta
+
             const ehDireta = (modalidad === 'dispensa' || modalidad === 'inexigibilidade');
             if (ehDireta) {
                 escore += 1;
-                detalhes.push(`✓ Contratação direta: +1 ponto (modalidade = ${modalidad})`);
+                detalhes.push({ texto: `Contratacao direta: +1 ponto (modalidade = ${modalidad})`, positivo: true });
             } else {
-                detalhes.push(`✗ Contratação competitiva: +0 pontos`);
+                detalhes.push({ texto: `Contratacao competitiva: +0 pontos`, positivo: false });
             }
-            
-            // Componente 2: Desvio Percentual
+
             let desvio = 0;
             if (valorEstimado > 0) {
                 desvio = ((valorHomologado - valorEstimado) / valorEstimado) * 100;
             }
-            
+
             const ehSobrepreco = desvio > 20;
             const ehDescontoExcessivo = desvio < -20;
-            
+
             if (ehSobrepreco) {
                 escore += 1;
-                detalhes.push(`✓ Sobrepreço (>20%): +1 ponto (desvio = ${desvio.toFixed(1)}%)`);
+                detalhes.push({ texto: `Sobrepreco (>20%): +1 ponto (desvio = ${desvio.toFixed(1)}%)`, positivo: true });
             } else if (ehDescontoExcessivo) {
                 escore += 1;
-                detalhes.push(`✓ Desconto excessivo (<-20%): +1 ponto (desvio = ${desvio.toFixed(1)}%)`);
+                detalhes.push({ texto: `Desconto excessivo (<-20%): +1 ponto (desvio = ${desvio.toFixed(1)}%)`, positivo: true });
             } else {
-                detalhes.push(`✗ Desvio moderado (${desvio.toFixed(1)}%): +0 pontos`);
+                detalhes.push({ texto: `Desvio moderado (${desvio.toFixed(1)}%): +0 pontos`, positivo: false });
             }
-            
-            // Componente 3: Desconto Excessivo (verificado separadamente do sobrepreço)
-            // Já incluso no componente 2 acima
-            
-            // Atualizar UI
+
             escoreDisplay.textContent = escore;
             desvioPct.textContent = `${desvio.toFixed(1)}%`;
             componentes.textContent = `${escore}/3`;
-            
-            // Estilo e cor do risco
-            const labels = ['BAIXO RISCO', 'MÉDIO RISCO', 'ALTO RISCO', 'CRÍTICO'];
-            const classes = ['risk-low', 'risk-medium', 'risk-high', 'risk-critical'];
-            
+
+            const labels = ['BAIXO RISCO', 'MEDIO RISCO', 'ALTO RISCO', 'CRITICO'];
+            const classes = ['risk-0', 'risk-1', 'risk-2', 'risk-3'];
+
             riscoLabel.textContent = labels[escore];
-            riscoLabel.className = `result-label-risk ${classes[escore]}`;
-            
-            // Detalhamento
-            detalhamento.innerHTML = detalhes.map(d => `<li>${d}</li>`).join('');
+            riscoLabel.className = `result-tag ${classes[escore]}`;
+
+            detalhamento.innerHTML = detalhes.map(d =>
+                `<li class="${d.positivo ? 'positive' : 'negative'}">${d.texto}</li>`
+            ).join('');
         }
-        
-        // Event listeners
+
         modalidadeSelect.addEventListener('change', calcularRisco);
         valorEstimadoInput.addEventListener('input', calcularRisco);
         valorHomologadoInput.addEventListener('input', calcularRisco);
-        
-        // Cálculo inicial
+
         calcularRisco();
     </script>
 </body>
