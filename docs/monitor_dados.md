@@ -9,7 +9,7 @@
 
 ---
 
-## Status atual: 17 Artigos + 1 Artefato
+## Status atual: 18 Artigos + 1 Artefato
 
 ### Legenda de Status
 
@@ -46,6 +46,7 @@
 | 06 | Análise de Sobrevivência (Kaplan-Meier) | Contratos com datas (10K registros) | Portal Transparência | 🟢 Pronto |
 | 07 | Governança Algorítmica: Benchmarking | Métricas por órgão (180 municípios) | Siconfi + IBGE | 🟢 Pronto |
 | 08 | XAI em Prova de Conceito: TCEs | Decisões de auditoria (8.5K registros) | Bases Históricas + Dados TCU | 🟢 Pronto |
+| 18 | Compliance Algorítmico em Compras de Inovação | Registros PNCP 2024 (273.309 registros) | PNCP Bulk (dados.gov.br) | 🟢 Pronto |
 
 ---
 
@@ -104,7 +105,7 @@
 
 | Categoria | Quantidade | Porcentagem |
 |-----------|------------|--------------|
-| Artigos com dados ✅ | 17 | 100.0% |
+| Artigos com dados ✅ | 18 | 100.0% |
 | Pensadores críticos incorporados 🟢 | 10 | 100.0% |
 | Artigos com dados parciais ⚠️ | 0 | 0.0% |
 | Artigos pendentes 🔴 | 0 | 0.0% |

@@ -343,7 +343,7 @@ site:linkedin.com/pulse "compras públicas" tecnologia
 
 **Documento completo:** Ver `dicionario_dados.md` para matriz consolidada com:
 
-- **17 artigos + 1 artefato** mapeados individualmente
+- **18 artigos + 1 artefato** mapeados individualmente
 - Para cada item: What, Why, Where, When, Who, How, How much
 - Fontes de dados, volumes estimados e ordem de extração recomendada
 

@@ -2,7 +2,7 @@
 
 ## Visão Geral
 
-Este documento consolida o mapeamento completo das necessidades de dados para os 17 artigos científicos e o artefato Copiloto da tese de doutorado.
+Este documento consolida o mapeamento completo das necessidades de dados para os 18 artigos científicos e o artefato Copiloto da tese de doutorado.
 
 ---
 
@@ -138,7 +138,27 @@ Este documento consolida o mapeamento completo das necessidades de dados para os
 
 ---
 
-## PARTE II: ARTIGOS QUALITATIVOS (09-17)
+## PARTE II: ARTIGOS QUALITATIVOS (09-15)
+
+---
+
+### Artigo 18 - Compliance Algorítmico em Compras Públicas de Inovação
+
+| Dimensão | Detalhamento |
+|----------|---------------|
+| **What** | Base de dados PNCP 2024 (273.309 registros) com escore ordinal de risco processual (0-3) |
+| **Why** | Propor framework de compliance algorítmico com XAI (Random Forest + SHAP) e trilhas blockchain |
+| **Where** | PNCP bulk data (dados.gov.br) |
+| **When** | Exercício financeiro 2024 |
+| **Who** | Contratações públicas de todas as esferas federativas |
+| **How** | Extração bulk + saneamento + modelagem Random Forest vs Regressão Logística |
+| **How much** | 273.309 registros após saneamento (de 296.748 originais) |
+
+**Features necessárias:** `modalidade`, `esfera`, `valor_estimado`, `valor_homologado`, `desvio_percentual`, `flag_inovacao`, `escore_risco_regra`
+
+---
+
+## PARTE III: REVISÃO SISTEMÁTICA (16-17)
 
 ---
 
@@ -286,7 +306,7 @@ Este documento consolida o mapeamento completo das necessidades de dados para os
 
 ---
 
-## PARTE III: ARTEFATO COPILOTO
+## PARTE V: ARTEFATO COPILOTO
 
 ---
 

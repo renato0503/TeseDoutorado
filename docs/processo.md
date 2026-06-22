@@ -158,7 +158,7 @@ def calcular_complexidade(texto: str) -> dict:
 
 **Organização:**
 - `Tese/` - Arquivos da tese
-- `Artigos/` - 17 artigos em desenvolvimento
+- `Artigos/` - 18 artigos em desenvolvimento
 - `scripts/` - Scripts Python de análise
 - `dados/` - Dados brutos e processados
 

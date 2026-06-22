@@ -24,7 +24,7 @@ TeseDoutorado/
 │   ├── style_academico.css       # Estilo ABNT/APA
 │   ├── gerar_graficos.py         # Geração de SVGs (matplotlib)
 │   └── imagens/                  # 10 SVGs (5 gráficos + 5 figuras)
-├── Artigos/                      # 17 artigos (8 quanti + 9 quali)
+├── Artigos/                      # 18 artigos (9 quanti + 9 quali)
 │   ├── 16-Caixa-Preta-.../artigo_16.html  ✅ COMPLETO
 │   └── 17-DSR-Contabilidade/artigo_17.html ✅ COMPLETO
 ├── Base_de_Dados_e_APIs/
@@ -76,8 +76,9 @@ Repositório GitHub: https://github.com/renato0503/TeseDoutorado
 | 15 | IA na Mídia | ✅ Pronto | 388 matérias Conjur/Valor/Jota (Framing, χ²=108,45) |
 | 16 | Revisão XAI | ✅ Pronto | 52 artigos (PRISMA, rede coautorias NetworkX, 5 eixos) |
 | 17 | DSR Contabilidade | ✅ Pronto | 42 artigos (Scoping Review, matriz Gregor & Hevner) |
+| 18 | Compliance Algorítmico | ✅ Pronto | 273.309 registros PNCP 2024 (Random Forest + Blockchain) |
 
-**Total: 17 prontos (100%) — Todos os artigos completos e estruturados**
+**Total: 18 prontos (100%) — Todos os artigos completos e estruturados**
 
 ---
 
@@ -178,6 +179,14 @@ Repositório GitHub: https://github.com/renato0503/TeseDoutorado
 - Executou Análise de Conteúdo de Laurence Bardin codificando o corpus em quatro categorias temáticas (Direcionamento de Edital: 39,33%, Superespecificação de Exigências Técnicas: 26,67%, Incompatibilidade com Práticas de Mercado: 23,33%, Incongruência no Orçamento Estimado: 10,67%).
 - Realizou o teste de Qui-Quadrado de Independência de Pearson (χ² = 25,6464, p = 4,100 × 10⁻⁷, df = 1, p < 0,001), provando a forte dependência entre a complexidade do objeto tecnológico e a probabilidade de acolhimento (taxa de acolhimento de 62,50% em objetos complexos vs. 21,43% em comuns).
 - Redigiu o artigo_11.html em formato ABNT contendo fundamentação baseada na Economia dos Custos de Transação (Williamson), Assimetria de Informação (Akerlof), Barreiras de Entrada (Bain) e Design Science Research (Hevner; Peffers) com três tabelas acadêmicas detalhadas.
+
+### 17. Artigo 18 - Compliance Algorítmico em Compras Públicas de Inovação
+- Artigo desenvolvido na disciplina de quanti com coautor Walter Reis Cabral
+- Base de dados: 273.309 registros PNCP 2024 (após saneamento de 296.748 originais)
+- Framework proposto: Classificação XAI (Random Forest) + Trilha Blockchain
+- Escore ordinal de risco processual (0-3) baseado em proxies observáveis
+- Resultados: Random Forest F1=1.0000 (Modelo A) vs 0.4347 (Modelo B)
+- Conclusão: Framework não detecta ilegalidades, mas operacionaliza triagem de risco
 
 ### 16. Tese Draft Reescrita e Infraestrutura de Visualização
 - Draft da tese (`tese_draft.html`) completamente reescrito com `style_academico.css`
