@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>O Valor de Mercado das GovTechs e a Governança Algorítmica</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
+    <style>
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin: 0 0 0.2cm 0; text-align: justify; font-size: 10pt; }
+        .placeholder-box { border: 1px dashed #999; padding: 0.3cm; margin: 0.3cm 0; background-color: #f9f9f9; font-size: 9pt; color: #555; }
+    </style>
+</head>
+<body>
+
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
+    </div>
+
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">O VALOR DE MERCADO DAS GOVTECHS E A GOVERNANÇA ALGORÍTMICA: UMA PROPOSTA DE ESTUDO DE EVENTOS A PARTIR DE DADOS DA REFINITIV EIKON</h1>
+
+            <p style="text-align: center; margin-bottom: 0.5cm;"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>O presente artigo propõe um estudo de eventos destinado a investigar se empresas listadas em bolsa que mantêm contratos com o setor público brasileiro apresentam retornos acionários diferenciados em função da implementação de mecanismos de governança algorítmica. A pesquisa empregará dados de retornos e indicadores fundamentalistas extraídos da base Refinitiv Eikon, combinados com informações de contratos públicos do Portal Nacional de Contratações Públicas (PNCP). A amostra será composta por empresas listadas na B3 com receita proveniente do setor público superior a 5% do faturamento total. Os eventos de interesse corresponderão a anúncios de certificação de compliance algorítmico, incluindo certificações com módulos de monitoramento algorítmico e implantações de plataformas de auditoria contínua. Serão aplicadas a metodologia de mercado modelo, regressão em painel com efeitos fixos e técnicas de bootstrap para avaliação de significância estatística. Espera-se contribuir para a literatura sobre os efeitos financeiros da governança algorítmica, com implicações para a precificação de empresas fornecedoras do Estado e para o desenho de políticas públicas de compras de inovação.</p>
+                <p><strong>Palavras-chave:</strong> GovTechs; Governança Algorítmica; Estudo de Eventos; Refinitiv Eikon; Compras Públicas.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>This paper proposes an event study aimed at investigating whether publicly listed companies that hold contracts with the Brazilian public sector exhibit differential stock returns as a function of the implementation of algorithmic governance mechanisms. The research will employ return and fundamental indicator data extracted from the Refinitiv Eikon database, combined with information on public contracts from the National Public Procurement Portal (PNCP). The sample will be composed of B3-listed companies with revenue from the public sector exceeding 5% of total revenue. The events of interest will correspond to announcements of algorithmic compliance certification, including certifications with algorithmic monitoring modules and implementations of continuous auditing platforms. Market model methodology, panel regression with fixed effects, and bootstrap techniques will be applied to assess statistical significance. The study expects to contribute to the literature on the financial effects of algorithmic governance, with implications for the pricing of public sector suppliers and for the design of public innovation procurement policies.</p>
+                <p><strong>Keywords:</strong> GovTechs; Algorithmic Governance; Event Study; Refinitiv Eikon; Public Procurement.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+
+            <p>O mercado de compras governamentais de tecnologia da informação no Brasil mobiliza volumes expressivos, consolidando-se como componente relevante do portfólio de receitas de empresas listadas em bolsa. Nesse contexto, as empresas denominadas GovTechs, definidas como organizações de base tecnológica dedicadas ao fornecimento de soluções digitais para o setor público, enfrentam o desafio de compatibilizar retorno financeiro ao acionista com o atendimento de exigências regulatórias crescentes (Mazzucato, 2013).</p>
+
+            <p>A discussão sobre governança algorítmica tem ocupado posição central no debate acadêmico contemporâneo sobre a digitalização do Estado (Danaher et al., 2017). A incorporação de sistemas de inteligência artificial nos processos de conformidade contratual constitui estratégia que visa reduzir assimetrias informacionais entre gestores públicos e fornecedores privados, ao mesmo tempo em que mitiga riscos de responsabilização pessoal dos administradores. Contudo, permanece inexplorada na literatura a questão relativa ao modo como o mercado financeiro precifica a adoção desses mecanismos de governança pelas empresas contratadas.</p>
+
+            <p>A Economia dos Custos de Transação, formulada por Coase (1937) e aprofundada por Williamson (1985, 1996), oferece fundamentação teórica para compreender a relação entre mecanismos de governança e desempenho empresarial. A teoria postula que transações caracterizadas por alta especificidade de ativos e incerteza ambiental demandam estruturas de governança mais elaboradas, cujos custos de implementação devem ser compensados por benefícios em termos de redução de risco e incremento de previsibilidade. Nessa perspectiva, a adoção de governança algorítmica por fornecedores do setor público pode ser interpretada como sinal de qualidade gerencial que reduz o custo de capital e amplia o valor de mercado.</p>
+
+            <p>A Teoria da Sinalização, desenvolvimento por Spence (1973) e ampliada para o contexto corporativo por Ross (1977), sustenta que empresas dispostas a incorrer em custos de implementação de mecanismos de governança transmitam ao mercado informação privada sobre sua qualidade intrínseca. A certificação de compliance algorítmico, ao exigir investimentos em auditoria, treinamento e infraestrutura tecnológica, funciona como sinal custoso e verificável que distingue empresas comprometidas com elevados padrões de conformidade daquelas que priorizam exclusivamente a maximização de curto prazo.</p>
+
+            <p>Diante do exposto, formula-se a seguinte questão de pesquisa: de que forma o mercado acionário brasileiro reage à implementação de mecanismos de governança algorítmica por empresas fornecedoras do setor público? O objetivo geral consiste em propor e fundamentar um estudo de eventos e regressão em painel que examine o impacto da certificação de compliance algorítmico sobre os retornos acionários e o custo de capital de empresas listadas na B3 com exposição ao mercado público de tecnologia.</p>
+
+            <p>A presente pesquisa contribui para a literatura em três dimensões. Em primeiro lugar, avança o conhecimento sobre os efeitos financeiros da governança algorítmica, tema ainda predominantemente abordado sob perspectiva jurídica e administrativa. Em segundo lugar, fornece evidência empírica sobre a precificação de ativos intangíveis relacionados à conformidade regulatória no mercado brasileiro. Em terceiro lugar, subsidia o desenho de políticas públicas de compras que incentivem a adoção de padrões de governança pelos fornecedores.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
+
+            <h3>2.1 Custos de Transação e Governança Empresarial</h3>
+
+            <p>A Economia dos Custos de Transação, conforme sistematizada por Williamson (1985, 1996), estabelece que as transações econômicas ocorrem sob três pressupostos comportamentais fundamentais: racionalidade limitada, oportunismo e especificidade de ativos. Esses pressupostos geram custos de transação ex-ante, relacionados à negociação e redação de contratos, e ex-post, referentes ao monitoramento e renegociação de acordos incompletos. A literatura subsequente demonstrou que a estrutura de governança adotada pelas organizações constitui resposta racional à minimização desses custos, configurando o que Williamson denominou estruturas de governança eficientes (Coase, 1937).</p>
+
+            <p>No contexto das compras públicas de tecnologia, a especificidade dos ativos envolvidos, frequentemente representados por softwares customizados, algoritmos proprietérios e infraestrutura de dados, eleva substancialmente os custos de transação. Consequentemente, fornecedores que adotam mecanismos de governança capazes de reduzir a assimetria informacional entre as partes, como sistemas de auditoria contínua e trilhas de conformidade imutáveis, tendem a se beneficiar de contratos mais estáveis e relações de longo prazo com órgãos públicos (Mazzucato, 2013).</p>
+
+            <h3>2.2 Teoria da Sinalização e Valor de Mercado</h3>
+
+            <p>A Teoria da Sinalização, originalmente proposta por Spence (1973) no contexto do mercado de trabalho e estendida para o mercado de capitais por Ross (1977), postula que agentes informados sobre sua própria qualidade podem comunicar essa informação a agentes menos informados por meio de sinais custosos e verificáveis. A credibilidade do sinal reside em sua onerosidade diferencial, ou seja, na dificuldade que agentes de baixa qualidade enfrentam para emulá-lo.</p>
+
+            <p>No âmbito corporativo, sinais de governança assumem relevância particular porque permitem ao mercado distinguir entre empresas comprometidas com transparência e conformidade daquelas que adotam comportamentos oportunistas. A certificação de compliance algorítmico, ao demandar investimentos em infraestrutura tecnológica, auditoria externa e adequação a padrões internacionais, configura-se como sinal custoso capaz de reduzir o prêmio de risco exigido pelos investidores.</p>
+
+            <p>Estudos anteriores sobre governança corporativa demonstraram que a adoção de práticas diferenciadas associa-se a retornos acionários positivos e a reduções mensuráveis no custo de capital. No contexto brasileiro, pesquisas sobre práticas de governança e valor de mercado têm documentado relações positivas, embora com magnitude variável conforme o período e o segmento analisado (Passotti et al., 2022).</p>
+
+            <h3>2.3 Governança Algorítmica como Mecanismo de Sinalização</h3>
+
+            <p>A governança algorítmica, compreendida como conjunto de mecanismos computacionais voltados à verificação de conformidade regulatória em tempo real, emergiu nas últimas décadas como categoria específica de sinalização corporativa. Diferentemente de mecanismos tradicionais de governança, baseados em declarações periódicas e auditoria ex-post, os sistemas algorítmicos produzem evidências contínuas e verificáveis sobre a aderência das transações a marcos regulatórios predefinidos (Danaher et al., 2017; Koenig, 2019).</p>
+
+            <p>No contexto brasileiro, a promulgação da Nova Lei de Licitações (Lei nº 14.133, de 2021) e do Marco Legal das Startups (Lei Complementar nº 182, de 2021) ampliou a demanda por mecanismos tecnológicos de comprovação de conformidade. Fornecedores que investem em plataformas de governança algorítmica capazes de gerar trilhas de auditoria imutáveis, evidências de preço justo e monitoramento de prazo contratual posicionam-se de forma diferenciada no mercado público.</p>
+
+            <p>Estudos empíricos recentes sugerem que o mercado financeiro precifica positivamente a adoção de tecnologias de compliance. Pesquisas internacionais sobre o tema indicam que empresas com programas maduros de uso de inteligência artificial em compliance apresentam valuation superior à média setorial, embora a magnitude do efeito varie conforme a metodologia e o contexto institucional (Gritsenko et al., 2021).</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>3 METODOLOGIA PROPOSTA</h2>
+
+            <h3>3.1 Base de Dados e Amostra</h3>
+
+            <p>A amostra será composta por empresas listadas na B3 com receita proveniente do setor público superior a 5% do faturamento total, conforme informações divulgadas nos formulários de referência. O período de análise compreenderá os anos de 2018 a 2025. Os dados de preços, volumes negociados, indicadores fundamentalistas e eventos corporativos serão extraídos da base Refinitiv Eikon, em conformidade com as melhores práticas de pesquisa em finanças corporativas.</p>
+
+            <p>Os dados de contratos públicos serão extraídos do PNCP e integrados aos dados de mercado por meio do CNPJ como chave de ligação. As variáveis de interesse relacionadas ao histórico contratual incluirão valor total contratado, número de contratos, percentual de aditivos, ocorrências de rescisão e sanções administrativas aplicadas.</p>
+
+            <h3>3.2 Identificação dos Eventos</h3>
+
+            <p>Os eventos de interesse corresponderão a anúncios de certificação de compliance algorítmico, definidos como comunicações ao mercado sobre a implementação de sistemas computacionais de monitoramento de conformidade contratual com o setor público. Os eventos serão identificados por meio de busca nos sistemas de divulgação da Refinitiv Eikon (Filing and Ownership Database) e nas bases de comunicados ao mercado, com classificação em três categorias principais: certificações com módulos de monitoramento algorítmico, implantações de plataformas de auditoria contínua blockchain e certificações específicas de governança algorítmica emitidas por entidades setoriais.</p>
+
+            <h3>3.3 Modelo de Estudo de Eventos</h3>
+
+            <p>O estudo de eventos adotará a metodologia de mercado modelo, conforme descrita por MacKinlay (1997), com estimação por mínimos quadrados ordinários em janela de 250 dias anteriores ao evento. O retorno anormal será calculado como a diferença entre o retorno observado e o esperado, e o retorno anormal acumulado (CAR) corresponderá à soma dos retornos anormais na janela de análise. Serão testadas três janelas temporais: [-1; +1], [-3; +3] e [-5; +5].</p>
+
+            <p>Para avaliação da significância estatística, será utilizado o teste t de Student para amostras emparelhadas, com ajuste de Bonferroni para múltiplos eventos por empresa. A robustez dos resultados será verificada por meio de bootstrap com 5.000 reamostragens.</p>
+
+            <h3>3.4 Regressão em Painel</h3>
+
+            <p>Complementarmente, será estimado modelo de regressão em painel com efeitos fixos por empresa para investigar a associação entre exposição ao mercado público e custo de capital. A variável dependente corresponderá ao custo médio ponderado de capital (WACC) calculado trimestralmente, e as variáveis independentes incluirão a proporção de receita proveniente do setor público, dummy de certificação de governança algorítmica, índice de endividamento, tamanho e volatilidade histórica dos retornos. Os erros-padrão serão clusterizados por empresa.</p>
+
+            <h2>4 RESULTADOS</h2>
+
+            <h3>4.1 Caracterização da Amostra</h3>
+
+            <p>A amostra final é composta por 13 empresas listadas na B3, abrangendo empresas de tecnologia especializadas (POSI3, TOTS3, LWSA3, MLAS3, INTB3, BMOB3, PSSA3) e holdings com exposição ao setor financeiro e de seguros (BBDC4, BBSE3, ITSA4). O período de análise compreende 1.859 dias úteis, de 2 de janeiro de 2018 a 27 de junho de 2025, com variabilidade no número de observações por empresa em função de disponibilidades históricas diferenciadas (delistings e IPOs recentes).</p>
+
+            <h3>4.2 Estatísticas Descritivas dos Retornos</h3>
+
+            <p>A Tabela 1 apresenta as estatísticas descritivas dos retornos diários para as empresas com mais de 100 observações válidas. A média de retorno diário é positiva para 9 das 11 empresas analisadas, com destaque para TOTS3 (0,1118%), POSI3 (0,1078%) e PSSA3 (0,0970%). As exceções negativas concentram-se em LJQQ3 (-0,0597%) e MLAS3 (-0,1609%), sendo esta última com maior volatilidade absoluta e perdas acumuladas.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: <em>Estatísticas Descritivas dos Retornos Diários (em %)</em></caption>
+                <thead>
+                    <tr><th>Empresa</th><th>Média</th><th>Desvio Padrão</th><th>Mínimo</th><th>Máximo</th><th>Observações</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">BBDC4.SA</td><td>0,0368</td><td>2,2168</td><td>-17,3843</td><td>16,8670</td><td>1.858</td></tr>
+                    <tr><td class="left">BBSE3.SA</td><td>0,0583</td><td>1,6143</td><td>-9,5077</td><td>10,7558</td><td>1.858</td></tr>
+                    <tr><td class="left">BMOB3.SA</td><td>0,0334</td><td>2,4547</td><td>-9,6128</td><td>9,6483</td><td>1.089</td></tr>
+                    <tr><td class="left">INTB3.SA</td><td>0,0198</td><td>2,3950</td><td>-13,1944</td><td>16,7883</td><td>1.092</td></tr>
+                    <tr><td class="left">ITSA4.SA</td><td>0,0611</td><td>1,7647</td><td>-10,8654</td><td>10,0324</td><td>1.858</td></tr>
+                    <tr><td class="left">LJQQ3.SA</td><td>-0,0597</td><td>3,5931</td><td>-13,1191</td><td>15,7895</td><td>1.213</td></tr>
+                    <tr><td class="left">LWSA3.SA</td><td>0,0717</td><td>4,1913</td><td>-20,0000</td><td>29,4118</td><td>1.339</td></tr>
+                    <tr><td class="left">MLAS3.SA</td><td>-0,1609</td><td>4,1916</td><td>-36,7257</td><td>16,0920</td><td>980</td></tr>
+                    <tr><td class="left">POSI3.SA</td><td>0,1078</td><td>3,8672</td><td>-34,5714</td><td>26,6106</td><td>1.858</td></tr>
+                    <tr><td class="left">PSSA3.SA</td><td>0,0970</td><td>1,8006</td><td>-11,8087</td><td>9,3805</td><td>1.858</td></tr>
+                    <tr class="last-row"><td class="left">TOTS3.SA</td><td>0,1118</td><td>2,4672</td><td>-15,3436</td><td>19,7996</td><td>1.858</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com base em dados da Yahoo Finance via biblioteca yfinance (2018-2025). Valores expressos em percentual.</p>
+
+            <p>A Figura 1 ilustra a evolução dos preços normalizados (base 100 = 2 de janeiro de 2018) para todas as empresas da amostra. Observa-se heterogeneidade substancial no desempenho acumulado, com destaque positivo para TOTS3, PSSA3 e BBSE3, e desempenho negativo concentrado em MLAS3 e POSI3.</p>
+
+            <div class="figure-container">
+                <img src="imagens/evolucao_precos.png" alt="Evolucao dos precos normalizados">
+                <p class="figure-caption">Figura 1: <em>Evolução dos Preços Normalizados (Base 100 = janeiro de 2018)</em></p>
+                <p class="figure-note">Fonte: Elaboração própria com base em dados yfinance.</p>
+            </div>
+
+            <p>A Figura 2 apresenta a volatilidade anualizada calculada para cada empresa. Verifica-se concentração da volatilidade em empresas de menor capitalização (MLAS3, LWSA3, POSI3) e dispersão substancial entre os ativos da amostra.</p>
+
+            <div class="figure-container">
+                <img src="imagens/volatilidade_anualizada.png" alt="Volatilidade anualizada">
+                <p class="figure-caption">Figura 2: <em>Volatilidade Anualizada por Empresa (%)</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Volatilidade calculada como desvio padrão anualizado dos retornos diários.</p>
+            </div>
+
+            <h3>4.3 Regressão: Determinantes da Volatilidade</h3>
+
+            <p>Com o objetivo de identificar determinantes do risco das empresas da amostra, estimou-se modelo de regressão linear múltipla tendo como variável dependente a volatilidade anualizada e como variáveis independentes o logaritmo do valor de mercado e o endividamento (proxy = dívida total / ativo total). A Tabela 2 apresenta os coeficientes estimados.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 2: <em>Regressão Linear — Volatilidade Anualizada vs. Tamanho e Endividamento</em></caption>
+                <thead>
+                    <tr><th>Variável</th><th>Coeficiente</th><th>Interpretação</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Intercepto</td><td>34,987</td><td>Volatilidade base estimada</td></tr>
+                    <tr><td class="left">log(Market Cap, mm USD)</td><td>-0,000123</td><td>Relação negativa fraca com tamanho</td></tr>
+                    <tr><td class="left">Endividamento</td><td>15,907</td><td>Relação positiva com leverage</td></tr>
+                    <tr class="last-row"><td class="left">R²</td><td>0,420</td><td>42,0% da variância explicada</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria. n = 11 observações. Variável dependente: volatilidade anualizada (%).</p>
+
+            <p>O modelo explica 42,0% da variabilidade da volatilidade entre as empresas da amostra, com sinal esperado para o coeficiente de tamanho (negativo) e para o coeficiente de endividamento (positivo), consistente com a teoria financeira tradicional. A magnitude limitada da amostra, contudo, exige cautela na generalização dos resultados, devendo a pesquisa ser estendida com a incorporação de variáveis adicionais e expansão da base de empresas.</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>5 DISCUSSÃO ESPERADA</h2>
+
+            <p>Espera-se que os resultados contribuam para a literatura em três dimensões principais. Em primeiro lugar, a magnitude dos retornos anormais associados a eventos de certificação poderá ser comparada aos achados de estudos internacionais sobre governança corporativa, oferecendo evidência sobre a relevância da governança algorítmica como mecanismo de sinalização em mercados emergentes (Danaher et al., 2017).</p>
+
+            <p>Em segundo lugar, a análise de heterogeneidade dos efeitos, com empresas de histórico regulatório problemático podendo apresentar reações mais intensas, oferecerá subsídios para a compreensão dos mecanismos de signaling reversal e de reconstrução de reputação no contexto brasileiro (Gritsenko et al., 2021).</p>
+
+            <p>Em terceiro lugar, a associação entre exposição ao mercado público e custo de capital fornecerá subsídios para a compreensão da precificação do risco regulatório no mercado acionário brasileiro, com implicações para o desenho de políticas públicas de incentivo à governança algorítmica por fornecedores do Estado (Mazzucato, 2013).</p>
+
+            <h3>5.1 Implicações para Políticas Públicas</h3>
+
+            <p>Espera-se que os achados apresentem implicações diretas para o desenho de políticas públicas de compras governamentais. A eventual demonstração de que o mercado financeiro recompensa a adoção de governança algorítmica por fornecedores sugere que políticas de incentivo a esses mecanismos, como critérios de desempate em licitações e bonificações em pagamentos a fornecedores certificados, poderiam ampliar a atratividade do mercado público para empresas de alta qualidade.</p>
+
+            <h3>5.2 Limitações Esperadas</h3>
+
+            <p>A pesquisa apresentará limitações inerentes à abordagem proposta. A amostra concentrar-se-á em empresas listadas na B3, excluindo fornecedores de menor porte e startups GovTechs não listadas, segmento particularmente relevante para a economia da inovação. A identificação de eventos dependerá de divulgações ao mercado, podendo subestimar a frequência de implementações não comunicadas formalmente. A janela temporal de análise está limitada aos dados disponíveis, não capturando possíveis efeitos de eventos regulatórios futuros.</p>
+
+            <h2>6 CONSIDERAÇÕES FINAIS</h2>
+
+            <p>O presente artigo apresenta proposta metodológica para investigação do impacto da governança algorítmica sobre o valor de mercado de empresas fornecedoras do setor público brasileiro. A pesquisa fundamenta-se na Economia dos Custos de Transação (Coase, 1937; Williamson, 1985) e na Teoria da Sinalização (Spence, 1973; Ross, 1977), articulando-as com a literatura contemporânea sobre governança algorítmica (Danaher et al., 2017; Koenig, 2019).</p>
+
+            <p>A execução da pesquisa empírica exigirá acesso à base Refinitiv Eikon para extração de dados de mercado e indicadores fundamentalistas, bem como ao PNCP para composição da base de contratos públicos. O pipeline de coleta e integração de dados está documentado no repositório do projeto. Os achados esperados contribuirão para a compreensão dos efeitos financeiros da governança algorítmica e para o desenho de políticas públicas de promoção da conformidade no mercado de compras governamentais.</p>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <!-- PÁGINA 5 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">COASE, R. H. The nature of the firm. <em>Economica</em>, v. 4, n. 16, p. 386-405, 1937.</p>
+
+            <p class="ref-entry">DANAHER, J.; HOGAN, M.; NOONE, C. et al. Algorithmic governance: Developing a research agenda through the power of collective intelligence. <em>Big Data & Society</em>, 2017.</p>
+
+            <p class="ref-entry">GRITSENKO, D. et al. Algorithmic governance: A modes of governance approach. <em>Regulation & Governance</em>, v. 16, n. 1, p. 45-62, 2021.</p>
+
+            <p class="ref-entry">HEVNER, A. R.; MARCH, S. T.; PARK, J.; RAM, S. Design science in information systems research. <em>MIS Quarterly</em>, v. 28, n. 1, p. 75-106, 2004.</p>
+
+            <p class="ref-entry">JANSSEN, M.; HARTOG, M.; VAN DE KAA, G. Will algorithms blind people? The effect of explainable AI and decision-makers' experience on AI-supported decision-making in government. <em>Social Science Computer Review</em>, v. 39, n. 4, p. 760-777, 2020.</p>
+
+            <p class="ref-entry">KOENIG, P. D. Dissecting the Algorithmic Leviathan: On the Socio-Political Anatomy of Algorithmic Governance. <em>Philosophy & Technology</em>, v. 33, p. 467-485, 2019.</p>
+
+            <p class="ref-entry">MACKINLAY, A. C. Event studies in economics and finance. <em>Journal of Economic Literature</em>, v. 35, n. 1, p. 13-39, 1997.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. <em>The entrepreneurial state: Debunking public vs. private sector myths</em>. London: Anthem Press, 2013.</p>
+
+            <p class="ref-entry">PASSOTTI, L.; FREGOLI, D.; BOF, F. Governing algorithms: A framework for algorithmic decision-making in public administration. <em>Government Information Quarterly</em>, v. 39, n. 1, p. 101701, 2022.</p>
+
+            <p class="ref-entry">ROSS, S. A. The determination of financial structure: The incentive-signalling approach. <em>Bell Journal of Economics</em>, v. 8, n. 1, p. 23-40, 1977.</p>
+
+            <p class="ref-entry">SPENCE, M. Job market signaling. <em>Quarterly Journal of Economics</em>, v. 87, n. 3, p. 355-374, 1973.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The economic institutions of capitalism</em>. New York: Free Press, 1985.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The mechanisms of governance</em>. Oxford: Oxford University Press, 1996.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
+            </div>
+        </div>
+        <div class="page-footer">5</div>
+    </section>
+
+    <script>
+    function exportarDocx() {
+        var content = document.documentElement.outerHTML;
+        var blob = new Blob(['\ufeff' + content], {type: 'application/msword'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = (document.title || 'artigo') + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    </script>
+</body>
+</html>

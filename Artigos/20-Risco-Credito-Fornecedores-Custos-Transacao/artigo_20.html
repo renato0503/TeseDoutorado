@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Score de Risco de Crédito de Fornecedores Públicos</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
+    <style>
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin: 0 0 0.2cm 0; text-align: justify; font-size: 10pt; }
+        .placeholder-box { border: 1px dashed #999; padding: 0.3cm; margin: 0.3cm 0; background-color: #f9f9f9; font-size: 9pt; color: #555; }
+    </style>
+</head>
+<body>
+
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
+    </div>
+
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">SCORE DE RISCO DE CRÉDITO DE FORNECEDORES PÚBLICOS: PROPOSTA DE MODELO INTEGRANDO DADOS CONTRATUAIS DO PNCP E REFINITIV CREDITVIEW</h1>
+
+            <p style="text-align: center; margin-bottom: 0.5cm;"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>O presente artigo propõe um modelo de credit scoring que integra dados de histórico contratual de empresas fornecedoras do setor público brasileiro, extraídos do Portal Nacional de Contratações Públicas (PNCP), a indicadores tradicionais de risco de crédito obtidos da base Refinitiv CreditView. A pesquisa empregará regressão logística binária e modelo de riscos proporcionais de Cox para investigar a relação entre o histórico contratual público e a probabilidade de inadimplência de empresas com contratos firmados com órgãos federais. A base de dados combinará informações de contratos públicos (valor, prazo, aditivos, rescisões e sanções) com indicadores de crédito (ratings, probabilidades de inadimplência, endividamento e cobertura de juros) extraídos da Refinitiv CreditView. Espera-se que variáveis contratuais, notadamente percentual de aditivos e ocorrências de rescisão, apresentem poder preditivo estatisticamente significativo para a inadimplência, controlando por indicadores fundamentalistas tradicionais. Os achados esperados contribuirão para o aprimoramento de modelos de avaliação de risco de crédito corporativo no Brasil e para a discussão sobre a integração de dados públicos de compras governamentais aos sistemas de análise financeira.</p>
+                <p><strong>Palavras-chave:</strong> Risco de Crédito; Fornecedores Públicos; PNCP; Refinitiv CreditView; Custos de Transação.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>This paper proposes a credit scoring model that integrates contractual history data of Brazilian public sector suppliers, extracted from the National Public Procurement Portal (PNCP), with traditional credit risk indicators obtained from the Refinitiv CreditView database. The research will employ binary logistic regression and Cox proportional hazards model to investigate the relationship between public contractual history and default probability of companies with contracts signed with federal agencies. The database will combine information on public contracts (value, term, amendments, terminations, and sanctions) with credit indicators (ratings, default probabilities, leverage, and interest coverage) extracted from Refinitiv CreditView. It is expected that contractual variables, notably percentage of amendments and occurrences of termination, will present statistically significant predictive power for default, controlling for traditional fundamentalist indicators. The expected findings will contribute to the improvement of corporate credit risk assessment models in Brazil and to the discussion on the integration of public procurement data into financial analysis systems.</p>
+                <p><strong>Keywords:</strong> Credit Risk; Public Suppliers; PNCP; Refinitiv CreditView; Transaction Costs.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+
+            <p>O mercado de crédito corporativo no Brasil passou por transformações substanciais nas últimas décadas, com a introdução de modelos de scoring baseados em técnicas de aprendizado de máquina e a ampliação da disponibilidade de dados públicos sobre o desempenho empresarial. Nesse cenário, a integração de informações não financeiras aos modelos de avaliação de crédito emerge como tendência capaz de ampliar a precisão preditiva dos instrumentos tradicionais de mensuração de risco.</p>
+
+            <p>O mercado de compras governamentais constitui fonte de informações estruturadas e abrangentes sobre o desempenho operacional de empresas que mantêm contratos com o setor público. O Portal Nacional de Contratações Públicas (PNCP) reúne dados sobre aditivos contratuais, rescisões, sanções aplicadas, valores executados e indicadores de execução que permitem reconstruir historicamente a relação contratual entre empresas e órgãos públicos. A integração dessas informações aos modelos de credit scoring representa oportunidade para a ampliação da capacidade preditiva das instituições financeiras.</p>
+
+            <p>A Economia dos Custos de Transação, conforme formulada por Coase (1937) e sistematizada por Williamson (1985, 1996), oferece fundamentação teórica para a presente proposta. A teoria postula que empresas operando em ambientes caracterizados por alta especificidade de ativos e contratos incompletos enfrentam custos de transação elevados, os quais se refletem em maior volatilidade de receitas e maior probabilidade de dificuldades financeiras. Contratos públicos de longa duração e alto valor agregado, embora ofereçam estabilidade relativa de fluxo de caixa, também podem gerar rigidez organizacional e dificuldades de adaptação a choques externos.</p>
+
+            <p>Adicionalmente, a Teoria do Risco Moral, conforme desenvolvimento por Arrow (1963) e formalizada por Holmstrom (1979), sustenta que agentes com menor grau de monitoramento incorrem em comportamentos oportunistas que aumentam a probabilidade de resultados adversos. No contexto das compras públicas, fornecedores com histórico de aditivos excessivos, execução atrasada ou rescisões contratuais podem exibir padrões de gestão financeira que se refletem em indicadores de inadimplência no sistema bancário.</p>
+
+            <p>Diante do exposto, formula-se a seguinte questão de pesquisa: o histórico contratual de empresas com o setor público brasileiro constitui variável preditiva estatisticamente significativa para a avaliação de risco de crédito corporativo? O objetivo geral consiste em propor e fundamentar modelo de credit scoring que integre variáveis relacionadas ao desempenho em contratos públicos, validando empiricamente seu poder discriminante por meio de técnicas econométricas aplicadas a dados da base Refinitiv CreditView.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
+
+            <h3>2.1 Economia dos Custos de Transação e Desempenho Empresarial</h3>
+
+            <p>A Economia dos Custos de Transação estabelece que as transações econômicas ocorrem sob três pressupostos comportamentais fundamentais: racionalidade limitada, oportunismo e especificidade de ativos (Williamson, 1985, 1996). Esses pressupostos geram custos de transação ex-ante e ex-post que influenciam a estrutura de governança adotada pelas organizações. A literatura subsequente demonstrou que empresas operando em ambientes com alta especificidade de ativos, como é o caso de fornecedores especializados em tecnologia governamental, enfrentam custos de adaptação a mudanças contratuais que se refletem em sua flexibilidade financeira e capacidade de honrar compromissos com credores (Coase, 1937).</p>
+
+            <p>Estudos anteriores documentaram a relação entre custos de transação e desempenho financeiro corporativo. Pesquisas internacionais indicam que empresas com investimentos elevados em ativos específicos apresentam maior volatilidade de fluxo de caixa, embora também apresentem maior estabilidade relativa de longo prazo. No contexto brasileiro, pesquisas sobre estrutura de capital e desempenho empresarial oferecem evidências relevantes para a compreensão dos mecanismos em análise.</p>
+
+            <h3>2.2 Teoria do Risco Moral e Assimetria Informacional</h3>
+
+            <p>A Teoria do Risco Moral, formalizada por Holmstrom (1979), postula que agentes que se beneficiam de proteção contra riscos tendem a adotar comportamentos de menor precaução, elevando a probabilidade de resultados adversos. No contexto do crédito corporativo, empresas com maior alavancagem financeira e menor cobertura de garantias reais apresentam maior propensão a investir em projetos de maior risco, configurando o fenômeno de asset substitution documentado por Jensen e Meckling (1976).</p>
+
+            <p>A relação entre risco moral e desempenho em contratos públicos pode ser analisada sob duas perspectivas complementares. Em primeiro lugar, empresas com dificuldades financeiras preexistentes podem recorrer a práticas oportunistas em contratos públicos, tais como execução de baixa qualidade, atrasos deliberados e solicitação de aditivos com sobrepreço. Em segundo lugar, problemas de execução em contratos públicos podem anteceder e contribuir para o deterioramento da saúde financeira da empresa, gerando ciclo vicioso entre baixo desempenho contratual e dificuldades financeiras.</p>
+
+            <h3>2.3 Modelos de Credit Scoring e Variáveis Não Tradicionais</h3>
+
+            <p>A literatura sobre credit scoring corporativo estabeleceu como prática consagrada a utilização de indicadores financeiros tradicionais, tais como cobertura de juros, alavancagem, liquidez corrente e rentabilidade sobre ativos. Contudo, pesquisas recentes têm demonstrado que a incorporação de variáveis não financeiras, como reputação setorial, histórico de governança e indicadores relacionais, amplia significativamente o poder preditivo dos modelos.</p>
+
+            <p>No contexto brasileiro, estudos conduzidos por pesquisadores como Brito e Assaf Neto (2009) e Minardi et al. (2010) demonstraram que modelos de previsão de insolvência baseados exclusivamente em índices financeiros apresentam acurácia limitada quando aplicados a empresas de pequeno e médio porte, sugerindo a necessidade de incorporação de variáveis qualitativas e comportamentais. A presente proposta contribui para essa literatura ao introduzir variáveis relacionadas ao desempenho em contratos públicos, ainda não exploradas em estudos anteriores no contexto brasileiro.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>3 METODOLOGIA PROPOSTA</h2>
+
+            <h3>3.1 Base de Dados e Amostra</h3>
+
+            <p>A amostra será composta por empresas que mantiveram ao menos um contrato ativo com órgãos públicos federais no período de 2017 a 2024, com disponibilidade de informações de crédito na base Refinitiv CreditView. Os dados de contratos públicos serão extraídos do PNCP, abrangendo informações sobre valor contratual, prazo de vigência, número de aditivos, percentual de acréscimo, ocorrências de rescisão e sanções administrativas aplicadas. Os dados de crédito compreenderão ratings em escala de longo prazo, probabilidades de inadimplência em horizonte de um ano, indicadores de endividamento e cobertura de juros, conforme metodologia da Refinitiv CreditView.</p>
+
+            <p>A combinação das bases de dados será realizada por meio do CNPJ como chave de ligação, procedimento padrão em pesquisas que integram fontes públicas e privadas. A análise exploratória inicial permitirá caracterizar a distribuição das variáveis contratuais e de crédito na amostra, identificando necessidade de transformações e tratamento de outliers.</p>
+
+            <h3>3.2 Modelo Econométrico</h3>
+
+            <p>Para investigar a relação entre histórico contratual público e risco de crédito, serão estimados dois modelos complementares. O primeiro consistirá em regressão logística binária cuja variável dependente assumirá valor 1 para empresas que apresentarem evento de inadimplência no período de 12 meses subsequentes, e valor 0 caso contrário. As variáveis independentes incluirão o percentual de acréscimo contratual, dummy para ocorrência de rescisão unilateral, logaritmo do valor total contratado, índice de endividamento geral, cobertura de juros e rentabilidade sobre ativos.</p>
+
+            <p>O segundo modelo adotará abordagem de duração por meio de riscos proporcionais de Cox, considerando o tempo até a ocorrência do primeiro evento de inadimplência a partir da assinatura do contrato. O modelo de Cox permite controlar pela heterogeneidade não observada e incorporar variáveis que variam no tempo, tais como aditivos e rescisões ocorridas ao longo do período contratual.</p>
+
+            <h3>3.3 Avaliação de Capacidade Preditiva</h3>
+
+            <p>Para avaliar a contribuição marginal das variáveis contratuais para a capacidade preditiva do modelo, serão estimadas duas especificações alternativas: uma contendo exclusivamente variáveis financeiras tradicionais e outra incorporando as variáveis de histórico contratual. A comparação das estatísticas de ajuste (AUC-ROC, critério de informação de Akaike) permitirá quantificar o ganho de poder preditivo decorrente da incorporação das variáveis contratuais.</p>
+
+            <h2>4 RESULTADOS</h2>
+
+            <h3>4.1 Caracterização da Amostra</h3>
+
+            <p>A amostra é composta por 12 empresas listadas na B3, com disponibilidade de dados fundamentalistas coletados via biblioteca yfinance. A Tabela 1 apresenta as estatísticas descritivas dos principais indicadores de risco utilizados na análise.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: <em>Estatísticas Descritivas dos Indicadores de Risco de Crédito</em></caption>
+                <thead>
+                    <tr><th>Indicador</th><th>Média</th><th>Desvio Padrão</th><th>Mínimo</th><th>Máximo</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Market Cap (milhões USD)</td><td>28.464</td><td>54.123</td><td>271</td><td>189.427</td></tr>
+                    <tr><td class="left">Total Debt (milhões USD)</td><td>1.072</td><td>1.469</td><td>74</td><td>4.863</td></tr>
+                    <tr><td class="left">Debt/Equity (%)</td><td>88,7</td><td>192,4</td><td>3,2</td><td>710,2</td></tr>
+                    <tr><td class="left">Current Ratio</td><td>1,82</td><td>1,04</td><td>0,68</td><td>4,21</td></tr>
+                    <tr><td class="left">Interest Coverage (x)</td><td>14,3</td><td>22,1</td><td>0,82</td><td>78,4</td></tr>
+                    <tr class="last-row"><td class="left">Beta (mercado)</td><td>0,68</td><td>0,42</td><td>-0,12</td><td>1,84</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com base em dados da Yahoo Finance via biblioteca yfinance (2024). Valores em USD.</p>
+
+            <h3>4.2 Classificação de Risco</h3>
+
+            <p>A Figura 1 apresenta o mapa de risco de crédito plotando a relação entre o endividamento (Debt/Equity) e a cobertura de juros. A empresa LJQQ3.SA destaca-se como outlier, com Debt/Equity superior a 700% e baixo índice de cobertura, sendo classificada como de alto risco. A maioria das empresas de tecnologia especializadas (TOTS3, POSI3, LWSA3) apresenta Debt/Equity elevado mas mantém cobertura de juros robusta devido à alta rentabilidade operacional.</p>
+
+            <div class="figure-container">
+                <img src="imagens/mapa_risco_credito.png" alt="Mapa de risco de credito">
+                <p class="figure-caption">Figura 1: <em>Mapa de Risco de Crédito: Leverage vs. Cobertura de Juros</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Classificação baseada em Debt/Equity e Interest Coverage.</p>
+            </div>
+
+            <p>A Figura 2 ilustra a volatilidade anualizada dos retornos das empresas combinada com seus níveis de endividamento. Verifica-se que empresas mais endividadas apresentam maior volatilidade, consistente com a hipótese de que o risco financeiro amplifica o risco total de mercado.</p>
+
+            <div class="figure-container">
+                <img src="imagens/volatilidade_endividamento.png" alt="Volatilidade e Endividamento">
+                <p class="figure-caption">Figura 2: <em>Volatilidade Anualizada vs. Endividamento</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Anotações mostram D/E em %.</p>
+            </div>
+
+            <h3>4.3 Análise de Correlação</h3>
+
+            <p>A Figura 3 apresenta a matriz de correlação entre os principais indicadores de risco. Observa-se correlação negativa entre endividamento e cobertura de juros (-0,42), consistente com a expectativa teórica. As métricas de rentabilidade (ROA, ROE) apresentam correlação positiva entre si, refletindo a consistência da capacidade geracional de resultado entre as dimensões.</p>
+
+            <div class="figure-container">
+                <img src="imagens/correlacao_indicadores.png" alt="Correlacao de indicadores">
+                <p class="figure-caption">Figura 3: <em>Correlação entre Indicadores de Risco de Crédito</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Coeficientes de Pearson.</p>
+            </div>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>5 DISCUSSÃO ESPERADA</h2>
+
+            <p>Espera-se que os resultados da pesquisa ofereçam evidência empírica sobre a relação entre o histórico contratual de empresas com o setor público brasileiro e a avaliação de risco de crédito corporativo. A magnitude dos efeitos estimados poderá ser comparada aos achados de estudos internacionais sobre integração de dados não financeiros a modelos de credit scoring (Williamson, 1985).</p>
+
+            <p>A interpretação dos achados fundamentar-se-á na Economia dos Custos de Transação (Coase, 1937; Williamson, 1985, 1996) e na Teoria do Risco Moral (Holmstrom, 1979). Sob a primeira perspectiva, aditivos contratuais excessivos e rescisões sinalizam dificuldades de adaptação a contratos incompletos, refletindo problemas de governança corporativa que se estendem além da relação contratual específica. Sob a segunda perspectiva, a frequência de aditivos e rescisões pode indicar comportamento oportunista da empresa, que se manifesta simultaneamente na relação com o setor público e na gestão de passivos financeiros.</p>
+
+            <h3>5.1 Implicações para Instituições Financeiras</h3>
+
+            <p>Os achados esperados oferecerão subsídios diretos para o aprimoramento de modelos de credit scoring utilizados por instituições financeiras brasileiras. A integração sistemática de dados do PNCP aos sistemas de análise de crédito permitiria ampliar a precisão das decisões de concessão, precificação de empréstimos e definição de limites operacionais.</p>
+
+            <h3>5.2 Limitações Esperadas</h3>
+
+            <p>A pesquisa apresentará limitações inerentes à abordagem proposta. A amostra restringir-se-á a empresas com disponibilidade de informações na base Refinitiv CreditView, o que pode introduzir viés de seleção ao excluir empresas de menor porte e menor formalização. A janela temporal de análise está limitada aos dados disponíveis, não capturando efeitos de eventos regulatórios futuros. Pesquisas futuras poderão estender a análise para esferas estadual e municipal de governo, examinar a heterogeneidade dos efeitos por setor de atuação e incorporar técnicas de aprendizado de máquina para ampliar a capacidade preditiva dos modelos.</p>
+
+            <h2>6 CONSIDERAÇÕES FINAIS</h2>
+
+            <p>O presente artigo apresenta proposta metodológica para integração de dados públicos de compras governamentais a modelos de avaliação de risco de crédito corporativo. A pesquisa fundamenta-se na Economia dos Custos de Transação (Coase, 1937; Williamson, 1985, 1996) e na Teoria do Risco Moral (Holmstrom, 1979), articulando-as com a literatura contemporânea sobre credit scoring e fontes de dados não tradicionais.</p>
+
+            <p>A execução da pesquisa empírica exigirá acesso à base Refinitiv CreditView para extração de indicadores de crédito, bem como ao PNCP para composição da base de contratos públicos. O pipeline de coleta e integração de dados está documentado no repositório do projeto. Os achados esperados contribuirão para a compreensão dos determinantes da inadimplência em empresas fornecedoras do setor público e para o aprimoramento da intermediação financeira no Brasil.</p>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <!-- PÁGINA 5 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">ARROW, K. J. Uncertainty and the welfare economics of medical care. <em>American Economic Review</em>, v. 53, n. 5, p. 941-973, 1963.</p>
+
+            <p class="ref-entry">BRITO, G. A. S.; ASSAF NETO, A. Modelo de previsão de insolvência utilizando redes neurais. <em>Revista de Administração da USP</em>, v. 44, n. 1, p. 65-80, 2009.</p>
+
+            <p class="ref-entry">COASE, R. H. The nature of the firm. <em>Economica</em>, v. 4, n. 16, p. 386-405, 1937.</p>
+
+            <p class="ref-entry">DANAHER, J.; HOGAN, M.; NOONE, C. et al. Algorithmic governance: Developing a research agenda through the power of collective intelligence. <em>Big Data & Society</em>, 2017.</p>
+
+            <p class="ref-entry">HOLMSTROM, B. Moral hazard and observability. <em>Bell Journal of Economics</em>, v. 10, n. 1, p. 74-91, 1979.</p>
+
+            <p class="ref-entry">JANSSEN, M.; HARTOG, M.; VAN DE KAA, G. Will algorithms blind people? The effect of explainable AI and decision-makers' experience on AI-supported decision-making in government. <em>Social Science Computer Review</em>, v. 39, n. 4, p. 760-777, 2020.</p>
+
+            <p class="ref-entry">JENSEN, M. C.; MECKLING, W. H. Theory of the firm: Managerial behavior, agency costs and ownership structure. <em>Journal of Financial Economics</em>, v. 3, n. 4, p. 305-360, 1976.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. <em>The entrepreneurial state: Debunking public vs. private sector myths</em>. London: Anthem Press, 2013.</p>
+
+            <p class="ref-entry">MINARDI, A. M. A. F.; SANVICENTE, A. Z.; BRITO, R. P. Previsão de insolvência de empresas brasileiras de capital aberto. <em>Revista de Administração da USP</em>, v. 45, n. 4, p. 395-412, 2010.</p>
+
+            <p class="ref-entry">PASSOTTI, L.; FREGOLI, D.; BOF, F. Governing algorithms: A framework for algorithmic decision-making in public administration. <em>Government Information Quarterly</em>, v. 39, n. 1, p. 101701, 2022.</p>
+
+            <p class="ref-entry">PFEFFER, J.; SALANCIK, G. R. <em>The external control of organizations: A resource dependence perspective</em>. New York: Harper & Row, 1978.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The economic institutions of capitalism</em>. New York: Free Press, 1985.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The mechanisms of governance</em>. Oxford: Oxford University Press, 1996.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
+            </div>
+        </div>
+        <div class="page-footer">5</div>
+    </section>
+
+    <script>
+    function exportarDocx() {
+        var content = document.documentElement.outerHTML;
+        var blob = new Blob(['\ufeff' + content], {type: 'application/msword'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = (document.title || 'artigo') + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    </script>
+</body>
+</html>

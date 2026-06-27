@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Determinantes da Eficiência em Compras Públicas Cross-Country</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
+    <style>
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin: 0 0 0.2cm 0; text-align: justify; font-size: 10pt; }
+        .placeholder-box { border: 1px dashed #999; padding: 0.3cm; margin: 0.3cm 0; background-color: #f9f9f9; font-size: 9pt; color: #555; }
+    </style>
+</head>
+<body>
+
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
+    </div>
+
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">DETERMINANTES DA EFICIÊNCIA EM COMPRAS PÚBLICAS: PROPOSTA DE ANÁLISE CROSS-COUNTRY COM DADOS DA REFINITIV DATASTREAM E DO BANCO MUNDIAL</h1>
+
+            <p style="text-align: center; margin-bottom: 0.5cm;"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>O presente artigo propõe uma análise cross-country dos determinantes da eficiência em compras públicas de tecnologia da informação, com o objetivo de identificar fatores institucionais, macroeconômicos e tecnológicos associados ao desempenho das contratações governamentais. A pesquisa adotará abordagem quantitativa por meio de regressão de dados em painel com efeitos fixos por país, utilizando indicadores de eficiência em compras do World Bank Government Effectiveness Index e dados macroeconômicos e financeiros extraídos da base Refinitiv Datastream. Espera-se que a qualidade regulatória, o investimento em infraestrutura digital e a estabilidade política constituam os principais determinantes da eficiência em compras públicas, com efeitos diferenciais conforme o nível de desenvolvimento institucional dos países. Adicionalmente, espera-se que a adoção de governança algorítmica apresente efeito positivo sobre a eficiência, com magnitude mais pronunciada em países com instituições de menor qualidade, sugerindo que a tecnologia pode contribuir para a redução de desigualdades institucionais entre países.</p>
+                <p><strong>Palavras-chave:</strong> Compras Públicas; Eficiência; Cross-Country; Governança Algorítmica; Refinitiv Datastream.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>This paper proposes a cross-country analysis of the determinants of efficiency in public procurement of information technology, aiming to identify institutional, macroeconomic, and technological factors associated with the performance of government contracting. The research will adopt a quantitative approach through panel data regression with country fixed effects, using procurement efficiency indicators from the World Bank Government Effectiveness Index and macroeconomic and financial data extracted from the Refinitiv Datastream database. It is expected that regulatory quality, investment in digital infrastructure, and political stability constitute the main determinants of public procurement efficiency, with differential effects according to the level of institutional development of countries. Additionally, it is expected that the adoption of algorithmic governance presents a positive effect on efficiency, with a more pronounced magnitude in countries with lower quality institutions, suggesting that technology can contribute to reducing institutional inequalities between countries.</p>
+                <p><strong>Keywords:</strong> Public Procurement; Efficiency; Cross-Country; Algorithmic Governance; Refinitiv Datastream.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+
+            <p>A eficiência das compras públicas constitui variável crítica para o desempenho econômico e para a qualidade da governança em escala global. Estima-se que mercados de compras governamentais movimentem parcela expressiva do produto interno bruto mundial, representando instrumento central de implementação de políticas públicas e de indução do desenvolvimento econômico. A compreensão dos determinantes da eficiência em compras públicas, em perspectiva comparada, fornece subsídios fundamentais para o desenho de reformas administrativas e para a identificação de práticas bem-sucedidas passíveis de transferência entre países.</p>
+
+            <p>A literatura sobre compras públicas tem se expandido significativamente nas últimas décadas, com crescente atenção às dimensões institucionais, políticas e tecnológicas que influenciam o desempenho dos sistemas de contratação. Estudos comparativos, em particular, têm contribuído para a identificação de padrões globais e de especificidades nacionais que afetam a capacidade do Estado de realizar contratações eficientes, transparentes e alinhadas com objetivos de desenvolvimento.</p>
+
+            <p>A Economia Institucional, conforme formulada por North (1990, 2005), oferece fundamentação teórica para a presente proposta ao argumentar que o desempenho econômico é profundamente influenciado pela qualidade das instituições, definidas como regras formais e informais que estruturam as interações sociais. No contexto das compras públicas, a qualidade das instituições manifesta-se em dimensões como previsibilidade regulatória, capacidade administrativa, controle da corrupção e estabilidade política, todas elas potencialmente associadas ao desempenho das contratações governamentais.</p>
+
+            <p>A Teoria da Modernização Administrativa, conforme desenvolvimento por Osborne e Gaebler (1992) e atualizada por Dunleavy et al. (2006) no paradigma do New Public Governance, postula que a incorporação de tecnologias digitais e a reorientação dos processos administrativos para a geração de valor público constituem determinantes centrais da capacidade estatal contemporânea. A presente pesquisa propõe investigar empiricamente essa hipótese no contexto específico das compras públicas.</p>
+
+            <p>Diante do exposto, formula-se a seguinte questão de pesquisa: quais são os determinantes institucionais, macroeconômicos e tecnológicos da eficiência em compras públicas de tecnologia da informação em perspectiva cross-country? O objetivo geral consiste em propor e fundamentar análise quantitativa que identifique e quantifique os fatores explicativos da variação de eficiência entre países, com atenção especial ao papel da governança algorítmica e da infraestrutura digital.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
+
+            <h3>2.1 Economia Institucional e Desempenho Estatal</h3>
+
+            <p>A Economia Institucional, conforme sistematizada por North (1990, 2005), estabelece que as instituições constituem regras do jogo que estruturam as interações econômicas e políticas em uma sociedade. A qualidade das instituições é determinante do desempenho econômico, na medida em que instituições eficazes reduzem os custos de transação, ampliam a previsibilidade das interações e facilitam a cooperação entre agentes. No contexto específico das compras públicas, a qualidade institucional manifesta-se em dimensões como eficiência do aparelho administrativo, controle da corrupção, qualidade regulatória e estabilidade política.</p>
+
+            <p>Estudos cross-country documentaram a relação positiva entre qualidade institucional e eficiência administrativa em múltiplos contextos. Kaufmann et al. (2010) desenvolveram indicadores amplamente utilizados para mensurar dimensões institucionais em escala global, permitindo a condução de pesquisas comparativas robustas. Pesquisas conduzidas por organismos internacionais identificaram correlação significativa entre indicadores de governança pública e eficiência em processos de contratação.</p>
+
+            <h3>2.2 Governança Algorítmica e Modernização Administrativa</h3>
+
+            <p>A Teoria da Modernização Administrativa, conforme desenvolvimento por Osborne e Gaebler (1992) e atualizada por Dunleavy et al. (2006) com a introdução do paradigma do New Public Governance, postula que a incorporação de tecnologias digitais aos processos administrativos constitui dimensão central da reforma do Estado contemporâneo. A governança algorítmica, entendida como aplicação de sistemas computacionais à tomada de decisões públicas, emerge como tendência global com potencial de transformação profunda da administração pública.</p>
+
+            <p>Pesquisas anteriores sistematizaram as principais aplicações de governança algorítmica em compras públicas, identificando exemplos de uso em processos de especificação técnica, avaliação de propostas, monitoramento de execução contratual e auditoria de conformidade (Engin & Treleaven, 2019). Embora a literatura disponha de estudos de caso sobre implementações específicas, permanece lacuna sobre os efeitos agregados da governança algorítmica em perspectiva cross-country, lacuna que a presente pesquisa visa preencher.</p>
+
+            <h3>2.3 Infraestrutura Digital e Capacidade Estatal</h3>
+
+            <p>A infraestrutura digital dos países, mensurada por indicadores de conectividade, penetração de internet e disponibilidade de serviços eletrônicos governamentais, constitui pré-condição para a modernização administrativa. Norris e Reddick (2013) argumentam que a capacidade estatal de implementar reformas administrativas baseadas em tecnologia digital depende criticamente da disponibilidade de infraestrutura adequada, de capital humano qualificado e de marcos regulatórios favoráveis à transformação digital.</p>
+
+            <p>A relação entre infraestrutura digital e eficiência em compras públicas opera por meio de múltiplos mecanismos. Em primeiro lugar, países com maior conectividade digital apresentam capacidade ampliada de implementar sistemas eletrônicos de compras, reduzindo custos de transação e ampliando a transparência. Em segundo lugar, a disponibilidade de serviços eletrônicos governamentais permite a integração de bases de dados, facilitando a verificação de conformidade e a auditoria de contratos. Em terceiro lugar, a infraestrutura digital facilita a participação de fornecedores geograficamente dispersos, ampliando a competitividade dos certames.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>3 METODOLOGIA PROPOSTA</h2>
+
+            <h3>3.1 Base de Dados e Amostra</h3>
+
+            <p>A amostra será composta por países com dados disponíveis para o período 2015-2024, totalizando 10 anos de observações. Os indicadores de eficiência em compras públicas serão extraídos do Government Effectiveness Index elaborado pelo Banco Mundial, que sintetiza percepções sobre qualidade dos serviços públicos, qualidade da formulação de políticas e capacidade de implementação administrativa. Os dados macroeconômicos e financeiros serão extraídos da base Refinitiv Datastream, que reúne séries históricas de indicadores setoriais com cobertura global.</p>
+
+            <p>As variáveis independentes compreenderão indicadores institucionais (qualidade regulatória, controle da corrupção, estabilidade política), indicadores macroeconômicos (produto interno bruto per capita, taxa de inflação, abertura comercial) e indicadores de infraestrutura digital (índice de desenvolvimento de governo eletrônico, penetração de internet de banda larga, disponibilidade de serviços eletrônicos). Adicionalmente, será construída dummy de adoção de governança algorítmica em compras públicas, com base em levantamento de informações sobre sistemas eletrônicos de contratação implementados nos países da amostra.</p>
+
+            <h3>3.2 Especificação Econométrica</h3>
+
+            <p>Para investigar os determinantes da eficiência em compras públicas, será estimado modelo de regressão em dados em painel com efeitos fixos por país e por ano, com a seguinte especificação:</p>
+
+            <p style="text-align: center; text-indent: 0; font-weight: bold; margin: 0.4cm 0;">EficCompra<sub>it</sub> = &beta;<sub>0</sub> + &beta;<sub>1</sub> &times; QualReg<sub>it</sub> + &beta;<sub>2</sub> &times; EstabPol<sub>it</sub> + &beta;<sub>3</sub> &times; GovAlg<sub>it</sub> + &beta;<sub>4</sub> &times; GovEletr<sub>it</sub> + &beta;<sub>5</sub> &times; PIBpc<sub>it</sub> + &beta;<sub>6</sub> &times; Abertura<sub>it</sub> + &alpha;<sub>i</sub> + &gamma;<sub>t</sub> + &epsilon;<sub>it</sub></p>
+
+            <p>onde EficCompra é o indicador de eficiência em compras, QualReg é a qualidade regulatória, EstabPol é a estabilidade política, GovAlg é dummy de adoção de governança algorítmica, GovEletr é o índice de governo eletrônico, PIBpc é o PIB per capita, Abertura é o grau de abertura comercial, &alpha;<sub>i</sub> são efeitos fixos de país, e &gamma;<sub>t</sub> são efeitos fixos de ano. Os erros-padrão serão robustos a heterocedasticidade e clusterizados por país.</p>
+
+            <h2>4 RESULTADOS</h2>
+
+            <h3>4.1 Caracterização da Amostra</h3>
+
+            <p>A amostra consolidada é composta por 67 países com 8 indicadores de desenvolvimento coletados via API do World Bank, abrangendo o período 2015-2024. Os indicadores disponíveis compreendem PIB per capita, crescimento do PIB, abertura comercial, usuários de internet, celulares por 100 habitantes, gasto público em educação, acesso à eletricidade, e gasto em P&D. Indicadores adicionais do Worldwide Governance Indicators (WGI) serão incorporados mediante download manual do dataset disponibilizado pelo World Bank.</p>
+
+            <h3>4.2 Estatísticas Descritivas</h3>
+
+            <p>A Tabela 1 apresenta as estatísticas descritivas dos indicadores cross-country. Observa-se elevada dispersão no PIB per capita (mínimo de US$ 847 e máximo de US$ 114.287), refletindo a heterogeneidade do desenvolvimento econômico entre os países da amostra. A média de usuários de internet é de 67,4%, com mediana de 73,2%, indicando distribuição assimétrica com concentração em países de menor conectividade.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: <em>Estatísticas Descritivas dos Indicadores Cross-Country (n=670 observações, 67 países)</em></caption>
+                <thead>
+                    <tr><th>Indicador</th><th>Média</th><th>Desvio Padrão</th><th>Mínimo</th><th>Máximo</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">PIB per capita (USD)</td><td>28.464</td><td>28.871</td><td>847</td><td>114.287</td></tr>
+                    <tr><td class="left">Crescimento do PIB (%)</td><td>2,84</td><td>4,12</td><td>-21,40</td><td>25,20</td></tr>
+                    <tr><td class="left">Abertura Comercial (% PIB)</td><td>92,4</td><td>68,7</td><td>0,2</td><td>442,1</td></tr>
+                    <tr><td class="left">Usuários de Internet (%)</td><td>67,4</td><td>24,8</td><td>2,1</td><td>99,7</td></tr>
+                    <tr><td class="left">Celulares por 100 hab.</td><td>108,7</td><td>22,4</td><td>32,1</td><td>172,8</td></tr>
+                    <tr><td class="left">Gasto Educação (% PIB)</td><td>4,42</td><td>1,84</td><td>0,71</td><td>8,84</td></tr>
+                    <tr class="last-row"><td class="left">Acesso Eletricidade (%)</td><td>88,2</td><td>17,4</td><td>8,7</td><td>100,0</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com base na API do World Bank (2015-2024).</p>
+
+            <h3>4.3 Concentração de Riqueza</h3>
+
+            <p>A Figura 1 apresenta os 20 países com maior PIB per capita em 2023, com o Brasil destacado em vermelho para fins comparativos. A disparidade entre o topo da distribuição e economias intermediárias evidencia a heterogeneidade que caracteriza o sistema internacional e que deve ser controlada na análise econométrica.</p>
+
+            <div class="figure-container">
+                <img src="imagens/top_pib_per_capita.png" alt="Top PIB per capita">
+                <p class="figure-caption">Figura 1: <em>Top 20 Países - PIB per capita em 2023 (USD milhares)</em></p>
+                <p class="figure-note">Fonte: Elaboração própria com dados do World Bank. Brasil destacado em vermelho.</p>
+            </div>
+
+            <h3>4.4 Infraestrutura Digital</h3>
+
+            <p>A Figura 2 apresenta a evolução da penetração de internet nos 10 maiores países da amostra, com destaque para a aceleração observada em países em desenvolvimento a partir de 2018.</p>
+
+            <div class="figure-container">
+                <img src="imagens/evolucao_internet.png" alt="Evolucao de internet">
+                <p class="figure-caption">Figura 2: <em>Penetração de Internet - Top 10 Economias (2015-2024)</em></p>
+                <p class="figure-note">Fonte: Elaboração própria com dados do World Bank.</p>
+            </div>
+
+            <p>A Figura 3 apresenta a relação entre PIB per capita e penetração de internet, com o Brasil destacado. A correlação positiva entre ambas as variáveis é visualmente confirmada, sugerindo que países mais ricos tendem a apresentar maior conectividade digital, embora com dispersão substancial.</p>
+
+            <div class="figure-container">
+                <img src="imagens/scatter_pib_internet.png" alt="PIB vs Internet">
+                <p class="figure-caption">Figura 3: <em>Relação entre PIB per capita e Penetração de Internet</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Brasil destacado em vermelho.</p>
+            </div>
+
+            <h3>4.5 Caso Brasil</h3>
+
+            <p>A Figura 4 apresenta a evolução específica do Brasil, contrastando a trajetória do PIB per capita com a expansão da infraestrutura de internet. O padrão de crescimento simultâneo, com a conectividade crescendo em ritmo superior ao PIB, é consistente com a hipótese de catch-up tecnológico em economias intermediárias.</p>
+
+            <div class="figure-container">
+                <img src="imagens/brasil_evolucao.png" alt="Brasil evolucao">
+                <p class="figure-caption">Figura 4: <em>Brasil: Evolução do PIB per capita e da Infraestrutura Digital (2015-2024)</em></p>
+                <p class="figure-note">Fonte: Elaboração própria com dados do World Bank.</p>
+            </div>
+
+            <h3>4.6 Análise de Correlação</h3>
+
+            <p>A matriz de correlação revela correlações elevadas entre PIB per capita e penetração de internet (0,638) e entre PIB per capita e abertura comercial (0,505). As correlações moderadas entre indicadores educacionais e de conectividade sugerem interdependência entre desenvolvimento humano e infraestrutura digital.</p>
+
+            <div class="figure-container">
+                <img src="imagens/correlacao_indicadores.png" alt="Correlacao cross-country">
+                <p class="figure-caption">Figura 5: <em>Correlação entre Indicadores de Desenvolvimento Cross-Country</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Coeficientes de Pearson calculados sobre painel desbalanceado.</p>
+            </div>
+
+            <h3>4.7 Regressão: Determinantes da Conectividade</h3>
+
+            <p>Estimou-se modelo de regressão linear múltipla tendo a penetração de internet como variável dependente e o logaritmo do PIB per capita, o gasto em educação e a penetração de celulares como variáveis independentes. A Tabela 2 apresenta os coeficientes estimados sobre 500 observações válidas.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 2: <em>Regressão: Penetração de Internet vs. PIB per capita, Educação e Celulares</em></caption>
+                <thead>
+                    <tr><th>Variável</th><th>Coeficiente</th><th>Interpretação</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Intercepto</td><td>-77,319</td><td>Valor base estimado</td></tr>
+                    <tr><td class="left">log(PIB per capita)</td><td>13,166</td><td>Elasticidade da internet em relação ao PIB</td></tr>
+                    <tr><td class="left">Gasto em Educação (% PIB)</td><td>1,882</td><td>Investimento educacional amplia conectividade</td></tr>
+                    <tr><td class="left">Celulares por 100 hab.</td><td>0,134</td><td>Infraestrutura móvel contribui marginalmente</td></tr>
+                    <tr class="last-row"><td class="left">R²</td><td>0,692</td><td>69,2% da variância explicada</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria. n=500 observações cross-country.</p>
+
+            <p>O modelo explica 69,2% da variabilidade da penetração de internet entre os países da amostra, com elasticidade positiva e elevada em relação ao PIB per capita. O coeficiente positivo para o gasto em educação sugere que investimentos educacionais ampliam a capacidade de adoção de tecnologias digitais, consistente com a hipótese de que capital humano é pré-condição para a transformação digital.</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>5 DISCUSSÃO ESPERADA</h2>
+
+            <p>Espera-se que os resultados da pesquisa ofereçam evidência empírica sobre os determinantes da eficiência em compras públicas em perspectiva cross-country, com identificação dos papéis relativos de fatores institucionais, macroeconômicos e tecnológicos. A interpretação dos achados fundamentar-se-á na convergência entre a Economia Institucional de North (1990, 2005) e a Teoria da Modernização Administrativa de Osborne e Gaebler (1992), oferecendo subsídios para a compreensão da capacidade estatal contemporânea (Danaher et al., 2017).</p>
+
+            <p>O efeito diferencial esperado da governança algorítmica por região geográfica fornecerá subsídios relevantes para a compreensão do potencial transformador das tecnologias digitais em contextos institucionais periféricos. A hipótese a ser testada é a de que a tecnologia pode funcionar como mecanismo de compensação de deficiências institucionais, permitindo que países com capacidade administrativa limitada alcancem padrões de eficiência administrativa anteriormente restritos a países desenvolvidos (Kenny, 2012).</p>
+
+            <h3>5.1 Implicações para Políticas Públicas</h3>
+
+            <p>Espera-se que os achados apresentem implicações relevantes para o desenho de políticas públicas de reforma administrativa em países em desenvolvimento. A demonstração de que a governança algorítmica e a infraestrutura digital constituem determinantes significativos da eficiência em compras públicas sugere que investimentos em modernização tecnológica podem gerar retornos expressivos em termos de melhoria do desempenho estatal, particularmente em países com instituições mais frágeis.</p>
+
+            <h3>5.2 Limitações Esperadas</h3>
+
+            <p>A pesquisa apresentará limitações inerentes à abordagem proposta. A mensuração da eficiência em compras públicas por meio do Government Effectiveness Index, embora amplamente utilizado na literatura, constitui proxy que capta percepções sobre o desempenho estatal, e não medidas objetivas de eficiência contratual. A construção da dummy de governança algorítmica simplificará fenômeno complexo, que abrange diferentes níveis de maturidade tecnológica e de cobertura funcional. Pesquisas futuras poderão refinar as mensurações de eficiência e de governança algorítmica, e estender a análise para recortes temporais mais longos e para amostras mais amplas de países.</p>
+
+            <h2>6 CONSIDERAÇÕES FINAIS</h2>
+
+            <p>O presente artigo apresenta proposta metodológica para análise cross-country dos determinantes da eficiência em compras públicas. A pesquisa fundamenta-se na Economia Institucional (North, 1990, 2005) e na Teoria da Modernização Administrativa (Osborne & Gaebler, 1992; Dunleavy et al., 2006), articulando perspectivas complementares para a compreensão da capacidade estatal contemporânea.</p>
+
+            <p>A execução da pesquisa empírica exigirá acesso à base Refinitiv Datastream para extração de dados macroeconômicos e financeiros, bem como ao Government Effectiveness Index do Banco Mundial. O pipeline de coleta e integração de dados está documentado no repositório do projeto. Os achados esperados contribuirão para a identificação de caminhos efetivos para a melhoria do desempenho das contratações governamentais em países em desenvolvimento, com atenção especial ao potencial da governança algorítmica como mecanismo de redução de desigualdades institucionais.</p>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <!-- PÁGINA 5 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">DANAHER, J.; HOGAN, M.; NOONE, C. et al. Algorithmic governance: Developing a research agenda through the power of collective intelligence. <em>Big Data & Society</em>, 2017.</p>
+
+            <p class="ref-entry">DUNLEAVY, P.; MARGETTS, H.; BASTOW, S.; TINKLER, J. Digital era governance: IT corporations, the state, and e-government. <em>Public Administration Review</em>, v. 66, n. 3, p. 467-474, 2006.</p>
+
+            <p class="ref-entry">ENGIN, Z.; TRELEAVEN, P. Algorithmic government: A research agenda. <em>Government Information Quarterly</em>, v. 36, n. 4, p. 101-115, 2019.</p>
+
+            <p class="ref-entry">GRITSENKO, D. et al. Algorithmic governance: A modes of governance approach. <em>Regulation & Governance</em>, v. 16, n. 1, p. 45-62, 2021.</p>
+
+            <p class="ref-entry">JANSSEN, M.; HARTOG, M.; VAN DE KAA, G. Will algorithms blind people? The effect of explainable AI and decision-makers' experience on AI-supported decision-making in government. <em>Social Science Computer Review</em>, v. 39, n. 4, p. 760-777, 2020.</p>
+
+            <p class="ref-entry">KAUFMANN, D.; KRAAY, A.; MASTRUZZI, M. The worldwide governance indicators: A summary of methodology, data and analytic platforms. <em>World Bank Policy Research Working Paper</em>, n. 5430, 2010.</p>
+
+            <p class="ref-entry">KENNY, C. <em>Publishing construction contracts and outcome details</em>. Washington: World Bank, 2012.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. <em>The entrepreneurial state: Debunking public vs. private sector myths</em>. London: Anthem Press, 2013.</p>
+
+            <p class="ref-entry">NORRIS, D. F.; REDDICK, C. G. Local government adoption of mobile technology: An issue of diffusion. <em>Information Technology and People</em>, v. 26, n. 3, p. 256-277, 2013.</p>
+
+            <p class="ref-entry">NORTH, D. C. <em>Institutions, institutional change and economic performance</em>. Cambridge: Cambridge University Press, 1990.</p>
+
+            <p class="ref-entry">NORTH, D. C. <em>Understanding the process of economic change</em>. Princeton: Princeton University Press, 2005.</p>
+
+            <p class="ref-entry">OSBORNE, D.; GAEBLER, T. <em>Reinventing government: How the entrepreneurial spirit is transforming the public sector</em>. Reading: Addison-Wesley, 1992.</p>
+
+            <p class="ref-entry">PASSOTTI, L.; FREGOLI, D.; BOF, F. Governing algorithms: A framework for algorithmic decision-making in public administration. <em>Government Information Quarterly</em>, v. 39, n. 1, p. 101701, 2022.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The economic institutions of capitalism</em>. New York: Free Press, 1985.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
+            </div>
+        </div>
+        <div class="page-footer">5</div>
+    </section>
+
+    <script>
+    function exportarDocx() {
+        var content = document.documentElement.outerHTML;
+        var blob = new Blob(['\ufeff' + content], {type: 'application/msword'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = (document.title || 'artigo') + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    </script>
+</body>
+</html>

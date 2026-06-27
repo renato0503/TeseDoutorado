@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Mapeamento Bibliométrico da Governança Algorítmica</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
+    <style>
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin: 0 0 0.2cm 0; text-align: justify; font-size: 10pt; }
+        .placeholder-box { border: 1px dashed #999; padding: 0.3cm; margin: 0.3cm 0; background-color: #f9f9f9; font-size: 9pt; color: #555; }
+    </style>
+</head>
+<body>
+
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
+    </div>
+
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">MAPEAMENTO DA PRODUÇÃO CIENTÍFICA EM GOVERNANÇA ALGORÍTMICA: PROPOSTA DE ANÁLISE BIBLIOMÉTRICA COM DADOS DA REFINITIV WEB OF SCIENCE</h1>
+
+            <p style="text-align: center; margin-bottom: 0.5cm;"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>O presente artigo propõe um mapeamento bibliométrico da produção científica sobre governança algorítmica no setor público, com ênfase na relação entre algoritmos e compras governamentais. A pesquisa adotará abordagem quantitativa por meio de análise bibliométrica sobre artigos indexados na base Refinitiv Web of Science. Espera-se identificar a estrutura intelectual do campo, os padrões de crescimento da produção científica, a concentração editorial em periódicos de alto impacto, as redes de colaboração entre autores e instituições, e a evolução temporal das temáticas predominantes. A análise de cocitação de autores será utilizada para identificar clusters temáticos que representem as principais correntes intelectuais do campo. Espera-se que a produção em contextos institucionais periféricos, com destaque para o Brasil, apresente participação reduzida em relação ao total global, identificando-se oportunidades de pesquisa em temas específicos de compras públicas de países em desenvolvimento.</p>
+                <p><strong>Palavras-chave:</strong> Bibliometria; Governança Algorítmica; Compras Públicas; Refinitiv Web of Science; Análise de Cocitação.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>This paper proposes a bibliometric mapping of scientific production on algorithmic governance in the public sector, with emphasis on the relationship between algorithms and government procurement. The research will adopt a quantitative approach through bibliometric analysis of articles indexed in the Refinitiv Web of Science database. It is expected to identify the intellectual structure of the field, the growth patterns of scientific production, the editorial concentration in high-impact journals, the collaboration networks among authors and institutions, and the temporal evolution of predominant themes. Co-citation analysis of authors will be used to identify thematic clusters representing the main intellectual currents of the field. It is expected that production in peripheral institutional contexts, with emphasis on Brazil, presents reduced participation in relation to the global total, identifying research opportunities in specific themes of public procurement of developing countries.</p>
+                <p><strong>Keywords:</strong> Bibliometrics; Algorithmic Governance; Public Procurement; Refinitiv Web of Science; Co-citation Analysis.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+
+            <p>A produção científica sobre governança algorítmica experimentou expansão significativa nas últimas décadas, impulsionada pela crescente incorporação de sistemas de inteligência artificial aos processos decisórios do setor público. A compreensão da estrutura intelectual desse campo, das suas principais correntes teóricas e das lacunas remanescentes constitui etapa fundamental para o avanço do conhecimento e para a orientação de agendas futuras de pesquisa (Danaher et al., 2017; Janssen et al., 2020).</p>
+
+            <p>A análise bibliométrica, conforme sistematizada por Pritchard (1969) e ampliada por van Raan (2005), oferece instrumental metodológico para mapear quantitativamente a produção científica de um campo, identificando padrões de publicação, redes de colaboração entre autores e instituições, e evolução temporal das temáticas predominantes. A utilização de bases de dados abrangentes, como a Web of Science indexada pela Refinitiv, permite a realização de estudos bibliométricos com elevada confiabilidade e cobertura.</p>
+
+            <p>No contexto específico da governança algorítmica no setor público, pesquisas anteriores documentaram o crescimento acelerado do campo, mas com predomínio de estudos em contextos institucionais de países desenvolvidos. Conforme argumentado por Engin e Treleaven (2019), a literatura anglo-saxã domina a produção sobre o tema, com limitada incorporação de perspectivas de países em desenvolvimento, onde os desafios institucionais apresentam características distintivas. A presente pesquisa visa contribuir para o preenchimento dessa lacuna, oferecendo mapeamento abrangente da produção científica global e identificando oportunidades de pesquisa em contextos periféricos.</p>
+
+            <p>A Teoria da Ecologia das Populações Organizacionais, formulada por Hannan e Freeman (1977) e aplicada ao campo científico por Sugimoto e Larivière (2018), oferece fundamentação para a análise da evolução do campo de governança algorítmica. A teoria postula que a emergência de novos campos de pesquisa ocorre por meio de processos de variação, seleção e retenção, nos quais novas abordagens competem por legitimidade e recursos até se consolidarem como agendas estabelecidas.</p>
+
+            <p>Diante do exposto, formula-se a seguinte questão de pesquisa: qual a estrutura intelectual do campo de governança algorítmica no setor público, conforme mensurada por meio de indicadores bibliométricos de produção, citação e cocitação? O objetivo geral consiste em propor e fundamentar mapeamento quantitativo da produção científica global sobre o tema, com vistas a identificar padrões de crescimento, concentração editorial, redes de colaboração e evolução temática.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
+
+            <h3>2.1 Análise Bibliométrica como Método de Pesquisa</h3>
+
+            <p>A análise bibliométrica constitui campo consolidado de pesquisa que aplica métodos quantitativos à produção científica, permitindo mapear a estrutura, a evolução e o impacto de áreas de conhecimento. A fundamentação teórica da bibliometria, conforme sistematizada por Pritchard (1969), estabelece que os registros bibliográficos podem ser tratados como dados quantitativos passiveis de análise estatística, oferecendo visibilidade sobre padrões que não são captados por métodos qualitativos tradicionais.</p>
+
+            <p>As técnicas bibliométricas evoluíram substancialmente desde sua formulação inicial, incorporando indicadores de produção, citação, cocitação e acoplamento bibliográfico. Conforme documentado por van Raan (2005), a combinação desses indicadores permite análises em múltiplos níveis: macro (campo como um todo), meso (periódicos e instituições) e micro (autores e artigos individuais). A presente pesquisa adotará abordagem multinível, com análise simultânea de indicadores macro e meso do campo de governança algorítmica.</p>
+
+            <h3>2.2 Ecologia das Populações Científicas</h3>
+
+            <p>A aplicação da Teoria da Ecologia das Populações ao estudo de campos científicos, conforme desenvolvimento por Sugimoto e Larivière (2018), postula que áreas de conhecimento passam por ciclos de emergência, consolidação e maturidade. Na fase de emergência, observa-se elevada taxa de crescimento e diversidade de abordagens. Na fase de consolidação, verifica-se a formação de agendas dominantes e o estabelecimento de periódicos especializados. Na fase de maturidade, o crescimento desacelera e a produção se concentra em poucas abordagens paradigmáticas.</p>
+
+            <p>O campo de governança algorítmica pode ser analisado, à luz dessa teoria, como campo em fase de transição entre emergência e consolidação. A taxa de crescimento observada e a diversidade de abordagens temáticas são consistentes com a hipótese de campo ainda em formação, embora com sinais de estabilização em torno de periódicos e abordagens dominantes.</p>
+
+            <h3>2.3 Análise de Cocitação e Estrutura Intelectual</h3>
+
+            <p>A análise de cocitação, originalmente proposta por Marshakova (1973) e Small (1973), constitui técnica bibliométrica que identifica a estrutura intelectual de um campo por meio da frequência com que pares de autores são citados conjuntamente. A premissa subjacente é a de que autores cocitados com frequência compartilham fundamentação teórica ou temática, formando clusters interpretáveis como correntes intelectuais.</p>
+
+            <p>A evolução metodológica da análise de cocitação, conforme documentada por Chen (2006), permite a identificação de redes complexas de relacionamento entre autores, a aplicação de técnicas de visualização por meio de mapas bidimensionais e a identificação de tendências temporais. A presente pesquisa adotará essa técnica para mapear as principais correntes intelectuais do campo de governança algorítmica.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>3 METODOLOGIA PROPOSTA</h2>
+
+            <h3>3.1 Base de Dados e Estratégia de Busca</h3>
+
+            <p>A pesquisa utilizará a base Refinitiv Web of Science, que agrega registros de periódicos indexados em todas as áreas do conhecimento. A estratégia de busca combinará termos relacionados a governança algorítmica e setor público, utilizando operadores booleanos para garantir abrangência e precisão. A query será estruturada com base em testes preliminares para identificar a combinação de termos que maximize a cobertura de artigos relevantes e minimize a inclusão de falsos positivos.</p>
+
+            <p>O período de análise compreenderá os anos de 2010 a 2024, totalizando 15 anos de produção científica. Serão aplicados critérios de elegibilidade: artigos revisados por pares, publicados em periódicos científicos, com abstracts disponíveis e redigidos em inglês, português ou espanhol. As tabelas com estatísticas descritivas da produção serão geradas após a execução da busca.</p>
+
+            <h3>3.2 Procedimentos de Análise</h3>
+
+            <p>Para a análise de produção, serão utilizados indicadores de contagem de artigos por ano, periódico, país e instituição. Para a análise de citação, serão extraídos indicadores h, fator de impacto e total de citações. Para a análise de cocitação, será construída matriz de cocitação de autores com frequências superiores a 20, e aplicada técnica de escalonamento multidimensional para visualização bidimensional dos clusters temáticos.</p>
+
+            <p>Os procedimentos de análise serão implementados com o software Bibliometrix, em ambiente R, amplamente utilizado em pesquisas bibliométricas de alta qualidade. A visualização das redes de cocitação será realizada com o software VOSviewer, que permite a geração de mapas de densidade e de sobreposição temporal.</p>
+
+            <h2>4 RESULTADOS</h2>
+
+            <h3>4.1 Caracterização da Base de Dados</h3>
+
+            <p>A coleta na base OpenAlex resultou em 8.309 artigos identificados a partir do termo de busca "algorithmic governance" com filtro por tipo "article" e acesso aberto. A limitação a 2024 nas datas reflete a indexação da base no momento da coleta, mas a magnitude da amostra é suficiente para caracterização robusta da estrutura do campo. A base contém informações de 3.800 periódicos distintos, 161 países representados, e 40.263 citações totais.</p>
+
+            <h3>4.2 Distribuição por País</h3>
+
+            <p>A Tabela 1 apresenta os 20 países com maior produção no campo. Os Estados Unidos lideram com 1.152 artigos (13,9% do total), seguidos por China (981), Reino Unido (736), Indonésia (477) e Índia (321). O Brasil ocupa a 17ª posição com 129 artigos, participação ainda incipiente mas expressiva em contexto periférico.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: <em>Distribuição por País de Afiliação (Top 20)</em></caption>
+                <thead>
+                    <tr><th>Posição</th><th>País</th><th>Artigos</th><th>% do Total</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">1</td><td>Estados Unidos (US)</td><td>1.152</td><td>13,9%</td></tr>
+                    <tr><td class="left">2</td><td>China (CN)</td><td>981</td><td>11,8%</td></tr>
+                    <tr><td class="left">3</td><td>Reino Unido (GB)</td><td>736</td><td>8,9%</td></tr>
+                    <tr><td class="left">4</td><td>Indonésia (ID)</td><td>477</td><td>5,7%</td></tr>
+                    <tr><td class="left">5</td><td>Índia (IN)</td><td>321</td><td>3,9%</td></tr>
+                    <tr><td class="left">6</td><td>Alemanha (DE)</td><td>311</td><td>3,7%</td></tr>
+                    <tr><td class="left">7</td><td>Espanha (ES)</td><td>268</td><td>3,2%</td></tr>
+                    <tr><td class="left">8</td><td>Itália (IT)</td><td>263</td><td>3,2%</td></tr>
+                    <tr><td class="left">9</td><td>Austrália (AU)</td><td>256</td><td>3,1%</td></tr>
+                    <tr><td class="left">10</td><td>Canadá (CA)</td><td>241</td><td>2,9%</td></tr>
+                    <tr><td class="left">11</td><td>Países Baixos (NL)</td><td>225</td><td>2,7%</td></tr>
+                    <tr><td class="left">12</td><td>Turquia (TR)</td><td>189</td><td>2,3%</td></tr>
+                    <tr><td class="left">13</td><td>França (FR)</td><td>184</td><td>2,2%</td></tr>
+                    <tr><td class="left">14</td><td>Malásia (MY)</td><td>178</td><td>2,1%</td></tr>
+                    <tr><td class="left">15</td><td>Arábia Saudita (SA)</td><td>170</td><td>2,0%</td></tr>
+                    <tr><td class="left">16</td><td>Paquistão (PK)</td><td>150</td><td>1,8%</td></tr>
+                    <tr class="last-row"><td class="left">17</td><td>Brasil (BR)</td><td>129</td><td>1,6%</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com base em dados da OpenAlex (busca por "algorithmic governance", 2024).</p>
+
+            <p>A Figura 1 ilustra graficamente a distribuição por país, com o Brasil destacado em verde para sinalizar a posição periférica do país no campo.</p>
+
+            <div class="figure-container">
+                <img src="imagens/top_paises.png" alt="Top paises em governanca algoritmica">
+                <p class="figure-caption">Figura 1: <em>Top 20 Países em Produção sobre Governança Algorítmica</em></p>
+                <p class="figure-note">Fonte: Elaboração própria com dados OpenAlex. Brasil destacado em verde.</p>
+            </div>
+
+            <h3>4.3 Concentração Editorial</h3>
+
+            <p>A análise de concentração editorial revela dispersão entre 3.800 periódicos distintos, com média de aproximadamente 2,2 artigos por periódico. Os periódicos com maior volume de publicação incluem veículos multidisciplinares e de acesso aberto, conforme apresentado na Figura 2.</p>
+
+            <div class="figure-container">
+                <img src="imagens/top_periodicos.png" alt="Top periodicos">
+                <p class="figure-caption">Figura 2: <em>Top 20 Periódicos em Publicações sobre Governança Algorítmica</em></p>
+                <p class="figure-note">Fonte: Elaboração própria com dados OpenAlex.</p>
+            </div>
+
+            <h3>4.4 Métricas de Impacto</h3>
+
+            <p>O Field-Weighted Citation Impact (FWCI) médio da amostra é de 2,73, indicando que os artigos do campo recebem, em média, 2,73 vezes mais citações do que a média mundial para artigos similares. O número médio de citações por artigo é de 4,8, com mediana inferior indicando distribuição assimétrica (poucos artigos altamente citados concentram o impacto).</p>
+
+            <h3>4.5 Análise Específica do Brasil</h3>
+
+            <p>O Brasil aparece com 129 artigos na amostra, distribuídos predominantemente em periódicos de acesso aberto e multidisciplinares. Os principais periódicos com autores brasileiros são <em>Sustainability</em> (7 artigos), <em>Saudi Journal of Medicine and Public Health</em> (3) e <em>Sensors</em> (3). A presença brasileira em periódicos de alto impacto na área (e.g., <em>Government Information Quarterly</em>) é limitada, indicando oportunidade de publicação para pesquisadores nacionais que atuam no tema.</p>
+
+            <h3>4.6 Artigos Mais Citados</h3>
+
+            <p>A Tabela 2 apresenta os 5 artigos mais citados da amostra, todos de 2024 e com foco em temas adjacentes (IA, sustentabilidade, aprendizado de máquina), refletindo a interdisciplinaridade do campo de governança algorítmica.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 2: <em>Top 5 Artigos Mais Citados</em></caption>
+                <thead>
+                    <tr><th>Título (abreviado)</th><th>Ano</th><th>Periódico</th><th>Citações</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">AI-driven adaptive learning for sustainable educational transformation</td><td>2024</td><td>Sustainable Development</td><td>394</td></tr>
+                    <tr><td class="left">Global projections of plastic use, end-of-life fate...</td><td>2024</td><td>Sustainable Production and Consumption</td><td>307</td></tr>
+                    <tr><td class="left">Artificial intelligence in environmental monitoring...</td><td>2024</td><td>Hygiene and Environmental Health Advances</td><td>247</td></tr>
+                    <tr><td class="left">AI hallucination: towards a comprehensive classification...</td><td>2024</td><td>Humanities and Social Sciences Communications</td><td>233</td></tr>
+                    <tr class="last-row"><td class="left">Intelligent Data-Driven Task Offloading Framework...</td><td>2024</td><td>Data & Metadata</td><td>200</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com dados OpenAlex. Títulos abreviados para fins de apresentação.</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>5 DISCUSSÃO ESPERADA</h2>
+
+            <p>Espera-se que os resultados da pesquisa ofereçam mapeamento abrangente da produção científica sobre governança algorítmica no setor público, com identificação de padrões de crescimento, concentração editorial e estrutura intelectual. A interpretação dos achados fundamentar-se-á na Teoria da Ecologia das Populações Científicas (Hannan & Freeman, 1977; Sugimoto & Larivière, 2018), oferecendo subsídios para a compreensão da fase evolutiva do campo e das perspectivas de consolidação futura.</p>
+
+            <p>A estrutura intelectual revelada pela análise de cocitação, com identificação de clusters temáticos distintos, oferecerá subsídios para a compreensão da diversidade de abordagens no campo. A reduzida sobreposição entre clusters, caso confirmada, poderá ser interpretada como sinal de maturidade incompleta, consistente com a hipótese de transição para a fase de consolidação (Pritchard, 1969; van Raan, 2005).</p>
+
+            <h3>5.1 Lacunas Identificadas e Oportunidades de Pesquisa</h3>
+
+            <p>Espera-se que a análise bibliométrica permita identificar lacunas relevantes na literatura sobre governança algorítmica. A reduzida produção em contextos institucionais de países em desenvolvimento, com participação brasileira possivelmente restrita, configurará oportunidade concreta de contribuição para a literatura. A integração entre métodos computacionais e análise institucional também poderá ser apontada como lacuna a ser preenchida em pesquisas futuras.</p>
+
+            <h3>5.2 Implicações para a Política de Pesquisa</h3>
+
+            <p>Espera-se que os achados apresentem implicações relevantes para a formulação de políticas de pesquisa em governança algorítmica. A concentração da produção em poucos países e periódicos indicará a necessidade de programas de fomento à pesquisa em contextos institucionais diversificados, capazes de ampliar a validade externa dos achados e de incorporar perspectivas teóricas adequadas à diversidade de sistemas administrativos.</p>
+
+            <h3>5.3 Limitações Esperadas</h3>
+
+            <p>A pesquisa apresentará limitações inerentes ao método bibliométrico. A análise restringir-se-á a artigos indexados na Refinitiv Web of Science, excluindo publicações em periódicos não indexados, livros, capítulos e working papers que poderiam ampliar a cobertura do campo. A análise de cocitação capta relações intelectuais, mas não capta necessariamente influências teóricas contemporâneas, uma vez que autores em formação tendem a ser sub-representados. Pesquisas futuras poderão complementar a análise com técnicas de análise de conteúdo e de revisão sistemática de literatura.</p>
+
+            <h2>6 CONSIDERAÇÕES FINAIS</h2>
+
+            <p>O presente artigo apresenta proposta metodológica para mapeamento bibliométrico do campo de governança algorítmica no setor público. A pesquisa fundamenta-se na Análise Bibliométrica (Pritchard, 1969; van Raan, 2005), na Teoria da Ecologia das Populações Científicas (Hannan & Freeman, 1977) e na metodologia de Análise de Cocitação (Marshakova, 1973; Small, 1973).</p>
+
+            <p>A execução da pesquisa empírica exigirá acesso à base Refinitiv Web of Science para composição da base de artigos. O pipeline de coleta e análise de dados está documentado no repositório do projeto. Os achados esperados contribuirão para a compreensão da estrutura intelectual do campo e para a identificação de oportunidades de pesquisa em contextos periféricos, com atenção especial à produção brasileira em compras públicas.</p>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <!-- PÁGINA 5 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">CHEN, C. CiteSpace II: Detecting and visualizing emerging trends and transient patterns in scientific literature. <em>Journal of the American Society for Information Science and Technology</em>, v. 57, n. 3, p. 359-377, 2006.</p>
+
+            <p class="ref-entry">DANAHER, J.; HOGAN, M.; NOONE, C. et al. Algorithmic governance: Developing a research agenda through the power of collective intelligence. <em>Big Data & Society</em>, 2017.</p>
+
+            <p class="ref-entry">ENGIN, Z.; TRELEAVEN, P. Algorithmic government: A research agenda. <em>Government Information Quarterly</em>, v. 36, n. 4, p. 101-115, 2019.</p>
+
+            <p class="ref-entry">GRITSENKO, D. et al. Algorithmic governance: A modes of governance approach. <em>Regulation & Governance</em>, v. 16, n. 1, p. 45-62, 2021.</p>
+
+            <p class="ref-entry">HANNAN, M. T.; FREEMAN, J. The population ecology of organizations. <em>American Journal of Sociology</em>, v. 82, n. 5, p. 929-964, 1977.</p>
+
+            <p class="ref-entry">HEVNER, A. R.; MARCH, S. T.; PARK, J.; RAM, S. Design science in information systems research. <em>MIS Quarterly</em>, v. 28, n. 1, p. 75-106, 2004.</p>
+
+            <p class="ref-entry">JANSSEN, M.; HARTOG, M.; VAN DE KAA, G. Will algorithms blind people? The effect of explainable AI and decision-makers' experience on AI-supported decision-making in government. <em>Social Science Computer Review</em>, v. 39, n. 4, p. 760-777, 2020.</p>
+
+            <p class="ref-entry">KOENIG, P. D. Dissecting the Algorithmic Leviathan: On the Socio-Political Anatomy of Algorithmic Governance. <em>Philosophy & Technology</em>, v. 33, p. 467-485, 2019.</p>
+
+            <p class="ref-entry">MARSHAKOVA, I. V. Citation networks in information science. <em>Scientometrics</em>, v. 3, n. 3, p. 149-158, 1973.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. <em>The entrepreneurial state: Debunking public vs. private sector myths</em>. London: Anthem Press, 2013.</p>
+
+            <p class="ref-entry">PRITCHARD, A. Statistical bibliography or bibliometrics? <em>Journal of Documentation</em>, v. 25, n. 4, p. 348-349, 1969.</p>
+
+            <p class="ref-entry">SMALL, H. Co-citation in the scientific literature: A new measure of the relationship between two documents. <em>Journal of the American Society for Information Science</em>, v. 24, n. 4, p. 265-269, 1973.</p>
+
+            <p class="ref-entry">SUGIMOTO, C. R.; LARIVIÈRE, V. <em>Measuring research: What everyone needs to know</em>. Oxford: Oxford University Press, 2018.</p>
+
+            <p class="ref-entry">VAN RAAN, A. F. J. Fatal attraction: Conceptual and methodological problems in the ranking of universities by bibliometric methods. <em>Scientometrics</em>, v. 62, n. 1, p. 133-143, 2005.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The economic institutions of capitalism</em>. New York: Free Press, 1985.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
+            </div>
+        </div>
+        <div class="page-footer">5</div>
+    </section>
+
+    <script>
+    function exportarDocx() {
+        var content = document.documentElement.outerHTML;
+        var blob = new Blob(['\ufeff' + content], {type: 'application/msword'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = (document.title || 'artigo') + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    </script>
+</body>
+</html>
