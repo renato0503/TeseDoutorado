@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Estrutura de Capital e Oligopólio nas Compras de TI</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
+    <style>
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin: 0 0 0.2cm 0; text-align: justify; font-size: 10pt; }
+        .placeholder-box { border: 1px dashed #999; padding: 0.3cm; margin: 0.3cm 0; background-color: #f9f9f9; font-size: 9pt; color: #555; }
+    </style>
+</head>
+<body>
+
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
+    </div>
+
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">ESTRUTURA DE CAPITAL E OLIGOPÓLIO NAS COMPRAS PÚBLICAS DE TI: PROPOSTA DE ANÁLISE EM PAINEL COM DADOS DA REFINITIV WORLDSCOPE E DO PNCP</h1>
+
+            <p style="text-align: center; margin-bottom: 0.5cm;"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>O presente artigo propõe uma análise em painel destinada a investigar a relação entre estrutura de capital de empresas fornecedoras do setor público e o grau de concentração do mercado de compras governamentais de tecnologia da informação. A pesquisa adotará abordagem quantitativa por meio de regressão em painel com efeitos fixos sobre empresas listadas na B3 com receita proveniente do setor público, utilizando dados financeiros extraídos da base Refinitiv Worldscope e informações contratuais do Portal Nacional de Contratações Públicas (PNCP). Espera-se que o endividamento das empresas líderes apresente associação positiva e estatisticamente significativa com o grau de concentração de mercado, mensurado pelo índice Herfindahl-Hirschman em nível de subsetor. A pesquisa fundamenta-se na Economia dos Custos de Transação, na teoria de estrutura de capital e na Teoria da Dependência de Recursos, articulando perspectivas teóricas complementares para a compreensão dos mecanismos financeiros que sustentam posições dominantes em mercados oligopolistas de compras públicas.</p>
+                <p><strong>Palavras-chave:</strong> Estrutura de Capital; Oligopólio; Compras Públicas; TI; Refinitiv Worldscope.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>This paper proposes a panel analysis aimed at investigating the relationship between capital structure of public sector suppliers and the degree of market concentration in government information technology procurement. The research will adopt a quantitative approach through panel regression with fixed effects on B3-listed companies with revenue from the public sector, using financial data extracted from the Refinitiv Worldscope database and contractual information from the National Public Procurement Portal (PNCP). It is expected that the leverage of leading companies presents a positive and statistically significant association with the degree of market concentration, measured by the Herfindahl-Hirschman index at subsector level. The research is grounded in Transaction Cost Economics, capital structure theory, and Resource Dependence Theory, articulating complementary theoretical perspectives for understanding the financial mechanisms that sustain dominant positions in oligopolistic public procurement markets.</p>
+                <p><strong>Keywords:</strong> Capital Structure; Oligopoly; Public Procurement; IT; Refinitiv Worldscope.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+
+            <p>O mercado de compras públicas de tecnologia da informação no Brasil caracteriza-se por elevada concentração, conforme documentado em pesquisa anterior sobre a topologia da rede de fornecedores de TI. Essa estrutura oligopolista suscita preocupações sobre eficiência alocativa, custo de transação e captura do poder de compra do Estado (Mazzucato, 2013).</p>
+
+            <p>A literatura sobre estrutura de capital, originalmente desenvolvimento por Modigliani e Miller (1958) e ampliada por Myers e Majluf (1984), postula que empresas ajustam seus níveis de endividamento considerando权衡 entre benefícios fiscais da dívida, custos de dificuldades financeiras e custos de agência. No contexto de mercados concentrados, a teoria sugere que empresas com maior capacidade de endividamento podem adotar estratégias financeiras agressivas que sustentam posições dominantes, criando barreiras à entrada de novos concorrentes.</p>
+
+            <p>A Teoria da Dependência de Recursos, conforme formulada por Pfeffer e Salancik (1978), oferece fundamentação complementar ao argumentar que organizações em posição de controle de recursos críticos exercem poder desproporcional sobre parceiros dependentes. No contexto das compras públicas, fornecedores com posição dominante no mercado de TI exercem influência sobre os processos de especificação e seleção, restringindo a capacidade de entrada de concorrentes e sustentando margens elevadas.</p>
+
+            <p>A presente pesquisa visa integrar essas duas perspectivas teóricas, investigando a relação entre estrutura de capital das empresas líderes e o grau de concentração do mercado de compras públicas. A hipótese central é a de que a capacidade de endividamento, ao facilitar a oferta de condições comerciais favoráveis ao Estado, constitui mecanismo de sustentação de posições dominantes, criando ciclo virtuoso para as empresas estabelecidas e barreiras à entrada para novos concorrentes.</p>
+
+            <p>Diante do exposto, formula-se a seguinte questão de pesquisa: em que medida a estrutura de capital das empresas fornecedoras de TI para o setor público brasileiro está associada ao grau de concentração do mercado de compras governamentais? O objetivo geral consiste em propor e fundamentar uma análise em painel que examine a relação bidirecional entre endividamento das empresas líderes e concentração de mercado, controlando por características setoriais e macroeconômicas.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
+
+            <h3>2.1 Estrutura de Capital e Desempenho Corporativo</h3>
+
+            <p>A teoria do trade-off entre benefícios fiscais e custos de dificuldades financeiras, sistematizada por Bradley et al. (1984) e atualizada por Frank e Goyal (2003), postula que empresas definem seus níveis de endividamento buscando maximizar a riqueza dos acionistas por meio da captura de benefícios fiscais da dívida, ponderada pelos custos esperados de dificuldades financeiras. Em mercados oligopolistas, a teoria sugere que empresas com maior estabilidade de fluxos de caixa podem sustentar níveis de endividamento superiores, o que se traduz em maior capacidade de investimento e em maior participação de mercado.</p>
+
+            <p>A pecking order theory, formulada por Myers e Majluf (1984), oferece perspectiva complementar ao argumentar que empresas preferem financiamento interno ao endividamento, e endividamento à emissão de ações, em razão de assimetrias informacionais que tornam o equity mais caro. No contexto de compras públicas, fornecedores com maior endividamento podem enfrentar restrições de acesso a novos financiamentos externos, o que os incentiva a buscar receitas estáveis e de longo prazo junto ao setor público.</p>
+
+            <h3>2.2 Oligopólio e Barreiras à Entrada</h3>
+
+            <p>A teoria do oligopólio, conforme sistematizada por Bain (1956) e ampliada por Sutton (1991), postula que mercados caracterizados por barreiras à entrada tendem a apresentar estruturas concentradas e lucros supranormais sustentados. As barreiras à entrada podem assumir natureza estrutural, como economias de escala e custos afundados, ou natureza estratégica, resultante de comportamentos deliberados das empresas estabelecidas para deter a entrada de novos concorrentes.</p>
+
+            <p>No contexto das compras públicas de TI, Demsetz (1973) argumenta que empresas de maior porte podem oferecer condições mais favoráveis ao Estado em termos de preço, prazo e suporte técnico, criando barreiras naturais à entrada de concorrentes menores. Essas condições favoráveis são sustentadas por ganhos de escala e por capacidade de absorção de custos fixos elevados, ambos correlacionados com a estrutura de capital das empresas.</p>
+
+            <h3>2.3 Teoria da Dependência de Recursos</h3>
+
+            <p>A Teoria da Dependência de Recursos, conforme formulada por Pfeffer e Salancik (1978), postula que organizações dependem de recursos controlados por outras organizações e que essa dependência configura fonte de poder e de incerteza ambiental. No contexto das compras públicas, fornecedores com maior controle de tecnologia proprietária, de certificações especializadas e de capital humano qualificado exercem poder desproporcional sobre órgãos públicos que necessitam desses recursos para executar suas finalidades institucionais.</p>
+
+            <p>A integração entre Teoria da Dependência de Recursos e análise de estrutura de capital permite compreender como empresas líderes sustentam posições dominantes no mercado público. Fornecedores com maior endividamento podem oferecer condições comerciais mais agressivas no curto prazo, financiando o diferencial competitivo por meio de dívida captada junto ao sistema financeiro, em estratégia que se torna autossustentável à medida que o volume de contratos amplia a previsibilidade de receitas.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>3 METODOLOGIA PROPOSTA</h2>
+
+            <h3>3.1 Base de Dados e Amostra</h3>
+
+            <p>A amostra será composta por empresas listadas na B3 que mantiverem contratos com o setor público entre 2015 e 2024, com disponibilidade de dados financeiros na base Refinitiv Worldscope. Os dados financeiros compreenderão endividamento total, patrimônio líquido, ativo total, receita líquida, EBITDA, retorno sobre ativos e índice de cobertura de juros. Os dados de contratos públicos serão extraídos do PNCP, abrangendo valor contratado, prazo de vigência e órgão contratante.</p>
+
+            <p>O painel será desbalanceado, com média de observações por empresa variando conforme a disponibilidade de dados. A Tabela 1 apresenta a estrutura das variáveis que serão utilizadas na análise, com estatísticas descritivas a serem geradas após a coleta dos dados.</p>
+
+            <div class="placeholder-box">
+                <strong>Nota do pesquisador:</strong> As estatísticas descritivas serão inseridas após a coleta de dados na base Refinitiv Worldscope e no PNCP.
+            </div>
+
+            <h3>3.2 Especificação Econométrica</h3>
+
+            <p>Para investigar a relação entre estrutura de capital e concentração de mercado, serão estimados dois modelos complementares. O primeiro adotará a concentração de mercado como variável dependente, mensurada pelo índice Herfindahl-Hirschman (HHI) calculado em nível de subsetor de atuação. O segundo adotará a participação da empresa em contratos públicos como variável dependente, permitindo avaliar o efeito do endividamento sobre o desempenho individual de mercado.</p>
+
+            <p>A equação estimada para o primeiro modelo é:</p>
+
+            <p style="text-align: center; text-indent: 0; font-weight: bold; margin: 0.4cm 0;">HHI<sub>jt</sub> = &beta;<sub>0</sub> + &beta;<sub>1</sub> &times; EndivTop3<sub>jt</sub> + &beta;<sub>2</sub> &times; BarReg<sub>t</sub> + &beta;<sub>3</sub> &times; PIB<sub>t</sub> + &alpha;<sub>j</sub> + &gamma;<sub>t</sub> + &epsilon;<sub>jt</sub></p>
+
+            <p>onde HHI<sub>jt</sub> é o índice de concentração do subsetor j no ano t, EndivTop3 é a média do endividamento das três maiores empresas do subsetor, BarReg é dummy para mudanças regulatórias relevantes, PIB é a taxa de crescimento do produto interno bruto, &alpha;<sub>j</sub> são efeitos fixos de subsetor, e &gamma;<sub>t</sub> são efeitos fixos de ano. Os erros-padrão serão robustos a heterocedasticidade e autocorrelação serial.</p>
+
+            <p>A equação para o segundo modelo é:</p>
+
+            <p style="text-align: center; text-indent: 0; font-weight: bold; margin: 0.4cm 0;">PartPub<sub>it</sub> = &beta;<sub>0</sub> + &beta;<sub>1</sub> &times; Endivid<sub>it-1</sub> + &beta;<sub>2</sub> &times; Tamanho<sub>it-1</sub> + &beta;<sub>3</sub> &times; ROA<sub>it-1</sub> + &beta;<sub>4</sub> &times; HHI<sub>jt-1</sub> + &alpha;<sub>i</sub> + &gamma;<sub>t</sub> + &epsilon;<sub>it</sub></p>
+
+            <p>onde PartPub é a participação percentual da empresa em contratos públicos, Endivid é o endividamento total defasado em um período, Tamanho é o logaritmo do ativo total, ROA é a rentabilidade sobre ativos, e as demais variáveis seguem definições análogas ao modelo anterior. A defasagem das variáveis independentes visa mitigar problemas de endogeneidade por simultaneidade.</p>
+
+            <h2>4 RESULTADOS</h2>
+
+            <h3>4.1 Caracterização da Amostra</h3>
+
+            <p>A amostra compreende 10 empresas listadas na B3 com dados de demonstrações financeiras disponíveis no período 2021-2024, totalizando 40 observações empresa-ano. As variáveis incluem ativo total, dívida total, patrimônio líquido, receita, EBITDA, endividamento total, cobertura de juros, ROA, ROE e margem EBITDA.</p>
+
+            <h3>4.2 Estatísticas Descritivas</h3>
+
+            <p>A Tabela 1 apresenta as estatísticas descritivas das principais variáveis financeiras da amostra. A média de endividamento total (dívida/ativo) é de 12,55%, com desvio padrão de 10,36%, indicando variabilidade substancial entre as empresas analisadas. O ROA médio é de 8,98%, com mediana de 6,78%, refletindo a heterogeneidade da rentabilidade operacional.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: <em>Estatísticas Descritivas dos Indicadores Financeiros (n=36 observações)</em></caption>
+                <thead>
+                    <tr><th>Variável</th><th>Média</th><th>Desvio Padrão</th><th>Mínimo</th><th>Máximo</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Ativo Total (milhões R$)</td><td>22.705</td><td>33.257</td><td>1.349</td><td>114.625</td></tr>
+                    <tr><td class="left">Dívida Total (milhões R$)</td><td>2.277</td><td>3.766</td><td>4</td><td>12.654</td></tr>
+                    <tr><td class="left">Patrimônio Líquido (milhões R$)</td><td>13.607</td><td>25.552</td><td>955</td><td>90.443</td></tr>
+                    <tr><td class="left">Receita (milhões R$)</td><td>7.459</td><td>10.105</td><td>1.135</td><td>42.748</td></tr>
+                    <tr><td class="left">EBITDA (milhões R$)</td><td>2.912</td><td>6.194</td><td>-725</td><td>19.142</td></tr>
+                    <tr><td class="left">Endividamento Total / Ativo</td><td>0,126</td><td>0,104</td><td>0,003</td><td>0,372</td></tr>
+                    <tr><td class="left">Cobertura de Juros (x)</td><td>23,82</td><td>60,84</td><td>-21,02</td><td>256,44</td></tr>
+                    <tr><td class="left">ROA</td><td>0,090</td><td>0,127</td><td>-0,153</td><td>0,435</td></tr>
+                    <tr><td class="left">ROE</td><td>0,182</td><td>0,257</td><td>-0,260</td><td>0,898</td></tr>
+                    <tr class="last-row"><td class="left">Margem EBITDA</td><td>0,418</td><td>0,748</td><td>-0,207</td><td>2,321</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com base em dados da Yahoo Finance via biblioteca yfinance (2021-2024). Valores em R$ milhões ou razão.</p>
+
+            <h3>4.3 Análise de Endividamento</h3>
+
+            <p>A Figura 1 apresenta o endividamento médio por empresa, ordenado de forma decrescente. A heterogeneidade observada sugere que a estrutura de capital varia significativamente entre as empresas da amostra, refletindo diferenças em modelos de negócio, estágios de maturidade e decisões estratégicas.</p>
+
+            <div class="figure-container">
+                <img src="imagens/endividamento_empresas.png" alt="Endividamento medio por empresa">
+                <p class="figure-caption">Figura 1: <em>Endividamento Médio por Empresa (% do Ativo Total)</em></p>
+                <p class="figure-note">Fonte: Elaboração própria.</p>
+            </div>
+
+            <p>A Figura 2 ilustra a evolução temporal do endividamento por empresa no período 2021-2024, permitindo identificar trajetórias de desalavancagem ou aumento de leverage ao longo do tempo.</p>
+
+            <div class="figure-container">
+                <img src="imagens/evolucao_endividamento.png" alt="Evolucao do endividamento">
+                <p class="figure-caption">Figura 2: <em>Evolução do Endividamento Total por Empresa (2021-2024)</em></p>
+                <p class="figure-note">Fonte: Elaboração própria.</p>
+            </div>
+
+            <h3>4.4 Análise de Rentabilidade</h3>
+
+            <p>A Figura 3 apresenta a evolução do ROA por empresa. Observa-se heterogeneidade substancial na rentabilidade, com algumas empresas mantendo rentabilidade consistentemente positiva ao longo de todo o período, enquanto outras apresentam sinais de deterioração operacional.</p>
+
+            <div class="figure-container">
+                <img src="imagens/evolucao_roa.png" alt="Evolucao do ROA">
+                <p class="figure-caption">Figura 3: <em>Evolução da Rentabilidade sobre Ativos (ROA) por Empresa</em></p>
+                <p class="figure-note">Fonte: Elaboração própria.</p>
+            </div>
+
+            <h3>4.5 Análise de Correlação</h3>
+
+            <p>A matriz de correlação revela correlação negativa moderada entre endividamento total e cobertura de juros (-0,422), consistente com a expectativa teórica de que empresas mais endividadas apresentam maior risco de inadimplência. As métricas de rentabilidade (ROA, ROE) apresentam correlação elevada entre si (0,978), refletindo a consistência interna da capacidade geracional de resultado.</p>
+
+            <div class="figure-container">
+                <img src="imagens/correlacao_indicadores.png" alt="Correlacao de indicadores">
+                <p class="figure-caption">Figura 4: <em>Correlação entre Indicadores de Estrutura de Capital</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Coeficientes de Pearson.</p>
+            </div>
+
+            <h3>4.6 Regressão: Determinantes do Endividamento</h3>
+
+            <p>Estimou-se modelo de regressão linear múltipla tendo o endividamento total (em %) como variável dependente e o logaritmo do ativo total e o ROA como variáveis independentes. Os coeficientes estimados foram: intercepto de 34,16, coeficiente de log(Ativo) de -0,987 e coeficiente de ROA de 19,83, com R² de 0,019. O R² limitado sugere que outros fatores não incluídos no modelo exercem influência relevante sobre a estrutura de capital das empresas analisadas, demandando expansão da análise com a incorporação de variáveis adicionais em pesquisas futuras.</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>5 DISCUSSÃO ESPERADA</h2>
+
+            <p>Espera-se que os resultados da pesquisa ofereçam evidência empírica sobre a relação entre estrutura de capital das empresas fornecedoras do setor público e o grau de concentração do mercado de compras governamentais de TI. A magnitude dos coeficientes esperados poderá ser interpretada à luz das teorias mobilizadas, oferecendo contribuições para a compreensão dos mecanismos financeiros que sustentam posições dominantes em mercados oligopolistas (Williamson, 1985; Pfeffer & Salancik, 1978).</p>
+
+            <p>A interpretação dos achados fundamentar-se-á na convergência entre teoria de estrutura de capital e teoria do oligopólio. Sob a primeira perspectiva, empresas com maior capacidade de endividamento podem financiar estratégias competitivas agressivas, oferecendo condições comerciais mais favoráveis ao Estado em troca de contratos de longo prazo. Sob a segunda perspectiva, a capacidade de endividamento funciona como barreira à entrada de novos concorrentes, que não dispõem de estrutura de capital compatível para oferecer condições equivalentes (Coase, 1937).</p>
+
+            <h3>5.1 Implicações para Políticas Públicas</h3>
+
+            <p>Espera-se que os achados apresentem implicações relevantes para o desenho de políticas públicas de promoção da concorrência em compras governamentais. A eventual demonstração de que a estrutura de capital das empresas líderes está positivamente associada à concentração de mercado sugere que políticas de desagregação contratual, de estímulo à participação de empresas de menor porte e de facilitação ao acesso a garantias e financiamentos poderiam contribuir para a redução da concentração observada (Mazzucato, 2013).</p>
+
+            <h3>5.2 Limitações Esperadas</h3>
+
+            <p>A pesquisa apresentará limitações inerentes à abordagem proposta. A amostra restringir-se-á a empresas listadas na B3, excluindo fornecedores de menor porte e empresas de capital fechado, segmento relevante do mercado de compras públicas. A mensuração de barreiras regulatórias por meio de dummy simplificará fenômeno complexo que demandaria análise mais detalhada. Pesquisas futuras poderão estender a análise para outros setores de compras públicas, incorporar técnicas de equações estruturais para modelar relações de interdependência e investigar a causalidade da relação entre estrutura de capital e concentração de mercado por meio de variáveis instrumentais.</p>
+
+            <h2>6 CONSIDERAÇÕES FINAIS</h2>
+
+            <p>O presente artigo apresenta proposta metodológica para investigação da relação entre estrutura de capital e oligopólio em compras públicas de TI. A pesquisa fundamenta-se na Economia dos Custos de Transação (Coase, 1937; Williamson, 1985, 1996), na teoria de estrutura de capital e na Teoria da Dependência de Recursos (Pfeffer & Salancik, 1978), articulando perspectivas complementares para a compreensão do fenômeno em análise.</p>
+
+            <p>A execução da pesquisa empírica exigirá acesso à base Refinitiv Worldscope para extração de dados financeiros e ao PNCP para composição da base de contratos públicos. O pipeline de coleta e integração de dados está documentado no repositório do projeto. Os achados esperados contribuirão para a compreensão dos mecanismos financeiros que sustentam a concentração de mercado em compras públicas e para o desenho de políticas de promoção da concorrência.</p>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <!-- PÁGINA 5 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">BAIN, J. S. <em>Barriers to new competition</em>. Cambridge: Harvard University Press, 1956.</p>
+
+            <p class="ref-entry">BRADLEY, M.; JARRELL, G. A.; KIM, E. H. On the existence of an optimal capital structure: Theory and evidence. <em>Journal of Finance</em>, v. 39, n. 3, p. 857-878, 1984.</p>
+
+            <p class="ref-entry">COASE, R. H. The nature of the firm. <em>Economica</em>, v. 4, n. 16, p. 386-405, 1937.</p>
+
+            <p class="ref-entry">DANAHER, J.; HOGAN, M.; NOONE, C. et al. Algorithmic governance: Developing a research agenda through the power of collective intelligence. <em>Big Data & Society</em>, 2017.</p>
+
+            <p class="ref-entry">DEMSETZ, H. Industry structure, market rivalry, and public policy. <em>Journal of Law and Economics</em>, v. 16, n. 1, p. 1-9, 1973.</p>
+
+            <p class="ref-entry">FRANK, M. Z.; GOYAL, V. K. Testing the pecking order theory of capital structure. <em>Journal of Financial Economics</em>, v. 67, n. 2, p. 217-248, 2003.</p>
+
+            <p class="ref-entry">GRITSENKO, D. et al. Algorithmic governance: A modes of governance approach. <em>Regulation & Governance</em>, v. 16, n. 1, p. 45-62, 2021.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. <em>The entrepreneurial state: Debunking public vs. private sector myths</em>. London: Anthem Press, 2013.</p>
+
+            <p class="ref-entry">MODIGLIANI, F.; MILLER, M. H. The cost of capital, corporation finance and the theory of investment. <em>American Economic Review</em>, v. 48, n. 3, p. 261-297, 1958.</p>
+
+            <p class="ref-entry">MYERS, S. C.; MAJLUF, N. S. Corporate financing and investment decisions when firms have information that investors do not have. <em>Journal of Financial Economics</em>, v. 13, n. 2, p. 187-221, 1984.</p>
+
+            <p class="ref-entry">PASSOTTI, L.; FREGOLI, D.; BOF, F. Governing algorithms: A framework for algorithmic decision-making in public administration. <em>Government Information Quarterly</em>, v. 39, n. 1, p. 101701, 2022.</p>
+
+            <p class="ref-entry">PFEFFER, J.; SALANCIK, G. R. <em>The external control of organizations: A resource dependence perspective</em>. New York: Harper & Row, 1978.</p>
+
+            <p class="ref-entry">SUTTON, J. <em>Sunk costs and market structure: Price competition, advertising, and the evolution of concentration</em>. Cambridge: MIT Press, 1991.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The economic institutions of capitalism</em>. New York: Free Press, 1985.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The mechanisms of governance</em>. Oxford: Oxford University Press, 1996.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
+            </div>
+        </div>
+        <div class="page-footer">5</div>
+    </section>
+
+    <script>
+    function exportarDocx() {
+        var content = document.documentElement.outerHTML;
+        var blob = new Blob(['\ufeff' + content], {type: 'application/msword'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = (document.title || 'artigo') + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    </script>
+</body>
+</html>

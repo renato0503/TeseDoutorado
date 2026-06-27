@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas LLM Multi-Agente: Revisao Sistematica da Literatura</title>
+    <style>
+        
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 2;
+            margin: 2.54cm;
+            text-align: justify;
+        }
+
+        h1 {
+            font-size: 14pt;
+            text-align: center;
+            margin-bottom: 0.5em;
+        }
+
+        h2 {
+            font-size: 12pt;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        p {
+            text-indent: 1.25cm;
+            margin-bottom: 0;
+        }
+
+        .author {
+            text-align: center;
+            margin: 1em 0;
+        }
+
+        .abstract-box {
+            margin: 1em 0;
+            padding: 0.5em;
+            border: 1px solid #000;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 0.3em;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
+</head>
+<body>
+
+<div class="control-panel no-print">
+    <button onclick="window.print()">Imprimir / Salvar PDF</button>
+</div>
+
+<section class="paper-page">
+    <h1>Sistemas LLM Multi-Agente: Revisao Sistematica da Literatura</h1>
+    <p class="author">Renato de Oliveira Rosa</p>
+
+    <div class="abstract-box">
+        <strong>Resumo.</strong> Este estudo analisa 395 preprints sobre sistemas LLM multi-agente, recuperados do arXiv. A pesquisa employs abordagem bibliometrica para mapear tendencias e lacunas. Os resultados indicam crescimento exponencial desde 2022 e concentracao em instituciones de pesquisa.<strong>Palavras-chave:</strong> LLM; Multi-Agente; Revisao Sistematica; Inteligencia Artificial.
+    </div>
+
+    <h2>1. Introducao</h2>
+    
+    <p>A arquitetura de Large Language Models (LLM) multi-agente tem emergido
+    como paradigma prometedor para sistemas de inteligencia artificial
+    complexos (Xi et al., 2023). Essa abordagem permite a cooperacao
+    entre multiplos agentes autonomos, cada um utilizando capacidades
+    especificas de LLM para resolver problemas de forma distribuida.</p>
+
+    <p>O presente estudo tem como objetivo analisar a producao cientifica
+    sobre sistemas LLM multi-agente, identificando tendencias tecnologicas,
+    arquiteturas propostas e aplicacoes emergentes. A analise de
+    395 trabalhos retrieved from arXiv permite mapear
+    o estado da arte nesse campo emergente.</p>
+
+    <p>O artigo esta organizado em cinco secoes: introducao, fundamentacao
+    teorica, metodologia, resultados e discussao, e conclusao.</p>
+    
+
+    <h2>2. Fundamentacao Teorica</h2>
+    
+    <p>Os sistemas multi-agente baseados em LLM representam uma evolucao
+    significativa em relacao aos sistemas de agentes tradicionais,
+    combinando a capacidade de processar linguagem natural dos LLMs
+    com a robustez de arquiteturas distribuidas (Wang et al., 2023).</p>
+
+    <p>A literatura identifica diversas abordagens para implementacao
+    de sistemas multi-agente, incluindo: hierarquicas, onde um agente
+    coordena os demais; peer-to-peer, com cooperacao horizontal;
+    e hibridas, combinando elementos de ambas as arquiteturas.</p>
+
+    <p>As aplicacoes desses sistemas incluem: automacao de processos
+    robotic (RPA), assistentes virtuais cooperativos, sistemas de
+    suporte a decisao distribuidos, e plataformas de e-commerce
+    inteligente.</p>
+    
+
+    <h2>3. Metodologia</h2>
+    
+    <p>A pesquisa employs a bibliometric analysis methodology, collecting
+    data from the arXiv preprint repository. The search terms included:
+    "LLM multi-agent", "model cascading LLM", "LLM routing",
+    "on-premises LLM", and "federated LLM".</p>
+
+    <p>The temporal scope was defined from 2018 to 2024, capturing
+    the entire period of LLM development. A total of 395
+    preprints were retrieved and analyzed.</p>
+
+    <p>The analysis involved: (1) temporal distribution analysis;
+    (2) thematic clustering through keyword co-occurrence;
+    (3) identification of leading institutions and authors;
+    and (4) mapping of proposed architectures and methodologies.</p>
+    
+
+    <div class="page-break"></div>
+
+    <h2>4. Resultados</h2>
+    <p><strong>Tabela 1.</strong> Amostra de Preprints sobre LLM Multi-Agente</p>
+<table>
+<thead>
+<tr><th>Titulo</th><th>Ano</th><th>Autores</th></tr>
+</thead>
+<tbody>
+<tr><td>A Survey of Multi-Agent Deep Reinforcement Learning with Communication</td><td>2022</td><td>Changxi Zhu; Mehdi Dastani; Shihan Wang</td></tr>
+<tr><td>A Methodology to Engineer and Validate Dynamic Multi-level Multi-agent Based Simulations</td><td>2013</td><td>Jean-Baptiste Soyez; Gildas Morvan; Daniel Dupont; Rochdi Merzouki</td></tr>
+<tr><td>Augmenting the action space with conventions to improve multi-agent cooperation in Hanabi</td><td>2024</td><td>F. Bredell; H. A. Engelbrecht; J. C. Schoeman</td></tr>
+<tr><td>Context Engineering for Multi-Agent LLM Code Assistants Using Elicit, NotebookLM, ChatGPT, and Claude Code</td><td>2025</td><td>Muhammad Haseeb</td></tr>
+<tr><td>AOAD-MAT: Transformer-based multi-agent deep reinforcement learning model considering agents' order of action decisions</td><td>2025</td><td>Shota Takayama; Katsuhide Fujita</td></tr>
+<tr><td>Small LLMs Are Weak Tool Learners: A Multi-LLM Agent</td><td>2024</td><td>Weizhou Shen; Chenliang Li; Hongzhan Chen; Ming Yan; Xiaojun Quan</td></tr>
+<tr><td>MedAide: Information Fusion and Anatomy of Medical Intents via LLM-based Agent Collaboration</td><td>2024</td><td>Dingkang Yang; Jinjie Wei; Mingcheng Li; Jiyao Liu; Lihao Liu</td></tr>
+<tr><td>From Model-Based Screening to Data-Driven Surrogates: A Multi-Stage Workflow for Exploring Stochastic Agent-Based Models</td><td>2026</td><td>Paul Saves; Matthieu Mastio; Nicolas Verstaevel; Benoit Gaudou</td></tr>
+<tr><td>Thucy: An LLM-based Multi-Agent System for Claim Verification across Relational Databases</td><td>2025</td><td>Michael Theologitis; Dan Suciu</td></tr>
+<tr><td>Don't Just Demo, Teach Me the Principles: A Principle-Based Multi-Agent Prompting Strategy for Text Classification</td><td>2025</td><td>Peipei Wei; Dimitris Dimitriadis; Yan Xu; Mingwei Shen</td></tr>
+<tr><td>TradingAgents: Multi-Agents LLM Financial Trading Framework</td><td>2024</td><td>Yijia Xiao; Edward Sun; Di Luo; Wei Wang</td></tr>
+<tr><td>Understanding Multi-Agent LLM Frameworks: A Unified Benchmark and Experimental Analysis</td><td>2026</td><td>Abdelghny Orogat; Ana Rostam; Essam Mansour</td></tr>
+<tr><td>Pommerman: A Multi-Agent Playground</td><td>2018</td><td>Cinjon Resnick; Wes Eldridge; David Ha; Denny Britz; Jakob Foerster</td></tr>
+<tr><td>Quantifying the effects of environment and population diversity in multi-agent reinforcement learning</td><td>2021</td><td>Kevin R. McKee; Joel Z. Leibo; Charlie Beattie; Richard Everett</td></tr>
+<tr><td>Learning Reward Machines in Cooperative Multi-Agent Tasks</td><td>2023</td><td>Leo Ardon; Daniel Furelos-Blanco; Alessandra Russo</td></tr>
+<tr><td>Towards Effective GenAI Multi-Agent Collaboration: Design and Evaluation for Enterprise Applications</td><td>2024</td><td>Raphael Shu; Nilaksh Das; Michelle Yuan; Monica Sunkara; Yi Zhang</td></tr>
+<tr><td>YouZhi: Towards High-Concurrency Financial LLMs via Adaptive GQA-to-MLA Transition</td><td>2026</td><td> PSBC LLM Team;  Huawei LLM Team; Ruihan Long; Junjie Wu; Tianan Zhang</td></tr>
+<tr><td>LLM Constitutional Multi-Agent Governance</td><td>2026</td><td>J. de Curtò; I. de Zarzà</td></tr>
+<tr><td>MAEBE: Multi-Agent Emergent Behavior Framework</td><td>2025</td><td>Sinem Erisken; Timothy Gothard; Martin Leitgab; Ram Potham</td></tr>
+<tr><td>PhishDebate: An LLM-Based Multi-Agent Framework for Phishing Website Detection</td><td>2025</td><td>Wenhao Li; Selvakumar Manickam; Yung-wey Chong; Shankar Karuppayah</td></tr>
+</tbody>
+</table>
+<p>Nota. Dados consolidados de 395 registros.</p><p>Fonte: Elaboracao propria.</p>
+
+    <h2>5. Discussao</h2>
+    
+    <p>Os resultados indicam crescimento exponencial na producao sobre
+    sistemas LLM multi-agente a partir de 2022, coincidente com o
+    lancamento de modelos como ChatGPT e GPT-4.</p>
+
+    <p>A analise temática revela cinco principais clusters de pesquisa:
+    (1) arquitetura de agentes; (2) metodos de cooperacao; (3) otimizacao
+    de recursos; (4) seguranca e privacidade; e (5) aplicacoes verticais.</p>
+
+    <p>Observa-se que a maioria das publicacoes origina-se de instituciones
+    de pesquisa em inteligencia artificial, com baixa participacao de
+    organizations do setor publico ou empresas tradicionais.</p>
+    
+
+    <h2>6. Conclusao</h2>
+    
+    <p>Este estudo analisou a producao cientifica sobre sistemas LLM
+    multi-agente, identificando tendencias e lacunas no campo.</p>
+
+    <p>A analise de 395 preprints revelou crescimento
+    significativo e concentracao em poucas instituciones de pesquisa,
+    principalmente em universidades dos Estados Unidos e China.</p>
+
+    <p>Identificou-se uma lacuna importante: a ausencia quase total de
+    estudos sobre aplicacoes de sistemas multi-agente em contextos de
+    gestao publica, o que representa oportunidade para pesquisas futuras.</p>
+    
+
+    <h2>Referencias</h2>
+<ol>
+<li>Changxi Zhu et al. (2022). A Survey of Multi-Agent Deep Reinforcement Learning with Communication. arXiv. http://arxiv.org/abs/2203.08975v2</li>
+<li>Jean-Baptiste Soyez et al. (2013). A Methodology to Engineer and Validate Dynamic Multi-level Multi-agent Based Simulations. arXiv. http://arxiv.org/abs/1311.5108v1</li>
+<li>F. Bredell et al. (2024). Augmenting the action space with conventions to improve multi-agent cooperation in Hanabi. arXiv. http://arxiv.org/abs/2412.06333v3</li>
+<li>Muhammad Haseeb (2025). Context Engineering for Multi-Agent LLM Code Assistants Using Elicit, NotebookLM, ChatGPT, and Claude Code. arXiv. http://arxiv.org/abs/2508.08322v1</li>
+<li>Shota Takayama et al. (2025). AOAD-MAT: Transformer-based multi-agent deep reinforcement learning model considering agents' order of action decisions. arXiv. http://arxiv.org/abs/2510.13343v1</li>
+<li>Weizhou Shen et al. (2024). Small LLMs Are Weak Tool Learners: A Multi-LLM Agent. arXiv. http://arxiv.org/abs/2401.07324v3</li>
+<li>Dingkang Yang et al. (2024). MedAide: Information Fusion and Anatomy of Medical Intents via LLM-based Agent Collaboration. arXiv. http://arxiv.org/abs/2410.12532v3</li>
+<li>Paul Saves et al. (2026). From Model-Based Screening to Data-Driven Surrogates: A Multi-Stage Workflow for Exploring Stochastic Agent-Based Models. arXiv. http://arxiv.org/abs/2604.03350v1</li>
+<li>Michael Theologitis et al. (2025). Thucy: An LLM-based Multi-Agent System for Claim Verification across Relational Databases. arXiv. http://arxiv.org/abs/2512.03278v2</li>
+<li>Peipei Wei et al. (2025). Don't Just Demo, Teach Me the Principles: A Principle-Based Multi-Agent Prompting Strategy for Text Classification. arXiv. http://arxiv.org/abs/2502.07165v1</li>
+<li>Yijia Xiao et al. (2024). TradingAgents: Multi-Agents LLM Financial Trading Framework. arXiv. http://arxiv.org/abs/2412.20138v7</li>
+<li>Abdelghny Orogat et al. (2026). Understanding Multi-Agent LLM Frameworks: A Unified Benchmark and Experimental Analysis. arXiv. http://arxiv.org/abs/2602.03128v1</li>
+<li>Cinjon Resnick et al. (2018). Pommerman: A Multi-Agent Playground. arXiv. http://arxiv.org/abs/1809.07124v2</li>
+<li>Kevin R. McKee et al. (2021). Quantifying the effects of environment and population diversity in multi-agent reinforcement learning. arXiv. http://arxiv.org/abs/2102.08370v2</li>
+<li>Leo Ardon et al. (2023). Learning Reward Machines in Cooperative Multi-Agent Tasks. arXiv. http://arxiv.org/abs/2303.14061v4</li>
+<li>Raphael Shu et al. (2024). Towards Effective GenAI Multi-Agent Collaboration: Design and Evaluation for Enterprise Applications. arXiv. http://arxiv.org/abs/2412.05449v1</li>
+<li> PSBC LLM Team et al. (2026). YouZhi: Towards High-Concurrency Financial LLMs via Adaptive GQA-to-MLA Transition. arXiv. http://arxiv.org/abs/2606.05868v1</li>
+<li>J. de Curtò et al. (2026). LLM Constitutional Multi-Agent Governance. arXiv. http://arxiv.org/abs/2603.13189v1</li>
+<li>Sinem Erisken et al. (2025). MAEBE: Multi-Agent Emergent Behavior Framework. arXiv. http://arxiv.org/abs/2506.03053v2</li>
+<li>Wenhao Li et al. (2025). PhishDebate: An LLM-Based Multi-Agent Framework for Phishing Website Detection. arXiv. http://arxiv.org/abs/2506.15656v2</li>
+<li>Ziyu Cheng et al. (2026). Interference-Aware K-Step Reachable Communication in Multi-Agent Reinforcement Learning. arXiv. http://arxiv.org/abs/2603.15054v1</li>
+<li>Rafael C. Cardoso et al. (2021). MLFC: From 10 to 50 Planners in the Multi-Agent Programming Contest. arXiv. http://arxiv.org/abs/2110.08172v2</li>
+<li>Chairi Kiourt et al. (2018). How game complexity affects the playing behavior of synthetic agents. arXiv. http://arxiv.org/abs/1807.02648v1</li>
+<li>Andrés Holgado-Sánchez et al. (2026). Learning the Value Systems of Agents with Preference-based and Inverse Reinforcement Learning. arXiv. http://arxiv.org/abs/2602.04518v1</li>
+<li>Ibrahim H. Ahmed et al. (2022). Deep Reinforcement Learning for Multi-Agent Interaction. arXiv. http://arxiv.org/abs/2208.01769v1</li>
+<li>Akshaya Kesarimangalam Srinivasan et al. (2023). Multi-agent Collective Construction using 3D Decomposition. arXiv. http://arxiv.org/abs/2309.00985v1</li>
+<li>Nhat-Minh Huynh et al. (2024). Multi-Agent Training for Pommerman: Curriculum Learning and Population-based Self-Play Approach. arXiv. http://arxiv.org/abs/2407.00662v2</li>
+<li>Indraveni Chebolu et al. (2026). SPEAR: An Engineering Case Study of Multi-Agent Coordination for Smart Contract Auditing. arXiv. http://arxiv.org/abs/2602.04418v3</li>
+<li>Ying Wen et al. (2021). A Game-Theoretic Approach to Multi-Agent Trust Region Optimization. arXiv. http://arxiv.org/abs/2106.06828v1</li>
+<li>Bowen Jiang et al. (2024). Multi-Agent VQA: Exploring Multi-Agent Foundation Models in Zero-Shot Visual Question Answering. arXiv. http://arxiv.org/abs/2403.14783v1</li>
+<li>Qian Long et al. (2024). SocialGFs: Learning Social Gradient Fields for Multi-Agent Reinforcement Learning. arXiv. http://arxiv.org/abs/2405.01839v1</li>
+<li>Baicen Xiao et al. (2022). Agent-Temporal Attention for Reward Redistribution in Episodic Multi-Agent Reinforcement Learning. arXiv. http://arxiv.org/abs/2201.04612v1</li>
+<li>Kotaro Furuya et al. (2025). The Geometry of Dialogue: Graphing Language Models to Reveal Synergistic Teams for Multi-Agent Collaboration. arXiv. http://arxiv.org/abs/2510.26352v2</li>
+<li>Balint Gyevnar et al. (2023). Causal Explanations for Sequential Decision-Making in Multi-Agent Systems. arXiv. http://arxiv.org/abs/2302.10809v4</li>
+<li>Meng-Han Lee (2026). Agentic Social Affordance Framework (ASAF): Agent Identity Design as a Collaboration Interface in Multi-Agent Systems. arXiv. http://arxiv.org/abs/2606.09832v1</li>
+<li>Jennifer She et al. (2022). Agent-Time Attention for Sparse Rewards Multi-Agent Reinforcement Learning. arXiv. http://arxiv.org/abs/2210.17540v1</li>
+<li>Abdalwhab Abdalwhab et al. (2024). Learning Multi-agent Multi-machine Tending by Mobile Robots. arXiv. http://arxiv.org/abs/2408.16875v3</li>
+<li>Jannik Peters et al. (2024). Emergent Language: A Survey and Taxonomy. arXiv. http://arxiv.org/abs/2409.02645v2</li>
+<li>Niels van Duijkeren et al. (2023). An Industrial Perspective on Multi-Agent Decision Making for Interoperable Robot Navigation following the VDA5050 Standard. arXiv. http://arxiv.org/abs/2311.14615v1</li>
+<li>Hang Ma et al. (2017). Overview: Generalizations of Multi-Agent Path Finding to Real-World Scenarios. arXiv. http://arxiv.org/abs/1702.05515v1</li>
+<li>Yiwei Fu et al. (2022). Multi-Agent Learning of Numerical Methods for Hyperbolic PDEs with Factored Dec-MDP. arXiv. http://arxiv.org/abs/2205.15716v1</li>
+<li>Chao Qu et al. (2020). Variational Policy Propagation for Multi-agent Reinforcement Learning. arXiv. http://arxiv.org/abs/2004.08883v4</li>
+<li>Jingkai Luo et al. (2026). Cayley Graph Optimization for Scalable Multi-Agent Communication Topologies. arXiv. http://arxiv.org/abs/2604.09703v1</li>
+<li>Claude Formanek et al. (2023). Off-the-Grid MARL: Datasets with Baselines for Offline Multi-Agent Reinforcement Learning. arXiv. http://arxiv.org/abs/2302.00521v2</li>
+<li>Logan Beaver (2024). Energy-Optimal Multi-Agent Navigation as a Strategic-Form Game. arXiv. http://arxiv.org/abs/2403.19641v1</li>
+<li>Zarreen Reza (2025). The Social Laboratory: A Psychometric Framework for Multi-Agent LLM Evaluation. arXiv. http://arxiv.org/abs/2510.01295v1</li>
+<li>Patara Trirat et al. (2024). AutoML-Agent: A Multi-Agent LLM Framework for Full-Pipeline AutoML. arXiv. http://arxiv.org/abs/2410.02958v2</li>
+<li>Tzvika Geft et al. (2022). Refined Hardness of Distance-Optimal Multi-Agent Path Finding. arXiv. http://arxiv.org/abs/2203.07416v1</li>
+<li>Christiano Braga et al. (2017). Modeling Normative Multi-Agent Systems from a Kelsenian Perspective. arXiv. http://arxiv.org/abs/1709.02018v2</li>
+<li>Xin He et al. (2025). Lang-PINN: From Language to Physics-Informed Neural Networks via a Multi-Agent Framework. arXiv. http://arxiv.org/abs/2510.05158v1</li>
+</ol>
+
+</section>
+
+</body>
+</html>

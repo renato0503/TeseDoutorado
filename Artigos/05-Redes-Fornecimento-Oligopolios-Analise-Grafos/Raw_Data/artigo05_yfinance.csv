@@ -1,0 +1,11 @@
+﻿ticker,nome,setor,market_cap,receita,lucro,preco_atual,dividend_yield,num_acoes
+ITUB4.SA,Itaú Unibanco Holding S.A.,Financial Services,465563910144,138185998336,45986000896,42.24,2.11,1247
+BBDC4.SA,Banco Bradesco S.A.,Financial Services,189427154944,91670847488,23245817856,17.92,1.27,1247
+BBAS3.SA,Banco do Brasil S.A.,Financial Services,116114751488,69190754304,14125952000,20.34,1.17,1247
+VALE3.SA,Vale S.A.,Basic Materials,332716376064,214864003072,15603000320,78.15,8.82,1247
+PETROBRAS3.SA,,,0,0,0,0.0,0.0,0
+BRF3.SA,,,0,0,0,0.0,0.0,0
+CSNA3.SA,Companhia Siderúrgica Nacional,Basic Materials,6272424448,44494090240,-1998759040,4.73,0.0,1247
+GGBR4.SA,Gerdau S.A.,Basic Materials,42148216832,69198856192,1639576960,21.42,3.17,1247
+HAPV3.SA,Hapvida Participações e Investimentos S.A.,Financial Services,4864900608,31848921088,-428847008,10.24,0.0,1247
+MEAL3.SA,International Meal Company Alimentação S.A.,Consumer Cyclical,275209472,1699182976,-178346000,0.96,0.0,1247

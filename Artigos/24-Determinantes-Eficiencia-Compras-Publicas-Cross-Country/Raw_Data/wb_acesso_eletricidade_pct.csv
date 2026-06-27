@@ -1,0 +1,671 @@
+pais,pais_nome,ano,valor
+ARE,United Arab Emirates,2024,
+ARE,United Arab Emirates,2023,100.0
+ARE,United Arab Emirates,2022,100.0
+ARE,United Arab Emirates,2021,100.0
+ARE,United Arab Emirates,2020,100.0
+ARE,United Arab Emirates,2019,100.0
+ARE,United Arab Emirates,2018,100.0
+ARE,United Arab Emirates,2017,100.0
+ARE,United Arab Emirates,2016,100.0
+ARE,United Arab Emirates,2015,100.0
+ARG,Argentina,2024,
+ARG,Argentina,2023,100.0
+ARG,Argentina,2022,100.0
+ARG,Argentina,2021,100.0
+ARG,Argentina,2020,100.0
+ARG,Argentina,2019,100.0
+ARG,Argentina,2018,100.0
+ARG,Argentina,2017,100.0
+ARG,Argentina,2016,99.9
+ARG,Argentina,2015,99.7
+AUS,Australia,2024,
+AUS,Australia,2023,100.0
+AUS,Australia,2022,100.0
+AUS,Australia,2021,100.0
+AUS,Australia,2020,100.0
+AUS,Australia,2019,100.0
+AUS,Australia,2018,100.0
+AUS,Australia,2017,100.0
+AUS,Australia,2016,100.0
+AUS,Australia,2015,100.0
+AUT,Austria,2024,
+AUT,Austria,2023,100.0
+AUT,Austria,2022,100.0
+AUT,Austria,2021,100.0
+AUT,Austria,2020,100.0
+AUT,Austria,2019,100.0
+AUT,Austria,2018,100.0
+AUT,Austria,2017,100.0
+AUT,Austria,2016,100.0
+AUT,Austria,2015,100.0
+BEL,Belgium,2024,
+BEL,Belgium,2023,100.0
+BEL,Belgium,2022,100.0
+BEL,Belgium,2021,100.0
+BEL,Belgium,2020,100.0
+BEL,Belgium,2019,100.0
+BEL,Belgium,2018,100.0
+BEL,Belgium,2017,100.0
+BEL,Belgium,2016,100.0
+BEL,Belgium,2015,100.0
+BGR,Bulgaria,2024,
+BGR,Bulgaria,2023,100.0
+BGR,Bulgaria,2022,100.0
+BGR,Bulgaria,2021,99.8
+BGR,Bulgaria,2020,99.7
+BGR,Bulgaria,2019,99.2
+BGR,Bulgaria,2018,98.7
+BGR,Bulgaria,2017,98.1
+BGR,Bulgaria,2016,97.3
+BGR,Bulgaria,2015,96.6
+BOL,Bolivia,2024,
+BOL,Bolivia,2023,99.8
+BOL,Bolivia,2022,99.9
+BOL,Bolivia,2021,98.6
+BOL,Bolivia,2020,97.2
+BOL,Bolivia,2019,95.1
+BOL,Bolivia,2018,92.8
+BOL,Bolivia,2017,91.8
+BOL,Bolivia,2016,91.8
+BOL,Bolivia,2015,91.5
+BRA,Brazil,2024,
+BRA,Brazil,2023,99.8
+BRA,Brazil,2022,100.0
+BRA,Brazil,2021,99.5
+BRA,Brazil,2020,99.7
+BRA,Brazil,2019,99.8
+BRA,Brazil,2018,99.7
+BRA,Brazil,2017,99.8
+BRA,Brazil,2016,99.7
+BRA,Brazil,2015,99.7
+CAN,Canada,2024,
+CAN,Canada,2023,100.0
+CAN,Canada,2022,100.0
+CAN,Canada,2021,100.0
+CAN,Canada,2020,100.0
+CAN,Canada,2019,100.0
+CAN,Canada,2018,100.0
+CAN,Canada,2017,100.0
+CAN,Canada,2016,100.0
+CAN,Canada,2015,100.0
+CHE,Switzerland,2024,
+CHE,Switzerland,2023,100.0
+CHE,Switzerland,2022,100.0
+CHE,Switzerland,2021,100.0
+CHE,Switzerland,2020,100.0
+CHE,Switzerland,2019,100.0
+CHE,Switzerland,2018,100.0
+CHE,Switzerland,2017,100.0
+CHE,Switzerland,2016,100.0
+CHE,Switzerland,2015,100.0
+CHL,Chile,2024,
+CHL,Chile,2023,100.0
+CHL,Chile,2022,100.0
+CHL,Chile,2021,100.0
+CHL,Chile,2020,100.0
+CHL,Chile,2019,100.0
+CHL,Chile,2018,100.0
+CHL,Chile,2017,99.7
+CHL,Chile,2016,100.0
+CHL,Chile,2015,99.7
+CHN,China,2024,
+CHN,China,2023,100.0
+CHN,China,2022,100.0
+CHN,China,2021,100.0
+CHN,China,2020,100.0
+CHN,China,2019,100.0
+CHN,China,2018,100.0
+CHN,China,2017,100.0
+CHN,China,2016,100.0
+CHN,China,2015,100.0
+COL,Colombia,2024,
+COL,Colombia,2023,98.7
+COL,Colombia,2022,100.0
+COL,Colombia,2021,100.0
+COL,Colombia,2020,99.7
+COL,Colombia,2019,99.4
+COL,Colombia,2018,98.5
+COL,Colombia,2017,98.5
+COL,Colombia,2016,98.4
+COL,Colombia,2015,98.2
+CRI,Costa Rica,2024,
+CRI,Costa Rica,2023,100.0
+CRI,Costa Rica,2022,100.0
+CRI,Costa Rica,2021,100.0
+CRI,Costa Rica,2020,99.9
+CRI,Costa Rica,2019,99.7
+CRI,Costa Rica,2018,99.7
+CRI,Costa Rica,2017,99.6
+CRI,Costa Rica,2016,99.5
+CRI,Costa Rica,2015,99.4
+CYP,Cyprus,2024,
+CYP,Cyprus,2023,100.0
+CYP,Cyprus,2022,100.0
+CYP,Cyprus,2021,100.0
+CYP,Cyprus,2020,100.0
+CYP,Cyprus,2019,100.0
+CYP,Cyprus,2018,100.0
+CYP,Cyprus,2017,100.0
+CYP,Cyprus,2016,100.0
+CYP,Cyprus,2015,100.0
+CZE,Czechia,2024,
+CZE,Czechia,2023,100.0
+CZE,Czechia,2022,100.0
+CZE,Czechia,2021,100.0
+CZE,Czechia,2020,100.0
+CZE,Czechia,2019,100.0
+CZE,Czechia,2018,100.0
+CZE,Czechia,2017,100.0
+CZE,Czechia,2016,100.0
+CZE,Czechia,2015,100.0
+DEU,Germany,2024,
+DEU,Germany,2023,100.0
+DEU,Germany,2022,100.0
+DEU,Germany,2021,100.0
+DEU,Germany,2020,100.0
+DEU,Germany,2019,100.0
+DEU,Germany,2018,100.0
+DEU,Germany,2017,100.0
+DEU,Germany,2016,100.0
+DEU,Germany,2015,100.0
+DNK,Denmark,2024,
+DNK,Denmark,2023,100.0
+DNK,Denmark,2022,100.0
+DNK,Denmark,2021,100.0
+DNK,Denmark,2020,100.0
+DNK,Denmark,2019,100.0
+DNK,Denmark,2018,100.0
+DNK,Denmark,2017,100.0
+DNK,Denmark,2016,100.0
+DNK,Denmark,2015,100.0
+ECU,Ecuador,2024,
+ECU,Ecuador,2023,98.7
+ECU,Ecuador,2022,100.0
+ECU,Ecuador,2021,100.0
+ECU,Ecuador,2020,98.9
+ECU,Ecuador,2019,99.1
+ECU,Ecuador,2018,98.7
+ECU,Ecuador,2017,99.2
+ECU,Ecuador,2016,98.7
+ECU,Ecuador,2015,98.8
+EGY,"Egypt, Arab Rep.",2024,
+EGY,"Egypt, Arab Rep.",2023,100.0
+EGY,"Egypt, Arab Rep.",2022,100.0
+EGY,"Egypt, Arab Rep.",2021,100.0
+EGY,"Egypt, Arab Rep.",2020,100.0
+EGY,"Egypt, Arab Rep.",2019,100.0
+EGY,"Egypt, Arab Rep.",2018,100.0
+EGY,"Egypt, Arab Rep.",2017,100.0
+EGY,"Egypt, Arab Rep.",2016,100.0
+EGY,"Egypt, Arab Rep.",2015,99.3
+ESP,Spain,2024,
+ESP,Spain,2023,100.0
+ESP,Spain,2022,100.0
+ESP,Spain,2021,100.0
+ESP,Spain,2020,100.0
+ESP,Spain,2019,100.0
+ESP,Spain,2018,100.0
+ESP,Spain,2017,100.0
+ESP,Spain,2016,100.0
+ESP,Spain,2015,100.0
+EST,Estonia,2024,
+EST,Estonia,2023,100.0
+EST,Estonia,2022,100.0
+EST,Estonia,2021,100.0
+EST,Estonia,2020,100.0
+EST,Estonia,2019,100.0
+EST,Estonia,2018,100.0
+EST,Estonia,2017,100.0
+EST,Estonia,2016,100.0
+EST,Estonia,2015,100.0
+FIN,Finland,2024,
+FIN,Finland,2023,100.0
+FIN,Finland,2022,100.0
+FIN,Finland,2021,100.0
+FIN,Finland,2020,100.0
+FIN,Finland,2019,100.0
+FIN,Finland,2018,100.0
+FIN,Finland,2017,100.0
+FIN,Finland,2016,100.0
+FIN,Finland,2015,100.0
+FRA,France,2024,
+FRA,France,2023,100.0
+FRA,France,2022,100.0
+FRA,France,2021,100.0
+FRA,France,2020,100.0
+FRA,France,2019,100.0
+FRA,France,2018,100.0
+FRA,France,2017,100.0
+FRA,France,2016,100.0
+FRA,France,2015,100.0
+GBR,United Kingdom,2024,
+GBR,United Kingdom,2023,100.0
+GBR,United Kingdom,2022,100.0
+GBR,United Kingdom,2021,100.0
+GBR,United Kingdom,2020,100.0
+GBR,United Kingdom,2019,100.0
+GBR,United Kingdom,2018,100.0
+GBR,United Kingdom,2017,100.0
+GBR,United Kingdom,2016,100.0
+GBR,United Kingdom,2015,100.0
+GRC,Greece,2024,
+GRC,Greece,2023,100.0
+GRC,Greece,2022,100.0
+GRC,Greece,2021,100.0
+GRC,Greece,2020,100.0
+GRC,Greece,2019,100.0
+GRC,Greece,2018,100.0
+GRC,Greece,2017,100.0
+GRC,Greece,2016,100.0
+GRC,Greece,2015,100.0
+GTM,Guatemala,2024,
+GTM,Guatemala,2023,100.0
+GTM,Guatemala,2022,99.1
+GTM,Guatemala,2021,97.9
+GTM,Guatemala,2020,96.6
+GTM,Guatemala,2019,95.4
+GTM,Guatemala,2018,94.2
+GTM,Guatemala,2017,93.3
+GTM,Guatemala,2016,91.8
+GTM,Guatemala,2015,90.5
+HRV,Croatia,2024,
+HRV,Croatia,2023,100.0
+HRV,Croatia,2022,100.0
+HRV,Croatia,2021,100.0
+HRV,Croatia,2020,100.0
+HRV,Croatia,2019,100.0
+HRV,Croatia,2018,100.0
+HRV,Croatia,2017,100.0
+HRV,Croatia,2016,100.0
+HRV,Croatia,2015,100.0
+HUN,Hungary,2024,
+HUN,Hungary,2023,100.0
+HUN,Hungary,2022,100.0
+HUN,Hungary,2021,100.0
+HUN,Hungary,2020,100.0
+HUN,Hungary,2019,100.0
+HUN,Hungary,2018,100.0
+HUN,Hungary,2017,100.0
+HUN,Hungary,2016,100.0
+HUN,Hungary,2015,100.0
+IDN,Indonesia,2024,
+IDN,Indonesia,2023,99.4
+IDN,Indonesia,2022,100.0
+IDN,Indonesia,2021,99.2
+IDN,Indonesia,2020,97.0
+IDN,Indonesia,2019,98.9
+IDN,Indonesia,2018,98.5
+IDN,Indonesia,2017,98.1
+IDN,Indonesia,2016,97.6
+IDN,Indonesia,2015,97.5
+IND,India,2024,
+IND,India,2023,99.5
+IND,India,2022,99.2
+IND,India,2021,99.6
+IND,India,2020,96.5
+IND,India,2019,95.9
+IND,India,2018,95.7
+IND,India,2017,91.8
+IND,India,2016,89.6
+IND,India,2015,88.0
+IRL,Ireland,2024,
+IRL,Ireland,2023,100.0
+IRL,Ireland,2022,100.0
+IRL,Ireland,2021,100.0
+IRL,Ireland,2020,100.0
+IRL,Ireland,2019,100.0
+IRL,Ireland,2018,100.0
+IRL,Ireland,2017,100.0
+IRL,Ireland,2016,100.0
+IRL,Ireland,2015,100.0
+ISL,Iceland,2024,
+ISL,Iceland,2023,100.0
+ISL,Iceland,2022,100.0
+ISL,Iceland,2021,100.0
+ISL,Iceland,2020,100.0
+ISL,Iceland,2019,100.0
+ISL,Iceland,2018,100.0
+ISL,Iceland,2017,100.0
+ISL,Iceland,2016,100.0
+ISL,Iceland,2015,100.0
+ISR,Israel,2024,
+ISR,Israel,2023,100.0
+ISR,Israel,2022,100.0
+ISR,Israel,2021,100.0
+ISR,Israel,2020,100.0
+ISR,Israel,2019,100.0
+ISR,Israel,2018,100.0
+ISR,Israel,2017,100.0
+ISR,Israel,2016,100.0
+ISR,Israel,2015,100.0
+ITA,Italy,2024,
+ITA,Italy,2023,100.0
+ITA,Italy,2022,100.0
+ITA,Italy,2021,100.0
+ITA,Italy,2020,100.0
+ITA,Italy,2019,100.0
+ITA,Italy,2018,100.0
+ITA,Italy,2017,100.0
+ITA,Italy,2016,100.0
+ITA,Italy,2015,100.0
+JPN,Japan,2024,
+JPN,Japan,2023,100.0
+JPN,Japan,2022,100.0
+JPN,Japan,2021,100.0
+JPN,Japan,2020,100.0
+JPN,Japan,2019,100.0
+JPN,Japan,2018,100.0
+JPN,Japan,2017,100.0
+JPN,Japan,2016,100.0
+JPN,Japan,2015,100.0
+KOR,"Korea, Rep.",2024,
+KOR,"Korea, Rep.",2023,100.0
+KOR,"Korea, Rep.",2022,100.0
+KOR,"Korea, Rep.",2021,100.0
+KOR,"Korea, Rep.",2020,100.0
+KOR,"Korea, Rep.",2019,100.0
+KOR,"Korea, Rep.",2018,100.0
+KOR,"Korea, Rep.",2017,100.0
+KOR,"Korea, Rep.",2016,100.0
+KOR,"Korea, Rep.",2015,100.0
+LTU,Lithuania,2024,
+LTU,Lithuania,2023,100.0
+LTU,Lithuania,2022,100.0
+LTU,Lithuania,2021,100.0
+LTU,Lithuania,2020,100.0
+LTU,Lithuania,2019,100.0
+LTU,Lithuania,2018,100.0
+LTU,Lithuania,2017,100.0
+LTU,Lithuania,2016,100.0
+LTU,Lithuania,2015,100.0
+LUX,Luxembourg,2024,
+LUX,Luxembourg,2023,100.0
+LUX,Luxembourg,2022,100.0
+LUX,Luxembourg,2021,100.0
+LUX,Luxembourg,2020,100.0
+LUX,Luxembourg,2019,100.0
+LUX,Luxembourg,2018,100.0
+LUX,Luxembourg,2017,100.0
+LUX,Luxembourg,2016,100.0
+LUX,Luxembourg,2015,100.0
+LVA,Latvia,2024,
+LVA,Latvia,2023,100.0
+LVA,Latvia,2022,100.0
+LVA,Latvia,2021,100.0
+LVA,Latvia,2020,100.0
+LVA,Latvia,2019,100.0
+LVA,Latvia,2018,100.0
+LVA,Latvia,2017,100.0
+LVA,Latvia,2016,100.0
+LVA,Latvia,2015,100.0
+MAR,Morocco,2024,
+MAR,Morocco,2023,100.0
+MAR,Morocco,2022,100.0
+MAR,Morocco,2021,100.0
+MAR,Morocco,2020,100.0
+MAR,Morocco,2019,99.6
+MAR,Morocco,2018,98.1
+MAR,Morocco,2017,100.0
+MAR,Morocco,2016,97.8
+MAR,Morocco,2015,97.3
+MEX,Mexico,2024,
+MEX,Mexico,2023,99.7
+MEX,Mexico,2022,100.0
+MEX,Mexico,2021,100.0
+MEX,Mexico,2020,99.4
+MEX,Mexico,2019,99.6
+MEX,Mexico,2018,99.5
+MEX,Mexico,2017,100.0
+MEX,Mexico,2016,99.5
+MEX,Mexico,2015,99.0
+MYS,Malaysia,2024,
+MYS,Malaysia,2023,100.0
+MYS,Malaysia,2022,100.0
+MYS,Malaysia,2021,100.0
+MYS,Malaysia,2020,100.0
+MYS,Malaysia,2019,100.0
+MYS,Malaysia,2018,100.0
+MYS,Malaysia,2017,100.0
+MYS,Malaysia,2016,99.9
+MYS,Malaysia,2015,99.9
+NLD,Netherlands,2024,
+NLD,Netherlands,2023,100.0
+NLD,Netherlands,2022,100.0
+NLD,Netherlands,2021,100.0
+NLD,Netherlands,2020,100.0
+NLD,Netherlands,2019,100.0
+NLD,Netherlands,2018,100.0
+NLD,Netherlands,2017,100.0
+NLD,Netherlands,2016,100.0
+NLD,Netherlands,2015,100.0
+NOR,Norway,2024,
+NOR,Norway,2023,100.0
+NOR,Norway,2022,100.0
+NOR,Norway,2021,100.0
+NOR,Norway,2020,100.0
+NOR,Norway,2019,100.0
+NOR,Norway,2018,100.0
+NOR,Norway,2017,100.0
+NOR,Norway,2016,100.0
+NOR,Norway,2015,100.0
+NZL,New Zealand,2024,
+NZL,New Zealand,2023,100.0
+NZL,New Zealand,2022,100.0
+NZL,New Zealand,2021,100.0
+NZL,New Zealand,2020,100.0
+NZL,New Zealand,2019,100.0
+NZL,New Zealand,2018,100.0
+NZL,New Zealand,2017,100.0
+NZL,New Zealand,2016,100.0
+NZL,New Zealand,2015,100.0
+PAK,Pakistan,2024,
+PAK,Pakistan,2023,95.6
+PAK,Pakistan,2022,95.0
+PAK,Pakistan,2021,94.9
+PAK,Pakistan,2020,94.5
+PAK,Pakistan,2019,93.9
+PAK,Pakistan,2018,93.4
+PAK,Pakistan,2017,92.7
+PAK,Pakistan,2016,91.8
+PAK,Pakistan,2015,91.0
+PAN,Panama,2024,
+PAN,Panama,2023,97.0
+PAN,Panama,2022,95.0
+PAN,Panama,2021,95.3
+PAN,Panama,2020,95.3
+PAN,Panama,2019,93.9
+PAN,Panama,2018,93.8
+PAN,Panama,2017,93.7
+PAN,Panama,2016,92.4
+PAN,Panama,2015,91.6
+PER,Peru,2024,
+PER,Peru,2023,96.2
+PER,Peru,2022,96.2
+PER,Peru,2021,95.6
+PER,Peru,2020,96.2
+PER,Peru,2019,95.6
+PER,Peru,2018,95.2
+PER,Peru,2017,94.8
+PER,Peru,2016,94.2
+PER,Peru,2015,93.9
+PHL,Philippines,2024,
+PHL,Philippines,2023,98.0
+PHL,Philippines,2022,94.8
+PHL,Philippines,2021,97.5
+PHL,Philippines,2020,96.4
+PHL,Philippines,2019,95.3
+PHL,Philippines,2018,94.2
+PHL,Philippines,2017,93.0
+PHL,Philippines,2016,92.0
+PHL,Philippines,2015,89.1
+POL,Poland,2024,
+POL,Poland,2023,100.0
+POL,Poland,2022,100.0
+POL,Poland,2021,100.0
+POL,Poland,2020,100.0
+POL,Poland,2019,100.0
+POL,Poland,2018,100.0
+POL,Poland,2017,100.0
+POL,Poland,2016,100.0
+POL,Poland,2015,100.0
+PRT,Portugal,2024,
+PRT,Portugal,2023,100.0
+PRT,Portugal,2022,100.0
+PRT,Portugal,2021,100.0
+PRT,Portugal,2020,100.0
+PRT,Portugal,2019,100.0
+PRT,Portugal,2018,100.0
+PRT,Portugal,2017,100.0
+PRT,Portugal,2016,100.0
+PRT,Portugal,2015,100.0
+ROU,Romania,2024,
+ROU,Romania,2023,100.0
+ROU,Romania,2022,100.0
+ROU,Romania,2021,100.0
+ROU,Romania,2020,100.0
+ROU,Romania,2019,100.0
+ROU,Romania,2018,99.8
+ROU,Romania,2017,100.0
+ROU,Romania,2016,99.1
+ROU,Romania,2015,98.8
+RUS,Russian Federation,2024,
+RUS,Russian Federation,2023,100.0
+RUS,Russian Federation,2022,100.0
+RUS,Russian Federation,2021,100.0
+RUS,Russian Federation,2020,99.9
+RUS,Russian Federation,2019,99.8
+RUS,Russian Federation,2018,100.0
+RUS,Russian Federation,2017,100.0
+RUS,Russian Federation,2016,99.4
+RUS,Russian Federation,2015,95.5
+SAU,Saudi Arabia,2024,
+SAU,Saudi Arabia,2023,100.0
+SAU,Saudi Arabia,2022,100.0
+SAU,Saudi Arabia,2021,100.0
+SAU,Saudi Arabia,2020,100.0
+SAU,Saudi Arabia,2019,100.0
+SAU,Saudi Arabia,2018,99.9
+SAU,Saudi Arabia,2017,100.0
+SAU,Saudi Arabia,2016,99.9
+SAU,Saudi Arabia,2015,100.0
+SGP,Singapore,2024,
+SGP,Singapore,2023,100.0
+SGP,Singapore,2022,100.0
+SGP,Singapore,2021,100.0
+SGP,Singapore,2020,100.0
+SGP,Singapore,2019,100.0
+SGP,Singapore,2018,100.0
+SGP,Singapore,2017,100.0
+SGP,Singapore,2016,100.0
+SGP,Singapore,2015,100.0
+SLV,El Salvador,2024,
+SLV,El Salvador,2023,98.3
+SLV,El Salvador,2022,100.0
+SLV,El Salvador,2021,97.9
+SLV,El Salvador,2020,99.7
+SLV,El Salvador,2019,97.4
+SLV,El Salvador,2018,97.0
+SLV,El Salvador,2017,96.8
+SLV,El Salvador,2016,96.0
+SLV,El Salvador,2015,95.4
+SVK,Slovak Republic,2024,
+SVK,Slovak Republic,2023,100.0
+SVK,Slovak Republic,2022,100.0
+SVK,Slovak Republic,2021,100.0
+SVK,Slovak Republic,2020,100.0
+SVK,Slovak Republic,2019,100.0
+SVK,Slovak Republic,2018,100.0
+SVK,Slovak Republic,2017,100.0
+SVK,Slovak Republic,2016,100.0
+SVK,Slovak Republic,2015,100.0
+SVN,Slovenia,2024,
+SVN,Slovenia,2023,100.0
+SVN,Slovenia,2022,100.0
+SVN,Slovenia,2021,100.0
+SVN,Slovenia,2020,100.0
+SVN,Slovenia,2019,100.0
+SVN,Slovenia,2018,100.0
+SVN,Slovenia,2017,100.0
+SVN,Slovenia,2016,100.0
+SVN,Slovenia,2015,100.0
+SWE,Sweden,2024,
+SWE,Sweden,2023,100.0
+SWE,Sweden,2022,100.0
+SWE,Sweden,2021,100.0
+SWE,Sweden,2020,100.0
+SWE,Sweden,2019,100.0
+SWE,Sweden,2018,100.0
+SWE,Sweden,2017,100.0
+SWE,Sweden,2016,100.0
+SWE,Sweden,2015,100.0
+THA,Thailand,2024,
+THA,Thailand,2023,100.0
+THA,Thailand,2022,99.9
+THA,Thailand,2021,100.0
+THA,Thailand,2020,100.0
+THA,Thailand,2019,99.9
+THA,Thailand,2018,99.8
+THA,Thailand,2017,99.9
+THA,Thailand,2016,99.9
+THA,Thailand,2015,99.6
+TUR,Turkiye,2024,
+TUR,Turkiye,2023,100.0
+TUR,Turkiye,2022,100.0
+TUR,Turkiye,2021,100.0
+TUR,Turkiye,2020,100.0
+TUR,Turkiye,2019,100.0
+TUR,Turkiye,2018,100.0
+TUR,Turkiye,2017,100.0
+TUR,Turkiye,2016,100.0
+TUR,Turkiye,2015,100.0
+URY,Uruguay,2024,
+URY,Uruguay,2023,100.0
+URY,Uruguay,2022,100.0
+URY,Uruguay,2021,100.0
+URY,Uruguay,2020,100.0
+URY,Uruguay,2019,99.9
+URY,Uruguay,2018,99.8
+URY,Uruguay,2017,99.8
+URY,Uruguay,2016,99.7
+URY,Uruguay,2015,99.7
+USA,United States,2024,
+USA,United States,2023,100.0
+USA,United States,2022,100.0
+USA,United States,2021,100.0
+USA,United States,2020,100.0
+USA,United States,2019,100.0
+USA,United States,2018,100.0
+USA,United States,2017,100.0
+USA,United States,2016,100.0
+USA,United States,2015,100.0
+VEN,"Venezuela, RB",2024,
+VEN,"Venezuela, RB",2023,100.0
+VEN,"Venezuela, RB",2022,100.0
+VEN,"Venezuela, RB",2021,100.0
+VEN,"Venezuela, RB",2020,99.9
+VEN,"Venezuela, RB",2019,99.8
+VEN,"Venezuela, RB",2018,99.9
+VEN,"Venezuela, RB",2017,99.2
+VEN,"Venezuela, RB",2016,99.4
+VEN,"Venezuela, RB",2015,100.0
+VNM,Viet Nam,2024,
+VNM,Viet Nam,2023,99.8
+VNM,Viet Nam,2022,100.0
+VNM,Viet Nam,2021,100.0
+VNM,Viet Nam,2020,99.8
+VNM,Viet Nam,2019,99.4
+VNM,Viet Nam,2018,100.0
+VNM,Viet Nam,2017,100.0
+VNM,Viet Nam,2016,99.2
+VNM,Viet Nam,2015,99.3
+ZAF,South Africa,2024,
+ZAF,South Africa,2023,87.7
+ZAF,South Africa,2022,86.5
+ZAF,South Africa,2021,89.3
+ZAF,South Africa,2020,90.0
+ZAF,South Africa,2019,85.0
+ZAF,South Africa,2018,84.7
+ZAF,South Africa,2017,84.4
+ZAF,South Africa,2016,83.9
+ZAF,South Africa,2015,85.3

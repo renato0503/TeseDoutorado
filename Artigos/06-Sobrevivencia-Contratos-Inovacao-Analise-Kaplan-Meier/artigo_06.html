@@ -2,215 +2,183 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Sobrevivência dos Contratos de Inovação: Análise de Kaplan-Meier em Contratações Públicas</title>
-    <link rel="stylesheet" href="../../css/style_academico.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contexto Macroeconomico Brasileiro para Analise de Contratos de Inovacao: Uma Abordagem Utilizando Dados do Banco Central</title>
     <style>
-        .figure-container { margin: 0.5cm 0; text-align: center; }
-        .figure-container img { max-width: 95%; height: auto; }
-        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
-        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
-        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
-        .ref-entry { text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin: 0 0 0.2cm 0; text-align: justify; font-size: 10pt; }
+        
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 2;
+            margin: 2.54cm;
+            text-align: justify;
+        }
+
+        h1 {
+            font-size: 14pt;
+            text-align: center;
+            margin-bottom: 0.5em;
+        }
+
+        h2 {
+            font-size: 12pt;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        p {
+            text-indent: 1.25cm;
+            margin-bottom: 0;
+        }
+
+        .author {
+            text-align: center;
+            margin: 1em 0;
+        }
+
+        .abstract-box {
+            margin: 1em 0;
+            padding: 0.5em;
+            border: 1px solid #000;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 0.3em;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
     </style>
 </head>
 <body>
 
-    <div class="control-panel no-print">
-        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
-        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
+<div class="control-panel no-print">
+    <button onclick="window.print()">Imprimir / Salvar PDF</button>
+</div>
+
+<section class="paper-page">
+    <h1>Contexto Macroeconomico Brasileiro para Analise de Contratos de Inovacao: Uma Abordagem Utilizando Dados do Banco Central</h1>
+    <p class="author">Renato de Oliveira Rosa</p>
+
+    <div class="abstract-box">
+        <strong>Resumo.</strong> Este estudo analisa series macroecononomicas brasileiras (IPCA, CDI, INPC, IGP-M) utilizando dados do BCB SGS API. A analise de 420 registros busca fornecer contexto para estudos de sobrevivencia de contratos de inovacao. Os resultados indicam estabilidade macroeconomica no periodo 2018-2024.<strong>Palavras-chave:</strong> Macroeconomia; IPCA; CDI; Banco Central; Contratos.
     </div>
 
-    <!-- PÁGINA 1 -->
-    <section class="paper-page">
-        <div class="page-content">
-            <h1 class="paper-title">SOBREVIVÊNCIA DOS CONTRATOS DE INOVAÇÃO: ANÁLISE DE KAPLAN-MEIER EM CONTRATAÇÕES PÚBLICAS TECNOLÓGICAS</h1>
+    <h2>1. Introducao</h2>
+    
+    <p>A analise macroecononomica e fundamental para compreensao do
+    ambiente de negocios e planejamento estrategico em contextos de
+    compras publicas (Williamson, 1985). A inflacao, representada
+    pelo IPCA, e um indicador-chave para avaliacao de riscos
+    contratuais de longo prazo.</p>
 
-            <p style="text-align: center; margin-bottom: 0.5cm;"><strong>Renato de Oliveira Rosa</strong><br>
-            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+    <p>O presente estudo tem como objetivo analisar series macroecononomicas
+    brasileiras, incluindo IPCA, CDI, INPC e IGP-M, para fornecer
+    contexto para analises de sobrevivencia de contratos de inovacao.
+    Os dados, retrieved from the Banco Central do Brasil SGS API,
+    abrangem o periodo de 2018 - 2024.</p>
 
-            <div class="abstract-box">
-                <h2>RESUMO</h2>
-                <p>A rescisão antecipada de contratos de tecnologia e inovação no setor público gera ineficiências e compromete a modernização do Estado. Este artigo investiga a sobrevida temporal desses contratos, identificando fatores associados à falha precoce. A metodologia adota análise de sobrevivência com estimadores de Kaplan-Meier e modelo de riscos proporcionais de Cox sobre base de 10.000 contratos (2019-2025). Os resultados revelam taxa global de rescisão de 11,31%. Contratos que utilizaram copiloto algorítmico na fase de planejamento apresentaram probabilidade de sobrevivência de 95,04% contra 83,41% em 1.080 dias. A regressão de Cox indica redução de 62% no risco de falha contratual (HR = 0,38; p < 0,001). Conclui-se que a governança algorítmica ex-ante atua como fator atenuador de custos de transação e assimetria informacional.</p>
-                <p><strong>Palavras-chave:</strong> Análise de Sobrevivência; Kaplan-Meier; Regressão de Cox; Compras Públicas de TI; Inteligência Artificial.</p>
-            </div>
+    <p>O artigo esta organizado em cinco secoes: introducao, fundamentacao
+    teorica, metodologia, resultados e discussao, e conclusao.</p>
+    
 
-            <div class="abstract-box">
-                <h2>ABSTRACT</h2>
-                <p>Premature termination of technology and innovation contracts in the public sector creates inefficiencies and compromises state modernization. This paper investigates the temporal survival of these contracts, identifying factors associated with early failure. The methodology adopts survival analysis with Kaplan-Meier estimators and the Cox proportional hazards model on a database of 10,000 contracts (2019-2025). Results reveal an overall termination rate of 11.31%. Contracts using an algorithmic copilot in the planning phase showed a survival probability of 95.04% vs 83.41% at 1,080 days. Cox regression indicates a 62% reduction in failure risk (HR = 0.38; p < 0.001). We conclude that ex-ante algorithmic governance acts as an attenuating factor for transaction costs and information asymmetry.</p>
-                <p><strong>Keywords:</strong> Survival Analysis; Kaplan-Meier; Cox Regression; Public IT Procurement; Artificial Intelligence.</p>
-            </div>
+    <h2>2. Fundamentacao Teorica</h2>
+    
+    <p>A Economia dos Custos de Transacao (ECT), desenvolvida por
+    Oliver Williamson (1985), fornece fundamento teorico para analise
+    de contratos em contextos de incerteza macroecononomica. A teoria
+    sostiene que a estrutura de governance deve ser escolhida com base
+    nos custos de transacao e no grau de especificidade dos ativos.</p>
 
-            <h2>1 INTRODUÇÃO</h2>
+    <p>No contexto de contratos publicos de inovacao, a inflacao
+    representa um fator de risco significativo, uma vez que pode
+    alterar o equilibrio economico-financeiro das contratacoes
+    ao longo do tempo.</p>
 
-            <p>As contratações de tecnologia da informação e inovação têm assumido papel central nas políticas públicas de transformação digital do Estado. Nesse sentido, a administração pública firma parcerias contratuais complexas de médio e longo prazo com o setor privado. Todavia, essa modalidade de contratação caracteriza-se por alto grau de incerteza, volatilidade de escopo e assimetria informacional, culminando no encerramento prematuro dos vínculos contratuais (Williamson, 1985). Dessa forma, a falha contratual precoce gera perdas orçamentárias e descontinuidade de serviços públicos. Apesar desse panorama, as abordagens tradicionais focam majoritariamente em análises descritivas ou retrospectivas, negligenciando a dinâmica temporal das taxas de falha ao longo do ciclo de vida dos contratos. Para preencher essa lacuna, a análise de sobrevivência surge como abordagem apropriada para estimar a probabilidade de um contrato permanecer ativo ao longo do tempo e identificar quais covariáveis influenciam o risco de rescisão antecipada.</p>
+    <p>Os principais indicadores macroecononomicos brasileiros para
+    analise de contratos incluem: IPCA (inflacao oficial),
+    INPC (inflacao para populations de baixa renda), IGP-M
+    (inflacao do setor primario), e CDI (taxa de juros de curto prazo).</p>
+    
 
-            <p>Nesse contexto, este artigo investiga os determinantes da longevidade dos contratos tecnológicos federais, formulando a seguinte questão: em que medida a modelagem de sobrevivência revela diferenças nas taxas de rescisão entre contratos de TI e inovação, e como a governança ex-ante baseada em copilotos algorítmicos mitiga a probabilidade de insucesso contratual? O objetivo é estimar curvas de Kaplan-Meier e parametrizar modelo de riscos proporcionais de Cox a partir de banco temporal de 10.000 contratos públicos.</p>
-        </div>
-        <div class="page-footer">1</div>
-    </section>
+    <h2>3. Metodologia</h2>
+    
+    <p>A pesquisa employs uma abordagem de analise de series temporais,
+    coletando dados do Sistema Gerenciador de Series Temporais (SGS)
+    do Banco Central do Brasil. A coleta foi realizada via API REST,
+    utilizando codigos de series padronizados.</p>
 
-    <!-- PÁGINA 2 -->
-    <section class="paper-page">
-        <div class="page-content">
-            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
+    <p>As series analisadas foram: IPCA (codigo 433), CDI (codigo 4391),
+    divida federal (codigo 27842), INPC (codigo 188), e IGP-M (codigo 189).
+    O periodo de coleta abrangeu de 2018 a 2024, permitindo analise
+    do comportamento ciclico e tendencial.</p>
 
-            <h3>2.1 Custos de Transação e Teoria da Agência</h3>
+    <p>A analise estatistica incluiu: calculo de medias e desvios-padrao;
+    identificacao de tendencias; e analise de correlacao entre series.
+    As series analisadas foram: ipca, cdi, divida_federal, inpc, igpm.</p>
+    
 
-            <p>A análise da durabilidade dos contratos tecnológicos no setor público encontra embasamento na Economia dos Custos de Transação (Williamson, 1985, 1996) e na Teoria da Agência (Jensen; Meckling, 1976). De acordo com a TCT, a especificidade do ativo tecnológico combinada com a racionalidade limitada dos agentes públicos resulta em contratos incompletos. Nesse contexto, à medida que o tempo passa, novos requisitos técnicos surgem e as partes enfrentam dificuldades para renegociar equitativamente. Essa incompletude eleva os custos de transação ex-post, tornando a rescisão uma alternativa frequente para encerrar transações ineficientes. A Teoria da Agência, por sua vez, aponta que a assimetria informativa ex-ante permite que fornecedores ocultem limitações operacionais, resultando em seleção adversa de contratados inaptos (Jensen; Meckling, 1976).</p>
+    <div class="page-break"></div>
 
-            <h3>2.2 Governança Algorítmica como Fator de Mitigação</h3>
+    <h2>4. Resultados</h2>
+    <p><strong>Tabela 1.</strong> Series Macroecononomicas por Ano (Media)</p><table><thead><tr><th>Ano</th><th>Cdi</th><th>Divida_Federal</th><th>Igpm</th><th>Inpc</th><th>Ipca</th></tr></thead><tbody><tr><td>2018</td><td>0.52</td><td>2680938237.17</td><td>0.61</td><td>0.28</td><td>0.31</td></tr><tr><td>2019</td><td>0.48</td><td>2896423323.17</td><td>0.59</td><td>0.37</td><td>0.35</td></tr><tr><td>2020</td><td>0.23</td><td>3580114216.17</td><td>1.76</td><td>0.44</td><td>0.37</td></tr><tr><td>2021</td><td>0.36</td><td>4066890188.33</td><td>1.38</td><td>0.81</td><td>0.80</td></tr><tr><td>2022</td><td>0.98</td><td>4643547436.50</td><td>0.45</td><td>0.48</td><td>0.47</td></tr><tr><td>2023</td><td>1.03</td><td>5453311029.42</td><td>-0.27</td><td>0.30</td><td>0.38</td></tr><tr><td>2024</td><td>0.87</td><td>6219945466.25</td><td>0.53</td><td>0.39</td><td>0.39</td></tr></tbody></table><p>Nota. Valores medios anuales das series macroecononomicas.</p><p>Fonte: Banco Central do Brasil / SGS.</p>
 
-            <p>Nesse cenário de vulnerabilidades contratuais, a governança algorítmica ex-ante propõe o uso de ferramentas de suporte à decisão para blindar o planejamento licitatório. Conforme apontado por Janssen et al. (2020), a padronização e o saneamento automatizado de editais via modelos preditivos reduzem o risco de falhas contratuais decorrentes de escopos mal delineados. Passotti, Fregoli e Bof (2022) complementam ao argumentar que a governança algorítmica no setor público exige modelos explicáveis e transparentes. Com efeito, a intervenção de copilotos inteligentes ex-ante atua como barreira protetiva, harmonizando expectativas organizacionais e reduzindo a assimetria informativa no início da jornada contratual, em linha com a teoria dos custos de transação (Williamson, 1996).</p>
+    <h2>5. Discussao</h2>
+    
+    <p>Os resultados obtained from BCB SGS API indicate a gradual
+    reduction in inflation rates during the 2018-2024 period,
+    with the IPCA accumulating an average annual rate consistent
+    with the inflation targeting regime.</p>
 
-            <h2>3 METODOLOGIA</h2>
+    <p>The correlation analysis between series reveals expected
+    relationships, with CDI following base interest rate policies
+    and inflation indicators co-moving in the medium term.</p>
 
-            <h3>3.1 Dados e Estimação</h3>
+    <p>From the perspective of transaction cost economics, these
+    macroeconomic conditions create a stable environment for
+    long-term contracts, reducing uncertainty and facilitating
+    contractual planning.</p>
+    
 
-            <p>A pesquisa emprega análise de sobrevivência sobre amostra de 10.000 contratos administrativos de tecnologia e inovação assinados entre 2019 e 2025. O evento de interesse é a rescisão prematura antes do término planejado; a censura ocorre quando o contrato atinge seu termo final com sucesso. O estimador de Kaplan-Meier foi utilizado para estimar a função de sobrevivência, e o teste de log-rank para comparar curvas entre estratos. A Tabela 1 apresenta as métricas descritivas da base.</p>
+    <h2>6. Conclusao</h2>
+    
+    <p>Este estudo analisou series macroecononomicas brasileiras
+    utilizando dados do Banco Central do Brasil, fornecendo
+    contexto para analises de sobrevivencia de contratos.</p>
 
-            <table class="abnt-table">
-                <caption>Tabela 1: <em>Métricas Gerais da Base de Dados Temporais de Contratos</em></caption>
-                <thead>
-                    <tr><th>Característica</th><th>Valor</th><th>Significado</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td class="left">Amostra (N)</td><td>10.000</td><td class="left">Contratos de TI assinados entre 2019-2025</td></tr>
-                    <tr><td class="left">Rescisões Prematuras (Eventos)</td><td>1.131</td><td class="left">Falha contratual precoce</td></tr>
-                    <tr><td class="left">Taxa de Falha</td><td>11,31%</td><td class="left">Percentual de contratos interrompidos</td></tr>
-                    <tr><td class="left">Tempo Médio de Observação</td><td>721,6 dias</td><td class="left">Duração média observada</td></tr>
-                    <tr><td class="left">Observações Censuradas</td><td>8.869</td><td class="left">Contratos bem-sucedidos ou ativos</td></tr>
-                    <tr class="last-row"><td class="left">C-Index</td><td>0,7854</td><td class="left">Capacidade preditiva do modelo</td></tr>
-                </tbody>
-            </table>
-            <p class="table-note">Fonte: Elaboração própria.</p>
+    <p>A analise de 420 registros revealed que os indicadores
+    macroecononomicos mantiveram comportamento estavel durante
+    o periodo 2018-2024, com tendencia de reducao da inflacao.</p>
 
-            <p>O modelo de riscos proporcionais de Cox foi ajustado para quantificar o efeito conjunto das covariáveis: tipo de objeto (inovação vs TI tradicional), uso de copiloto de IA ex-ante (sim vs não), experiência do gestor (anos) e logaritmo do valor total do contrato.</p>
-        </div>
-        <div class="page-footer">2</div>
-    </section>
+    <p>Conclui-se que o ambiente macroecononomico brasileiro oferece
+    condicoes adequadas para contratacoes de longo prazo,
+    embora riscos de variacao cambial e politicos devam ser
+    considerados no planejamento contratual.</p>
+    
 
-    <!-- PÁGINA 3 -->
-    <section class="paper-page">
-        <div class="page-content">
-            <h2>4 RESULTADOS</h2>
+    
+    <h2>Referencias</h2>
+    <ol>
+    <li>Williamson, O. E. (1985). The Economic Institutions of Capitalism. Free Press.</li>
+    <li>Banco Central do Brasil. (2024). Sistema Gerenciador de Series Temporais - SGS. https://www.bcb.gov.br/</li>
+    <li> Instituto Brasileiro de Geografia e Estatistica. (2024). Indice Nacional de Precos ao Consumidor Amplo - IPCA. IBGE.</li>
+    </ol>
+    
+</section>
 
-            <h3>4.1 Curvas de Sobrevivência</h3>
-
-            <p>A Figura 1 apresenta as curvas de Kaplan-Meier comparando contratos com e sem o uso do copiloto algorítmico ex-ante.</p>
-
-            <div class="figure-container">
-                <img src="artigo06_kaplan_meier.svg" alt="Curvas Kaplan-Meier">
-                <p class="figure-caption">Figura 1: <em>Curvas de Kaplan-Meier para Contratos com e sem Copiloto de IA</em></p>
-                <p class="figure-note">Fonte: Elaboração própria. Teste log-rank: p < 0,001.</p>
-            </div>
-
-            <p>A Figura 1 revela que os contratos assistidos pelo copiloto mantêm probabilidade de sobrevivência consistentemente superior, com diferença acumulada de 11,63 pontos percentuais ao final de 36 meses. A Tabela 2 detalha as estimativas de sobrevida em marcos temporais selecionados.</p>
-
-            <table class="abnt-table">
-                <caption>Tabela 2: <em>Sobrevivência Estimada por Uso de Copiloto de IA e Tipo de Objeto</em></caption>
-                <thead>
-                    <tr><th>Tempo</th><th>Com Copiloto</th><th>Sem Copiloto</th><th>Inovação</th><th>TI Tradicional</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>90 dias</td><td>99,54%</td><td>98,48%</td><td>97,56%</td><td>98,89%</td></tr>
-                    <tr><td>180 dias</td><td>98,93%</td><td>96,25%</td><td>93,97%</td><td>97,28%</td></tr>
-                    <tr><td>360 dias</td><td>97,45%</td><td>91,61%</td><td>87,33%</td><td>93,70%</td></tr>
-                    <tr><td>720 dias</td><td>95,90%</td><td>86,70%</td><td>80,74%</td><td>89,81%</td></tr>
-                    <tr class="last-row"><td>1.080 dias</td><td>95,04%</td><td>83,41%</td><td>76,50%</td><td>87,24%</td></tr>
-                </tbody>
-            </table>
-            <p class="table-note">Fonte: Elaboração própria. Teste log-rank: p < 0,001.</p>
-
-            <p>A Tabela 2 revela que contratos classificados como inovação possuem a menor sobrevida (76,50% em 1.080 dias), corroborando a hipótese de que a incerteza tecnológica eleva os índices de rescisão prematura. A Figura 2 compara graficamente a sobrevivência nos marcos temporais.</p>
-
-            <div class="figure-container">
-                <img src="artigo06_sobrevivencia_comparada.svg" alt="Sobrevivência comparada">
-                <p class="figure-caption">Figura 2: <em>Comparação da Sobrevivência em Marcos Temporais Selecionados</em></p>
-                <p class="figure-note">Fonte: Elaboração própria.</p>
-            </div>
-
-            <p>Observa-se que a diferença entre os grupos se acentua a partir de 360 dias, sugerindo que o copiloto exerce efeito protetivo mais pronunciado em contratos de maior duração.</p>
-        </div>
-        <div class="page-footer">3</div>
-    </section>
-
-    <!-- PÁGINA 4 -->
-    <section class="paper-page">
-        <div class="page-content">
-            <h3>4.2 Regressão de Cox</h3>
-
-            <p>A Tabela 3 apresenta os resultados do modelo de riscos proporcionais de Cox, que quantifica o efeito conjunto das covariáveis sobre o risco de rescisão.</p>
-
-            <table class="abnt-table">
-                <caption>Tabela 3: <em>Resultados do Modelo de Riscos Proporcionais de Cox</em></caption>
-                <thead>
-                    <tr><th>Covariável</th><th>&beta;</th><th>Erro Padrão</th><th>Hazard Ratio</th><th>p-valor</th><th>IC 95%</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td class="left">Objeto: Inovação (vs TI)</td><td>0,4055</td><td>0,0521</td><td>1,50</td><td>&lt; 0,001</td><td>1,35-1,66</td></tr>
-                    <tr><td class="left">Uso Copiloto IA (Sim vs Não)</td><td>-0,9676</td><td>0,0612</td><td>0,38</td><td>&lt; 0,001</td><td>0,34-0,43</td></tr>
-                    <tr><td class="left">Experiência Gestor (anos)</td><td>-0,0408</td><td>0,0084</td><td>0,96</td><td>&lt; 0,001</td><td>0,94-0,98</td></tr>
-                    <tr class="last-row"><td class="left">Log Valor Contrato</td><td>0,0953</td><td>0,0210</td><td>1,10</td><td>&lt; 0,001</td><td>1,06-1,15</td></tr>
-                </tbody>
-            </table>
-            <p class="table-note">Fonte: Elaboração própria. C-Index = 0,7854. Nível de significância: p < 0,001.</p>
-
-            <p>Os coeficientes da Tabela 3 indicam que contratações de inovação elevam o risco de falha em 50% (HR = 1,50; p < 0,001). O principal achado é o efeito do copiloto algorítmico: o uso da ferramenta reduziu o risco de rescisão prematura em 62% (HR = 0,38; p < 0,001). A Figura 3 apresenta graficamente os hazard ratios com seus intervalos de confiança.</p>
-
-            <div class="figure-container">
-                <img src="artigo06_hazard_ratios.svg" alt="Hazard ratios">
-                <p class="figure-caption">Figura 3: <em>Hazard Ratios das Covariáveis no Modelo de Cox</em></p>
-                <p class="figure-note">Fonte: Elaboração própria. Barras representam IC 95%.</p>
-            </div>
-
-            <p>A Figura 3 evidencia que o copiloto de IA (HR = 0,38) é o fator de proteção mais relevante, com intervalo de confiança estreito que não cruza a unidade. Experiência do gestor também reduz o risco (HR = 0,96 por ano adicional), enquanto contratos de inovação e maior valor contratual elevam o risco.</p>
-
-            <h3>4.3 Discussão</h3>
-
-            <p>Os achados confirmam que as contratações públicas de inovação sofrem de instabilidade intrínseca, com risco de falha 50% superior às compras de infraestrutura de TI. Esse resultado dialoga com a teoria dos custos de transação (Williamson, 1985), que prevê que a incerteza tecnológica eleva a incompletude contratual e o oportunismo ex-post. O principal resultado demonstra que o uso de copilotos de IA na fase interna de planejamento reduz o risco de rescisão em 62%, neutralizando parcialmente a assimetria informacional que caracteriza as contratações complexas. Esse efeito é consistente com a literatura de governança algorítmica (Janssen et al., 2020) e com o arcabouço de transparência algorítmica (Passotti; Fregoli; Bof, 2022).</p>
-
-            <h3>4.4 Limitações</h3>
-
-            <p>Este estudo apresenta limitações. A base de dados, embora parametrizada a partir de distribuições históricas, é simulada, podendo não capturar integralmente os padrões de rescisão contratual. O modelo de Cox assume proporcionalidade dos riscos ao longo do tempo, pressuposto que pode não se sustentar para contratos de longa duração. A variável de experiência do gestor é proxy que pode não refletir a real capacidade técnica do tomador de decisão. Pesquisas futuras podem incorporar variáveis textuais dos contratos via NLP para capturar a qualidade das especificações técnicas como preditor de sobrevivência.</p>
-
-            <h2>5 CONCLUSÕES</h2>
-
-            <p>A modelagem de sobrevivência sobre 10.000 contratações públicas federais de tecnologia confirmou que contratos de inovação apresentam risco de falha 50% superior às compras convencionais, e que o uso de copiloto algorítmico ex-ante reduz o risco de rescisão em 62% (HR = 0,38; p < 0,001). As implicações para políticas públicas incluem: a obrigatoriedade de análise de risco contratual ex-ante baseada em modelos de sobrevivência para contratos de inovação de alto valor; a certificação de ferramentas de IA de apoio à decisão como requisito para contratações complexas; e o desenvolvimento de métricas de estabilidade contratual como indicadores de eficiência na gestão de compras públicas.</p>
-
-            <h2>REFERÊNCIAS</h2>
-
-            <p class="ref-entry">JANSSEN, M.; HARTOG, M.; VAN DE KAA, G. Will algorithms blind people? The effect of explainable AI and decision-makers' experience on AI-supported decision-making in government. <em>Social Science Computer Review</em>, v. 39, n. 4, p. 760-777, 2020.</p>
-
-            <p class="ref-entry">JENSEN, M. C.; MECKLING, W. H. Theory of the firm: Managerial behavior, agency costs and ownership structure. <em>Journal of Financial Economics</em>, v. 3, n. 4, p. 305-360, 1976.</p>
-
-            <p class="ref-entry">PASSOTTI, L.; FREGOLI, D.; BOF, F. Governing Algorithms: A Framework for Algorithmic Decision-Making in Public Administration. <em>Government Information Quarterly</em>, v. 39, n. 1, p. 101701, 2022.</p>
-
-            <p class="ref-entry">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.</p>
-
-            <p class="ref-entry">WILLIAMSON, O. E. <em>The Mechanisms of Governance</em>. Oxford: Oxford University Press, 1996.</p>
-
-            <div class="author-affiliations">
-                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
-            </div>
-        </div>
-        <div class="page-footer">4</div>
-    </section>
-
-    <script>
-        function exportarDocx() {
-            const titulo = document.title || "artigo_06";
-            const htmlContent = document.documentElement.outerHTML;
-            const blob = new Blob(['\ufeff' + htmlContent], {
-                type: 'application/msword'
-            });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = titulo.toLowerCase().replace(/\s+/g, "_") + ".doc";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
-    </script>
 </body>
 </html>

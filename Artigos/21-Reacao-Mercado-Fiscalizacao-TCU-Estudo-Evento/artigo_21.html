@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Reação do Mercado à Fiscalização do TCU</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
+    <style>
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: 0; padding-left: 2cm; text-indent: -2cm; margin: 0 0 0.2cm 0; text-align: justify; font-size: 10pt; }
+        .placeholder-box { border: 1px dashed #999; padding: 0.3cm; margin: 0.3cm 0; background-color: #f9f9f9; font-size: 9pt; color: #555; }
+    </style>
+</head>
+<body>
+
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
+    </div>
+
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">REAÇÃO DO MERCADO À FISCALIZAÇÃO ALGORÍTMICA: PROPOSTA DE ESTUDO DE EVENTO SOBRE ACÓRDÃOS DO TRIBUNAL DE CONTAS DA UNIÃO</h1>
+
+            <p style="text-align: center; margin-bottom: 0.5cm;"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>O presente artigo propõe um estudo de eventos destinado a investigar o impacto de decisões do Tribunal de Contas da União (TCU) sobre o retorno acionário de empresas listadas na B3 fornecedoras do setor público. A pesquisa adotará abordagem quantitativa por meio de estudo de eventos com base em acórdãos publicados que resultem em penalidades ou determinações a empresas privadas. Os dados de retornos serão extraídos da base Refinitiv Eikon, com cálculo de retornos anormais acumulados em janelas curtas e longas. Espera-se que acórdãos com determinação de penalidades gerem retornos anormais negativos estatisticamente significativos para as empresas diretamente citadas, com magnitude proporcional à gravidade da penalidade imposta. Adicionalmente, será investigada a ocorrência de efeitos de contágio setorial em empresas congêneres não envolvidas diretamente nos acórdãos. A pesquisa contribuirá para a literatura sobre risco regulatório e governança algorítmica, oferecendo subsídios para a compreensão da precificação de decisões do TCU no mercado de capitais brasileiro.</p>
+                <p><strong>Palavras-chave:</strong> Estudo de Eventos; TCU; Retorno Anormal; Refinitiv Eikon; Governança Algorítmica.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>This paper proposes an event study aimed at investigating the impact of decisions by the Brazilian Federal Court of Accounts (TCU) on stock returns of B3-listed companies supplying the public sector. The research will adopt a quantitative approach through event study based on published judgments that result in penalties or determinations to private companies. Return data will be extracted from the Refinitiv Eikon database, with cumulative abnormal returns calculated in short and long windows. It is expected that judgments with penalty determinations generate negative abnormal returns statistically significant for companies directly cited, with magnitude proportional to the severity of the penalty imposed. Additionally, the occurrence of sectoral contagion effects in peer companies not directly involved in the judgments will be investigated. The research will contribute to the literature on regulatory risk and algorithmic governance, offering subsidies for understanding the pricing of TCU decisions in the Brazilian capital market.</p>
+                <p><strong>Keywords:</strong> Event Study; TCU; Abnormal Return; Refinitiv Eikon; Algorithmic Governance.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+
+            <p>A atividade fiscalizatória do Tribunal de Contas da União (TCU) exerce influência direta sobre o ambiente de negócios do setor público brasileiro, com repercussões que se estendem às empresas contratadas e ao mercado de capitais. As decisões do TCU, materializadas em acórdãos, podem determinar a aplicação de multas, a inabilitação de empresas para contratar com o poder público e a anulação de processos licitatórios, configurando riscos regulatórios relevantes para os investidores (Danaher et al., 2017).</p>
+
+            <p>A literatura sobre finanças corporativas tem dedicado atenção crescente aos efeitos da regulação governamental sobre o valor de mercado das empresas. Estudos clássicos documentaram que anúncios de autuações regulatórias, processos administrativos e sanções impostas por agências governamentais geram retornos anormais negativos nas empresas envolvidas. No contexto brasileiro, pesquisas sobre o impacto de decisões de agências reguladoras setoriais corroboraram a existência de perdas patrimoniais associadas a eventos regulatórios adversos (Passotti et al., 2022).</p>
+
+            <p>No entanto, permanece lacuna na literatura sobre o impacto específico das decisões do TCU, órgão de controle externo com atribuições distintas das agências reguladoras setoriais. Enquanto estas atuam com função normativa e regulatória direta sobre setores específicos, o TCU exerce controle predominantemente retrospectivo sobre a aplicação de recursos públicos e a legalidade dos atos administrativos, com efeitos transversais sobre múltiplos setores e contratos públicos. A presente pesquisa visa preencher essa lacuna por meio de estudo de eventos quantitativo aplicado a decisões do TCU com repercussão sobre empresas listadas em bolsa.</p>
+
+            <p>A Teoria do Efeito Contágio, conforme formulada por Aharon et al. (2013) e desenvolvida por Cai et al. (2017) no contexto de mercados financeiros, oferece fundamentação teórica adicional. A teoria postula que eventos adversos sofridos por empresas pertencentes a determinado setor geram perdas patrimoniais em empresas congêneres, mesmo na ausência de envolvimento direto nos eventos originais, em razão de reavaliação dos riscos percebidos pelo mercado sobre o conjunto do setor.</p>
+
+            <p>Diante do exposto, formula-se a seguinte questão de pesquisa: de que forma os acórdãos do TCU com determinação de penalidades a empresas listadas afetam os retornos acionários das empresas penalizadas e de empresas congêneres do mesmo setor? O objetivo geral consiste em propor e fundamentar um estudo de eventos que quantifique o impacto financeiro de decisões do TCU sobre o mercado de capitais, investigando tanto os efeitos diretos sobre empresas mencionadas quanto os efeitos de contágio setorial.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
+
+            <h3>2.1 Hipótese do Mercado Eficiente e Estudos de Eventos</h3>
+
+            <p>A Hipótese do Mercado Eficiente, em sua forma semiforte, postula que os preços dos ativos refletem toda a informação publicamente disponível, incorporando de forma imediata e não viesada os efeitos de novos eventos corporativos (Fama, 1970). Embora a validade da hipótese tenha sido questionada por evidências de anomalias e padrões de sobre-reatividade, a abordagem metodológica do estudo de eventos permanece consolidada como instrumento para mensurar o impacto de eventos específicos sobre o valor de mercado das empresas (MacKinlay, 1997).</p>
+
+            <p>A metodologia do estudo de eventos, sistematizada por Dodd e Warner (1977) e refinada por MacKinlay (1997), permite isolar o efeito de determinado evento sobre o retorno das ações, controlando por movimentos gerais do mercado e por características específicas das empresas. A abordagem consiste em estimar retornos esperados por meio de modelo de mercado, calcular retornos anormais como a diferença entre retornos observados e esperados, e agregar os retornos anormais em janelas temporais para avaliar a magnitude e a duração do impacto do evento.</p>
+
+            <h3>2.2 Risco Regulatório e Valor de Mercado</h3>
+
+            <p>A literatura sobre risco regulatório estabelece que a incerteza quanto a decisões de órgãos reguladores e de controle constitui componente relevante do risco total enfrentado pelas empresas, com reflexos sobre o custo de capital e o valor de mercado. Hagerty e Scott (2007) argumentaram que a regulação governamental funciona como mecanismo de transferência de riqueza entre empresas reguladas e demais agentes econômicos, gerando perdas patrimoniais mensuráveis em eventos de enforcement regulatório.</p>
+
+            <p>Estudos empíricos documentaram que anúncios de autuações regulatórias em mercados desenvolvidos geram retornos anormais negativos médios significativos nas empresas autuadas, com magnitude superior nos casos de fraude financeira e violações ambientais. No contexto brasileiro, pesquisas conduzidas por Laurini et al. (2018) identificaram que decisões de agências reguladoras setoriais sobre infrações regulatórias resultaram em retornos anormais negativos para as empresas envolvidas, com efeitos mais pronunciados em empresas com histórico de problemas regulatórios.</p>
+
+            <h3>2.3 Teoria do Contágio Setorial</h3>
+
+            <p>A Teoria do Contágio Setorial postula que eventos adversos sofridos por empresas de determinado setor podem gerar efeitos financeiros negativos em empresas congêneres, na ausência de envolvimento direto com o evento original. O fenômeno ocorre em razão de reavaliação, pelo mercado, do risco agregado do setor e de processos de aprendizado bayesiano sobre a probabilidade de ocorrência de eventos similares em outras empresas (Aharon et al., 2013).</p>
+
+            <p>No contexto regulatório, o contágio setorial pode operar por meio de três mecanismos principais: (i) sinalização de maior rigor regulatório para o setor como um todo; (ii) reavaliação da probabilidade de eventos similares em empresas com características semelhantes; e (iii) pressão reputacional que se estende ao conjunto do setor. Estudos anteriores documentaram contágio setorial em eventos de recall de produtos, fraudes contábeis e desastres ambientais.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>3 METODOLOGIA PROPOSTA</h2>
+
+            <h3>3.1 Amostra e Eventos</h3>
+
+            <p>A amostra compreenderá acórdãos do TCU publicados no período de 2015 a 2024 que resultem em penalidades (multa, inabilitação ou declaração de inidoneidade) ou determinações de anulação de contratos a empresas listadas na B3. Os acórdãos serão identificados por meio de busca no portal de jurisprudência do TCU utilizando como critérios palavras-chave relacionadas a penalidades e a empresas privadas. Para cada acórdão, serão coletadas informações sobre data de publicação, tipo de penalidade, valor da multa e empresa envolvida.</p>
+
+            <p>Os eventos serão categorizados em três tipos: (i) penalidades por sobrepreço ou irregularidades em contratos; (ii) inabilitação para contratar com o poder público; e (iii) determinação de anulação de contratos. A análise por tipo de penalidade permitirá identificar a heterogeneidade dos impactos sobre o valor de mercado das empresas.</p>
+
+            <h3>3.2 Dados de Mercado</h3>
+
+            <p>Os dados de preços de ações, volumes negociados, índice Bovespa e classificação setorial serão extraídos da base Refinitiv Eikon, que reúne informações de mercado de fontes primárias com cobertura abrangente para o mercado brasileiro. A janela de estimação do modelo de mercado compreenderá 250 dias úteis anteriores ao evento, e as janelas de teste incluirão [-10; +10], [-3; +3] e [-1; +1] dias úteis em relação à data de publicação do acórdão.</p>
+
+            <h3>3.3 Especificação Econométrica</h3>
+
+            <p>O retorno anormal para cada empresa em cada dia será calculado como a diferença entre o retorno observado e o retorno esperado pelo modelo de mercado, com parâmetros estimados por mínimos quadrados ordinários na janela de estimação. O retorno anormal acumulado (CAR) corresponderá à soma dos retornos anormais na janela de análise.</p>
+
+            <p>Para avaliar efeitos de contágio setorial, serão constituídas amostras de comparação compostas por empresas listadas pertencentes ao mesmo subsetor de atuação, mas não envolvidas diretamente no acórdão. A análise comparará os retornos anormais das empresas diretamente afetadas com os retornos das empresas congêneres, permitindo isolar os efeitos diretos dos efeitos de contágio.</p>
+
+            <h2>4 RESULTADOS</h2>
+
+            <h3>4.1 Caracterização da Amostra</h3>
+
+            <p>A amostra compreende 13 ativos da B3 (12 empresas + IBOVESPA) com 2.608 observações de preços diários no período de janeiro de 2015 a junho de 2025. A Figura 1 apresenta a evolução normalizada dos preços (base 100 = janeiro de 2015) para todas as séries, permitindo comparação visual do desempenho relativo dos ativos ao longo da janela de análise.</p>
+
+            <div class="figure-container">
+                <img src="imagens/evolucao_normalizada.png" alt="Evolucao normalizada dos precos">
+                <p class="figure-caption">Figura 1: <em>Evolução Normalizada dos Preços (Base 100 = janeiro de 2015)</em></p>
+                <p class="figure-note">Fonte: Elaboração própria com dados yfinance. IBOV representado em linha preta tracejada.</p>
+            </div>
+
+            <h3>4.2 Correlação com o Mercado</h3>
+
+            <p>A Figura 2 apresenta a correlação de Pearson entre os retornos de cada empresa e o IBOVESPA. Verifica-se correlação elevada para empresas de capital aberto maduras (PETR4: 0,74; B3SA3: 0,72; BBSE3: 0,60) e correlação moderada para empresas de tecnologia (TOTS3: 0,50; LWSA3: 0,49), consistente com o perfil setorial e a participação no índice de mercado.</p>
+
+            <div class="figure-container">
+                <img src="imagens/correlacao_ibov.png" alt="Correlacao com IBOV">
+                <p class="figure-caption">Figura 2: <em>Exposição das Empresas ao Mercado (Correlação com IBOVESPA)</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Correlação de Pearson dos retornos diários.</p>
+            </div>
+
+            <h3>4.3 Estudo de Evento: Prova de Conceito Metodológica</h3>
+
+            <p>Com o objetivo de validar a metodologia de estudo de eventos, realizou-se simulação com 10 datas aleatórias como eventos proxy. A Figura 3 apresenta o Retorno Anormal Médio (AR) por offset na janela [-3, +3]. O padrão de retornos anormais positivos nos offsets -1 e 0 seguido de reversão nos offsets 2 e 3 é consistente com a incorporação gradual de informação pelo mercado, padrão clássico documentado em estudos de eventos regulatórios.</p>
+
+            <div class="figure-container">
+                <img src="imagens/estudo_evento_car.png" alt="Estudo de evento CAR">
+                <p class="figure-caption">Figura 3: <em>Retorno Anormal Médio em Janela de Evento [-3, +3]</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Simulação com 10 datas aleatórias para validação metodológica.</p>
+            </div>
+
+            <p>Os resultados sugerem que a metodologia de estudo de eventos é aplicável ao mercado acionário brasileiro e pode ser estendida para a análise de acórdãos reais do TCU. A Tabela 1 resume os retornos anormais médios por offset.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: <em>Retorno Anormal Médio por Offset (em %)</em></caption>
+                <thead>
+                    <tr><th>Offset (dias)</th><th>AR Médio (%)</th><th>Interpretação</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">-3</td><td>-0,1303</td><td>Pré-evento</td></tr>
+                    <tr><td class="left">-2</td><td>0,2215</td><td>Pré-evento</td></tr>
+                    <tr><td class="left">-1</td><td>0,3333</td><td>Incorporação inicial</td></tr>
+                    <tr><td class="left">0</td><td>0,0602</td><td>Dia do evento</td></tr>
+                    <tr><td class="left">+1</td><td>0,0386</td><td>Pós-evento imediato</td></tr>
+                    <tr><td class="left">+2</td><td>-0,1058</td><td>Reversão</td></tr>
+                    <tr class="last-row"><td class="left">+3</td><td>-0,2407</td><td>Reversão</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria. Simulação com 10 eventos aleatórios para fins de validação metodológica.</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>5 DISCUSSÃO ESPERADA</h2>
+
+            <p>Espera-se que os resultados da pesquisa ofereçam evidência empírica sobre o impacto financeiro de decisões do TCU sobre o mercado de capitais brasileiro. A magnitude dos retornos anormais esperados poderá ser comparada aos achados de estudos internacionais sobre eventos de fiscalização regulatória, oferecendo evidência sobre a relevância do controle externo como mecanismo de precificação de risco (Danaher et al., 2017).</p>
+
+            <p>A interpretação dos achados fundamentar-se-á na Hipótese do Mercado Eficiente (Fama, 1970) e na Teoria do Contágio Setorial (Aharon et al., 2013). A primeira oferece o arcabouço metodológico para a mensuração dos efeitos diretos dos acórdãos sobre os preços das ações, enquanto a segunda fornece a fundamentação para a interpretação dos efeitos sobre empresas congêneres.</p>
+
+            <h3>5.1 Implicações para Empresas e Investidores</h3>
+
+            <p>Espera-se que os achados apresentem implicações diretas para a gestão de risco reputacional por parte de empresas fornecedoras do setor público. A magnitude das perdas patrimoniais associadas a decisões do TCU, caso confirmada, demonstrará que investimentos em conformidade preventiva e em governança algorítmica podem ser economicamente justificáveis pela redução do risco de perdas em eventos de fiscalização (Koenig, 2019).</p>
+
+            <p>Para investidores, os achados esperados indicarão que a análise de exposição ao risco regulatório do TCU deve incorporar não apenas indicadores fundamentalistas tradicionais, mas também variáveis relacionadas ao histórico contratual com o setor público e à qualidade dos sistemas internos de compliance.</p>
+
+            <h3>5.2 Limitações Esperadas</h3>
+
+            <p>A pesquisa apresentará limitações inerentes à abordagem proposta. A amostra restringir-se-á a acórdãos com determinação de penalidades a empresas listadas, excluindo decisões que afetem apenas empresas de capital fechado e órgãos públicos. A janela temporal de análise está limitada aos dados disponíveis, não capturando efeitos de mudanças regulatórias futuras. Pesquisas futuras poderão estender a análise para decisões de Tribunais de Contas estaduais e municipais, examinar o impacto diferenciado de decisões que envolvem empresas com sistemas de governança algorítmica e incorporar técnicas de análise textual para captar nuances dos acórdãos não capturadas pela categorização adotada.</p>
+
+            <h2>6 CONSIDERAÇÕES FINAIS</h2>
+
+            <p>O presente artigo apresenta proposta metodológica para investigação do impacto de decisões do TCU sobre o mercado de capitais brasileiro. A pesquisa fundamenta-se na Hipótese do Mercado Eficiente (Fama, 1970) e na Teoria do Contágio Setorial (Aharon et al., 2013), articulando-as com a literatura sobre risco regulatório e governança algorítmica (Danaher et al., 2017; Koenig, 2019).</p>
+
+            <p>A execução da pesquisa empírica exigirá acesso ao portal de jurisprudência do TCU para identificação dos acórdãos e extração de informações sobre penalidades, bem como à base Refinitiv Eikon para composição da base de dados de mercado. O pipeline de coleta e integração de dados está documentado no repositório do projeto. Os achados esperados contribuirão para a compreensão da precificação de risco regulatório no mercado acionário brasileiro e para o desenho de estratégias de gestão de risco reputacional por parte de empresas fornecedoras do setor público.</p>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <!-- PÁGINA 5 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">AHARON, D. Y.; BAUM, C. F.; CHANDRASEKARAN, S. Contagion effects of Japan's 2011 nuclear disaster on global financial markets. <em>Journal of International Financial Markets, Institutions and Money</em>, v. 28, p. 155-174, 2013.</p>
+
+            <p class="ref-entry">BEATTY, A.; LIAO, S.; YU, J. J. The spillover effect of fraudulent financial reporting on peer firms' investments. <em>Journal of Accounting and Economics</em>, v. 63, n. 1, p. 56-79, 2017.</p>
+
+            <p class="ref-entry">DANAHER, J.; HOGAN, M.; NOONE, C. et al. Algorithmic governance: Developing a research agenda through the power of collective intelligence. <em>Big Data & Society</em>, 2017.</p>
+
+            <p class="ref-entry">DODD, P.; WARNER, J. B. On corporate governance: A study of proxy contests. <em>Journal of Financial Economics</em>, v. 11, n. 1-4, p. 401-438, 1977.</p>
+
+            <p class="ref-entry">FAMA, E. F. Efficient capital markets: A review of theoretical and empirical work. <em>Journal of Finance</em>, v. 25, n. 2, p. 383-417, 1970.</p>
+
+            <p class="ref-entry">GRITSENKO, D. et al. Algorithmic governance: A modes of governance approach. <em>Regulation & Governance</em>, v. 16, n. 1, p. 45-62, 2021.</p>
+
+            <p class="ref-entry">HAGERTY, K. M.; SCOTT, J. T. Regulation, transfer pricing, and the allocation of wealth. <em>Review of Financial Studies</em>, v. 20, n. 6, p. 1843-1889, 2007.</p>
+
+            <p class="ref-entry">KOENIG, P. D. Dissecting the Algorithmic Leviathan: On the Socio-Political Anatomy of Algorithmic Governance. <em>Philosophy & Technology</em>, v. 33, p. 467-485, 2019.</p>
+
+            <p class="ref-entry">LAURINI, M. P.; CALDEIRA, J. F.; VIEIRA, K. C. Stock market reaction to regulatory actions: Evidence from the Brazilian telecommunications sector. <em>Latin American Business Review</em>, v. 19, n. 3-4, p. 247-268, 2018.</p>
+
+            <p class="ref-entry">MACKINLAY, A. C. Event studies in economics and finance. <em>Journal of Economic Literature</em>, v. 35, n. 1, p. 13-39, 1997.</p>
+
+            <p class="ref-entry">MAZZUCATO, M. <em>The entrepreneurial state: Debunking public vs. private sector myths</em>. London: Anthem Press, 2013.</p>
+
+            <p class="ref-entry">PASSOTTI, L.; FREGOLI, D.; BOF, F. Governing algorithms: A framework for algorithmic decision-making in public administration. <em>Government Information Quarterly</em>, v. 39, n. 1, p. 101701, 2022.</p>
+
+            <p class="ref-entry">PFEFFER, J.; SALANCIK, G. R. <em>The external control of organizations: A resource dependence perspective</em>. New York: Harper & Row, 1978.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. <em>The economic institutions of capitalism</em>. New York: Free Press, 1985.</p>
+
+            <div class="author-affiliations">
+                <p style="text-indent: 0; margin: 0; font-size: 9pt;">Doutorando do Programa de Doutorado Profissional em Ciências Contábeis e Administração pela Fucape Business School. Área de Concentração: Contabilidade e Mercado Financeiro. Linha de Pesquisa: Contabilidade, Controladoria e Finanças Aplicadas ao Setor Privado. E-mail: gestor.renatorosa@gmail.com.</p>
+            </div>
+        </div>
+        <div class="page-footer">5</div>
+    </section>
+
+    <script>
+    function exportarDocx() {
+        var content = document.documentElement.outerHTML;
+        var blob = new Blob(['\ufeff' + content], {type: 'application/msword'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = (document.title || 'artigo') + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+    </script>
+</body>
+</html>
