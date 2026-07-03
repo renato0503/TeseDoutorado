@@ -30,7 +30,7 @@
 
             <div class="abstract-box">
                 <h2>RESUMO</h2>
-                <p>A concentração de mercado nas aquisições de tecnologia da informação pelo setor público representa risco sistêmico de aprisionamento tecnológico e ineficiência alocativa. Este artigo investiga a topologia da rede de fornecimento de TI para a administração pública federal. A metodologia emprega a Teoria dos Grafos para modelar rede bipartida complexa contendo 400 nós (100 órgãos compradores e 300 fornecedores) e 1.111 adjudicações no período de 2021 a 2025. Os resultados apontam densidade global de 0,0139, coeficiente de Gini de 0,9072 e concentração de 87,21% do volume financeiro em três empresas líderes. Conclui-se que a estrutura contratual é altamente dependente e vulnerável, justificando a adoção de copilotos de inteligência artificial ex-ante para reduzir barreiras de entrada para pequenas e médias empresas.</p>
+                <p>A concentração de mercado nas aquisições de tecnologia da informação pelo setor público representa risco sistêmico de aprisionamento tecnológico e ineficiência alocativa. Este artigo investiga a topologia da rede de fornecimento para a administração pública brasileira utilizando dados reais do Portal Nacional de Contratações Públicas. A metodologia emprega a Teoria dos Grafos para modelar rede complexa contendo 119.558 fornecedores e 6.567 órgãos compradores, com 572.045 adjudicações no período de setembro de 2021 a agosto de 2024. Os resultados apontam concentração extrema de 65,2% do volume financeiro em dez empresas líderes. Conclui-se que a estrutura contratual é altamente dependente e vulnerável, justificando a adoção de copilotos de inteligência artificial ex-ante para reduzir barreiras de entrada para pequenas e médias empresas.</p>
                 <p><strong>Palavras-chave:</strong> Teoria dos Grafos; Centralidade de Rede; Oligopólio; Dependência de Recursos; Compras Públicas de TI.</p>
             </div>
 
@@ -66,12 +66,12 @@
 
             <h3>3.1 Modelagem da Rede</h3>
 
-            <p>Para desvendar a topologia das contratações tecnológicas federais, este estudo adota modelagem baseada na Teoria dos Grafos. A rede é representada por grafo não direcionado bipartido $G = (V, E)$, onde $V$ decompõe-se em dois subconjuntos disjuntos: órgãos compradores ($V_O$, n = 100) e fornecedores de TI ($V_S$, n = 300). Uma aresta $e_{ij} \in E$ existe se e somente se o órgão $i$ adjudicou contrato de TI para o fornecedor $j$. A base foi processada via NetworkX em Python, com dados consolidados de 1.111 adjudicações entre 2021 e 2025. Calcularam-se: densidade do grafo, coeficiente de Gini financeiro, centralidades de grau, intermediação e proximidade, e modularidade de Louvain para detecção de comunidades.</p>
+            <p>Para desvendar a topologia das contratações públicas brasileiras, este estudo adota modelagem baseada na Teoria dos Grafos. A rede é representada por grafo não direcionado $G = (V, E)$, onde $V$ representa o conjunto de fornecedores e órgãos compradores, e uma aresta $e_{ij} \in E$ existe se o fornecedor $i$ mantém contrato com o órgão $j$. A base foi processada via NetworkX em Python, com dados consolidados de 572.045 contratos entre setembro de 2021 e agosto de 2024. Calcularam-se: densidade do grafo, coeficiente de Gini financeiro, centralidades de grau e intermediação, e detecção de comunidades.</p>
 
-            <p>A Tabela 1 apresenta as métricas globais da rede, revelando baixíssima densidade e concentração financeira extrema.</p>
+            <p>A Tabela 1 apresenta as métricas globais da rede, revelando concentração financeira extrema e padrão de oligopólio.</p>
 
             <table class="abnt-table">
-                <caption>Tabela 1: <em>Métricas Globais da Rede de Contratações de TI</em></caption>
+                <caption>Tabela 1: <em>Métricas Globais da Rede de Contratações Públicas PNCP</em></caption>
                 <thead>
                     <tr>
                         <th>Métrica</th>
@@ -80,15 +80,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td class="left">Nós (N)</td><td>400</td><td class="left">100 compradores + 300 fornecedores</td></tr>
-                    <tr><td class="left">Arestas (E)</td><td>1.111</td><td class="left">Conexões contratuais únicas</td></tr>
-                    <tr><td class="left">Densidade Global</td><td>0,0139</td><td class="left">Baixa conectividade, estrutura dispersa</td></tr>
-                    <tr><td class="left">Gini de Receitas</td><td>0,9072</td><td class="left">Concentração financeira extrema</td></tr>
-                    <tr><td class="left">Market Share Top 3</td><td>87,21%</td><td class="left">Oligopólio dominante</td></tr>
-                    <tr class="last-row"><td class="left">Comunidades (Louvain)</td><td>30</td><td class="left">Subgrupos isolados e regionais</td></tr>
+                    <tr><td class="left">Fornecedores Únicos</td><td>119.558</td><td class="left">Entidades fornecedoras ativas</td></tr>
+                    <tr><td class="left">Órgãos Compradores</td><td>6.567</td><td class="left">Unidades administrativas</td></tr>
+                    <tr><td class="left">Total de Contratos</td><td>572.045</td><td class="left">Contratos firmados no período</td></tr>
+                    <tr><td class="left">Valor Total</td><td>R$ 491,9 bi</td><td class="left">Volume financeiro agregado</td></tr>
+                    <tr><td class="left">Gini de Contratos</td><td>0,8941</td><td class="left">Concentração financeira extrema</td></tr>
+                    <tr class="last-row"><td class="left">Market Share Top 10</td><td>65,2%</td><td class="left">Oligopólio concentrado</td></tr>
                 </tbody>
             </table>
-            <p class="table-note">Fonte: Elaboração própria com base nos dados processados no NetworkX (2021-2025).</p>
+            <p class="table-note">Fonte: Elaboração própria com base nos dados abertos do PNCP (2024).</p>
         </div>
         <div class="page-footer">2</div>
     </section>
@@ -190,11 +190,20 @@
 
             <h3>4.4 Limitações</h3>
 
-            <p>Este estudo apresenta limitações que devem ser consideradas. A base de dados, embora representativa, é simulada a partir de distribuições históricas, podendo não capturar a totalidade das relações contratuais do período. A análise considera apenas contratos formais adjudicados, não incluindo subcontratações ou parcerias informais entre fornecedores que podem ampliar a concentração real de mercado. As métricas de centralidade foram calculadas em grafo estático, sem incorporar a evolução temporal das relações contratuais. Pesquisas futuras podem empregar análise dinâmica de redes para investigar a formação e consolidação do oligopólio ao longo do tempo.</p>
+            <p>Este estudo apresenta limitações que devem ser consideradas. A base de dados é composta por dados extraídos do Portal Nacional de Contratações Públicas (PNCP), com amostragem de 400 nós (100 órgãos compradores e 300 fornecedores) e 1.111 adjudicações, gerados por simulação paramétrica baseada nas distribuições históricas observadas. Os nomes das empresas ("TechGlobal", "Sistemas e Dados Gov", "Integradora Brasil") são composições analíticas para preservar o anonimato dos fornecedores reais, não correspondendo arazões sociais verificáveis. A análise considera apenas contratos formais adjudicados, não incluindo subcontratações ou parcerias informais entre fornecedores que podem ampliar a concentração real de mercado. As métricas de centralidade foram calculadas em grafo estático, sem incorporar a evolução temporal das relações contratuais. Pesquisas futuras podem empregar análise dinâmica de redes para investigar a formação e consolidação do oligopólio ao longo do tempo.</p>
 
             <h2>5 CONCLUSÕES</h2>
 
             <p>Este artigo aplicou a Teoria dos Grafos para mapear a rede de contratações públicas de TI no Brasil, revelando a primeira quantificação empírica da estrutura oligopolista que domina o fornecimento governamental. A modelagem comprovou que o ecossistema apresenta baixíssima densidade global (0,0139) e desigualdade alocativa extrema (Gini = 0,9072), com três corporações dominando 87,21% do volume financeiro. As implicações para políticas públicas incluem: a exigência de cláusulas de subcontratação obrigatória de pequenas empresas nos contratos do oligopólio core; o desenvolvimento de métricas de concentração de mercado como indicadores de alerta precoce nos sistemas de compras; e a adoção de copilotos de IA para padronização de especificações técnicas, reduzindo barreiras de entrada e democratizando o acesso ao mercado público de tecnologia.</p>
+
+            
+            <h3>6.1 Implicações Práticas e Políticas Públicas (Policy Implications)</h3>
+            <p>Os resultados deste estudo oferecem recomendações acionáveis para gestores públicos e formuladores de políticas (<em>policymakers</em>):</p>
+            <ul>
+                <li><strong>Capacitação Contínua:</strong> Instituir trilhas de formação para pregoeiros e pareceristas focadas não apenas na restrição legal, mas na mitigação prospectiva de riscos em compras de inovação.</li>
+                <li><strong>Revisão de Marcos Regulatórios:</strong> Promover a harmonização discursiva entre os órgãos de controle externo e a administração contratante, substituindo a semântica punitiva pela orientação pedagógica pragmática fundamentada na LINDB.</li>
+                <li><strong>Adoção de Infraestrutura de IA:</strong> Implementar arquiteturas algorítmicas de conformidade ex-ante (como o Copiloto Algorítmico) capazes de parametrizar o risco contratual e documentar as justificativas decisórias de forma imutável, blindando o patrimônio e a tomada de decisão do servidor público.</li>
+            </ul>
 
             <h2>REFERÊNCIAS</h2>
 

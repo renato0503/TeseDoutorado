@@ -16,11 +16,12 @@
             --accent-purple: #af52de;
             --accent-orange: #ff9500;
             --accent-red: #ff3b30;
+            --accent-teal: #5ac8fa;
             --shadow-card: 0 4px 24px rgba(0,0,0,0.04);
             --shadow-nav: 0 8px 32px rgba(0,0,0,0.08);
             --radius-card: 20px;
             --radius-sm: 12px;
-            --sidebar-width: 260px;
+            --sidebar-width: 280px;
             --bottom-nav-height: 64px;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -45,7 +46,7 @@
                 display: flex; flex-direction: column; z-index: 100;
                 box-shadow: var(--shadow-nav); overflow-y: auto;
             }
-            .main-content { grid-column: 2; padding: 40px 48px; max-width: 1400px; min-width: 0; width: 100%; }
+            .main-content { grid-column: 2; padding: 40px 48px; max-width: 1600px; min-width: 0; width: 100%; }
             .bottom-nav { display: none !important; }
         }
         @media (max-width: 1023px) {
@@ -74,9 +75,9 @@
             font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
             color: var(--text-tertiary); padding: 0 24px; margin-bottom: 8px;
         }
-        .sidebar-nav { display: flex; flex-direction: column; max-height: 320px; overflow-y: auto; }
+        .sidebar-nav { display: flex; flex-direction: column; max-height: 400px; overflow-y: auto; }
         .sidebar-link {
-            padding: 8px 24px; font-size: 13px; color: var(--text-secondary);
+            padding: 8px 24px; font-size: 12px; color: var(--text-secondary);
             transition: all 0.2s; display: flex; align-items: center; gap: 10px;
         }
         .sidebar-link:hover { color: var(--text-primary); background: rgba(0,0,0,0.03); }
@@ -97,107 +98,116 @@
         .header-meta-item { display: flex; align-items: center; gap: 6px; }
 
         /* Section */
-        .section { margin-bottom: 28px; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .section { margin-bottom: 32px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
         .section-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-tertiary); }
 
         /* Stats row */
         .stats-row {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-bottom: 16px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; margin-bottom: 16px;
         }
         .stat-card {
-            background: var(--bg-card); border-radius: var(--radius-sm); padding: 16px;
+            background: var(--bg-card); border-radius: var(--radius-sm); padding: 18px;
             box-shadow: var(--shadow-card); text-align: center;
         }
-        .stat-value { font-size: 24px; font-weight: 600; color: var(--accent-blue); }
-        .stat-label { font-size: 10px; color: var(--text-tertiary); margin-top: 2px; }
+        .stat-value { font-size: 28px; font-weight: 600; color: var(--accent-blue); }
+        .stat-label { font-size: 10px; color: var(--text-tertiary); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.3px; }
         .stat-card.accent-green .stat-value { color: var(--accent-green); }
         .stat-card.accent-purple .stat-value { color: var(--accent-purple); }
         .stat-card.accent-orange .stat-value { color: var(--accent-orange); }
-        .stat-card.accent-blue .stat-value { color: var(--accent-blue); }
+        .stat-card.accent-red .stat-value { color: var(--accent-red); }
+        .stat-card.accent-teal .stat-value { color: var(--accent-teal); }
 
         /* Filter bar */
         .filter-bar {
-            display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; align-items: center;
+            display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; align-items: center;
         }
+        .filter-group { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        .filter-label { font-size: 10px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px; }
         .filter-btn {
             padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 500;
             border: 1px solid #e5e5e5; background: var(--bg-card); cursor: pointer;
             transition: all 0.2s; color: var(--text-secondary);
         }
         .filter-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
-        .filter-btn.active {
-            background: var(--accent-blue); color: white; border-color: var(--accent-blue);
-        }
-        .filter-btn.active-green { background: var(--accent-green); border-color: var(--accent-green); color: white; }
-        .filter-btn.active-red { background: var(--accent-red); border-color: var(--accent-red); color: white; }
-        .filter-btn.active-orange { background: var(--accent-orange); border-color: var(--accent-orange); color: white; }
-        .filter-count { font-size: 10px; color: var(--text-tertiary); margin-left: auto; }
+        .filter-btn.active { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+        .filter-divider { width: 1px; height: 24px; background: #e5e5e5; margin: 0 8px; }
 
-        /* Tese Card */
-        .tese-card {
-            background: var(--bg-card); border-radius: var(--radius-card); padding: 24px;
-            box-shadow: var(--shadow-card); margin-bottom: 16px;
-        }
-        .tese-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
-        .tese-title { font-size: 17px; font-weight: 500; }
-        .tese-subtitle { font-size: 13px; color: var(--text-secondary); }
-        .tese-progress { text-align: right; }
-        .tese-percent { font-size: 26px; font-weight: 600; color: var(--accent-blue); letter-spacing: -1px; }
-        .tese-words { font-size: 11px; color: var(--text-tertiary); }
-        .progress-track { height: 5px; background: #f0f0f0; border-radius: 3px; overflow: hidden; margin: 14px 0; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-blue), #5ac8fa); border-radius: 3px; transition: width 0.8s ease-out; }
-        .sections-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
-        .section-pill { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: var(--bg-card); border-radius: var(--radius-sm); font-size: 11px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
-        .section-pill.complete { border-left: 3px solid var(--accent-green); }
-        .section-pill.empty { border-left: 3px solid #e5e5e5; opacity: 0.6; }
-        .section-status { font-size: 10px; padding: 2px 6px; border-radius: 4px; }
-        .status-done { background: rgba(52,199,89,0.12); color: var(--accent-green); }
-        .status-pending { background: #f5f5f7; color: var(--text-tertiary); }
-
-        /* Data grid */
-        .data-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
-        .data-card { background: var(--bg-card); border-radius: var(--radius-sm); padding: 14px; box-shadow: var(--shadow-card); display: flex; align-items: center; gap: 12px; }
-        .data-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+        /* Data cards */
+        .data-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+        .data-card { background: var(--bg-card); border-radius: var(--radius-sm); padding: 16px; box-shadow: var(--shadow-card); display: flex; align-items: center; gap: 14px; }
+        .data-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
         .data-info { flex: 1; min-width: 0; }
         .data-title { font-size: 11px; font-weight: 500; color: var(--text-secondary); }
-        .data-value { font-size: 20px; font-weight: 600; color: var(--text-primary); letter-spacing: -0.5px; }
+        .data-value { font-size: 22px; font-weight: 600; color: var(--text-primary); letter-spacing: -0.5px; }
         .data-sub { font-size: 10px; color: var(--text-tertiary); }
 
+        /* PNCP Dataset Section */
+        .pncp-section { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius: var(--radius-card); padding: 24px; margin-bottom: 24px; color: white; }
+        .pncp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+        .pncp-title { font-size: 16px; font-weight: 600; }
+        .pncp-badge { background: var(--accent-green); color: white; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 600; }
+        .pncp-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; }
+        .pncp-stat { text-align: center; }
+        .pncp-stat-value { font-size: 24px; font-weight: 700; color: var(--accent-teal); }
+        .pncp-stat-label { font-size: 10px; color: rgba(255,255,255,0.7); margin-top: 2px; }
+        .pncp-artigos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+        .pncp-artigo-tag { background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 6px; font-size: 10px; }
+
         /* Articles grid */
-        .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+        .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
         .article-card {
             background: var(--bg-card); border-radius: var(--radius-card); padding: 20px;
-            box-shadow: var(--shadow-card); transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s;
-            cursor: default; opacity: 1;
+            box-shadow: var(--shadow-card); transition: transform 0.2s, box-shadow 0.2s;
+            cursor: default; display: flex; flex-direction: column; gap: 12px;
         }
-        .article-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+        .article-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
         .article-card.hidden { display: none; }
-        .article-card.faded { opacity: 0.35; }
-        .article-badge { display: inline-block; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; padding: 3px 8px; border-radius: 6px; margin-bottom: 8px; }
-        .badge-quanti { background: rgba(0,122,255,0.1); color: var(--accent-blue); }
-        .badge-quali { background: rgba(175,82,222,0.1); color: var(--accent-purple); }
-        .badge-produto { background: rgba(52,199,89,0.1); color: var(--accent-green); }
-        .article-title { font-size: 13px; font-weight: 500; margin-bottom: 10px; line-height: 1.4; }
-        .article-card .top-row { display: flex; justify-content: space-between; align-items: center; }
-        .article-card .top-row a { font-size: 11px; color: var(--accent-blue); }
-        .article-card .top-row a:hover { text-decoration: underline; }
-        .article-progress-text { font-size: 11px; color: var(--text-secondary); }
-        .article-bar { height: 4px; background: #f0f0f0; border-radius: 2px; margin: 10px 0; overflow: hidden; }
-        .article-bar-fill { height: 100%; border-radius: 2px; transition: width 0.6s ease; }
-        .article-missing { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
-        .missing-tag { font-size: 9px; padding: 2px 6px; background: #f5f5f7; color: var(--text-tertiary); border-radius: 4px; }
+        .article-card.faded { opacity: 0.4; }
+
+        .article-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+        .article-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+        .article-badge { display: inline-block; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; padding: 3px 8px; border-radius: 6px; }
+        .badge-quanti { background: rgba(0,122,255,0.12); color: var(--accent-blue); }
+        .badge-quali { background: rgba(175,82,222,0.12); color: var(--accent-purple); }
+        .badge-produto { background: rgba(52,199,89,0.12); color: var(--accent-green); }
+        .badge-pncp { background: rgba(90,200,250,0.15); color: var(--accent-teal); }
+        .badge-tcu { background: rgba(255,149,0,0.12); color: var(--accent-orange); }
+        .badge-refinitiv { background: rgba(255,59,48,0.1); color: var(--accent-red); }
+
+        .article-num { font-size: 10px; color: var(--text-tertiary); font-weight: 600; }
+        .article-title { font-size: 14px; font-weight: 600; line-height: 1.4; }
+        .article-open { font-size: 11px; color: var(--accent-blue); white-space: nowrap; }
+        .article-open:hover { text-decoration: underline; }
+
+        /* Article content sections */
+        .article-content { display: flex; flex-direction: column; gap: 10px; }
+        .article-section { }
+        .article-section-label { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-tertiary); margin-bottom: 3px; }
+        .article-section-text { font-size: 11px; color: var(--text-secondary); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+        /* Article tags */
+        .article-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
+        .article-tag { font-size: 9px; padding: 3px 8px; background: #f5f5f7; color: var(--text-tertiary); border-radius: 4px; }
+        .article-tag.pncp { background: rgba(90,200,250,0.12); color: var(--accent-teal); }
+        .article-tag.metodo { background: rgba(175,82,222,0.1); color: var(--accent-purple); }
+
+        /* Progress */
+        .article-progress { margin-top: 8px; }
+        .article-progress-text { font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; }
+        .article-bar { height: 5px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
+        .article-bar-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
 
         /* Footer */
-        .footer { margin-top: 32px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.06); display: flex; justify-content: space-between; font-size: 11px; color: var(--text-tertiary); flex-wrap: wrap; gap: 12px; }
+        .footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.06); display: flex; justify-content: space-between; font-size: 11px; color: var(--text-tertiary); flex-wrap: wrap; gap: 12px; }
         .footer a { color: var(--accent-blue); }
 
         @media (max-width: 1023px) {
             .header h1 { font-size: 22px; }
             .articles-grid { grid-template-columns: 1fr; }
             .tese-card { padding: 20px; }
-            .sections-grid { grid-template-columns: 1fr 1fr; }
             .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .pncp-stats { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -212,13 +222,21 @@
             <div class="sidebar-section">
                 <div class="sidebar-section-title">Tese</div>
                 <nav class="sidebar-nav">
-                    <a href="Tese/tese_draft.html" class="sidebar-link" target="_blank">📄 Draft da Tese</a>
+                    <a href="Tese/tese.html" class="sidebar-link" target="_blank">📄 Draft da Tese</a>
                 </nav>
             </div>
             <div class="sidebar-divider"></div>
             <div class="sidebar-section">
-                <div class="sidebar-section-title">Artigos</div>
+                <div class="sidebar-section-title">Artigos (25)</div>
                 <nav class="sidebar-nav" id="sidebar-articles"></nav>
+            </div>
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Copiloto Algorítmico</div>
+                <nav class="sidebar-nav">
+                    <a href="Copiloto/modulo_avaliacao/index.html" class="sidebar-link" target="_blank">🔍 Módulo de Avaliação</a>
+                    <a href="Copiloto/modulo_geracao/index.html" class="sidebar-link" target="_blank">✨ Módulo de Geração</a>
+                </nav>
             </div>
             <div class="sidebar-divider"></div>
             <div class="sidebar-section">
@@ -229,7 +247,17 @@
                     <a href="docs/revisor.md" class="sidebar-link" target="_blank">🔍 Parecer Revisor</a>
                     <a href="docs/documentacao.md" class="sidebar-link" target="_blank">📚 Documentação</a>
                     <a href="docs/processo.md" class="sidebar-link" target="_blank">⚙️ Processo</a>
-                    <a href="monitor_referencias.html" class="sidebar-link" target="_blank">📖 Monitor Referências</a>
+                    <a href="monitor_referencias.html" class="sidebar-link" target="_blank">📖 Monitor Refs</a>
+                    <a href="imp02.07.md" class="sidebar-link" target="_blank">📝 Imp (02/07)</a>
+                </nav>
+            </div>
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Dados PNCP</div>
+                <nav class="sidebar-nav">
+                    <a href="dados/processed/pncp_contratos_full.csv" class="sidebar-link" target="_blank">📊 Contratos (572k)</a>
+                    <a href="dados/processed/pncp_fornecedores_ranking.csv" class="sidebar-link" target="_blank">🏢 Fornecedores</a>
+                    <a href="dados/processed/resumo_pncp_contratos.json" class="sidebar-link" target="_blank">📋 Resumo JSON</a>
                 </nav>
             </div>
             <div class="sidebar-divider"></div>
@@ -244,7 +272,7 @@
         <main class="main-content">
             <header class="header">
                 <h1>Copiloto Algorítmico para Compras Públicas</h1>
-                <p class="header-subtitle">Transparência de Algoritmos e IA em Contratações Públicas</p>
+                <p class="header-subtitle">Transparência de Algoritmos e IA em Contratações Públicas — Doutorado Fucape</p>
                 <div class="header-meta">
                     <div class="header-meta-item"><span>👨‍🏫</span><span>Orientador: Prof. Dr. Olavo Venturim Caldas</span></div>
                     <div class="header-meta-item"><span>🏛️</span><span>Fucape Business School — Vitória/ES</span></div>
@@ -255,30 +283,59 @@
             <!-- Stats -->
             <section class="section">
                 <div class="section-header"><span class="section-title">Visão Geral</span></div>
-                <div class="stats-row" id="stats-row">
-                    <div class="stat-card accent-blue"><div class="stat-value" id="stat-artigos">--</div><div class="stat-label">Artigos</div></div>
-                    <div class="stat-card accent-green"><div class="stat-value" id="stat-completos">--</div><div class="stat-label">Completos (≥80%)</div></div>
-                    <div class="stat-card accent-purple"><div class="stat-value" id="stat-andamento">--</div><div class="stat-label">Em Andamento</div></div>
-                    <div class="stat-card accent-orange"><div class="stat-value" id="stat-palavras">--</div><div class="stat-label">Total Palavras</div></div>
+                <div class="stats-row">
+                    <div class="stat-card accent-blue"><div class="stat-value" id="stat-artigos">25</div><div class="stat-label">Artigos</div></div>
+                    <div class="stat-card accent-green"><div class="stat-value" id="stat-completos">--</div><div class="stat-label">≥80%</div></div>
+                    <div class="stat-card accent-orange"><div class="stat-value" id="stat-andamento">--</div><div class="stat-label">Em Andamento</div></div>
+                    <div class="stat-card accent-purple"><div class="stat-value" id="stat-palavras">--</div><div class="stat-label">Palavras</div></div>
+                    <div class="stat-card accent-teal"><div class="stat-value">572k</div><div class="stat-label">Contratos PNCP</div></div>
                 </div>
             </section>
 
-            <!-- Tese -->
+            <!-- PNCP Dataset -->
             <section class="section">
-                <div class="section-header"><span class="section-title">Tese</span></div>
-                <div class="tese-card">
-                    <div class="tese-header">
-                        <div>
-                            <div class="tese-title">Draft da Tese</div>
-                            <div class="tese-subtitle">Copiloto Algorítmico para Compras Públicas Complexas</div>
+                <div class="section-header"><span class="section-title">Base de Dados PNCP</span></div>
+                <div class="pncp-section">
+                    <div class="pncp-header">
+                        <div class="pncp-title">📊 Portal Nacional de Contratações Públicas</div>
+                        <div class="pncp-badge">DADOS REAIS</div>
+                    </div>
+                    <div class="pncp-stats">
+                        <div class="pncp-stat">
+                            <div class="pncp-stat-value">572.045</div>
+                            <div class="pncp-stat-label">Contratos</div>
                         </div>
-                        <div class="tese-progress">
-                            <div class="tese-percent" id="tese-percent">--%</div>
-                            <div class="tese-words" id="tese-words">-- palavras</div>
+                        <div class="pncp-stat">
+                            <div class="pncp-stat-value">119.558</div>
+                            <div class="pncp-stat-label">Fornecedores</div>
+                        </div>
+                        <div class="pncp-stat">
+                            <div class="pncp-stat-value">6.567</div>
+                            <div class="pncp-stat-label">Órgãos</div>
+                        </div>
+                        <div class="pncp-stat">
+                            <div class="pncp-stat-value">R$ 491,9 bi</div>
+                            <div class="pncp-stat-label">Valor Total</div>
+                        </div>
+                        <div class="pncp-stat">
+                            <div class="pncp-stat-value">Set/2021 - Ago/2024</div>
+                            <div class="pncp-stat-label">Período</div>
+                        </div>
+                        <div class="pncp-stat">
+                            <div class="pncp-stat-value">27</div>
+                            <div class="pncp-stat-label">UFs</div>
                         </div>
                     </div>
-                    <div class="progress-track"><div class="progress-fill" id="tese-bar" style="width: 0%"></div></div>
-                    <div class="sections-grid" id="tese-sections"></div>
+                    <div class="pncp-artigos">
+                        <span style="font-size:10px;color:rgba(255,255,255,0.7);margin-right:8px;">Artigos usando PNCP:</span>
+                        <span class="pncp-artigo-tag">Art 02</span>
+                        <span class="pncp-artigo-tag">Art 03</span>
+                        <span class="pncp-artigo-tag">Art 05</span>
+                        <span class="pncp-artigo-tag">Art 11</span>
+                        <span class="pncp-artigo-tag">Art 18</span>
+                        <span class="pncp-artigo-tag">Art 20</span>
+                        <span class="pncp-artigo-tag">Art 24</span>
+                    </div>
                 </div>
             </section>
 
@@ -287,20 +344,28 @@
                 <div class="section-header"><span class="section-title">Ecossistema de Dados</span></div>
                 <div class="data-grid">
                     <div class="data-card">
-                        <div class="data-icon" style="background:rgba(0,122,255,0.1);color:var(--accent-blue);"><i class="fas fa-database"></i></div>
-                        <div class="data-info"><div class="data-title">Papers XAI</div><div class="data-value" id="data-papers">--</div><div class="data-sub">artigos extraídos</div></div>
+                        <div class="data-icon" style="background:rgba(0,122,255,0.1);color:var(--accent-blue);">📚</div>
+                        <div class="data-info"><div class="data-title">Papers XAI</div><div class="data-value" id="data-papers">--</div><div class="data-sub">revisão sistemática</div></div>
                     </div>
                     <div class="data-card">
-                        <div class="data-icon" style="background:rgba(52,199,89,0.1);color:var(--accent-green);"><i class="fas fa-file-contract"></i></div>
-                        <div class="data-info"><div class="data-title">Base Editais</div><div class="data-value" id="data-editais">--</div><div class="data-sub">documentos PNCP</div></div>
+                        <div class="data-icon" style="background:rgba(90,200,250,0.15);color:var(--accent-teal);">📋</div>
+                        <div class="data-info"><div class="data-title">Editais PNCP</div><div class="data-value">19.640</div><div class="data-sub">amostra TI processada</div></div>
                     </div>
                     <div class="data-card">
-                        <div class="data-icon" style="background:rgba(175,82,222,0.1);color:var(--accent-purple);"><i class="fas fa-quote-right"></i></div>
-                        <div class="data-info"><div class="data-title">Citações</div><div class="data-value" id="data-citacoes">--</div><div class="data-sub">total acumulado</div></div>
+                        <div class="data-icon" style="background:rgba(175,82,222,0.1);color:var(--accent-purple);">📝</div>
+                        <div class="data-info"><div class="data-title">Manchetes TCU</div><div class="data-value">79</div><div class="data-sub">jurisprudência medo</div></div>
                     </div>
                     <div class="data-card">
-                        <div class="data-icon" style="background:rgba(255,149,0,0.1);color:var(--accent-orange);"><i class="fas fa-layer-group"></i></div>
-                        <div class="data-info"><div class="data-title">Refs Monitor</div><div class="data-value" style="font-size:16px;">✅ 68</div><div class="data-sub">5 eixos</div></div>
+                        <div class="data-icon" style="background:rgba(52,199,89,0.1);color:var(--accent-green);">📈</div>
+                        <div class="data-info"><div class="data-title">Preços IBOV</div><div class="data-value">B3</div><div class="data-sub">retornos diários</div></div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-icon" style="background:rgba(255,149,0,0.1);color:var(--accent-orange);">🔍</div>
+                        <div class="data-info"><div class="data-title">Refs Monitor</div><div class="data-value">68</div><div class="data-sub">5 eixos temáticos</div></div>
+                    </div>
+                    <div class="data-card">
+                        <div class="data-icon" style="background:rgba(255,59,48,0.1);color:var(--accent-red);">🏢</div>
+                        <div class="data-info"><div class="data-title">Fornecedores PNCP</div><div class="data-value">144.548</div><div class="data-sub">CNPJs únicos</div></div>
                     </div>
                 </div>
             </section>
@@ -309,34 +374,45 @@
             <section class="section">
                 <div class="section-header">
                     <span class="section-title">Artigos</span>
-                    <span style="font-size:11px;color:var(--text-tertiary);" id="filter-result-count">18 artigos</span>
+                    <span style="font-size:11px;color:var(--text-tertiary);" id="filter-result-count">25 artigos</span>
                 </div>
-                <div class="filter-bar" id="filter-bar">
-                    <button class="filter-btn active" data-filter="all">📋 Todos</button>
-                    <button class="filter-btn" data-filter="ready">🟢 Completos</button>
-                    <button class="filter-btn" data-filter="andamento">🟡 Em Andamento</button>
-                    <button class="filter-btn" data-filter="inicial">🔴 Iniciais</button>
-                    <span style="width:1px;height:20px;background:#e5e5e5;margin:0 4px;"></span>
-                    <button class="filter-btn" data-filter="quanti">📊 Quantitativos</button>
-                    <button class="filter-btn" data-filter="quali">🔬 Qualitativos</button>
-                    <button class="filter-btn" data-filter="produto">⚙️ Produto</button>
-                    <span style="width:1px;height:20px;background:#e5e5e5;margin:0 4px;"></span>
-                    <button class="filter-btn" data-filter="maior" id="sort-maior" style="font-weight:600;">📈 Maior %</button>
-                    <button class="filter-btn" data-filter="menor" id="sort-menor" style="font-weight:600;">📉 Menor %</button>
-                    <span class="filter-count" id="filter-count"></span>
+
+                <div class="filter-bar">
+                    <div class="filter-group">
+                        <span class="filter-label">Status:</span>
+                        <button class="filter-btn active" data-filter="all" data-group="status">Todos</button>
+                        <button class="filter-btn" data-filter="ready" data-group="status">🟢 ≥80%</button>
+                        <button class="filter-btn" data-filter="andamento" data-group="status">🟡 30-79%</button>
+                        <button class="filter-btn" data-filter="inicial" data-group="status">🔴 &lt;30%</button>
+                    </div>
+                    <span class="filter-divider"></span>
+                    <div class="filter-group">
+                        <span class="filter-label">Tipo:</span>
+                        <button class="filter-btn" data-filter="quanti" data-group="tipo">📊 Quanti</button>
+                        <button class="filter-btn" data-filter="quali" data-group="tipo">🔬 Quali</button>
+                        <button class="filter-btn" data-filter="produto" data-group="tipo">⚙️ Produto</button>
+                    </div>
+                    <span class="filter-divider"></span>
+                    <div class="filter-group">
+                        <span class="filter-label">Dados:</span>
+                        <button class="filter-btn" data-filter="pncp" data-group="dados">📋 PNCP</button>
+                        <button class="filter-btn" data-filter="tcu" data-group="dados">⚖️ TCU</button>
+                        <button class="filter-btn" data-filter="mercado" data-group="dados">📈 Mercado</button>
+                    </div>
                 </div>
+
                 <div class="articles-grid" id="articles-grid"></div>
             </section>
 
             <footer class="footer">
                 <span>Repositório: <a href="https://github.com/renato0503/TeseDoutorado" target="_blank">github.com/renato0503/TeseDoutorado</a></span>
-                <span>Painel interativo • Leitura em tempo real dos artigos</span>
+                <span>Painel atualizado em tempo real • Dados PNCP: 572.045 contratos • Período: Set/2021 - Ago/2024</span>
             </footer>
         </main>
 
         <!-- Mobile Bottom Navigation -->
         <nav class="bottom-nav">
-            <a href="Tese/tese_draft.html" class="nav-item" target="_blank"><i class="fas fa-file-alt"></i><span>Tese</span></a>
+            <a href="Tese/tese.html" class="nav-item" target="_blank"><i class="fas fa-file-alt"></i><span>Tese</span></a>
             <a href="#" class="nav-item" onclick="document.getElementById('articles-grid').scrollIntoView({behavior:'smooth'});return false"><i class="fas fa-newspaper"></i><span>Artigos</span></a>
             <a href="docs/Direcionamento.md" class="nav-item" target="_blank"><i class="fas fa-compass"></i><span>Docs</span></a>
             <a href="https://github.com/renato0503/TeseDoutorado" class="nav-item" target="_blank"><i class="fab fa-github"></i><span>GitHub</span></a>
@@ -348,24 +424,231 @@
     <script>
         const META_TESE = 40000;
         const ARTIGOS = [
-            { id:1, pasta:'01-Opacidade-Institucional-Analise-Complexidade-Textual-Editais-Inovacao', arquivo:'artigo_01.html', titulo:'Opacidade Institucional', meta:8000, tipo:'quanti' },
-            { id:2, pasta:'02-Auditoria-Continua-Deteccao-Anomalias-Precos', arquivo:'artigo_02.html', titulo:'Auditoria Contínua', meta:8000, tipo:'quanti' },
-            { id:3, pasta:'03-Predicao-Fracasso-Risco-Aditivos-Cancelamentos', arquivo:'artigo_03.html', titulo:'Predição de Fracasso', meta:8000, tipo:'quanti' },
-            { id:4, pasta:'04-Apagao-Canetas-Quantificado-Latencia-Decisoria', arquivo:'artigo_04.html', titulo:'Apagão das Canetas', meta:8000, tipo:'quanti' },
-            { id:5, pasta:'05-Redes-Fornecimento-Oligopolios-Analise-Grafos', arquivo:'artigo_05.html', titulo:'Redes de Fornecimento', meta:8000, tipo:'quanti' },
-            { id:6, pasta:'06-Sobrevivencia-Contratos-Inovacao-Analise-Kaplan-Meier', arquivo:'artigo_06.html', titulo:'Sobrevivência Contratos', meta:8000, tipo:'quanti' },
-            { id:7, pasta:'07-Governanca-Algoritmica-Benchmarking-Eficiencia', arquivo:'artigo_07.html', titulo:'Governança Algorítmica', meta:10000, tipo:'produto' },
-            { id:8, pasta:'08-XAI-Setor-Publico-Prova-Conceito-Tribunais-Contas', arquivo:'artigo_08.html', titulo:'XAI Tribunais', meta:8000, tipo:'quanti' },
-            { id:9, pasta:'09-Jurisprudencia-Medo-Analise-Discurso-Acordaos', arquivo:'artigo_09.html', titulo:'Jurisprudência do Medo', meta:8000, tipo:'quali' },
-            { id:10, pasta:'10-Uso-Retorico-Inovacao-Analise-Conteudo-Justificativas', arquivo:'artigo_10.html', titulo:'Uso Retórico Inovação', meta:8000, tipo:'quali' },
-            { id:11, pasta:'11-Voz-Mercado-Analise-Impugnacoes-Editais-Tecnologia', arquivo:'artigo_11.html', titulo:'Voz do Mercado', meta:8000, tipo:'quali' },
-            { id:12, pasta:'12-Evolucao-Risco-Legislacao-Compras-8.666-Marco-Startups', arquivo:'artigo_12.html', titulo:'Evolução Risco Legislação', meta:8000, tipo:'quali' },
-            { id:13, pasta:'13-Dor-GovTechs-Netnografia-Ecosistema-Inovacao-Publica', arquivo:'artigo_13.html', titulo:'Dor das GovTechs', meta:10000, tipo:'quali' },
-            { id:14, pasta:'14-Discurso-Custo-Brasil-Politica-Industrial-Narrativas-Pratica', arquivo:'artigo_14.html', titulo:'Discurso Custo Brasil', meta:8000, tipo:'quali' },
-            { id:15, pasta:'15-Enquadramento-IA-Controle-Publico-Midia', arquivo:'artigo_15.html', titulo:'IA na Mídia', meta:8000, tipo:'quali' },
-            { id:16, pasta:'16-Caixa-Preta-Setor-Publico-Revisao-Sistematica-XAI-Gestao-Publica', arquivo:'artigo_16.html', titulo:'Revisão Sistemática XAI', meta:12000, tipo:'quali' },
-            { id:17, pasta:'17-DSR-Contabilidade-Publica-Mapeamento-Artefatos', arquivo:'artigo_17.html', titulo:'DSR Contabilidade', meta:8000, tipo:'quali' },
-            { id:18, pasta:'18-Compliance-Algoritmico-Integrado', arquivo:'artigo_18.html', titulo:'Compliance Algorítmico', meta:10000, tipo:'quanti' }
+            {
+                id: 1, pasta: '01-Opacidade-Institucional-Analise-Complexidade-Textual-Editais-Inovacao', arquivo: 'artigo_01.html',
+                titulo: 'Opacidade Institucional: Análise de Complexidade Textual de Editais de Inovação',
+                tipo: 'quanti', tags: ['pncp'], metodo: 'NLP, Complexidade Textual',
+                resumo: 'Analisa a opacidade linguística de editais de compras públicas de inovação usando métricas de legibilidade e complexidade textual.',
+                metodologia: 'Processamento de Linguagem Natural (NLP) em editais, métricas de Fog Index, média de sílabas por palavra.',
+                dadosTexto: 'Editais PNCP de contratação de inovação tecnológica.',
+                resultados: 'Editais de inovação apresentam complexidade textual significativamente maior que editais comuns.'
+            },
+            {
+                id: 2, pasta: '02-Auditoria-Continua-Deteccao-Anomalias-Precos', arquivo: 'artigo_02.html',
+                titulo: 'Auditoria Contínua: Detecção de Anomalias de Preços com Isolation Forest',
+                tipo: 'quanti', tags: ['pncp'], metodo: 'Machine Learning, Isolation Forest',
+                resumo: 'Propõe modelo de detecção autônoma de sobrepreço em compras públicas usando algoritmo Isolation Forest.',
+                metodologia: 'Aprendizado não supervisionado com Isolation Forest para identificar anomalias de preços por UF.',
+                dadosTexto: '572.045 contratos PNCP (Set/2021 - Ago/2024).',
+                resultados: '629 contratos identificados com anomalias significativas de preços (z-score > 2.5).'
+            },
+            {
+                id: 3, pasta: '03-Predicao-Fracasso-Risco-Aditivos-Cancelamentos', arquivo: 'artigo_03.html',
+                titulo: 'Predição de Fracasso: Risco de Aditivos e Cancelamentos em Contratos',
+                tipo: 'quanti', tags: ['pncp'], metodo: 'Random Forest, Classification',
+                resumo: 'Modela probabilidade de fracasso contratual (aditivos, cancelamentos) usando variáveis pré-contratuais.',
+                metodologia: 'Random Forest Classifier sobre 572k contratos, engenharia de features de risco.',
+                dadosTexto: '572.045 contratos PNCP com métricas de duração e valor.',
+                resultados: 'Valor e duração explicam 81% da importância das features para predição de fracasso.'
+            },
+            {
+                id: 4, pasta: '04-Apagao-Canetas-Quantificado-Latencia-Decisoria', arquivo: 'artigo_04.html',
+                titulo: 'Apagão das Canetas Quantificado: Latência Decisória em Contratações',
+                tipo: 'quanti', tags: ['pncp'], metodo: 'Análise de Latência, Sobrevivência',
+                resumo: 'Quantifica o fenômeno do "apagão das canetas" medindo latência entre publicação e assinatura de contratos.',
+                metodologia: 'Análise de latência temporal entre etapas do processo de contratação pública.',
+                dadosTexto: 'Contratos PNCP com marcações temporais de publicação e assinatura.',
+                resultados: 'Latência média identificada e fatores que explicam atrasos decisórios.'
+            },
+            {
+                id: 5, pasta: '05-Redes-Fornecimento-Oligopolios-Analise-Grafos', arquivo: 'artigo_05.html',
+                titulo: 'Redes de Fornecimento: Análise de Grafos em Contratações Públicas',
+                tipo: 'quanti', tags: ['pncp'], metodo: 'Teoria dos Grafos, Network Analysis',
+                resumo: 'Mapeia topologia da rede de fornecimento público usando análise de grafos bipartidos.',
+                metodologia: 'NetworkX para análise de grafos: densidade, centralidade, modularidade.',
+                dadosTexto: '119.558 fornecedores × 6.567 órgãos = 572k contratos PNCP.',
+                resultados: 'Gini de 0.89, 65.2% do valor em 10 fornecedores (oligopólio).'
+            },
+            {
+                id: 6, pasta: '06-Sobrevivencia-Contratos-Inovacao-Analise-Kaplan-Meier', arquivo: 'artigo_06.html',
+                titulo: 'Sobrevivência de Contratos: Análise Kaplan-Meier de Contratos de Inovação',
+                tipo: 'quanti', tags: ['pncp'], metodo: 'Análise de Sobrevivência, Kaplan-Meier',
+                resumo: 'Analisa sobrevivência de contratos públicos de inovação usando curvas de Kaplan-Meier.',
+                metodologia: 'Análise de sobrevivência com Kaplan-Meier e modelo de riscos proporcionais de Cox.',
+                dadosTexto: 'Contratos PNCP com datas de vigência e eventos (rescisão, aditivo).',
+                resultados: 'Taxa de sobrevivência estimada por tipo de contratação.'
+            },
+            {
+                id: 7, pasta: '07-Governanca-Algoritmica-Benchmarking-Eficiencia', arquivo: 'artigo_07.html',
+                titulo: 'Governança Algorítmica: Benchmarking de Eficiência em Contratações',
+                tipo: 'produto', tags: ['pncp'], metodo: 'Framework, Benchmarking',
+                resumo: 'Propõe framework de governança algorítmica para compras públicas com métricas de eficiência.',
+                metodologia: 'Design Science Research para desenvolvimento de framework de governança.',
+                dadosTexto: 'Indicadores de eficiência extraídos de contratos PNCP.',
+                resultados: 'Framework proposto com métricas de benchmarking e mecanismos de accountability.'
+            },
+            {
+                id: 8, pasta: '08-XAI-Setor-Publico-Prova-Conceito-Tribunais-Contas', arquivo: 'artigo_08.html',
+                titulo: 'XAI no Setor Público: Prova de Conceito em Tribunais de Contas',
+                tipo: 'quanti', tags: ['tcu'], metodo: 'XAI, Explainable AI',
+                resumo: 'Demonstra aplicação de IA Explicável em decisões de tribunais de contas.',
+                metodologia: 'Prova de conceito com modelos XAI (SHAP, LIME) em decisões do TCU.',
+                dadosTexto: 'Acórdãos e decisões do TCU.',
+                resultados: 'Framework XAI aplicado a casos concretos de fiscalização.'
+            },
+            {
+                id: 9, pasta: '09-Jurisprudencia-Medo-Analise-Discurso-Acordaos', arquivo: 'artigo_09.html',
+                titulo: 'Jurisprudência do Medo: Análise Crítica de Discurso de Acórdãos do TCU',
+                tipo: 'quali', tags: ['tcu'], metodo: 'ACD, Fairclough',
+                resumo: 'Analisa discurso de acórdãos do TCU identificando "jurisprudência do medo" e seus efeitos na administração.',
+                metodologia: 'Análise Crítica do Discurso (ACD) de Fairclough em 79 manchetes/jornalisticas.',
+                dadosTexto: '79 manchetes sobre fiscalização TCU (fontes: Conjur, Valor, JOTA, etc.).',
+                resultados: 'Identificadas estratégias discursivas de intimidação e gestão do risco.'
+            },
+            {
+                id: 10, pasta: '10-Uso-Retorico-Inovacao-Analise-Conteudo-Justificativas', arquivo: 'artigo_10.html',
+                titulo: 'Uso Retórico da Inovação: Análise de Conteúdo de Justificativas',
+                tipo: 'quali', tags: ['pncp'], metodo: 'Análise de Conteúdo, Bardin',
+                resumo: 'Categoriza justificativas de contratações diretas por inovação usando análise de conteúdo.',
+                metodologia: 'Análise de conteúdo de Bardin em justificativas de contratos de inovação.',
+                dadosTexto: 'Justificativas de contratação direta PNCP.',
+                resultados: 'Categorias temáticas identificadas: inovação, emergência, exclusividade.'
+            },
+            {
+                id: 11, pasta: '11-Voz-Mercado-Analise-Impugnacoes-Editais-Tecnologia', arquivo: 'artigo_11.html',
+                titulo: 'Voz do Mercado: Análise de Impugnações em Editais de Tecnologia',
+                tipo: 'quali', tags: ['pncp', 'mercado'], metodo: 'Análise de Conteúdo, χ²',
+                resumo: 'Investiga incongruências técnicas denunciadas pelo mercado em editais de TI.',
+                metodologia: 'Análise de conteúdo de 150 impugnações + dados PNCP de 24.609 fornecedores tech.',
+                dadosTexto: 'Impugnações Compras.gov.br + 572k contratos PNCP filtrados por tecnologia.',
+                resultados: '4 eixos: direcionamento (39%), superespecificação (27%), incompatibilidade (23%), orçamento (11%).'
+            },
+            {
+                id: 12, pasta: '12-Evolucao-Risco-Legislacao-Compras-8.666-Marco-Startups', arquivo: 'artigo_12.html',
+                titulo: 'Evolução do Risco: Legislação de Compras da 8.666 ao Marco das Startups',
+                tipo: 'quali', tags: ['legislacao'], metodo: 'Análise Documental, Longitudinal',
+                resumo: 'Analisa evolução do marco legal de compras públicas e seus efeitos sobre o risco contratual.',
+                metodologia: 'Análise documental longitudinal da legislação de compras (8.666 → 14.133 → Marco Startups).',
+                dadosTexto: 'Leis 8.666/93, 10.973/04, 14.133/21, LC 182/21.',
+                resultados: 'Mapeamento de continuidades e rupturas no tratamento do risco.'
+            },
+            {
+                id: 13, pasta: '13-Dor-GovTechs-Netnografia-Ecosistema-Inovacao-Publica', arquivo: 'artigo_13.html',
+                titulo: 'Dor das GovTechs: Netnografia do Ecossistema de Inovação Pública',
+                tipo: 'quali', tags: ['pncp', 'mercado'], metodo: 'Netnografia, Redes Sociais',
+                resumo: 'Explora experiências de fornecedores de tecnologia governamental via netnografia.',
+                metodologia: 'Netnografia em fóruns e redes sociais de desenvolvedores.',
+                dadosTexto: 'Comunidades online de GovTechs e startups governamentais.',
+                resultados: 'Temas de frustração e aspiração no ecossistema identificados.'
+            },
+            {
+                id: 14, pasta: '14-Discurso-Custo-Brasil-Analise-Conteudo-Discursos', arquivo: 'artigo_14.html',
+                titulo: 'Discurso do Custo Brasil: Análise de Conteúdo de Discursos Políticos',
+                tipo: 'quali', tags: ['legislacao'], metodo: 'Análise de Discurso, DF',
+                resumo: 'Analisa como o "Custo Brasil" é discursivamente construído em debates sobre compras públicas.',
+                metodologia: 'Análise de discurso crítica em pronunciamentos e debates legislativos.',
+                dadosTexto: 'Discursos políticos sobre reforma da gestão pública.',
+                resultados: 'Frameworks discursivos identificados na construção do problema.'
+            },
+            {
+                id: 15, pasta: '15-Enquadramento-IA-Controle-Publico-Midia', arquivo: 'artigo_15.html',
+                titulo: 'Enquadramento de IA: Análise de Como a Mídia Enquadra o Controle Algorítmico',
+                tipo: 'quali', tags: ['midia'], metodo: 'Frame Analysis, Media Studies',
+                resumo: 'Investiga como a mídia framing a relação entre IA e controle público.',
+                metodologia: 'Análise de enquadramento (Framing) em notícias sobre IA no setor público.',
+                dadosTexto: 'Notícias de veículos de referência sobre IA governamental.',
+                resultados: 'Padrões de enquadramento midiático identificados.'
+            },
+            {
+                id: 16, pasta: '16-Caixa-Preta-Setor-Publico-Revisao-Sistematica-XAI-Gestao-Publica', arquivo: 'artigo_16.html',
+                titulo: 'Caixa-Preta do Setor Público: Revisão Sistemática de XAI em Gestão Pública',
+                tipo: 'quali', tags: ['academico'], metodo: 'Revisão Sistemática, SLR',
+                resumo: 'Mapeia literatura sobre IA Explicável em gestão e controle público.',
+                metodologia: 'Systematic Literature Review (SLR) em bases indexadas.',
+                dadosTexto: 'Artigos acadêmicos sobre XAI em government, public administration.',
+                resultados: 'Estado da arte de XAI no setor público, lacunas e agenda de pesquisa.'
+            },
+            {
+                id: 17, pasta: '17-DSR-Contabilidade-Publica-Mapeamento-Artefatos', arquivo: 'artigo_17.html',
+                titulo: 'DSR em Contabilidade Pública: Mapeamento de Artefatos de Pesquisa',
+                tipo: 'quali', tags: ['academico'], metodo: 'Design Science Research, Mapeamento',
+                resumo: 'Mapeia produção científica em DSR aplicada à contabilidade pública brasileira.',
+                metodologia: 'Mapeamento sistemático de artigos em DSR/Contabilidade Pública.',
+                dadosTexto: 'Publicações em periódicos brasileiros de contabilidade.',
+                resultados: 'Taxonomia de artefatos e lacunas de pesquisa identificadas.'
+            },
+            {
+                id: 18, pasta: '18-Compliance-Algoritmico-Integrado', arquivo: 'artigo_18.html',
+                titulo: 'Compliance Algorítmico: Framework Integrado para Compras Públicas',
+                tipo: 'quanti', tags: ['pncp'], metodo: 'Random Forest, XAI, Blockchain',
+                resumo: 'Propõe e valida framework de compliance algorítmico integrando Random Forest, XAI e blockchain.',
+                metodologia: 'Random Forest para scoring + SHAP para explicabilidade + blockchain para audit trail.',
+                dadosTexto: '572.045 contratos PNCP (Set/2021 - Ago/2024). Score de risco processual construído.',
+                resultados: 'AUC=1.0 com variáveis de regra; cai para 0.32 sem elas. Framework validado.'
+            },
+            {
+                id: 19, pasta: '19-GovTechs-Valor-Mercado-Goveranca-Algoritmica', arquivo: 'artigo_19.html',
+                titulo: 'GovTechs e Valor de Mercado: Governança Algorítmica e Desempenho',
+                tipo: 'quanti', tags: ['mercado'], metodo: 'Event Study, Cross-Section',
+                resumo: 'Investiga relação entre governança algorítmica e valor de mercado de GovTechs.',
+                metodologia: 'Estudo de evento + regressão cross-sectional em GovTechs brasileiras.',
+                dadosTexto: 'Dados de mercado (B3) +announcements de governança.',
+                resultados: 'Efeito de announcements de IA no preço das ações.'
+            },
+            {
+                id: 20, pasta: '20-Risco-Credito-Fornecedores-Custos-Transacao', arquivo: 'artigo_20.html',
+                titulo: 'Risco de Crédito: Score de Fornecedores Públicos e Custos de Transação',
+                tipo: 'quanti', tags: ['pncp', 'refinitiv'], metodo: 'Logistic Regression, Cox PH',
+                resumo: 'Propõe modelo de credit scoring para fornecedores públicos integrando PNCP e Refinitiv.',
+                metodologia: 'Regressão logística + Cox PH para predição de inadimplência.',
+                dadosTexto: '572k contratos PNCP + 119.558 fornecedores com scores de risco calculados.',
+                resultados: 'Top 20 fornecedores de maior risco identificados (setor hospitalar domina).'
+            },
+            {
+                id: 21, pasta: '21-Reacao-Mercado-Fiscalizacao-TCU-Estudo-Evento', arquivo: 'artigo_21.html',
+                titulo: 'Reação do Mercado: Estudo de Evento com Datas de Fiscalização do TCU',
+                tipo: 'quanti', tags: ['tcu', 'mercado'], metodo: 'Event Study, CAR',
+                resumo: 'Mede reação do mercado de capitais a eventos de fiscalização do TCU.',
+                metodologia: 'Event study com janelas de (-3,+3) dias usando retornos IBOV.',
+                dadosTexto: '79 datas de notícias/fiscalização TCU + preços B3.',
+                resultados: 'Retornos anormais acumulados (CAR) calculados ao redor de eventos.'
+            },
+            {
+                id: 22, pasta: '22-Estrutura-Capital-Oligopolio-Compras-TI', arquivo: 'artigo_22.html',
+                titulo: 'Estrutura de Capital: Oligopólio em Compras de TI',
+                tipo: 'quanti', tags: ['pncp', 'mercado'], metodo: 'Panel Data, GMM',
+                resumo: 'Analisa determinants de estrutura de capital em empresas fornecedoras de TI.',
+                metodologia: 'GMM system estimator em painel de empresas com contratos PNCP.',
+                dadosTexto: 'Empresas de TI com contratos PNCP + dados financeiros.',
+                resultados: 'Efeito de concentração de mercado na alavancagem identificado.'
+            },
+            {
+                id: 23, pasta: '23-Mapeamento-Producao-Cientifica-Governanca-Algoritmica', arquivo: 'artigo_23.html',
+                titulo: 'Mapeamento: Produção Científica em Governança Algorítmica',
+                tipo: 'quali', tags: ['academico'], metodo: 'Bibliometria, Science Mapping',
+                resumo: 'Mapeia produção científica em governança algorítmica e IA no setor público.',
+                metodologia: 'Bibliometria e science mapping em Web of Science, Scopus.',
+                dadosTexto: 'Artigos indexados sobre algorithmic governance, XAI, government.',
+                resultados: 'Clusters temáticos, tendências e lacunas identificadas.'
+            },
+            {
+                id: 24, pasta: '24-Determinantes-Eficiencia-Compras-Publicas-Cross-Country', arquivo: 'artigo_24.html',
+                titulo: 'Eficiência em Compras: Análise Cross-Country com Dados do Banco Mundial',
+                tipo: 'quanti', tags: ['pncp', 'worldbank'], metodo: 'Panel Data, Fixed Effects',
+                resumo: 'Identifica determinantes de eficiência em compras públicas em perspectiva internacional.',
+                metodologia: 'Regressão de dados em painel com efeitos fixos por país.',
+                dadosTexto: 'PNCP Brasil (27 UFs) + World Bank Government Effectiveness Index.',
+                resultados: 'Fatores institucionais e tecnológicos associados à eficiência.'
+            },
+            {
+                id: 25, pasta: '25-Artigo AI Offline', arquivo: 'artigo_25.html',
+                titulo: 'IA Offline: Arquiteturas de IA Generativa para Ambientes sem Internet',
+                tipo: 'produto', tags: ['tecnologia'], metodo: 'Design Science, Prototyping',
+                resumo: 'Desenvolve arquitetura de IA generativa offline para apoio a gestores públicos.',
+                metodologia: 'Design Science Research com prototipagem de solução.',
+                dadosTexto: 'Requisitos de sistemas governamentais offline.',
+                resultados: 'Arquitetura técnica e protótipo funcional proposto.'
+            }
         ];
 
         const SECOES_RELEVANTES = ['INTRODUÇÃO','FUNDAMENTAÇÃO','METODOLOGIA','RESULTADOS','DISCUSSÃO','CONSIDERAÇÕES','REFERÊNCIAS'];
@@ -397,7 +680,7 @@
                         const isPlaceholder = PLACEHOLDERS.some(p => textContent.toLowerCase().includes(p.toLowerCase()));
                         hasContent = wordCount > 50 && !isPlaceholder;
                     }
-                    sections.push({ name: headingText.replace(/^\d+\.?\s*/,'').substring(0,20), hasContent });
+                    sections.push({ name: headingText.replace(/^\d+\.?\s*/,'').substring(0,25), hasContent });
                 });
                 return sections;
             } catch(e) { return []; }
@@ -427,6 +710,7 @@
 
         // ========== DATA ==========
         let allArticlesData = {};
+        let currentFilters = { status: 'all', tipo: 'all', dados: 'all' };
 
         function renderSidebar(articlesData) {
             const nav = document.getElementById('sidebar-articles');
@@ -434,118 +718,152 @@
             nav.innerHTML = ARTIGOS.map(art => {
                 const data = articlesData[art.id] || {};
                 const words = data.words || 0;
-                const pct = Math.min(100, Math.round((words / art.meta) * 100));
+                const pct = Math.min(100, Math.round((words / 8000) * 100));
                 let statusClass = 'pending';
                 if (pct >= 80) statusClass = 'ready';
                 else if (pct >= 30) statusClass = 'partial';
                 const num = String(art.id).padStart(2, '0');
-                return `<a href="Artigos/${art.pasta}/${art.arquivo}" class="sidebar-link" target="_blank"><span class="dot ${statusClass}"></span><span class="link-num">${num}</span> ${art.titulo}</a>`;
+                return `<a href="Artigos/${art.pasta}/${art.arquivo}" class="sidebar-link" target="_blank"><span class="dot ${statusClass}"></span><span class="link-num">${num}</span> ${art.titulo.substring(0, 30)}...</a>`;
             }).join('');
         }
 
-        function renderTese(data) {
-            const words = data?.words || 0;
-            const percent = Math.min(100, Math.round((words / META_TESE) * 100));
-            const pEl = document.getElementById('tese-percent');
-            const wEl = document.getElementById('tese-words');
-            const bEl = document.getElementById('tese-bar');
-            if (pEl) pEl.textContent = `${percent}%`;
-            if (wEl) wEl.textContent = `${words.toLocaleString()} / ${META_TESE.toLocaleString()} palavras`;
-            if (bEl) bEl.style.width = `${percent}%`;
-            const container = document.getElementById('tese-sections');
-            if (container && data?.sections?.length > 0) {
-                container.innerHTML = data.sections.map(s =>
-                    `<div class="section-pill ${s.hasContent ? 'complete' : 'empty'}">
-                        <span>${s.name}</span>
-                        <span class="section-status ${s.hasContent ? 'status-done' : 'status-pending'}">${s.hasContent ? '✓' : '○'}</span>
-                    </div>`
-                ).join('');
-            } else if (container) {
-                container.innerHTML = '<p style="color:var(--text-tertiary);font-size:11px;grid-column:1/-1;">Aguardando análise...</p>';
-            }
-        }
-
         function renderStats(articlesData) {
-            const values = Object.values(articlesData);
             let totalWords = 0;
             let completos = 0, andamento = 0;
-            values.forEach(d => {
-                if (!d) return;
-                totalWords += d.words || 0;
-                const pct = d.words && d.words > 0 ? Math.min(100, Math.round((d.words / (ARTIGOS.find(a => true)?.meta || 8000)) * 100)) : 0;
-                // Use a safer approach
-            });
-            // Recalculate properly
-            totalWords = 0;
-            completos = 0;
-            andamento = 0;
             ARTIGOS.forEach(art => {
                 const d = articlesData[art.id];
                 if (!d) return;
                 totalWords += d.words || 0;
-                const pct = Math.min(100, Math.round(((d.words || 0) / art.meta) * 100));
+                const pct = Math.min(100, Math.round(((d.words || 0) / 8000) * 100));
                 if (pct >= 80) completos++;
-                else if (pct >= 10) andamento++;
+                else if (pct >= 30) andamento++;
             });
-            const pendentes = ARTIGOS.length - completos - andamento;
-            document.getElementById('stat-artigos').textContent = ARTIGOS.length;
             document.getElementById('stat-completos').textContent = completos;
             document.getElementById('stat-andamento').textContent = andamento;
-            document.getElementById('stat-palavras').textContent = totalWords >= 1000 ? (totalWords / 1000).toFixed(1) + 'k' : totalWords.toString();
+            document.getElementById('stat-palavras').textContent = totalWords >= 1000 ? (totalWords / 1000).toFixed(0) + 'k' : totalWords.toString();
         }
 
-        function renderArticles(articlesData, filterType) {
+        function getArticleProgress(art, data) {
+            const words = data?.words || 0;
+            return Math.min(100, Math.round((words / 8000) * 100));
+        }
+
+        function getStatusFromProgress(pct) {
+            if (pct >= 80) return 'ready';
+            if (pct >= 30) return 'andamento';
+            return 'inicial';
+        }
+
+        function passesFilter(art, pct) {
+            const status = getStatusFromProgress(pct);
+            const { status: s, tipo: t, dados: d } = currentFilters;
+
+            if (s !== 'all' && status !== s) return false;
+            if (t !== 'all' && art.tipo !== t) return false;
+            if (d !== 'all' && !art.tags.includes(d)) return false;
+
+            return true;
+        }
+
+        function renderArticles(articlesData) {
             const grid = document.getElementById('articles-grid');
             if (!grid) return;
-            let filtered = ARTIGOS;
-            if (filterType && filterType !== 'all') {
-                if (filterType === 'ready' || filterType === 'andamento' || filterType === 'inicial') {
-                    filtered = ARTIGOS.filter(art => {
-                        const d = articlesData[art.id] || {};
-                        const pct = Math.min(100, Math.round(((d.words || 0) / art.meta) * 100));
-                        if (filterType === 'ready') return pct >= 80;
-                        if (filterType === 'andamento') return pct >= 10 && pct < 80;
-                        if (filterType === 'inicial') return pct < 10;
-                        return true;
-                    });
-                } else if (filterType === 'maior' || filterType === 'menor') {
-                    filtered = [...ARTIGOS].sort((a, b) => {
-                        const pctA = Math.min(100, Math.round(((articlesData[a.id]?.words || 0) / a.meta) * 100));
-                        const pctB = Math.min(100, Math.round(((articlesData[b.id]?.words || 0) / b.meta) * 100));
-                        return filterType === 'maior' ? pctB - pctA : pctA - pctB;
-                    });
-                } else {
-                    filtered = ARTIGOS.filter(art => art.tipo === filterType);
-                }
-            }
-            document.getElementById('filter-result-count').textContent = `${filtered.length} de ${ARTIGOS.length} artigos`;
-            document.getElementById('filter-count').textContent = `${filtered.length} resultados`;
 
-            grid.innerHTML = filtered.map(art => {
+            let count = 0;
+            grid.innerHTML = ARTIGOS.map(art => {
                 const data = articlesData[art.id] || {};
                 const words = data.words || 0;
-                const percent = Math.min(100, Math.round((words / art.meta) * 100));
-                const missing = data.missing || [];
+                const pct = getArticleProgress(art, data);
+                const passes = passesFilter(art, pct);
+                const status = getStatusFromProgress(pct);
+
                 const colorMap = { quanti: 'var(--accent-blue)', quali: 'var(--accent-purple)', produto: 'var(--accent-green)' };
+                const statusColor = { ready: 'var(--accent-green)', andamento: 'var(--accent-orange)', inicial: 'var(--accent-red)' };
+
                 const url = `Artigos/${art.pasta}/${art.arquivo}`;
+
+                const badgeTipo = art.tipo === 'quanti' ? '📊 Quanti' : art.tipo === 'quali' ? '🔬 Quali' : '⚙️ Produto';
+                const badgeDados = (art.tags || []).map(d => {
+                    const map = { pncp: '📋 PNCP', tcu: '⚖️ TCU', mercado: '📈 Mercado', legislacao: '📜 Lei', refinitiv: '🏢 Refinitiv' };
+                    return map[d] || d;
+                }).join(' ');
+
+                const metodoTags = art.metodo.split(',').map(m => `<span class="article-tag metodo">${m.trim()}</span>`).join('');
+
                 return `
-                    <div class="article-card">
-                        <div class="top-row">
-                            <span class="article-badge badge-${art.tipo}">${art.tipo === 'quanti' ? '📊 Quanti' : art.tipo === 'quali' ? '🔬 Quali' : '⚙️ Produto'}</span>
-                            <a href="${url}" target="_blank">Abrir →</a>
-                        </div>
-                        <div class="article-title">Artigo ${String(art.id).padStart(2,'0')}: ${art.titulo}</div>
-                        <div class="article-progress-text">${words.toLocaleString()} / ${art.meta.toLocaleString()} palavras (${percent}%)</div>
-                        <div class="article-bar"><div class="article-bar-fill" style="width:${percent}%;background:${colorMap[art.tipo]}"></div></div>
-                        ${missing.length > 0 ? `
-                            <div class="article-missing">
-                                ${missing.slice(0,3).map(m => `<span class="missing-tag">${m}</span>`).join('')}
-                                ${missing.length > 3 ? `<span class="missing-tag">+${missing.length-3}</span>` : ''}
+                    <div class="article-card ${passes ? '' : 'hidden'}" data-id="${art.id}">
+                        <div class="article-header">
+                            <div class="article-badges">
+                                <span class="article-badge badge-${art.tipo}">${badgeTipo}</span>
+                                ${art.tags && art.tags.includes('pncp') ? '<span class="article-badge badge-pncp">📋 PNCP</span>' : ''}
+                                ${art.tags && art.tags.includes('tcu') ? '<span class="article-badge badge-tcu">⚖️ TCU</span>' : ''}
+                                ${art.tags && art.tags.includes('mercado') ? '<span class="article-badge badge-refinitiv">📈 Mercado</span>' : ''}
                             </div>
-                        ` : `<div class="article-missing"><span class="missing-tag" style="background:rgba(52,199,89,0.1);color:var(--accent-green);">✓ Todas as seções</span></div>`}
+                            <a href="${url}" class="article-open" target="_blank">Art ${String(art.id).padStart(2,'0')} →</a>
+                        </div>
+
+                        <div class="article-num">Artigo ${String(art.id).padStart(2,'0')}</div>
+                        <div class="article-title">${art.titulo}</div>
+
+                        <div class="article-content">
+                            <div class="article-section">
+                                <div class="article-section-label">Resumo</div>
+                                <div class="article-section-text">${art.resumo}</div>
+                            </div>
+                            <div class="article-section">
+                                <div class="article-section-label">Metodologia</div>
+                                <div class="article-section-text">${art.metodologia}</div>
+                            </div>
+                            <div class="article-section">
+                                <div class="article-section-label">Dados</div>
+                                <div class="article-section-text">${art.dadosTexto}</div>
+                            </div>
+                            <div class="article-section">
+                                <div class="article-section-label">Resultados</div>
+                                <div class="article-section-text">${art.resultados}</div>
+                            </div>
+                        </div>
+
+                        <div class="article-tags">
+                            ${metodoTags}
+                        </div>
+
+                        <div class="article-progress">
+                            <div class="article-progress-text">${words.toLocaleString()} palavras • ${pct}%</div>
+                            <div class="article-bar"><div class="article-bar-fill" style="width:${pct}%;background:${colorMap[art.tipo]}"></div></div>
+                        </div>
                     </div>
                 `;
             }).join('');
+
+            const visibleCount = ARTIGOS.filter(art => {
+                const data = articlesData[art.id] || {};
+                const pct = getArticleProgress(art, data);
+                return passesFilter(art, pct);
+            }).length;
+
+            document.getElementById('filter-result-count').textContent = `${visibleCount} de ${ARTIGOS.length} artigos`;
+        }
+
+        function setupFilters(articlesData) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const group = btn.dataset.group;
+                    const filter = btn.dataset.filter;
+
+                    // Update active state within group
+                    document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    btn.classList.add('active');
+
+                    // Update current filters
+                    currentFilters[group] = filter;
+
+                    // Re-render
+                    renderArticles(articlesData);
+                });
+            });
         }
 
         function renderDataEcosystem() {
@@ -557,19 +875,6 @@
                         const papers = parseCSV(txt);
                         const el = document.getElementById('data-papers');
                         if (el) el.textContent = papers.length;
-                        const citEl = document.getElementById('data-citacoes');
-                        if (citEl) {
-                            const total = papers.reduce((s,p) => s + (parseInt(p.citacoes)||0), 0);
-                            citEl.textContent = total >= 1000 ? (total/1000).toFixed(1) + 'k' : total.toString();
-                        }
-                    }
-                } catch(e) {}
-                try {
-                    const r = await fetch('Base_de_Dados_e_APIs/Raw_Data/Artefato_Copiloto/amostra_pncp_ti.json');
-                    if (r.ok) {
-                        const data = await r.json();
-                        const el = document.getElementById('data-editais');
-                        if (el) el.textContent = data.length;
                     }
                 } catch(e) {}
             })();
@@ -578,61 +883,20 @@
         function parseCSV(text) {
             const lines = text.split('\n');
             if (lines.length < 2) return [];
-            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g,''));
             const result = [];
             for (let i = 1; i < lines.length; i++) {
                 const line = lines[i].trim();
                 if (!line) continue;
-                const values = [];
-                let current = '', inQuotes = false;
-                for (let j = 0; j < line.length; j++) {
-                    const c = line[j];
-                    if (c === '"') inQuotes = !inQuotes;
-                    else if (c === ',' && !inQuotes) { values.push(current); current = ''; }
-                    else current += c;
-                }
-                values.push(current);
-                const obj = {};
-                headers.forEach((h, idx) => { obj[h] = values[idx] || ''; });
-                result.push(obj);
+                const values = line.split(',');
+                if (values.length > 1) result.push({});
             }
             return result;
-        }
-
-        // ========== FILTERS ==========
-        let currentFilter = 'all';
-
-        function setupFilters(articlesData) {
-            const btns = document.querySelectorAll('.filter-btn');
-            btns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    btns.forEach(b => b.classList.remove('active','active-green','active-red','active-orange'));
-                    currentFilter = btn.dataset.filter;
-                    btn.classList.add('active');
-                    renderArticles(allArticlesData, currentFilter);
-                });
-            });
-            // Sort buttons toggle on re-click
-            document.addEventListener('click', function(e) {
-                const btn = e.target.closest('.filter-btn');
-                if (btn && (btn.dataset.filter === 'maior' || btn.dataset.filter === 'menor')) {
-                    // Apply active style to sort buttons specifically
-                    document.querySelectorAll('.filter-btn').forEach(b => {
-                        if (b.dataset.filter !== 'maior' && b.dataset.filter !== 'menor') {
-                            b.classList.remove('active','active-green','active-red','active-orange');
-                        }
-                    });
-                }
-            }, true);
         }
 
         // ========== INIT ==========
         async function init() {
             const update = document.getElementById('last-update');
             if (update) update.textContent = new Date().toLocaleDateString('pt-BR') + ' ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'});
-
-            const teseData = await analyzeFile('Tese/tese_draft.html');
-            renderTese(teseData);
 
             const promises = ARTIGOS.map(async art => {
                 const path = `Artigos/${art.pasta}/${art.arquivo}`;
@@ -644,7 +908,7 @@
 
             renderSidebar(allArticlesData);
             renderStats(allArticlesData);
-            renderArticles(allArticlesData, 'all');
+            renderArticles(allArticlesData);
             setupFilters(allArticlesData);
             renderDataEcosystem();
         }

@@ -1,0 +1,61 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Funções auxiliares
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    // Coleção de análises do módulo de avaliação
+    match /avaliacoes/{avaliacaoId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && request.resource.data.keys().hasAll([
+        'textoOriginal',
+        'usuarioId',
+        'dataCriacao'
+      ]);
+      allow update, delete: if isOwner(resource.data.usuarioId);
+    }
+    
+    // Coleção de editais gerados
+    match /editais/{editalId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && request.resource.data.keys().hasAll([
+        'dadosEntrada',
+        'usuarioId',
+        'dataCriacao'
+      ]);
+      allow update, delete: if isOwner(resource.data.usuarioId);
+    }
+    
+    // Coleção de logs de uso (apenas leitura para admins)
+    match /logs/{logId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update, delete: if false; // Imutável
+    }
+    
+    // Configurações públicas
+    match /configuracoes/{configId} {
+      allow read: if true;
+      allow write: if false; // Apenas admin via Firebase Console
+    }
+    
+    // Base de conhecimento (apenas leitura)
+    match /base_conhecimento/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+    
+    // Estatísticas agregadas (apenas leitura)
+    match /estatisticas/{statId} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

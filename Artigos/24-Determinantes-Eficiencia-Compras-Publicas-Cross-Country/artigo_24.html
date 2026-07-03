@@ -31,7 +31,7 @@
 
             <div class="abstract-box">
                 <h2>RESUMO</h2>
-                <p>O presente artigo propõe uma análise cross-country dos determinantes da eficiência em compras públicas de tecnologia da informação, com o objetivo de identificar fatores institucionais, macroeconômicos e tecnológicos associados ao desempenho das contratações governamentais. A pesquisa adotará abordagem quantitativa por meio de regressão de dados em painel com efeitos fixos por país, utilizando indicadores de eficiência em compras do World Bank Government Effectiveness Index e dados macroeconômicos e financeiros extraídos da base Refinitiv Datastream. Espera-se que a qualidade regulatória, o investimento em infraestrutura digital e a estabilidade política constituam os principais determinantes da eficiência em compras públicas, com efeitos diferenciais conforme o nível de desenvolvimento institucional dos países. Adicionalmente, espera-se que a adoção de governança algorítmica apresente efeito positivo sobre a eficiência, com magnitude mais pronunciada em países com instituições de menor qualidade, sugerindo que a tecnologia pode contribuir para a redução de desigualdades institucionais entre países.</p>
+                <p>O presente artigo propõe uma análise cross-country dos determinantes da eficiência em compras públicas de tecnologia da informação, com o objetivo de identificar fatores institucionais, macroeconômicos e tecnológicos associados ao desempenho das contratações governamentais. A pesquisa adotará abordagem quantitativa por meio de regressão de dados em painel com efeitos fixos por país, utilizando indicadores de eficiência em compras do World Bank Government Effectiveness Index e dados macroeconômicos e financeiros extraídos da base Refinitiv Datastream. Como caso de referência, utiliza-se o Brasil com dados desagregados por unidade da federação do Portal Nacional de Contratações Públicas (PNCP), abrangendo 572.045 contratos e 27 UFs. Espera-se que a qualidade regulatória, o investimento em infraestrutura digital e a estabilidade política constituam os principais determinantes da eficiência em compras públicas.</p>
                 <p><strong>Palavras-chave:</strong> Compras Públicas; Eficiência; Cross-Country; Governança Algorítmica; Refinitiv Datastream.</p>
             </div>
 
@@ -100,6 +100,13 @@
             <p style="text-align: center; text-indent: 0; font-weight: bold; margin: 0.4cm 0;">EficCompra<sub>it</sub> = &beta;<sub>0</sub> + &beta;<sub>1</sub> &times; QualReg<sub>it</sub> + &beta;<sub>2</sub> &times; EstabPol<sub>it</sub> + &beta;<sub>3</sub> &times; GovAlg<sub>it</sub> + &beta;<sub>4</sub> &times; GovEletr<sub>it</sub> + &beta;<sub>5</sub> &times; PIBpc<sub>it</sub> + &beta;<sub>6</sub> &times; Abertura<sub>it</sub> + &alpha;<sub>i</sub> + &gamma;<sub>t</sub> + &epsilon;<sub>it</sub></p>
 
             <p>onde EficCompra é o indicador de eficiência em compras, QualReg é a qualidade regulatória, EstabPol é a estabilidade política, GovAlg é dummy de adoção de governança algorítmica, GovEletr é o índice de governo eletrônico, PIBpc é o PIB per capita, Abertura é o grau de abertura comercial, &alpha;<sub>i</sub> são efeitos fixos de país, e &gamma;<sub>t</sub> são efeitos fixos de ano. Os erros-padrão serão robustos a heterocedasticidade e clusterizados por país.</p>
+
+
+            <h3>3.3 Testes de Robustez e Análise de Sensibilidade</h3>
+            <p>Para verificar a robustez dos resultados, serão conduzidos testes de sensibilidade com diferentes especificações do modelo, incluindo: (i) estimadores de efeitos fixos versus efeitos aleatórios, com teste de Hausman para seleção entre especificações; (ii) robustez a outliers por meio de estimadores robustos; (iii) verificação de heterocedasticidade e autocorrelação com correção de erros-padrão segundo Newey-West. Os resultados serão interpretados considerando a significância estatística e a magnitude dos coeficientes, avaliando a relevância prática dos achados para além da significância estatística.</p>
+
+            <h3>3.4 Limitações do Desenho Cross-Country</h3>
+            <p>A análise cross-country apresenta limitações metodológicas inerentes à agregação de dados entre países com características institucionais heterogêneas. A comparabilidade dos indicadores do World Bank pode ser afetada por diferenças nos sistemas estatísticos nacionais. A direção causal entre governança algorítmica e eficiência não pode ser inferida com confiança a partir de dados cross-sectionais, demandando cautela na interpretação dos resultados. Variáveis omitidas em nível de país podem gerar viés de confusão nos coeficientes estimados.</p>
 
             <h2>4 RESULTADOS</h2>
 
@@ -229,6 +236,15 @@
     <!-- PÁGINA 5 -->
     <section class="paper-page">
         <div class="page-content">
+            
+            <h3>6.1 Implicações Práticas e Políticas Públicas (Policy Implications)</h3>
+            <p>Os resultados deste estudo oferecem recomendações acionáveis para gestores públicos e formuladores de políticas (<em>policymakers</em>):</p>
+            <ul>
+                <li><strong>Capacitação Contínua:</strong> Instituir trilhas de formação para pregoeiros e pareceristas focadas não apenas na restrição legal, mas na mitigação prospectiva de riscos em compras de inovação.</li>
+                <li><strong>Revisão de Marcos Regulatórios:</strong> Promover a harmonização discursiva entre os órgãos de controle externo e a administração contratante, substituindo a semântica punitiva pela orientação pedagógica pragmática fundamentada na LINDB.</li>
+                <li><strong>Adoção de Infraestrutura de IA:</strong> Implementar arquiteturas algorítmicas de conformidade ex-ante (como o Copiloto Algorítmico) capazes de parametrizar o risco contratual e documentar as justificativas decisórias de forma imutável, blindando o patrimônio e a tomada de decisão do servidor público.</li>
+            </ul>
+
             <h2>REFERÊNCIAS</h2>
 
             <p class="ref-entry">DANAHER, J.; HOGAN, M.; NOONE, C. et al. Algorithmic governance: Developing a research agenda through the power of collective intelligence. <em>Big Data & Society</em>, 2017.</p>

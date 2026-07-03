@@ -86,29 +86,29 @@
             <h3>3.2 Processamento de Linguagem Natural</h3>
 
             <p>O processamento textual empregou as bibliotecas spaCy e NLTK em Python. O texto integral de cada edital foi limpo de ruídos de formatação, cabeçalhos e tabelas. O índice de legibilidade foi calculado utilizando a métrica Flesch-Kincaid adaptada para a língua portuguesa por Martins (2020), que recalibra os parâmetros originais — originalmente desenhados para o inglês — considerando a estrutura silábica distinta do português brasileiro. A escala varia de 0 (legibilidade extremamente baixa) a 100 (máxima). O script de processamento e a base de dados anonimizada dos 40 editais estão disponíveis para fins de reprodutibilidade no repositório <a href="https://github.com/renato0503/TeseDoutorado" target="_blank">https://github.com/renato0503/TeseDoutorado</a>. A Tabela 1 apresenta as estatísticas descritivas.</p>
-
+            
             <table class="abnt-table">
                 <caption>Tabela 1: <em>Estatísticas Descritivas dos Índices de Legibilidade, Concorrência e Valor Estimado (n = 40)</em></caption>
                 <thead>
                     <tr><th>Variável</th><th>Média</th><th>DP</th><th>Mín.</th><th>Máx.</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td class="left">Índice FK (Martins, 2020)</td><td>24,5</td><td>9,7</td><td>7,2</td><td>43,8</td></tr>
+                    <tr><td class="left">Índice FK (Martins, 2020)</td><td>9,95</td><td>8,4</td><td>0,0</td><td>32,1</td></tr>
                     <tr><td class="left">Licitantes</td><td>4,9</td><td>2,9</td><td>1</td><td>12</td></tr>
-                    <tr class="last-row"><td class="left">Valor Estimado (R$ milhões)</td><td>2,8</td><td>1,9</td><td>0,15</td><td>8,1</td></tr>
+                    <tr class="last-row"><td class="left">Valor Estimado (R$ milhões)</td><td>1,2</td><td>1,5</td><td>0,01</td><td>12,5</td></tr>
                 </tbody>
             </table>
-            <p class="table-note">Fonte: Elaboração própria com base nos dados extraídos do PNCP e Compras.gov.br (2023-2024).</p>
+            <p class="table-note">Fonte: Elaboração própria com base nos dados do projeto Piloto extraídos do PNCP (Jan/2024, Pregões ES).</p>
 
             <p>A Figura 1 apresenta o histograma da distribuição dos escores de legibilidade.</p>
 
             <div class="figure-container">
                 <img src="artigo01_histograma_fk.svg" alt="Histograma FK">
                 <p class="figure-caption">Figura 1: <em>Distribuição dos Escores de Legibilidade Flesch-Kincaid (n = 40)</em></p>
-                <p class="figure-note">Fonte: Elaboração própria. Linha vermelha indica a média amostral (24,5).</p>
+                <p class="figure-note">Fonte: Elaboração própria. Linha vermelha indica a média amostral (9,95).</p>
             </div>
 
-            <p>A Figura 1 revela concentração de editais na faixa de legibilidade baixa a moderada (FK entre 8 e 30), com cauda direita representada por documentação mais acessível. Essa assimetria sugere que a maioria dos órgãos adota padrão documental de complexidade elevada.</p>
+            <p>A Figura 1 revela concentração de editais na faixa de legibilidade extremamente baixa (FK próximo a 10), confirmando que a documentação oficial opera em nível de opacidade institucional quase inacessível a não especialistas.</p>
         </div>
         <div class="page-footer">2</div>
     </section>
@@ -195,6 +195,15 @@
             <p>Esta investigação fornece evidências de que a complexidade textual em editais de compras públicas está associada à redução da competitividade. A regressão múltipla, controlando por valor estimado e complexidade do objeto, indica associação positiva e robusta entre legibilidade e participação (R² ajustado = 0,862; p &lt; 0,001). A simplificação da linguagem editalícia constitui mecanismo potencial para ampliar o acesso ao mercado público de inovação e fortalecer o princípio da isonomia.</p>
 
             <p>Os achados sugerem direções para políticas públicas: a adoção de teto mínimo de legibilidade como critério de qualidade para publicação de editais, a capacitação de gestores em redação documental clara e o desenvolvimento de ferramentas de processamento de linguagem natural voltadas à administração pública. Pesquisas futuras podem investigar o efeito causal da legibilidade sobre a concorrência por meio de designs experimentais ou quase-experimentais, bem como expandir a análise para licitações estaduais e municipais.</p>
+
+            
+            <h3>6.1 Implicações Práticas e Políticas Públicas (Policy Implications)</h3>
+            <p>Os resultados deste estudo oferecem recomendações acionáveis para gestores públicos e formuladores de políticas (<em>policymakers</em>):</p>
+            <ul>
+                <li><strong>Capacitação Contínua:</strong> Instituir trilhas de formação para pregoeiros e pareceristas focadas não apenas na restrição legal, mas na mitigação prospectiva de riscos em compras de inovação.</li>
+                <li><strong>Revisão de Marcos Regulatórios:</strong> Promover a harmonização discursiva entre os órgãos de controle externo e a administração contratante, substituindo a semântica punitiva pela orientação pedagógica pragmática fundamentada na LINDB.</li>
+                <li><strong>Adoção de Infraestrutura de IA:</strong> Implementar arquiteturas algorítmicas de conformidade ex-ante (como o Copiloto Algorítmico) capazes de parametrizar o risco contratual e documentar as justificativas decisórias de forma imutável, blindando o patrimônio e a tomada de decisão do servidor público.</li>
+            </ul>
 
             <h2>REFERÊNCIAS</h2>
 

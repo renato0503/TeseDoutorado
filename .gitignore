@@ -10,7 +10,17 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Firebase / PubliCopilot
+PubliCopilot/env/
+PubliCopilot/node_modules/
+.firebase/
+
 # Arquivos de saída (serão gerados depois)
 # *.html  # agora serão versionados
 # *.docx
 # *.xlsx
+
+# Bases de dados pesadas
+dados/
+*.csv
+*.pkl
