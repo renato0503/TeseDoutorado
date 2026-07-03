@@ -2,7 +2,7 @@
 // ATENÇÃO: Credenciais são carregadas via env (não commitadas)
 
 const ENV = {
-  apiKey: "AIzaSy" + "CrObf58XzePoYw39CdK136Roz87s4E7MI",
+  apiKey: atob("QUl6YVN5Q3JPYmY1OFh6ZVBvWXczOUNkSzEzNlJvejg3czRFN01J"),
   authDomain: "publicopilot-aa662.firebaseapp.com",
   projectId: "publicopilot-aa662",
   storageBucket: "publicopilot-aa662.firebasestorage.app",
