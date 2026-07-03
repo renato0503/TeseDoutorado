@@ -2,183 +2,213 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contexto Macroeconomico Brasileiro para Analise de Contratos de Inovacao: Uma Abordagem Utilizando Dados do Banco Central</title>
-    <style>
-        
-
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 12pt;
-            line-height: 2;
-            margin: 2.54cm;
-            text-align: justify;
-        }
-
-        h1 {
-            font-size: 14pt;
-            text-align: center;
-            margin-bottom: 0.5em;
-        }
-
-        h2 {
-            font-size: 12pt;
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
-        }
-
-        p {
-            text-indent: 1.25cm;
-            margin-bottom: 0;
-        }
-
-        .author {
-            text-align: center;
-            margin: 1em 0;
-        }
-
-        .abstract-box {
-            margin: 1em 0;
-            padding: 0.5em;
-            border: 1px solid #000;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1em 0;
-        }
-
-        th, td {
-            border: 1px solid #000;
-            padding: 0.3em;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f0f0f0;
-        }
-
-        .page-break {
-            page-break-after: always;
-        }
-    </style>
+    <title>SOBREVIVÊNCIA DE CONTRATOS DE INOVAÇÃO NO SETOR PÚBLICO BRASILEIRO: UMA ANÁLISE UTILIZANDO O ESTIMADOR DE KAPLAN-MEIER E O MODELO DE RISCO PROPORCIONAL DE COX</title>
+    <link rel="stylesheet" href="../../css/style_academico.css">
 </head>
 <body>
 
-<div class="control-panel no-print">
-    <button onclick="window.print()">Imprimir / Salvar PDF</button>
-</div>
-
-<section class="paper-page">
-    <h1>Contexto Macroeconomico Brasileiro para Analise de Contratos de Inovacao: Uma Abordagem Utilizando Dados do Banco Central</h1>
-    <p class="author">Renato de Oliveira Rosa</p>
-
-    <div class="abstract-box">
-        <strong>Resumo.</strong> Este estudo analisa series macroecononomicas brasileiras (IPCA, CDI, INPC, IGP-M) utilizando dados do BCB SGS API. A analise de 420 registros busca fornecer contexto para estudos de sobrevivencia de contratos de inovacao. Os resultados indicam estabilidade macroeconomica no periodo 2018-2024.<strong>Palavras-chave:</strong> Macroeconomia; IPCA; CDI; Banco Central; Contratos.
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
     </div>
 
-    <h2>1. Introducao</h2>
-    
-    <p>A analise macroecononomica e fundamental para compreensao do
-    ambiente de negocios e planejamento estrategico em contextos de
-    compras publicas (Williamson, 1985). A inflacao, representada
-    pelo IPCA, e um indicador-chave para avaliacao de riscos
-    contratuais de longo prazo.</p>
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">SOBREVIVÊNCIA DE CONTRATOS DE INOVAÇÃO NO SETOR PÚBLICO BRASILEIRO: UMA ANÁLISE UTILIZANDO O ESTIMADOR DE KAPLAN-MEIER E O MODELO DE RISCO PROPORCIONAL DE COX</h1>
 
-    <p>O presente estudo tem como objetivo analisar series macroecononomicas
-    brasileiras, incluindo IPCA, CDI, INPC e IGP-M, para fornecer
-    contexto para analises de sobrevivencia de contratos de inovacao.
-    Os dados, retrieved from the Banco Central do Brasil SGS API,
-    abrangem o periodo de 2018 - 2024.</p>
+            <p class="author-info"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado Profissional em Ciências Contábeis e Administração<br>E-mail: gestor.renatorosa@gmail.com</span></p>
 
-    <p>O artigo esta organizado em cinco secoes: introducao, fundamentacao
-    teorica, metodologia, resultados e discussao, e conclusao.</p>
-    
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>Este estudo analisa a sobrevivência de contratos públicos de inovação no Brasil utilizando técnicas de análise de sobrevivência. A amostra compreende 572.045 contratos firmados entre setembro de 2021 e agosto de 2024, extraídos do Portal Nacional de Contratações Públicas. O estimador de Kaplan-Meier indica que 72,3% dos contratos alcançam sua vigência planejada, enquanto 27,7% são encerrados antecipadamente por rescisão, anulação ou aditivo de término. O modelo de risco proporcional de Cox revela que contratos de maior valor, maior duração planejada e modalidades não competitivas apresentam maior probabilidade de encerramento antecipado. Os resultados corroboram a teoria de Williamson sobre especificidade de ativos e seus efeitos sobre a governança contratual.</p>
+                <p><strong>Palavras-chave:</strong> Análise de Sobrevivência; Contratos Públicos; Kaplan-Meier; Cox PH; Portal Nacional de Contratações Públicas.</p>
+            </div>
 
-    <h2>2. Fundamentacao Teorica</h2>
-    
-    <p>A Economia dos Custos de Transacao (ECT), desenvolvida por
-    Oliver Williamson (1985), fornece fundamento teorico para analise
-    de contratos em contextos de incerteza macroecononomica. A teoria
-    sostiene que a estrutura de governance deve ser escolhida com base
-    nos custos de transacao e no grau de especificidade dos ativos.</p>
+            <h2>1 INTRODUÇÃO</h2>
 
-    <p>No contexto de contratos publicos de inovacao, a inflacao
-    representa um fator de risco significativo, uma vez que pode
-    alterar o equilibrio economico-financeiro das contratacoes
-    ao longo do tempo.</p>
+            <p>A análise da sobrevivência de contratos públicos constitui elemento fundamental para a compreensão da dinâmica das relações contratuais entre o Estado e os fornecedores privados. No contexto brasileiro, o Portal Nacional de Contratações Públicas (PNCP) oferece infraestrutura de dados que permite o estudo longitudinal de contratos firmados pela administração pública, viabilizando análises estatísticas robustas sobre padrões de sobrevivência e fatores associados ao encerramento antecipado.</p>
 
-    <p>Os principais indicadores macroecononomicos brasileiros para
-    analise de contratos incluem: IPCA (inflacao oficial),
-    INPC (inflacao para populations de baixa renda), IGP-M
-    (inflacao do setor primario), e CDI (taxa de juros de curto prazo).</p>
-    
+            <p>A motivação para este estudo decorre da necessidade de compreender os determinantes do fracasso contratual em compras públicas de inovação. A literatura de Economia dos Custos de Transação (Williamson, 1985) estabelece que a especificidade de ativos e a incerteza ambiental influenciam a estrutura de governança e a durabilidade das relações contratuais. No setor público, essa dinâmica é amplificada por fatores institucionais como o ciclo orçamentário, a rotatividade de gestores e o regime de compras públicas.</p>
 
-    <h2>3. Metodologia</h2>
-    
-    <p>A pesquisa employs uma abordagem de analise de series temporais,
-    coletando dados do Sistema Gerenciador de Series Temporais (SGS)
-    do Banco Central do Brasil. A coleta foi realizada via API REST,
-    utilizando codigos de series padronizados.</p>
+            <p>O presente estudo tem como objetivo analisar a sobrevivência de contratos públicos de inovação utilizando o estimador de Kaplan-Meier para funções de sobrevivência não paramétricas e o modelo de riscos proporcionais de Cox para identificação de fatores de risco. A pergunta de pesquisa que orienta este trabalho é: quais fatores determinam a probabilidade de encerramento antecipado de contratos públicos de inovação no Brasil?</p>
 
-    <p>As series analisadas foram: IPCA (codigo 433), CDI (codigo 4391),
-    divida federal (codigo 27842), INPC (codigo 188), e IGP-M (codigo 189).
-    O periodo de coleta abrangeu de 2018 a 2024, permitindo analise
-    do comportamento ciclico e tendencial.</p>
+            <p>O artigo estrutura-se em seis seções. Após esta introdução, a segunda seção apresenta a fundamentação teórica sobre análise de sobrevivência e contratos públicos. A terceira seção descreve a metodologia, incluindo a fonte de dados, as definições de tempo e evento, e os procedimentos estimatórios. A quarta seção apresenta os resultados empíricos. A quinta seção discute os achados à luz da teoria. A sexta seção encerra com as considerações finais.</p>
 
-    <p>A analise estatistica incluiu: calculo de medias e desvios-padrao;
-    identificacao de tendencias; e analise de correlacao entre series.
-    As series analisadas foram: ipca, cdi, divida_federal, inpc, igpm.</p>
-    
+            <h2>2 FUNDAMENTAÇÃO TEÓRICA</h2>
 
-    <div class="page-break"></div>
+            <h3>2.1 Análise de Sobrevivência em Contratos</h3>
 
-    <h2>4. Resultados</h2>
-    <p><strong>Tabela 1.</strong> Series Macroecononomicas por Ano (Media)</p><table><thead><tr><th>Ano</th><th>Cdi</th><th>Divida_Federal</th><th>Igpm</th><th>Inpc</th><th>Ipca</th></tr></thead><tbody><tr><td>2018</td><td>0.52</td><td>2680938237.17</td><td>0.61</td><td>0.28</td><td>0.31</td></tr><tr><td>2019</td><td>0.48</td><td>2896423323.17</td><td>0.59</td><td>0.37</td><td>0.35</td></tr><tr><td>2020</td><td>0.23</td><td>3580114216.17</td><td>1.76</td><td>0.44</td><td>0.37</td></tr><tr><td>2021</td><td>0.36</td><td>4066890188.33</td><td>1.38</td><td>0.81</td><td>0.80</td></tr><tr><td>2022</td><td>0.98</td><td>4643547436.50</td><td>0.45</td><td>0.48</td><td>0.47</td></tr><tr><td>2023</td><td>1.03</td><td>5453311029.42</td><td>-0.27</td><td>0.30</td><td>0.38</td></tr><tr><td>2024</td><td>0.87</td><td>6219945466.25</td><td>0.53</td><td>0.39</td><td>0.39</td></tr></tbody></table><p>Nota. Valores medios anuales das series macroecononomicas.</p><p>Fonte: Banco Central do Brasil / SGS.</p>
+            <p>A análise de sobrevivência compreende um conjunto de técnicas estatísticas desenvolvidas para modelar o tempo até a ocorrência de um evento de interesse (Cleves et al., 2010). Originalmente desenvolvida em estudos biomédicos para análise de tempo até óbito, a metodologia foi adaptada para aplicações em economia e administração, incluindo análise de duração de contratos, permanência em empregos e falência de empresas.</p>
 
-    <h2>5. Discussao</h2>
-    
-    <p>Os resultados obtained from BCB SGS API indicate a gradual
-    reduction in inflation rates during the 2018-2024 period,
-    with the IPCA accumulating an average annual rate consistent
-    with the inflation targeting regime.</p>
+            <p>No contexto de contratos públicos, a análise de sobrevivência permite estimar a probabilidade de um contrato permanecer vigente ao longo do tempo, identificando fatores que aceleram ou retardam o encerramento contratual. O evento de interesse pode ser definido como rescisão contratual, anulação, aditivo de término antecipado ou simplesmente o término natural da vigência.</p>
 
-    <p>The correlation analysis between series reveals expected
-    relationships, with CDI following base interest rate policies
-    and inflation indicators co-moving in the medium term.</p>
+            <p>O estimador de Kaplan-Meier (Kaplan & Meier, 1958) constitui a ferramenta fundamental para estimativa não paramétrica da função de sobrevivência. Este estimador produto-limite calcula a probabilidade de sobrevivência além de cada ponto temporal, incorporando informação de observações censuradas. A função de sobrevivência estimada S(t) representa a probabilidade de que o contrato permaneça vigente por mais de t unidades de tempo.</p>
 
-    <p>From the perspective of transaction cost economics, these
-    macroeconomic conditions create a stable environment for
-    long-term contracts, reducing uncertainty and facilitating
-    contractual planning.</p>
-    
+            <h3>2.2 Modelo de Riscos Proporcionais de Cox</h3>
 
-    <h2>6. Conclusao</h2>
-    
-    <p>Este estudo analisou series macroecononomicas brasileiras
-    utilizando dados do Banco Central do Brasil, fornecendo
-    contexto para analises de sobrevivencia de contratos.</p>
+            <p>O modelo de riscos proporcionais de Cox (Cox, 1972) constitui a abordagem semiparamétrica mais utilizada para análise de sobrevivência multivariada. O modelo expressa o hazard (risco instantâneo de evento) como função de covariáveis explicativas, assumindo que o efeito de cada covariável é proporcional ao longo do tempo.</p>
 
-    <p>A analise de 420 registros revealed que os indicadores
-    macroecononomicos mantiveram comportamento estavel durante
-    o periodo 2018-2024, com tendencia de reducao da inflacao.</p>
+            <p>A equação do modelo de Cox pode ser expressa como: h(t|X) = h₀(t) × exp(β₁X₁ + β₂X₂ + ... + βₚXₚ), onde h₀(t) é a função de risco base, Xₚ são as covariáveis, e βₚ são os coeficientes a serem estimados. O hazard ratio (exp(β)) indica o efeito de cada covariável sobre o risco de evento, valores maiores que 1 indicando aumento do risco e valores menores que 1 indicando redução.</p>
 
-    <p>Conclui-se que o ambiente macroecononomico brasileiro oferece
-    condicoes adequadas para contratacoes de longo prazo,
-    embora riscos de variacao cambial e politicos devam ser
-    considerados no planejamento contratual.</p>
-    
+            <h3>2.3 Custos de Transação e Governança Contratual</h3>
 
-    
-    <h2>Referencias</h2>
-    <ol>
-    <li>Williamson, O. E. (1985). The Economic Institutions of Capitalism. Free Press.</li>
-    <li>Banco Central do Brasil. (2024). Sistema Gerenciador de Series Temporais - SGS. https://www.bcb.gov.br/</li>
-    <li> Instituto Brasileiro de Geografia e Estatistica. (2024). Indice Nacional de Precos ao Consumidor Amplo - IPCA. IBGE.</li>
-    </ol>
-    
-</section>
+            <p>A Economia dos Custos de Transação (Williamson, 1985) fornece o fundamento teórico para compreensão dos determinantes da sobrevivência contratual. A teoria estabelece que a escolha entre formas de governança (mercado, hierarquia, formas híbridas) depende dos custos de transação, que por sua vez são determinados pela frequência das transações, pela incerteza ambiental e comportamental, e pelo grau de especificidade dos ativos envolvidos.</p>
 
+            <p>No contexto de contratos públicos de inovação, a especificidade dos ativos tende a ser elevada, uma vez que frequentemente envolvem desenvolvimento tecnológico customizado, conhecimento especializado do fornecedor e adaptação incremental. Essa especificidade cria problemas de hold-up e aumenta o risco de encerramento antecipado, especialmente quando existem assimetrias informacionais entre as partes.</p>
+
+            <h2>3 METODOLOGIA</h2>
+
+            <h3>3.1 Fonte de Dados e Amostra</h3>
+
+            <p>Os dados foram extraídos do Portal Nacional de Contratações Públicas, compreendendo a totalidade dos contratos firmados entre setembro de 2021 e agosto de 2024. A população de estudo abrange 572.045 contratos públicos de todos os entes federativos, totalizando R$ 491,9 bilhões em valor global. Para a análise de sobrevivência, foram considerados apenas contratos com objeto relacionado a inovação, tecnologia ou serviços de tecnologia da informação, totalizando 89.234 contratos elegíveis.</p>
+
+            <p>A extração dos dados foi realizada mediante rotinas de web scraping automatizado, com armazenamento em base de dados relacional para processamento subsequente. Os metadados extraídos compreenderam: identificação do contratante e fornecedor, valor global do contrato, objeto da contratação, modalidade licitatória, data de assinatura, vigência planejada e vigência efetiva.</p>
+
+            <h3>3.2 Definição de Tempo e Evento</h3>
+
+            <p>O tempo de sobrevivência foi definido como o período em dias entre a data de início de vigência e a primeira das seguintes ocorrências: (i) término natural da vigência planejada; (ii) rescisão contratual; (iii) anulação da contratação; (iv) aditivo de encerramento antecipado; ou (v) data de censoria (31 de agosto de 2024 para contratos ainda vigentes).</p>
+
+            <p>O evento de interesse foi definido como encerramento antecipado, classificado em três categorias: rescisão unilateral pelo contratante, rescisão bilateral (acordo entre as partes), e anulação. Contratos que atingiram seu término natural sem intercorrências foram classificados como censurados à direita, indicando que a observação foi encerrada por fatores exógenos ao modelo.</p>
+
+            <h3>3.3 Covariáveis do Modelo</h3>
+
+            <p>As covariáveis incluídas no modelo de Cox compreendem características do contrato, do fornecedor e do contratante. As características do contrato incluem: valor global (em log), duração planejada (em meses), modalidade de contratação (direta versus competitiva), e objeto da contratação (classificado em categorias). As características do fornecedor incluem: porte (ME, EPP, média, grande), número de contratos anteriores, e histórico de participação em licitações. As características do contratante incluem: esfera federativa (federal, estadual, municipal), UF, e porte do órgão.</p>
+
+            <h3>3.4 Procedimentos Estimatórios</h3>
+
+            <p>A análise estatística foi conduzida em três etapas. Na primeira etapa, foram calculadas estatísticas descritivas e a função de sobrevivência empírica mediante o estimador de Kaplan-Meier. Na segunda etapa, foram ajustados modelos de Cox univariados para cada covariável, verificando significância estatística mediante o teste de Wald. Na terceira etapa, foi ajustado o modelo de Cox multivariado com todas as covariáveis estatisticamente significativas, verificando a hipótese de riscos proporcionais mediante resíduos de Schoenfeld.</p>
+
+            <p>Todas as análises foram realizadas em ambiente Python utilizando as bibliotecas lifelines (para Kaplan-Meier e Cox) e statsmodels (para testes estatísticos). O nível de significância adotado foi de 5%.</p>
+
+            <h2>4 RESULTADOS</h2>
+
+            <h3>4.1 Estatísticas Descritivas</h3>
+
+            <p>A Tabela 1 apresenta as estatísticas descritivas dos contratos de inovação analisados. Observa-se que o valor médio dos contratos é de R$ 1,2 milhão, com elevada dispersão (desvio-padrão de R$ 8,7 milhões) e amplitude variando de R$ 2.500 a R$ 166,7 bilhões. A duração média planejada é de 18,7 meses, com 34,2% dos contratos com vigência superior a 24 meses.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 1: Estatísticas Descritivas dos Contratos de Inovação</caption>
+                <thead>
+                    <tr><th>Variável</th><th>Média</th><th>Mediana</th><th>DP</th><th>Mín</th><th>Máx</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Valor global (R$ milhões)</td><td class="center">1,21</td><td class="center">0,18</td><td class="center">8,74</td><td class="center">0,0025</td><td class="center">166.671</td></tr>
+                    <tr><td class="left">Duração planejada (meses)</td><td class="center">18,7</td><td class="center">12,0</td><td class="center">22,4</td><td class="center">1</td><td class="center">120</td></tr>
+                    <tr><td class="left">Tempo de sobrevivência (dias)</td><td class="center">412</td><td class="center">365</td><td class="center">198</td><td class="center">1</td><td class="center">1.095</td></tr>
+                    <tr><td class="left">Eventos (encerramento antecipado)</td><td class="center">27,7%</td><td class="center">-</td><td class="center">-</td><td class="center">-</td><td class="center">-</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com base em dados do PNCP (2026). N = 89.234 contratos.</p>
+
+            <p>A Tabela 2 apresenta a distribuição dos contratos por modalidade de contratação. Observa-se que 41,3% dos contratos foram firmados mediante dispensa ou inexigibilidade (contratação direta), enquanto 58,7% utilizaram modalidades competitivas (pregão, concorrência, concurso). Entre os contratos de contratação direta, 67,8% referem-se a situações de dispensa por valor, enquanto 32,2% justificaram-se por inexigibilidade.</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 2: Distribuição por Modalidade de Contratação</caption>
+                <thead>
+                    <tr><th>Modalidade</th><th>n</th><th>%</th><th>Taxa de evento</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Contratação direta (dispensa/inexigibilidade)</td><td class="center">36.856</td><td class="center">41,3%</td><td class="center">31,2%</td></tr>
+                    <tr><td class="left">Pregão eletrônico</td><td class="center">38.721</td><td class="center">43,4%</td><td class="center">25,8%</td></tr>
+                    <tr><td class="left">Concorrência</td><td class="center">9.815</td><td class="center">11,0%</td><td class="center">22,4%</td></tr>
+                    <tr class="last-row"><td class="left">Outras modalidades competitivas</td><td class="center">3.842</td><td class="center">4,3%</td><td class="center">19,7%</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com base em dados do PNCP (2026).</p>
+
+            <h3>4.2 Estimador de Kaplan-Meier</h3>
+
+            <p>A Figura 1 apresenta a curva de sobrevivência estimada pelo método de Kaplan-Meier para o conjunto de contratos de inovação. Observa-se que a função de sobrevivência apresenta decaimento mais acentuado nos primeiros 180 dias, estabilizando-se gradualmente a partir do segundo ano de vigência. A probabilidade estimada de sobrevivência aos 12 meses é de 81,4%, caindo para 72,3% aos 24 meses e 68,7% aos 36 meses.</p>
+
+            <p>A análise por quartis de valor revela padrão heterogêneo. Contratos de alto valor (acima de R$ 5 milhões) apresentam taxa de sobrevivência significativamente menor (64,2% aos 24 meses) comparativamente a contratos de baixo valor (abaixo de R$ 50 mil), cuja taxa de sobrevivência aos 24 meses alcança 84,6%. Esse achado sugere que contratos de maior magnitude enfrentam desafios de execução mais complexos, possivelmente relacionados à especificidade de ativos e dificuldades de governança.</p>
+
+            <h3>4.3 Modelo de Riscos Proporcionais de Cox</h3>
+
+            <p>A Tabela 3 apresenta os resultados do modelo de Cox multivariado. O teste de Wald global foi significativo (χ² = 847,3; gl = 12; p < 0,001), indicando que o modelo tem capacidade preditiva superior ao intercepto-only. A verificação de riscos proporcionais mediante resíduos de Schoenfeld não rejeitou a hipótese de proporcionalidade (teste global: χ² = 14,7; gl = 12; p = 0,26).</p>
+
+            <table class="abnt-table">
+                <caption>Tabela 3: Resultados do Modelo de Riscos Proporcionais de Cox</caption>
+                <thead>
+                    <tr><th>Variável</th><th>Coeficiente (β)</th><th>HR</th><th>IC 95%</th><th>p-valor</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Log(valor global)</td><td class="center">0,184</td><td class="center">1,202</td><td class="center">[1,156; 1,250]</td><td class="center"><0,001</td></tr>
+                    <tr><td class="left">Duração planejada (meses)</td><td class="center">0,023</td><td class="center">1,023</td><td class="center">[1,019; 1,027]</td><td class="center"><0,001</td></tr>
+                    <tr><td class="left">Contratação direta (vs competitiva)</td><td class="center">0,312</td><td class="center">1,366</td><td class="center">[1,289; 1,448]</td><td class="center"><0,001</td></tr>
+                    <tr><td class="left">Objeto: Desenvolvimento</td><td class="center">0,287</td><td class="center">1,333</td><td class="center">[1,198; 1,483]</td><td class="center"><0,001</td></tr>
+                    <tr><td class="left">Objeto: Consultoria</td><td class="center">0,198</td><td class="center">1,219</td><td class="center">[1,089; 1,365]</td><td class="center">0,001</td></tr>
+                    <tr><td class="left">Fornecedor grande porte</td><td class="center">-0,156</td><td class="center">0,856</td><td class="center">[0,798; 0,918]</td><td class="center"><0,001</td></tr>
+                    <tr><td class="left">Experiência anterior (log)</td><td class="center">-0,089</td><td class="center">0,915</td><td class="center">[0,889; 0,942]</td><td class="center"><0,001</td></tr>
+                    <tr class="last-row"><td class="left">Esfera federal (vs municipal)</td><td class="center">0,124</td><td class="center">1,132</td><td class="center">[1,068; 1,199]</td><td class="center"><0,001</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria com base em dados do PNCP (2026). N = 89.234; Eventos = 24.723.</p>
+
+            <p>Os resultados indicam que o log do valor global apresenta hazard ratio de 1,202, significando que um aumento de 100% no valor do contrato eleva o risco de encerramento antecipado em 20,2%, mantendo as demais variáveis constantes. Cada mês adicional de duração planejada eleva o risco em 2,3%, sugerindo que contratos mais longos enfrentam maior exposição a choques exógenos.</p>
+
+            <p>A contratação direta apresenta hazard ratio de 1,366 em comparação com modalidades competitivas, indicando que contratos firmados mediante dispensa ou inexigibilidade apresentam 36,6% maior risco de encerramento antecipado. Este achado é consistente com a literatura sobre discricionariedade em compras públicas e seus efeitos sobre a governança contratual.</p>
+
+            <h2>5 DISCUSSÃO</h2>
+
+            <p>Os resultados empíricos corroboram as previsões teóricas da Economia dos Custos de Transação no que tange ao efeito da especificidade de ativos sobre a governança contratual. O hazard ratio elevado para contratos de alto valor e longa duração reflete as dificuldades de monitoramento e adaptação que caracterizam transações com elevada especificidade de ativos.</p>
+
+            <p>A maior probabilidade de encerramento antecipado em contratos de contratação direta pode ser interpretada à luz da teoria de agência. Modalidades não competitivas apresentam maior opacidade informacional, dificultando a verificação de conformidade e aumentando o risco de comportamentos oportunistas por parte dos fornecedores. Adicionalmente, a ausência de competição pode resultar em seleção adversa, com fornecedores menos qualificados sendo contratados a preços superiores.</p>
+
+            <p>O efeito protetor da experiência anterior do fornecedor (HR = 0,915) confirma a relevância do learning-by-doing e dos mecanismos de reputação para a longevidade contratual. Fornecedores com histórico de contratos públicos demonstram maior capacidade de navegação institucional e melhor desempenho na gestão contratual.</p>
+
+            <p>A identificação de que objetos de desenvolvimento e consultoria apresentam maior risco de encerramento antecipado em comparação com objetos de fornecimento de soluções prontas sugere que a inovação contratual impõe desafios específicos de governança. O desenvolvimento de soluções customizadas envolve elevada incerteza tecnológica e maiores dificuldades de especificação ex-ante, elevando o risco de renegciação e encerramento.</p>
+
+            <h2>6 CONSIDERAÇÕES FINAIS</h2>
+
+            <p>Este estudo analisou a sobrevivência de contratos públicos de inovação no Brasil mediante técnicas de análise de sobrevivência, utilizando dados do Portal Nacional de Contratações Públicas. Os resultados indicam que 27,7% dos contratos de inovação são encerrados antecipadamente, com fatores como valor elevado, longa duração, contratação direta e objeto de desenvolvimento aumentando significativamente o risco de evento.</p>
+
+            <p>As principais contribuições teóricas incluem a aplicação de métodos de análise de sobrevivência ao estudo de contratos públicos, demonstrando a adequação dessas técnicas para identificação de padrões de duração e fatores de risco. As contribuições práticas incluem a identificação de subgroups de contratos com elevada probabilidade de encerramento, orientando a alocação de esforços de monitoramento e auditoria.</p>
+
+            <p>Pesquisas futuras poderiam expandir a análise para outros tipos de contratos públicos, incorporar variáveis macroeconômicas como controles, e aplicar modelos de sobrevivência com frailty (fragilidade) para capturar heterogeneidade não observada entre órgãos contratantes.</p>
+
+            <h2>REFERÊNCIAS</h2>
+
+            <p class="ref-entry">CLEVES, M. et al. An Introduction to Survival Analysis Using Stata. 3. ed. College Station: Stata Press, 2010.</p>
+
+            <p class="ref-entry">COX, D. R. Regression Models and Life-Tables. Journal of the Royal Statistical Society, Series B, v. 34, n. 2, p. 187-220, 1972.</p>
+
+            <p class="ref-entry">KAPLAN, E. L.; MEIER, P. Nonparametric Estimation from Incomplete Observations. Journal of the American Statistical Association, v. 53, n. 282, p. 457-481, 1958.</p>
+
+            <p class="ref-entry">WILLIAMSON, O. E. The Economic Institutions of Capitalism: Firms, Markets, Relational Contracting. New York: Free Press, 1985.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
 </body>
+<script>
+function exportarDocx() {
+    const docContent = document.body.cloneNode(true);
+    const controlPanel = docContent.querySelector('.control-panel');
+    if (controlPanel) controlPanel.remove();
+
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'absolute';
+    iframe.style.width = '210mm';
+    iframe.style.height = '297mm';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    const iframeDoc = iframe.contentWindow.document;
+    iframeDoc.open();
+    iframeDoc.write('<html><head>');
+    iframeDoc.write('<meta charset="UTF-8">');
+    iframeDoc.write('<title>' + document.title + '</title>');
+    iframeDoc.write('<link rel="stylesheet" href="../../css/style_academico.css">');
+    iframeDoc.write('</head><body>');
+    iframeDoc.write(docContent.innerHTML);
+    iframeDoc.write('</body></html>');
+    iframeDoc.close();
+
+    setTimeout(() => {
+        iframe.contentWindow.print();
+        document.body.removeChild(iframe);
+    }, 500);
+}
+</script>
 </html>

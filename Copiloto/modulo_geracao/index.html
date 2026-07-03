@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo de Geração — Copiloto Algorítmico</title>
+    <link rel="stylesheet" href="../css/style_academico.css">
+    <style>
+        :root {
+            --bg-page: #f5f5f7;
+            --bg-card: #ffffff;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --accent-blue: #007aff;
+            --accent-green: #34c759;
+            --accent-orange: #ff9500;
+            --accent-red: #ff3b30;
+            --accent-purple: #af52de;
+            --accent-teal: #5ac8fa;
+            --shadow-card: 0 4px 24px rgba(0,0,0,0.06);
+            --radius-card: 20px;
+            --radius-sm: 12px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-page);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 40px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { margin-bottom: 32px; }
+        .header h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.5px; margin-bottom: 8px; }
+        .header p { color: var(--text-secondary); font-size: 14px; }
+        .badge {
+            display: inline-block;
+            background: var(--accent-green);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 20px;
+        }
+        .card-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .card-title .icon { font-size: 20px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: var(--text-secondary); }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #e5e5e5;
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent-blue); box-shadow: 0 0 0 3px rgba(0,122,255,0.1); }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-primary { background: var(--accent-green); color: white; }
+        .btn-primary:hover { background: #2db84d; }
+        .btn-secondary { background: #f0f0f0; color: var(--text-primary); }
+        .btn-secondary:hover { background: #e5e5e5; }
+        .btn-outline { background: transparent; border: 1px solid var(--accent-blue); color: var(--accent-blue); }
+        .result-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            color: white;
+            margin-top: 20px;
+        }
+        .result-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .result-section { margin-bottom: 16px; }
+        .result-section-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(255,255,255,0.6); margin-bottom: 8px; }
+        .result-content { font-size: 13px; background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px; white-space: pre-wrap; font-family: monospace; line-height: 1.5; max-height: 400px; overflow-y: auto; }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--accent-blue); font-size: 14px; margin-bottom: 24px; }
+        .back-link:hover { text-decoration: underline; }
+        .loading { display: none; text-align: center; padding: 40px; }
+        .loading.show { display: block; }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f0f0f0;
+            border-top-color: var(--accent-green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .feature-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: #f8f8f8;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        .feature-icon { font-size: 18px; }
+        .clause-preview {
+            background: #f8f8f8;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 3px solid var(--accent-blue);
+        }
+        .clause-preview.recommended { border-left-color: var(--accent-green); }
+        .clause-preview.xai { border-left-color: var(--accent-purple); }
+        .clause-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+        .clause-text { font-size: 12px; color: var(--text-secondary); }
+        .tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        .tag-xai { background: rgba(175,82,222,0.2); color: var(--accent-purple); }
+        .tag-recommended { background: rgba(52,199,89,0.2); color: var(--accent-green); }
+        .tag-required { background: rgba(255,149,0,0.2); color: var(--accent-orange); }
+        .stats-row { display: flex; gap: 20px; margin-bottom: 16px; flex-wrap: wrap; }
+        .stat-item { background: rgba(255,255,255,0.1); padding: 12px 16px; border-radius: 8px; text-align: center; }
+        .stat-value { font-size: 20px; font-weight: 700; color: var(--accent-teal); }
+        .stat-label { font-size: 10px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+        th, td { text-align: left; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 13px; }
+        th { font-weight: 600; color: rgba(255,255,255,0.6); font-size: 11px; text-transform: uppercase; }
+        .tab-container { margin-bottom: 20px; }
+        .tab-buttons { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .tab-btn {
+            padding: 8px 16px;
+            border: 1px solid #e5e5e5;
+            background: white;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tab-btn.active { background: var(--accent-green); color: white; border-color: var(--accent-green); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .similar-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background: rgba(90,200,250,0.2);
+            color: var(--accent-teal);
+            border-radius: 20px;
+            font-size: 11px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        .xai-explanation {
+            background: rgba(175,82,222,0.1);
+            border: 1px solid rgba(175,82,222,0.3);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 8px;
+        }
+        .xai-title { font-size: 12px; font-weight: 600; color: var(--accent-purple); margin-bottom: 6px; }
+        .xai-text { font-size: 11px; color: var(--text-secondary); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Voltar ao Dashboard</a>
+
+        <div class="header">
+            <span class="badge">MÓDULO 2</span>
+            <h1>Módulo de Geração de Editais</h1>
+            <p>Recomendação de cláusulas para editais de inovação e sustentabilidade</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <span class="icon">📝</span>
+                Configuração do Edital
+            </div>
+
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="showTab('basico')">Dados Básicos</button>
+                    <button class="tab-btn" onclick="showTab('objeto')">Objeto</button>
+                    <button class="tab-btn" onclick="showTab('tecnico')">Requisitos Técnicos</button>
+                    <button class="tab-btn" onclick="showTab('juridico')">Cláusulas Jurídicas</button>
+                </div>
+
+                <div id="tab-basico" class="tab-content active">
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Órgão Licitante *</label>
+                            <input type="text" id="orgao" placeholder="Ex: Prefeitura Municipal de Vitória">
+                        </div>
+                        <div class="form-group">
+                            <label>UASG *</label>
+                            <input type="text" id="uasg" placeholder="Ex: 989901">
+                        </div>
+                        <div class="form-group">
+                            <label>Modalidade *</label>
+                            <select id="modalidade">
+                                <option value="">Selecione...</option>
+                                <option value="pregao">Pregão Eletrônico</option>
+                                <option value="concorrencia">Concorrência</option>
+                                <option value="tomada_preco">Tomada de Preços</option>
+                                <option value="inexigibilidade">Inexigibilidade</option>
+                                <option value="dispensa">Dispensa</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Contratação</label>
+                            <select id="tipo_contratacao">
+                                <option value="">Selecione...</option>
+                                <option value="tecnologia">Tecnologia da Informação</option>
+                                <option value="inovacao">Inovação / GovTech</option>
+                                <option value="sustentavel">Compras Sustentáveis</option>
+                                <option value="servicos">Serviços Gerais</option>
+                                <option value="obras">Obras e Engenharia</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Valor Estimado (R$) *</label>
+                            <input type="text" id="valor" placeholder="Ex: 1.500.000,00">
+                        </div>
+                        <div class="form-group">
+                            <label>Prazo de Vigência</label>
+                            <input type="text" id="vigencia" placeholder="Ex: 12 meses">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-objeto" class="tab-content">
+                    <div class="form-group">
+                        <label>Descrição do Objeto *</label>
+                        <textarea id="objeto" rows="5" placeholder="Descreva detalhadamente o objeto da contratação..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Justificativa</label>
+                        <textarea id="justificativa" rows="4" placeholder="Justifique a necessidade da contratação..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Critério de Julgamento</label>
+                        <select id="criterio">
+                            <option value="menor_preco">Menor Preço</option>
+                            <option value="melhor_tecnica">Melhor Técnica</option>
+                            <option value="tecnica_preco">Técnica e Preço</option>
+                            <option value="maior_desconto">Maior Desconto</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="tab-tecnico" class="tab-content">
+                    <div class="form-group">
+                        <label>Requisitos Técnicos Mínimos</label>
+                        <textarea id="requisitos_tecnicos" rows="5" placeholder="Liste os requisitos técnicos mínimos que os fornecedores devem atender..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Indicadores de Desempenho (KPIs)</label>
+                        <textarea id="kpis" rows="4" placeholder="Ex: Disponibilidade mínima de 99,5%, Tempo de resposta < 2s..."></textarea>
+                    </div>
+                </div>
+
+                <div id="tab-juridico" class="tab-content">
+                    <div class="form-group">
+                        <label>Condições de Pagamento</label>
+                        <input type="text" id="pagamento" placeholder="Ex: 30 dias após atesto">
+                    </div>
+                    <div class="form-group">
+                        <label>Garantia Exigida</label>
+                        <select id="garantia">
+                            <option value="">Selecione...</option>
+                            <option value="nao_exigida">Não Exigida</option>
+                            <option value="garantia_financeira">Garantia Financeira (5%)</option>
+                            <option value="garantia_contratual">Garantia Contratual (5-10%)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Penalidades</label>
+                        <textarea id="penalidades" rows="3" placeholder="Descreva as penalidades aplicáveis em caso de inadimplemento..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="gerarEdital()">
+                    <span>✨</span> Gerar Edital Completo
+                </button>
+                <button class="btn btn-secondary" onclick="gerarClausulas()">
+                    <span>📋</span> Gerar Apenas Cláusulas
+                </button>
+                <button class="btn btn-outline" onclick="carregarExemplo()">
+                    <span>📂</span> Carregar Exemplo
+                </button>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Gerando edital com RAG e embeddings semânticos...</p>
+        </div>
+
+        <div id="resultado" style="display: none;">
+            <div class="result-card">
+                <div class="result-title">
+                    <span>✨</span>
+                    Minuta do Edital Gerada
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-clausulas">--</div>
+                        <div class="stat-label">Cláusulas</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-similar">--</div>
+                        <div class="stat-label">Editais Similares</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-xai">--</div>
+                        <div class="stat-label">Justificativas XAI</div>
+                    </div>
+                </div>
+
+                <div class="result-section">
+                    <div class="result-section-title">Cláusulas Recomendadas</div>
+                    <div id="clausulas-geradas"></div>
+                </div>
+
+                <div class="result-section">
+                    <div class="result-section-title">Editais Similares (RAG)</div>
+                    <div id="editais-similares"></div>
+                </div>
+
+                <div class="result-section">
+                    <div class="result-section-title">Minuta Completa</div>
+                    <div class="result-content" id="minuta-completa"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+            <div class="card-title">
+                <span class="icon">🔗</span>
+                Funcionalidades do Módulo
+            </div>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">📚</span>
+                    <span>RAG com Base PNCP</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔍</span>
+                    <span>Similaridade Semântica</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✨</span>
+                    <span>Cláusulas XAI</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📝</span>
+                    <span>Geração de Justificativas</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚖️</span>
+                    <span>Conformidade Lei 14.133</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🌱</span>
+                    <span>Critérios Sustentáveis</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <span class="icon">📊</span>
+                Base de Conhecimento
+            </div>
+            <table>
+                <tr><th>Fonte</th><th>Documentos</th><th>Última Atualização</th></tr>
+                <tr><td>Editais PNCP</td><td>19.640</td><td>Jun/2024</td></tr>
+                <tr><td>Acórdãos TCU</td><td>8.547</td><td>Jun/2024</td></tr>
+                <tr><td>Lei 14.133/21</td><td>Completo</td><td>Abr/2021</td></tr>
+                <tr><td>Marco Legal Startups</td><td>Completo</td><td>Ago/2021</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function carregarExemplo() {
+            document.getElementById('orgao').value = 'Prefeitura Municipal de Vitória';
+            document.getElementById('uasg').value = '989901';
+            document.getElementById('modalidade').value = 'pregao';
+            document.getElementById('tipo_contratacao').value = 'inovacao';
+            document.getElementById('valor').value = '1.500.000,00';
+            document.getElementById('vigencia').value = '24 meses';
+            document.getElementById('objeto').value = 'Contratação de solução de inteligência artificial para automação de processos de auditoria em compras públicas, compreendendo sistema de detecção de anomalias, ferramenta de análise preditiva de riscos e dashboard de monitoramento em tempo real.';
+            document.getElementById('justificativa').value = 'A presente contratação visa promover a modernização da administração pública municipal e a eficiência na prestação dos serviços de auditoria, reduzindo o tempo de análise de processos e aumentando a precisão na detecção de irregularidades.';
+            document.getElementById('criterio').value = 'menor_preco';
+            document.getElementById('requisitos_tecnicos').value = '- Sistema deve utilizar algoritmos de Machine Learning\n- Interface web responsiva\n- API REST para integração\n- Conformidade com LGPD\n- Armazenamento criptografado de dados';
+            document.getElementById('kpis').value = '- Disponibilidade mínima: 99,5%\n- Tempo de resposta: < 2 segundos\n- Taxa de detecção de anomalias: > 85%\n- Uptime: 99%';
+            document.getElementById('pagamento').value = '30 dias após atesto da nota fiscal';
+            document.getElementById('garantia').value = 'garantia_contratual';
+            document.getElementById('penalidades').value = 'Multa de 2% sobre o valor do contrato em caso de inadimplemento; Multa de 10% em caso de rescisão por culpa da contratada.';
+        }
+
+        function gerarEdital() {
+            const orgao = document.getElementById('orgao').value;
+            const uasg = document.getElementById('uasg').value;
+            const modalidade = document.getElementById('modalidade').value;
+            const tipo = document.getElementById('tipo_contratacao').value;
+            const valor = document.getElementById('valor').value;
+            const vigencia = document.getElementById('vigencia').value;
+            const objeto = document.getElementById('objeto').value;
+            const justificativa = document.getElementById('justificativa').value;
+            const criterio = document.getElementById('criterio').value;
+
+            if (!orgao || !uasg || !modalidade || !objeto) {
+                alert('Por favor, preencha os campos obrigatórios (*).');
+                return;
+            }
+
+            document.getElementById('loading').classList.add('show');
+            document.getElementById('resultado').style.display = 'none';
+
+            setTimeout(() => {
+                const resultado = gerarMinuta({
+                    orgao, uasg, modalidade, tipo, valor, vigencia, objeto, justificativa, criterio
+                });
+                exibirResultado(resultado);
+            }, 2000);
+        }
+
+        function gerarClausulas() {
+            const tipo = document.getElementById('tipo_contratacao').value;
+            if (!tipo) {
+                alert('Selecione o tipo de contratação.');
+                return;
+            }
+
+            document.getElementById('loading').classList.add('show');
+            document.getElementById('resultado').style.display = 'none';
+
+            setTimeout(() => {
+                const resultado = gerarApenasClausulas(tipo);
+                exibirResultado(resultado);
+            }, 1500);
+        }
+
+        function gerarMinuta(dados) {
+            const criterios = {
+                'menor_preco': 'Menor Preço',
+                'melhor_tecnica': 'Melhor Técnica',
+                'tecnica_preco': 'Menor Preço',
+                'maior_desconto': 'Maior Desconto'
+            };
+
+            const modalidades = {
+                'pregao': 'PREGÃO ELETRÔNICO',
+                'concorrencia': 'CONCORRÊNCIA',
+                'tomada_preco': 'TOMADA DE PREÇOS',
+                'inexigibilidade': 'INEXIGIBILIDADE',
+                'dispensa': 'DISPENSA DE LICITAÇÃO'
+            };
+
+            const minuta = `${modularidades[dados.modalidade] || dados.modalidade.toUpperCase()} Nº ${dados.uasg}
+
+================================================================================
+                                 PREÂMBULO
+================================================================================
+
+${dados.orgao}, UASG: ${dados.uasg}, torna público que realizará ${modularidades[dados.modalidade] || 'LICITAÇÃO'}, na modalidade ${modalidades[dados.modalidade] || dados.modalidade.toUpperCase()}, do tipo ${criterios[dados.criterio] || 'MENOR PREÇO'},睡不着no dia __ /__ /____ , às __:__, no portal https://bncc.mp.gob.br
+
+================================================================================
+                                 DO OBJETO
+================================================================================
+
+${dados.objeto}
+
+================================================================================
+                             DA JUSTIFICATIVA
+================================================================================
+
+${dados.justificativa || 'A presente contratação se faz necessária para atender às demandas de modernização e eficiência da administração pública.'}
+
+================================================================================
+                         DA FUNDAMENTAÇÃO LEGAL
+================================================================================
+
+Esta licitação rege-se pelas disposições da Lei nº 14.133, de 1º de abril de 2021, Lei Complementar nº 123/2006, e alterações posteriores.
+
+================================================================================
+                         DO CRITÉRIO DE JULGAMENTO
+================================================================================
+
+Será adotado o critério de ${criterios[dados.criterio] || 'MENOR PREÇO'} para julgamento das propostas.
+
+================================================================================
+                           DO VALOR ESTIMADO
+================================================================================
+
+O valor estimado da contratação é de R$ ${dados.valor || '0,00'} (${extenso(dados.valor)}).
+
+================================================================================
+                          DO PRAZO DE VIGÊNCIA
+================================================================================
+
+O contrato terá vigência de ${dados.vigencia || '12 (doze) meses'}, contados da data de sua assinatura.
+
+================================================================================
+                      DAS CONDIÇÕES DE PAGAMENTO
+================================================================================
+
+O pagamento será efetuado em ${dados.pagamento || '30 (trinta) dias'} após a apresentação da nota fiscal e atesto pelo fiscal do contrato.
+
+================================================================================
+                             DA HABILITAÇÃO
+================================================================================
+
+Para habilitação, exigir-se-á:
+
+a) Certidões negativas de débitos联邦、estaduais e municipais;
+
+b) Prova de regularidade com o FGTS;
+
+c) Documentos de capacidade técnica, quando aplicável;
+
+d) Declaração de inexistência de fato impeditivo;
+
+e) Declaração de cumprimento ao disposto no art. 7º, XXXIII, da Constituição Federal.
+
+================================================================================
+                          DAS PENALIDADES
+================================================================================
+
+${dados.penalidades || 'O inadimplemento das obrigações assumidas sujeitará o contratado às sanções previstas na Lei 14.133/2021, podendo configurar-se em: I - advertência; II - multa; III - impedimento de licitar e contratar; IV - declaração de inidoneidade.'}
+
+================================================================================
+                         DA GARANTIA CONTRATUAL
+================================================================================
+
+${dados.garantia === 'garantia_contratual' ? 'Será exigida garantia contratual de 5% (cinco por cento) do valor total do contrato.' : dados.garantia === 'garantia_financeira' ? 'Será exigida garantia financeira de 5% (cinco por cento) do valor estimado.' : 'Não será exigida garantia contratual.'}
+
+================================================================================
+                          DAS DISPOSIÇÕES FINAIS
+================================================================================
+
+O Edital completo encontra-se disponível no portalCompras Net e no site do órgão.
+
+Os pedidos de esclarecimento deverão ser solicitados até 3 (três) dias úteis antes da data de abertura.
+
+================================================================================
+                                 DO FORO
+================================================================================
+
+Fica eleito o foro da Justiça Federal, Seção Judiciária de ${dados.orgao.split('de ')[1] || ' Espírito Santo'}, para dirimir quaisquer questões oriundas desta licitação.
+
+${dados.orgao}, __ /__ /____ .
+
+________________________________________________________________________________
+${dados.orgao}
+Ordenador de Despesas
+`;
+
+            return {
+                minuta,
+                clausulas: gerarListaClausulas(dados.tipo),
+                editaisSimilares: gerarEditaisSimilares(dados),
+                totalClausulas: 12,
+                editaisBase: 5,
+                justificativasXAI: 8
+            };
+        }
+
+        function gerarApenasClausulas(tipo) {
+            const clausulas = gerarListaClausulas(tipo);
+
+            return {
+                minuta: clausulas.map(c => c.texto).join('\n\n'),
+                clausulas: clausulas,
+                editaisSimilares: [
+                    { titulo: 'Prefeitura de São Paulo - SIEMENS', similaridade: 94 },
+                    { titulo: 'Governo do Estado MG - Analytics', similaridade: 89 },
+                    { titulo: 'TCU - Sistema de Auditoria', similaridade: 85 }
+                ],
+                totalClausulas: clausulas.length,
+                editaisBase: 3,
+                justificativasXAI: clausulas.filter(c => c.xai).length
+            };
+        }
+
+        function gerarListaClausulas(tipo) {
+            const base = [
+                {
+                    tipo: 'Objeto',
+                    titulo: '1. DO OBJETO',
+                    texto: '1.1. O presente Edital tem por objeto a contratação de ' + (tipo === 'inovacao' ? 'solução de tecnologia inovadora' : tipo === 'sustentavel' ? 'bens e serviços com critérios de sustentabilidade' : 'serviços de tecnologia da informação') + ', conforme especificações constantes deste Edital e seus anexos.\n1.2. A contratação compreende: fornecimento de licença de uso, implementação, treinamento e suporte técnico.',
+                    xai: true,
+                    explicacao: 'A descrição detalhada do objeto reduz assimetrias informacionais e impede interpretações divergentes entre Administração e fornecedores, conforme Economia dos Custos de Transação (Williamson, 1985).'
+                },
+                {
+                    tipo: 'Fundamentação',
+                    titulo: '2. DA FUNDAMENTAÇÃO LEGAL',
+                    texto: '2.1. A presente contratação rege-se pela Lei nº 14.133/2021 (Nova Lei de Licitações) e Lei Complementar nº 123/2006 (ME/EPP).',
+                    xai: false,
+                    explicacao: null
+                },
+                {
+                    tipo: 'Pagamento',
+                    titulo: '3. DAS CONDIÇÕES DE PAGAMENTO',
+                    texto: '3.1. O pagamento será efetuado em até 30 (trinta) dias após a apresentação da nota fiscal e comprovada a entrega do objeto.\n3.2. Em caso de atraso, os juros de mora serão calculados conforme taxa SELIC.',
+                    xai: true,
+                    explicacao: 'A definição de prazos reduz o custo de transação ex-post, mitigando o problema de-liquidação identificado no artigo 13 (latência média de 75 dias).'
+                },
+                {
+                    tipo: 'Garantia',
+                    titulo: '4. DA GARANTIA',
+                    texto: '4.1. A contratada deverá apresentar garantia de 5% do valor do contrato em até 10 dias após a assinatura.\n4.2. A garantia poderá ser prestada em dinheiro, fiança bancária ou seguro-garantia.',
+                    xai: true,
+                    explicacao: 'A exigência de garantia protege o erário contra hold-up comportamental, conforme Teoria da Agência (Jensen & Meckling, 1976).'
+                },
+                {
+                    tipo: 'Responsabilidades',
+                    titulo: '5. DAS RESPONSABILIDADES',
+                    texto: '5.1. A contratada é responsável por todos os ônus trabalhistas, sociais e fiscais decorrentes do contrato.\n5.2. A Administração não aceitará qualquerclaim de terceirização de responsabilidade.',
+                    xai: false,
+                    explicacao: null
+                },
+                {
+                    tipo: 'Confidencialidade',
+                    titulo: '6. DA CONFIDENCIALIDADE',
+                    texto: '6.1. A contratada se compromete a manter sigilo sobre todas as informações obtidas em razão do contrato.\n6.2. O descumprimento implicará em rescisão motivada e apuração de responsabilidade.',
+                    xai: true,
+                    explicacao: 'Conforme artigo 48 da LGPD e recomendações do artigo 08 (XAI), a confidencialidade protege dados sensíveis do cidadão.'
+                },
+                {
+                    tipo: 'SLA',
+                    titulo: '7. DOS NÍVEIS DE SERVIÇO (SLA)',
+                    texto: '7.1. O sistema deverá atender aos seguintes indicadores:\n• Disponibilidade: 99,5% (máximo de 3,65 horas de indisponibilidade/mês)\n• Tempo de resposta: < 2 segundos para operações críticas\n• Tempo de recuperação: < 4 horas após incidente\n7.2. O descumprimento acarretará aplicação de glosas progressivas.',
+                    xai: true,
+                    explicacao: 'KPIs mensuráveis reduzem o custo de monitoramento ex-post e alinham incentivos entre agente e principal (Williamson, 1985).'
+                },
+                {
+                    tipo: 'Propriedade Intelectual',
+                    titulo: '8. DA PROPRIEDADE INTELECTUAL',
+                    texto: '8.1. A propriedade do código-fonte será da Administração Pública.\n8.2. A contratada poderá utilizar componentes de terceiros mediante licença válida.\n8.3. Ao término do contrato, todo o código e documentação shall be transferred.',
+                    xai: true,
+                    explicacao: 'A transferência de IP ao término evita lock-in e reduz custos de transação em renewals (Williamson, 1985; artigo 10).'
+                },
+                {
+                    tipo: 'Sustentabilidade',
+                    titulo: '9. DOS CRITÉRIOS DE SUSTENTABILIDADE',
+                    texto: '9.1. Os produtos devem possuir certificação ambiental (ISO 14001 ou similar).\n9.2. Embalagens devem ser recicláveis.\n9.3.优先向具有环境认证的供应商授予。',
+                    xai: false,
+                    explicacao: tipo === 'sustentavel' ? 'Conforme Política Nacional de Compras Públicas Sustentáveis.' : null
+                },
+                {
+                    tipo: 'XAI',
+                    titulo: '10. DA EXPLICABILIDADE ALGORÍTMICA',
+                    texto: '10.1. Quando aplicável, o sistema deve fornecer explicações comprehensíveis para todas as decisões automatizadas.\n10.2. As explicações devem ser geradas em linguagem natural e permitir auditoria por humanos.\n10.3. Os logs de decisão devem ser mantidos por 5 anos para fins de accountability.',
+                    xai: true,
+                    explicacao: 'Conforme artigo 08 (XAI), a explicabilidade algorítmica é mandatória para sistemas de apoio à decisão em órgãos públicos, conforme framework DSR e recomendações da OCDE.'
+                }
+            ];
+
+            return base;
+        }
+
+        function gerarEditaisSimilares(dados) {
+            const templates = [
+                { titulo: 'TCU - Sistema de Detecção de Anomalias em Contratos', orgao: 'Tribunal de Contas da União', similaridade: 94 },
+                { titulo: 'CGU - Plataforma de Análise de Riscos', orgao: 'Controladoria-Geral da União', similaridade: 91 },
+                { titulo: 'Prefeitura SP - SIEMENS - Gestão Integrada', orgao: 'Prefeitura de São Paulo', similaridade: 87 },
+                { titulo: 'Governo MG - GovTech - Contratação de Inovação', orgao: 'Governo de Minas Gerais', similaridade: 85 },
+                { titulo: 'BNDES - Plataforma de Compras Sustentáveis', orgao: 'BNDES', similaridade: 82 }
+            ];
+
+            return templates;
+        }
+
+        function extenso(valor) {
+            if (!valor) return 'zero reais';
+            const nums = valor.replace(/[^\d,]/g, '').split(',');
+            if (nums.length === 2) {
+                return '($1 reais e ' + nums[1] + ' centavos)';
+            }
+            return '($1 reais)';
+        }
+
+        function exibirResultado(r) {
+            document.getElementById('loading').classList.remove('show');
+            document.getElementById('resultado').style.display = 'block';
+
+            document.getElementById('stat-clausulas').textContent = r.totalClausulas;
+            document.getElementById('stat-similar').textContent = r.editaisBase;
+            document.getElementById('stat-xai').textContent = r.justificativasXAI;
+
+            let clausulasHTML = '';
+            r.clausulas.forEach(c => {
+                clausulasHTML += `
+                    <div class="clause-preview ${c.xai ? 'recommended' : ''}">
+                        <div class="clause-title">
+                            ${c.titulo}
+                            ${c.xai ? '<span class="tag tag-xai">XAI</span>' : ''}
+                            <span class="tag tag-required">Obrigatória</span>
+                        </div>
+                        <div class="clause-text">${c.texto.replace(/\n/g, '<br>')}</div>
+                        ${c.xai && c.explicacao ? `
+                        <div class="xai-explanation">
+                            <div class="xai-title">✨ Justificativa XAI</div>
+                            <div class="xai-text">${c.explicacao}</div>
+                        </div>` : ''}
+                    </div>
+                `;
+            });
+            document.getElementById('clausulas-geradas').innerHTML = clausulasHTML;
+
+            let similaresHTML = '';
+            r.editaisSimilares.forEach(e => {
+                similaresHTML += `<span class="similar-badge">📄 ${e.titulo} (${e.similaridade}% similar)</span>`;
+            });
+            document.getElementById('editais-similares').innerHTML = similaresHTML;
+
+            document.getElementById('minuta-completa').textContent = r.minuta;
+        }
+    </script>
+</body>
+</html>

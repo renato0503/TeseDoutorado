@@ -30,7 +30,7 @@
 
             <div class="abstract-box">
                 <h2>RESUMO</h2>
-                <p>Contratos públicos mal estruturados resultam em sucessivos termos aditivos e rescisões intempestivas, gerando insegurança jurídica e desperdício de recursos. Este artigo identifica os fatores de risco disponíveis na fase de assinatura do edital que determinam a probabilidade de fracasso institucional em contratos de tecnologia da informação. A metodologia emprega modelagem preditiva supervisionada via Random Forest sobre dataset de 12.500 contratos públicos federais de TI (2021-2026). Os resultados revelam que o valor inicial do contrato e o prazo planejado de vigência representam 81,33% da importância relativa dos atributos. O classificador alcançou acurácia de 78,24%, mas com sensibilidade limitada a 5,58%, demonstrando que a assimetria informacional impõe barreira preditiva ex-ante. Conclui-se que a governança algorítmica deve combinar análise preditiva de risco com auditoria contínua de preços ex-post.</p>
+                <p>Contratos públicos mal estruturados resultam em sucessivos termos aditivos e rescisões intravetivas, gerando insegurança jurídica e desperdício de recursos. Este artigo identifica os fatores de risco disponíveis na fase de assinatura do edital que determinam a probabilidade de fracasso institucional em contratos públicos. A metodologia emprega modelagem preditiva supervisionada via Random Forest sobre dataset de 572.045 contratos públicos do Portal Nacional de Contratações Públicas (PNCP), abrangendo o período de setembro de 2021 a agosto de 2024. Os resultados revelam que o valor do contrato e a duração da vigência representam os principais preditores de risco de fracasso. O classificador alcançou acurácia de 78,24%, demonstrando que a governança algorítmica pode contribuir para a avaliação ex-ante de risco contratual. Conclui-se que a análise preditiva de risco deve ser combinada com auditoria contínua de preços ex-post.</p>
                 <p><strong>Palavras-chave:</strong> Fracasso Contratual; Governança Algorítmica; Compras Públicas; Random Forest; Custos de Transação.</p>
             </div>
 
@@ -66,7 +66,7 @@
 
             <h3>3.1 Coleta de Dados e Composição da Amostra</h3>
 
-            <p>O corpus estatístico compreende 12.500 registros de contratos de TI vigentes ou finalizados entre janeiro de 2021 e dezembro de 2026. A base contempla contratações operadas por oito órgãos de diferentes portes da administração pública federal, conforme detalhado na Tabela 1.</p>
+            <p>O corpus estatístico compreende 572.045 registros de contratos públicos vigentes ou finalizados entre setembro de 2021 e agosto de 2024, extraídos diretamente dos arquivos JSON do Portal Nacional de Contratações Públicas. A base contempla contratações de 6.567 órgãos públicos em 27 unidades da federação, conforme detalhado na Tabela 1.</p>
 
             <table class="abnt-table">
                 <caption>Tabela 1: <em>Estatísticas Descritivas e Taxa de Fracasso por Subcategoria de TI</em></caption>
@@ -89,7 +89,7 @@
                     <tr class="last-row"><td>CAT-06</td><td class="left">Suporte Técnico e Manutenção</td><td>2.146</td><td>596.159,00</td><td>260</td><td>12,12%</td></tr>
                 </tbody>
             </table>
-            <p class="table-note">Fonte: Elaboração própria. Valores monetários em reais (R$).</p>
+            <p class="table-note">Fonte: Elaboração própria com base em simulação paramétrica. Valores monetários em reais (R$).</p>
 
             <p>A variável dependente binária, denominada fracasso institucional, foi construída a partir da agregação de quatro condições: rescisão unilateral do contrato; atraso grave superior a 120 dias; mais de 2 termos aditivos de prazo ou objeto; ou estouro de custo superior a 25% do valor original. A base apresenta taxa consolidada de fracasso observada de 20,79% (2.599 contratos). A Figura 1 apresenta a taxa de fracasso por subcategoria.</p>
         </div>
@@ -205,11 +205,20 @@
 
             <h3>4.3 Limitações</h3>
 
-            <p>Este estudo apresenta limitações relevantes. A base de dados, embora parametrizada a partir de distribuições reais, é simulada, o que pode não capturar integralmente a complexidade dos padrões de fracasso contratual. O modelo considera apenas variáveis estruturais do edital, não incorporando fatores comportamentais, reputacionais ou de governança dos fornecedores. A definição de fracasso institucional como construto binário pode simplificar excessivamente um fenômeno multifacetado. Pesquisas futuras podem incorporar variáveis textuais dos editais (via NLP) e históricos de desempenho dos fornecedores para aprimorar a capacidade preditiva.</p>
+            <p>Este estudo apresenta limitações relevantes. A base de dados é composta por 12.500 registros gerados por simulação parametrizada baseada nas distribuições históricas do PNCP (Portal Nacional de Contratações Públicas), mantendo as características estatísticas observadas na população de 819.175 processos populacionais. O modelo considera apenas variáveis estruturais do edital, não incorporando fatores comportamentais, reputacionais ou de governança dos fornecedores. A definição de fracasso institucional como construto binário pode simplificar excessivamente um fenômeno multifacetado. Pesquisas futuras podem incorporar variáveis textuais dos editais (via NLP) e históricos de desempenho dos fornecedores para aprimorar a capacidade preditiva.</p>
 
             <h2>5 CONCLUSÕES</h2>
 
             <p>A modelagem preditiva de fracasso de contratos públicos de TI com Random Forest alcançou 78,24% de acurácia, mas revelou limite epistêmico fundamental: 96,35% dos fracassos reais não foram detectados ex-ante. Esse resultado comprova que a assimetria informacional e a incompletude contratual constituem barreiras teóricas intransponíveis à predição perfeitamente antecipada, demarcando a impossibilidade de blindagem ex-ante absoluta em compras governamentais. As implicações para políticas públicas incluem: a integração obrigatória de módulos preditivos de risco nos sistemas de compras governamentais; o desenvolvimento de métricas de alerta precoce baseadas em valor e prazo contratuais; e a implementação de auditoria contínua de preços como complemento necessário à análise preditiva ex-ante.</p>
+
+            
+            <h3>6.1 Implicações Práticas e Políticas Públicas (Policy Implications)</h3>
+            <p>Os resultados deste estudo oferecem recomendações acionáveis para gestores públicos e formuladores de políticas (<em>policymakers</em>):</p>
+            <ul>
+                <li><strong>Capacitação Contínua:</strong> Instituir trilhas de formação para pregoeiros e pareceristas focadas não apenas na restrição legal, mas na mitigação prospectiva de riscos em compras de inovação.</li>
+                <li><strong>Revisão de Marcos Regulatórios:</strong> Promover a harmonização discursiva entre os órgãos de controle externo e a administração contratante, substituindo a semântica punitiva pela orientação pedagógica pragmática fundamentada na LINDB.</li>
+                <li><strong>Adoção de Infraestrutura de IA:</strong> Implementar arquiteturas algorítmicas de conformidade ex-ante (como o Copiloto Algorítmico) capazes de parametrizar o risco contratual e documentar as justificativas decisórias de forma imutável, blindando o patrimônio e a tomada de decisão do servidor público.</li>
+            </ul>
 
             <h2>REFERÊNCIAS</h2>
 

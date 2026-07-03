@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentacao ao Orientador</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/white.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <style>
+        :root {
+            --fucape-navy: #1e3a8a;
+            --fucape-gray: #64748b;
+            --fucape-light: #f1f5f9;
+            --highlight-green: #059669;
+            --highlight-red: #dc2626;
+            --highlight-orange: #d97706;
+        }
+
+        .reveal {
+            font-family: 'Georgia', serif;
+            font-size: 26px;
+            color: #1e293b;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Arial', sans-serif;
+            color: var(--fucape-navy);
+            text-transform: none;
+            letter-spacing: -0.02em;
+        }
+
+        .reveal h1 { font-size: 1.6em; font-weight: 700; }
+        .reveal h2 { font-size: 1.2em; font-weight: 600; margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 0.85em; font-weight: 600; }
+
+        .reveal section {
+            height: 100%;
+            padding: 30px 60px;
+            box-sizing: border-box;
+        }
+
+        .reveal .slides {
+            text-align: left;
+        }
+
+        .cover-slide {
+            text-align: center !important;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cover-slide h1 {
+            font-size: 1.4em;
+            line-height: 1.4;
+            margin-bottom: 30px;
+        }
+
+        .cover-slide .subtitle {
+            font-size: 0.8em;
+            color: var(--fucape-gray);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .cover-slide .meta {
+            font-size: 0.65em;
+            color: var(--fucape-gray);
+            line-height: 1.8;
+        }
+
+        .cover-slide .meta strong {
+            color: var(--fucape-navy);
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            background: var(--fucape-light);
+            border-radius: 8px;
+            padding: 16px 10px;
+            text-align: center;
+            border-left: 3px solid var(--fucape-navy);
+        }
+
+        .stat-box .value {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--fucape-navy);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .stat-box .label {
+            font-size: 0.5em;
+            color: var(--fucape-gray);
+            margin-top: 4px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 10px 0;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+            border-left: 3px solid var(--fucape-navy);
+        }
+
+        .content-card h3 {
+            font-size: 0.75em;
+            margin-bottom: 8px;
+        }
+
+        .content-card p, .content-card li {
+            font-size: 0.58em;
+            line-height: 1.5;
+            color: #334155;
+        }
+
+        .content-card ul {
+            padding-left: 16px;
+            margin: 0;
+        }
+
+        .finding-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+            border-radius: 8px;
+            padding: 14px;
+            margin: 12px 0;
+            border-left: 3px solid var(--highlight-green);
+        }
+
+        .finding-box h4 {
+            font-size: 0.65em;
+            color: var(--highlight-green);
+            margin-bottom: 6px;
+        }
+
+        .finding-box p {
+            font-size: 0.55em;
+            line-height: 1.5;
+            color: #1e293b;
+        }
+
+        .icon-inline { margin-right: 6px; color: var(--fucape-navy); font-size: 0.9em; }
+
+        .slide-footer {
+            position: absolute;
+            bottom: 12px;
+            left: 60px;
+            right: 60px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.45em;
+            color: var(--fucape-gray);
+            border-top: 1px solid #e2e8f0;
+            padding-top: 10px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 250px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .two-cols {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .col {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- SLIDE 1: CAPA -->
+            <section class="cover-slide">
+                <h1>Copiloto Algorítmico para Compras Públicas Complexas:<br>Redução de Assimetrias na Contratação</h1>
+                <p class="subtitle">Relatório Consolidado de Resultados Empíricos</p>
+                <div class="meta">
+                    <p><strong>Renato de Oliveira Rosa</strong></p>
+                    <p>Orientador: Prof. Dr. Olavo Venturim Caldas</p>
+                    <p style="margin-top: 16px;">Fucape Business School — Doutorado em Contabilidade</p>
+                    <p style="margin-top: 6px; color: var(--fucape-navy);">Julho de 2026</p>
+                </div>
+            </section>
+
+            
+            <!-- SLIDE 2: CONTEXTO DA TESE -->
+            <section>
+                <h2><i class="fas fa-university icon-inline"></i>2. Contexto da Tese</h2>
+
+                <div class="two-cols">
+                    <div class="col">
+                        <div class="content-card">
+                            <h3>A Complexidade da Compra Pública</h3>
+                            <p>A contratação pública de inovação e sustentabilidade no Brasil caracteriza-se por um ambiente de alta complexidade regulatória. O volume de recursos mobilizados pelo Estado atinge aproximadamente 15% do PIB, consolidando o poder de compra governamental como indutor estratégico de tecnologia.</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="content-card">
+                            <h3>O "Apagão das Canetas"</h3>
+                            <p>A estruturação de editais complexos impõe desafios cognitivos severos aos gestores. A ausência de apoio técnico, combinada com a responsabilização estrita imposta por órgãos de controle, gera uma aversão ao risco que paralisa as aquisições, elevando os custos de transação e a latência decisória.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="finding-box">
+                    <h4><i class="fas fa-lightbulb icon-inline"></i>O Desafio</h4>
+                    <p>Como desenvolver um artefato tecnológico capaz de mitigar a assimetria informacional e reduzir a paralisia decisória, sem usurpar a autonomia do gestor público e mantendo a transparência institucional?</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 3: EMBASAMENTO TEÓRICO -->
+            <section>
+                <h2><i class="fas fa-book icon-inline"></i>3. Embasamento Teórico</h2>
+
+                <div class="content-card">
+                    <p>A pesquisa articula-se em eixos analíticos que convergem do macroinstitucional para o microtecnológico, fundamentando a intervenção governamental.</p>
+                </div>
+
+                <div class="stat-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="stat-box" style="border-left-color: var(--fucape-blue);">
+                        <div class="value" style="font-size: 1.2em; color: var(--fucape-blue);">Custos de Transação</div>
+                        <div class="label">Williamson (1985) e Coase (1937): Racionalidade limitada e custos associados à assimetria informacional.</div>
+                    </div>
+                    <div class="stat-box" style="border-left-color: var(--fucape-orange);">
+                        <div class="value" style="font-size: 1.2em; color: var(--fucape-orange);">Estado Empreendedor</div>
+                        <div class="label">Mazzucato (2018): O papel indutor do poder de compra público nas políticas de inovação e tecnologia.</div>
+                    </div>
+                    <div class="stat-box" style="border-left-color: var(--fucape-green);">
+                        <div class="value" style="font-size: 1.2em; color: var(--fucape-green);">Transparência</div>
+                        <div class="label">Burrell (2016): Necessidade constitucional de accountability e interpretabilidade em decisões estatais.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 4: XAI - AUTORES E PARADIGMAS -->
+            <section>
+                <h2><i class="fas fa-brain icon-inline"></i>4. XAI: Autores e Paradigmas</h2>
+
+                <div class="two-cols">
+                    <div class="col">
+                        <div class="content-card">
+                            <h3>O Paradigma Black-box</h3>
+                            <p>Doshi-Velez e Kim (2018) identificam que modelos preditivos complexos operam como caixas-pretas (black-box), cujas decisões opacas conflitam com o direito à motivação dos atos administrativos no setor público.</p>
+                            <p>Arrieta et al. (2020) e Adadi (2021) classificam as técnicas em intrínsecas e pós-hoc, destacando a fidelidade e a suficiência na validação de sistemas explicáveis.</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="content-card">
+                            <h3>A Solução Explicável (XAI)</h3>
+                            <p>Ribeiro et al. (2016) e Lundberg & Lee (2017) validam o uso de LIME e SHAP para gerar explicabilidade sem violar os parâmetros internos do modelo (propriedade intelectual).</p>
+                            <p>Wachter et al. (2019) propõem as <strong>explicações contrafactuais</strong> como o mecanismo regulatório ideal para equilibrar transparência (accountability) com a proteção de segredos comerciais no Estado.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 5: METODOLOGIA -->
+            <section>
+                <h2><i class="fas fa-project-diagram icon-inline"></i>5. Metodologia: Design Science Research</h2>
+
+                <div class="content-card">
+                    <p>A pesquisa adota o paradigma <strong>Design Science Research (DSR)</strong>, estruturado nos ciclos de Peffers et al. (2007) e Hevner (2007), conjugando rigor acadêmico com relevância prática governamental mediante uma abordagem de Métodos Mistos.</p>
+                </div>
+
+                <div class="stat-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="stat-box" style="border-left-color: var(--highlight-orange);">
+                        <div class="value" style="font-size: 1.2em; color: var(--highlight-orange);">Eixo Quantitativo</div>
+                        <div class="label">Análise populacional (572 mil contratos). Modelagem não supervisionada (Isolation Forest), Random Forest e estimadores de sobrevivência (Kaplan-Meier, Cox).</div>
+                    </div>
+                    <div class="stat-box" style="border-left-color: var(--highlight-green);">
+                        <div class="value" style="font-size: 1.2em; color: var(--highlight-green);">Eixo Qualitativo</div>
+                        <div class="label">Análise de conteúdo estruturada (Bardin) de acórdãos e matérias midiáticas. Validação final via Painel Delphi com dez especialistas em compras públicas.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 6: O ARTEFATO DSR -->
+            <section>
+                <h2><i class="fas fa-laptop-code icon-inline"></i>6. O Artefato DSR: Copiloto Algorítmico</h2>
+
+                <div class="content-card">
+                    <p>O produto tecnológico desenvolvido atua como um <strong>exoesqueleto cognitivo</strong>. A solução não substitui o julgamento do agente público, mas preenche a lacuna informacional por meio do processamento avançado de linguagem natural (NLP).</p>
+                </div>
+
+                <div class="two-cols">
+                    <div class="col">
+                        <div class="finding-box">
+                            <h4>Módulo de Avaliação</h4>
+                            <p>Inspeção automatizada de minutas de editais visando detectar omissões legais (compliance algorítmico) e cláusulas restritivas à concorrência em licitações complexas.</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="finding-box">
+                            <h4>Módulo de Geração</h4>
+                            <p>Recuperação semântica de cláusulas bem-sucedidas em contratações pretéritas. Utiliza métricas XAI (SHAP) para auditar cada recomendação formulada ao usuário.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+<!-- SLIDE 7: PIPELINE E BASE DE DADOS -->
+            <section>
+                <h2><i class="fas fa-database icon-inline"></i>7. O Pipeline de Dados (População Censitária)</h2>
+
+                <div class="content-card">
+                    <p>A pesquisa construiu um banco de dados integrado, extraído via APIs governamentais (PNCP, Siconfi, Transparência) referentes ao período de setembro de 2021 a agosto de 2024. Adicionalmente, dados qualitativos foram coletados de acórdãos, publicações midiáticas e documentos oficiais.</p>
+                </div>
+
+                <div class="two-cols">
+                    <div class="col">
+                        <div class="stat-grid" style="grid-template-columns: repeat(2, 1fr);">
+                            <div class="stat-box">
+                                <div class="value">572.045</div>
+                                <div class="label">Contratos PNCP</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="value">119.558</div>
+                                <div class="label">Fornecedores</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="value">6.567</div>
+                                <div class="label">Órgãos Públicos</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="value">R$ 491,9 bi</div>
+                                <div class="label">Valor Transacionado</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="chart-container">
+                            <canvas id="chartPipeline"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="finding-box">
+                    <h4><i class="fas fa-check-circle icon-inline"></i>Síntese</h4>
+                    <p>A base estruturada sustenta 25 artigos empíricos da tese. Portanto, elimina-se o viés de amostragem ao processar a população completa dos dados no intervalo analisado.</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 8: QUANTI I -->
+            <section>
+                <h2><i class="fas fa-chart-line icon-inline"></i>8. Resultados Quantitativos: Custos e Latência</h2>
+
+                <div class="two-cols">
+                    <div class="col">
+                        <div class="content-card">
+                            <h3>Governança e Eficiência (Art. 07)</h3>
+                            <p>Análise de 180 municípios (Benchmarking Siconfi/DEA) indicou que a adoção de sistemas algorítmicos promoveu redução estatisticamente significativa no tempo de processamento.</p>
+                            <ul>
+                                <li><strong>Antes:</strong> 45,66 horas/processo.</li>
+                                <li><strong>Depois:</strong> 5,14 horas/processo (Redução de 88,74%).</li>
+                            </ul>
+                        </div>
+                        <div class="content-card">
+                            <h3>"Apagão das Canetas" (Art. 04)</h3>
+                            <p>Regressão OLS com lags (n = 9.000) revelou que cada sanção do TCU gera latência direta (ex-ante) nas decisões (R² = 90,64%).</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="chart-container" style="height: 350px;">
+                            <canvas id="chartCustos"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 9: QUANTI II -->
+            <section>
+                <h2><i class="fas fa-shield-alt icon-inline"></i>3. Resultados Quantitativos: Risco e Concentração</h2>
+
+                <div class="two-cols">
+                    <div class="col">
+                        <div class="content-card">
+                            <h3>Redes de Fornecimento (Art. 05)</h3>
+                            <p>A análise estrutural de grafos (NetworkX) evidenciou elevada concentração de mercado em contratações de TI, configurando um ambiente oligopolista acentuado.</p>
+                            <ul>
+                                <li><strong>Gini Financeiro:</strong> 0,9072</li>
+                                <li><strong>Concentração:</strong> 87,21% em 3 empresas líderes.</li>
+                            </ul>
+                        </div>
+                        <div class="content-card">
+                            <h3>Sobrevivência e Predição (Art. 03 e 06)</h3>
+                            <p>O modelo Random Forest obteve 78,24% de acurácia na predição de fracasso. Complementarmente, o modelo de Cox (Kaplan-Meier) demonstrou redução de 62% no risco de rescisão utilizando apoio algorítmico.</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="chart-container" style="height: 350px;">
+                            <canvas id="chartConcentracao"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 10: QUALI I -->
+            <section>
+                <h2><i class="fas fa-comments icon-inline"></i>4. Resultados Qualitativos: Discurso e Mercado</h2>
+
+                <div class="two-cols">
+                    <div class="col">
+                        <div class="content-card">
+                            <h3>Uso Retórico da Inovação (Art. 10)</h3>
+                            <p>Análise de conteúdo de Laurence Bardin em 350 justificativas do PNCP apontou dependência estrutural (χ² = 91,25, p < 0,001) entre contratação direta e argumentos retóricos.</p>
+                        </div>
+                        <div class="content-card">
+                            <h3>Voz do Mercado (Art. 11)</h3>
+                            <p>A codificação de 150 impugnações revelou que o direcionamento de edital e a superespecificação técnica são as principais causas de disputas. Objetos complexos apresentaram taxa de acolhimento significativamente maior (62,5%).</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="chart-container">
+                            <canvas id="chartRetorica"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 11: QUALI II -->
+            <section>
+                <h2><i class="fas fa-newspaper icon-inline"></i>5. Resultados Qualitativos: Mídia e Controle</h2>
+
+                <div class="two-cols">
+                    <div class="col">
+                        <div class="content-card">
+                            <h3>Jurisprudência do Medo (Art. 09)</h3>
+                            <p>Aplicação da Análise Crítica do Discurso (Fairclough) em acórdãos do TCU evidenciou padrões de nominalização punitiva, os quais inibem a agência administrativa em cenários de inovação tecnológica.</p>
+                        </div>
+                        <div class="content-card">
+                            <h3>Enquadramento Midiático da IA (Art. 15)</h3>
+                            <p>A teoria do enquadramento aplicada a 388 publicações (Conjur, Valor Econômico e Jota) atestou uma polarização de narrativas (χ² = 108,45, p < 0,001).</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="chart-container" style="height: 320px;">
+                            <canvas id="chartMidia"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="finding-box" style="margin-top: 5px;">
+                    <p>O Valor Econômico privilegia predominantemente o discurso de eficiência econômica (66,1%), enquanto o Conjur concentra-se em compliance (40,8%) e opacidade algorítmica (38,0%).</p>
+                </div>
+            </section>
+
+            <!-- SLIDE 12: ARTEFATO DSR -->
+            <section>
+                <h2><i class="fas fa-microchip icon-inline"></i>6. Artefato DSR: O Copiloto Algorítmico</h2>
+
+                <div class="content-card">
+                    <p>Desenvolvimento e avaliação de classificador com IA Explicável (XAI) e trilha Blockchain (Art. 08 e 18). O modelo alcançou acurácia preditiva de 94,88% em dados de licitações.</p>
+                </div>
+
+                <div class="two-cols">
+                    <div class="col" style="flex: 0.4;">
+                        <div class="stat-grid" style="grid-template-columns: 1fr; gap: 8px;">
+                            <div class="stat-box">
+                                <div class="value">94,88%</div>
+                                <div class="label">Acurácia (Random Forest)</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="value">78,54%</div>
+                                <div class="label">C-Index (Sobrevivência)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col" style="flex: 0.6;">
+                        <div class="chart-container" style="height: 200px;">
+                            <canvas id="chartSHAP"></canvas>
+                        </div>
+                        <p style="font-size: 0.5em; text-align: center; color: var(--fucape-gray); margin-top: 5px;">Impacto médio (SHAP Values) sobre a predição de risco ex-ante.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 8: LITERATURA E DSR -->
+            <section>
+                <h2><i class="fas fa-book icon-inline"></i>7. Fundamentação e Revisões Sistemáticas</h2>
+
+                <div class="content-card">
+                    <h3>Revisão XAI (Art. 16) e DSR em Contabilidade (Art. 17)</h3>
+                    <p>A arquitetura do copiloto fundamenta-se na Economia dos Custos de Transação (Williamson, 1985) e nos modelos de transparência algorítmica. A pesquisa sistematizou a literatura por meio de metanálise empírica (PRISMA e Scoping Review).</p>
+                </div>
+
+                <div class="stat-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="stat-box">
+                        <div class="value">52</div>
+                        <div class="label">Artigos XAI sistematizados</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="value">42</div>
+                        <div class="label">Artigos DSR mapeados</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="value">68</div>
+                        <div class="label">Referências centrais</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 14: CONCLUSÃO -->
+            <section>
+                <h2><i class="fas fa-tasks icon-inline"></i>14. Conclusão e Próximos Passos</h2>
+
+                <div class="content-card">
+                    <p>Com os 25 artigos e o artefato computacional (PubliCopilot) finalizados (100% de execução das análises empíricas), restam as etapas de validação e homogeneização textual.</p>
+                </div>
+
+                <div class="stat-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="stat-box" style="border-left-color: var(--highlight-green);">
+                        <div class="value" style="color: var(--highlight-green);">25</div>
+                        <div class="label">Artigos concluídos</div>
+                    </div>
+                    <div class="stat-box" style="border-left-color: var(--highlight-green);">
+                        <div class="value" style="color: var(--highlight-green);">T4 e T5</div>
+                        <div class="label">Revisões APA concluídas</div>
+                    </div>
+                    <div class="stat-box" style="border-left-color: var(--highlight-orange);">
+                        <div class="value" style="color: var(--highlight-orange);">Delphi</div>
+                        <div class="label">Painel com 10 gestores</div>
+                    </div>
+                </div>
+
+                <div class="finding-box">
+                    <h4><i class="fas fa-flag-checkered icon-inline"></i>Status do Cronograma</h4>
+                    <p>O desenvolvimento atual apresenta <strong>93% de progressão global</strong>. As próximas etapas incluem o deploy do aplicativo web e a condução da pesquisa Delphi para mensurar a aceitação institucional do copiloto, concluindo a metodologia de Design Science Research.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: true,
+            controls: true,
+            progress: true,
+            center: false,
+            transition: 'fade',
+            width: 1280,
+            height: 720,
+            margin: 0.04
+        });
+
+        // Configurações globais do Chart.js
+        Chart.register(ChartDataLabels);
+        Chart.defaults.font.family = "'Arial', sans-serif";
+        Chart.defaults.color = '#64748b';
+        Chart.defaults.plugins.datalabels.color = '#fff';
+        Chart.defaults.plugins.datalabels.font.weight = 'bold';
+
+        // Gráfico 1: Pipeline de Dados
+        const ctxPipeline = document.getElementById('chartPipeline').getContext('2d');
+        new Chart(ctxPipeline, {
+            type: 'bar',
+            data: {
+                labels: ['PNCP (Contratos)', 'Órgãos', 'Acórdãos TCU', 'Notícias Mídia'],
+                datasets: [{
+                    label: 'Registros Consolidados',
+                    data: [572045, 6567, 5, 388],
+                    backgroundColor: ['#1e3a8a', '#3b82f6', '#059669', '#d97706'],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: { type: 'logarithmic' }
+                },
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Distribuição Documental (Escala Log)' }
+                }
+            }
+        });
+
+        // Gráfico 2: Custos e Latência
+        const ctxCustos = document.getElementById('chartCustos').getContext('2d');
+        new Chart(ctxCustos, {
+            type: 'bar',
+            data: {
+                labels: ['Tempo Médio Convencional', 'Tempo Médio com Sistema', 'Latência por Sanção (Dias)'],
+                datasets: [{
+                    data: [45.66, 5.14, 8.8],
+                    backgroundColor: ['#dc2626', '#059669', '#d97706'],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Comparativo de Tempos Operacionais (Horas/Dias)' },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'start',
+                        formatter: Math.round
+                    }
+                }
+            }
+        });
+
+        // Gráfico 3: Concentração Oligopolista
+        const ctxConcentracao = document.getElementById('chartConcentracao').getContext('2d');
+        new Chart(ctxConcentracao, {
+            type: 'pie',
+            data: {
+                labels: ['Top 3 Empresas', 'Restante do Mercado'],
+                datasets: [{
+                    data: [87.21, 12.79],
+                    backgroundColor: ['#1e3a8a', '#e2e8f0'],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: { display: true, text: 'Market Share - Fornecimento TI (Valor)' }
+                }
+            }
+        });
+
+        // Gráfico 4: Retórica
+        const ctxRetorica = document.getElementById('chartRetorica').getContext('2d');
+        new Chart(ctxRetorica, {
+            type: 'doughnut',
+            data: {
+                labels: ['Mimetismo', 'Inovação Legítima', 'Urgência Retórica', 'Redundância'],
+                datasets: [{
+                    data: [33.43, 31.43, 17.71, 17.43],
+                    backgroundColor: ['#3b82f6', '#059669', '#d97706', '#dc2626'],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: { display: true, text: 'Temáticas de Justificativas (n=350)' }
+                }
+            }
+        });
+
+        // Gráfico 5: Mídia
+        const ctxMidia = document.getElementById('chartMidia').getContext('2d');
+        new Chart(ctxMidia, {
+            type: 'bar',
+            data: {
+                labels: ['Valor Econômico', 'Conjur', 'Jota'],
+                datasets: [
+                    { label: 'Eficiência Econômica', data: [66.1, 15.0, 45.0], backgroundColor: '#1e3a8a' },
+                    { label: 'Compliance/Risco Legal', data: [15.0, 40.8, 30.0], backgroundColor: '#dc2626' },
+                    { label: 'Opacidade Algorítmica', data: [10.0, 38.0, 15.0], backgroundColor: '#64748b' }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { stacked: true },
+                    y: { stacked: true, max: 100 }
+                },
+                plugins: {
+                    title: { display: true, text: 'Enquadramento da IA por Portal (%)' },
+                    datalabels: { display: false }
+                }
+            }
+        });
+
+        // Gráfico 6: SHAP XAI
+        const ctxSHAP = document.getElementById('chartSHAP').getContext('2d');
+        new Chart(ctxSHAP, {
+            type: 'bar',
+            data: {
+                labels: ['Histórico de Sanções', 'Especificidade Técnica', 'Porte da Empresa'],
+                datasets: [{
+                    data: [7.79, 4.32, 2.15],
+                    backgroundColor: '#059669',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Features de Maior Impacto (%)' }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

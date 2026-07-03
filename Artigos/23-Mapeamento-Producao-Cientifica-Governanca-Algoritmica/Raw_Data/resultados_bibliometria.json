@@ -1,0 +1,101 @@
+{
+  "estatisticas_gerais": {
+    "total_artigos": 9749,
+    "periodo": "2024-2024",
+    "paises": 161,
+    "periodicos": 20
+  },
+  "top_10_paises": [
+    {
+      "pais": "US",
+      "n_artigos": 1152
+    },
+    {
+      "pais": "CN",
+      "n_artigos": 981
+    },
+    {
+      "pais": "GB",
+      "n_artigos": 736
+    },
+    {
+      "pais": "ID",
+      "n_artigos": 477
+    },
+    {
+      "pais": "IN",
+      "n_artigos": 321
+    },
+    {
+      "pais": "DE",
+      "n_artigos": 311
+    },
+    {
+      "pais": "ES",
+      "n_artigos": 268
+    },
+    {
+      "pais": "IT",
+      "n_artigos": 263
+    },
+    {
+      "pais": "AU",
+      "n_artigos": 256
+    },
+    {
+      "pais": "CA",
+      "n_artigos": 241
+    }
+  ],
+  "top_10_periodicos": [
+    {
+      "periodico": "Sustainability",
+      "n_artigos": 223
+    },
+    {
+      "periodico": "International Journal of Advanced Multidisciplinary Research and Studies",
+      "n_artigos": 110
+    },
+    {
+      "periodico": "World Journal of Advanced Research and Reviews",
+      "n_artigos": 79
+    },
+    {
+      "periodico": "Scientific Reports",
+      "n_artigos": 66
+    },
+    {
+      "periodico": "PLoS ONE",
+      "n_artigos": 65
+    },
+    {
+      "periodico": "Journal of Infrastructure Policy and Development",
+      "n_artigos": 64
+    },
+    {
+      "periodico": "Proceedings of the AAAI/ACM Conference on AI Ethics and Society",
+      "n_artigos": 60
+    },
+    {
+      "periodico": "International Journal For Multidisciplinary Research",
+      "n_artigos": 60
+    },
+    {
+      "periodico": "International Journal of Research Publication and Reviews",
+      "n_artigos": 60
+    },
+    {
+      "periodico": "Russian Economic Bulletin",
+      "n_artigos": 60
+    }
+  ],
+  "fwci": {
+    "global": 1.42,
+    "brasil": 1.18
+  },
+  "brasil": {
+    "artigos": 129,
+    "rank": 17,
+    "participacao": 1.3232126371935584
+  }
+}

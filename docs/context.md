@@ -20,8 +20,8 @@
 ```
 TeseDoutorado/
 ├── Tese/
-│   ├── tese_draft.html           # Draft principal da tese (1298 linhas, ABNT)
-│   ├── style_academico.css       # Estilo ABNT/APA
+│   ├── tese_draft.html           # Draft principal da tese (1298 linhas, APA)
+│   ├── style_academico.css       # Estilo APA
 │   ├── gerar_graficos.py         # Geração de SVGs (matplotlib)
 │   └── imagens/                  # 10 SVGs (5 gráficos + 5 figuras)
 ├── Artigos/                      # 18 artigos (9 quanti + 9 quali)
@@ -128,14 +128,14 @@ Repositório GitHub: https://github.com/renato0503/TeseDoutorado
 - Simulou chamadas de APIs públicas de CNPJs e extraiu rede complexa bipartida contendo 400 nós (100 órgãos compradores e 300 fornecedores) com 1.111 arestas de adjudicações de TI (2021-2025).
 - Executou análise estrutural de grafos via NetworkX, revelando coeficiente de Gini financeiro extremo de 0,9072 e market share de 87,21% concentrado em 3 empresas líderes (oligopólio core com alta centralidade de intermediação/grau).
 - Salvou nós e arestas em CSV, relatório de redes em JSON e grafo complexo serializado em pkl.
-- Redigiu artigo_05.html estruturado em ABNT, com fundamentação na Teoria da Dependência de Recursos de Pfeffer e Salancik e 3 tabelas estatísticas completas.
+- Redigiu artigo_05.html estruturado em APA, com fundamentação na Teoria da Dependência de Recursos de Pfeffer e Salancik e 3 tabelas estatísticas completas.
 
 ### 9. Artigo 06 (Sobrevivência de Contratos de Inovação: Análise de Kaplan-Meier)
 - Desenvolvido o script `extrator_sobrevivencia_contratos.py`.
 - Simulou chamadas de APIs e compilou base de dados temporais de 10.000 contratos públicos de TI/Inovação (2019-2025).
 - Modelou e executou estimativas de curvas de Kaplan-Meier e regressão Cox Proportional Hazards ex-ante, comprovando que o uso de copiloto de IA ex-ante reduz em 62% o risco de rescisão antecipada de contratos (C-Index = 78,54%).
 - Salvou dados contratuais em CSV, relatório estatístico em JSON e modelo Cox em pkl.
-- Redigiu artigo_06.html estruturado conforme ABNT, com sustentação na Economia dos Custos de Transação e na Teoria da Agência e 3 tabelas estatísticas detalhadas.
+- Redigiu artigo_06.html estruturado conforme APA, com sustentação na Economia dos Custos de Transação e na Teoria da Agência e 3 tabelas estatísticas detalhadas.
 
 ### 10. Artigo 07 (Governança Algorítmica: Benchmarking de Eficiência)
 - Desenvolvido o script `extrator_benchmarking_eficiencia.py`.
@@ -143,13 +143,13 @@ Repositório GitHub: https://github.com/renato0503/TeseDoutorado
 - Realizou testes estatísticos formais (teste T pareado) comprovando uma redução de 88,74% no tempo processual médio (de 45,66h para 5,14h, p < 0.001) e calculou a eficiência relativa (score DEA).
 - Projetou uma redução nacional do "Custo Brasil" na ordem de R$ 334.785.849,51 anuais ao erário municipal brasileiro.
 - Salvou a base de dados em CSV, relatório executivo em JSON e modelo serializado em pkl.
-- Redigiu o artigo_07.html completo em formato ABNT com três tabelas estatísticas detalhadas.
+- Redigiu o artigo_07.html completo em formato APA com três tabelas estatísticas detalhadas.
 
 ### 11. Artigo 15 (O Enquadramento da IA no Controle Público na Mídia)
 - Realizado o web scraping e compilação de 388 matérias jornalísticas de relevância regulatória nos portais Conjur, Valor Econômico e Jota (2021-2026).
 - Aplicou a teoria de análise de enquadramento (Framing Analysis) de Entman e de Semetko & Valkenburg.
 - Realizou testes estatísticos inferenciais de Qui-Quadrado de Independência de Pearson, comprovando uma polarização altamente significativa (chi2 = 108.45, p < 0.001) entre a visão de eficiência econômica (Valor: 66.1%) e o ceticismo legal (Conjur: 40.8% compliance, 38.0% opacidade).
-- Redigiu o artigo_15.html completo em formato ABNT com três tabelas estatísticas detalhadas.
+- Redigiu o artigo_15.html completo em formato APA com três tabelas estatísticas detalhadas.
 
 ### 12. Artigo 08 (Inteligência Artificial Explicável - XAI no Setor Público)
 - Desenvolvido o script `extrator_xai.py`.
@@ -157,13 +157,13 @@ Repositório GitHub: https://github.com/renato0503/TeseDoutorado
 - Modelou e treinou um classificador Random Forest com acurácia de 94,88%, precisão de 86,61% e F1-score de 71,66%.
 - Computou a explicabilidade global de features via SHAP (sendo o histórico de sanções do vencedor o atributo dominante, com 7,79% de impacto médio nas decisões) e forneceu explicações locais coerentes (SHAP local) para três casos contrastantes representativos.
 - Salvou a base de dados em CSV, o modelo preditivo serializado em pkl e o relatório executivo em JSON.
-- Redigiu o artigo_08.html completo em formato ABNT, com fundamentação teórica em DSR (Hevner, Peffers, Gregor) e XAI (Doshi-Velez, Adadi, Arrieta, Ribeiro/LIME, Wachter) e 3 tabelas estatísticas detalhadas.
+- Redigiu o artigo_08.html completo em formato APA, com fundamentação teórica em DSR (Hevner, Peffers, Gregor) e XAI (Doshi-Velez, Adadi, Arrieta, Ribeiro/LIME, Wachter) e 3 tabelas estatísticas detalhadas.
 
 ### 13. Artigo 09 (A Construção da "Jurisprudência do Medo": Análise de Discurso em Acórdãos)
 - Analisou 5 acórdãos/ementas reais de jurisprudência do TCU sobre responsabilização de gestores e apagão das canetas coletados via API.
 - Aplicou a metodologia tridimensional de Análise Crítica do Discurso (ACD) de Norman Fairclough (Análise Textual, Prática Discursiva e Prática Social).
 - Revelou padrões de nominalização punitiva e severidade lexical que inibem a agência administrativa e a inovação tecnológica pública, contrastando com os preceitos modernizadores da LINDB (Artigos 20 e 22).
-- Redigiu o artigo_09.html completo em formato ABNT com duas tabelas analíticas detalhadas.
+- Redigiu o artigo_09.html completo em formato APA com duas tabelas analíticas detalhadas.
 
 ### 14. Artigo 10 (O Uso Retórico da Inovação: Análise de Conteúdo de Justificativas)
 - Desenvolvido o script `extrator_retorico.py`.
@@ -171,14 +171,14 @@ Repositório GitHub: https://github.com/renato0503/TeseDoutorado
 - Executou Análise de Conteúdo de Laurence Bardin codificando o corpus em quatro categorias temáticas (Mimetismo: 33,43%, Inovação Legítima: 31,43%, Urgência Retórica: 17,71%, Redundância Instrumental: 17,43%).
 - Realizou o teste de Qui-Quadrado de Independência de Pearson (χ² = 91,2540, p = 1,264 × 10⁻²¹, df = 1), provando a dependência entre a modalidade direta e justificativas retóricas/de conveniência.
 - Calculou o Rhetorical Score médio de 0,7574 para contratações diretas vs. 0,4308 para competitivas.
-- Redigiu o artigo_10.html em formato ABNT contendo fundamentação baseada no Estado Empreendedor (Mazzucato), ECT (Williamson) e Isomorfismo Institucional (DiMaggio & Powell) com duas tabelas acadêmicas detalhadas.
+- Redigiu o artigo_10.html em formato APA contendo fundamentação baseada no Estado Empreendedor (Mazzucato), ECT (Williamson) e Isomorfismo Institucional (DiMaggio & Powell) com duas tabelas acadêmicas detalhadas.
 
 ### 15. Artigo 11 (O Uso da Voz do Mercado: Análise Temática de Impugnações)
 - Desenvolvido o script `extrator_impugnacoes.py`.
 - Simulou e compilou um banco de dados empírico de 150 peças de impugnações de TI extraídas do Compras.gov.br.
 - Executou Análise de Conteúdo de Laurence Bardin codificando o corpus em quatro categorias temáticas (Direcionamento de Edital: 39,33%, Superespecificação de Exigências Técnicas: 26,67%, Incompatibilidade com Práticas de Mercado: 23,33%, Incongruência no Orçamento Estimado: 10,67%).
 - Realizou o teste de Qui-Quadrado de Independência de Pearson (χ² = 25,6464, p = 4,100 × 10⁻⁷, df = 1, p < 0,001), provando a forte dependência entre a complexidade do objeto tecnológico e a probabilidade de acolhimento (taxa de acolhimento de 62,50% em objetos complexos vs. 21,43% em comuns).
-- Redigiu o artigo_11.html em formato ABNT contendo fundamentação baseada na Economia dos Custos de Transação (Williamson), Assimetria de Informação (Akerlof), Barreiras de Entrada (Bain) e Design Science Research (Hevner; Peffers) com três tabelas acadêmicas detalhadas.
+- Redigiu o artigo_11.html em formato APA contendo fundamentação baseada na Economia dos Custos de Transação (Williamson), Assimetria de Informação (Akerlof), Barreiras de Entrada (Bain) e Design Science Research (Hevner; Peffers) com três tabelas acadêmicas detalhadas.
 
 ### 17. Artigo 18 - Compliance Algorítmico em Compras Públicas de Inovação
 - Artigo desenvolvido na disciplina de quanti com coautor Walter Reis Cabral
@@ -190,7 +190,7 @@ Repositório GitHub: https://github.com/renato0503/TeseDoutorado
 
 ### 16. Tese Draft Reescrita e Infraestrutura de Visualização
 - Draft da tese (`tese_draft.html`) completamente reescrito com `style_academico.css`
-- Adicionada epígrafe de Andrew Feenberg (página iv) e 12 tabelas ABNT em ordem cronológica
+- Adicionada epígrafe de Andrew Feenberg (página iv) e 12 tabelas APA em ordem cronológica
 - Gerados 10 SVGs via Python/matplotlib (5 gráficos + 5 figuras) em `Tese/imagens/`
 - Cada ilustração possui nota "Fonte:" e parágrafos de contexto antes/depois
 - Listas de Tabelas e Ilustrações atualizadas no sumário
