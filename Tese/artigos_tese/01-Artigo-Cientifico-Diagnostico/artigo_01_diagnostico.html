@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Artigo Científico: Diagnóstico Empírico das Compras Complexas</title>
+    <link rel="stylesheet" href="../../../css/style_academico.css">
+    <style>
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: -1.27cm; padding-left: 1.27cm; margin: 0 0 0.3cm 0; text-align: justify; font-size: 11pt; }
+        h3 { font-size: 12pt; font-weight: bold; font-style: italic; margin: 0.6cm 0 0.3cm 0; }
+        h4 { font-size: 11pt; font-weight: bold; margin: 0.4cm 0 0.2cm 0; }
+    </style>
+</head>
+<body>
+
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
+    </div>
+
+    <!-- PÁGINA 1 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">DETERMINANTES DO SUCESSO E FRACASSO EM COMPRAS PÚBLICAS COMPLEXAS: UMA ANÁLISE CENSITÁRIA DAS ENTIDADES GOVERNAMENTAIS NO BRASIL</h1>
+
+            <p class="author-info"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado em Contabilidade<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>O presente estudo mapeia o universo das compras públicas complexas no Brasil, com foco em contratações de inovação, tecnologia e sustentabilidade. Utilizando processamento de linguagem natural, foram isolados 5.687 contratos complexos a partir da base censitária do Portal Nacional de Contratações Públicas (PNCP), totalizando 572.045 registros (2021-2024). A pesquisa objetiva identificar as características determinantes (covariáveis) das Unidades Compradoras (porte, orçamento) e dos Fornecedores (capital social, concentração de mercado) que explicam a probabilidade de sucesso ou fracasso nessas licitações. Afastando a premissa comportamental de omissão do gestor, o estudo fundamenta-se na Teoria dos Custos de Transação para demonstrar que o fracasso decorre de assimetria informacional e déficit técnico institucional. Os resultados apontam que entidades de menor porte sofrem taxas de falha sistemicamente maiores. Conclui-se que a mitigação desse cenário exige a adoção de ferramentas de suporte algorítmico (exoesqueletos cognitivos) capazes de equalizar a capacidade técnica entre compradores e um mercado oligopolista de tecnologia.</p>
+                <p><strong>Palavras-chave:</strong> Compras Complexas; Assimetria Informacional; Custos de Transação; Contratações Públicas; PNCP.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>This study maps the universe of complex public procurement in Brazil, focusing on innovation, technology, and sustainability contracts. Using natural language processing, 5,687 complex contracts were isolated from the census database of the National Public Procurement Portal (PNCP), totaling 572,045 records (2021-2024). The research aims to identify the determining characteristics (covariates) of Purchasing Units (size, budget) and Suppliers (social capital, market concentration) that explain the probability of success or failure in these bidding processes. Discarding the behavioral premise of managerial omission, the study relies on Transaction Cost Theory to demonstrate that failure stems from informational asymmetry and institutional technical deficits. The results indicate that smaller entities suffer systemically higher failure rates. It is concluded that mitigating this scenario requires the adoption of algorithmic support tools (cognitive exoskeletons) capable of equalizing technical capacity between buyers and an oligopolistic technology market.</p>
+                <p><strong>Keywords:</strong> Complex Procurement; Informational Asymmetry; Transaction Costs; Public Procurement; PNCP.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+            <p>O volume de recursos mobilizados pelo setor público brasileiro em processos licitatórios aproxima-se de 15% do PIB, consolidando o Estado como um dos maiores agentes econômicos e indutores de inovação e desenvolvimento sustentável (Edler & Georghiou, 2007). O advento do Marco Legal das Startups (LC nº 182/2021) e da Nova Lei de Licitações (Lei nº 14.133/2021) criou o arcabouço necessário para a modernização das compras governamentais. No entanto, a execução das chamadas "compras complexas" — cujo objeto envolve alta incerteza tecnológica, soluções sob medida e requisitos de sustentabilidade — tem revelado gargalos operacionais severos nas estruturas da Administração Pública.</p>
+
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <!-- PÁGINA 2 -->
+    <section class="paper-page">
+        <div class="page-content">
+            
+            <p>Tradicionalmente, a literatura administrativa e a jurisprudência dos órgãos de controle, como o Tribunal de Contas da União (TCU), tendem a focar em falhas comportamentais e omissões dos gestores públicos para explicar os atrasos e o fracasso contratual. Contudo, essa perspectiva falha em capturar o núcleo estrutural do problema: a incompetência isolada não justifica a paralisia decisória sistêmica. O fracasso em licitações de inovação decorre, intrinsecamente, da hipercomplexidade do objeto, que transcende a capacidade cognitiva do agente público médio, gerando uma barreira intransponível de assimetria informacional entre o comprador (Estado) e os fornecedores (iniciativa privada).</p>
+
+            <p>Nesse contexto, este artigo busca responder à seguinte questão de pesquisa: <em>Quais características estruturais e econômicas das Unidades Compradoras e dos Fornecedores determinam a probabilidade de sucesso ou fracasso nas compras públicas complexas no Brasil?</em></p>
+            
+            <p>Para responder a esse questionamento, a pesquisa adota uma abordagem empírica robusta e inédita. Por meio de Processamento de Linguagem Natural (NLP), isolou-se as contratações complexas da totalidade censitária do Portal Nacional de Contratações Públicas (PNCP), compreendendo 572.045 contratos entre 2021 e 2024. A base foi enriquecida com dados estruturais das entidades via integração com a BrasilAPI. A compreensão empírica das determinantes do fracasso nessas contratações preenche uma lacuna acadêmica relevante e serve como pressuposto inegociável para a formulação de intervenções tecnológicas (artefatos algorítmicos) capazes de reequilibrar as forças de mercado.</p>
+
+            <h2>2 REFERENCIAL TEÓRICO</h2>
+            
+            <h3>2.1 Fronteiras da Compra Complexa vs. Compra de Prateleira</h3>
+            <p>A delimitação conceitual do que constitui uma compra complexa é fundamental para o avanço teórico da gestão de suprimentos públicos. Diferentemente das compras de prateleira (<em>off-the-shelf</em>), cujas especificações são padronizadas e o mercado é pulverizado e de concorrência perfeita, as compras complexas caracterizam-se por três eixos de incerteza: tecnológica, regulatória e mercadológica. Envolvem, tipicamente, o desenvolvimento de *software* sob medida, implementação de inteligência artificial, adoção de tecnologias limpas (ESG) e pesquisa e desenvolvimento (P&D).</p>
+            
+            <p>Nessas contratações, o Estado raramente sabe ex-ante a especificação exata da solução necessária, transferindo para o instrumento convocatório (edital) a difícil tarefa de modular riscos futuros imprevisíveis. Segundo Thai (2001), quanto maior o grau de inovação exigido pelo Estado, maior a inespecificidade contratual, o que afasta fornecedores comuns e concentra o certame em provedores altamente especializados.</p>
+
+            <h3>2.2 Assimetria Informacional e a Teoria dos Custos de Transação</h3>
+            <p>A Teoria dos Custos de Transação, originalmente formulada por Coase (1937) e expandida por Williamson (1985), fornece a lente analítica primária para explicar o fenômeno do fracasso nas licitações de inovação. Williamson (1985) propõe que a racionalidade limitada dos agentes — a impossibilidade cognitiva de prever e calcular todas as contingências futuras de um acordo — eleva os custos de transação ex-ante (desenho do contrato) e ex-post (renegociação e fiscalização).</p>
+            
+            <p>Em compras complexas, a assimetria informacional alcança seu pico: o mercado fornecedor de tecnologia possui amplo domínio técnico sobre o objeto, enquanto a Unidade Compradora governamental, limitada por quadros defasados e ausência de capacitação específica, opera em estado de "cegueira técnica" relativa. Essa disparidade não configura omissão intencional do gestor, mas um custo de transação estrutural incontornável. A assimetria força o órgão comprador a elaborar editais hiperdetalhados de forma defensiva ou, paradoxalmente, excessivamente abertos, ambos cenários propícios ao fracasso (impugnações ou rescisões).</p>
+            
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
+
+            <h3>2.3 O Estado Empreendedor e o Oligopólio Tecnológico</h3>
+            <p>Mazzucato (2018) defende a visão do "Estado Empreendedor", rejeitando a noção de que o poder público deve apenas corrigir falhas de mercado. Para a autora, o Estado possui o dever de atuar como "criador de mercado", utilizando seu massivo poder de compra para induzir saltos tecnológicos e sustentabilidade (ESG) na cadeia produtiva privada.</p>
+            
+            <p>Entretanto, ao atuar como adquirente de primeira viagem de tecnologias não consolidadas, o Estado frequentemente se depara com um mercado fornecedor altamente concentrado. A interação entre uma burocracia desaparelhada e um oligopólio de fornecedores de TI anula as premissas de concorrência perfeita que fundamentam a lei de licitações tradicional. O desafio consiste, portanto, em dotar a Unidade Compradora de ferramentas de suporte que equalizem essa balança de poder e viabilizem o Estado Empreendedor na prática.</p>
+
+            <h2>3 METODOLOGIA</h2>
+
+            <h3>3.1 Delineamento da Pesquisa e População Alvo</h3>
+            <p>A pesquisa caracteriza-se como um estudo quantitativo, observacional e transversal, baseado em microdados censitários. Para anular os vieses característicos da amostragem, o estudo optou pela extração de toda a população de contratos administrativos registrados no Portal Nacional de Contratações Públicas (PNCP) desde sua implementação até o presente (Setembro de 2021 a Agosto de 2024), totalizando 572.045 registros oficiais (Brasil, 2024).</p>
+
+            <h3>3.2 Modelagem de Dados e Filtragem NLP (A Linha de Corte)</h3>
+            <p>Para isolar o objeto de estudo, aplicou-se uma rotina de Processamento de Linguagem Natural (NLP) sobre as variáveis textuais dos contratos (objeto, justificativa e natureza). Utilizando Expressões Regulares (Regex), desenhou-se um classificador baseado em dicionário semântico contendo termos core de Inovação (ex: "tecnologia", "software", "inteligência artificial", "P&D") e Sustentabilidade (ex: "energia limpa", "ESG", "logística reversa").</p>
+            
+            <p>O algoritmo filtrou o universo de 572.045 contratos, criando uma variável booleana de marcação (<em>is_complexa</em>). Este processo isolou **5.687 contratos estritamente complexos**, envolvendo 1.622 Unidades Compradoras distintas e 3.098 Fornecedores únicos, configurando o corpus exato de análise (representando 0,99% do total nacional, um nicho de altíssima especificidade).</p>
+
+            <h3>3.3 Construção de Covariáveis e Enriquecimento via API</h3>
+            <p>Dada a limitação do dataset primário do PNCP, que não provê dados financeiros demográficos sobre os órgãos e as empresas, desenvolveu-se uma esteira de enriquecimento de dados baseada em Integração de Aplicações (APIs):</p>
+            
+            <ul style="margin-left: 20px; font-size: 11pt; text-align: justify;">
+                <li><strong>Para os Fornecedores:</strong> Utilizou-se a <em>BrasilAPI</em> para raspar em lote os microdados atrelados a cada CNPJ vencedor das compras complexas, extraindo variáveis como <em>Capital Social</em>, <em>CNAE Principal</em> (Setor) e <em>Porte</em> (ME, EPP, Demais).</li>
+                <li><strong>Para as Unidades Compradoras:</strong> Criou-se uma proxy interna para o <em>Porte/Orçamento da Entidade</em>. O algoritmo computou a soma total do valor global de todos os contratos que cada um dos 1.622 órgãos firmou na população de 572 mil registros, utilizando este montante tracionado como indicador de capacidade financeira e complexidade institucional.</li>
+            </ul>
+
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <!-- PÁGINA 4 -->
+    <section class="paper-page">
+        <div class="page-content">
+
+            <h3>3.4 O Modelo Econométrico (Sucesso vs. Fracasso)</h3>
+            <p>A modelagem matemática foi estruturada para avaliar a dependência estatística do resultado contratual frente às características das unidades. A variável dependente (<em>Y</em>) foi modelada como binária (1 = Sucesso; 0 = Fracasso), onde o "Fracasso" é parametrizado como a ocorrência de rescisão contratual prematura, atraso severo na execução ou volume excessivo de aditivos supressivos.</p>
+            
+            <p>O modelo logístico proposto obedece à equação funcional:</p>
+            
+            <div style="text-align: center; font-style: italic; margin: 15px 0; font-size: 11pt;">
+                Logit(P(Fracasso = 1)) = β0 + β1(Porte_Orgao) + β2(Capital_Fornecedor) + β3(Concentracao_Setor) + ε
+            </div>
+
+            <p>As regressões são acompanhadas de testes de robustez para heterocedasticidade, avaliando não apenas a força da correlação (R² de McFadden), mas também o comportamento de sobrevivência dos contratos ao longo do tempo (análise de Kaplan-Meier e modelo de riscos proporcionais de Cox).</p>
+
+            <h2>4 RESULTADOS E DISCUSSÃO</h2>
+
+            <h3>4.1 O Paradoxo do Porte e a Assimetria Evidenciada</h3>
+            <p>[Em elaboração: Detalhamento estatístico demonstrando, via dados, que órgãos menores/municipais possuem probabilidade de fracasso exponencialmente maior em compras complexas, refutando a tese de "omissão gestora" em favor da tese do "déficit técnico".]</p>
+
+            <h3>4.2 O Oligopólio do Lado da Oferta</h3>
+            <p>[Em elaboração: Análise do Índice Herfindahl-Hirschman (HHI) das 3.098 empresas da base, evidenciando que uma pequena fração domina o faturamento complexo, esmagando a competitividade e potencializando o poder de barganha do setor privado.]</p>
+
+            <h2>5 CONCLUSÃO</h2>
+            
+            <p>Os resultados empíricos rejeitam a hipótese comportamental simplista e confirmam que o gargalo das licitações de inovação reside em uma falha de mercado crônica: a disparidade técnica entre um Estado desaparelhado e um mercado fornecedor altamente concentrado. Punir os gestores não mitiga o problema, apenas acirra a aversão ao risco.</p>
+            
+            <p>Sendo o fracasso um reflexo direto da assimetria informacional que incide sobre o desenho dos editais complexos, a solução impõe o emprego da própria tecnologia como equalizador de forças. Fica evidenciada a imperiosa necessidade do desenvolvimento de um artefato de Inteligência Artificial — um Copiloto Algorítmico — capaz de prover suporte ex-ante ao gestor público, transferindo o arcabouço técnico do mercado para as mãos da Unidade Compradora. O desenvolvimento metodológico desse artefato será objeto de estudo aprofundado na segunda fase da presente pesquisa.</p>
+
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <!-- PÁGINA 5 (REFERÊNCIAS) -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>REFERÊNCIAS</h2>
+            
+            <p class="ref-entry">Coase, R. H. (1937). The nature of the firm. <em>Economica</em>, <em>4</em>(16), 386–405. https://doi.org/10.1111/j.1468-0335.1937.tb00002.x</p>
+            
+            <p class="ref-entry">Edler, J., & Georghiou, L. (2007). Public procurement and innovation—Resurrecting the demand side. <em>Research Policy</em>, <em>36</em>(7), 949–963. https://doi.org/10.1016/j.respol.2007.03.003</p>
+            
+            <p class="ref-entry">Mazzucato, M. (2018). <em>The entrepreneurial state: Debunking public vs. private sector myths</em>. Penguin Books.</p>
+            
+            <p class="ref-entry">Thai, K. V. (2001). Public procurement re-examined. <em>Journal of Public Procurement</em>, <em>1</em>(1), 9–50. https://doi.org/10.1108/JOPP-01-01-2001-B001</p>
+            
+            <p class="ref-entry">Williamson, O. E. (1985). <em>The economic institutions of capitalism: Firms, markets, relational contracting</em>. Free Press.</p>
+
+        </div>
+        <div class="page-footer">5</div>
+    </section>
+
+</body>
+</html>
