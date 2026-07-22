@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 450" font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="cloud-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f8fafc"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="450" fill="url(#bg-grad)"/>
+
+  <text x="500" y="35" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">Arquitetura Técnica do PubliCopilot v1.3</text>
+  <text x="500" y="55" text-anchor="middle" font-size="11" fill="#94a3b8">Firebase (Python 3.11) → 5 estágios de ML → Saída JSON + XAI</text>
+
+  <!-- Cloud icon -->
+  <g transform="translate(50, 100)">
+    <ellipse cx="60" cy="40" rx="55" ry="35" fill="#ffffff" opacity="0.2"/>
+    <path d="M 35 45 Q 35 20 60 20 Q 85 20 85 45 Q 85 70 60 70 Q 35 70 35 45 Z" fill="#ffffff" opacity="0.3"/>
+    <text x="60" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">FIREBASE</text>
+    <text x="60" y="62" text-anchor="middle" font-size="8" fill="#cbd5e1">Hosting · Auth · Functions · Firestore</text>
+  </g>
+
+  <text x="60" y="95" text-anchor="middle" font-size="9" fill="#cbd5e1">Cloud Functions (Python 3.11)</text>
+
+  <!-- Stage 1 -->
+  <g transform="translate(150, 80)">
+    <rect width="120" height="80" rx="8" fill="#0d9488" opacity="0.15" stroke="#0d9488" stroke-width="1"/>
+    <text x="60" y="25" text-anchor="middle" font-size="10" font-weight="700" fill="#0d9488">1. Auth</text>
+    <text x="60" y="45" text-anchor="middle" font-size="8" fill="#94a3b8">JWT Bearer</text>
+    <text x="60" y="60" text-anchor="middle" font-size="8" fill="#94a3b8">Token Validation</text>
+  </g>
+
+  <line x1="270" y1="120" x2="310" y2="120" stroke="#0d9488" stroke-width="3" marker-end="url(#arrow)"/>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#0d9488"/></marker></defs>
+
+  <!-- Stage 2 -->
+  <g transform="translate(340, 80)">
+    <rect width="120" height="80" rx="8" fill="#0d9488" opacity="0.15" stroke="#0d9488" stroke-width="1"/>
+    <text x="60" y="25" text-anchor="middle" font-size="10" font-weight="700" fill="#0d9488">2. NLP</text>
+    <text x="60" y="45" text-anchor="middle" font-size="8" fill="#94a3b8">Regex · 16 padrões</text>
+    <text x="60" y="60" text-anchor="middle" font-size="8" fill="#94a3b8">Lei 14.133/2021</text>
+  </g>
+
+  <line x1="460" y1="120" x2="500" y2="120" stroke="#0d9488" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3 -->
+  <g transform="translate(530, 80)">
+    <rect width="120" height="80" rx="8" fill="#f59e0b" opacity="0.15" stroke="#f59e0b" stroke-width="1"/>
+    <text x="60" y="25" text-anchor="middle" font-size="10" font-weight="700" fill="#b45309">3. IF</text>
+    <text x="60" y="45" text-anchor="middle" font-size="8" fill="#94a3b8">TF-IDF 500</text>
+    <text x="60" y="60" text-anchor="middle" font-size="8" fill="#94a3b8">15k PNCP</text>
+  </g>
+
+  <line x1="650" y1="120" x2="690" y2="120" stroke="#0d9488" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4 -->
+  <g transform="translate(720, 80)">
+    <rect width="120" height="80" rx="8" fill="#10b981" opacity="0.15" stroke="#10b981" stroke-width="1"/>
+    <text x="60" y="25" text-anchor="middle" font-size="10" font-weight="700" fill="#0f172a">4. RF</text>
+    <text x="60" y="45" text-anchor="middle" font-size="8" fill="#94a3b8">11 features</text>
+    <text x="60" y="60" text-anchor="middle" font-size="8" fill="#94a3b8">100 árvores</text>
+  </g>
+
+  <line x1="840" y1="120" x2="880" y2="120" stroke="#0d9488" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5 -->
+  <g transform="translate(930, 80)">
+    <rect width="120" height="80" rx="8" fill="#8b5cf6" opacity="0.15" stroke="#8b5cf6" stroke-width="1"/>
+    <text x="60" y="25" text-anchor="middle" font-size="10" font-weight="700" fill="#7c3aed">5. SHAP</text>
+    <text x="60" y="45" text-anchor="middle" font-size="8" fill="#94a3b8">TreeExplainer</text>
+    <text x="60" y="60" text-anchor="middle" font-size="8" fill="#94a3b8">XAI</text>
+  </g>
+
+  <!-- Output Arrow -->
+  <line x1="880" y1="120" x2="880" y2="200" stroke="#0d9488" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="880" y1="200" x2="500" y2="200" stroke="#0d9488" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Output Box -->
+  <g transform="translate(350, 190)">
+    <rect width="300" height="100" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
+    <text x="150" y="30" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">📤 JSON Output</text>
+    <g font-size="10" fill="#333">
+      <text x="20" y="50">risk_score: 73.4%</text>
+      <text x="20" y="65">risk_level: "MÉDIO-Alto"</text>
+      <text x="20" y="80">gaps_detected: 5</text>
+      <text x="160" y="50">shap_values: {vigencia_log: 0.76, ...}</text>
+      <text x="160" y="65">counterfactuals: [...]</text>
+      <text x="160" y="80">model_metrics: {acc: 93.36%, auc: 90.83%}</text>
+    </g>
+  </g>
+
+  <!-- Firestore icon -->
+  <g transform="translate(50, 320)">
+    <ellipse cx="60" cy="35" rx="50" ry="30" fill="#ffffff" opacity="0.2"/>
+    <path d="M 35 40 Q 35 20 60 20 Q 85 20 85 40 Q 85 60 60 60 Q 35 60 35 40 Z" fill="#ffffff" opacity="0.3"/>
+    <text x="60" y="45" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">FIRESTORE</text>
+    <text x="60" y="58" text-anchor="middle" font-size="8" fill="#cbd5e1">Perfis · Histórico · Logs</text>
+  </g>
+
+  <text x="60" y="75" text-anchor="middle" font-size="9" fill="#cbd5e1">Dados de Usuários</text>
+
+  <!-- Connection lines -->
+  <line x1="60" y1="200" x2="60" y2="260" stroke="#64748b" stroke-width="2" stroke-dasharray="4,3"/>
+  <line x1="60" y1="260" x2="60" y2="300" stroke="#64748b" stroke-width="2"/>
+
+  <text x="60" y="320" text-anchor="middle" font-size="9" fill="#64748b">Persistência</text>
+
+  <text x="500" y="390" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">Fonte: PubliCopilot v1.3 · Firebase Python 3.11 · 11 modelos (.pkl)</text>
+</svg>

@@ -1,0 +1,20 @@
+# Manter estes 11 arquivos em functions/models/saved/
+# Qualquer outro deve ser deletado via: python limpar_modelos.py --aplicar
+
+counterfactual_templates.json
+feature_columns.pkl
+isolation_forest.pkl
+label_encoder_tipo.pkl
+label_encoder_uf.pkl
+metricas.json
+random_forest.pkl
+scaler.pkl
+shap_background.pkl
+shap_explainer.pkl
+tfidf_vectorizer.pkl
+
+# Arquivos deletados (NAO recriar):
+# - random_forest_sem_vigencia.pkl   (12.4 MB) - modelo antigo nao usado
+# - scaler_sem_vigencia.pkl          (0.9 KB)  - scaler redundante
+# - feature_columns_sem_vigencia.pkl (0.2 KB)  - lista de colunas antiga
+# - shap_values_sample.pkl           (51.7 KB) - sample nao usado em runtime

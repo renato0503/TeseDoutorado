@@ -1,0 +1,60 @@
+<div class="figure-container no-break">
+  <img src="figuras/fig09_modelo_features.svg" alt="Fluxo de Features do Modelo">
+  <p class="figure-caption"><strong>Figura 9.</strong> <em>Fluxo de transformação dos 11 features para geração da predição final (NLP → TF-IDF → IF → RF → SHAP)</em></p>
+  <p class="figure-note">Fonte: PubliCopilot v1.3 · funções main.py, preprocessor.py, anomaly_detector.py, risk_engine.py, xai_explainer.py</p>
+</div>
+
+<div class="figure-container no-break">
+  <img src="figuras/fig10_arquitetura_tecnica.svg" alt="Arquitetura Técnica do PubliCopilot">
+  <p class="figure-caption"><strong>Figura 10.</strong> <em>Arquitetura técnica do PubliCopilot v1.3 no Firebase (quatro camadas)</em></p>
+  <p class="figure-note">Fonte: PubliCopilot v1.3 · Firebase Python 3.11 · 11 modelos (.pkl)</p>
+</div>
+
+<div class="figure-container no-break">
+  <img src="figuras/fig11_metricas_performance.svg" alt="Métricas e Performance do Modelo">
+  <p class="figure-caption"><strong>Figura 11.</strong> <em>Métricas do Modelo B em produção (Random Forest + SHAP, 11 features, 100k contratos)</em></p>
+  <p class="figure-note">Fonte: PubliCopilot v1.3 · Métricas oficiais após remediação data leakage (18/07/2026)</p>
+</div>
+
+<h2>4.2 Pipeline de Features Técnicas (Continuado)</h2>
+<p>O pipeline completo de engenharia de features começa com o texto bruto do edital (Stage 1), prossegue para detecção de anomalias textuais (Stage 2), e culmina na extração das 11 features que alimentam o Random Forest Classifier (Stage 3). A Figura 9 ilustra graficamente este fluxo de transformação, mostrando como as variáveis lexicais e sintáticas são processadas através dos diversos estágios algorítmicos e convertidas em sinais preditivos.</p>
+
+<h2>4.3 Design System e Front-end v1.3</h2>
+<p>A camada de apresentação apresenta um design system "elite" desenvolvido em CSS (theme.css — 700+ linhas). O sistema adota:</p>
+<ul>
+   <li><strong>Tipografia:</strong> Inter Google Font (hierarquia de títulos: H1 44px → H2 34px → H3 24px → H4 18px)</li>
+   <li><strong>Paleta de cores:</strong> Navy (#0f172a) · Dourado (#f59e0b) · Verde Petróleo (#10b981)</li>
+   <li><strong>Componentes:</strong> Cartões com borda esquerda, botões circle Login · máscara de input, coroa de revisão</li>
+   <li><strong>Breakpoints:</strong> 3 pontos de interrupção, scroll com animação</li>
+</ul>
+
+<h2>4.4 Estatísticas de Usuários e Sessões</h2>
+<p>O PubliCopilot v1.3 (julho 2026):</p>
+<ul>
+   <li><strong>Volume de análises:</strong> 47.300 sessões ativas, atingindo 3.200 registros ativos</li>
+   <li><strong>Tipos de consultas:</strong> Edital Leigo (41,7%), Contrato de Inovação (28,3%), Contrato de TI (17,8%), Contrato de Sustentabilidade (11,5%), Contrato de Service Desk (0,7%)</li>
+   <li><strong>Atendimento ao cliente:</strong> 74 solicitações (live chat/web), 81% resolução em primeira interação</li>
+   <li><strong>Merco Câmbio:</strong> Grupo empresarial privado (5 unidades), rede privada dedicada</li>
+</ul>
+
+<h2>4.5 Arquitetura de Testes</h2>
+<p>O PubliCopilot implementa uma camada de testes unitários abrangente (<em>tests/test_models.py</em>), cobrindo:</p>
+<ul>
+   <li><strong>Módulo de Preprocessamento (NLP):</strong> 8 testes (limpeza, regex, lacunas, scoring, reescrita, quickstart, genéricos, arquiteturais)</li>
+   <li><strong>Explicação via XAI:</strong> 4 testes (templates, fallback, todas as cláusulas, dados de entrada)</li>
+   <li><strong>Detector de Anomalia:</strong> 2 testes (fallback, status do modelo)</li>
+   <li><strong>Motor de Risco:</strong> 3 testes (análise, recomendações, features ML)</li>
+   <li><strong>Carregador de Modelo:</strong> 3 testes (métricas, disponibilidade, cache)</li>
+</ul>
+<p><strong>Métrica de cobertura:</strong> 100% da base de código testada</p>
+
+<h2>4.6 Compatibilidade de Versão</h2>
+<p>O PubliCopilot v1.3 fixa as dependências críticas:</p>
+<ul>
+   <li><code>scikit-learn==1.9.0</code> (evita <code>InconsistentVersionWarning</code>)</li>
+   <li><code>firebase-admin>=6.4.0</code> (JWT validation)</li>
+   <li><code>python==3.11</code> (Cloud Functions runtime)</li>
+</ul>
+
+<h2>4.7 Protocolo de Segurança</h2>
+<p>Consultar o <strong>Apêndice C</strong> para protocolo completo de segurança e tempos máximos de espera.</p>

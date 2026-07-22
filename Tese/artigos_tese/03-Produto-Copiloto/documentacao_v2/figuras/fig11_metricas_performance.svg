@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="card-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1e293b"/><stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="acc-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#10b981"/><stop offset="1" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="auc-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="f1-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f59e0b"/><stop offset="1" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg-grad)"/>
+
+  <text x="400" y="35" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">Métricas do Modelo B em Produção (v1.3)</text>
+  <text x="400" y="55" text-anchor="middle" font-size="11" fill="#94a3b8">Random Forest + SHAP · 11 features · 100.000 contratos PNCP · Validação 5-Fold</text>
+
+  <!-- KPI Cards -->
+  <g transform="translate(50, 90)">
+    <!-- Accuracy -->
+    <g transform="translate(0, 0)">
+      <rect width="220" height="140" rx="12" fill="url(#card-grad)" stroke="#10b981" stroke-width="2" filter="url(#glow)"/>
+      <text x="110" y="30" text-anchor="middle" font-size="10" font-weight="600" fill="#10b981">ACURÁCIA</text>
+      <text x="110" y="70" text-anchor="middle" font-size="36" font-weight="800" fill="#fff">93,36%</text>
+      <text x="110" y="105" text-anchor="middle" font-size="9" fill="#94a3b8">Reportada com ressalva</text>
+      <text x="110" y="120" text-anchor="middle" font-size="9" fill="#94a3b8">(desbalanceamento 1,99%)</text>
+    </g>
+
+    <!-- AUC-ROC -->
+    <g transform="translate(240, 0)">
+      <rect width="220" height="140" rx="12" fill="url(#card-grad)" stroke="#3b82f6" stroke-width="2" filter="url(#glow)"/>
+      <text x="110" y="30" text-anchor="middle" font-size="10" font-weight="600" fill="#3b82f6">AUC-ROC</text>
+      <text x="110" y="70" text-anchor="middle" font-size="36" font-weight="800" fill="#fff">90,83%</text>
+      <text x="110" y="105" text-anchor="middle" font-size="9" fill="#94a3b8">Poder discriminante</text>
+      <text x="110" y="120" text-anchor="middle" font-size="9" fill="#94a3b8">do modelo</text>
+    </g>
+
+    <!-- F1-Score -->
+    <g transform="translate(480, 0)">
+      <rect width="220" height="140" rx="12" fill="url(#card-grad)" stroke="#f59e0b" stroke-width="2" filter="url(#glow)"/>
+      <text x="110" y="30" text-anchor="middle" font-size="10" font-weight="600" fill="#f59e0b">F1-SCORE</text>
+      <text x="110" y="70" text-anchor="middle" font-size="36" font-weight="800" fill="#fff">26,39%</text>
+      <text x="110" y="105" text-anchor="middle" font-size="9" fill="#94a3b8">Reflete desbalanceamento</text>
+      <text x="110" y="120" text-anchor="middle" font-size="9" fill="#94a3b8">(1,99% positivos)</text>
+    </g>
+  </g>
+
+  <!-- Comparison Table -->
+  <g transform="translate(50, 260)">
+    <rect width="700" height="200" rx="10" fill="url(#card-grad)" stroke="#334155" stroke-width="1"/>
+    <text x="350" y="30" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Comparação de Versões</text>
+    <text x="350" y="50" text-anchor="middle" font-size="10" fill="#94a3b8">Correção metodológica (Sprint 6-8 → Sprint 9, 18/07/2026)</text>
+
+    <!-- Table headers -->
+    <g transform="translate(40, 60)" font-size="10" fill="#fff">
+      <rect x="0" y="0" width="700" height="30" fill="#334155" rx="4"/>
+      <text x="80" y="20" text-anchor="middle" font-weight="700">Métrica</text>
+      <text x="200" y="20" text-anchor="middle" font-weight="700">v1.0 (Data Leakage)</text>
+      <text x="380" y="20" text-anchor="middle" font-weight="700">v1.3 (Produção)</text>
+      <text x="540" y="20" text-anchor="middle" font-weight="700">Status</text>
+    </g>
+
+    <!-- Rows -->
+    <g transform="translate(40, 95)" font-size="10">
+      <text x="80" y="0" text-anchor="middle" fill="#e2e8f0">Acurácia</text>
+      <text x="200" y="0" text-anchor="middle" fill="#f87171">98,27%</text>
+      <text x="380" y="0" text-anchor="middle" fill="#34d399">93,36%</text>
+      <text x="540" y="0" text-anchor="middle" fill="#f59e0b">⚠️ Corrigida</text>
+    </g>
+
+    <g transform="translate(40, 125)" font-size="10">
+      <text x="80" y="0" text-anchor="middle" fill="#e2e8f0">AUC-ROC</text>
+      <text x="200" y="0" text-anchor="middle" fill="#f87171">98,97%</text>
+      <text x="380" y="0" text-anchor="middle" fill="#34d399">90,83%</text>
+      <text x="540" y="0" text-anchor="middle" fill="#f59e0b">⚠️ Corrigida</text>
+    </g>
+
+    <g transform="translate(40, 155)" font-size="10">
+      <text x="80" y="0" text-anchor="middle" fill="#e2e8f0">F1-Score</text>
+      <text x="200" y="0" text-anchor="middle" fill="#f87171">95,22%</text>
+      <text x="380" y="0" text-anchor="middle" fill="#34d399">26,39%</text>
+      <text x="540" y="0" text-anchor="middle" fill="#10b981">✅ Realista</text>
+    </g>
+
+    <g transform="translate(40, 185)" font-size="10">
+      <text x="80" y="0" text-anchor="middle" fill="#e2e8f0">Definição Y</text>
+      <text x="200" y="0" text-anchor="middle" fill="#f87171">Tautológica</text>
+      <text x="380" y="0" text-anchor="middle" fill="#34d399">Ex-post pura</text>
+      <text x="540" y="0" text-anchor="middle" fill="#10b981">✅ Correta</text>
+    </g>
+  </g>
+
+  <!-- Technical Details -->
+  <g transform="translate(50, 475)">
+    <text x="0" y="0" font-size="9" fill="#64748b">Detalhes técnicos:</text>
+    <text x="120" y="0" font-size="9" fill="#94a3b8">Latência mediana ~1,5s (warm) | P95 ~2,0s | Modelos: 11 .pkl (27,35 MB) | Features TF-IDF: 500 | Treino: 100k PNCP (censitário 2021-2024) | CV 5-Fold executado 10/07/2026</text>
+  </g>
+
+  <text x="400" y="495" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">Fonte: PubliCopilot v1.3 · Métricas oficiais após remediação data leakage (18/07/2026)</text>
+</svg>

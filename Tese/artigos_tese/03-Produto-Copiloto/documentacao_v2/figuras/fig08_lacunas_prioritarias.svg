@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <linearGradient id="high-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fee2e2"/><stop offset="1" stop-color="#fecaca"/>
+    </linearGradient>
+    <linearGradient id="med-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fed7aa"/><stop offset="1" stop-color="#fdbd00"/>
+    </linearGradient>
+    <linearGradient id="low-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fef3c7"/><stop offset="1" stop-color="#fcd34d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="#f8fafc"/>
+
+  <text x="400" y="35" text-anchor="middle" font-size="20" font-weight="800" fill="#0f172a">Lacunas Detectadas por Nível de Criticidade</text>
+  <text x="400" y="55" text-anchor="middle" font-size="11" fill="#64748b">Análise automática de cláusulas contratuais em editais de compra pública</text>
+
+  <!-- Bar Chart -->
+  <g transform="translate(100, 90)">
+    <!-- Axis -->
+    <line x1="0" y1="280" x2="600" y2="280" stroke="#0f172a" stroke-width="2"/>
+    <line x1="0" y1="0" x2="0" y2="280" stroke="#0f172a" stroke-width="2"/>
+    <text x="300" y="310" text-anchor="middle" font-size="12" fill="#0f172a">Criticidade</text>
+    <text x="-50" y="140" text-anchor="middle" font-size="12" fill="#0f172a" transform="rotate(-90 -50 140)">Quantidade de Lacunas</text>
+
+    <!-- Bars -->
+    <g font-size="10" fill="#0f172a" font-weight="600">
+      <!-- ALTA -->
+      <g transform="translate(80, 260)">
+        <rect width="100" height="-200" rx="4" fill="url(#high-grad)"/>
+        <text x="50" y="-205" text-anchor="middle" fill="#991b1b">ALTA</text>
+        <text x="50" y="-215" text-anchor="middle" font-size="14" font-weight="800" fill="#dc2626">2</text>
+      </g>
+
+      <!-- MÉDIA -->
+      <g transform="translate(250, 260)">
+        <rect width="100" height="-120" rx="4" fill="url(#med-grad)"/>
+        <text x="50" y="-125" text-anchor="middle" fill="#9a3412">MÉDIA</text>
+        <text x="50" y="-135" text-anchor="middle" font-size="14" font-weight="800" fill="#f59e0b">2</text>
+      </g>
+
+      <!-- BAIXA -->
+      <g transform="translate(420, 260)">
+        <rect width="100" height="-60" rx="4" fill="url(#low-grad)"/>
+        <text x="50" y="-65" text-anchor="middle" fill="#854d0e">BAIXA</text>
+        <text x="50" y="-75" text-anchor="middle" font-size="14" font-weight="800" fill="#eab308">1</text>
+      </g>
+    </g>
+
+    <!-- Y-axis labels -->
+    <g font-size="10" fill="#64748b">
+      <text x="-15" y="280" text-anchor="end">0</text>
+      <text x="-15" y="220" text-anchor="end">5</text>
+      <text x="-15" y="160" text-anchor="end">10</text>
+      <text x="-15" y="100" text-anchor="end">15</text>
+      <text x="-15" y="40" text-anchor="end">20</text>
+    </g>
+
+    <!-- Detail labels -->
+    <g font-size="11" fill="#0f172a">
+      <text x="80" y="288">⚠️ Garantia Contratual</text>
+      <text x="80" y="305">⚠️ SLA / Níveis Serviço</text>
+      <text x="250" y="288">⚡ Rescisão Contratual</text>
+      <text x="250" y="305">⚡ LGPD / Confidencialidade</text>
+      <text x="420" y="288">🔹 Propriedade Intelectual</text>
+    </g>
+  </g>
+
+  <!-- Summary Box -->
+  <g transform="translate(100, 380)">
+    <rect width="600" height="50" rx="8" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="300" y="27" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">Resumo da Análise</text>
+    <text x="120" y="48" font-size="10" fill="#64748b">Total de lacunas: 5 | Percentual de cobertura: 78% | Recomendações: 2 cláusulas críticas</text>
+  </g>
+
+  <text x="400" y="435" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">Fonte: PubliCopilot v1.3 · Análise automática baseada em regras e ML</text>
+</svg>

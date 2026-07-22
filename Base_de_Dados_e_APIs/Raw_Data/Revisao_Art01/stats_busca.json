@@ -1,0 +1,64 @@
+{
+  "data_busca": "2026-07-10T14:42:22.644639",
+  "total_artigos": 514,
+  "por_tema": {
+    "T1_definicao_complexas": 152,
+    "T2_inovacao_tecnologica": 121,
+    "T3_esg_sustentabilidade": 124,
+    "T4_assimetria_reducao": 117
+  },
+  "ano_medio": 2011.7,
+  "ano_mediano": 2015.0,
+  "top_citados": [
+    {
+      "titulo": "Short-Term Effects of Nose-Only Cigarette Smoke Exposure on Glutathione Redox Homeostasis, Cytochrome P450 1A1/2 and Respiratory Enzyme Activities in Mice Tissues",
+      "citacoes": 47289,
+      "ano": 2013
+    },
+    {
+      "titulo": "Initial sequencing and analysis of the human genome",
+      "citacoes": 24596,
+      "ano": 2001
+    },
+    {
+      "titulo": "Older Adults' Reasons for Using Technology while Aging in Place",
+      "citacoes": 19751,
+      "ano": 2015
+    },
+    {
+      "titulo": "A Survey of Corporate Governance",
+      "citacoes": 16262,
+      "ano": 1997
+    },
+    {
+      "titulo": "Correspondence - Tranexamic acid for traumatic brain injury",
+      "citacoes": 11784,
+      "ano": 2005
+    },
+    {
+      "titulo": "The measurement and antecedents of affective, continuance and normative commitment to the organization",
+      "citacoes": 11541,
+      "ano": 1990
+    },
+    {
+      "titulo": "Projections of Global Mortality and Burden of Disease from 2002 to 2030",
+      "citacoes": 11505,
+      "ano": 2006
+    },
+    {
+      "titulo": "NCBI GEO: archive for functional genomics data sets—update",
+      "citacoes": 10798,
+      "ano": 2012
+    },
+    {
+      "titulo": "Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI",
+      "citacoes": 9132,
+      "ano": 2019
+    },
+    {
+      "titulo": "A view of cloud computing",
+      "citacoes": 9004,
+      "ano": 2010
+    }
+  ]
+}

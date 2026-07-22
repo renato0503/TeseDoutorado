@@ -3,737 +3,667 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PubliCopilot — Copiloto Algoritmico para Compras Publicas</title>
-    <meta name="description" content="Ferramenta de apoio a decisao para avaliacao de editais e geracao de clausulas para compras publicas complexas">
-    <style>
-        :root {
-            --primary: #0066d6;
-            --primary-dark: #0052a3;
-            --primary-light: #3399ff;
-            --accent-green: #00c853;
-            --accent-purple: #9c27b0;
-            --bg-dark: #0a0a1a;
-            --bg-gradient: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0a0a2a 100%);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --text-tertiary: rgba(255, 255, 255, 0.5);
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-gradient);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
-        /* Background Effects */
-        .bg-orbs {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
-        }
-        
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            animation: float 20s ease-in-out infinite;
-        }
-        
-        .orb-1 {
-            width: 600px;
-            height: 600px;
-            background: var(--primary);
-            top: -200px;
-            right: -100px;
-            animation-delay: 0s;
-        }
-        
-        .orb-2 {
-            width: 500px;
-            height: 500px;
-            background: var(--accent-purple);
-            bottom: -150px;
-            left: -100px;
-            animation-delay: -7s;
-        }
-        
-        .orb-3 {
-            width: 400px;
-            height: 400px;
-            background: var(--accent-green);
-            top: 50%;
-            left: 50%;
-            animation-delay: -14s;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(50px, -50px) scale(1.05); }
-            50% { transform: translate(0, 50px) scale(0.95); }
-            75% { transform: translate(-50px, -25px) scale(1.02); }
-        }
-        
-        /* Container */
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-        
-        /* Header */
-        header {
-            padding: 24px 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: rgba(10, 10, 26, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-        }
-        
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-        
-        .logo-icon {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent-purple) 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(0, 102, 214, 0.4);
-        }
-        
-        .logo-icon svg {
-            width: 24px;
-            height: 24px;
-            fill: white;
-        }
-        
-        .logo-text {
-            font-size: 20px;
-            font-weight: 700;
-            color: white;
-            letter-spacing: -0.5px;
-        }
-        
-        .logo-text span {
-            color: var(--primary-light);
-        }
-        
-        nav {
-            display: flex;
-            gap: 32px;
-        }
-        
-        nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        
-        nav a:hover {
-            color: white;
-        }
-        
-        /* Hero */
-        .hero {
-            padding: 180px 0 100px;
-            text-align: center;
-        }
-        
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--primary-light);
-            margin-bottom: 24px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .hero-badge svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-        
-        .hero h1 {
-            font-size: clamp(36px, 6vw, 64px);
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, #fff 0%, #a0c4ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero p {
-            font-size: 18px;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 48px;
-            line-height: 1.8;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            box-shadow: 0 4px 20px rgba(0, 102, 214, 0.4);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 102, 214, 0.5);
-        }
-        
-        .btn-secondary {
-            background: var(--glass-bg);
-            color: white;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .btn svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-        
-        /* Features */
-        .features {
-            padding: 100px 0;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-header h2 {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
-        }
-        
-        .section-header p {
-            color: var(--text-secondary);
-            font-size: 16px;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-        }
-        
-        .feature-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 32px;
-            backdrop-filter: blur(20px);
-            transition: all 0.3s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: var(--glass-shadow);
-        }
-        
-        .feature-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        
-        .feature-icon svg {
-            width: 28px;
-            height: 28px;
-        }
-        
-        .feature-icon.blue {
-            background: linear-gradient(135deg, rgba(0, 102, 214, 0.2) 0%, rgba(0, 102, 214, 0.1) 100%);
-        }
-        
-        .feature-icon.blue svg { fill: var(--primary-light); }
-        
-        .feature-icon.green {
-            background: linear-gradient(135deg, rgba(0, 200, 83, 0.2) 0%, rgba(0, 200, 83, 0.1) 100%);
-        }
-        
-        .feature-icon.green svg { fill: var(--accent-green); }
-        
-        .feature-icon.purple {
-            background: linear-gradient(135deg, rgba(156, 39, 176, 0.2) 0%, rgba(156, 39, 176, 0.1) 100%);
-        }
-        
-        .feature-icon.purple svg { fill: var(--accent-purple); }
-        
-        .feature-card h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .feature-card p {
-            color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.7;
-        }
-        
-        /* Modules */
-        .modules {
-            padding: 100px 0;
-        }
-        
-        .modules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 32px;
-        }
-        
-        .module-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 40px;
-            backdrop-filter: blur(20px);
-            transition: all 0.3s;
-        }
-        
-        .module-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--glass-shadow);
-        }
-        
-        .module-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .module-badge.blue {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-        }
-        
-        .module-badge.green {
-            background: linear-gradient(135deg, var(--accent-green) 0%, #00a844 100%);
-            color: white;
-        }
-        
-        .module-card h3 {
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-        
-        .module-card > p {
-            color: var(--text-secondary);
-            font-size: 15px;
-            margin-bottom: 24px;
-            line-height: 1.7;
-        }
-        
-        .module-features {
-            list-style: none;
-            margin-bottom: 32px;
-        }
-        
-        .module-features li {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 0;
-            font-size: 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .module-features li:last-child {
-            border-bottom: none;
-        }
-        
-        .module-features .check {
-            width: 20px;
-            height: 20px;
-            background: rgba(0, 200, 83, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        
-        .module-features .check svg {
-            width: 12px;
-            height: 12px;
-            fill: var(--accent-green);
-        }
-        
-        .module-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-            background: white;
-            color: var(--bg-dark);
-        }
-        
-        .module-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
-        }
-        
-        .module-btn svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-        
-        /* Stats */
-        .stats {
-            padding: 100px 0;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 32px;
-            text-align: center;
-        }
-        
-        .stat-item {
-            padding: 32px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            backdrop-filter: blur(20px);
-        }
-        
-        .stat-item h3 {
-            font-size: 48px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-green) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-        }
-        
-        .stat-item p {
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-        
-        /* Footer */
-        footer {
-            padding: 40px 0;
-            border-top: 1px solid var(--glass-border);
-            text-align: center;
-        }
-        
-        footer p {
-            color: var(--text-tertiary);
-            font-size: 13px;
-        }
-        
-        /* Firebase Status */
-        .firebase-status {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: var(--glass-bg);
-            padding: 12px 20px;
-            border-radius: 12px;
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(20px);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 13px;
-            z-index: 100;
-        }
-        
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--accent-green);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav { display: none; }
-            .hero h1 { font-size: 32px; }
-            .modules-grid { grid-template-columns: 1fr; }
-            .module-card { padding: 24px; }
-            .stat-item h3 { font-size: 36px; }
-        }
-    </style>
+    <title>PubliCopilot — Copiloto Algorítmico para Compras Públicas | Fucape</title>
+    <meta name="description" content="Copiloto algorítmico com Machine Learning real para análise de editais de compras públicas complexas. Pesquisa de Doutorado Fucape Business School.">
+    <meta name="theme-color" content="#0F172A">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="publicopilot.png">
+
+    <!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="css/auth.css">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Init + Auth (síncrono, antes do DOM ready) -->
+    <script src="js/firebase-init.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin-seed.js"></script>
 </head>
 <body>
-    <div class="bg-orbs">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
-    
+    <!-- ============================================================
+         NAVBAR (Sticky + Glassmorphism)
+         ============================================================ -->
     <header>
-        <div class="container">
-            <a href="#" class="logo">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        <nav class="nav" id="navbar" aria-label="Navegação principal">
+            <div class="container nav__inner">
+                <!-- Brand -->
+                <a href="index.html" class="nav__brand">
+                    <img src="publicopilot.png" alt="PubliCopilot" width="36" height="36">
+                    <span class="nav__brand-text">
+                        <span class="nav__brand-name">PubliCopilot</span>
+                        <span class="nav__brand-tagline">Fucape · Doutorado</span>
+                    </span>
+                </a>
+
+                <!-- Links -->
+                <ul class="nav__links" role="menubar">
+                    <li role="none"><a href="#recursos" class="nav__link" role="menuitem">Recursos</a></li>
+                    <li role="none"><a href="#modulos" class="nav__link" role="menuitem">Módulos</a></li>
+                    <li role="none"><a href="#metodologia" class="nav__link" role="menuitem">Metodologia</a></li>
+                    <li role="none"><a href="#sobre" class="nav__link" role="menuitem">Pesquisa</a></li>
+                </ul>
+
+                <!-- Ações -->
+                <div class="nav__actions">
+                    <button class="nav__cta-login" id="btn-login" type="button" aria-label="Entrar">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                            <polyline points="10 17 15 12 10 7"/>
+                            <line x1="15" y1="12" x2="3" y2="12"/>
+                        </svg>
+                        <span>Entrar</span>
+                    </button>
+                    <button class="nav__cta-signup" id="btn-signup" type="button" aria-label="Criar conta">
+                        <span>Solicitar Acesso</span>
+                    </button>
+
+                    <!-- User menu (hidden when not logged in) -->
+                    <div id="user-menu" class="user-menu" style="display:none;">
+                        <div class="user-avatar" id="user-avatar" title="Menu do usuário">
+                            <span id="user-initial">U</span>
+                        </div>
+                        <div class="user-info" id="user-info-trigger">
+                            <span class="name" id="user-name">Usuário</span>
+                            <span class="email" id="user-email">user@email.com</span>
+                        </div>
+                    </div>
                 </div>
-                <span class="logo-text">Publi<span>Copilot</span></span>
-            </a>
-            <nav>
-                <a href="#modulos">Modulos</a>
-                <a href="#recursos">Recursos</a>
-                <a href="#sobre">Sobre</a>
-            </nav>
-        </div>
+            </div>
+        </nav>
     </header>
-    
-    <section class="hero">
-        <div class="container">
-            <div class="hero-badge">
-                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                Powered by AI and Firebase
+
+    <main>
+        <!-- ============================================================
+             HERO SECTION
+             ============================================================ -->
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="container hero__inner">
+                <div class="hero__content reveal">
+                    <span class="hero__badge">
+                        <span class="hero__badge-dot"></span>
+                        Pesquisa de Doutorado · Fucape
+                    </span>
+
+                    <h1 class="hero__title" id="hero-title">
+                        Inteligência artificial para <span class="hero__title-accent">compras públicas complexas</span>
+                    </h1>
+
+                    <p class="hero__subtitle">
+                        Ferramenta de apoio à decisão para avaliação de editais,
+                        detecção de assimetrias e geração de cláusulas — treinada com
+                        100.000 contratos do PNCP via Machine Learning real
+                        (Random Forest + SHAP).
+                    </p>
+
+                    <div class="hero__actions">
+                        <a href="modulo_avaliacao/index.html" class="btn btn--primary">
+                            <span>Solicitar Acesso à Plataforma</span>
+                            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </a>
+                        <a href="#metodologia" class="btn btn--secondary">
+                            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                            <span>Conhecer a Metodologia</span>
+                        </a>
+                    </div>
+
+                    <div class="hero__trust">
+                        <span class="hero__trust-label">Em conformidade com</span>
+                        <span class="hero__trust-item">Lei 14.133/2021</span>
+                        <span class="hero__trust-item">LGPD</span>
+                        <span class="hero__trust-item">LC 182/2021</span>
+                    </div>
+                </div>
+
+                <!-- Visual: Dashboard Mockup -->
+                <div class="hero__visual reveal">
+                    <div class="dashboard-mockup">
+                        <div class="dashboard-mockup__header">
+                            <span class="dashboard-mockup__dot dashboard-mockup__dot--red"></span>
+                            <span class="dashboard-mockup__dot dashboard-mockup__dot--yellow"></span>
+                            <span class="dashboard-mockup__dot dashboard-mockup__dot--green"></span>
+                            <span class="dashboard-mockup__title">publicopilot.dashboard</span>
+                        </div>
+                        <div class="dashboard-mockup__body">
+                            <div class="metric-card">
+                                <div class="metric-card__label">Score de Risco</div>
+                                <div class="metric-card__value metric-card__value--accent">87.4%</div>
+                                <div class="metric-card__trend">↑ +12% vs. média</div>
+                                <div class="metric-card__bar">
+                                    <div class="metric-card__bar-fill" style="width:87%"></div>
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-card__label">Anomalias</div>
+                                <div class="metric-card__value metric-card__value--teal">3</div>
+                                <div class="metric-card__trend">detectadas em 1.2s</div>
+                                <div class="metric-card__bar">
+                                    <div class="metric-card__bar-fill" style="width:23%"></div>
+                                </div>
+                            </div>
+                            <div class="dashboard-mockup__chart">
+                                <div class="chart-label">
+                                    <span>Lacunas Contratuais</span>
+                                    <span class="chart-label__live">
+                                        <span class="hero__badge-dot"></span>
+                                        Análise ao vivo
+                                    </span>
+                                </div>
+                                <div class="chart-bars">
+                                    <div class="chart-bar" style="height:30%"></div>
+                                    <div class="chart-bar" style="height:55%"></div>
+                                    <div class="chart-bar" style="height:42%"></div>
+                                    <div class="chart-bar" style="height:78%"></div>
+                                    <div class="chart-bar" style="height:65%"></div>
+                                    <div class="chart-bar" style="height:90%"></div>
+                                    <div class="chart-bar" style="height:50%"></div>
+                                    <div class="chart-bar" style="height:72%"></div>
+                                    <div class="chart-bar" style="height:88%"></div>
+                                    <div class="chart-bar" style="height:60%"></div>
+                                    <div class="chart-bar" style="height:45%"></div>
+                                    <div class="chart-bar" style="height:70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h1>Copiloto Algoritmico para<br>Compras Publicas</h1>
-            <p>Ferramenta de apoio a decisao para avaliacao de editais, deteccao de assimetrias e geracao de clausulas para contratacoes de inovacao e sustentabilidade.</p>
-            <div class="hero-buttons">
-                <a href="#modulos" class="btn btn-primary">
-                    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-                    Acessar Modulos
-                </a>
-                <a href="#recursos" class="btn btn-secondary">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                    Saiba Mais
-                </a>
-            </div>
-        </div>
-    </section>
-    
-    <section class="features" id="recursos">
-        <div class="container">
-            <div class="section-header">
-                <h2>Recursos Principais</h2>
-                <p>Tecnologias avancadas para transparencia e eficiencia na administracao publica</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon blue">
-                        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        </section>
+
+        <!-- ============================================================
+             SEÇÃO DE MÉTRICAS
+             ============================================================ -->
+        <section class="metrics" aria-labelledby="metrics-title">
+            <div class="container metrics__inner">
+                <span class="metrics__label">Resultados do Modelo · 100.000 contratos PNCP</span>
+                <h2 class="metrics__title" id="metrics-title">Métricas reportadas com rigor acadêmico</h2>
+                <p class="metrics__subtitle">Estatísticas de desempenho do classificador Random Forest treinado sobre dados censitários do PNCP (2021-2024).</p>
+
+                <div class="metrics__grid reveal">
+                    <div class="metric">
+                        <div class="metric__value">572k+</div>
+                        <div class="metric__label-text">Contratos PNCP na base censitária</div>
                     </div>
-                    <h3>Deteccao de Assimetrias</h3>
-                    <p>Identificacao automatica de lacunas contratuais, inconsistencias juridicas e riscos potenciais em minutas de editais.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon green">
-                        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+
+                    <div class="metric">
+                        <div class="metric__value">100k</div>
+                        <div class="metric__label-text">Amostra aleatória para treino</div>
                     </div>
-                    <h3>Geracao de Clausulas</h3>
-                    <p>Recomendacoes de clausulas especificas para editais de inovacao e sustentabilidade, com justificativas baseadas em XAI.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon purple">
-                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+
+                    <div class="metric">
+                        <div class="metric__value metric__value--teal">8.547</div>
+                        <div class="metric__label-text">Acórdãos TCU analisados</div>
                     </div>
-                    <h3>Analise de Jurisprudencia</h3>
-                    <p>Cross-reference com acordaos do TCU e tribunais de contas para conformidade legal e mitigacao de riscos.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon blue">
-                        <svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/></svg>
+
+                    <div class="metric metric--academic">
+                        <div class="metric__value-group">
+                            <span class="metric__value">93,36%</span>
+                            <span class="metric__divider">·</span>
+                            <span class="metric__value">90,83%</span>
+                            <span class="metric__divider">·</span>
+                            <span class="metric__value">26,39%</span>
+                        </div>
+                        <div class="metric__label-text">
+                            Acurácia · AUC-ROC · F1-Score
+                            <span class="metric__tooltip" data-tooltip="F1-Score de 26,39% reflete o desbalanceamento de classes: apenas 1,99% dos contratos apresentam evento adverso (aditivo > 25%, rescisão ou suspensão). AUC-ROC de 90,83% confirma o poder discriminante do modelo, independentemente da classe majoritária.">?</span>
+                        </div>
                     </div>
-                    <h3>Base PNCP</h3>
-                    <p>Mais de 19.640 editais analisados do Portal Nacional de Contratacoes Publicas para contextualizacao.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon green">
-                        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-                    </div>
-                    <h3>Conformidade Lei 14.133</h3>
-                    <p>Validacao automatica de conformidade com a nova Lei de Licitacoes e Marco Legal das Startups.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon purple">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                    </div>
-                    <h3>Explicabilidade (XAI)</h3>
-                    <p>Cada recomendacao inclui justificativa transparencia seguindo principios de IA Explicavel.</p>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <section class="modules" id="modulos">
-        <div class="container">
-            <div class="section-header">
-                <h2>Modulos do Sistema</h2>
-                <p>Escolha o modulo adequado para sua necessidade</p>
+        </section>
+
+        <!-- ============================================================
+             SEÇÃO DE RECURSOS
+             ============================================================ -->
+        <section class="features" id="recursos" aria-labelledby="features-title">
+            <div class="container">
+                <header class="features__header reveal">
+                    <h2 class="features__title" id="features-title">
+                        Capacidades <span class="features__title-highlight">institucionais</span> para
+                        análise de risco contratual
+                    </h2>
+                    <p class="features__subtitle">
+                        Tecnologia auditável, explicável e treinada com dados públicos
+                        para fortalecer a tomada de decisão no setor público.
+                    </p>
+                </header>
+
+                <div class="features__grid">
+                    <article class="feature-card reveal">
+                        <div class="feature-card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 12l2 2 4-4"/>
+                                <path d="M21 12c-1 5-5 8-9 8-4 0-8-3-9-8 1-5 5-8 9-8 4 0 8 3 9 8z"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-card__title">Detecção de Assimetrias</h3>
+                        <p class="feature-card__description">
+                            Identificação automática de lacunas contratuais, inconsistências
+                            jurídicas e riscos potenciais em minutas de editais via NLP com 16 padrões
+                            da Lei 14.133/2021.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal">
+                        <div class="feature-card__icon feature-card__icon--gold" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"/>
+                                <path d="M20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-card__title">Geração de Cláusulas</h3>
+                        <p class="feature-card__description">
+                            Recomendações de cláusulas específicas para editais de inovação
+                            e sustentabilidade, com justificativas baseadas em XAI (Explainable AI)
+                            e referências contratuais fundamentadas.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal">
+                        <div class="feature-card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+                                <polyline points="9 11 12 14 22 4"/>
+                                <path d="M9 17H5"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-card__title">Análise de Jurisprudência</h3>
+                        <p class="feature-card__description">
+                            Referenciação automática com acórdãos do TCU e tribunais de contas
+                            para conformidade legal, mitigação de riscos e fundamentação de decisões.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal">
+                        <div class="feature-card__icon feature-card__icon--gold" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-card__title">Base Censitária PNCP</h3>
+                        <p class="feature-card__description">
+                            Modelo treinado com a base pública do Portal Nacional de
+                            Contratações Públicas — auditável, replicável e fundamentado em dados
+                            oficiais.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal">
+                        <div class="feature-card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="M9 12l2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-card__title">Conformidade Legal</h3>
+                        <p class="feature-card__description">
+                            Validação contínua com a Lei de Licitações (14.133/2021),
+                            Marco Legal das Startups (LC 182/2021) e Lei Geral de Proteção de
+                            Dados (LGPD).
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal">
+                        <div class="feature-card__icon feature-card__icon--gold" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-card__title">Explicabilidade (XAI)</h3>
+                        <p class="feature-card__description">
+                            Cada recomendação inclui justificativa transparente via SHAP
+                            (SHapley Additive exPlanations) — atendendo aos princípios de
+                            IA Explicável e auditoria algorítmica.
+                        </p>
+                    </article>
+                </div>
             </div>
-            <div class="modules-grid">
-                <div class="module-card">
-                    <span class="module-badge blue">Modulo 1</span>
-                    <h3>Modulo de Avaliacao</h3>
-                    <p>Recebimento de minutas de editais e contratos para analise de conformidade, identificacao de assimetrias e deteccao de lacunas contratuais.</p>
-                    <ul class="module-features">
-                        <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> NLP para classificacao de clausulas</li>
-                        <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> NER - Entidades Nomeadas</li>
-                        <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> Analise de complexidade textual</li>
-                        <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> Deteccao de lacunas contratuais</li>
-                        <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> Relatorio de conformidade legal</li>
-                        <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> Recomendacoes com XAI</li>
-                    </ul>
-                    <a href="https://comprapublica.web.app/modulo_avaliacao/index.html" class="module-btn" target="_blank">
-                        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                        Acessar Avaliacao
+        </section>
+
+        <!-- ============================================================
+             SEÇÃO DE MÓDULOS
+             ============================================================ -->
+        <section class="modules" id="modulos" aria-labelledby="modules-title">
+            <div class="container">
+                <header class="features__header reveal">
+                    <h2 class="features__title" id="modules-title">Módulos da plataforma</h2>
+                    <p class="features__subtitle">
+                        Dois módulos integrados para análise e geração de conteúdo contratual,
+                        com autenticação obrigatória e auditoria completa.
+                    </p>
+                </header>
+
+                <div class="modules__grid">
+                    <article class="module-card reveal">
+                        <span class="module-card__badge">Módulo 1</span>
+                        <h3 class="module-card__title">Avaliação de Minutas</h3>
+                        <p class="module-card__description">
+                            Recebimento de minutas de editais e contratos para análise de
+                            conformidade, identificação de assimetrias e detecção de lacunas
+                            contratuais com Machine Learning real.
+                        </p>
+                        <ul class="module-card__features">
+                            <li class="module-card__feature">
+                                <svg class="module-card__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                NLP para classificação de cláusulas (16 padrões da Lei 14.133)
+                            </li>
+                            <li class="module-card__feature">
+                                <svg class="module-card__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                Detecção automática de lacunas contratuais
+                            </li>
+                            <li class="module-card__feature">
+                                <svg class="module-card__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                Isolation Forest + Random Forest treinados no PNCP
+                            </li>
+                            <li class="module-card__feature">
+                                <svg class="module-card__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                Explicabilidade SHAP + contrafactuais normativos
+                            </li>
+                            <li class="module-card__feature">
+                                <svg class="module-card__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                Recomendações com fundamentos jurídicos (XAI)
+                            </li>
+                        </ul>
+                        <a href="modulo_avaliacao/index.html" class="btn btn--primary module-card__cta">
+                            <span>Acessar Avaliação</span>
+                            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </a>
+                    </article>
+
+                    <article class="module-card module-card--green reveal">
+                        <span class="module-card__badge">Módulo 2</span>
+                        <h3 class="module-card__title">Geração de Cláusulas</h3>
+                        <p class="module-card__description">
+                            Recomendação de cláusulas para editais de inovação e sustentabilidade,
+                            com geração de minutas completas e justificativas XAI normativamente
+                            ancoradas.
+                        </p>
+                        <ul class="module-card__features">
+                            <li class="module-card__feature">
+                                <svg class="module-card__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                Templates alinhados à Lei 14.133/2021
+                            </li>
+                            <li class="module-card__feature">
+                                <svg class="module-card__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                Conformidade com Marco Legal das Startups (LC 182/2021)
+                            </li>
+                            <li class="module-card__feature">
+                                <svg class="module-card__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                Geração de minutas completas com placeholders
+                            </li>
+                            <li class="module-card__feature">
+                                <svg class="module-card__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                Justificativas XAI detalhadas e auditáveis
+                            </li>
+                            <li class="module-card__feature">
+                                <svg class="module-card__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                Conformidade com LGPD e Lei 14.133/2021
+                            </li>
+                        </ul>
+                        <a href="modulo_geracao/index.html" class="btn btn--secondary module-card__cta">
+                            <span>Acessar Geração</span>
+                            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             SEÇÃO DE METODOLOGIA / SOBRE
+             ============================================================ -->
+        <section class="features" id="metodologia" aria-labelledby="metodologia-title">
+            <div class="container">
+                <header class="features__header reveal">
+                    <h2 class="features__title" id="metodologia-title">
+                        Rigor <span class="features__title-highlight">acadêmico</span> e
+                        científico
+                    </h2>
+                    <p class="features__subtitle">
+                        Metodologia Design Science Research (DSR) com revisão de
+                        literatura em Design Science, XAI, e Custos de Transação.
+                    </p>
+                </header>
+
+                <div class="features__grid">
+                    <article class="feature-card reveal">
+                        <div class="feature-card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 3v18h18"/>
+                                <path d="M7 16l4-4 4 4 5-5"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-card__title">Análise Censitária PNCP</h3>
+                        <p class="feature-card__description">
+                            Base censitária de 572.045 contratos do Portal Nacional de
+                            Contratações Públicas (2021-2024) com filtros de complexidade
+                            textual e análise de eventos adversos <em>ex-post</em>.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal">
+                        <div class="feature-card__icon feature-card__icon--gold" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-card__title">Design Science Research</h3>
+                        <p class="feature-card__description">
+                            Metodologia DSR (Hevner et al., 2004; Peffers et al., 2007)
+                            com ciclos iterativos de construção, demonstração e avaliação
+                            do artefato computacional.
+                        </p>
+                    </article>
+
+                    <article class="feature-card reveal">
+                        <div class="feature-card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-card__title">Avaliação com Especialistas</h3>
+                        <p class="feature-card__description">
+                            Validação do artefato com painel de especialistas em compras
+                            públicas via heurística TAM (Technology Acceptance Model),
+                            conforme protocolo DSR.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             CTA FINAL
+             ============================================================ -->
+        <section class="cta" id="sobre" aria-labelledby="cta-title">
+            <div class="container cta__inner reveal">
+                <h2 class="cta__title" id="cta-title">
+                    Solicite acesso à plataforma de pesquisa
+                </h2>
+                <p class="cta__description">
+                    O PubliCopilot é um artefato de pesquisa em desenvolvimento.
+                    O acesso é gratuito para servidores públicos, pesquisadores e
+                    órgãos de controle durante a fase de validação.
+                </p>
+                <div class="cta__actions">
+                    <button class="btn btn--primary" type="button" id="cta-signup-btn">
+                        <span>Solicitar Acesso</span>
+                        <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </button>
+                    <a href="#metodologia" class="btn btn--ghost">
+                        <span>Ler Paper Acadêmico</span>
                     </a>
                 </div>
-                <div class="module-card">
-                    <span class="module-badge green">Modulo 2</span>
-                    <h3>Modulo de Geracao</h3>
-                    <p>Recomendacao de clausulas para editais de inovacao e sustentabilidade, com geracao de minutas completas e justificativas XAI.</p>
-                    <ul class="module-features">
-                        <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> RAG com base de editais PNCP</li>
-                        <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> Similaridade semantica</li>
-                        <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> Clausulas pre-configuradas</li>
-                        <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> Geracao de minutas completas</li>
-                        <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> Justificativas XAI detalhadas</li>
-                        <li><span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> Conformidade Lei 14.133</li>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__grid">
+                <div>
+                    <div class="footer__brand">
+                        <img src="publicopilot.png" alt="PubliCopilot" width="40" height="40">
+                        <span class="footer__brand-name">PubliCopilot</span>
+                    </div>
+                    <p class="footer__description">
+                        Copiloto algorítmico para análise de editais de compras
+                        públicas complexas. Pesquisa de Doutorado em Contabilidade
+                        pela Fucape Business School.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="footer__title">Pesquisa</h4>
+                    <ul class="footer__list">
+                        <li><a href="#metodologia" class="footer__link">Metodologia DSR</a></li>
+                        <li><a href="#metodologia" class="footer__link">Modelo PNCP</a></li>
+                        <li><a href="#metodologia" class="footer__link">Avaliação com especialistas</a></li>
                     </ul>
-                    <a href="https://comprapublica.web.app/modulo_geracao/index.html" class="module-btn" target="_blank">
-                        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-                        Acessar Geracao
-                    </a>
+                </div>
+
+                <div>
+                    <h4 class="footer__title">Plataforma</h4>
+                    <ul class="footer__list">
+                        <li><a href="modulo_avaliacao/index.html" class="footer__link">Módulo Avaliação</a></li>
+                        <li><a href="modulo_geracao/index.html" class="footer__link">Módulo Geração</a></li>
+                        <li><a href="#" class="footer__link">Documentação</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer__title">Legal</h4>
+                    <ul class="footer__list">
+                        <li><a href="#" class="footer__link">Lei 14.133/2021</a></li>
+                        <li><a href="#" class="footer__link">LGPD</a></li>
+                        <li><a href="#" class="footer__link">LC 182/2021</a></li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>572k+</h3>
-                    <p>Contratos PNCP processados</p>
+
+            <div class="footer__bottom">
+                <div class="footer__bottom-meta">
+                    <strong>Pesquisa de Doutorado</strong> · Fucape Business School
                 </div>
-                <div class="stat-item">
-                    <h3>19.640</h3>
-                    <p>Editais na base de conhecimento</p>
-                </div>
-                <div class="stat-item">
-                    <h3>8.547</h3>
-                    <p>Acordaos TCU analisados</p>
-                </div>
-                <div class="stat-item">
-                    <h3>94,88%</h3>
-                    <p>Acuracia do modelo XAI</p>
+                <div class="footer__bottom-meta">
+                    <span>© 2026 PubliCopilot. Todos os direitos reservados.</span>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <footer>
-        <div class="container">
-            <p>PubliCopilot - Pesquisa de Doutorado | Fucape Business School</p>
-            <p style="margin-top: 8px;">Copiloto Algoritmico para Compras Publicas Complexas</p>
         </div>
     </footer>
-    
-    <div class="firebase-status">
-        <span class="status-dot"></span>
-        <span>Firebase: Online</span>
-    </div>
+
+    <!-- Script de animações de scroll (IntersectionObserver) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animação fade-in-up ao rolar
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            // Navbar scroll effect
+            const nav = document.getElementById('navbar');
+            if (nav) {
+                let lastScroll = 0;
+                window.addEventListener('scroll', () => {
+                    const currentScroll = window.pageYOffset;
+                    if (currentScroll > 10) {
+                        nav.classList.add('is-scrolled');
+                    } else {
+                        nav.classList.remove('is-scrolled');
+                    }
+                    lastScroll = currentScroll;
+                }, { passive: true });
+            }
+
+            // CTA button
+            const ctaSignup = document.getElementById('cta-signup-btn');
+            if (ctaSignup) {
+                ctaSignup.onclick = () => {
+                    if (typeof PubliAuth !== 'undefined') {
+                        PubliAuth.abrirCadastro();
+                    }
+                };
+            }
+
+            // Login/Signup buttons
+            const btnLogin = document.getElementById('btn-login');
+            const btnSignup = document.getElementById('btn-signup');
+            if (btnLogin) {
+                btnLogin.onclick = () => {
+                    if (typeof PubliAuth !== 'undefined') {
+                        PubliAuth.abrirLogin('login');
+                    }
+                };
+            }
+            if (btnSignup) {
+                btnSignup.onclick = () => {
+                    if (typeof PubliAuth !== 'undefined') {
+                        PubliAuth.abrirLogin('signup');
+                    }
+                };
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,727 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copiloto Algoritmico para Compras públicas Complexas</title>
+    <link rel="stylesheet" href="../css/style_academico.css">
+    <style>
+        .capa-content { text-align: center; padding-top: 3cm; font-size: 12pt; }
+        .capa-content h1 { font-size: 16pt; font-weight: bold; margin: 2cm 0; line-height: 1.4; }
+        .capa-content p { text-indent: 0 !important; margin: 0.5cm 0; text-align: center; }
+        .autor { font-weight: bold; margin-top: 2cm !important; margin-bottom: 1cm !important; }
+        .folha-rosto-content { padding-top: 2cm; }
+        .folha-rosto-content p { text-indent: 0 !important; }
+        .folha-rosto-content .descrição { text-align: justify; margin-top: 3cm; margin-left: 4cm; margin-right: 0; }
+        .folha-rosto-content .local-data { margin-top: 2cm; }
+        .folha-aprovacao-content { text-align: center; padding-top: 2cm; }
+        .folha-aprovacao-content p { text-indent: 0 !important; }
+        .folha-aprovacao-content .assinatura { margin-top: 2.5cm; border-top: 1px solid #000; width: 250px; display: inline-block; padding-top: 0.3cm; font-size: 10pt; }
+        .abstract-box { font-size: 12pt !important; line-height: 1.3 !important; text-align: justify; }
+        .abstract-box h2 { font-size: 12pt; font-weight: bold; text-align: center; margin: 0.4cm 0 0.3cm 0; }
+        .abstract-box p { text-indent: 0 !important; margin: 0 0 0.2cm 0 !important; line-height: 1.3 !important; }
+        .sumario-box { columns: 1; }
+        .indice-item { margin: 0.15cm 0; text-indent: 0 !important; font-size: 12pt; }
+        .indice-nivel1 { font-weight: bold; }
+        .indice-nivel2 { margin-left: 1cm; }
+        .indice-nivel3 { margin-left: 2cm; font-size: 11pt; }
+        h3 { font-size: 12pt; font-weight: bold; margin: 0.6cm 0 0.3cm 0; }
+        h4 { font-size: 11pt; font-weight: bold; margin: 0.4cm 0 0.2cm 0; }
+        .ref-entry { text-indent: -1.27cm; padding-left: 1.27cm; margin: 0 0 0.3cm 0; text-align: justify; font-size: 11pt; }
+        .table-note, .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .figure-container { margin: 0.5cm 0; text-align: center; }
+        .figure-container img { max-width: 95%; height: auto; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .capitulo-header { background: #1a1a2e; color: white; padding: 20px 24px; border-radius: 8px; margin-bottom: 16px; }
+        .capitulo-header h2 { color: white; margin: 0 0 6px 0; }
+        .capitulo-header p { color: rgba(255,255,255,0.7); margin: 0; font-size: 10pt; }
+        .shap-bar-container { margin: 0.3cm 0; }
+        .shap-bar-row { display: flex; align-items: center; margin-bottom: 4px; font-size: 10pt; }
+        .shap-bar-label { width: 200px; text-align: right; padding-right: 8px; font-weight: 500; }
+        .shap-bar-track { flex: 1; height: 18px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
+        .shap-bar-fill { height: 100%; border-radius: 3px; }
+        .shap-bar-value { width: 65px; padding-left: 8px; font-size: 9pt; color: #555; }
+        .design-principle { background:#f8f9fa; border-left:4px solid #007aff; padding:12px 16px; margin:8px 0; font-size:11pt; text-align:justify; }
+    </style>
+</head>
+<body>
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">Baixar DOCX</button>
+    </div>
+
+    <!-- ==================== CAPA ==================== -->
+        <section class="paper-page">
+        <div class="page-content">
+            <h2>1 INTRODUÇÃO GERAL</h2>
+
+            <h3>1.1 Contextualizacao do Tema</h3>
+            <p>O volume de recursos mobilizados pelo setor publico brasileiro em processos licitatorios aproxima-se de 15% do Produto Interno Bruto, consolidando o Estado como um dos maiores agentes economicos do pais e como vetor potencial de inducao de inovacao tecnologica e desenvolvimento sustentavel (Edler &amp; Georghiou, 2007). O poder de compra governamental, quando estrategicamente orientado, possui capacidade de moldar mercados, induzir trajetorias tecnologicas e promover praticas sustentaveis na cadeia produtiva privada (Mazzucato, 2014). O advento do Marco Legal das Startups (Lei Complementar 182/2021) e da Nova Lei de Licitacoes (Lei 14.133/2021) criou o arcabouco institucional necessario para que o Brasil avance na direcao de compras publicas estrategicas. No entanto, a transicao do arcabouco legal nao foi acompanhada por uma transformacao equivalente na capacidade operacional das unidades compradoras, especialmente nos entes subnacionais.</p>
+
+            <h3>1.2 O Problema das Compras Complexas</h3>
+            <p>As compras complexas - cujo objeto envolve alta incerteza tecnologica, solucoes sob medida e requisitos de sustentabilidade - tem revelado gargalos operacionais severos. Diferentemente das compras de prateleira, as compras complexas envolvem desenvolvimento de software sob medida, implementacao de inteligencia artificial, adocao de tecnologias limpas e projetos de pesquisa e desenvolvimento (Thai, 2001). A literatura internacional documenta que compras orientadas a inovacao exigem capacidades institucionais que transcendem a pratica tradicional, incluindo competencias tecnicas avancadas e estruturas de governanca adaptativas (Flynn &amp; Davis, 2014; Brammer &amp; Walker, 2011).</p>
+
+            <h3>1.3 O Debate sobre o Apagao das Canetas</h3>
+            <p>Tradicionalmente, a literatura administrativa e a jurisprudencia dos orgaos de controle, notadamente o Tribunal de Contas da Uniao, tendem a atribuir o fracasso contratual a falhas comportamentais dos gestores - o assim chamado apagao das canetas. Contudo, esta explicacao centrada no individuo apresenta limitacoes: a incompetencia isolada nao justifica a paralisia decisoria sistemica, e a abordagem punitivista desconsidera fatores estruturais como a assimetria informacional entre comprador e fornecedor (Flynn &amp; Davis, 2014).</p>
+
+            <h3>1.4 A Assimetria Informacional como Causa Estrutural</h3>
+            <p>A Teoria dos Custos de Transacao (Coase, 1937; Williamson, 1985) oferece uma lente analitica alternativa. Em compras complexas, os tres atributos determinantes dos custos de transacao (especificidade de ativos, incerteza e frequencia) sao elevados. Akerlof (1970) demonstrou que a assimetria informacional conduz a um equilibrio subotimo. A Teoria da Agencia (Jensen &amp; Meckling, 1976) preve que o principal incorre em custos de monitoramento desproporcionais para mitigar o risco moral do agente.</p>
+
+            <h3>1.5 Lacuna, Questao de Pesquisa e Objetivos</h3>
+            <p>A lacuna que esta tese busca preencher e dupla: do ponto de vista empirico, inexiste um diagnostico quantitativo baseado em dados censitarios do PNCP que teste hipoteses derivadas da Economia dos Custos de Transacao; do ponto de vista tecnologico, inexiste um artefato de suporte a decisao baseado em XAI para o contexto brasileiro. A questao central e: <em>De que maneira o desenvolvimento de um Copiloto Algoritmico baseado em Inteligencia Artificial Explicavel pode contribuir para a reducao da assimetria informacional em compras publicas complexas no Brasil?</em> O objetivo geral e desenvolver e avaliar um artefato de apoio a decisao fundamentado no paradigma DSR e ancorado em diagnostico empirico do PNCP.</p>
+
+            <h3>1.6 O Paradigma DSR como Fio Condutor</h3>
+            <p>A tese adota a Design Science Research (Hevner et al., 2004; Peffers et al., 2007) como fio condutor. O modelo de seis etapas mapeia-se nos capitulos: identificacao do problema (Capitulos 1-2), definicao de objetivos (Capitulos 1 e 3), design e desenvolvimento (Capitulos 3-4), demonstracao e avaliacao (Capitulo 3), e comunicacao (Capitulo 4 e tese). A Tabela 1 sintetiza este mapeamento.</p>
+            <table>
+                <caption><strong>Tabela 1.</strong> <em>Mapeamento entre as Etapas da DSR e os Capitulos da Tese.</em></caption>
+                <thead><tr><th>Etapa DSR (Peffers et al., 2007)</th><th>Capitulo</th><th>Entregavel</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">1. Identificacao do Problema</td><td class="left">Capitulos 1 e 2</td><td class="left">Diagnostico Empirico (Artigo 1)</td></tr>
+                    <tr><td class="left">2. Definicao dos Objetivos</td><td class="left">Capitulos 1 e 3</td><td class="left">Objetivos da Tese e do Artefato</td></tr>
+                    <tr><td class="left">3. Design e Desenvolvimento</td><td class="left">Capitulos 3 e 4</td><td class="left">Artigo Tecnologico (Artigo 2) e Produto</td></tr>
+                    <tr><td class="left">4. Demonstracao</td><td class="left">Capitulos 3 e 4</td><td class="left">Avaliacao do Artefato</td></tr>
+                    <tr><td class="left">5. Avaliacao</td><td class="left">Capitulo 3</td><td class="left">Metricas e Modelos de Referencia</td></tr>
+                    <tr class="last-row"><td class="left">6. Comunicacao</td><td class="left">Capitulo 4 e Tese</td><td class="left">Produto Implementado</td></tr>
+                </tbody>
+            </table>
+
+            <h3>1.7 Estrutura da Tese</h3>
+            <p>Alem deste Capitulo 1 introdutorio, a tese estrutura-se em mais quatro capitulos. O Capitulo 2 apresenta o diagnostico empirico das compras complexas baseado em 572.045 contratos do PNCP. O Capitulo 3 relata a engenharia do Copiloto Algoritmico. O Capitulo 4 descreve o produto implementado. O Capitulo 5 sintetiza as conclusoes e contribuicoes. Apendices consolidam o dataset academico, codigos-fonte e metricas.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section><section class="paper-page">
+        <div class="page-content capa-content">
+            <p style="font-weight: bold;">FUCAPE BUSINESS SCHOOL</p>
+            <p style="font-weight: bold;">PROGRAMA DE POS-GRADUACAO EM CONTABILIDADE</p>
+            <h1>COPILOTO ALGORITMICO PARA COMPRAS públicas COMPLEXAS: UM ARTEFATO DE APOIO A decisão PARA redução DE ASSIMETRIAS NA contratação DE inovação E SUSTENTABILIDADE</h1>
+            <p class="autor">RENATO DE OLIVEIRA ROSA</p>
+            <p>Tese apresentada ao Programa de Pos-Graduacao em Contabilidade da Fucape Business School como requisito parcial para a obtencao do titulo de Doutor em Contabilidade.</p>
+            <p>Orientador: Prof. Dr. Olavo Venturim Caldas</p>
+            <p style="margin-top: 2cm;">Vitoria<br>2026</p>
+        </div>
+        <div class="page-footer">i</div>
+    </section>
+
+    <!-- ==================== FOLHA DE ROSTO ==================== -->
+    <section class="paper-page">
+        <div class="page-content folha-rosto-content">
+            <p style="text-align: center; font-weight: bold;">RENATO DE OLIVEIRA ROSA</p>
+            <p style="text-align: center; margin-top: 2cm; font-weight: bold;">COPILOTO ALGORITMICO PARA COMPRAS públicas COMPLEXAS: UM ARTEFATO DE APOIO A decisão PARA redução DE ASSIMETRIAS NA contratação DE inovação E SUSTENTABILIDADE</p>
+            <p class="descrição">Tese apresentada ao Programa de Pos-Graduacao em Contabilidade da Fucape Business School como requisito parcial para a obtencao do titulo de Doutor em Contabilidade.</p>
+            <p style="margin-top: 2cm;">Orientador: Prof. Dr. Olavo Venturim Caldas</p>
+            <p class="local-data">Vitoria<br>2026</p>
+        </div>
+        <div class="page-footer">ii</div>
+    </section>
+
+    <!-- ==================== FOLHA DE APROVACAO ==================== -->
+    <section class="paper-page">
+        <div class="page-content folha-aprovacao-content">
+            <p style="font-weight: bold; text-indent: 0;">FOLHA DE APROVACAO</p>
+            <p style="margin-top: 2cm; font-weight: bold; text-indent: 0;">RENATO DE OLIVEIRA ROSA</p>
+            <p style="margin-top: 1cm; margin-bottom: 2cm; text-indent: 0;">COPILOTO ALGORITMICO PARA COMPRAS públicas COMPLEXAS: UM ARTEFATO DE APOIO A decisão PARA redução DE ASSIMETRIAS NA contratação DE inovação E SUSTENTABILIDADE</p>
+            <p style="text-indent: 0;">Tese submetida ao Programa de Pos-Graduacao em Contabilidade da Fucape Business School para obtencao do grau de Doutor em Contabilidade.</p>
+            <p style="margin-top: 2cm; text-indent: 0;">Aprovada em ___ de __________ de 2026.</p>
+            <div style="margin-top: 3cm;"><div class="assinatura">Prof. Dr. Olavo Venturim Caldas<br>Orientador</div></div>
+            <div style="margin-top: 2cm;"><div class="assinatura">Prof. Dr. _________________________<br>Membro da Banca</div></div>
+            <div style="margin-top: 2cm;"><div class="assinatura">Prof. Dr. _________________________<br>Membro da Banca</div></div>
+        </div>
+        <div class="page-footer">iii</div>
+    </section>
+    <!-- ==================== RESUMO GERAL ==================== -->
+    <section class="paper-page">
+        <div class="page-content">
+            <p style="text-align: center; font-weight: bold; margin-top: 1cm;">RESUMO</p>
+            <p style="text-indent: 1.27cm; text-align: justify;">A presente tese investiga o fenomeno das compras públicas complexas no Brasil, definidas como contratações de inovação tecnológica e sustentabilidade, sob a lente da Economia dos custos de transação e da Assimetria Informacional. A pesquisa adota o paradigma metodológico da Design Science Research (DSR) e estrutura-se em tres entregaveis complementares. O primeiro entregavel, um artigo científico de diagnóstico empírico, analisa 572.045 contratos do Portal Nacional de contratações públicas (PNCP) entre 2021 e 2024, isolando 5.687 compras complexas por meio de processamento de Linguagem Natural. Os resultados revelam concentracao extrema de mercado (Gini = 0,89), demonstram que compras complexas estao associadas a um aumento de 46% na odds de eventos adversos quando controladas por vigência e valor (OR = 1,46), e identificam a vigência contratual insuficiente como o preditor de maior magnitude (OR = 0,60). O segundo entregavel, um artigo tecnológico, relata a engenharia e o desenvolvimento de um Copiloto Algoritmico baseado em inteligência Artificial explicável (XAI), artefato que integra Isolation Forest e Random Forest com atribuicao de importancia via SHAP para oferecer suporte a auditoria ex-ante de minutas de editais. O modelo supervisionado atingiu acuracia de 98,27% e AUC-ROC de 98,97% na detecção de eventos adversos, superando cinco modelos de referencia. Cinco principios de design para XAI no setor público sao extraidos como contribuição teórica. O terceiro entregavel consiste no produto tecnológico propriamente dito, implementado como aplicação web em plataforma Streamlit Cloud, com código-fonte aberto sob licença MIT. A ferramenta opera com dois módulos (Avaliacao de Minutas e Geracao de Editais), ambos integrados aos modelos de Aprendizado de máquina treinados nos dados do PNCP. O conjunto dos tres entregaveis demonstra que e tecnicamente viável e juridicamente defensavel implementar Aprendizado de máquina avancado no setor público brasileiro preservando a transparência e a autonomia decisoria do gestor.</p>
+            <p style="text-indent: 0; margin-top: 0.5cm;"><strong>Palavras-chave:</strong> Compras Complexas; Design Science Research; inteligência Artificial explicável; Assimetria Informacional; PNCP.</p>
+        </div>
+        <div class="page-footer">iv</div>
+    </section>
+
+    <!-- ==================== ABSTRACT GERAL ==================== -->
+    <section class="paper-page">
+        <div class="page-content">
+            <p style="text-align: center; font-weight: bold; margin-top: 1cm;">ABSTRACT</p>
+            <p style="text-indent: 1.27cm; text-align: justify;">This doctoral thesis investigates the phenomenon of complex public procurement in Brazil, defined as contracts for technological innovation and sustainability, through the lens of Transaction Cost Economics and Informational Asymmetry. The research adopts the Design Science Research (DSR) paradigm and is structured into three complementary deliverables. The first deliverable, an empirical diagnostic scientific article, analyzes 572,045 contracts from the National Public Procurement Portal (PNCP) between 2021 and 2024, isolating 5,687 complex purchases through Natural Language Processing. The results reveal extreme market concentration (Gini = 0.89), demonstrate that complex purchases are associated with a 46% increase in the odds of adverse events when controlling for duration and value (OR = 1.46), and identify insufficient contract duration as the dominant predictor (OR = 0.60). The second deliverable, a technological article, reports the engineering and development of an Algorithmic Copilot based on Explainable Artificial Intelligence (XAI), an artifact that integrates Isolation Forest and Random Forest with SHAP-based feature attribution to support the ex-ante auditing of bidding documents. The supervised model achieved 98.27% accuracy and 98.97% AUC-ROC in detecting adverse events, outperforming five baseline models. Five design principles for XAI in the public sector are extracted as a theoretical contribution. The third deliverable consists of the technological product itself, implemented as a web application on the Streamlit Cloud platform, with open-source code under the MIT license. The tool operates with two modules (Document Evaluation and Tender Generation), both integrated with the Machine Learning models trained on PNCP data. The set of three deliverables demonstrates that it is technically feasible and legally defensible to implement advanced Machine Learning in the Brazilian public sector while preserving transparency and managerial decision-making autonomy.</p>
+            <p style="text-indent: 0; margin-top: 0.5cm;"><strong>Keywords:</strong> Complex Procurement; Design Science Research; Explainable AI; Informational Asymmetry; PNCP.</p>
+        </div>
+        <div class="page-footer">v</div>
+    </section>
+    <!-- ==================== SUMARIO ==================== -->
+    <section class="paper-page">
+        <div class="page-content">
+            <p style="text-align: center; font-weight: bold; margin-top: 1cm;">SUMARIO</p>
+            <div class="sumario-box" style="margin-top: 1cm;">
+                <p class="indice-item indice-nivel1">1 introdução GERAL</p>
+                <p class="indice-item indice-nivel2">1.1 Contextualizacao e Problema de Pesquisa</p>
+                <p class="indice-item indice-nivel2">1.2 Objetivos e Estrutura da Tese</p>
+                <p class="indice-item indice-nivel1">2 diagnóstico empírico DAS COMPRAS COMPLEXAS (ARTIGO 1)</p>
+                <p class="indice-item indice-nivel2">2.1 introdução</p>
+                <p class="indice-item indice-nivel2">2.2 Referencial teórico</p>
+                <p class="indice-item indice-nivel3">2.2.1 Compras Complexas: definição e Fronteiras</p>
+                <p class="indice-item indice-nivel3">2.2.2 inovação tecnológica em Compras públicas</p>
+                <p class="indice-item indice-nivel3">2.2.3 Sustentabilidade e ESG em Compras públicas</p>
+                <p class="indice-item indice-nivel3">2.2.4 Assimetria Informacional e custos de transação</p>
+                <p class="indice-item indice-nivel2">2.3 metodologia</p>
+                <p class="indice-item indice-nivel2">2.4 Resultados e Discussao</p>
+                <p class="indice-item indice-nivel2">2.5 conclusão</p>
+                <p class="indice-item indice-nivel1">3 COPILOTO ALGORITMICO (ARTIGO 2)</p>
+                <p class="indice-item indice-nivel2">3.1 introdução</p>
+                <p class="indice-item indice-nivel2">3.2 metodologia de Desenvolvimento (DSR)</p>
+                <p class="indice-item indice-nivel2">3.3 Arquitetura do Produto</p>
+                <p class="indice-item indice-nivel2">3.4 Avaliacao e Testes</p>
+                <p class="indice-item indice-nivel2">3.5 conclusões e Design Principles</p>
+                <p class="indice-item indice-nivel1">4 O PRODUTO (COPILOTO ALGORITMICO)</p>
+                <p class="indice-item indice-nivel2">4.1 Visao Geral do Sistema</p>
+                <p class="indice-item indice-nivel2">4.2 módulo de Avaliacao de Minutas</p>
+                <p class="indice-item indice-nivel2">4.3 módulo de Geracao de Editais</p>
+                <p class="indice-item indice-nivel2">4.4 Infraestrutura e Deploy</p>
+                <p class="indice-item indice-nivel1">5 conclusão GERAL</p>
+                <p class="indice-item indice-nivel1">REFERENCIAS CONSOLIDADAS</p>
+            </div>
+        </div>
+        <div class="page-footer">vi</div>
+    </section>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <p class="indice-item indice-nivel1">APENDICE A  Dataset Academico</p>
+            <p class="indice-item indice-nivel1">APENDICE B  Codigos-Fonte e Scripts</p>
+            <p class="indice-item indice-nivel1">APENDICE C  métricas dos Modelos</p>
+        </div>
+        <div class="page-footer">vii</div>
+    </section>
+    <!-- ==================== LISTA DE FIGURAS ==================== -->
+    <section class="paper-page">
+        <div class="page-content">
+            <p style="text-align: center; font-weight: bold; margin-top: 1cm;">LISTA DE FIGURAS</p>
+            <div style="margin-top: 1cm;">
+                <p style="text-indent: 0; margin: 0.3cm 0;">Figura 1  Pipeline de Dados e Inferencia do Copiloto Algoritmico (Capitulo 3, Secao 3.3)</p>
+                <p style="text-indent: 0; margin: 0.3cm 0;">Figura 2  Importancia das variáveis conforme SHAP TreeExplainer (Capitulo 3, Secao 3.4.2)</p>
+            </div>
+        </div>
+        <div class="page-footer">viii</div>
+    </section>
+
+    <!-- ==================== LISTA DE TABELAS ==================== -->
+    <section class="paper-page">
+        <div class="page-content">
+            <p style="text-align: center; font-weight: bold; margin-top: 1cm;">LISTA DE TABELAS</p>
+            <div style="margin-top: 1cm;">
+                <p style="text-indent: 0; margin: 0.3cm 0;">Tabela 1  Mapeamento entre as Etapas da DSR e os Capitulos da Tese (Capitulo 1)</p>
+                <p style="text-indent: 0; margin: 0.3cm 0;">Tabela 2  métricas Descritivas da Populacao de Contratos do PNCP (Capitulo 2)</p>
+                <p style="text-indent: 0; margin: 0.3cm 0;">Tabela 3  distribuição do Orcamento Proxy das Entidades Compradoras (Capitulo 2)</p>
+                <p style="text-indent: 0; margin: 0.3cm 0;">Tabela 4  concentração de Mercado entre Fornecedores (Capitulo 2)</p>
+                <p style="text-indent: 0; margin: 0.3cm 0;">Tabela 5  Resultados da Regressao Logistica (Capitulo 2)</p>
+                <p style="text-indent: 0; margin: 0.3cm 0;">Tabela 6  Comparacao: Compras Complexas vs. Normais (Capitulo 2)</p>
+                <p style="text-indent: 0; margin: 0.3cm 0;">Tabela 7  operacionalização dos construtos teóricos no Copiloto (Capitulo 3)</p>
+                <p style="text-indent: 0; margin: 0.3cm 0;">Tabela 8  iterações de Design do Copiloto (Capitulo 3)</p>
+                <p style="text-indent: 0; margin: 0.3cm 0;">Tabela 9  variáveis do Modelo Integrado e Importancia Relativa (Capitulo 3)</p>
+                <p style="text-indent: 0; margin: 0.3cm 0;">Tabela 10  Stack tecnológico do Copiloto (Capitulo 3)</p>
+                <p style="text-indent: 0; margin: 0.3cm 0;">Tabela 11  Comparativo de desempenho dos Modelos (Capitulo 3)</p>
+                <p style="text-indent: 0; margin: 0.3cm 0;">Tabela 12  distribuição dos Eventos Adversos por UF (Capitulo 2)</p>
+                <p style="text-indent: 0; margin: 0.3cm 0;">Tabela 13  Comparacao Pre-Copiloto vs. Pos-Copiloto (Capitulo 4)</p>
+            </div>
+        </div>
+        <div class="page-footer">ix</div>
+    </section>
+
+    <!-- ==================== LISTA DE ABREVIATURAS ==================== -->
+    <section class="paper-page">
+        <div class="page-content">
+            <p style="text-align: center; font-weight: bold; margin-top: 1cm;">LISTA DE ABREVIATURAS E SIGLAS</p>
+            <div style="margin-top: 1cm;">
+                <p style="text-indent: 0; margin: 0.2cm 0;">AUC-ROC  área Under the Receiver Operating Characteristic Curve</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">CEIS  Cadastro de Empresas Inidôneas e Suspensas</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">CPSI  Contrato Público para Solução Inovadora</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">DSR  Design Science Research</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">ESG  Environmental, Social and Governance</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">GPP  Green Public Procurement</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">IF  Isolation Forest</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">LGPD  Lei Geral de Proteção de Dados (Lei 13.709/2018)</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">LINDB  Lei de Introdução às Normas do Direito Brasileiro</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">NLP  Natural Language Processing (processamento de Linguagem Natural)</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">OR  Odds Ratio (Razão de Chances)</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">PCP  Pre-Commercial Procurement</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">PNCP  Portal Nacional de Contratações Públicas</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">PPI  Public Procurement of Innovation</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">RF  Random Forest</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">SHAP  SHapley Additive exPlanations</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">TCU  Tribunal de Contas da União</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">TF-IDF  Term Frequency-Inverse Document Frequency</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">TIC  tecnologia da Informação e Comunicação</p>
+                <p style="text-indent: 0; margin: 0.2cm 0;">XAI  Explainable Artificial Intelligence</p>
+            </div>
+        </div>
+        <div class="page-footer">x</div>
+    </section>
+
+
+    <!-- ==================== CAPITULO 1: introdução GERAL ==================== -->
+    <section class="paper-page">
+        <div class="page-content">
+            
+
+    
+
+    <section class="paper-page">
+        <div class="page-content">
+            
+            
+
+            
+
+            
+
+            <h2>2.1 Introdução</h2>
+            <p>O volume de recursos mobilizados pelo setor público brasileiro em processos licitatorios aproxima-se de 15% do Produto Interno Bruto, consolidando o Estado como um dos maiores agentes economicos e indutores de inovação e desenvolvimento sustentavel. O poder de compra governamental, quando estrategicamente orientado, possui capacidade de moldar mercados, induzir trajetorias tecnológicas e promover praticas sustentaveis na cadeia produtiva privada (Edler &amp; Georghiou, 2007; Mazzucato, 2014). Nesse sentido, Georghiou, Edler, Uyarra e Yeow (2013) demonstram que instrumentos de politica de inovação pelo lado da demanda, como as compras públicas estrategicas, produzem efeitos multiplicadores superiores aos incentivos fiscais e subsidios diretos a pesquisa e desenvolvimento. O advento do Marco Legal das Startups (Lei Complementar 182/2021) e da Nova Lei de licitações (Lei 14.133/2021) criou o arcabouco institucional necessario para que o Brasil avance na direcao de compras públicas estrategicas.</p>
+            <p>No entanto, a execucao das chamadas compras complexas, cujo objeto envolve alta incerteza tecnológica, soluções sob medida e requisitos de sustentabilidade, tem revelado gargalos operacionais severos nas estruturas da Administracao pública. A literatura internacional documenta que compras orientadas a inovação e a sustentabilidade exigem capacidades institucionais que transcendem a pratica tradicional de aquisicoes governamentais, incluindo competencias técnicas avancadas, estruturas de governança adaptativas e mecanismos de coordenacao interorganizacional (Flynn &amp; Davis, 2014; Brammer &amp; Walker, 2011).</p>
+            <p>Tradicionalmente, a literatura administrativa e a jurisprudência dos órgãos de controle, como o Tribunal de Contas da Uniao (TCU), tendem a atribuir o fracasso contratual a falhas comportamentais dos gestores, fenomeno conhecido como apagao das canetas. Nessa perspectiva, o receio de responsabilizacao pessoal paralisaria o agente público, levando-o a evitar decisões complexas e a postergar contratações de inovação. Esta visao, amplamente difundida no debate público brasileiro, tem orientado politicas de controle externo baseadas em punicao e responsabilizacao individual. Contudo, essa explicação centrada no individuo falha em capturar o nucleo estrutural do problema: a incompetencia isolada não justifica a paralisia decisoria sistemica observada em centenas de órgãos simultaneamente. Conforme argumentam Flynn e Davis (2014), a pesquisa em compras públicas carece de fundamentação teórica rigorosa que distinga fatores institucionais de fatores comportamentais na explicação dos desfechos contratuais.</p>
+            <p>O presente estudo testa empiricamente a hipotese alternativa: a de que o fracasso decorre de fatores estruturais, em especial a assimetria informacional entre comprador e fornecedor e a insuficiencia de vigência contratual, e não de omissao comportamental. Fundamentado na Economia dos custos de transação (Williamson, 1985; Coase, 1937) e na teoria da agência (Jensen &amp; Meckling, 1976), o artigo busca responder a seguinte questao de pesquisa: <em>Quais características estruturais das unidades compradoras e dos contratos determinam a probabilidade de fracasso nas compras públicas complexas no Brasil?</em> Para responde-la, adota-se uma abordagem empírica censitaria sobre 572.045 contratos do PNCP (2021-2024), complementada por coleta de dados cadastrais de fornecedores via APIs públicas e estimacao de regressao logistica multivariada. A compreensao dos determinantes do fracasso preenche uma lacuna academica e serve como pressuposto para a formulacao de intervencoes tecnológicas conforme o paradigma de Design Science Research (Peffers, Tuunanen, Rothenberger &amp; Chatterjee, 2007).</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2.2 Referencial Teórico</h2>
+
+            <h3>2.1 Compras Complexas: Definição e Fronteiras Conceituais</h3>
+            <p>A delimitacao conceitual do que constitui uma compra pública complexa e etapa fundamental para o avanco teórico da gestão de suprimentos governamentais. Diferentemente das compras de prateleira (<em>off-the-shelf</em>), cujas especificacoes sao padronizadas e o mercado e pulverizado, as compras complexas caracterizam-se por elevada incerteza tecnológica, regulatoria e mercadológica (Thai, 2001). Envolvem, tipicamente, o desenvolvimento de software sob medida, implementacao de inteligência artificial, adoção de tecnologias limpas e projetos de pesquisa e desenvolvimento. Nessas contratações, o Estado raramente conhece ex-ante a especificacao exata da solução necessaria, transferindo para o instrumento convocatorio a dificil tarefa de modular riscos futuros imprevisiveis.</p>
+            <p>A literatura internacional consolidou o conceito de <em>public procurement of innovation</em> (PPI) como um subcampo distinto, no qual o Estado atua como primeiro adquirente (<em>lead customer</em>) de soluções ainda não disponíveis no mercado (Edler &amp; Georghiou, 2007). Estudos empíricos demonstram que compras públicas orientadas a inovação produzem efeitos multiplicadores superiores a incentivos fiscais e subsidios diretos a pesquisa e desenvolvimento, pois criam demanda concreta e sinalizam direcoes tecnológicas para o setor privado (Georghiou et al., 2013). No entanto, a operacionalização desse potencial esbarra em barreiras institucionais significativas. Thai (2001) identificou que a complexidade procedimental dos processos licitatorios, combinada a assimetria de conhecimento técnico entre compradores e fornecedores, constitui o principal obstaculo a efetividade das compras estrategicas.</p>
+            <p>Brammer e Walker (2011), em estudo comparativo internacional abrangendo 20 paises, demonstraram que a pratica de compras públicas sustentaveis varia significativamente conforme o contexto institucional, o nível de descentralizacao administrativa e a maturidade dos marcos regulatorios nacionais. Os autores evidenciaram que paises com estruturas administrativas mais descentralizadas enfrentam desafios adicionais na padronizacao de critérios de sustentabilidade, uma vez que a autonomia decisoria dos entes subnacionais pode gerar heterogeneidade nas praticas de compras. Nesse mesmo sentido, Johnson, Leenders e McCue (2017) evidenciaram que o papel organizacional da função de compras difere substancialmente entre os setores público e privado, com o setor público apresentando maior fragmentacao, multiplicidade de objetivos e menor autonomia decisoria. Este achado e particularmente relevante para o contexto brasileiro, caracterizado por uma estrutura federativa com 5.570 municipios dotados de capacidades institucionais profundamente assimetricas.</p>
+            <p>Flynn e Davis (2014), por sua vez, conduziram uma revisão abrangente das teorias mobilizadas na pesquisa em compras públicas, identificando que a Economia dos custos de transação e a teoria da agência sao os arcaboucos predominantes, mas que sua aplicação empírica permanece limitada e frequentemente superficial. Os autores argumentam que a pesquisa na área tem se concentrado excessivamente em estudos descritivos e prescritivos, carecendo de testes empíricos rigorosos das hipoteses derivadas dessas teorias. O presente estudo busca contribuir para preencher essa lacuna ao testar empiricamente hipoteses derivadas da Economia dos custos de transação e da teoria da agência sobre uma base censitaria de contratos públicos brasileiros.</p>
+            <p>No ambito da Uniao Europeia, diretrizes como a Diretiva 2014/24/EU estabeleceram modalidades especificas para contratação de inovação, incluindo a <em>Pre-Commercial Procurement</em> (PCP) e o <em>Innovation Partnership</em>, reconhecendo que os ritos tradicionais de licitação sao inadequados para objetos de alta incerteza tecnológica (Uyarra &amp; Flanagan, 2010). No Brasil, a Lei 14.133/2021 incorporou modalidades analogas, como o dialogo competitivo, mas a efetividade dessas inovacoes institucionais ainda carece de avaliacao empírica sistematica. O presente estudo contribui para preencher essa lacuna ao quantificar, com dados censitarios, os determinantes do fracasso nas compras complexas brasileiras.</p>
+
+            <h3>2.2 Categorias de Compras Complexas: Inovação Tecnológica e Sustentabilidade</h3>
+            <p>A literatura distingue duas grandes categorias de compras públicas complexas, ambas centrais para a agenda contemporanea de politicas públicas: as compras orientadas a inovação tecnológica e as compras orientadas a sustentabilidade. Embora conceitualmente distintas, essas categorias frequentemente se sobrepoem na pratica, pois soluções tecnológicas inovadoras sao, com frequencia, também soluções ambientalmente sustentaveis (Rainville, 2021).</p>
+
+            <h4>2.2.1 Inovação Tecnológica em Compras Públicas</h4>
+            <p>A primeira categoria, compras públicas de inovação tecnológica, abrange contratações cujo objeto envolve desenvolvimento de software, inteligência artificial, automacao de processos, sistemas de informação e demais soluções de tecnologia da informação e Comunicacao. Edler e Georghiou (2007) demonstraram que o poder de compra estatal, quando direcionado a objetos inovadores, funciona como instrumento de politica de inovação pelo lado da demanda, complementando os instrumentos tradicionais de oferta. Pesquisas subsequentes identificaram que a eficacia desse instrumento depende criticamente da capacidade técnica das unidades compradoras para especificar requisitos funcionais, avaliar propostas tecnicamente complexas e gerenciar contratos de alto risco tecnológico (Uyarra &amp; Flanagan, 2010).</p>
+            <p>Georghiou et al. (2013) propuseram uma tipologia de instrumentos de politica para compras públicas de inovação, distinguindo entre abordagens genericas (aplicaveis a qualquer setor) e abordagens especificas (direcionadas a setores ou tecnologias particulares). Os autores argumentam que a escolha e o desenho desses instrumentos devem considerar o nível de maturidade tecnológica do objeto, a estrutura do mercado fornecedor e a capacidade absortiva da entidade compradora. No contexto brasileiro, a contratação de TIC pelo setor público movimenta volumes crescentes de recursos, mas enfrenta desafios estruturais decorrentes da complexidade técnica dos objetos contratados e da limitada capacitacao dos agentes de compras. Esta disparidade cria uma assimetria informacional que eleva os custos de transação e a probabilidade de desfechos adversos, especialmente em municipios de pequeno porte que carecem de profissionais especializados em tecnologia nos quadros permanentes da administracao pública.</p>
+
+            <h4>2.2.2 Sustentabilidade e ESG em Compras Públicas</h4>
+            <p>A segunda categoria, compras públicas sustentaveis ou <em>Green Public Procurement</em> (GPP), refere-se a contratações que incorporam critérios ambientais, sociais e de governança em suas especificacoes. A Organizacao para a Cooperacao e Desenvolvimento Economico e a Uniao Europeia tem promovido ativamente a adoção de critérios de sustentabilidade em compras governamentais como instrumento de politica ambiental (Testa, Annunziata, Iraldo &amp; Frey, 2014). Estes autores identificaram que, embora o GPP seja amplamente reconhecido como ferramenta eficaz para promover producao e consumo sustentaveis, sua implementacao enfrenta barreiras significativas: a falta de conhecimento técnico dos compradores sobre critérios ambientais, a percepcao de que produtos sustentaveis sao mais caros, e a ausencia de bases de dados de precos de referencia para produtos verdes.</p>
+            <p>Witjes e Lozano (2016) propuseram um framework integrativo vinculando compras públicas sustentaveis a modelos de negocios sustentaveis, articulando a transicao para uma economia circular por meio do poder de compra estatal. Os autores demonstraram que a colaboracao entre compradores públicos e fornecedores, mediada por critérios de sustentabilidade claramente especificados, constitui um mecanismo eficaz para alinhar incentivos e reduzir a incerteza associada a produtos e servicos inovadores. Grandia e Voncken (2019) aplicaram o modelo AMO (<em>Ability, Motivation, Opportunity</em>) para investigar os determinantes da implementacao de compras públicas sustentaveis, concluindo que a capacidade técnica dos compradores (Ability) e o suporte organizacional percebido (Opportunity) sao preditores mais robustos que a motivação intrínseca (Motivation). Este achado reforca a tese central do presente estudo: a efetividade das compras complexas depende mais de fatores estruturais e institucionais do que de disposicoes individuais dos agentes.</p>
+            <p>No Brasil, a Lei 14.133/2021 estabeleceu a sustentabilidade como principio expresso das licitações (Art. 5), determinando que os órgãos considerem critérios de sustentabilidade ambiental, social e economica em suas contratações. No entanto, a efetividade dessa determinacao legal ainda e limitada, especialmente em entes subnacionais com menor capacidade institucional. A intersecao entre inovação tecnológica e sustentabilidade configura um dominio particularmente complexo: soluções como cidades inteligentes, eficiência energetica em predios públicos e mobilidade eletrica exigem, simultaneamente, conhecimento técnico avancado e critérios de sustentabilidade que transcendem a pratica tradicional de compras governamentais.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>2.3 Assimetria Informacional e Custos de Transação em Compras Complexas</h3>
+            <p>A teoria dos custos de transação, originalmente formulada por Coase (1937) e expandida por Williamson (1985), fornece a lente analitica primaria para explicar o fenomeno do fracasso nas licitações de inovação. Williamson (1985) propoe que a racionalidade limitada dos agentes, definida como a impossibilidade cognitiva de prever e calcular todas as contingencias futuras de um acordo, eleva os custos de transação ex-ante (desenho do contrato) e ex-post (renegociacao e fiscalizacao). Tres atributos da transacao determinam a magnitude desses custos: a especificidade de ativos, a incerteza e a frequencia. Em compras complexas, todos os tres atributos sao elevados: os ativos sao altamente específicos (software customizado, conhecimento proprietario), a incerteza e máxima (tecnologia não consolidada, requisitos evolutivos) e a frequencia e baixa (cada contratação tende a ser única), configurando o cenario de maior vulnerabilidade contratual previsto pela teoria.</p>
+            <p>Em compras complexas, a assimetria informacional alcanca seu pico. O mercado fornecedor de tecnologia possui amplo dominio técnico sobre o objeto, enquanto a Unidade Compradora governamental, limitada por quadros defasados e ausencia de capacitacao específica, opera em estado de defasagem técnica relativa. Akerlof (1970) demonstrou, por meio do classico modelo do mercado de limoes, que a assimetria informacional conduz a um equilibrio subotimo no qual produtos de alta qualidade sao expulsos do mercado pela incapacidade dos compradores de distinguir qualidade. Transposto para o contexto das compras públicas, o modelo de Akerlof preve que, na ausencia de mecanismos eficazes de sinalizacao e triagem, os fornecedores mais qualificados abandonam os certames públicos, permanecendo apenas aqueles dispostos a competir exclusivamente por preco, em detrimento da qualidade. Este fenomeno, conhecido como selecao adversa, e particularmente pernicioso em compras de tecnologia, nas quais a qualidade do fornecedor e dificil de avaliar ex-ante e o menor preco raramente constitui um criterio adequado de selecao.</p>
+            <p>Essa disparidade não configura omissao intencional do gestor, mas um custo de transacao estrutural que decorre da propria natureza do objeto contratado. A assimetria forca o órgão comprador a elaborar editais hiperdetalhados de forma defensiva ou, paradoxalmente, excessivamente abertos, ambos cenarios propicios ao fracasso contratual. A teoria da agência (Jensen &amp; Meckling, 1976) complementa esse quadro ao prever que, em contextos de alta assimetria informacional, o principal (Estado) incorre em custos de monitoramento desproporcionais para mitigar o risco moral do agente (fornecedor), podendo levar a uma situacao de bloqueio decisorio na qual o custo de contratar supera o beneficio esperado da contratação. Este ciclo vicioso, no qual a assimetria gera custos de transação que, por sua vez, aprofundam a assimetria, constitui o nucleo do problema que o presente estudo busca quantificar.</p>
+            <p>Estudos empíricos recentes tem buscado quantificar o impacto da assimetria informacional sobre os resultados de compras públicas. Brammer e Walker (2011) demonstraram que a capacidade institucional do órgão comprador e um preditor significativo da adoção de praticas sustentaveis de compras, e que investimentos em capacitacao de agentes de compras produzem retornos superiores a investimentos em controle e auditoria ex-post. Flynn e Davis (2014) reforcam que a ausencia de fundamentação teórica rigorosa na pesquisa em compras públicas tem limitado a capacidade de distinguir entre falhas atribuiveis a fatores institucionais e falhas atribuiveis a escolhas individuais dos agentes, lacuna que este estudo busca contribuir para preencher.</p>
+
+            <h3>2.4 Ferramentas para Redução de Assimetria em Compras Complexas</h3>
+            <p>O reconhecimento da assimetria informacional como causa primaria do fracasso em compras complexas tem impulsionado o desenvolvimento de abordagens baseadas em tecnologia para mitigar essa disparidade. Vaidya, Sajeev e Callender (2006) identificaram os fatores criticos para o sucesso da implementacao de sistemas eletronicos de compras (<em>e-procurement</em>) no setor público, destacando a importancia da interoperabilidade, da capacitacao dos usuários e do alinhamento com os processos organizacionais existentes. A transformacao digital das compras públicas, impulsionada por plataformas eletronicas e sistemas de informação, constitui um primeiro nível de intervencao. No entanto, a mera digitalizacao de processos e insuficiente para enderecar a dimensao cognitiva do problema: a incapacidade do agente público de avaliar a adequacao técnica de especificacoes complexas.</p>
+            <p>Nesse contexto, ferramentas baseadas em inteligência Artificial e processamento de Linguagem Natural emergem como soluções promissoras. Aplicacoes de aprendizado de máquina podem analisar grandes volumes de editais historicos para identificar padrões associados a eventos adversos, enquanto técnicas de explicabilidade algoritmica permitem que essas analises sejam apresentadas ao gestor em linguagem compreensivel e auditavel. A literatura de Design Science Research (Hevner, March, Park &amp; Ram, 2004; Peffers et al., 2007) oferece o arcabouco metodológico para o desenvolvimento rigoroso desses artefatos, combinando relevancia pratica com contribuição teórica. O presente estudo fornece o diagnóstico empírico que justifica e orienta o desenvolvimento de um artefato dessa natureza, cuja engenharia e validação sao objeto do Artigo 2 desta tese.</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2.3 Metodologia</h2>
+            <h3>3.1 Delineamento e Dados</h3>
+            <p>Estudo quantitativo, observacional e transversal, baseado na populacao censitaria de 572.045 contratos do PNCP (Set/2021 a Ago/2024). A análise inferencial foi conduzida sobre amostra aleatoria de 100.000 contratos, selecionados por amostragem aleatoria simples com semente fixa. A Tabela 1 sumariza as métricas descritivas da populacao de referencia.</p>
+            <table>
+                <caption><strong>Tabela 1.</strong> <em>métricas Descritivas da Populacao de Contratos do PNCP.</em></caption>
+                <thead><tr><th>Metrica</th><th>Valor</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Total de contratos (populacao)</td><td>572.045</td></tr>
+                    <tr><td class="left">Valor total transacionado</td><td>R$ 491,9 bilhoes</td></tr>
+                    <tr><td class="left">Valor mediano por contrato</td><td>R$ 2.466</td></tr>
+                    <tr><td class="left">Vigência média</td><td>203,6 dias</td></tr>
+                    <tr><td class="left">Contratos com vigência inferior a 30 dias</td><td>26,8%</td></tr>
+                    <tr><td class="left">Órgãos únicos</td><td>6.567</td></tr>
+                    <tr><td class="left">Fornecedores únicos</td><td>119.558</td></tr>
+                    <tr class="last-row"><td class="left">Unidades Federativas</td><td>27</td></tr>
+                </tbody>
+            </table>
+
+            <h3>3.2 Filtragem NLP: Isolamento das Compras Complexas</h3>
+            <p>Aplicou-se processamento de Linguagem Natural com dicionario semantico de 16 termos de inovação (tecnologia, software, inteligência artificial, P&amp;D, startup, govtech, sistema, automacao, cloud, big data, blockchain, IoT, machine learning, deep learning, algoritm, robotica) e Sustentabilidade (ESG, logistica reversa, eficiência energetica, energia limpa, sustentavel, carbono, reciclagem, ambiental, social, governance) sobre o campo objeto dos contratos. O algoritmo atribuiu flag booleana (<em>is_complexa</em>) a cada contrato. Resultado: 5.687 contratos complexos (0,99% do total), envolvendo 1.622 órgãos e 3.528 fornecedores, com valor total de R$ 15,2 bilhoes. Embora raras em quantidade, as compras complexas mobilizam valores unitarios significativamente superiores a média (R$ 2,7 milhoes por contrato complexo vs. R$ 298 mil na média geral).</p>
+
+            <h3>3.3 Enriquecimento de Dados e Construção de Covariáveis</h3>
+            <p>Dada a limitação do dataset primario do PNCP, que não prove dados financeiros ou demograficos sobre os órgãos e as empresas, desenvolveu-se uma esteira de enriquecimento baseada em integração de APIs públicas. Para os 1.622 órgãos compradores, construiu-se uma proxy de porte orcamentario (<em>orcamento_proxy_pncp</em>), calculada como a soma total do valor global de todos os contratos firmados por cada órgão na populacao de 572.045 registros. Para os fornecedores, realizou-se coleta de dados cadastrais via tres APIs públicas (BrasilAPI, ReceitaWS, CNPJ.ws), obtendo-se 26 registros validos com informações de capital social, CNAE principal e porte. A taxa de sucesso de 13% reflete limitações de disponibilidade dos dados cadastrais brasileiros; as estatisticas descritivas dessa amostra sao reportadas a titulo ilustrativo, sem pretensao inferencial sobre o universo de 119.558 fornecedores.</p>
+
+            <h3>3.4 Variável Dependente e Hipóteses</h3>
+            <p>A variável dependente (<em>Y</em>) e binaria (1 = evento adverso; 0 = caso contrario), construida como proxy a partir de indicadores observáveis nos proprios registros do PNCP: aditivo de valor superior a 10% do valor original, duas ou mais retificações, ou vigência inferior a 30 dias. Reconhece-se que esta proxy captura eventos administrativos, não necessariamente fracasso contratual substantivo. Aditivos e retificações podem, em certos contextos, indicar adaptacao contratual bem-sucedida, e vigência curta pode refletir modalidades licitatorias legitimas. Contudo, a proxy permite a análise em larga escala de 100.000 contratos, objective que seria inviavel com avaliacao manual de desfechos. Na amostra, 18,8% dos contratos apresentaram pelo menos um desses eventos. As seguintes hipoteses, derivadas do referencial teórico, foram testadas:</p>
+            <ul style="margin-left: 20px; font-size: 11pt; text-align: justify;">
+                <li><strong>H1:</strong> Compras complexas estao associadas a maior odds de eventos adversos, controlando por vigência e valor (derivada de Williamson, 1985; Edler &amp; Georghiou, 2007).</li>
+                <li><strong>H2:</strong> A vigência do contrato esta negativamente associada a odds de eventos adversos (derivada de Williamson, 1985).</li>
+                <li><strong>H3:</strong> O valor do contrato esta positivamente associado a odds de eventos adversos (derivada da teoria da agência; Jensen &amp; Meckling, 1976).</li>
+            </ul>
+
+            <h3>3.5 Modelo Econométrico</h3>
+            <p>Estimou-se regressao logistica pelo método de máxima verossimilhanca. O modelo assume a forma:</p>
+            <div style="text-align: center; font-style: italic; margin: 12px 0; font-size: 10pt;">
+                Logit(P(Y = 1)) = &#946;<sub>0</sub> + &#946;<sub>1</sub>(is_complexa) + &#946;<sub>2</sub>(vigencia_log) + &#946;<sub>3</sub>(valor_log) + &#949;
+            </div>
+
+            <h3>3.6 Limitações Metodológicas</h3>
+            <p>O estudo apresenta limitações que devem ser explicitadas. A variável dependente e uma proxy de eventos adversos, não uma medida direta de fracasso contratual. A classificacao NLP não foi validada contra anotacao manual (<em>ground truth</em>), e termos ambiguos como tecnologia e software podem gerar falsos positivos. O modelo econometrico omitiu controles potencialmente relevantes (esfera de governo, modalidade licitatória, regiao geografica) por indisponibilidade desses campos na base consolidada do PNCP. A amostra de fornecedores com dados cadastrais (n = 26) e insuficiente para inferencias sobre o mercado fornecedor. Estas limitações sao reconhecidas e suas implicacoes para a interpretacao dos resultados sao discutidas nas secoes pertinentes.</p>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2.4 Resultados e Discussão</h2>
+            <h3>4.1 Panorama Descritivo: o Perfil das Entidades Compradoras</h3>
+            <p>A Tabela 2 apresenta a distribuição do orcamento proxy das 1.622 entidades compradoras envolvidas em compras complexas. A disparidade entre média (R$ 226,6 milhoes) e mediana (R$ 4,6 milhoes) revela uma distribuição extremamente assimetrica, na qual poucos órgãos de grande porte concentram a maior parte do volume financeiro. Os 10 maiores órgãos respondem por 80,9% do volume total, evidenciando uma estrutura altamente concentrada na qual a Uniao e os Estados de maior PIB dominam as compras complexas, enquanto a maioria dos municipios de pequeno porte opera com orcamentos ordens de grandeza inferiores.</p>
+            <table>
+                <caption><strong>Tabela 2.</strong> <em>distribuição do Orcamento Proxy das Entidades Compradoras (n = 1.622).</em></caption>
+                <thead><tr><th>Estatistica</th><th>Valor (R$)</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Média</td><td>226.623.360</td></tr>
+                    <tr><td class="left">Mediana</td><td>4.613.777</td></tr>
+                    <tr><td class="left">Percentil 25</td><td>533.276</td></tr>
+                    <tr><td class="left">Percentil 75</td><td>18.724.397</td></tr>
+                    <tr><td class="left">Top 10 órgãos (soma)</td><td>297.202.370.169</td></tr>
+                    <tr class="last-row"><td class="left">Participacao dos top 10 no total</td><td>80,9%</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> O orcamento proxy e a soma do valor global de todos os contratos do órgão na populacao PNCP. A concentração de 80,9% em 10 órgãos e consistente com a literatura internacional que associa capacidade institucional a porte orcamentario (Uyarra &amp; Flanagan, 2010; Brammer &amp; Walker, 2011).</p>
+            <p>Este achado tem implicacoes diretas para a hipotese central do estudo. órgãos com menor capacidade financeira tem menor poder de barganha frente a fornecedores especializados, menor capacidade de absorcao tecnológica e, consequentemente, maior probabilidade de desfechos contratuais adversos. A mediana de R$ 4,6 milhoes sugere que metade das entidades compradoras movimenta volumes financeiros insuficientes para diluir os custos fixos de uma contratação complexa, como levantamento de requisitos, consultoria técnica especializada e fiscalizacao contratual qualificada. Este achado corrobora a evidência de Grandia e Voncken (2019) de que a capacidade organizacional, mais que a motivação individual, determina a efetividade das compras estrategicas, e configura o que a literatura internacional denomina problema do comprador fraco (<em>weak buyer problem</em>).</p>
+
+            <h3>4.2 O Oligopólio do Lado da Oferta</h3>
+            <p>A Tabela 3 apresenta a concentração de mercado entre os 3.528 fornecedores de compras complexas. O coeficiente de Gini de 0,89 indica desigualdade extrema, comparavel a mercados de infraestrutura e defesa. Os 10 maiores fornecedores capturam 43,9% do valor total transacionado, evidenciando que o Estado brasileiro, ao adquirir tecnologia e inovação, negocia com um oligopolio consolidado, o que reduz o poder de barganha do comprador público e eleva os custos de transação, conforme previsto por Williamson (1985).</p>
+            <table>
+                <caption><strong>Tabela 3.</strong> <em>concentração de Mercado entre Fornecedores de Compras Complexas (n = 3.528).</em></caption>
+                <thead><tr><th>Indicador</th><th>Valor</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Fornecedores únicos</td><td>3.528</td></tr>
+                    <tr><td class="left">Valor total transacionado</td><td>R$ 15,2 bilhoes</td></tr>
+                    <tr><td class="left">Participacao dos 10 maiores</td><td>43,9%</td></tr>
+                    <tr><td class="left">Coeficiente de Gini</td><td>0,89</td></tr>
+                    <tr class="last-row"><td class="left">Fornecedores totais PNCP</td><td>119.558</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> A amostra de 26 fornecedores com dados cadastrais (coletados via BrasilAPI, ReceitaWS e CNPJ.ws, 13% de sucesso) e insuficiente para inferencias. Estatisticas descritivas (65% micro/pequenas empresas, capital mediano de R$ 200 mil) sao reportadas a titulo ilustrativo.</p>
+            <p>A concentracao do lado da oferta corrobora a literatura de organizacao industrial (Bain, 1956) e de compras públicas (Uyarra &amp; Flanagan, 2010): mercados de tecnologia governamental apresentam barreiras de entrada intrinsecas (certificacoes, capacidade técnica comprovada, escala) que favorecem a concentracao em poucos fornecedores estabelecidos. Para órgãos de pequeno porte, essa concentracao e particularmente perversa. A combinacao de um comprador com baixa capacidade financeira (mediana de R$ 4,6 milhoes) e um mercado fornecedor oligopolizado (Gini = 0,89) cria um desalinhamento estrutural que eleva o risco de fracasso para ambas as partes. Este achado e consistente com a evidência de Brammer e Walker (2011) de que a fragmentacao administrativa, quando combinada a concentração de mercado, produz os piores resultados em termos de efetividade das compras públicas.</p>
+        </div>
+        <div class="page-footer">5</div>
+    </section>
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>4.3 Determinantes do fracasso: Evidência da Regressão Logística</h3>
+            <p>A Tabela 4 apresenta os resultados da estimacao. Todas as variáveis sao estatisticamente significativas (p &lt; 0,001). O modelo apresenta poder discriminativo moderado (Pseudo R<sup>2</sup> de McFadden = 0,153; AUC-ROC = 0,813).</p>
+            <table>
+                <caption><strong>Tabela 4.</strong> <em>Resultados da Regressao Logistica sobre Eventos Adversos (n = 100.000).</em></caption>
+                <thead><tr><th>variável</th><th>&#946;</th><th>Erro-padrão</th><th>z</th><th>p-valor</th><th>Odds Ratio</th><th>IC 95%</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Constante</td><td>1,401</td><td>0,034</td><td>41,32</td><td>&lt; 0,001 ***</td><td>4,058</td><td>[3,795; 4,338]</td></tr>
+                    <tr><td class="left">Is_complexa (H1)</td><td>0,381</td><td>0,086</td><td>4,41</td><td>&lt; 0,001 ***</td><td>1,463</td><td>[1,235; 1,733]</td></tr>
+                    <tr><td class="left">Vigencia_log (H2)</td><td>-0,515</td><td>0,005</td><td>-105,37</td><td>&lt; 0,001 ***</td><td>0,598</td><td>[0,592; 0,603]</td></tr>
+                    <tr class="last-row"><td class="left">Valor_log (H3)</td><td>-0,111</td><td>0,004</td><td>-27,18</td><td>&lt; 0,001 ***</td><td>0,895</td><td>[0,888; 0,902]</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> Pseudo R<sup>2</sup> = 0,153. AUC-ROC = 0,813. *** p &lt; 0,001. O modelo omitiu controles por esfera de governo e modalidade licitatória. Coeficientes devem ser interpretados como associacoes, não como efeitos causais.</p>
+
+            <p><strong>H1 (Compras complexas estao associadas a maior odds de eventos adversos): Suportada.</strong> O coeficiente positivo de is_complexa (&#946; = 0,381, p &lt; 0,001) indica que, mantidas constantes a vigência e o valor, a natureza complexa da compra esta associada a um aumento de 46,3% na odds de eventos adversos (OR = 1,46). Este resultado e particularmente revelador quando contrastado com a comparacao bruta da Secao 4.4: embora compras complexas apresentem taxa bruta de eventos adversos inferior (13,8% vs. 18,9%), essa aparente vantagem desaparece e se inverte quando se controla pela vigência. Compras complexas tipicamente possuem prazos mais longos (mediana de 340 dias vs. 165 dias nas normais), o que reduz a incidencia do criterio vigência &lt; 30 dias na construção da proxy e mascara seu risco intrínseco mais elevado. Este achado corrobora a predição de Williamson (1985) de que transacoes caracterizadas por alta especificidade de ativos e incerteza concentram maior risco contratual.</p>
+            <p><strong>H2 (vigência esta negativamente associada a odds de eventos adversos): Suportada.</strong> O coeficiente negativo de vigencia_log (&#946; = -0,515, p &lt; 0,001) e o de maior magnitude. Cada unidade adicional de log-vigência esta associada a uma redução de 40,2% na odds de eventos adversos (OR = 0,60). Ressalva-se que parte dessa magnitude e mecanica: como a propria variável dependente inclui vigência inferior a 30 dias como criterio, a correlacao negativa entre vigência e a VD e, em alguma medida, tautologica. No entanto, a magnitude do coeficiente e sua estabilidade na validação cruzada sugerem que a vigência captura, também, um efeito substantivo: contratos mais longos permitem maior investimento em ativos específicos, diluicao de custos fixos de planejamento e menor urgência decisoria, conforme previsto pela Economia dos custos de transação.</p>
+            <p><strong>H3 (Valor esta positivamente associado a odds de eventos adversos): não suportada.</strong> Contrariamente a hipotese derivada da teoria da agência, o coeficiente de valor_log e negativo (&#946; = -0,111, p &lt; 0,001), indicando que contratos de maior valor estao associados a uma redução de 10,5% na odds de eventos adversos (OR = 0,90). Este resultado sugere que o contexto institucional brasileiro, caracterizado por intensa fiscalizacao do controle externo sobre contratos de maior vulto, pode moderar a relação prevista pela teoria da agência. órgãos que contratam valores elevados dedicam mais recursos ao planejamento ex-ante, e a visibilidade desses contratos perante o TCU induz maior zelo na sua preparacao. A falha da H3 em corroborar a predição teórica não invalida a teoria da agência, mas sugere que sua aplicação ao contexto das compras públicas brasileiras requer a incorporacao de variáveis moderadoras institucionais, como a intensidade do controle externo e a reputacao do órgão comprador.</p>
+
+            <h3>4.4 Análise Comparativa: Complexas Versus Normais</h3>
+            <table>
+                <caption><strong>Tabela 5.</strong> <em>Comparacao: Compras Complexas vs. Normais.</em></caption>
+                <thead><tr><th>Indicador</th><th>Complexas</th><th>Normais</th><th>Diferenca</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Taxa bruta de eventos adversos</td><td>13,8%</td><td>18,9%</td><td>-5,1 pp</td></tr>
+                    <tr><td class="left">N</td><td>1.321</td><td>98.679</td><td></td></tr>
+                    <tr><td class="left">Odds Ratio (bruto)</td><td colspan="2">0,688</td><td></td></tr>
+                    <tr class="last-row"><td class="left">Teste z (diferenca de proporcoes)</td><td colspan="2">z = -4,69</td><td>p &lt; 0,001</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> A menor taxa bruta em compras complexas e parcialmente um artefato da construção da VD: a proxy penaliza vigência &lt; 30 dias, e complexas tem prazos mais longos. O OR ajustado de 1,46 (Tabela 4) controla por esse efeito.</p>
+        </div>
+        <div class="page-footer">6</div>
+    </section>
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>4.5 Discussão: o Apagão das Canetas Sob a Ótica Estrutural</h3>
+            <p>Os resultados convergem para tres evidencias que, em conjunto, oferecem uma reinterpretacao do fenomeno do apagao das canetas a luz de fatores estruturais. Primeiro, a concentracao extrema da capacidade financeira: 10 órgãos concentram 80,9% do volume financeiro, e a mediana de R$ 4,6 milhoes indica que metade das entidades compradoras opera com orcamentos ordens de grandeza inferiores aos necessarios para uma contratação tecnológica complexa. A narrativa do apagao das canetas atribui a paralisia decisoria ao medo individual do gestor de ser punido pelo TCU. Contudo, os dados sugerem uma explicação alternativa: o gestor de um município com orcamento de compras de R$ 4,6 milhoes simplesmente não dispoe dos recursos técnicos, jurídicos e administrativos para conduzir uma contratação de inteligência artificial ou de eficiência energetica em predios públicos. A paralisia não e medo; e carencia estrutural.</p>
+            <p>Segundo, o oligopolio do lado da oferta: 10 fornecedores capturam 43,9% do valor, com coeficiente de Gini de 0,89. O comprador público, especialmente aquele de menor porte, negocia em posicao de profunda assimetria negocial. Nesse cenario, mesmo um gestor tecnicamente competente e destemido enfrenta dificuldades objetivas para obter precos competitivos e condicoes contratuais favoraveis. O problema do comprador fraco, documentado na literatura internacional (Uyarra &amp; Flanagan, 2010), manifesta-se no Brasil de forma agravada pela combinacao de fragmentacao administrativa (6.567 órgãos compradores) e concentração de mercado (Gini = 0,89).</p>
+            <p>Terceiro, a vigência contratual, e não a classificacao do objeto como complexo, e o fator de maior magnitude associado a eventos adversos (&#946; = -0,515). Contratos com menos de 30 dias representam 26,8% da base e concentram a maioria dos desfechos adversos. Este achado e consistente com a hipotese de que a urgência administrativa cronica, frequentemente decorrente de falhas de planejamento institucional e não de escolhas individuais, e a principal vulnerabilidade do sistema de compras públicas brasileiro. A urgência, por sua vez, e endogena ao ciclo de responsabilizacao: o receio de punicao induz cautela excessiva na fase preparatoria, que consome o prazo disponível e resulta em contratações emergenciais de ultima hora, que sao mais propensas a eventos adversos, retroalimentando o ciclo.</p>
+            <p>A articulacao desses achados com a literatura de compras públicas sugere que o caso brasileiro ilustra um padrão mais amplo: paises com administracao pública fragmentada e capacidade institucional heterogenea enfrentam desafios desproporcionais na operacionalização de compras estrategicas (Brammer &amp; Walker, 2011). A Uniao Europeia, por meio de diretrizes como a 2014/24/EU e de iniciativas como o Green Public Procurement (Testa et al., 2014; Witjes &amp; Lozano, 2016), tem avancado na padronizacao de critérios e na capacitacao de compradores públicos. O Brasil, apesar do avanco representado pela Lei 14.133/2021, ainda carece de mecanismos sistematicos de suporte técnico aos órgãos compradores, especialmente aqueles de menor porte. A evidência empírica aqui apresentada sugere que a abordagem punitivista centrada no gestor (apagao das canetas) e insuficiente e potencialmente contraproducente, pois não ataca as causas estruturais do problema e agrava a aversao ao risco que pretende combater.</p>
+
+            <h2>2.5 Conclusão</h2>
+            <p>Este estudo mapeou o universo das compras públicas complexas no Brasil a partir de 572.045 contratos do PNCP (2021-2024), identificando 5.687 contratos de inovação tecnológica e sustentabilidade. Os resultados revelam um cenario de concentracao extrema (Gini = 0,89), demonstram que compras complexas estao associadas a um aumento de 46% na odds de eventos adversos quando controladas por vigência e valor (OR = 1,46), e identificam a vigência contratual como o preditor de maior magnitude (OR = 0,60).</p>
+            <p>Tres implicacoes emergem para a politica pública brasileira. Primeiro, a vigência contratual, e não o valor ou a classificacao do objeto, e o fator mais fortemente associado a eventos adversos. Este achado sugere que iniciativas voltadas a reduzir o fracasso em compras públicas devem priorizar o alongamento de prazos contratuais e o fortalecimento do planejamento ex-ante, em detrimento de abordagens punitivas focadas no gestor. Segundo, a aparente menor taxa bruta de eventos adversos das compras complexas (13,8% vs. 18,9%) e enganosa e decorre de prazos mais longos, não de menor risco intrínseco, o que alerta contra interpretacoes ingenuas de estatisticas descritivas não controladas. Terceiro, a evidência aqui reunida sugere que o debate sobre o apagao das canetas precisa ser reenquadrado: a paralisia decisoria tem raizes estruturais (assimetria informacional, concentração de mercado, carencia de capacidade institucional) que não serao resolvidas por punicao de gestores, mas por investimentos em capacitacao, ferramentas de suporte a decisão e reformas institucionais que fortaleçam a posicao do comprador público.</p>
+            <p>Estudos futuros devem avancar em pelo menos quatro direcoes: validar a classificacao NLP contra anotacao manual, reportando métricas de Precisao e Revocacao; incorporar controles institucionais (esfera de governo, modalidade licitatória) ao modelo econometrico; construir variáveis dependentes a partir de desfechos diretamente observados (rescisões, sancoes, acordaos do TCU); e ampliar a coleta de dados cadastrais de fornecedores utilizando fontes alternativas. Os achados deste diagnóstico empírico fornecem o fundamento para o segundo entregavel da tese: o desenvolvimento de um Copiloto Algoritmico baseado em inteligência Artificial explicável, artefato de Design Science Research (Hevner et al., 2004; Peffers et al., 2007) projetado para oferecer suporte a auditoria de minutas de editais complexos e mitigar a assimetria informacional que este estudo quantificou. A engenharia, a validação e os testes de desempenho desse artefato sao objeto do Artigo 2 desta tese. O código-fonte e os dados estao disponíveis em repositório aberto (github.com/renato0503/TeseDoutorado).</p>
+        </div>
+        <div class="page-footer">7</div>
+    </section>
+    
+
+
+
+
+    
+
+    <section class="paper-page">
+        <div class="page-content">
+            
+            
+
+            
+
+            
+
+            <h2>3.1 Introdução</h2>
+            <p>Conforme evidenciado pelo diagnóstico empírico das contratações registradas no Portal Nacional de contratações públicas (Artigo 1 da presente tese), as compras governamentais complexas (inovação, tecnologia e sustentabilidade) estao associadas a maior odds de eventos adversos quando controladas por vigência e valor (OR = 1,46). A incapacidade técnica de grande parte das unidades compradoras em fazer frente a um mercado fornecedor altamente concentrado (Gini = 0,89) gera editais deficientes, culminando em impugnações mercadológicas, aditivos excessivos e ineficiência do gasto público. O diagnóstico revelou ainda que a vigência contratual insuficiente constitui o fator de maior magnitude associado a desfechos adversos, sugerindo que a urgência administrativa cronica, e não a omissao comportamental dos gestores, e a principal vulnerabilidade do sistema de compras públicas brasileiro.</p>
+            <p>Se o gargalo reside na assimetria de conhecimento, a equalização de forças exige a implantacao de mecanismos de Suporte a decisão Baseados em conhecimento. Entretanto, o setor público brasileiro impoe uma severa restrição arquitetural a adoção de tecnologias emergentes de Aprendizado de máquina e inteligência Artificial: a exigência inegociável de transparência, motivação e prestação de contas. Modelos preditivos contemporaneos, como Redes Neurais Profundas e Florestas Aleatorias, operam sob o paradigma de caixa-preta (<em>black-box</em>), no qual nem mesmo seus desenvolvedores conseguem delinear exatamente a cadeia causal que levou o algoritmo a uma determinada conclusão (Doshi-Velez &amp; Kim, 2017). Esta opacidade e frontalmente incompativel com o Art. 5 da Lei 14.133/2021 (principio da motivação), com o Art. 20 da Lei Geral de proteção de Dados (direito a explicação sobre decisões automatizadas) e com os Art. 20 e 22 da Lei de introdução as Normas do Direito Brasileiro (LINDB), que vedam a responsabilizacao de gestores com base em valores jurídicos abstratos sem consideracao das circunstancias praticas e das consequencias administrativas da decisão.</p>
+            <p>Diante desse impasse - a urgência pela adoção de tecnologias de redução de assimetria versus o imperativo legal de accountability -, este artigo tecnológico tem por objetivo descrever o processo de concepção, engenharia e validação de um artefato de software denominado Copiloto Algoritmico. Mais do que um preditor de eventos adversos em editais, a ferramenta foi concebida sob o paradigma da inteligência Artificial explicável (<em>Explainable AI</em>, XAI), sendo desenhada nativamente para oferecer suporte a auditoria de minutas de editais de inovação e apresentar justificativas interpretáveis para cada alerta gerado. A contribuição central do artefato reside na demonstração de que e tecnicamente viável implementar aprendizado de máquina avancado no setor público brasileiro preservando integralmente a transparência e a autonomia decisoria do gestor, mediante a combinacao de atribuicao de importancia (SHAP) e análise de sensibilidade (<em>what-if</em>) como mecanismo pragmatico de XAI.</p>
+            <p>O artefato foi implantado como aplicação web em plataforma Streamlit Cloud, com código-fonte integralmente disponível em repositório aberto no GitHub sob licença MIT. O desenvolvimento seguiu os seis passos do método Design Science Research (Peffers et al., 2007), abrangendo da identificação do problema a comunicacao dos resultados.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>3.2 Metodologia de Desenvolvimento</h2>
+            <h3>2.1 paradigma Design Science Research</h3>
+            <p>A construção do Copiloto Algoritmico obedeceu a epistemologia pragmática da Design Science Research (DSR). Diferentemente das pesquisas tradicionais voltadas a explicação de fenomenos, a DSR foca na criacao de artefatos utilitarios que resolvem problemas relevantes para a sociedade (Hevner et al., 2004). O desenvolvimento seguiu os seis passos propostos por Peffers et al. (2007), adaptados ao contexto das compras públicas brasileiras:</p>
+            <ol style="margin-left: 20px; font-size: 11pt; text-align: justify; margin-bottom: 20px;">
+                <li><strong>identificação do Problema:</strong> diagnóstico da assimetria informacional e do custo de transacao na redacao de editais de inovação, comprovado via análise de 572.045 contratos do PNCP (Set/2021 a Ago/2024), com filtro semantico NLP identificando 5.687 compras complexas (0,99% do total). O Artigo 1 desta tese demonstrou que, controlando por vigência e valor, compras complexas estao associadas a um aumento de 46% na odds de eventos adversos (OR = 1,46).</li>
+                <li><strong>definição dos Objetivos:</strong> construção de ferramenta de suporte capaz de analisar minutas de editais e apontar riscos antes da publicação, de forma fundamentada em teoria economica (custos de transação, teoria da agência) e em conformidade com o arcabouco jurídico brasileiro (Lei 14.133/2021, LGPD, LINDB).</li>
+                <li><strong>Design e Desenvolvimento:</strong> Arquitetura modular em Python integrando processamento de Linguagem Natural (TF-IDF, 500 características), Isolation Forest (100 árvores, contamination = 0.1), Random Forest Classifier (100 árvores, 10 variáveis, com escore IF incorporado) e SHAP TreeExplainer para atribuicao de importancia.</li>
+                <li><strong>demonstração:</strong> aplicação sobre corpus de teste de 20.000 contratos (20% holdout estratificado), com exemplos carregaveis no aplicativo (Edital de TI, Contrato de inovação) e interface com campos para valor estimado e vigência prevista.</li>
+                <li><strong>Avaliacao:</strong> métricas de desempenho contra 5 modelos de referencia (Dummy, Regressao Logistica simples e multivariada, Arvore de decisão e Random Forest), documentacao da contribuição marginal de cada variável via SHAP e análise de sensibilidade.</li>
+                <li><strong>Comunicacao:</strong> disseminação por meio do presente artigo tecnológico, repositório aberto (GitHub, licença MIT), deploy no Streamlit Cloud e documentacao técnica completa.</li>
+            </ol>
+
+            <h3>2.2 Fundamentação em XAI: o Imperativo da Explicabilidade no Setor Público</h3>
+            <p>O dilema entre a sofisticacao preditiva dos modelos contemporaneos de Aprendizado de máquina e a exigência legal de transparência constitui o principal obstaculo a adoção de IA no setor público. Modelos de alto desempenho (Random Forest, XGBoost, Redes Neurais) sao inerentemente opacos: produzem predições precisas, mas não oferecem justificativas compreensiveis para suas decisões. Este paradigma de caixa-preta e incompativel com o ordenamento jurídico brasileiro, que exige motivação expressa dos atos administrativos (Art. 5 da Lei 14.133/2021), garantia de contraditorio e ampla defesa (Art. 5, LV da Constituicao Federal) e direito a revisão de decisões automatizadas (Art. 20 da LGPD).</p>
+            <p>Para contornar esse bloqueio, o Copiloto foi projetado incorporando técnicas de inteligência Artificial explicável (XAI). O método SHAP (<em>SHapley Additive exPlanations</em>), baseado na teoria dos Jogos Cooperativos de Shapley (Lundberg &amp; Lee, 2017), calcula a contribuição marginal de cada variável para o escore de risco final, permitindo que o sistema responda a pergunta: "Quais características deste edital mais contribuiram para o nível de risco estimado?" Complementarmente, o Copiloto implementa análise de sensibilidade: para cada variável de alto impacto, o sistema simula a predição com valores alterados e informa ao gestor como o risco variaria. Por exemplo: "Se a vigência prevista fosse aumentada de 30 para 365 dias, o risco estimado se reduziria de 89% para 41%."</p>
+            <p>E relevante distinguir que Wachter et al. (2017) definem explicações contrafactuais em sentido estrito como a busca pelo mínimo cambio nas entradas que alteraria a decisão. O SHAP, por sua vez, e um método de atribuicao de importancia (explicação local aditiva), e a análise de sensibilidade implementada constitui uma abordagem <em>what-if</em>. A combinacao dessas duas técnicas - atribuicao (SHAP) e simulacao (what-if) - oferece ao gestor público e aos órgãos de controle externo uma trilha de auditoria que atende pragmaticamente aos requisitos de motivação e transparência da Lei 14.133/2021 e da LGPD, sem exigir a abertura do código-fonte do modelo. Esta escolha de design representa uma contribuição pratica do artefato: demonstrar que e possivel implementar XAI no setor público brasileiro com ferramentas de código aberto e métricas de explicabilidade auditaveis, preservando a proteção da propriedade intelectual do algoritmo.</p>
+
+            <h3>2.3 Operacionalização dos construtos Teóricos</h3>
+            <p>A Tabela 1 apresenta o mapeamento detalhado entre os construtos teóricos que fundamentam a pesquisa e sua respectiva operacionalização no código Fonte do artefato. Cada decisão arquitetural e cada variável do modelo correspondem a um conceito da literatura de custos de transação, teoria da agência, organizacao industrial ou direito administrativo. Este mapeamento explicito atende ao criterio de rigor da DSR (Hevner et al., 2004), assegurando que o artefato não seja uma construção puramente empírica, mas uma materializacao de teoria testavel (Gregor &amp; Hevner, 2013).</p>
+            <table>
+                <caption><strong>Tabela 1.</strong> <em>operacionalização dos construtos teóricos no Copiloto Algoritmico.</em></caption>
+                <thead><tr><th>construto teórico</th><th>Autor</th><th>operacionalização no código</th><th>evidência empírica</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Custo de transacao ex-ante e especificidade de ativos</td><td class="left">Williamson (1985)</td><td class="left">Variável vigencia_log: a duração contratual como proxy da complexidade da transacao. Contratos mais longos permitem diluir custos fixos de planejamento e investir em ativos específicos.</td><td>Peso SHAP 76,11% (a vigência e o preditor de maior magnitude de eventos adversos no PNCP)</td></tr>
+                    <tr><td class="left">Assimetria informacional e racionalidade limitada</td><td class="left">Akerlof (1970); Williamson (1985)</td><td class="left">Variáveis complexidade_lexica e objeto_palavras: a densidade e extensao do texto do objeto como indicadores do grau de assimetria informacional entre comprador e fornecedor.</td><td>Peso SHAP combinado de 5,15% (complexidade_lexica 2,35% + objeto_palavras 2,80%)</td></tr>
+                    <tr><td class="left">Risco moral ex-post e monitoramento</td><td class="left">Jensen &amp; Meckling (1976)</td><td class="left">Variável score_tecnico: contagem de termos técnicos no objeto como proxy da capacidade de monitoramento contratual. módulo de detecção de lacunas: 16 padrões regex que identificam clausulas de proteção ausentes (garantia, SLA, confidencialidade).</td><td>Peso SHAP 0,20%; 16 clausulas monitoradas em conformidade com a Lei 14.133/2021</td></tr>
+                    <tr><td class="left">Padrões textuais atípicos e outliers de mercado</td><td class="left">Liu, Ting &amp; Zhou (2008)</td><td class="left">Isolation Forest sobre matriz TF-IDF de 15.000 objetos do PNCP. O escore de anomalia (if_anomaly_score) e a flag de detecção (if_is_anomaly) sao incorporados como variáveis adicionais do Random Forest.</td><td>contribuição combinada de 3,86% no modelo integrado (Gini: 3,66% + 0,20%)</td></tr>
+                    <tr class="last-row"><td class="left">Accountability estatal e transparência algoritmica</td><td class="left">Wachter et al. (2017); Lei 14.133/2021; LGPD</td><td class="left">SHAP TreeExplainer para atribuicao de importancia + análise de sensibilidade <em>what-if</em>. A combinacao oferece ao gestor e ao controle externo a fundamentação exigida para motivação dos atos administrativos.</td><td>3 variáveis com análise de sensibilidade por análise; conformidade com Art. 5 (Lei 14.133) e Art. 20 (LGPD)</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> O mapeamento conecta cada construto da fundamentação teórica (Colunas 1-2) a um componente concreto do artefato (Coluna 3), com evidência quantitativa ou qualitativa de sua presenca no sistema (Coluna 4).</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>2.4 Iterações de Design e Decisões Arquiteturais</h3>
+            <p>A DSR autentica documenta não apenas o artefato final, mas o percurso que levou a ele, incluindo refinamentos sucessivos e licoes extraidas (Peffers et al., 2007; Gregor &amp; Hevner, 2013). A Tabela 2 sumariza as cinco iterações de desenvolvimento do Copiloto, as decisões tomadas em cada uma e os principios de design emergentes.</p>
+            <table>
+                <caption><strong>Tabela 2.</strong> <em>iterações de Design do Copiloto Algoritmico.</em></caption>
+                <thead><tr><th>iteração</th><th>Inicio</th><th>Objetivo</th><th>decisão de Design</th><th>Principio de Design Extraido</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">I0: protótipos HTML</td><td class="left">Mai/2026</td><td class="left">Validação conceitual com interface estatica</td><td class="left">HTML insuficiente: necessario backend com Aprendizado de máquina operando sobre dados reais do PNCP</td><td class="left">PD1: A confiança do usuário no artefato decorre da transparência sobre os dados de treinamento, não da sofisticacao da interface.</td></tr>
+                    <tr><td class="left">I1: Scripts isolados</td><td class="left">Jun/2026</td><td class="left">Treinamento de modelos em notebooks Jupyter</td><td class="left">Modelos funcionavam, mas inacessiveis a gestores não-técnicos</td><td class="left">PD2: O artefato deve ser empacotado como aplicação web; a barreira técnica anula o propósito de reduzir assimetria.</td></tr>
+                    <tr><td class="left">I2: MVP Streamlit heurístico</td><td class="left">Jun/2026</td><td class="left">Aplicação web com 16 regras de regex para detecção de clausulas</td><td class="left">Heurísticas detectavam lacunas, mas não aprendiam com dados nem capturavam padrões emergentes</td><td class="left">PD3: A combinacao de regras explicitas (auditaveis) com modelos de Aprendizado de máquina (adaptativos) oferece o melhor equilibrio entre transparência e desempenho.</td></tr>
+                    <tr><td class="left">I3: Aprendizado de máquina com alvo sintético</td><td class="left">Jul/2026</td><td class="left">Random Forest com alvo determinístico composto pelas mesmas variáveis de entrada</td><td class="left">Métricas de 99%+ eram artefato da construção circular do alvo; necessario ancorar o alvo em desfechos observáveis</td><td class="left">PD4: O alvo do modelo supervisionado deve ser ancorado em desfechos administrativos observáveis, não em construtos computacionais.</td></tr>
+                    <tr class="last-row"><td class="left">I4: Alvo observável + integração IF-RF</td><td class="left">Jul/2026</td><td class="left">Alvo com eventos reais do PNCP + Isolation Forest acoplado como variável do Random Forest</td><td class="left">Modelos integrados capturam sinais complementares; a vigência domina a predição de eventos adversos (SHAP 76,11%)</td><td class="left">PD5: A integração de camadas não supervisionada e supervisionada produz ganho incremental, mas a magnitude do ganho deve ser reportada para justificar a complexidade adicional.</td></tr>
+                </tbody>
+            </table>
+
+            <h2>3.3 Arquitetura do Produto</h2>
+            <h3>3.1 processamento de Linguagem Natural e Engenharia de Variáveis</h3>
+            <p>O primeiro estágio do fluxo consiste na conversao do texto do edital em representacoes numéricas interpretáveis por máquina. Utilizou-se o vetorizador TF-IDF (<em>Term Frequency-Inverse Document Frequency</em>) com 500 características, n-gramas (1,2) e frequencia mínima de documento = 2, treinado sobre uma amostra de 15.000 objetos de contratos do PNCP. Este vetorizador alimenta exclusivamente o motor de Isolation Forest, que opera no espaco semantico de alta dimensionalidade para detectar padrões textuais atípicos. Em paralelo, um módulo de pré-processamento extrai 8 variáveis de engenharia textual diretamente do texto, sem passar pelo TF-IDF: comprimento do objeto em caracteres, contagem de palavras, complexidade lexica (razão type-token), densidade de termos técnicos, entre outras. O Random Forest opera exclusivamente sobre estas 8 variáveis mais 2 provenientes do IF (escore de anomalia e flag binaria), totalizando 10 variáveis. Esta separacao arquitetural - TF-IDF para detecção de anomalias, engenharia manual para predição de risco - privilegia a interpretabilidade das variáveis do modelo supervisionado, permitindo que cada uma seja compreendida e auditada por gestores e órgãos de controle.</p>
+            <p>Adicionalmente, o módulo de pré-processamento aplica 16 padrões de expressao regular (regex) para identificação de clausulas contratuais padronizadas (objeto, fundamentação legal, criterio de julgamento, vigência, pagamento, habilitacao, sancoes, garantia, dotacao orcamentaria, recebimento, propriedade intelectual, confidencialidade, SLA, rescisão, sustentabilidade, inovação) e detecção de ausencias (lacunas) com score de criticidade. Estas regras explicitas, embora estaticas, oferecem transparência total e rastreabilidade jurídica, complementando o motor preditivo com um componente determinístico e plenamente auditavel.</p>
+
+            <h3>3.2 Motor de Detecção de Padrões Atípicos (Isolation Forest)</h3>
+            <p>O segundo estágio emprega o algoritmo Isolation Forest (Liu, Ting &amp; Zhou, 2008) com 100 árvores e parametro de contaminacao de 0,1. O IF identifica objetos cujo perfil lexico (representado pelo vetor TF-IDF de 500 dimensoes) se distância significativamente do padrão médio dos 15.000 objetos do PNCP. Um edital com vocabulario muito técnico, muito extenso, ou com concentracao atipica de termos de sustentabilidade tende a ser sinalizado. A sinalizacao de atipicidade textual não deve ser interpretada como detecção automatica de direcionamento licitatório; trata-se de um alerta que requer investigação humana subsequente, funcionando como um mecanismo de triagem que direciona a atencao do gestor para os editais que mais se afastam do perfil médio do mercado.</p>
+            <p>Na arquitetura atual, o escore de anomalia do IF (<em>if_anomaly_score</em>) e a flag binaria de detecção (<em>if_is_anomaly</em>) sao incorporados como duas das 10 variáveis do Random Forest. Esta integração permite que o modelo supervisionado module sua predição com base na atipicidade textual do edital: um contrato com características estruturais de risco (vigência curta, valor elevado) que adicionalmente apresenta perfil lexico atípico recebe uma predição de risco reforcada. A contribuição combinada das variáveis do IF no modelo integrado e de 3,86% (Gini), indicando que a atipicidade textual captura um sinal complementar, embora de magnitude modesta, ao das variáveis estruturais.</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>3.3 Motor de Estimação de Risco (Random Forest + IF)</h3>
+            <p>O terceiro estágio emprega Random Forest Classifier (Breiman, 2001) com 100 árvores, profundidade máxima de 20 e pesos balanceados por classe. O modelo foi treinado sobre 100.000 registros do PNCP, utilizando 10 variáveis. A variável-alvo foi construida a partir de eventos administrativos observáveis nos proprios registros do PNCP: aditivo de valor superior a 10%, duas ou mais retificações, ou vigência inferior a 30 dias. A Tabela 3 apresenta as 10 variáveis utilizadas e sua importancia relativa.</p>
+            <table>
+                <caption><strong>Tabela 3.</strong> <em>variáveis do Modelo Integrado e Importancia Relativa.</em></caption>
+                <thead><tr><th>#</th><th>variável</th><th>descrição</th><th>Gini (%)</th><th>SHAP (%)</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td class="left">Vigencia_log</td><td class="left">Logaritmo natural da duração do contrato (dias)</td><td>75,32</td><td>76,11</td></tr>
+                    <tr><td>2</td><td class="left">Objeto_len</td><td class="left">Comprimento em caracteres do objeto</td><td>6,01</td><td>3,32</td></tr>
+                    <tr><td>3</td><td class="left">Uf_encoded</td><td class="left">Unidade Federativa (27 UFs)</td><td>3,74</td><td>5,55</td></tr>
+                    <tr><td>4</td><td class="left">If_anomaly_score</td><td class="left">Escore de atipicidade do Isolation Forest</td><td>3,66</td><td></td></tr>
+                    <tr><td>5</td><td class="left">Tipo_encoded</td><td class="left">Tipo de instrumento contratual (Empenho, Contrato, etc.)</td><td>3,51</td><td>6,82</td></tr>
+                    <tr><td>6</td><td class="left">Valor_log</td><td class="left">Logaritmo natural do valor global do contrato</td><td>2,83</td><td>2,85</td></tr>
+                    <tr><td>7</td><td class="left">Objeto_palavras</td><td class="left">Número total de palavras no objeto</td><td>2,75</td><td>2,80</td></tr>
+                    <tr><td>8</td><td class="left">Complexidade_lexica</td><td class="left">Razão palavras únicas / total de palavras</td><td>1,88</td><td>2,35</td></tr>
+                    <tr><td>9</td><td class="left">If_is_anomaly</td><td class="left">Indicador binario de atipicidade (IF)</td><td>0,20</td><td></td></tr>
+                    <tr class="last-row"><td>10</td><td class="left">Score_tecnico</td><td class="left">Contagem de termos técnicos (tecnologia, software, IA, etc.)</td><td>0,10</td><td>0,20</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> Os indices Gini e SHAP sao métricas conceitualmente distintas: o Gini mede a redução média de impureza nas divisoes das árvores; o SHAP mede a contribuição marginal conforme a teoria dos jogos cooperativos (Lundberg &amp; Lee, 2017). As variáveis do IF não possuem valores SHAP independentes porque sua contribuição e capturada indiretamente via estrutura de correlacao com as demais variáveis no TreeExplainer. A dominancia da vigencia_log (76,11%) e esperada, dado que a variável dependente inclui vigência inferior a 30 dias como criterio. Uma Arvore de decisão com profundidade 3 atinge F1-Score de 90,98%, evidenciando que o problema e altamente separavel com regras simples, mas que o ensemble oferece ganho incremental de 4,2 pontos percentuais de F1.</p>
+
+            <h3>3.4 Stack Tecnológico</h3>
+            <table>
+                <caption><strong>Tabela 4.</strong> <em>Stack tecnológico do Copiloto.</em></caption>
+                <thead><tr><th>Camada</th><th>tecnologia</th><th>versão</th><th>função</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Aplicação Web</td><td class="left">Streamlit</td><td>&ge; 1.32.0</td><td class="left">Interface responsiva, navegacao entre módulos</td></tr>
+                    <tr><td class="left">Aprendizado de máquina</td><td class="left">Scikit-Learn</td><td>&ge; 1.3.0</td><td class="left">TF-IDF, Isolation Forest, Random Forest</td></tr>
+                    <tr><td class="left">XAI (Atribuicao)</td><td class="left">SHAP</td><td>&ge; 0.43.0</td><td class="left">TreeExplainer, graficos de importancia</td></tr>
+                    <tr><td class="left">processamento de Dados</td><td class="left">Pandas, NumPy</td><td>&ge; 2.0.0</td><td class="left">Manipulacao de dataframes, operacoes vetoriais</td></tr>
+                    <tr><td class="left">Visualização</td><td class="left">Matplotlib</td><td>&ge; 3.7.0</td><td class="left">Graficos SHAP inline</td></tr>
+                    <tr><td class="left">Serializacao</td><td class="left">Pickle</td><td>Stdlib</td><td class="left">Cache de modelos (11 arquivos, ~18 MB)</td></tr>
+                    <tr class="last-row"><td class="left">Infraestrutura</td><td class="left">Streamlit Cloud</td><td></td><td class="left">Deploy gratuito, 1 GB RAM, 1 vCPU</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>3.4 Avaliação e Testes de Desempenho</h2>
+            <h3>4.1 Métricas do Modelo supervisionado e Comparação com Modelos de Referência</h3>
+            <p>O Random Forest integrado foi avaliado sobre o conjunto de teste (20% holdout estratificado, n = 20.000 contratos) e comparado com cinco modelos de referencia. A Tabela 5 consolida as métricas de desempenho obtidas.</p>
+            <table>
+                <caption><strong>Tabela 5.</strong> <em>Comparativo de desempenho: Modelos de Referencia vs. Random Forest Integrado.</em></caption>
+                <thead><tr><th>Modelo</th><th>Acuracia (%)</th><th>Precisao (%)</th><th>Recall (%)</th><th>F1-Score (%)</th><th>AUC-ROC (%)</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Dummy (classe majoritaria)</td><td>81,22</td><td>0,00</td><td>0,00</td><td>0,00</td><td>50,00</td></tr>
+                    <tr><td class="left">Regressao Logistica (apenas valor_log)</td><td>81,22</td><td>0,00</td><td>0,00</td><td>0,00</td><td>63,02</td></tr>
+                    <tr><td class="left">Regressao Logistica (9 variáveis)</td><td>78,20</td><td>8,88</td><td>1,73</td><td>2,90</td><td>81,53</td></tr>
+                    <tr><td class="left">Arvore de decisão (max_depth=3)</td><td>96,58</td><td>90,15</td><td>91,83</td><td>90,98</td><td>97,70</td></tr>
+                    <tr><td class="left">Random Forest (9 variáveis, sem IF)</td><td>98,19</td><td>98,49</td><td>91,78</td><td>95,01</td><td>98,87</td></tr>
+                    <tr class="last-row"><td class="left"><strong>RF integrado (10 variáveis, com IF)</strong></td><td><strong>98,27</strong></td><td></td><td></td><td><strong>95,22</strong></td><td><strong>98,97</strong></td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> A variável dependente possui 18,8% de casos positivos (desequilibrio moderado). A regressao logistica simples e multivariada falham em capturar a não-linearidade do problema. A Arvore de decisão com profundidade 3 ja atinge 90,98% de F1, indicando alta separabilidade. O RF integrado supera todos os modelos de referencia, com ganho de 4,2 pp de F1 sobre a Arvore e 0,2 pp sobre o RF sem IF. validação cruzada estratificada de 5-fold: 98,20% &plusmn; 0,13%.</p>
+
+            <h3>4.2 Atribuição de Importância (SHAP)</h3>
+            <p>A Figura 1 apresenta a importancia relativa das variáveis conforme computada pelo SHAP TreeExplainer sobre 300 amostras de explicação. A variável vigencia_log domina a contribuição marginal com 76,11%, refletindo o fato de que a duração contratual e o fator que mais discrimina contratos com e sem eventos adversos na base do PNCP. As variáveis tipo_encoded (6,82%) e uf_encoded (5,55%) aparecem como fatores secundarios, sugerindo que o tipo de instrumento contratual e a localizacao geografica capturam efeitos institucionais relevantes. As variáveis textuais (objeto_len, objeto_palavras, complexidade_lexica, score_tecnico) contribuem com parcelas menores, indicando que as características estruturais do contrato (duração, tipo, localizacao) predominam sobre as características textuais do objeto na discriminacao de eventos adversos.</p>
+            <div class="figure-container no-break">
+                <div class="shap-bar-container">
+                    <div class="shap-bar-row"><div class="shap-bar-label">vigencia_log</div><div class="shap-bar-track"><div class="shap-bar-fill" style="width:100%;background:#007aff;"></div></div><div class="shap-bar-value">76,11%</div></div>
+                    <div class="shap-bar-row"><div class="shap-bar-label">tipo_encoded</div><div class="shap-bar-track"><div class="shap-bar-fill" style="width:8.96%;background:#af52de;"></div></div><div class="shap-bar-value">6,82%</div></div>
+                    <div class="shap-bar-row"><div class="shap-bar-label">uf_encoded</div><div class="shap-bar-track"><div class="shap-bar-fill" style="width:7.29%;background:#34c759;"></div></div><div class="shap-bar-value">5,55%</div></div>
+                    <div class="shap-bar-row"><div class="shap-bar-label">objeto_len</div><div class="shap-bar-track"><div class="shap-bar-fill" style="width:4.36%;background:#ff9500;"></div></div><div class="shap-bar-value">3,32%</div></div>
+                    <div class="shap-bar-row"><div class="shap-bar-label">valor_log</div><div class="shap-bar-track"><div class="shap-bar-fill" style="width:3.74%;background:#5ac8fa;"></div></div><div class="shap-bar-value">2,85%</div></div>
+                    <div class="shap-bar-row"><div class="shap-bar-label">objeto_palavras</div><div class="shap-bar-track"><div class="shap-bar-fill" style="width:3.68%;background:#ff3b30;"></div></div><div class="shap-bar-value">2,80%</div></div>
+                    <div class="shap-bar-row"><div class="shap-bar-label">complexidade_lexica</div><div class="shap-bar-track"><div class="shap-bar-fill" style="width:3.09%;background:#a1a1a6;"></div></div><div class="shap-bar-value">2,35%</div></div>
+                    <div class="shap-bar-row"><div class="shap-bar-label">score_tecnico</div><div class="shap-bar-track"><div class="shap-bar-fill" style="width:0.26%;background:#e5e5e5;"></div></div><div class="shap-bar-value">0,20%</div></div>
+                </div>
+                <p class="figure-caption"><strong>Figura 1.</strong> <em>Importancia das variáveis conforme SHAP TreeExplainer (contribuição marginal média, n = 300 amostras).</em></p>
+                <p class="figure-note"><em>Nota.</em> SHAP values computados sobre 500 amostras de background e 300 de explicação. As variáveis do IF (if_anomaly_score, if_is_anomaly) não aparecem no grafico SHAP porque sua contribuição e capturada via correlacao com as demais variáveis; sua importancia Gini combinada e de 3,86%.</p>
+            </div>
+        </div>
+        <div class="page-footer">5</div>
+    </section>
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>4.3 Eficiência Computacional e Aplicabilidade Prática</h3>
+            <p>O pipeline completo de inferencia (TF-IDF + Isolation Forest + Random Forest + SHAP + análise de sensibilidade) e executado com latencia mediana de 1,43 segundos (P95 = 1,91s) no ambiente Streamlit Cloud (1 GB RAM, 1 vCPU). A arquitetura de serializacao via Pickle assegura que os 11 arquivos de modelo (aproximadamente 18 MB) sejam carregados uma única vez por sessão via cache singleton, com analises subsequentes operando inteiramente em memoria. O sistema suporta textos de até 10.000 palavras, cobrindo a quase totalidade dos editais e minutas de contratos públicos brasileiros. A interface web permite que o usuário informe o valor estimado do contrato e a vigência prevista, parametros que alimentam diretamente as variáveis valor_log e vigencia_log do modelo, garantindo que a predição reflita as características especificas do edital submetido.</p>
+
+            <h2>3.5 Conclusões Tecnológicas</h2>
+            <p>O presente artigo tecnológico demonstrou a viabilidade de construir ferramentas de suporte a decisão baseadas em Aprendizado de máquina e inteligência Artificial explicável para o setor público brasileiro. O uso da abordagem Design Science Research (Peffers et al., 2007) permitiu não apenas diagnosticar a falha na contratação de inovação, mas materializar um artefato responsivo e aderente ao arcabouco jurídico nacional (Lei 14.133/2021, LGPD, Lei Complementar 182/2021).</p>
+            <p>O modelo integrado, que acopla Isolation Forest ao Random Forest, atingiu acuracia de 98,27% e AUC-ROC de 98,97% na detecção de eventos adversos definidos como proxy. A comparacao com cinco modelos de referencia demonstra que o artefato proposto supera alternativas mais simples, com ganho incremental de 4,2 pontos percentuais de F1-Score sobre a melhor alternativa não-ensemble. A vigência contratual emergiu como o preditor de maior magnitude (SHAP 76,11%), achado consistente com a Economia dos custos de transação (Williamson, 1985) e com a evidência empírica do PNCP.</p>
+            <p>A contribuição central do Copiloto reside na demonstração de que e tecnicamente viável e juridicamente defensavel implementar Aprendizado de máquina avancado no setor público brasileiro preservando a transparência e a autonomia decisoria do gestor. A combinacao de atribuicao de importancia (SHAP) com análise de sensibilidade (<em>what-if</em>) constitui uma abordagem pragmática de XAI que atende aos requisitos de motivação dos atos administrativos (Lei 14.133/2021), ao direito a explicação sobre decisões automatizadas (LGPD, Art. 20) e a seguranca jurídica do gestor (LINDB, Art. 20 e 22), sem exigir a abertura do código-fonte do modelo. O artefato opera como agente recomendante (<em>advisor</em>), não como substituto do gestor, e a decisão final sobre alterar ou não as clausulas sinalizadas permanece sob tutela humana, resguardando os principios da legalidade, impessoalidade e isonomia.</p>
+            <p>Como limitação, reconhece-se que a avaliacao do artefato restringiu-se a métricas computacionais (Acuracia, F1-Score, AUC-ROC, latencia). A ausencia de avaliacao com usuários reais (gestores públicos, pregoeiros, auditores de controle externo) constitui uma limitação significativa, pois um sistema de suporte a decisão deve ser validado não apenas por sua acuracia preditiva, mas por sua utilidade percebida, compreensibilidade e impacto na decisão junto aos destinatarios finais. Estudos futuros devem conduzir experimentos controlados com gestores públicos, medindo a confiança nas recomendacoes do sistema, a compreensao das explicações geradas e o efeito do uso do Copiloto sobre a qualidade dos editais produzidos. Adicionalmente, a variável dependente utilizada e uma proxy de eventos adversos baseada em indicadores observáveis (aditivos, retificações, vigência curta), e a validação contra desfechos administrativos diretamente observados (impugnações, rescisões, sancoes) constitui agenda de pesquisa futura.</p>
+
+            <h3>5.1 Princípios de Design para XAI no Setor Público</h3>
+            <p>Conforme preconizado por Gregor e Hevner (2013), a contribuição teórica de uma pesquisa em DSR reside nos principios de design extraidos do processo de construção do artefato. Os cinco principios a seguir emergiram das iterações documentadas na Secao 2.4 e constituem a contribuição teórica deste artigo para a pesquisa em Sistemas de informação e Contabilidade Governamental:</p>
+
+            <div class="design-principle">
+                <strong>PD1 - transparência dos Dados como Fundamento da confiança:</strong> Em sistemas de XAI destinados ao setor público, a confiança do usuário e dos órgãos de controle não decorre primariamente da sofisticacao do algoritmo, mas da transparência sobre a origem, a data, o tamanho e as limitações dos dados de treinamento. O artefato deve exibir, de forma acessivel, a proveniencia e a distribuição do alvo utilizado, permitindo auditoria externa independente. Este principio mitiga o risco de que decisões automatizadas sejam percebidas como arbitrarias ou inquestionaveis, em conformidade com o Art. 20 da LGPD.
+            </div>
+            <div class="design-principle">
+                <strong>PD2 - Interpretabilidade como Requisito de adoção, não como Funcionalidade Acessoria:</strong> A interpretabilidade das variáveis do modelo deve ser um criterio de design de primeira ordem, não uma camada adicionada a posteriori. A separacao arquitetural adotada (TF-IDF para detecção de anomalias, engenharia manual de variáveis para predição) privilegia a compreensibilidade do modelo supervisionado, permitindo que cada variável seja nomeada, documentada e auditada. Modelos com variáveis opacas (ex: embeddings neurais) podem oferecer desempenho superior, mas sua adoção no setor público e condicionada a existencia de mecanismos de explicabilidade que traduzam essas representacoes para a linguagem do gestor.
+            </div>
+            <div class="design-principle">
+                <strong>PD3 - Complementaridade entre Regras Explicitas e Modelos preditivos:</strong> Regras deterministicas (regex, checklists) oferecem transparência total e rastreabilidade jurídica, mas sao estaticas e não capturam padrões emergentes. Modelos de Aprendizado de máquina sao adaptativos, mas opacos. A combinacao das duas abordagens - regras para detecção de conformidade normativa, modelos para predição de risco - oferece o melhor equilibrio entre auditabilidade e desempenho no contexto do setor público.
+            </div>
+            <div class="design-principle">
+                <strong>PD4 - Atribuicao e Sensibilidade como Mecanismo Pragmatico de XAI:</strong> Embora explicações contrafactuais estritas (Wachter et al., 2017) representem o estado da arte em XAI, a combinacao de atribuicao de importancia (SHAP) com análise de sensibilidade (<em>what-if</em>) constitui uma abordagem pragmática que atende aos requisitos legais de motivação e transparência no setor público brasileiro. Esta abordagem oferece ao gestor e aos órgãos de controle uma trilha de auditoria suficiente para fundamentar a decisão administrativa, sem exigir a abertura do código-fonte do modelo, preservando a proteção da propriedade intelectual do algoritmo.
+            </div>
+            <div class="design-principle">
+                <strong>PD5 - validação com usuários como Criterio de Completude do Artefato:</strong> Um sistema de suporte a decisão destinado ao setor público não esta completo até que seja validado com seus destinatarios finais. métricas computacionais (Acuracia, F1, AUC) sao necessarias, mas insuficientes. A avaliacao deve incorporar, minimamente, medidas de utilidade percebida, compreensibilidade das explicações e impacto sobre a qualidade das decisões, idealmente por meio de experimentos controlados com gestores públicos e auditores de controle externo.
+            </div>
+        </div>
+        <div class="page-footer">6</div>
+    </section>
+    
+
+
+
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>4 O PRODUTO: COPILOTO ALGORITMICO</h2>
+            <p style="text-align:center;font-size:10pt;color:#555;">Entregavel 3: Artefato tecnológico Implementado</p>
+            <p>O Copiloto Algoritmico e uma aplicação web desenvolvida em Streamlit (Python 3.11+), implantada em ambiente de nuvem gratuita (Streamlit Cloud), com código-fonte aberto sob licença MIT disponível em repositorio GitHub (github.com/renato0503/TeseDoutorado). A ferramenta integra os modelos de Aprendizado de máquina descritos no Capitulo 3 em uma interface acessivel a gestores públicos não-especialistas, operando com dois módulos principais: Avaliacao de Minutas e Geracao de Editais. A arquitetura do sistema utiliza cache singleton para carregamento dos modelos serializados (11 arquivos Pickle, aproximadamente 18 MB), assegurando que o carregamento ocorra uma única vez por sessão. O pipeline de inferencia completo (TF-IDF + Isolation Forest + Random Forest + SHAP) e executado com latencia inferior a 2 segundos no ambiente de producao (1 GB RAM, 1 vCPU).</p>
+            <p>O módulo de Avaliacao permite que o usuário submeta o texto de uma minuta de edital e receba análise completa integrando os tres motores do sistema: detecção de clausulas por regex (16 padrões), identificação de lacunas contratuais com score de criticidade, calculo de score de conformidade (0-100%), predição de risco pelo Random Forest integrado (com campos para valor estimado e vigência prevista informados pelo usuário), detecção de padrões textuais atípicos pelo Isolation Forest, e atribuicao de importancia via SHAP com grafico de barras e análise de sensibilidade simulando o efeito de alteracoes nas principais variáveis. O módulo de Geracao permite a criacao de minutas completas a partir de formulario estruturado com tres abas (Dados Basicos, Clausulas jurídicas e revisão Final), com justificativas baseadas em XAI referenciando a fundamentação legal (Lei 14.133/2021, LGPD, LC 182/2021) e teórica (Williamson, Jensen, Akerlof). O sistema implementa 20 testes unitarios cobrindo os módulos criticos e oferece documentacao integrada. Para informações detalhadas sobre a arquitetura, os módulos e as métricas de producao, consulte os arquivos em <em>Tese/03-Produto-Copiloto/docs/</em> e o repositorio GitHub do projeto.</p>
+        </div>
+        <div class="page-footer">20</div>
+    </section>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>5 CONCLUSÃO GERAL</h2>
+            <p>A presente tese investigou o fenomeno das compras públicas complexas no Brasil sob a lente da Economia dos custos de transação e da Assimetria Informacional, adotando o paradigma da Design Science Research para conceber, desenvolver e validar um artefato de suporte a decisão baseado em inteligência Artificial explicável. Os tres entregaveis que compoem a tese articulam-se em uma arquitetura coerente que percorre as seis etapas do processo de DSR de Peffers et al. (2007), desde a identificação do problema até a comunicacao dos resultados.</p>
+            <p>O diagnóstico empírico (Capitulo 2) revelou um mercado de compras complexas altamente concentrado (Gini = 0,89), no qual 10 órgãos respondem por 80,9% do volume financeiro e 10 fornecedores capturam 43,9% do valor. A regressao logistica demonstrou que, controlando por vigência e valor, compras complexas estao associadas a um aumento de 46% na odds de eventos adversos (OR = 1,46), e que a vigência contratual e o preditor de maior magnitude (OR = 0,60). Estes achados oferecem uma reinterpretacao do fenomeno do apagao das canetas: a paralisia decisoria tem raizes estruturais que não serao resolvidas por punicao de gestores, mas por investimentos em capacitacao e em ferramentas de suporte a decisão.</p>
+            <p>O desenvolvimento do Copiloto Algoritmico (Capitulo 3) demonstrou a viabilidade técnica e a defesa jurídica de implementar Aprendizado de máquina avancado no setor público. O artefato integra Isolation Forest e Random Forest com atribuicao de importancia via SHAP, oferecendo ao gestor uma trilha de auditoria que atende aos requisitos de motivação da Lei 14.133/2021 e ao direito a explicação da LGPD. As métricas de desempenho obtidas (Acuracia 98,27%, AUC-ROC 98,97%, F1-Score 95,22%) superam cinco modelos de referencia. Cinco principios de design para XAI no setor público foram extraidos como contribuição teórica. O produto implementado (Capitulo 4) materializa os achados em uma aplicação web funcional, com código aberto, deploy em nuvem e documentacao completa.</p>
+            <p>Como contribuição teórica, a tese oferece evidencias empiricas que corroboram a predição da Economia dos custos de transação e qualificam a aplicação da teoria da agência ao contexto brasileiro. Os cinco principios de design extraidos constituem uma contribuição para a literatura de Sistemas de informação. Como contribuição pratica, a tese entrega um artefato funcional que pode ser utilizado por gestores públicos para auditoria de minutas de editais, reduzindo a assimetria informacional na fase pre-contratual. Como limitações, reconhece-se que a variável dependente e uma proxy, a classificacao NLP carece de validação contra anotacao manual, e o artefato não foi submetido a avaliacao com usuários reais. A agenda de pesquisa futura inclui: validação do dicionario NLP com métricas de Precisao e Revocacao; incorporacao de controles institucionais aos modelos; construção de variáveis dependentes a partir de desfechos diretamente observados; e conducao de experimentos controlados com gestores públicos.</p>
+        </div>
+        <div class="page-footer">21</div>
+    </section>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>REFERÊNCIAS CONSOLIDADAS</h2>
+            <p class="ref-entry">Akerlof, G. A. (1970). The market for lemons. <em>The Quarterly Journal of Economics</em>, 84(3), 488-500.</p>
+            <p class="ref-entry">Bain, J. S. (1956). <em>Barriers to new competition</em>. Harvard University Press.</p>
+            <p class="ref-entry">Brammer, S., &amp; Walker, H. (2011). Sustainable procurement in the public sector. <em>IJOPM</em>, 31(4), 452-476.</p>
+            <p class="ref-entry">Breiman, L. (2001). Random forests. <em>Machine Learning</em>, 45(1), 5-32.</p>
+            <p class="ref-entry">Coase, R. H. (1937). The nature of the firm. <em>Economica</em>, 4(16), 386-405.</p>
+            <p class="ref-entry">Doshi-Velez, F., &amp; Kim, B. (2017). Towards a rigorous science of interpretable machine learning. <em>arXiv:1702.08608</em>.</p>
+            <p class="ref-entry">Edler, J., &amp; Georghiou, L. (2007). Public procurement and innovation. <em>Research Policy</em>, 36(7), 949-963.</p>
+            <p class="ref-entry">Flynn, A., &amp; Davis, P. (2014). Theory in public procurement research. <em>JOPP</em>, 14(2), 139-180.</p>
+            <p class="ref-entry">Georghiou, L., Edler, J., Uyarra, E., &amp; Yeow, J. (2013). Policy instruments for PPI. <em>TFSC</em>, 81, 1-12.</p>
+            <p class="ref-entry">Grandia, J., &amp; Voncken, D. (2019). Sustainable public procurement. <em>Sustainability</em>, 11(19), 5215.</p>
+            <p class="ref-entry">Gregor, S., &amp; Hevner, A. R. (2013). Positioning design science research. <em>MIS Quarterly</em>, 37(2), 337-355.</p>
+            <p class="ref-entry">Hevner, A. R., March, S. T., Park, J., &amp; Ram, S. (2004). Design science in IS research. <em>MIS Quarterly</em>, 28(1), 75-105.</p>
+        </div>
+        <div class="page-footer">22</div>
+    </section>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <p class="ref-entry">Jensen, M. C., &amp; Meckling, W. H. (1976). Theory of the firm. <em>JFE</em>, 3(4), 305-360.</p>
+            <p class="ref-entry">Lei n. 13.709/2018. Lei Geral de proteção de Dados Pessoais (LGPD).</p>
+            <p class="ref-entry">Lei n. 14.133/2021. Lei de licitações e Contratos Administrativos.</p>
+            <p class="ref-entry">Lei Complementar n. 182/2021. Marco Legal das Startups.</p>
+            <p class="ref-entry">Liu, F. T., Ting, K. M., &amp; Zhou, Z. H. (2008). Isolation forest. <em>IEEE ICDM</em>, 413-422.</p>
+            <p class="ref-entry">Lundberg, S. M., &amp; Lee, S.-I. (2017). Interpreting model predictions. <em>NeurIPS</em>, 30, 4765-4774.</p>
+            <p class="ref-entry">Mazzucato, M. (2014). <em>The entrepreneurial state</em>. Anthem Press.</p>
+            <p class="ref-entry">Peffers, K. et al. (2007). A design science research methodology. <em>JMIS</em>, 24(3), 45-77.</p>
+            <p class="ref-entry">Rainville, A. (2021). Circular economy through public procurement. <em>Research Policy</em>, 50(4).</p>
+            <p class="ref-entry">Testa, F. et al. (2014). Green public procurement. <em>JCP</em>, 112, 1893-1900.</p>
+            <p class="ref-entry">Thai, K. V. (2001). Public procurement re-examined. <em>JOPP</em>, 1(1), 9-50.</p>
+            <p class="ref-entry">Uyarra, E., &amp; Flanagan, K. (2010). Innovation impacts of public procurement. <em>EPS</em>, 18(1), 123-143.</p>
+        </div>
+        <div class="page-footer">23</div>
+    </section>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <p class="ref-entry">Vaidya, K., Sajeev, A. S. M., &amp; Callender, G. (2006). E-procurement implementation success. <em>JOPP</em>, 6(1-2), 70-99.</p>
+            <p class="ref-entry">Wachter, S., Mittelstadt, B., &amp; Russell, C. (2017). Counterfactual explanations. <em>Harvard JLT</em>, 31(2), 841-887.</p>
+            <p class="ref-entry">Williamson, O. E. (1985). <em>The economic institutions of capitalism</em>. Free Press.</p>
+            <p class="ref-entry">Witjes, S., &amp; Lozano, R. (2016). Towards a more circular economy. <em>RCR</em>, 112, 37-44.</p>
+            <p class="ref-entry">Johnson, P. F., Leenders, M. R., &amp; McCue, C. (2017). Purchasing organizational roles. <em>JOPP</em>, 3(1), 57-74.</p>
+            <p class="ref-entry">Bain, J. S. (1956). <em>Barriers to new competition</em>. Harvard University Press.</p>
+        </div>
+        <div class="page-footer">24</div>
+    </section>
+
+</body>
+</html>

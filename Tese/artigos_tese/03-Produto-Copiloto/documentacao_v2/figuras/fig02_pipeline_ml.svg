@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <linearGradient id="stage-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d9488"/><stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0d9488"/>
+    </marker>
+    <filter id="sh2" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="320" fill="#f8fafc"/>
+
+  <text x="600" y="35" text-anchor="middle" font-size="22" font-weight="800" fill="#0f172a">Pipeline de Machine Learning: 5 Estágios Sequenciais</text>
+  <text x="600" y="58" text-anchor="middle" font-size="12" fill="#64748b">Da minuta de edital ao relatório de risco explicável (XAI via SHAP)</text>
+
+  <!-- Input -->
+  <g transform="translate(20, 130)">
+    <rect width="140" height="60" rx="8" fill="#0f172a" filter="url(#sh2)"/>
+    <text x="70" y="26" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Minuta de</text>
+    <text x="70" y="42" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Edital (.txt)</text>
+  </g>
+
+  <line x1="165" y1="160" x2="220" y2="160" stroke="#0d9488" stroke-width="3" marker-end="url(#arrow2)"/>
+
+  <!-- Stage 1 -->
+  <g transform="translate(225, 120)">
+    <rect width="180" height="80" rx="10" fill="url(#stage-grad)" filter="url(#sh2)"/>
+    <text x="90" y="22" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">ESTÁGIO 1</text>
+    <text x="90" y="40" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">NLP / Regex</text>
+    <text x="90" y="56" text-anchor="middle" font-size="9" fill="#ccfbf1">16 padrões de cláusulas</text>
+    <text x="90" y="70" text-anchor="middle" font-size="9" fill="#ccfbf1">Lei 14.133/2021</text>
+  </g>
+
+  <line x1="410" y1="160" x2="460" y2="160" stroke="#0d9488" stroke-width="3" marker-end="url(#arrow2)"/>
+
+  <!-- Stage 2 -->
+  <g transform="translate(465, 120)">
+    <rect width="180" height="80" rx="10" fill="url(#stage-grad)" filter="url(#sh2)"/>
+    <text x="90" y="22" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">ESTÁGIO 2</text>
+    <text x="90" y="40" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">Isolation Forest</text>
+    <text x="90" y="56" text-anchor="middle" font-size="9" fill="#ccfbf1">TF-IDF 500 features</text>
+    <text x="90" y="70" text-anchor="middle" font-size="9" fill="#ccfbf1">Anomalias vs 15k PNCP</text>
+  </g>
+
+  <line x1="650" y1="160" x2="700" y2="160" stroke="#0d9488" stroke-width="3" marker-end="url(#arrow2)"/>
+
+  <!-- Stage 3 -->
+  <g transform="translate(705, 120)">
+    <rect width="180" height="80" rx="10" fill="url(#stage-grad)" filter="url(#sh2)"/>
+    <text x="90" y="22" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">ESTÁGIO 3</text>
+    <text x="90" y="40" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">Random Forest</text>
+    <text x="90" y="56" text-anchor="middle" font-size="9" fill="#ccfbf1">11 features</text>
+    <text x="90" y="70" text-anchor="middle" font-size="9" fill="#ccfbf1">100 árvores, 100k contratos</text>
+  </g>
+
+  <line x1="890" y1="160" x2="940" y2="160" stroke="#0d9488" stroke-width="3" marker-end="url(#arrow2)"/>
+
+  <!-- Stage 4 -->
+  <g transform="translate(945, 120)">
+    <rect width="180" height="80" rx="10" fill="url(#stage-grad)" filter="url(#sh2)"/>
+    <text x="90" y="22" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">ESTÁGIO 4</text>
+    <text x="90" y="40" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">SHAP XAI</text>
+    <text x="90" y="56" text-anchor="middle" font-size="9" fill="#ccfbf1">TreeExplainer</text>
+    <text x="90" y="70" text-anchor="middle" font-size="9" fill="#ccfbf1">Atribuição marginal</text>
+  </g>
+
+  <line x1="1130" y1="160" x2="1155" y2="160" stroke="#0d9488" stroke-width="3" marker-end="url(#arrow2)"/>
+
+  <!-- Stage 5 (off-screen partial) -->
+  <g transform="translate(1160, 120)">
+    <rect width="180" height="80" rx="10" fill="url(#stage-grad)" filter="url(#sh2)"/>
+    <text x="90" y="22" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">ESTÁGIO 5</text>
+    <text x="90" y="40" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">Recomendações</text>
+  </g>
+
+  <text x="125" y="225" text-anchor="middle" font-size="9" font-weight="700" fill="#0d9488">Input</text>
+  <text x="315" y="225" text-anchor="middle" font-size="9" font-weight="700" fill="#0d9488">Feature Extraction</text>
+  <text x="555" y="225" text-anchor="middle" font-size="9" font-weight="700" fill="#0d9488">Anomaly Detection</text>
+  <text x="795" y="225" text-anchor="middle" font-size="9" font-weight="700" fill="#0d9488">Risk Prediction</text>
+  <text x="1035" y="225" text-anchor="middle" font-size="9" font-weight="700" fill="#0d9488">Explainability</text>
+
+  <!-- Output Box -->
+  <g transform="translate(380, 245)">
+    <rect width="440" height="50" rx="8" fill="#fff" stroke="#0f172a" stroke-width="2"/>
+    <text x="220" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">Saída: JSON com score, lacunas, SHAP, contrafactuais</text>
+    <text x="220" y="40" text-anchor="middle" font-size="10" fill="#64748b">modelo_treinado=true · metricas_treino (Acc 93,36% / AUC 90,83% / F1 26,39%)</text>
+  </g>
+
+  <line x1="1250" y1="160" x2="1250" y2="270" stroke="#0d9488" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow2)"/>
+  <line x1="1250" y1="270" x2="820" y2="270" stroke="#0d9488" stroke-width="2"/>
+  <line x1="820" y1="270" x2="820" y2="295" stroke="#0d9488" stroke-width="2" marker-end="url(#arrow2)"/>
+
+  <text x="600" y="313" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">Fonte: Elaboração própria · functions/main.py · analisar_minuta()</text>
+</svg>

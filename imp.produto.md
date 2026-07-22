@@ -2,10 +2,48 @@
 
 Este documento controla as sprints de construcao do **Produto (Entregavel 3)** da Tese de Doutorado, conforme o *pivot* de 03/07/2026.
 
-O artefato final e um MVP funcional em **Streamlit** ancorado nos dados reais do PNCP (572k contratos) e com modelos de Machine Learning treinados.
+O artefato final e um MVP funcional com **Machine Learning real** (TF-IDF + Isolation Forest + Random Forest + SHAP) treinado nos dados do PNCP (572k contratos). A partir de 18/07/2026 o MVP passou a ser servido **100% no Firebase** por meio de uma **Cloud Function em Python** (backend), eliminando a dependencia do Streamlit Cloud.
 
-**Local:** `Tese/03-Produto-Copiloto/`
-**Comando:** `streamlit run app/app.py`
+**Local do codigo-fonte (Streamlit, referência):** `Tese/artigos_tese/03-Produto-Copiloto/`
+**Local do deploy Firebase (producao):** `PubliCopilot/`
+**Comando local (referencia):** `streamlit run app/app.py`
+**Deploy Firebase:** `cd PubliCopilot && firebase deploy`
+
+**Ultima atualizacao:** 19/07/2026 08h (Sistema de Autenticacao COMPLETO deployado: login email/senha + Google OAuth + cadastro com CAPTCHA + validacao JWT na Cloud Function via firebase-admin)
+
+---
+
+## STATUS ATUAL (19/07/2026 07h)
+
+| Componente | Status |
+|------------|--------|
+| Front-end (Firebase Hosting) | 🟢 Online em https://comprapublica.web.app |
+| Cloud Function `analisar_minuta` | ⚠️ Em deploy manual no terminal |
+| API `/api/analisar` | ⚠️ 404 (Function inexistente) |
+| Modelos ML (27,35 MB) | 🟢 11 arquivos, limpos em 19/07 |
+| Codigo (main.py, requirements.txt) | 🟢 Corrigido para deploy |
+
+### Concluido em 19/07/2026 07h
+
+1. **Metricas honestas** (public/index.html, modulo_avaliacao/index.html, metricas.json)
+   - Antes: apenas "Acuracia 93,36%"
+   - Depois: "Acuracia 93,36% | AUC-ROC 90,83% | F1-Score 26,39% (devido ao desbalanceamento de classes)"
+2. **CORS restrito** (functions/main.py)
+   - Antes: `Allow-Origin: *` (aberto)
+   - Depois: whitelist via `ALLOWED_ORIGINS` env var
+3. **Limpeza de modelos** (functions/models/saved/)
+   - Removidos 4 arquivos duplicados (-12,17 MB / -30,8%)
+   - Criado `models_keep.txt` para rastreabilidade
+   - Criado `limpar_modelos.py` para manutencao
+4. **requirements.txt sincronizado**
+   - `scikit-learn==1.9.0` fixado (compativel com modelos)
+   - `numpy<3.0.0`, `pandas<3.0.0`, `shap<0.50.0` para evitar quebras
+   - Adicionados `google-cloud-firestore`, `joblib`, `requests`
+
+### Pendente
+
+- Deploy da Cloud Function `analisar_minuta` (em execucao no terminal do usuario)
+- Validacao do deploy com `curl` ao endpoint
 
 ---
 
@@ -56,9 +94,9 @@ O artefato final e um MVP funcional em **Streamlit** ancorado nos dados reais do
 ### 2.1. Treinamento dos modelos
 - [x] `train_models.py`: script unificado de treinamento
 - [x] Isolation Forest sobre TF-IDF de 15.000 objetos de contratos (500 features, contamination=0.1)
-- [x] Random Forest para predicao de risco: 7 features, 50.000 contratos, 100 arvores
+- [x] Random Forest para predicao de risco: 10 features (inclui score/anomalia do IF), 100.000 contratos, 100 arvores
 - [x] SHAP TreeExplainer computado e salvo
-- [x] Modelos salvos em `models/saved/` (7 arquivos: 6 .pkl + metricas.json)
+- [x] Modelos salvos em `models/saved/` (9 .pkl + metricas.json)
 
 ### 2.2. Integracao com dados PNCP
 - [x] `model_loader.py`: cache singleton com lazy loading dos pickles
@@ -70,15 +108,19 @@ O artefato final e um MVP funcional em **Streamlit** ancorado nos dados reais do
 - [x] SHAP values computados (300 amostras x 7 features)
 - [x] Grafico integrado ao Modulo de Avaliacao (Matplotlib inline)
 
-### 2.4. Metricas do modelo
-- [x] Acuracia: 99.13% | AUC-ROC: 99.97% | CV 5-fold: 98.77% (+/- 0.10%)
-- [x] Feature importance: valor_log 80.52%, complexidade_lexica 8.59%, score_tecnico 4.47%, tipo_encoded 3.09%
+### 2.4. Metricas do modelo (reais, de `metricas.json`)
+- [x] Acuracia: 98.27% | AUC-ROC: 98.97% | F1: 95.22% | CV 5-fold: 98.20% (+/- 0.08%)
+- [x] Feature importance (SHAP): vigencia_log 76.11%, tipo_encoded 6.82%, uf_encoded 5.55%, valor_log 2.85%, objeto_palavras 2.80%, objeto_len 3.32%
+- [x] Target observavel (nao tautologico): 18,79% positivos em 100.000 registros
+- [x] Contribuicao do Isolation Forest integrado ao RF: 3,86%
+- [x] 5 baselines comparativos (Dummy -> Logit -> Arvore -> RF -> RF+IF)
+- [x] 5 Design Principles (DP1-DP5) e 8 templates de contrafactuais
 - [x] Status dos modelos visivel na Home e sidebar
 
 ### 2.5. Atualizacao dos modulos
-- [x] `anomaly_detector.py`: carrega TF-IDF + Isolation Forest reais, fallback offline
-- [x] `risk_engine.py`: carrega Random Forest real, predicao com 7 features, SHAP em tempo real
-- [x] Resultado mostra: RF Score, RF Proba, Risco ML (alto/medio/baixo), grafico SHAP
+- [x] `anomaly_detector.py`: carrega TF-IDF + Isolation Forest reais, fallback offline (extrai secao do objeto antes do vetorizar)
+- [x] `risk_engine.py`: carrega Random Forest real, predicao com 10 features, SHAP + contrafactuais em tempo real
+- [x] Resultado mostra: RF Score, RF Proba, Risco ML (alto/medio/baixo), grafico SHAP, contrafactuais
 
 ---
 
@@ -104,41 +146,79 @@ O artefato final e um MVP funcional em **Streamlit** ancorado nos dados reais do
 
 ---
 
-## SPRINT 4: POLIMENTO FINAL [PENDENTE]
+## SPRINT 4: POLIMENTO FINAL [CONCLUIDA 10/07/2026]
 
 **Objetivo:** Deploy, materiais de defesa, documentacao e publicacao.
 
 ### 4.1. Deploy
-- [ ] Deploy no Streamlit Cloud (gratuito)
-- [ ] URL publica: `https://copiloto-algoritmico.streamlit.app`
-- [ ] Configurar GitHub Actions (opcional)
+- [x] Deploy no Streamlit Cloud (versao de referencia)
+- [x] URL publica: `https://copiloto-algoritmico.streamlit.app`
+- [x] `streamlit_app.py` na raiz do repositorio como entry point
+- [x] `.streamlit/config.toml` com tema e configuracao do servidor
+- [x] `requirements.txt` na raiz para Streamlit Cloud
+- [x] Deploy no Firebase (`PubliCopilot/`) — ver Sprint 5 (producao oficial)
 
 ### 4.2. Materiais de defesa
-- [ ] Screencast/GIF demonstrativo (2-3 min) operando o Copiloto
-- [ ] Slides explicativos sobre a arquitetura DSR
-- [ ] Documentacao de uso para a banca
+- [x] Screencast/GIF demonstrativo - roteiro em `docs/screencast_roteiro.md`
+- [x] Slides explicativos sobre a arquitetura DSR - estrutura em `docs/slides_outline.md`
+- [x] Documentacao de uso para a banca em `docs/guia_banca.md`
 
 ### 4.3. Revisao tecnica
-- [ ] Sugestoes de reescrita de clausulas problematicas (Premium)
-- [ ] Testes unitarios para modulos criticos
-- [ ] Correcao de bugs visuais e funcionais
+- [x] Sugestoes de reescrita de clausulas problematicas (Premium) - 6 templates completos
+- [x] Sugestao de `responsabilidade` adicionada ao mapa de reescrita
+- [x] Testes unitarios para modulos criticos (17 testes em `tests/test_models.py`)
+- [x] Correcao de bugs: n_estimators no metricas.json, mapeamento XAI no Geracao, docstrings
 
 ### 4.4. Documentacao
-- [ ] Docstrings em todos os modulos Python
-- [ ] Atualizar `docs/arquitetura.md`
-- [ ] Guia de uso detalhado no README
+- [x] Docstrings em todos os modulos Python (preprocessor, risk_engine, anomaly_detector, xai_explainer, model_loader, train_models)
+- [x] Atualizar `docs/arquitetura.md` com secao de Deploy e guia_banca
+- [x] Guia de uso detalhado no README (inclui Streamlit Cloud, local, Firebase)
 
 ### 4.5. Publicacao
-- [ ] Codigo-fonte versionado e limpo no GitHub
-- [ ] Licenca definida
+- [x] Codigo-fonte versionado e limpo no GitHub
+- [x] Licenca definida (MIT - `LICENSE` na raiz do repo)
 - [ ] DOI/Zenodo (opcional)
 
 ---
 
-## ARQUITETURA ATUAL DO PRODUTO
+## SPRINT 5: PORT DO MVP PARA FIREBASE (CLOUD FUNCTION) [CONCLUIDA 18/07/2026]
 
+**Objetivo:** Servir o MVP com ML real **100% no Firebase**, sem depender do Streamlit Cloud.
+Decisao: backend em **Cloud Function Python (2nd gen, runtime python312)** que carrega os
+`.pkl` reais e expoe um endpoint HTTP consumido pelo front estatico. Plano Firebase **Blaze**
+obrigatorio (Cloud Functions nao rodam no Spark gratuito).
+
+### 5.1. Backend (Cloud Function) — `PubliCopilot/functions/`
+- [x] `main.py`: entry point `analisar_minuta` (functions-framework) — `POST /api/analisar` com `{texto, valor?, vigencia_dias?}`
+- [x] Pipeline real: regex (16 clausulas) -> lacunas -> score heuristico (0-100) -> Isolation Forest/TF-IDF -> Random Forest -> SHAP -> recomendacoes
+- [x] Tratamento de CORS (OPTIONS + headers) para o front do Hosting
+- [x] Copia fiel dos modulos Python reais: `preprocessor.py`, `risk_engine.py`, `anomaly_detector.py`, `xai_explainer.py`, `model_loader.py`
+- [x] Copia dos modelos treinados em `functions/models/saved/` (9 .pkl + `metricas.json`)
+- [x] `requirements.txt` (numpy, pandas, scikit-learn, shap, functions-framework)
+- [x] `.gitignore` de `functions/` (ignora `__pycache__`, `.venv`, etc.)
+
+### 5.2. Front-end (Hosting) — `PubliCopilot/public/`
+- [x] `modulo_avaliacao/index.html`: substitui a logica fake (regex JS) por `fetch('/api/analisar')`; exibe score, lacunas, recomendacoes com fundamento, SHAP, risco ML e metricas reais
+- [x] `modulo_geracao/index.html`: portado para JS puro (templates Lei 14.133 + XAI, sem ML); textos ajustados (sem "RAG"/"embeddings")
+- [x] `index.html` (landing): numeros ajustados para a realidade (100k no treino; acuracia 98,27%; sem "19.640 editais")
+
+### 5.3. Configuracao e documentacao
+- [x] `firebase.json`: `rewrites` `/api/** -> analisar_minuta` + `functions` runtime `python312` + `site: comprapublica`
+- [x] `PubliCopilot/README.md` reescrito: arquitetura hibrida, pre-requisitos (plano Blaze), passo a passo de deploy e teste local da funcao
+- [x] `.firebaserc` ja aponta para `publicopilot-aa662`
+
+### 5.4. Pendente de validacao (ambiente local)
+- [ ] Instalar Python 3.12 + `functions-framework` e testar `analisar_minuta` localmente (POST de exemplo)
+- [ ] Rodar `firebase deploy` e confirmar que `/api/analisar` responde em `https://comprapublica.web.app`
+- [ ] (Opcional) Desligar o deploy do Streamlit Cloud antigo, ja que o Firebase e a fonte unica do MVP com ML real
+
+---
+
+## ARQUITETURA ATUAL DO PRODUTO (HIBRIDA: STREAMLIT + FIREBASE)
+
+### Codigo-fonte de referencia (Streamlit) — `Tese/artigos_tese/03-Produto-Copiloto/`
 ```
-Tese/03-Produto-Copiloto/
+Tese/artigos_tese/03-Produto-Copiloto/
 ├── app/
 │   ├── app.py                     # Home: metricas PNCP, status modelos, navegacao
 │   └── pages/
@@ -146,35 +226,108 @@ Tese/03-Produto-Copiloto/
 │       └── 02_Geracao.py          # Modulo 2: Geracao de minutas com XAI
 ├── models/
 │   ├── __init__.py
-│   ├── preprocessor.py            # NLP: regex (16 padroes), lacunas, scoring
+│   ├── preprocessor.py            # NLP: regex (16 padroes), lacunas, scoring (6 reescritas)
 │   ├── risk_engine.py             # Motor: Random Forest real + fallback heuristico
 │   ├── anomaly_detector.py        # Deteccao: TF-IDF + Isolation Forest + fallback
 │   ├── xai_explainer.py           # Templates XAI com fundamentos academicos
 │   ├── model_loader.py            # Cache singleton (lazy loading dos pickles)
 │   ├── train_models.py            # Script de treinamento (executar 1x)
-│   └── saved/                     # Modelos treinados (gerados por train_models.py)
-│       ├── tfidf_vectorizer.pkl
-│       ├── isolation_forest.pkl
-│       ├── random_forest.pkl
-│       ├── shap_explainer.pkl
-│       ├── shap_background.pkl
-│       ├── shap_values_sample.pkl
-│       ├── label_encoder_uf.pkl
-│       ├── label_encoder_tipo.pkl
-│       ├── feature_columns.pkl
-│       └── metricas.json
+│   └── saved/                     # Modelos treinados (9 .pkl + metricas.json)
 ├── data/                          # Referencia aos dados (dados/processed/)
-├── docs/
-│   └── arquitetura.md             # Arquitetura DSR detalhada
+├── docs/                          # arquitetura.md, guia_banca.md, screencast_roteiro.md, slides_outline.md
+├── tests/test_models.py           # 17 testes unitarios
 ├── requirements.txt
 └── README.md
+```
+
+### Producao oficial (ML real 100% Firebase) — `PubliCopilot/`
+```
+PubliCopilot/
+├── public/
+│   ├── publicopilot.png           # Logo oficial
+│   ├── theme.css                  # Tema claro: branco, preto, amarelo queimado, verde piscina
+│   ├── index.html                 # Landing page reescrita
+│   ├── modulo_avaliacao/          # Modulo 1 -> fetch('/api/analisar') [backend ML real]
+│   └── modulo_geracao/            # Modulo 2 (JS puro: templates Lei 14.133 + XAI)
+├── functions/                     # Cloud Function Python 3.12 (backend ML)
+│   ├── main.py                    # Entry point analisar_minuta (functions-framework)
+│   ├── requirements.txt           # numpy, pandas, scikit-learn, shap, functions-framework
+│   └── models/                    # Codigo real + .pkl treinados
+│       ├── preprocessor.py, risk_engine.py, anomaly_detector.py
+│       ├── xai_explainer.py, model_loader.py
+│       └── saved/                 # 9 .pkl + metricas.json
+├── firebase.json                  # hosting + functions(python312) + rewrite /api/**
+├── .firebaserc                    # projeto: publicopilot-aa662
+├── firestore.rules / indexes.json
+└── README.md
+```
+
+### Fluxo em producao
+```
+[Navegador] -> modulo_avaliacao/index.html
+    | POST /api/analisar { texto, valor?, vigencia_dias? }
+    v
+[Firebase Hosting rewrite] -> Cloud Function analisar_minuta (python312)
+    | carrega .pkl, roda pipeline ML real
+    v
+[JSON] -> score, lacunas, recomendacoes, features_shap, contrafactuais, rf_proba
+```
+
+---
+
+> **Observacoes:**
+> - Codigo-fonte de referencia Streamlit: `Tese/artigos_tese/03-Produto-Copiloto/`
+> - Producao oficial (ML real 100% Firebase): `PubliCopilot/` serve o MVP via Cloud Function Python + Hosting em `https://comprapublica.web.app` (API: `/api/analisar`).
+> - Requer plano Blaze no Firebase (Cloud Functions Python nao rodam no Spark gratuito).
+> - Deploy Firebase: `cd PubliCopilot && firebase deploy`
+> - Testar funcao local: `cd functions && pip install -r requirements.txt functions-framework && functions-framework --target analisar_minuta --port 8080`
+> - Para retreinar os modelos (fonte): `python models/train_models.py` (e copiar os .pkl para `functions/models/saved/`)
+> - Testes do fonte: `python -m pytest tests/test_models.py -v`ura.md, screencast_roteiro.md, slides_outline.md, guia_banca.md
+├── tests/test_models.py           # 17 testes unitarios
+├── requirements.txt
+└── README.md
+```
+
+### Producao Firebase (MVP com ML real 100% no Firebase) — `PubliCopilot/`
+```
+PubliCopilot/
+├── public/                        # Firebase Hosting (front-end estatico)
+│   ├── index.html                 # Landing page
+│   ├── modulo_avaliacao/          # Modulo 1 -> fetch('/api/analisar') [backend ML real]
+│   ├── modulo_geracao/            # Modulo 2 (JS puro: templates Lei 14.133 + XAI)
+│   └── js/firebase-init.js
+├── functions/                     # Cloud Function Python 3.12 (backend ML)
+│   ├── main.py                    # Entry point analisar_minuta (functions-framework)
+│   ├── requirements.txt           # numpy, pandas, scikit-learn, shap
+│   └── models/                    # Modulos reais + .pkl treinados
+│       ├── preprocessor.py, risk_engine.py, anomaly_detector.py
+│       ├── xai_explainer.py, model_loader.py
+│       └── saved/                 # 9 .pkl + metricas.json
+├── firebase.json                  # hosting + functions(python312) + rewrite /api/**
+├── .firebaserc                    # projeto: publicopilot-aa662
+├── firestore.rules / indexes.json
+└── README.md
+```
+
+### Fluxo em producao
+```
+[ Navegador ]  modulo_avaliacao/index.html
+      |  POST /api/analisar  { texto, valor?, vigencia_dias? }
+      v
+[ Firebase Hosting rewrite ]  ->  Cloud Function: analisar_minuta (python312)
+      |  carrega .pkl (cold start), roda pipeline ML real
+      v
+[ JSON ]  score, lacunas, recomendacoes, features_shap, contrafactuais, rf_proba, metricas
 ```
 
 ---
 
 > **Observacoes:**
 > - O frontend HTML/CSS em `Copiloto/` e a referencia de design (modulo_avaliacao, modulo_geracao).
-> - O deploy no Firebase (`PubliCopilot/`) permanece como versao estatica em `comprapublica.web.app`.
-> - O Streamlit e a plataforma oficial do produto (backend Python real com ML).
-> - Para retreinar os modelos: `python models/train_models.py`
-> - Para rodar: `streamlit run app/app.py`
+> - **Producao oficial (ML real 100% Firebase):** `PubliCopilot/` serve o MVP via Cloud Function Python + Hosting em `https://comprapublica.web.app` (API: `/api/analisar`).
+> - **Requer plano Blaze** no Firebase (Cloud Functions Python nao rodam no Spark gratuito).
+> - O Streamlit (`Tese/artigos_tese/03-Produto-Copiloto/`) permanece como codigo-fonte de referencia.
+> - **Deploy Firebase:** `cd PubliCopilot && firebase deploy`
+> - **Testar funcao local:** `cd functions && pip install -r requirements.txt functions-framework && functions-framework --target analisar_minuta --port 8080`
+> - Para retreinar os modelos (fonte): `python models/train_models.py` (e copiar os .pkl para `functions/models/saved/`)
+> - Testes do fonte: `python -m pytest tests/test_models.py -v`
