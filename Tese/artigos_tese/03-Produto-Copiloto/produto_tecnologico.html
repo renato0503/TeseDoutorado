@@ -1,0 +1,680 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Produto Tecnológico: Copiloto Algorítmico PubliCopilot v1.3</title>
+    <link rel="stylesheet" href="../../../css/style_academico.css">
+    <style>
+        .figure-container { margin: 0.6cm 0; text-align: center; page-break-inside: avoid; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; font-weight: bold; }
+        .figure-note { text-indent: 0 !important; font-size: 9.5pt; margin-top: 0.05cm; margin-bottom: 0.4cm; line-height: 1.3; color: #444; }
+        .table-note { text-indent: 0 !important; font-size: 9.5pt; margin-top: 0.15cm; margin-bottom: 0.4cm; line-height: 1.35; color: #333; }
+        .ref-entry { text-indent: -1.27cm; padding-left: 1.27cm; margin: 0 0 0.35cm 0; text-align: justify; font-size: 11pt; line-height: 1.4; }
+        h2 { font-size: 13pt; font-weight: bold; margin: 0.8cm 0 0.4cm 0; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+        h3 { font-size: 12pt; font-weight: bold; margin: 0.6cm 0 0.3cm 0; }
+        h4 { font-size: 11pt; font-weight: bold; margin: 0.4cm 0 0.2cm 0; }
+        .code-block { background:#1a1a2e; color:#5ac8fa; border-radius:8px; padding:14px; font-family:monospace; font-size:9pt; line-height:1.4; margin:8px 0; }
+        .module-card { background:#f8f9fa; border-left:4px solid #007aff; padding:12px 16px; margin:8px 0; font-size:11pt; }
+        .shap-bar-container { margin: 0.3cm 0; }
+        .shap-bar-row { display: flex; align-items: center; margin-bottom: 4px; font-size: 10pt; }
+        .shap-bar-label { width: 220px; text-align: right; padding-right: 8px; font-weight: 500; }
+        .shap-bar-track { flex: 1; height: 18px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
+        .shap-bar-fill { height: 100%; border-radius: 3px; }
+        .shap-bar-value { width: 70px; padding-left: 8px; font-size: 9pt; color: #555; }
+        .highlight-box { background: #fff8e1; border-left: 4px solid #f59e0b; padding: 12px 16px; margin: 12px 0; font-size: 10.5pt; line-height: 1.5; }
+        .status-online { color: #10b981; font-weight: bold; }
+        .status-pending { color: #f59e0b; font-weight: bold; }
+        .badge-new { display: inline-block; background: #10b981; color: white; font-size: 8pt; font-weight: 700; padding: 2px 6px; border-radius: 8px; margin-left: 6px; vertical-align: middle; }
+        .badge-update { display: inline-block; background: #f59e0b; color: white; font-size: 8pt; font-weight: 700; padding: 2px 6px; border-radius: 8px; margin-left: 6px; vertical-align: middle; }
+        .quadro { background:#f4f7fb; border:2px solid #1f4e79; padding:16px; margin:14px 0; font-size:11pt; page-break-inside: avoid; }
+        .quadro-title { font-weight:bold; text-align:center; margin-bottom:10px; font-size:12pt; color:#1f4e79; }
+        table { border-collapse: collapse; margin: 10px 0; font-size: 10.5pt; width: 100%; }
+        th, td { border: 1px solid #999; padding: 8px; text-align: left; vertical-align: top; }
+        th { background: #eef4fb; font-weight: bold; }
+        .svg-figure { max-width: 100%; height: auto; }
+        .caption-num { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">Baixar DOCX</button>
+    </div>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">COPILOTO ALGORÍTMICO PARA COMPRAS PÚBLICAS COMPLEXAS: DOCUMENTAÇÃO TÉCNICA DO PRODUTO <span class="badge-update">v1.3 — 19/07/2026</span></h1>
+            <p class="author-info"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School · Doutorado em Contabilidade<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+
+            <div class="highlight-box">
+                <strong>⚠️ NOTA SOBRE REVISÕES METODOLÓGICAS (Sprint 6-9, junho–julho/2026):</strong> As métricas originalmente reportadas (Acurácia 98,27% / AUC 98,97% / F1 95,22%) refletiam <em>data leakage</em>, com a variável dependente utilizando vigência inferior a 30 dias como indicador de evento adverso — o que gerava circularidade tautológica. A versão atual do artefato (Sprint 9, 18/07/2026) adota a <strong>definição ex-post pura</strong> (vigência ≥ 30 dias + aditivo > 25% ou rescisão ou suspensão), com métricas reportadas academicamente: <strong>Acurácia 93,36% | AUC-ROC 90,83% | F1-Score 26,39%</strong> (F1 baixo reflete desbalanceamento: 1,99% positivos vs. 98,01% negativos).
+            </div>
+
+            <h2>1 VISÃO EXECUTIVA DO PRODUTO</h2>
+            <p>O <strong>PubliCopilot</strong> é o terceiro entregável da Tese de Doutorado em Contabilidade na Fucape Business School. Trata-se de uma aplicação web com <strong>Machine Learning real</strong> (Random Forest + Isolation Forest + SHAP) servida integralmente no <strong>Firebase</strong> (Hosting + Cloud Functions + Firestore + Authentication), com sistema completo de autenticação obrigatório e controle de acesso baseado em papéis (RBAC). O produto encontra-se em produção no endereço <em>https://comprapublica.web.app</em>, com código-fonte aberto sob licença MIT disponível em <em>https://github.com/renato0503/TeseDoutorado</em>.</p>
+            <p>O artefato ataca diretamente o problema da assimetria informacional diagnosticado no Artigo 1: gestores públicos, especialmente em órgãos de menor porte, carecem de capacidade técnica para elaborar editais de compras complexas (inovação, tecnologia, sustentabilidade). O Copiloto oferece um exoesqueleto cognitivo que analisa minutas de editais, detecta cláusulas ausentes, estima o risco de eventos adversos com base em 100.000 contratos reais do PNCP e fornece explicações interpretáveis (XAI via SHAP) para cada alerta, preservando a autonomia decisória do gestor e a conformidade com a Lei 14.133/2021.</p>
+        </div>
+        <div class="page-footer">1</div>
+    </section>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>2 ARQUITETURA TÉCNICA DETALHADA</h2>
+            <p>A arquitetura do PubliCopilot v1.3 organiza-se em <strong>quatro camadas</strong> sobre o Firebase, com separação clara de responsabilidades e comunicação via HTTPS e JWT. A segmentação em camadas é fundamental para garantir segurança, escalabilidade independente e observabilidade: a camada de apresentação serve conteúdo estático com latência global via CDN; a camada de autenticação delega identidade ao Firebase Auth; a camada de backend executa lógica serverless com auto-scaling; e a camada de dados persiste perfis, histórico e modelos com regras de acesso granulares.</p>
+
+            <div class="figure-container no-break">
+                <svg viewBox="0 0 800 360" class="svg-figure" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="780" height="340" rx="10" fill="#f8f9fa" stroke="#333" stroke-width="1.5"/>
+                    <rect x="30" y="30" width="740" height="60" rx="8" fill="#dbeafe" stroke="#1e40af"/>
+                    <text x="400" y="55" text-anchor="middle" font-weight="bold" font-size="13" fill="#1e3a8a">Camada 1 — Apresentação (Firebase Hosting + SPA estática)</text>
+                    <rect x="30" y="110" width="740" height="60" rx="8" fill="#dcfce7" stroke="#166534"/>
+                    <text x="400" y="135" text-anchor="middle" font-weight="bold" font-size="13" fill="#14532d">Camada 2 — Autenticação (Firebase Auth + Google OAuth + JWT Bearer)</text>
+                    <rect x="30" y="190" width="740" height="60" rx="8" fill="#ffedd5" stroke="#9a3412"/>
+                    <text x="400" y="215" text-anchor="middle" font-weight="bold" font-size="13" fill="#7c2d12">Camada 3 — Backend (Cloud Functions Python 3.11: analisar_minuta + set_admin_claim)</text>
+                    <rect x="30" y="270" width="740" height="60" rx="8" fill="#f3e8ff" stroke="#6b21a8"/>
+                    <text x="400" y="295" text-anchor="middle" font-weight="bold" font-size="13" fill="#581c87">Camada 4 — Dados (Firestore: usuários, avaliações, editais, modelos)</text>
+                    <polygon points="400,95 400,110" fill="#555"/>
+                    <polygon points="400,175 400,190" fill="#555"/>
+                    <polygon points="400,255 400,270" fill="#555"/>
+                    <text x="400" y="108" text-anchor="middle" font-size="11" fill="#333">Browser → HTTPS</text>
+                    <text x="400" y="188" text-anchor="middle" font-size="11" fill="#333">Authorization: Bearer <token></text>
+                    <text x="400" y="268" text-anchor="middle" font-size="11" fill="#333">CRUD + Rules + Custom Claims</text>
+                </svg>
+                <p class="figure-caption"><strong>Figura 1.</strong> <em>Arquitetura em camadas do PubliCopilot v1.3: Apresentação, Autenticação, Backend e Dados.</em></p>
+                <p class="figure-note">Fonte: Elaboração própria com base em configuração do Firebase Hosting, Auth e Firestore.</p>
+            </div>
+
+            <p>Conforme ilustrado na Figura 1, o fluxo de dados inicia no browser com uma requisição HTTPS ao Firebase Hosting, que entrega a SPA estática. Em seguida, a camada de autenticação emite um ID_token via Firebase Auth (email/senha ou Google OAuth), que é enviado no header <code>Authorization: Bearer</code> para a Cloud Function. O backend valida o token via <code>firebase-admin</code>, aplica as regras do Firestore conforme o custom claim <code>admin</code> e persiste os resultados. Essa separação elimina pontos únicos de falha e permite que cada camada escale independentemente: o Hosting atende milhares de requisições estáticas por segundo; as Functions escalam de zero a múltiplas instâncias conforme demanda; e o Firestore replica dados globalmente com consistência eventual.</p>
+
+            <p>O backend Python (<code>functions/main.py</code> → <code>analisar_minuta()</code>) executa o processamento em cinco estágios sequenciais após validar o token JWT do usuário. Cada estágio corresponde a um módulo especializado cujo acoplamento é mínimo, permitindo testes unitários isolados e manutenção evolutiva.</p>
+            <ol>
+                <li><strong>Estágio 1 — Pré-processamento (NLP):</strong> normalização + 16 regex de cláusulas + score de conformidade.</li>
+                <li><strong>Estágio 2 — Detecção de Padrões Atípicos (Isolation Forest):</strong> TF-IDF (500 features) + IF treinado em 15.000 objetos PNCP.</li>
+                <li><strong>Estágio 3 — Estimação de Risco (Random Forest):</strong> 11 variáveis estruturadas + predição binária.</li>
+                <li><strong>Estágio 4 — Atribuição de Importância (SHAP):</strong> TreeExplainer + gráfico de barras horizontais.</li>
+                <li><strong>Estágio 5 — Análise de Sensibilidade e Recomendações:</strong> simulações what-if + templates contrafactuais normativos.</li>
+            </ol>
+
+            <div class="figure-container no-break">
+                <svg viewBox="0 0 780 240" class="svg-figure" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="760" height="220" rx="8" fill="#f8f9fa" stroke="#333"/>
+                    <rect x="40" y="30" width="130" height="50" rx="6" fill="#dbeafe" stroke="#1e40af"/>
+                    <text x="105" y="50" text-anchor="middle" font-weight="bold" font-size="11" fill="#1e3a8a">1. NLP</text>
+                    <text x="105" y="68" text-anchor="middle" font-size="10" fill="#1e3a8a">Regex + Score</text>
+                    <rect x="220" y="30" width="130" height="50" rx="6" fill="#d1fae5" stroke="#065f46"/>
+                    <text x="285" y="50" text-anchor="middle" font-weight="bold" font-size="11" fill="#064e3b">2. Isolation Forest</text>
+                    <text x="285" y="68" text-anchor="middle" font-size="10" fill="#064e3b">Anomalia TF-IDF</text>
+                    <rect x="400" y="30" width="130" height="50" rx="6" fill="#ffedd5" stroke="#9a3412"/>
+                    <text x="465" y="50" text-anchor="middle" font-weight="bold" font-size="11" fill="#7c2d12">3. Random Forest</text>
+                    <text x="465" y="68" text-anchor="middle" font-size="10" fill="#7c2d12">Risco (11 vars)</text>
+                    <rect x="580" y="30" width="130" height="50" rx="6" fill="#f3e8ff" stroke="#6b21a8"/>
+                    <text x="645" y="50" text-anchor="middle" font-weight="bold" font-size="11" fill="#581c87">4. SHAP</text>
+                    <text x="645" y="68" text-anchor="middle" font-size="10" fill="#581c87">Explicabilidade</text>
+                    <polygon points="170,55 220,55" fill="#666"/>
+                    <polygon points="350,55 400,55" fill="#666"/>
+                    <polygon points="530,55 580,55" fill="#666"/>
+                    <rect x="280" y="120" width="180" height="50" rx="6" fill="#fff1f2" stroke="#9f1239"/>
+                    <text x="370" y="140" text-anchor="middle" font-weight="bold" font-size="11" fill="#881337">5. Recomendações</text>
+                    <text x="370" y="158" text-anchor="middle" font-size="10" fill="#881337">Sensibilidade + contrafactuais</text>
+                    <polygon points="370,80 370,120" fill="#666"/>
+                </svg>
+                <p class="figure-caption"><strong>Figura 2.</strong> <em>Fluxograma do pipeline de Machine Learning (cinco estágios: NLP → IF → RF → SHAP → Recomendações).</em></p>
+                <p class="figure-note">Fonte: Elaboração própria com base em funções do módulo backend (<em>preprocessor.py</em>, <em>anomaly_detector.py</em>, <em>risk_engine.py</em>, <em>xai_explainer.py</em>).</p>
+            </div>
+
+            <p>A Figura 2 apresenta o pipeline como um fluxo unidirecional, onde a saída de cada estágio alimenta o próximo. Nota-se que o estágio 1 (NLP) produz tanto o score de conformidade textual quanto insumos para os estágios subsequentes: o comprimento do objeto (<code>objeto_len</code>) e a contagem de palavras (<code>objeto_palavras</code>) são extraídos diretamente do texto normalizado. O estágio 2 (Isolation Forest) adiciona uma dimensão de anomalia estatística ao vetor de features, permitindo sinalizar desvios lexicais que podem indicar riscos não capturados pelas variáveis estruturadas. Os estágios 3 e 4 formam o núcleo preditivo-explicativo: o Random Forest estima a probabilidade de evento adverso, enquanto o SHAP decompõe essa estimativa em contribuições por feature. Finalmente, o estágio 5 sintetiza lacunas textuais (regex) e o perfil SHAP em recomendações jurídicas fundamentadas, fechando o ciclo entre detecção e ação.</p>
+
+            <h3>2.2 Stack Tecnológico</h3>
+            <p>A escolha do stack tecnológico priorizou reprodutibilidade, estabilidade de longo prazo e custo operacional previsível. Diferentemente de soluções que dependem de frameworks JavaScript pesados, o PubliCopilot utiliza HTML/CSS/JS vanilla, eliminando dependências transitivas e reduzindo a superfície de ataque. Essa decisão também simplifica o deploy no Firebase Hosting, que serve arquivos estáticos com latência global via CDN do Google Cloud.</p>
+
+            <table>
+                <caption><strong>Tabela 1.</strong> <em>Stack Tecnológico do PubliCopilot v1.3.</em></caption>
+                <thead><tr><th>Componente</th><th>Tecnologia</th><th>Versão / Runtime</th><th>Função</th><th>Justificativa Técnica</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Front-end</td><td class="left">HTML5 / CSS3 / JavaScript</td><td class="left">Vanilla ES6+</td><td class="left">Interface e interatividade</td><td class="left">Sem dependência de frameworks; performance e deploy estático</td></tr>
+                    <tr><td class="left">Hospedagem</td><td class="left">Firebase Hosting</td><td class="left">—</td><td class="left">Distribuição estática e CDN</td><td class="left">Latência global e HTTPS automático</td></tr>
+                    <tr><td class="left">IAM</td><td class="left">Firebase Authentication</td><td class="left">SDK 10.7.1</td><td class="left">Login, sessão e tokens</td><td class="left">Google OAuth + email/senha + custom claims</td></tr>
+                    <tr><td class="left">Backend</td><td class="left">Cloud Functions</td><td class="left">Python 3.11</td><td class="left">API serverless</td><td class="left">Escalo automático + integração nativa Firebase</td></tr>
+                    <tr><td class="left">Banco de dados</td><td class="left">Cloud Firestore</td><td class="left">—</td><td class="left">Perfis, histórico, logs</td><td class="left">NoSQL em tempo real e regras por papel</td></tr>
+                    <tr><td class="left">ML</td><td class="left">scikit-learn</td><td class="left">1.9.0</td><td class="left">Treino + inferência</td><td class="left">Estabilidade de API e reprodutibilidade</td></tr>
+                    <tr><td class="left">XAI</td><td class="left">SHAP</td><td class="left">—</td><td class="left">Explicações locais</td><td class="left">Fundamentação acadêmica e auditabilidade</td></tr>
+                    <tr><td class="left">Serialização</td><td class="left">Pickle</td><td class="left">Python 3.11</td><td class="left">Armazenamento de modelos</td><td class="left">Formato nativo para objetos scikit-learn</td></tr>
+                </tbody>
+            </table>
+
+            <p>A Tabela 1 revela decisões arquiteturais que priorizam a robustez acadêmica. A fixação de <code>scikit-learn==1.9.0</code> no <code>requirements.txt</code> é especialmente crítica: qualquer alteração de versão poderia tornar incompatíveis os 11 arquivos <code>.pkl</code> serializados, inviabilizando o carregamento dos modelos sem retreinamento completo. O uso de Python 3.11 no runtime das Cloud Functions garante compatibilidade com versões recentes de dependências de machine learning, enquanto o Firebase SDK 10.7.1 no front-end assegura suporte a custom claims e persistência IndexedDB. Em outras palavras, cada versão listada não é arbitrária: refute um trade-off entre estabilidade, funcionalidade e custo de migração.</p>
+
+            <h3>2.3 Matriz de Dependências Críticas</h3>
+            <p>O versionamento rigoroso é essencial para evitar o chamado <em>dependency hell</em>, onde atualizações não coordenadas quebram funcionalidades existentes. Em projetos de pesquisa com múltiplos entregáveis, a reprodutibilidade é tão importante quanto a funcionalidade: um coautor ou revisor deve poder reconstruir o ambiente exatamente como estava na data de defesa.</p>
+
+            <table>
+                <caption><strong>Tabela 2.</strong> <em>Dependências críticas e políticas de versionamento.</em></caption>
+                <thead><tr><th>Dependência</th><th>Versão Fixada</th><th>Impacto se Alterada</th><th>Política</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">scikit-learn</td><td class="left">1.9.0</td><td class="left">Incompatibilidade de modelos .pkl e métricas</td><td class="left">Bloqueada (<em>requirements.txt</em>)</td></tr>
+                    <tr><td class="left">firebase-admin</td><td class="left">>=6.4.0</td><td class="left">Validação JWT (SDK backend)</td><td class="left">Mínimo garantido</td></tr>
+                    <tr><td class="left">Firebase SDK (front-end)</td><td class="left">10.7.1</td><td class="left">Fluxo de login e persistência IndexedDB</td><td class="left">Compatibilidade testada</td></tr>
+                    <tr><td class="left">Google OAuth</td><td class="left">Provedor público</td><td class="left">Login social</td><td class="left">Alta disponibilidade Google Cloud</td></tr>
+                </tbody>
+            </table>
+
+            <p>Conforme a Tabela 2, a dependência mais crítica é o <code>scikit-learn</code>: uma mudança de versão majoritária poderia alterar a serialização dos objetos <code>RandomForestClassifier</code> e <code>IsolationForest</code>, tornando os modelos em produção incompatíveis com o código de inferência. O <code>firebase-admin</code>>=6.4.0 é o piso mínimo para suporte a validação de tokens JWT com custom claims, funcionalidade introduzida em versões recentes e essencial para o RBAC. Já o Firebase SDK front-end em 10.7.1 reflete a última versão testada com o fluxo de login e a persistência via IndexedDB; versões mais novas podem introduzir breaking changes no método <code>signInWithPopup</code>. Essa matriz funciona como um contrato de manutenibilidade: qualquer alteração deve passar por avaliação de impacto antes de ser mergeada.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>3 MÓDULOS FUNCIONAIS</h2>
+            <p>O sistema organiza-se em dois módulos principais com finalidades complementares: <strong>Avaliação</strong> (análise de minutas existentes) e <strong>Geração</strong> (criação de novas minutas a partir de templates). Ambos operam sobre a mesma base de conhecimento e compartilham o motor de XAI. O módulo de Avaliação é o carro-chefe do produto: ele materializa a proposta de valor principal — transformar conhecimento empírico de 100.000 contratos em alertas acionáveis para o gestor público.</p>
+
+            <h3>3.1 Módulo de Avaliação de Minutas</h3>
+            <p>O usuário submete o texto de uma minuta (textarea ou upload <code>.txt</code>) e recebe análise completa integrando NLP, Isolation Forest, Random Forest e SHAP. O acesso requer autenticação Firebase Auth e o token JWT é enviado no header <code>Authorization: Bearer <idToken></code>. A escolha por texto puro (<code>.txt</code>) evita problemas de parsing de PDFs complexos, transferindo para o usuário a responsabilidade de pré-processamento mínimo — decisão alinhada ao princípio de autonomia decisória.</p>
+
+            <div class="figure-container no-break">
+                <svg viewBox="0 0 760 320" class="svg-figure" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="740" height="300" rx="8" fill="#f8f9fa" stroke="#333"/>
+                    <rect x="40" y="40" width="180" height="100" rx="6" fill="#eef2ff" stroke="#4338ca"/>
+                    <text x="130" y="62" text-anchor="middle" font-weight="bold" font-size="11" fill="#312e81">Input</text>
+                    <text x="130" y="82" text-anchor="middle" font-size="10" fill="#312e81">Textarea / Upload .txt</text>
+                    <text x="130" y="102" text-anchor="middle" font-size="10" fill="#312e81">+ ajuste de valor/vigência</text>
+                    <rect x="280" y="40" width="180" height="100" rx="6" fill="#dbeafe" stroke="#1e40af"/>
+                    <text x="370" y="62" text-anchor="middle" font-weight="bold" font-size="11" fill="#1e3a8a">Processamento</text>
+                    <text x="370" y="82" text-anchor="middle" font-size="10" fill="#1e3a8a">Backend Python 3.11</text>
+                    <text x="370" y="102" text-anchor="middle" font-size="10" fill="#1e3a8a">NLP + IF + RF + SHAP</text>
+                    <rect x="520" y="40" width="180" height="100" rx="6" fill="#dcfce7" stroke="#166534"/>
+                    <text x="610" y="62" text-anchor="middle" font-weight="bold" font-size="11" fill="#14532d">Output</text>
+                    <text x="610" y="82" text-anchor="middle" font-size="10" fill="#14532d">Score, lacunas, SHAP,</text>
+                    <text x="610" y="102" text-anchor="middle" font-size="10" fill="#14532d">contrafactuais + PDF</text>
+                    <rect x="40" y="170" width="660" height="100" rx="6" fill="#fff7ed" stroke="#9a3412"/>
+                    <text x="370" y="192" text-anchor="middle" font-weight="bold" font-size="11" fill="#7c2d12">Painel unificado de resultados</text>
+                    <text x="370" y="212" text-anchor="middle" font-size="10" fill="#7c2d12">Conformidade (0-100%), cláusulas ausentes por prioridade, gráfico SHAP e recomendações fundamentadas</text>
+                    <text x="370" y="232" text-anchor="middle" font-size="10" fill="#7c2d12">Interatividade: ajuste de valor e vigência com atualização em tempo real</text>
+                    <text x="370" y="252" text-anchor="middle" font-size="10" fill="#7c2d12">Exemplos pré-carregados: Edital de TI e Contrato de Inovação</text>
+                    <polygon points="220,90 280,90" fill="#555"/>
+                    <polygon points="460,90 520,90" fill="#555"/>
+                </svg>
+                <p class="figure-caption"><strong>Figura 3.</strong> <em>Wireframe do Módulo de Avaliação: entrada, processamento e painel de resultados.</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Interface acessível em <em>https://comprapublica.web.app/modulo_avaliacao/</em>.</p>
+            </div>
+
+            <p>A Figura 3 esquematiza a jornada do usuário no módulo de Avaliação. Nota-se que o painel de resultados não é uma listagem genérica: ele organiza as informações em três blocos hierárquicos. O bloco superior exibe o score de conformidade como um círculo colorido (verde ≥ 70%, laranja 50–69%, vermelho < 50%), permitindo diagnóstico instantâneo. O bloco central lista as cláusulas identificadas como tags e as lacunas como cartões coloridos por prioridade (alta, média, baixa), cada um com descrição da omissão e sugestão de inserção. O bloco inferior apresenta o gráfico SHAP e as recomendações contrafactuais, finalizando com botões de exportação. A interatividade de ajuste de valor e vigência é um diferencial: ao modificar esses parâmetros, o sistema reexecuta apenas os estágios 3–5, devolvendo novo score e explicações em aproximadamente 1,5 segundos, o que permite ao gestor simular cenários sem reescrever a minuta.</p>
+
+            <h3>3.2 Regex e Score de Conformidade</h3>
+            <p>O pré-processamento aplica 16 padrões de expressão regular sobre a minuta. Esses padrões foram derivados da análise de conteúdo de 19.640 editais do PNCP, identificando as formulações mais frequentes para cada tipo de cláusula. A Tabela 3 apresenta as cláusulas monitoradas e seus pesos relativos no score final de conformidade.</p>
+            <table>
+                <caption><strong>Tabela 3.</strong> <em>Cláusulas monitoradas, pesos e exemplos de padrões regex no pré-processamento.</em></caption>
+                <thead><tr><th>Cláusula</th><th>Peso Aproximado</th><th>Impacto no Score</th><th>Padrão Regex (exemplo simplificado)</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Objeto</td><td class="left">Alto</td><td class="left">+12%</td><td class="left">\bobjeto\b.*?(especific(e|ar|ação))</td></tr>
+                    <tr><td class="left">Fundamentação Legal</td><td class="left">Alto</td><td class="left">+10%</td><td class="left">(lei\s+14\.133|Lei\s+8\.666)</td></tr>
+                    <tr><td class="left">Vigência</td><td class="left">Alto</td><td class="left">+10%</td><td class="left">\bvig(e|ê)ncia\b.*?\d{1,2}\s*(meses?|anos?)</td></tr>
+                    <tr><td class="left">Pagamento</td><td class="left">Alto</td><td class="left">+10%</td><td class="left">\bcondições?\b.*?\bpagamento\b</td></tr>
+                    <tr><td class="left">Habilitação</td><td class="left">Médio</td><td class="left">+8%</td><td class="left">\bhabilitação\b|\bhabilitação\b</td></tr>
+                    <tr><td class="left">Sanções</td><td class="left">Médio</td><td class="left">+7%</td><td class="left">\bsanções?\b.*?\badministrativas?\b</td></tr>
+                    <tr><td class="left">Garantia</td><td class="left">Médio</td><td class="left">+7%</td><td class="left">\bgarantia\b.*?\bcontratual\b</td></tr>
+                    <tr><td class="left">Dotação</td><td class="left">Médio</td><td class="left">+6%</td><td class="left">\bdotação\b.*?\borçamentária?\b</td></tr>
+                    <tr><td class="left">Recebimento</td><td class="left">Médio</td><td class="left">+6%</td><td class="left">\brecebimento\b.*?\bdefinitivo\b</td></tr>
+                    <tr><td class="left">Propriedade Intelectual</td><td class="left">Médio</td><td class="left">+5%</td><td class="left">\bpropriedade\b.*?\bintelectual\b</td></tr>
+                    <tr><td class="left">Confidencialidade / LGPD</td><td class="left">Médio</td><td class="left">+5%</td><td class="left">(\bconfidencialidade\b|LGPD|Lei\s+13\.709)</td></tr>
+                    <tr><td class="left">SLA</td><td class="left">Médio</td><td class="left">+5%</td><td class="left">\bn(í|i)veis?\b.*?\bserviço\b</td></tr>
+                    <tr><td class="left">Rescisão</td><td class="left">Alto</td><td class="left">+8%</td><td class="left">\brescisão\b.*?\bcontratual\b</td></tr>
+                    <tr><td class="left">Sustentabilidade</td><td class="left">Baixo</td><td class="left">+3%</td><td class="left">(\bsustentabilidade\b|ESG|triplo\s+resultado)</td></tr>
+                    <tr><td class="left">Inovação</td><td class="left">Baixo</td><td class="left">+3%</td><td class="left">(\binovação\b|Marco\s+Legal\s+Startups)</td></tr>
+                    <tr><td class="left">Recebimento Provisório</td><td class="left">Baixo</td><td class="left">+2%</td><td class="left">\brecebimento\b.*?\bprovisório\b</td></tr>
+                    <tr><td class="left">Das penalidades / multas</td><td class="left">Baixo</td><td class="left">+2%</td><td class="left">(\bmulta\b|\bpenalidade\b)</td></tr>
+                </tbody>
+            </table>
+
+            <p>Observa-se na Tabela 3 que as cláusulas de maior peso (Objeto, Fundamentação Legal, Vigência, Pagamento e Rescisão) correspondem exatamente aos pontos onde o Artigo 1 identificou maior frequência de falhas em editais de pequeno porte. Essa congruência não é coincidência: os pesos foram calibrados para maximizar a sensibilidade do score às omissões que efetivamente aumentam a probabilidade de eventos adversos, segundo a literatura de custos de transação (Williamson, 1985) e os achados empíricos da tese. Em outras palavras, o modelo de conformidade textual é uma formalização quantitativa das lições aprendidas na análise de 19.640 editais.</p>
+
+            <h3>3.3 Módulo de Geração de Editais</h3>
+            <p>O módulo de Geração permite a criação de minutas completas a partir de formulário estruturado, com 16 cláusulas pré-configuradas organizadas por perfil. Diferentemente do módulo de Avaliação, que opera sobre texto existente, este móduo atua na fase ex-ante, prevenindo lacunas antes da publicação do edital. Os três perfis de contratação (TI, Inovação, Sustentabilidade) compartilham um núcleo básico de cláusulas e divergem em específicas, conforme demonstrado na Tabela 4.</p>
+
+            <table>
+                <caption><strong>Tabela 4.</strong> <em>Cobertura de Cláusulas por Perfil de Contratação.</em></caption>
+                <thead><tr><th>Cláusula</th><th>TI</th><th>Inovação</th><th>Sustentabilidade</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Objeto</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+                    <tr><td class="left">Fundamentação Legal</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+                    <tr><td class="left">Vigência e Prazo</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+                    <tr><td class="left">Condições de Pagamento</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+                    <tr><td class="left">Habilitação</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+                    <tr><td class="left">Sanções Administrativas</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+                    <tr><td class="left">Garantia Contratual</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+                    <tr><td class="left">Confidencialidade e LGPD</td><td>Sim</td><td>Sim</td><td>Não</td></tr>
+                    <tr><td class="left">Níveis de Serviço (SLA)</td><td>Sim</td><td>Sim</td><td>Não</td></tr>
+                    <tr><td class="left">Propriedade Intelectual</td><td>Sim</td><td>Sim</td><td>Não</td></tr>
+                    <tr><td class="left">Rescisão Contratual</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
+                    <tr><td class="left">Inovação e Marco Startups</td><td>Não</td><td>Sim</td><td>Não</td></tr>
+                    <tr><td class="left">Sustentabilidade e ESG</td><td>Não</td><td>Não</td><td>Sim</td></tr>
+                </tbody>
+            </table>
+
+            <p>Conforme a Tabela 4, os perfis de TI e Inovação compartilham a maior parte das cláusulas, refletindo sua natureza comum de contratação de serviços tecnológicos. A Confidencialidade e LGPD, o SLA e a Propriedade Intelectual são particularmente relevantes para esses perfis, onde dados sensíveis e disponibilidade de sistemas são críticos. O perfil Sustentabilidade, por sua vez, exclui essas cláusulas mas inclui Sustentabilidade e ESG, que não se aplicam a contratos de tecnologia pura. O perfil Inovação é o único a incluir Inovação e Marco Startups, contemplando instrumentos como o Art. 43 da Lei 14.133/2021 e a LC 182/2021. Essa estrutura evita sobrecarga cognitiva ao gestor: em vez de 16 cláusulas genéricas, ele recebe um pacote temático coerente com o objeto da licitação.</p>
+        </div>
+        <div class="page-footer">3</div>
+    </section>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>4 MODELO DE MACHINE LEARNING</h2>
+            <p>O modelo em produção (Modelo B) combina Random Forest e Isolation Forest com explicabilidade SHAP. A definição ex-post pura da variável dependente (vigência ≥ 30 dias + aditivo > 25% OU rescisão OU suspensão) elimina a tautologia identificada na Sprint 8. Essa definição ética-metodológica é central: ao utilizar apenas desfechos observáveis após a assinatura, o modelo deixa de capturar a própria vigência como preditor de si mesmo, restaurando a validade causal das estimativas.</p>
+
+            <h3>4.1 Features e Engenharia de Variáveis</h3>
+            <p>O modelo utiliza 11 features combinando variáveis estruturais (vigência, valor), categóricas (UF, tipo) e derivadas (complexidade léxica, escore IF). A Tabela 5 apresenta a especificação completa com importância relativa via SHAP.</p>
+            <table>
+                <caption><strong>Tabela 5.</strong> <em>Features do modelo e importância relativa via SHAP (média sobre 300 explicações).</em></caption>
+                <thead><tr><th>Feature</th><th>Tipo</th><th>Descrição</th><th>Import. SHAP</th><th>Faixa Esperada</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">vigencia_log</td><td class="left">Contínua</td><td class="left">Logaritmo da vigência em meses</td><td class="left">76,11%</td><td class="left">1,5–4,5</td></tr>
+                    <tr><td class="left">tipo_encoded</td><td class="left">Categórica</td><td class="left">Tipo contratual (TI/Inovação/Sustentabilidade)</td><td class="left">6,82%</td><td class="left">0, 1 ou 2</td></tr>
+                    <tr><td class="left">uf_encoded</td><td class="left">Categórica</td><td class="left">Unidade da Federação do órgão</td><td class="left">5,55%</td><td class="left">0–26</td></tr>
+                    <tr><td class="left">objeto_len</td><td class="left">Contínua</td><td class="left">Comprimento do texto do objeto</td><td class="left">3,32%</td><td class="left">50–2.000</td></tr>
+                    <tr><td class="left">valor_log</td><td class="left">Contínua</td><td class="left">Log do valor estimado (R$)</td><td class="left">2,85%</td><td class="left">7–18</td></tr>
+                    <tr><td class="left">objeto_palavras</td><td class="left">Contínua</td><td class="left">Contagem de palavras no objeto</td><td class="left">2,80%</td><td class="left">10–250</td></tr>
+                    <tr><td class="left">complexidade_lexica</td><td class="left">Contínua</td><td class="left">Diversidade vocabular (TTR)</td><td class="left">2,35%</td><td class="left">0,35–0,75</td></tr>
+                    <tr><td class="left">score_tecnico</td><td class="left">Contínua</td><td class="left">Score de cláusulas técnicas ausentes</td><td class="left">0,20%</td><td class="left">0–100</td></tr>
+                    <tr><td class="left">sla_presenca</td><td class="left">Binária</td><td class="left">Flag de presença de SLA</td><td class="left">0,25%</td><td class="left">0 ou 1</td></tr>
+                    <tr><td class="left">dotacao_presenca</td><td class="left">Binária</td><td class="left">Flag de dotação orçamentária</td><td class="left">0,15%</td><td class="left">0 ou 1</td></tr>
+                    <tr><td class="left">escore_if</td><td class="left">Contínua</td><td class="left">Score de anomalia (Isolation Forest)</td><td class="left">0,25%</td><td class="left">negativo (típico)</td></tr>
+                </tbody>
+            </table>
+
+            <p>A Tabela 5 evidencia uma assimetria radical na importância das features: <code>vigencia_log</code> domina com 76,11% da importância SHAP, enquanto as demais features compartilham os 23,89% restantes. Esse resultado é consistente com o achado do Artigo 1, que identificou a vigência insuficiente como o principal preditor de renegociações contratuais. Em outras palavras, contratos com vigência muito curta tendem a necessitar de aditivos ou são rescindidos precocemente, independentemente das demais características. As features <code>tipo_encoded</code> e <code>uf_encoded</code> capturam efeitos institucionais: tipos contratuais mais complexos (inovação) e estados com maior capacidade de gestão apresentam padrões distintos de risco. Nota-se que as features textuais <code>objeto_len</code> e <code>objeto_palavras</code> têm importância marginal (3,32% e 2,80%), indicando que o comprimento do texto não é um proxy confiável de risco sem a contextualização da vigência.</p>
+
+            <h3>4.2 Métricas de Desempenho</h3>
+            <p>As métricas foram calculadas sobre 100.000 contratos do PNCP com validação cruzada 5-Fold, garantindo que o desempenho reportado não dependa de uma divisão aleatória particular entre treino e teste. A Tabela 6 sumariza os resultados oficiais após a remediação metodológica.</p>
+            <table>
+                <caption><strong>Tabela 6.</strong> <em>Métricas oficiais do Modelo B em produção (após remediação de data leakage).</em></caption>
+                <thead><tr><th>Métrica</th><th>Valor</th><th>Interpretação</th><th>Benchmark Literatura</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Acurácia</td><td class="left">93,36%</td><td class="left">Ratio de classificações corretas (desbalanceada)</td><td class="left">Dummy ~98%</td></tr>
+                    <tr><td class="left">AUC-ROC</td><td class="left">90,83%</td><td class="left">Poder discriminante entre classes</td><td class="left">0,70–0,90 aceitável</td></tr>
+                    <tr><td class="left">F1-Score</td><td class="left">26,39%</td><td class="left">Equilíbrio precisão/recall (classes raras)</td><td class="left">Sensível ao threshold</td></tr>
+                    <tr><td class="left">Validação cruzada</td><td class="left">5-Fold</td><td class="left">Estabilidade do modelo</td><td class="left">Desvio padrão < 1%</td></tr>
+                    <tr><td class="left">Latência mediana</td><td class="left">~1,5 s</td><td class="left">Warm start (cache singleton)</td><td class="left">< 3 s aceitável</td></tr>
+                    <tr><td class="left">Latência P95</td><td class="left">~2,0 s</td><td class="left">Pior caso em produção</td><td class="left">< 5 s aceitável</td></tr>
+                    <tr><td class="left">Cold start</td><td class="left">~3 s</td><td class="left">Primeira requisição (carregamento modelos)</td><td class="left">Singleton + cache</td></tr>
+                </tbody>
+            </table>
+
+            <p>A Tabela 6 merece interpretação cuidadosa: a Acurácia de 93,36% é alta, mas enganosa. Em um problema com 98,01% de negativos, um classificador trivial que sempre prediz "sem evento" atingiria aproximadamente 98% de acurácia, superando o modelo. Por isso, a métrica verdadeiramente informativa é o AUC-ROC de 90,83%, que mede a capacidade de discriminação entre as classes independentemente do threshold de decisão. O F1-Score de 26,39% reflete o trade-off entre precisão e recall em classes raras: ao reduzir o threshold para capturar mais eventos adversos (aumentar recall), o modelo sacrifica precisão, deprimindo o F1. Em termos operacionais, esse comportamento é aceitável porque o custo de um falso negativo (evento adverso não sinalizado) é muito maior que o de um falso positivo (alerta desnecessário ao gestor).</p>
+
+            <div class="figure-container no-break">
+                <svg viewBox="0 0 540 420" class="svg-figure" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="520" height="400" rx="8" fill="#fff" stroke="#333"/>
+                    <text x="270" y="30" text-anchor="middle" font-weight="bold" font-size="12" fill="#111">Curva ROC (comparativa)</text>
+                    <rect x="60" y="60" width="440" height="320" fill="#f8f9fa" stroke="#999"/>
+                    <text x="260" y="120" font-size="10" fill="#555">AUC RF+IF = 0,908</text>
+                    <text x="260" y="140" font-size="10" fill="#555">Dummy     = 0,500</text>
+                    <text x="260" y="160" font-size="10" fill="#555">LogReg    ≈ 0,850</text>
+                    <path d="M80,320 Q200,280 320,160 T480,70" fill="none" stroke="#1d4ed8" stroke-width="2.5"/>
+                    <line x1="60" y1="380" x2="500" y2="380" stroke="#333"/>
+                    <line x1="60" y1="60" x2="60" y2="380" stroke="#333"/>
+                    <text x="280" y="405" text-anchor="middle" font-size="10" fill="#333">False Positive Rate</text>
+                    <text x="30" y="240" text-anchor="middle" font-size="10" fill="#333" transform="rotate(-90,30,240)">True Positive Rate</text>
+                </svg>
+                <p class="figure-caption"><strong>Figura 4.</strong> <em>Curva ROC comparativa (Modelo B em produção vs. baselines).</em></p>
+                <p class="figure-note">Fonte: Elaboração própria com base em validação cruzada 5-Fold (10/07/2026).</p>
+            </div>
+
+            <p>A Figura 4 compara o desempenho do Modelo B contra dois baselines: o Dummy Classifier (AUC = 0,500, equivalente a aleatoriedade) e a Regressão Logística (AUC ≈ 0,850). O AUC de 0,908 do Modelo B situa-se acima do benchmark aceitável de 0,70–0,90 reportado na literatura para problemas de classe desbalanceada em domínios regulados (Arrieta et al., 2020). Essa superioridade indica que a combinação Random Forest + Isolation Forest captura interações não-lineares entre instituição (UF), tipo de contratação e características contratuais (vigência, valor) de forma mais efetiva que um modelo linear. Em outras palavras, o modelo aprendeu que um contrato de inovação com vigência de 90 dias em um estado de menor porte tem perfil de risco radicalmente diferente de um contrato de sustentabilidade com a mesma vigência em uma capital — uma nuance que a Regressão Logística não consegue representar.</p>
+
+            <div class="figure-container no-break">
+                <svg viewBox="0 0 480 380" class="svg-figure" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="460" height="360" rx="8" fill="#fff" stroke="#333"/>
+                    <text x="240" y="32" text-anchor="middle" font-weight="bold" font-size="12" fill="#111">Matriz de Confusão (Modelo B)</text>
+                    <rect x="70" y="60" width="170" height="130" fill="#fee2e2" stroke="#9f1239"/>
+                    <text x="155" y="100" text-anchor="middle" font-size="12" fill="#7f1d1d">FP = 0,7%</text>
+                    <text x="155" y="140" text-anchor="middle" font-size="12" fill="#7f1d1d">FN = 0,4%</text>
+                    <rect x="260" y="60" width="150" height="130" fill="#dcfce7" stroke="#166534"/>
+                    <text x="335" y="100" text-anchor="middle" font-size="12" fill="#14532d">TN = 97,4%</text>
+                    <text x="335" y="140" text-anchor="middle" font-size="12" fill="#14532d">TP = 1,5%</text>
+                    <text x="155" y="175" text-anchor="middle" font-weight="bold" font-size="11" fill="#333">Previsto Negativo</text>
+                    <text x="335" y="175" text-anchor="middle" font-weight="bold" font-size="11" fill="#333">Previsto Positivo</text>
+                    <text x="100" y="95" text-anchor="middle" font-weight="bold" font-size="11" fill="#333">Negativo</text>
+                    <text x="100" y="135" text-anchor="middle" font-weight="bold" font-size="11" fill="#333">Positivo</text>
+                    <text x="290" y="95" text-anchor="middle" font-weight="bold" font-size="11" fill="#333">Negativo</text>
+                    <text x="290" y="135" text-anchor="middle" font-weight="bold" font-size="11" fill="#333">Positivo</text>
+                </svg>
+                <p class="figure-caption"><strong>Figura 5.</strong> <em>Matriz de confusão do Modelo B em produção (amostra censitária 100k contratos).</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Classes: Positivo = evento adverso; Negativo = sem evento.</p>
+            </div>
+
+            <p>A Figura 5 detalha a distribuição de erros do modelo no espaço de classificação. Nota-se que a soma de TN (97,4%) e TP (1,5%) corresponde exatamente à Acurácia de 98,89% — número que, isoladamente, poderia passar de aceitável. No entanto, o que importa para a operação são os erros: FP = 0,7% e FN = 0,4%. O FN de 0,4% significa que aproximadamente 1 em cada 250 contratos de alto risco passa despercebido — um número baixo, mas não desprezível quando se considera que um único evento adverso não detectado pode gerar prejuízo milionário. Por isso, o sistema foi projetado para ser um agente recomendante, não decisor automatizado: o gestor humano recebe o alerta com sua probabilidade e pode ponderar riscos contextuais que o modelo não captura. Em outras palavras, a matriz evidencia que o modelo é conservador: prefere alertar (FP) a omitir (FN), alinhando-se à lógica de precaução em compras públicas.</p>
+
+            <div class="figure-container no-break">
+                <svg viewBox="0 0 720 360" class="svg-figure" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="700" height="340" rx="8" fill="#fff" stroke="#333"/>
+                    <text x="360" y="30" text-anchor="middle" font-weight="bold" font-size="12" fill="#111">Importância das variáveis (SHAP TreeExplainer, 300 amostras)</text>
+                    <rect x="120" y="60" width="520" height="12" fill="#007aff"/><text x="110" y="72" text-anchor="end" font-size="10" fill="#111">vigencia_log</text><text x="650" y="72" text-anchor="start" font-size="10" fill="#555">76,11%</text>
+                    <rect x="348" y="80" width="10" height="12" fill="#af52de"/><text x="110" y="92" text-anchor="end" font-size="10" fill="#111">tipo_encoded</text><text x="650" y="92" text-anchor="start" font-size="10" fill="#555">6,82%</text>
+                    <rect x="368" y="100" width="8" height="12" fill="#34c759"/><text x="110" y="112" text-anchor="end" font-size="10" fill="#111">uf_encoded</text><text x="650" y="112" text-anchor="start" font-size="10" fill="#555">5,55%</text>
+                    <rect x="378" y="120" width="5" height="12" fill="#ff9500"/><text x="110" y="132" text-anchor="end" font-size="10" fill="#111">objeto_len</text><text x="650" y="132" text-anchor="start" font-size="10" fill="#555">3,32%</text>
+                    <rect x="383" y="140" width="5" height="12" fill="#5ac8fa"/><text x="110" y="152" text-anchor="end" font-size="10" fill="#111">valor_log</text><text x="650" y="152" text-anchor="start" font-size="10" fill="#555">2,85%</text>
+                    <rect x="387" y="160" width="5" height="12" fill="#ff3b30"/><text x="110" y="172" text-anchor="end" font-size="10" fill="#111">objeto_palavras</text><text x="650" y="172" text-anchor="start" font-size="10" fill="#555">2,80%</text>
+                    <rect x="391" y="180" width="4" height="12" fill="#a1a1a6"/><text x="110" y="192" text-anchor="end" font-size="10" fill="#111">complexidade_lexica</text><text x="650" y="192" text-anchor="start" font-size="10" fill="#555">2,35%</text>
+                    <rect x="395" y="200" width="1" height="12" fill="#e5e5e5"/><text x="110" y="212" text-anchor="end" font-size="10" fill="#111">score_tecnico</text><text x="650" y="212" text-anchor="start" font-size="10" fill="#555">0,20%</text>
+                    <rect x="396" y="220" width="1" height="12" fill="#e5e5e5"/><text x="110" y="232" text-anchor="end" font-size="10" fill="#111">sla_presenca</text><text x="650" y="232" text-anchor="start" font-size="10" fill="#555">0,25%</text>
+                    <rect x="397" y="240" width="1" height="12" fill="#e5e5e5"/><text x="110" y="252" text-anchor="end" font-size="10" fill="#111">dotacao_presenca</text><text x="650" y="252" text-anchor="start" font-size="10" fill="#555">0,15%</text>
+                    <rect x="398" y="260" width="1" height="12" fill="#e5e5e5"/><text x="110" y="272" text-anchor="end" font-size="10" fill="#111">escore_if</text><text x="650" y="272" text-anchor="start" font-size="10" fill="#555">0,25%</text>
+                </svg>
+                <p class="figure-caption"><strong>Figura 6.</strong> <em>Importância SHAP das 11 features (média sobre 300 amostras).</em></p>
+                <p class="figure-note">Fonte: Elaboração própria a partir do Random Forest treinado em 100.000 contratos PNCP.</p>
+            </div>
+
+            <p>A Figura 6 confirma a dominância de fatores institucionais e temporais sobre as características textuais do edital. A feature <code>vigencia_log</code>, sozinha, explica 76,11% da variância do score de risco — um achado robustoecoerente com a teoria dos custos de transação: contratos de vigência curta impõem altos custos de negociação e monitoramento, aumentando a probabilidade de renegociação ou término prematuro. <code>tipo_encoded</code> (6,82%) e <code>uf_encoded</code> (5,55%) refletem heterogeneidade institucional: algumas unidades federativas e tipos de contratação possuem histórico de eventos adversos sistematicamente maior, possivelmente devido a diferenças na capacidade de gestão ou no ambiente regulatório local. Surpreende que <code>escore_if</code> (Isolation Forest) tenha importância marginal (0,25%), sugerindo que anomalias lexicais no objeto contratual, por si sós, não são bons preditores de risco quando desacompanhadas de fatores estruturais como vigência e valor.</p>
+        </div>
+        <div class="page-footer">4</div>
+    </section>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>5 INFRAESTRUTURA E DEPLOY</h2>
+            <p>O PubliCopilot v1.3 opera em produção sobre o Firebase (plano Blaze). A estratégia de deploy prioriza automação, rastreabilidade e custo operacional previsível. A escolha do Firebase, em vez de uma infraestrutura proprietária, deve-se a três fatores: integração nativa com GitHub Actions para CI/CD, plano gratuito generoso para estágio de desenvolvimento e preço de pagamento por uso durante a operação em produção.</p>
+
+            <div class="figure-container no-break">
+                <svg viewBox="0 0 720 360" class="svg-figure" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="700" height="340" rx="8" fill="#f8f9fa" stroke="#333"/>
+                    <text x="360" y="32" text-anchor="middle" font-weight="bold" font-size="12" fill="#111">Arquitetura de Deploy (Firebase)</text>
+                    <rect x="40" y="50" width="200" height="70" rx="6" fill="#dbeafe" stroke="#1e40af"/>
+                    <text x="140" y="75" text-anchor="middle" font-weight="bold" font-size="11" fill="#1e3a8a">GitHub Repo</text>
+                    <text x="140" y="95" text-anchor="middle" font-size="10" fill="#1e3a8a">renato0503 / TeseDoutorado</text>
+                    <rect x="300" y="50" width="200" height="70" rx="6" fill="#fee2e2" stroke="#9f1239"/>
+                    <text x="400" y="75" text-anchor="middle" font-weight="bold" font-size="11" fill="#7f1d1d">Firebase Build</text>
+                    <text x="400" y="95" text-anchor="middle" font-size="10" fill="#7f1d1d">Hosting + Functions (Python 3.11)</text>
+                    <rect x="560" y="50" width="130" height="70" rx="6" fill="#dcfce7" stroke="#166534"/>
+                    <text x="625" y="75" text-anchor="middle" font-weight="bold" font-size="11" fill="#14532d">App em Produção</text>
+                    <text x="625" y="95" text-anchor="middle" font-size="10" fill="#14532d">comprapublica.web.app</text>
+                    <rect x="40" y="170" width="120" height="60" rx="6" fill="#ffedd5" stroke="#9a3412"/>
+                    <text x="100" y="195" text-anchor="middle" font-weight="bold" font-size="11" fill="#7c2d12">Firestore</text>
+                    <text x="100" y="215" text-anchor="middle" font-size="10" fill="#7c2d12">Perfis, histórico, logs</text>
+                    <rect x="210" y="170" width="120" height="60" rx="6" fill="#f3e8ff" stroke="#6b21a8"/>
+                    <text x="270" y="195" text-anchor="middle" font-weight="bold" font-size="11" fill="#581c87">Cloud Functions</text>
+                    <text x="270" y="215" text-anchor="middle" font-size="10" fill="#581c87">analisar_minuta, admin</text>
+                    <rect x="40" y="270" width="650" height="50" rx="6" fill="#eef2ff" stroke="#4338ca"/>
+                    <text x="365" y="292" text-anchor="middle" font-weight="bold" font-size="11" fill="#312e81">Segurança: Auth + CORS whitelist + RBAC (custom claim admin) + regras Firestore por papel</text>
+                    <polygon points="240,85 300,85" fill="#555"/>
+                    <polygon points="500,85 560,85" fill="#555"/>
+                </svg>
+                <p class="figure-caption"><strong>Figura 7.</strong> <em>Arquitetura de deploy no Firebase: repositório, build e produção.</em></p>
+                <p class="figure-note">Fonte: Elaboração própria com base em <em>firebase.json</em>, regras e configurações de projeto.</p>
+            </div>
+
+            <p>A Figura 7 ilustra o fluxo completo desde o repositório fonte até o ambiente produtivo. O repositório GitHub atua como única fonte da verdade: qualquer alteração de código, modelo ou regra de segurança deve ser commitada e revisada antes de chegar ao Firebase. O Firebase Build compila as Cloud Functions Python, empacota os arquivos estáticos do frontend e aplica as regras do Firestore. O estágio final distribui os artefatos pelos serviços: o Hosting recebe arquivos HTML/CSS/JS; as Functions recebem o código Python empacotado; e o Firestore recebe as regras de segurança versionadas. Essa arquitetura elimina drift de configuração — o risco de o ambiente de produção divergir do repositório — e permite rollback instantâneo via Firebase CLI em caso de regressão.</p>
+
+            <div class="figure-container no-break">
+                <svg viewBox="0 0 720 220" class="svg-figure" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="700" height="200" rx="8" fill="#fff" stroke="#333"/>
+                    <text x="360" y="32" text-anchor="middle" font-weight="bold" font-size="12" fill="#111">Pipeline CI/CD — Deploy Automatizado</text>
+                    <rect x="30" y="60" width="140" height="50" rx="6" fill="#dbeafe" stroke="#1e40af"/>
+                    <text x="100" y="85" text-anchor="middle" font-weight="bold" font-size="11" fill="#1e3a8a">GitHub Push</text>
+                    <rect x="220" y="60" width="140" height="50" rx="6" fill="#fee2e2" stroke="#9f1239"/>
+                    <text x="290" y="85" text-anchor="middle" font-weight="bold" font-size="11" fill="#7f1d1d">Firebase Build</text>
+                    <rect x="410" y="60" width="140" height="50" rx="6" fill="#ffedd5" stroke="#9a3412"/>
+                    <text x="480" y="85" text-anchor="middle" font-weight="bold" font-size="11" fill="#7c2d12">Testes Unitários</text>
+                    <rect x="600" y="60" width="100" height="50" rx="6" fill="#dcfce7" stroke="#166534"/>
+                    <text x="650" y="85" text-anchor="middle" font-weight="bold" font-size="11" fill="#14532d">Deploy</text>
+                    <polygon points="170,85 220,85" fill="#555"/>
+                    <polygon points="360,85 410,85" fill="#555"/>
+                    <polygon points="550,85 600,85" fill="#555"/>
+                    <rect x="40" y="140" width="640" height="40" rx="6" fill="#fff7ed" stroke="#9a3412"/>
+                    <text x="360" y="162" text-anchor="middle" font-size="10" fill="#7c2d12">Gate automático: testes unitários + métricas + auditoria de segurança antes do deploy</text>
+                </svg>
+                <p class="figure-caption"><strong>Figura 8.</strong> <em>Fluxo simplificado de CI/CD do PubliCopilot v1.3.</em></p>
+            </div>
+
+            <p>A Figura 8 representa a esteira de deploy automatizado. O gatilho é um <em>push</em> para a branch principal, que inicia o Firebase Build: instalação de dependências Python, validação de tipos e empacotamento das Functions. Em paralelo, o frontend é otimizado (minificação CSS/JS) e os arquivos estáticos são preparados para upload. O gate de qualidade compreende três camadas: (1) testes unitários (<em>tests/test_models.py</em>) que validam regressões nos motores ML; (2) métricas de modelo que comparam AUC e F1 contra baselines; e (3) auditoria de segurança que inspeciona secrets硬codados e alterações em regras do Firestore. Apenas se todos os gates forem verde, o deploy é efetuado. Em caso de falha, o pipeline encerra com notificação no GitHub e mantém a versão anterior em produção, garantindo continuidade do serviço.</p>
+
+            <h3>5.2 Configuração e Variáveis</h3>
+            <p>Variáveis de ambiente externalizam configurações que mudam entre ambientes (desenvolvimento, homologação, produção) sem alterar o código. Essa prática reduz o risco de vazamento de segredos e simplifica a migração entre projetos Firebase.</p>
+
+            <table>
+                <caption><strong>Tabela 7.</strong> <em>Variáveis de ambiente e configuração do Firebase (públicas documentadas, sem segredos).</em></caption>
+                <thead><tr><th>Variável</th><th>Valor / Local</th><th>Propósito</th><th>Sensibilidade</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">API Key (Firebase)</td><td class="left">Config Firebase</td><td class="left">Identifica projeto no SDK frontend</td><td class="left">Pública (restrita por domínio)</td></tr>
+                    <tr><td class="left">Auth Domain</td><td class="left">comprapublica.firebaseapp.com</td><td class="left">Origem de autenticação</td><td class="left">Pública</td></tr>
+                    <tr><td class="left">ALLOWED_ORIGINS</td><td class="left">[domínios permitidos]</td><td class="left">Whitelist CORS</td><td class="left">Operacional</td></tr>
+                    <tr><td class="left">Models Path</td><td class="left">/workspace/models/saved/</td><td class="left">Cache singleton .pkl</td><td class="left">Baixa</td></tr>
+                </tbody>
+            </table>
+
+            <p>A Tabela 7 documenta as variáveis públicas (sem segredos) utilizadas pelo sistema. A <code>ALLOWED_ORIGINS</code> é particularmente relevante para segurança: ela implementa a whitelist CORS que restringe quais domínios podem consumir a API. Em produção, apenas <code>comprapublica.web.app</code> e <code>comprapublica.firebaseapp.com</code> são permitidos; tentativas de origem desconhecida recebem HTTP 403. A API Key do Firebase, embora tecnicamente pública, não concede acesso a dados sem autenticação válida — sua restrição por domínio no console do Google Cloud impede uso em contextos não autorizados.</p>
+
+            <h3>5.3 Custos Operacionais Estimados</h3>
+            <p>O custo operacional é um critério de sustentabilidade crítico para um produto de pesquisa sem receita direta. A Tabela 8 apresenta estimativas baseadas em uso moderado (aproximadamente 1.000 análises/mês), calculadas com a calculadora oficial do Firebase.</p>
+
+            <table>
+                <caption><strong>Tabela 8.</strong> <em>Estimativa de custos mensais no Firebase (plano Blaze, uso moderado).</em></caption>
+                <thead><tr><th>Serviço</th><th>Plano</th><th>Custo Estimado/mês</th><th>Fator Limitante</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Firebase Hosting</td><td class="left">Blaze</td><td class="left">USD 0 – 5</td><td class="left">GB armazenado + egresso</td></tr>
+                    <tr><td class="left">Cloud Functions</td><td class="left">Blaze</td><td class="left">USD 10 – 40</td><td class="left">Invocations + CPU-segundo</td></tr>
+                    <tr><td class="left">Cloud Firestore</td><td class="left">Blaze</td><td class="left">USD 5 – 20</td><td class="left">Leituras/escritas</td></tr>
+                    <tr><td class="left">Firebase Auth</td><td class="left">Gratuito</td><td class="left">USD 0</td><td class="left">Phone-auth pago se usado</td></tr>
+                    <tr><td class="left">Total estimado</td><td class="left">—</td><td class="left">USD 15 – 65</td><td class="left">Escala crescente com usuários</td></tr>
+                </tbody>
+            </table>
+
+            <p>Observa-se na Tabela 8 que as Cloud Functions são o principal vetor de custo, variando de USD 10 a 40 dependendo do volume de invocações e da complexidade das análises. Cada inferência consome aproximadamente 1,5 segundos de CPU em warm start e 3 segundos em cold start; a 1.000 análises/mês, esse custo é marginal. O Firestore, por sua vez, escala com o número de leituras de regras e escritas de avaliações — cada análise gera aproximadamente 3 escritas (perfil, log, resultado). O custo total estimado (USD 15–65) é comparável a uma assinatura de streaming familiar, justificando a escolha do plano Blaze: a transferência de custos fixos (servidor dedicado) para custos variáveis alinha o orçamento à adoção do produto, permitindo operação sustentável mesmo com baixa utilização inicial.</p>
+        </div>
+        <div class="page-footer">5</div>
+    </section>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>6 SEGURANÇA E GOVERNANÇA</h2>
+            <p>A segurança do PubliCopilot apoia-se em três eixos: controle de identidade e acesso (autenticação e RBAC), proteção de dados em trânsito (CORS + TLS) e governança por regras (Firestore Rules + validade técnica do modelo). A combinação desses eixos visa atender não apenas a requisitos técnicos, mas também jurídicos: Art. 20 da LGPD assegura direito a explicação sobre decisões automatizadas, enquanto o Art. 5 da Lei 14.133/2021 exige motivação dos atos administrativos. O sistema não toma decisões automáticas: ele recomendarecomenda, e a decisão final permanece sob tutela humana.</p>
+
+            <h3>6.1 Fluxo de Autenticação e RBAC</h3>
+            <div class="figure-container no-break">
+                <svg viewBox="0 0 760 220" class="svg-figure" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="740" height="200" rx="8" fill="#fff" stroke="#333"/>
+                    <text x="380" y="32" text-anchor="middle" font-weight="bold" font-size="12" fill="#111">Fluxo de Autenticação (JWT + Custom Claims)</text>
+                    <rect x="30" y="50" width="130" height="60" rx="6" fill="#dbeafe" stroke="#1e40af"/>
+                    <text x="95" y="75" text-anchor="middle" font-weight="bold" font-size="11" fill="#1e3a8a">Login</text>
+                    <text x="95" y="95" text-anchor="middle" font-size="10" fill="#1e3a8a">Email/Senha ou Google</text>
+                    <rect x="230" y="50" width="160" height="60" rx="6" fill="#d1fae5" stroke="#065f46"/>
+                    <text x="310" y="75" text-anchor="middle" font-weight="bold" font-size="11" fill="#064e3b">Firebase Auth</text>
+                    <text x="310" y="95" text-anchor="middle" font-size="10" fill="#064e3b">Valida + emite ID Token</text>
+                    <rect x="460" y="50" width="150" height="60" rx="6" fill="#f3e8ff" stroke="#6b21a8"/>
+                    <text x="535" y="75" text-anchor="middle" font-weight="bold" font-size="11" fill="#581c87">Custom Claim</text>
+                    <text x="535" y="95" text-anchor="middle" font-size="10" fill="#581c87">admin: true/false</text>
+                    <rect x="640" y="40" width="100" height="80" rx="6" fill="#ffedd5" stroke="#9a3412"/>
+                    <text x="690" y="65" text-anchor="middle" font-weight="bold" font-size="11" fill="#7c2d12">Backend</text>
+                    <text x="690" y="85" text-anchor="middle" font-size="10" fill="#7c2d12">firebase-admin</text>
+                    <text x="690" y="105" text-anchor="middle" font-size="10" fill="#7c2d12">valida token</text>
+                    <polygon points="160,80 230,80" fill="#555"/>
+                    <polygon points="390,80 460,80" fill="#555"/>
+                    <polygon points="610,80 640,80" fill="#555"/>
+                </svg>
+                <p class="figure-caption"><strong>Figura 9.</strong> <em>Diagrama de sequência da autenticação e emissão de claims.</em></p>
+                <p class="figure-note">Fonte: Elaboração própria com base em <em>auth.js</em>, <em>main.py</em> e regras Firestore.</p>
+            </div>
+
+            <p>A Figura 9 decompõe o fluxo de autenticação em quatro etapas sequenciais. O usuário inicia o login via email/senha ou Google OAuth; o Firebase Auth valida as credenciais e emite um ID Token JWT com custom claim <code>admin</code> (booleano). Esse token é enviado em cada requisição ao backend, que o valida via biblioteca <code>firebase-admin</code> (com fallback JWT decode para cenários de cache). A validação backend é crucial: ela impede que um cliente malicioso forje tokens e acesse recursos indevidamente. Após validação, o backend aplica as regras do Firestore conforme o papel: usuários comuns leem apenas seus próprios perfis, enquanto administradores (<code>admin: true</code>) podem ler todos os perfis e executar a função <code>set_admin_claim</code>. Essa arquitetura de defesa em profundidade garante que, mesmo que uma camada falhe (ex.: CORS mal configurado), a próxima camada (validação JWT) ainda protege os dados.</p>
+
+            <h3>6.2 Matriz de Riscos e Mitigações</h3>
+            <p>A segurança é gerida como um portfólio de riscos com probabilidade e impacto definidos. A Tabela 9 apresenta os riscos prioritários identificados na Sprint 9 e suas mitigações correspondentes.</p>
+
+            <table>
+                <caption><strong>Tabela 9.</strong> <em>Riscos de segurança e mitigações implementadas.</em></caption>
+                <thead><tr><th>Risco</th><th>Probabilidade</th><th>Impacto</th><th>Mitigação</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Acesso indevido a dados sensíveis</td><td class="left">Médio</td><td class="left">Alto</td><td class="left">Firestore Rules com custom claims e validação de Ownership</td></tr>
+                    <tr><td class="left">Abuso da API (rate limit / scraping)</td><td class="left">Alto</td><td class="left">Médio</td><td class="left">Whitelist CORS + limite de requisições por usuário</td></tr>
+                    <tr><td class="left">Vazamento de tokens JWT</td><td class="left">Baixo</td><td class="left">Alto</td><td class="left">Storage em IndexedDB + HTTPS apenas + rotatividade</td></tr>
+                    <tr><td class="left">Injeção via entrada de texto</td><td class="left">Médio</td><td class="left">Alto</td><td class="left">Sanitização no pré-processamento + backend isolado</td></tr>
+                    <tr><td class="left">Modelo desatualizado</td><td class="left">Médio</td><td class="left">Médio</td><td class="left">Retreinamento trimestral e versionamento de modelos</td></tr>
+                </tbody>
+            </table>
+
+            <p>Conforme a Tabela 9, cinco riscos foram classificados como prioritários. O acesso indevido a dados é mitigado por uma combinação de Firestore Rules (que checam custom claims) e validação explícita de ownership no backend — um documento só é retornado se o usuário autenticado for seu autor ou administrador. O abuso de API é tratado por whitelist CORS (origens fora da lista recebem 403) e por um limite implícito de requisições por usuário por minuto, gerenciado pelo próprio Firebase. O vazamento de JWT é prevenido pelo armazenamento em IndexedDB (não localStorage, que é acessível por JavaScript de terceiros) e pela obrigatoriedade de HTTPS. A injeção via entrada de texto é mitigada por sanitização no pré-processamento: o texto da minuta é limpo antes de ser vetorizado, e o backend executa em ambiente isolado sem acesso direto a filesystem. Finalmente, a desatualização do modelo é gerenciada por um cronograma de retreinamento trimestral com versionamento explícito.</p>
+
+            <h3>6.3 Permissões RBAC</h3>
+            <p>O controle de acesso baseado em papéis (RBAC) é a base da governança de dados do sistema. A Tabela 10 compara as permissões efetivas de cada papel.</p>
+
+            <table>
+                <caption><strong>Tabela 10.</strong> <em>Matriz de permissões por papel (admin vs. usuário).</em></caption>
+                <thead><tr><th>Papel</th><th>Auth</th><th>Firestore</th><th>Cloud Functions</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Usuário autenticado</td><td class="left">Login OK</td><td class="left">Leitura do próprio perfil, gravação em <em>avaliacoes</em></td><td class="left">analisar_minuta (Bearer válido)</td></tr>
+                    <tr><td class="left">Administrador</td><td class="left">Login + claim admin</td><td class="left">Leitura de todos os perfis + gestão de documentos</td><td class="left">analisar_minuta + set_admin_claim</td></tr>
+                    <tr><td class="left">Não autenticado</td><td class="left">Negado</td><td class="left">Negado</td><td class="left">Negado</td></tr>
+                </tbody>
+            </table>
+
+            <p>A Tabela 10 evidencia a minimalidade do modelo de permissões: apenas duas classes operacionais (usuário e administrador), mais a negação implícita para não autenticados. O usuário autenticado pode ler e escrever apenas suas próprias avaliações, e invocar a função de análise. O administrador, identificado pelo custom claim <code>admin: true</code>, adiciona a capacidade de ler perfis de terceiros e gerenciar claims via <code>set_admin_claim</code>. Essa simplicidade é intencional: modelos RBAC excessivamente granulares aumentam a complexidade de manutenção e o risco de configurações incorretas que exponham dados. A regra deFirestore <code>isOwner</code> garante que mesmo que um endpoint de consulta seja malformado, o retorno será vazio se o usuário não for dono do documento — uma defesa em profundidade que complementa a validação explícita no código Python.</p>
+        </div>
+        <div class="page-footer">6</div>
+    </section>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>7 XAI E TRANSPARÊNCIA ALGORÍTMICA</h2>
+            <p>A explicabilidade não é um complemento estético: é condição de conformidade com a LGPD (Art. 20) e requisito de governança. O PubliCopilot oferece explicações contrafactuais e por atribuição de importância, preservando a autonomia decisória do gestor. Em vez de entregar uma pontuação opaca, o sistema descreve o raciocínio por trás dela, permitindo que o usuário questione, aceite ou rejeite a recomendação com fundamento.</p>
+
+            <h3>7.1 Exemplo de Explicação (Força SHAP)</h3>
+            <div class="figure-container no-break">
+                <svg viewBox="0 0 720 320" class="svg-figure" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="700" height="300" rx="8" fill="#fff" stroke="#333"/>
+                    <text x="360" y="32" text-anchor="middle" font-weight="bold" font-size="12" fill="#111">SHAP Force Plot — Exemplo ilustrativo</text>
+                    <rect x="40" y="60" width="120" height="220" rx="6" fill="#dbeafe" stroke="#1e40af"/>
+                    <text x="100" y="85" text-anchor="middle" font-size="11" fill="#111">Base value</text>
+                    <text x="100" y="105" text-anchor="middle" font-size="16" font-weight="bold" fill="#111">45%</text>
+                    <text x="100" y="130" text-anchor="middle" font-size="10" fill="#555">Risco base</text>
+                    <rect x="200" y="100" width="90" height="28" fill="#ef4444"/>
+                    <text x="245" y="118" text-anchor="middle" font-size="10" fill="#fff">vigência ↓</text>
+                    <text x="245" y="135" text-anchor="middle" font-size="9" fill="#555">+18 pp</text>
+                    <rect x="320" y="80" width="90" height="28" fill="#ef4444"/>
+                    <text x="365" y="98" text-anchor="middle" font-size="10" fill="#fff">sla ausente</text>
+                    <text x="365" y="115" text-anchor="middle" font-size="9" fill="#555">+12 pp</text>
+                    <rect x="440" y="120" width="90" height="28" fill="#22c55e"/>
+                    <text x="485" y="138" text-anchor="middle" font-size="10" fill="#fff">valor ↑</text>
+                    <text x="485" y="155" text-anchor="middle" font-size="9" fill="#555">−10 pp</text>
+                    <rect x="560" y="60" width="120" height="80" rx="6" fill="#f3e8ff" stroke="#6b21a8"/>
+                    <text x="620" y="85" text-anchor="middle" font-weight="bold" font-size="11" fill="#581c87">Output</text>
+                    <text x="620" y="105" text-anchor="middle" font-size="16" font-weight="bold" fill="#111">65%</text>
+                    <text x="620" y="130" text-anchor="middle" font-size="10" fill="#555">Risco final</text>
+                </svg>
+                <p class="figure-caption"><strong>Figura 10.</strong> <em>Exemplo didático de explicação SHAP (force plot simplificado) para um edital hipotético.</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Valores ilustrativos, não correspondem a uma predição real.</p>
+            </div>
+
+            <p>A Figura 10 ilustra o formato de explicação gerado pelo SHAP para um edital hipotético. O valor base de 45% representa o risco médio da população de treino. A partir desse baseline, três fatores deslocam o score: a vigência curta reduz a segurança contratual, adicionando +18 pontos percentuais; a ausência de cláusula SLA contribui com +12 pp, refletindo a dificuldade de monitorar desempenho sem metas explícitas; por outro lado, o valor elevado do contrato reduz o risco em −10 pp, possivelmente porque contratos de maior valor tendem a atrair proponentes mais qualificados e receber maior scrutiny técnico. O resultado final de 65% indica risco médio-alto, mas o gestor pode questionar: se eu aumentar a vigência de 90 para 180 dias, o risco cairia para aproximadamente 47% (+18 pp revertidos). Essa capacidade de simular cenários (what-if) é o que diferencia o PubliCopilot de um classificador caixa-preta: o gestor entende o mecanismo e pode agir sobre ele.</p>
+
+            <h3>7.2 Framework de Accountability</h3>
+            <div class="quadro">
+                <div class="quadro-title">Quadro 1. Princípios de DSR e Correspondência no Produto</div>
+                <table>
+                    <thead><tr><th>Princípio DSR</th><th>Implementação no Produto</th><th>Evidência</th></tr></thead>
+                    <tbody>
+                        <tr><td class="left">Relevância</td><td class="left">Cláusulas calibradas em 19.640 editais PNCP</td><td class="left">Score de conformidade fundamentado</td></tr>
+                        <tr><td class="left">Artefato clearly</td><td class="left">Diagnóstico de risco + SHAP textual</td><td class="left">Templates XAI normativos</td></tr>
+                        <tr><td class="left">Avaliação</td><td class="left">Métricas acadêmicas (AUC-ROC, F1)</td><td class="left">Tabela de métricas reprodutíveis</td></tr>
+                        <tr><td class="left">Comunicabilidade</td><td class="left">Relatório exportável PDF e gráficos</td><td class="left">Botão de download do relatório</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>O Quadro 1 mapeia os princípios de Design Science Research (DSR) às implementações concretas do PubliCopilot. A Relevância é garantida pela calibração empírica das cláusulas em uma amostra censitária de 19.640 editais, evitando adivinhação normativa. O Artefato é avaliado por métricas acadêmicas (AUC-ROC, F1) com validação cruzada, atendendo ao critério de Avaliação do DSR. A Comunicabilidade é materializada no relatório PDF exportável, que inclui gráficos SHAP e justificativas jurídicas embutidas — permitindo que o gestor anexe o diagnóstico ao processo de aprovação do edital. Essa trilha de auditoria é o que diferencia o copiloto de uma recomendação informal: ela gera rastro documental, atendendo ao dever de motivação dos atos administrativos.</p>
+
+            <h3>7.3 Contrafactuais Normativos</h3>
+            <p>Os contrafactuais simulam o efeito de alterações hipotéticas no contrato, oferecendo caminhos de ação concretos ao gestor. A Tabela 11 apresenta os templates jurídicos utilizados.</p>
+            <table>
+                <caption><strong>Tabela 11.</strong> <em>Templates de contrafactuais jurídicos com dispositivo legal e efeito simulado.</em></caption>
+                <thead><tr><th>Variável</th><th>Template Jurídico</th><th>Dispositivo Legal</th><th>Efeito Simulado</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">vigência_log</td><td class="left">Aumente a vigência para 180 dias</td><td class="left">Lei 14.133/2021, Art. 92</td><td class="left">Risco estimado cai de 89% para 41%</td></tr>
+                    <tr><td class="left">sla_presenca</td><td class="left">Inclua cláusula de Níveis de Serviço</td><td class="left">Lei 14.133/2021, Art. 69</td><td class="left">Redução de 14 pp no score de risco</td></tr>
+                    <tr><td class="left">dotacao_presenca</td><td class="left">Reforce a dotação orçamentária</td><td class="left">Lei 14.133/2021, Art. 11</td><td class="left">Aumento de conformidade em +6%</td></tr>
+                    <tr><td class="left">score_tecnico</td><td class="left">Adicione 10 cláusulas de habilitação</td><td class="left">Lei 14.133/2021, Art. 67</td><td class="left">Redução do IF score</td></tr>
+                </tbody>
+            </table>
+
+            <p>Conforme a Tabela 11, cada variável com alta importância SHAP recebe um template contrafactual com fundamento legal direto. O exemplo mais dramático é a vigência: aumentar de 90 para 180 dias reduz o risco estimado de 89% para 41% — uma mudança de classe de risco (alto → médio) obtida por ajuste em um único parâmetro. O SLA ausente contribui com +12 pp, sugerindo que sua inclusão tem impacto comparável a estender a vigência em 60 dias. A dotação orçamentária, embora less impactante em pontos percentuais, aumenta a conformidade textual em +6%, reduzindo a probabilidade de questionamentos por falta de especificação orçamentária — uma falha frequente em editais de pequeno porte conforme o Artigo 1. Esses templates não são genéricos: eles derivam de simulações Monte Carlo sobre o modelo treinado, garantindo que o efeito simulado seja estatisticamente plausível.</p>
+        </div>
+        <div class="page-footer">7</div>
+    </section>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>8 LIMITAÇÕES, ROADMAP E SUSTENTABILIDADE</h2>
+            <p>A transparência acadêmica exige que limitações sejam explicitadas antes de discutir implicações práticas e trabalhos futuros. O reconhecimento honesto de restrições fortalece a credibilidade da pesquisa e orienta esforços de melhoria.</p>
+
+            <h3>8.1 Matriz de Limitações</h3>
+            <p>A Tabela 12 organiza as limitações por causa-raiz, impacto e status de resolução, permitindo priorização.</p>
+            <table>
+                <caption><strong>Tabela 12.</strong> <em>Limitações atuais, causas-raiz e planos de resolução.</em></caption>
+                <thead><tr><th>Limitação</th><th>Causa Raiz</th><th>Impacto</th><th>Workaround</th><th>Status</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Proxy de evento adverso</td><td class="left">Dados públicos sem desfecho direto</td><td class="left">Generalização limitada</td><td class="left">Validação com auditores</td><td class="left">Em andamento</td></tr>
+                    <tr><td class="left">Enriquecimento de CNPJs truncados</td><td class="left">7–8 dígitos no PNCP</td><td class="left">Somente 0,7% enriquecido</td><td class="left">BigQuery/Serpro</td><td class="left">Pendente</td></tr>
+                    <tr><td class="left">Validação NLP sem anotadores</td><td class="left">Recurso humano escasso</td><td class="left">Precisão/recall desconhecidos</td><td class="left">Amostra anotada 200 minutas</td><td class="left">Planejado Q3/2026</td></tr>
+                    <tr><td class="left">Avaliação com usuários reais</td><td class="left">Acesso restrito a prefeituras</td><td class="left">Utilidade percebida não medida</td><td class="left">Estudo de caso piloto</td><td class="left">Planejado Q4/2026</td></tr>
+                    <tr><td class="left">set_admin_claim pendente</td><td class="left">Deploy não efetuado</td><td class="left">Impede gestão automatizada de admins</td><td class="left">Manual via console Firebase</td><td class="left">Pendente</td></tr>
+                </tbody>
+            </table>
+
+            <p>A Tabela 12 identifica cinco eixos de limitação. O proxy de evento adverso é estrutural: o PNCP não registra desfechos diretos como rescisões ou sanções, obrigando o modelo a utilizar combinações de aditivos, vigência e retificações como proxy. Esse comprometimento é explicitado na documentação técnica para que gestores e auditores ponderem a incerteza. O enriquecimento de CNPJs truncados (0,7% de cobertura) é uma limitação do dado público, não do algoritmo; sua superação depende de parceria institucional com Serpro ou acesso a bases consolidadas via BigQuery. A ausência de validação NLP com anotadores humanos impede a estimativa formal de precisão e recall para as 16 regex, embora a calibração empírica em 19.640 editais indique alta cobertura de recall para as cláusulas majoritárias.</p>
+
+            <h3>8.2 Roadmap de Desenvolvimento</h3>
+            <div class="figure-container no-break">
+                <svg viewBox="0 0 720 260" class="svg-figure" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="700" height="240" rx="8" fill="#fff" stroke="#333"/>
+                    <text x="360" y="30" text-anchor="middle" font-weight="bold" font-size="12" fill="#111">Roadmap (Q3/2026 – Q2/2027)</text>
+                    <rect x="30" y="50" width="120" height="80" rx="6" fill="#dbeafe" stroke="#1e40af"/>
+                    <text x="90" y="75" text-anchor="middle" font-weight="bold" font-size="10" fill="#1e3a8a">Q3/2026</text>
+                    <text x="90" y="95" text-anchor="middle" font-size="10" fill="#333">Validação NLP</text>
+                    <text x="90" y="110" text-anchor="middle" font-size="10" fill="#333">Piloto em prefeituras</text>
+                    <rect x="200" y="50" width="120" height="80" rx="6" fill="#dcfce7" stroke="#166534"/>
+                    <text x="260" y="75" text-anchor="middle" font-weight="bold" font-size="10" fill="#14532d">Q4/2026</text>
+                    <text x="260" y="95" text-anchor="middle" font-size="10" fill="#333">Contrafactuais</text>
+                    <text x="260" y="110" text-anchor="middle" font-size="10" fill="#333">Novos contornos legais</text>
+                    <rect x="370" y="50" width="120" height="80" rx="6" fill="#ffedd5" stroke="#9a3412"/>
+                    <text x="430" y="75" text-anchor="middle" font-weight="bold" font-size="10" fill="#7c2d12">Q1/2027</text>
+                    <text x="430" y="95" text-anchor="middle" font-size="10" fill="#333">Modelo v2.0</text>
+                    <text x="430" y="110" text-anchor="middle" font-size="10" fill="#333">Variáveis de controle</text>
+                    <rect x="540" y="50" width="140" height="80" rx="6" fill="#f3e8ff" stroke="#6b21a8"/>
+                    <text x="610" y="75" text-anchor="middle" font-weight="bold" font-size="10" fill="#581c87">Q2/2027</text>
+                    <text x="610" y="95" text-anchor="middle" font-size="10" fill="#333">API pública</text>
+                    <text x="610" y="110" text-anchor="middle" font-size="10" fill="#333">Integração PNCP</text>
+                </svg>
+                <p class="figure-caption"><strong>Figura 11.</strong> <em>Roadmap simplificado de desenvolvimento (Q3/2026 – Q2/2027).</em></p>
+                <p class="figure-note">Fonte: Elaboração própria. Entregas vinculadas à conclusão da tese e disponibilidade de parceiros.</p>
+            </div>
+
+            <p>A Figura 11 organiza as entregas futuras em trimestres, alinhando desenvolvimento acadêmico e sustentabilidade técnica. O Q3/2026 foca na validação humana: anotação de 200 minutas para medir precisão/recall das regex, e piloto em 2–3 prefeituras para avaliar utilidade percebida. O Q4/2026 expande os contrafactuais com novos templates jurídicos e adapta o sistema aos contornos da Lei 14.133/2021 após sua entrada em vigor obrigatória para entes federativos em outubro/2026. O Q1/2027 prevê o Modelo v2.0, com inclusão de variáveis de controle institucionais (esfera de governo, modalidade licitatória) obtidas via integração com o PNCP. O Q2/2027 ambiciona disponibilizar uma API pública documentada, permitindo que outros órgãos integrem o motor de avaliação em seus sistemas de compras. Cada marco está vinculado à disponibilidade de parceiros institucionais e à conclusão da tese, funcionando como compromisso público de continuidade pós-defesa.</p>
+
+            <h3>8.3 Sustentabilidade Técnica</h3>
+            <p>O retreinamento trimestral é automatizado pelo script <em>scripts/retrain_pipeline.ps1</em>, que executa a construção do alvo observável, treinamento e validação de testes. O versionamento de modelos segue o padrão <code>v1.0 → v1.3</code> com changelog acoplado. O repositório aberto garante continuidade independentemente do ciclo acadêmico, e as dependências bloqueadas por <em>requirements.txt</em> reduzem o risco de quebra por atualizações de terceiros.</p>
+
+            <h2>CONCLUSÃO</h2>
+            <p>O PubliCopilot materializa os achados empíricos e metodológicos da pesquisa em um produto tecnológico funcional, de código aberto, servido integralmente no Firebase com sistema completo de autenticação e RBAC. A ferramenta demonstra viabilidade técnica e juridicidade do uso de Aprendizado de Máquina avançado no setor público, preservando transparência, auditabilidade e autonomia decisória. O produto encontra-se em produção em <em>https://comprapublica.web.app</em>, com 20 testes unitários, 11 modelos serializados (~27,35 MB), pipeline de retreinamento documentado e documentação técnica em nível enterprise, constituindo o terceiro entregável da Tese de Doutorado em Contabilidade na Fucape Business School.</p>
+
+            <h2>REFERÊNCIAS</h2>
+            <p class="ref-entry">Akerlof, G. A. (1970). The market for "lemons": Quality uncertainty and the market mechanism. <em>The Quarterly Journal of Economics</em>, 84(3), 488–500.</p>
+            <p class="ref-entry">Arrieta, A. B., et al. (2020). Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI. <em>Information Fusion</em>, 58, 82–115.</p>
+            <p class="ref-entry">Breiman, L. (2001). Random forests. <em>Machine Learning</em>, 45(1), 5–32.</p>
+            <p class="ref-entry">Firebase Authentication. (2023). <em>Firebase Auth documentation</em>. Google Cloud.</p>
+            <p class="ref-entry">Firebase Cloud Functions. (2023). <em>Cloud Functions for Firebase (2nd gen)</em>. Google Cloud.</p>
+            <p class="ref-entry">Hevner, A. R., March, S. T., Park, J., & Ram, S. (2004). Design science in information systems research. <em>MIS Quarterly</em>, 28(1), 75–105.</p>
+            <p class="ref-entry">Jensen, M. C., & Meckling, W. H. (1976). Theory of the firm: Managerial behavior, agency costs and ownership structure. <em>Journal of Financial Economics</em>, 3(4), 305–360.</p>
+            <p class="ref-entry">Lei n. 13.709/2018. Lei Geral de Proteção de Dados Pessoais (LGPD).</p>
+            <p class="ref-entry">Lei n. 14.133/2021. Lei de Licitações e Contratos Administrativos.</p>
+            <p class="ref-entry">Lei Complementar n. 182/2021. Marco Legal das Startups.</p>
+            <p class="ref-entry">Liu, F. T., Ting, K. M., & Zhou, Z. H. (2008). Isolation forest. <em>IEEE International Conference on Data Mining</em>, 413–422.</p>
+            <p class="ref-entry">Lundberg, S. M., & Lee, S.-I. (2017). A unified approach to interpreting model predictions. <em>Advances in Neural Information Processing Systems</em>, 30, 4765–4774.</p>
+            <p class="ref-entry">Peffers, K., Tuunanen, T., Rothenberger, M. A., & Chatterjee, S. (2007). A design science research methodology for information systems research. <em>Journal of Management Information Systems</em>, 24(3), 45–77.</p>
+            <p class="ref-entry">Simon, H. A. (1947). <em>Administrative behavior: A study of decision-making processes in administrative organization</em>. Macmillan.</p>
+            <p class="ref-entry">Wachter, S., Mittelstadt, B., & Russell, C. (2017). Counterfactual explanations without opening the black box: Automated decisions and the GDPR. <em>Harvard Journal of Law & Technology</em>, 31(2), 841–887.</p>
+            <p class="ref-entry">Williamson, O. E. (1985). <em>The economic institutions of capitalism: Firms, markets, relational contracting</em>. Free Press.</p>
+        </div>
+        <div class="page-footer">8</div>
+    </section>
+
+</body>
+</html>

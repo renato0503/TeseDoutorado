@@ -1,0 +1,10 @@
+# Compiled / cache
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.env
+
+# Local function deps (if installed)
+.lib/

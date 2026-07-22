@@ -1,0 +1,103 @@
+{
+  "artigo": "Artigo 10 - O Uso Retórico da Inovação em Justificativas de Contratação",
+  "timestamp_processamento": "2026-05-18T09:46:36.901225",
+  "total_justificativas_analisadas": 350,
+  "estratificacao": {
+    "contratacoes_diretas": 202,
+    "certames_competitivos": 148,
+    "justificativas_retoricas": 240,
+    "justificativas_legitimas": 110
+  },
+  "distribuicao_categorias_bardin": {
+    "Mimetismo Tecnológico": 117,
+    "Inovação Legítima": 110,
+    "Urgência Retórica": 62,
+    "Redundância Instrumental": 61
+  },
+  "teste_inferencial_qui_quadrado": {
+    "estatistica_chi2": 91.2540478076524,
+    "p_value": 1.2636125825608264e-21,
+    "graus_liberdade": 1,
+    "significativo": true,
+    "tabela_observada": {
+      "0": {
+        "0": 88,
+        "1": 22
+      },
+      "1": {
+        "0": 60,
+        "1": 180
+      }
+    },
+    "scores_medios": {
+      "competitivo": 0.4307824324324324,
+      "contratacao_direta": 0.757350495049505
+    }
+  },
+  "amostra_justificativas_por_categoria": {
+    "mimetismo_tecnologico": [
+      {
+        "id_processo": "PNCP-JUST-2025-1007",
+        "orgao": "Superintendência de TI do INSS",
+        "tipo_contratacao": "Dispensa",
+        "texto_justificativa": "A contratação de consultoria especializada para migração de banco de dados e hospedagem em nuvem de tecnologia de ponta representa inovação metodológica necessária e disruptiva, eliminando servidores analógicos e estabelecendo governança informacional de padrão inovador no tribunal.",
+        "rhetorical_score": 0.8981
+      },
+      {
+        "id_processo": "PNCP-JUST-2025-1008",
+        "orgao": "Secretaria de Educação do RJ",
+        "tipo_contratacao": "Inexigibilidade",
+        "texto_justificativa": "Aquisição de software de atendimento eletrônico e chat corporativo dotado de inovação nos canais de comunicação com o cidadão, garantindo modernização completa, inteligência de interface e inovação preditiva capaz de revolucionar as rotinas operacionais deste órgão estatal.",
+        "rhetorical_score": 0.7024
+      }
+    ],
+    "urgencia_retorica": [
+      {
+        "id_processo": "PNCP-JUST-2025-1003",
+        "orgao": "Prefeitura de Uberlândia",
+        "tipo_contratacao": "Concorrência Pública",
+        "texto_justificativa": "A contratação de emergência da solução X fundamenta-se na necessidade de inovação célere nas barreiras de atendimento. Diante da iminente paralisação dos serviços públicos tributários por falha de TI, justifica-se a inexigibilidade pela inovação imediata para mitigação de riscos sistêmicos.",
+        "rhetorical_score": 0.8458
+      },
+      {
+        "id_processo": "PNCP-JUST-2025-1020",
+        "orgao": "Município de Joinville",
+        "tipo_contratacao": "Inexigibilidade",
+        "texto_justificativa": "A dispensa por inovação se justifica pela urgência crítica da transição de sistemas. O prolongado atraso no cronograma de planejamento impõe a contratação imediata de serviços de suporte técnico sob caráter inovador e prioritário para evitar interrupções operacionais graves.",
+        "rhetorical_score": 0.8076
+      }
+    ],
+    "redundancia_instrumental": [
+      {
+        "id_processo": "PNCP-JUST-2025-1001",
+        "orgao": "Município de Rio Claro",
+        "tipo_contratacao": "Inexigibilidade",
+        "texto_justificativa": "Contratação de empresa especializada para fornecimento de infraestrutura de conectividade física com fiação estruturada e repetidores. A contratação representa inovação estratégica em rede complexa com aplicação de blockchain descentralizado e deep learning para segurança periférica das dependências do órgão.",
+        "rhetorical_score": 0.8656
+      },
+      {
+        "id_processo": "PNCP-JUST-2025-1002",
+        "orgao": "Comando do Exército",
+        "tipo_contratacao": "Inexigibilidade",
+        "texto_justificativa": "Aquisição de serviço proprietário de consultoria em BI e analytics. A modelagem demanda inovação computacional proprietária de alta especificidade técnica, exigindo do fornecedor exclusividade por direitos intelectuais decorrentes de inteligência artificial algorítmica aplicada à contabilidade pública.",
+        "rhetorical_score": 0.9134
+      }
+    ],
+    "inovacao_legitima": [
+      {
+        "id_processo": "PNCP-JUST-2025-1000",
+        "orgao": "Prefeitura de Campinas",
+        "tipo_contratacao": "Pregão Eletrônico",
+        "texto_justificativa": "Desenvolvimento de ferramenta de inteligência artificial explicável local (XAI) para auditoria automatizada de preços de TI em tempo real. O software de base em design science research superará a opacidade dos modelos de caixa-preta tradicionais, representando inovação legítima aplicada ao controle preventivo.",
+        "rhetorical_score": 0.1551
+      },
+      {
+        "id_processo": "PNCP-JUST-2025-1004",
+        "orgao": "Procuradoria Geral do RS",
+        "tipo_contratacao": "Concorrência Pública",
+        "texto_justificativa": "Desenvolvimento conjunto de novo algoritmo preditivo de NLP baseado em Geração de Aumento por Recuperação (RAG) para avaliação ex-ante de editais de sustentabilidade. O projeto possui alto risco tecnológico e visa a criação de protótipo de software não disponível no mercado nacional.",
+        "rhetorical_score": 0.09
+      }
+    ]
+  }
+}

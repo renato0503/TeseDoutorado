@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <linearGradient id="header-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#19133/2021, Art. 28, inciso II..."/></text>
+    </g>
+
+    <!-- Sample buttons -->
+    <g transform="translate(750, 110)">
+      <text x="0" y="0" font-size="13" font-weight="700" fill="#0f172a">Parâmetros opcionais:</text>
+      <text x="0" y="20" font-size="11" fill="#64748b">Valor estimado:</text>
+      <rect x="120" y="8" width="200" height="22" rx="4" fill="#fff" stroke="#cbd5e1"/>
+      <text x="130" y="22" font-size="11" fill="#94a3b8">R$ 0,00 (opcional)</text>
+      <text x="0" y="50" font-size="11" fill="#64748b">Vigência (dias):</text>
+      <rect x="120" y="38" width="200" height="22" rx="4" fill="#fff" stroke="#cbd5e1"/>
+      <text x="130" y="52" font-size="11" fill="#94a3b8">365 (opcional)</text>
+      <rect x="0" y="80" width="320" height="40" rx="8" fill="#b45309"/>
+      <text x="160" y="105" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">🔍 Analisar com ML</text>
+      <text x="0" y="140" font-size="9" fill="#64748b" font-style="italic">⏱️ Latência: ~1,5s warm start</text>
+    </g>
+
+    <!-- Results Section -->
+    <g transform="translate(30, 330)">
+      <rect width="1060" height="220" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="20" y="25" font-size="14" font-weight="700" fill="#0f172a">📊 Resultado da Análise</text>
+
+      <!-- Panel 1: Score -->
+      <g transform="translate(20, 45)">
+        <rect width="160" height="160" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+        <text x="80" y="22" text-anchor="middle" font-size="10" font-weight="700" fill="#64748b">SCORE DE RISCO</text>
+        <circle cx="80" cy="90" r="42" fill="url(#score-bg)"/>
+        <text x="80" y="85" text-anchor="middle" font-size="22" font-weight="800" fill="#fff">73%</text>
+        <text x="80" y="100" text-anchor="middle" font-size="9" fill="#ccfbf1">MÉDIO-ALTO</text>
+        <text x="80" y="148" text-anchor="middle" font-size="9" fill="#64748b">5 cláusulas OK</text>
+        <text x="80" y="160" text-anchor="middle" font-size="9" fill="#dc2626">11 lacunas detectadas</text>
+      </g>
+
+      <!-- Panel 2: SHAP bars -->
+      <g transform="translate(200, 45)">
+        <rect width="350" height="160" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+        <text x="15" y="22" font-size="10" font-weight="700" fill="#64748b">TOP 5 SHAP FEATURES</text>
+        <g transform="translate(15, 32)">
+          <text x="0" y="10" font-size="9" fill="#0f172a">vigencia_log</text>
+          <rect x="100" y="2" width="200" height="12" rx="2" fill="#0d9488"/>
+          <text x="305" y="10" font-size="9" font-weight="700" fill="#0f172a">76%</text>
+        </g>
+        <g transform="translate(15, 55)">
+          <text x="0" y="10" font-size="9" fill="#0f172a">tipo_encoded</text>
+          <rect x="100" y="2" width="18" height="12" rx="2" fill="#a855f7"/>
+          <text x="305" y="10" font-size="9" font-weight="700" fill="#0f172a">7%</text>
+        </g>
+        <g transform="translate(15, 75)">
+          <text x="0" y="10" font-size="9" fill="#0f172a">uf_encoded</text>
+          <rect x="100" y="2" width="15" height="12" rx="2" fill="#10b981"/>
+          <text x="305" y="10" font-size="9" font-weight="700" fill="#0f172a">6%</text>
+        </g>
+        <g transform="translate(15, 95)">
+          <text x="0" y="10" font-size="9" fill="#0f172a">objeto_len</text>
+          <rect x="100" y="2" width="9" height="12" rx="2" fill="#f59e0b"/>
+          <text x="305" y="10" font-size="9" font-weight="700" fill="#0f172a">3%</text>
+        </g>
+        <g transform="translate(15, 115)">
+          <text x="0" y="10" font-size="9" fill="#0f172a">valor_log</text>
+          <rect x="100" y="2" width="8" height="12" rx="2" fill="#3b82f6"/>
+          <text x="305" y="10" font-size="9" font-weight="700" fill="#0f172a">3%</text>
+        </g>
+        <text x="15" y="148" font-size="9" fill="#64748b" font-style="italic">SHAP TreeExplainer · 300 amostras</text>
+      </g>
+
+      <!-- Panel 3: Lacunas -->
+      <g transform="translate(570, 45)">
+        <rect width="240" height="160" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+        <text x="15" y="22" font-size="10" font-weight="700" fill="#64748b">LACUNAS POR PRIORIDADE</text>
+        <g transform="translate(15, 35)">
+          <rect width="210" height="20" rx="3" fill="#fee2e2"/>
+          <text x="8" y="14" font-size="9" fill="#991b1b">⚠️ ALTA: Garantia Contratual</text>
+        </g>
+        <g transform="translate(15, 60)">
+          <rect width="210" height="20" rx="3" fill="#fee2e2"/>
+          <text x="8" y="14" font-size="9" fill="#991b1b">⚠️ ALTA: SLA / Níveis de Serviço</text>
+        </g>
+        <g transform="translate(15, 85)">
+          <rect width="210" height="20" rx="3" fill="#fed7aa"/>
+          <text x="8" y="14" font-size="9" fill="#9a3412">⚡ MÉDIA: Rescisão Contratual</text>
+        </g>
+        <g transform="translate(15, 110)">
+          <rect width="210" height="20" rx="3" fill="#fed7aa"/>
+          <text x="8" y="14" font-size="9" fill="#9a3412">⚡ MÉDIA: LGPD / Confidenc.</text>
+        </g>
+        <g transform="translate(15, 135)">
+          <rect width="210" height="20" rx="3" fill="#fef3c7"/>
+          <text x="8" y="14" font-size="9" fill="#854d0e">🔹 BAIXA: Propriedade Intelect.</text>
+        </g>
+      </g>
+
+      <!-- Panel 4: Métricas -->
+      <g transform="translate(830, 45)">
+        <rect width="210" height="160" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+        <text x="15" y="22" font-size="10" font-weight="700" fill="#64748b">MÉTRICAS DO MODELO</text>
+        <text x="15" y="40" font-size="9" fill="#64748b">Acurácia:</text>
+        <text x="195" y="40" text-anchor="end" font-size="11" font-weight="700" fill="#0f172a">93,36%</text>
+        <text x="15" y="58" font-size="9" fill="#64748b">AUC-ROC:</text>
+        <text x="195" y="58" text-anchor="end" font-size="11" font-weight="700" fill="#0f172a">90,83%</text>
+        <text x="15" y="76" font-size="9" fill="#64748b">F1-Score:</text>
+        <text x="195" y="76" text-anchor="end" font-size="11" font-weight="700" fill="#b45309">26,39%*</text>
+        <text x="15" y="100" font-size="8" fill="#94a3b8">* F1 baixo reflete desbalanceamento</text>
+        <text x="15" y="112" font-size="8" fill="#94a3b8">  (1,99% positivos). Verificar</text>
+        <text x="15" y="124" font-size="8" fill="#94a3b8">  AUC-ROC para discriminação real.</text>
+        <text x="15" y="148" font-size="9" fill="#0d9488">✓ Modelo treinado (PNCP)</text>
+      </g>
+    </g>
+  </g>
+
+  <text x="600" y="685" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">Fonte: Elaboração própria · https://comprapublica.web.app/modulo_avaliacao/ · Auth Firebase + JWT Bearer</text>
+</svg>
+</svg>

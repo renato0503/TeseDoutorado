@@ -1,0 +1,26 @@
+RELATORIO DE ANALISE - ARTIGO 19
+======================================================================
+Total de ativos analisados: 13
+Periodo: 2018-01-02 a 2025-06-27
+Dias uteis: 1859
+
+ESTATISTICAS DESCRITIVAS DOS RETORNOS:
+          Media (%)  DP (%)  Min (%)  Max (%)  Observacoes
+BBDC4.SA     0.0368  2.2168 -17.3843  16.8670       1858.0
+BBSE3.SA     0.0583  1.6143  -9.5077  10.7558       1858.0
+BMOB3.SA     0.0334  2.4547  -9.6128   9.6483       1089.0
+INTB3.SA     0.0198  2.3950 -13.1944  16.7883       1092.0
+ITSA4.SA     0.0611  1.7647 -10.8654  10.0324       1858.0
+LJQQ3.SA    -0.0597  3.5931 -13.1191  15.7895       1213.0
+LWSA3.SA     0.0717  4.1913 -20.0000  29.4118       1339.0
+MLAS3.SA    -0.1609  4.1916 -36.7257  16.0920        980.0
+POSI3.SA     0.1078  3.8672 -34.5714  26.6106       1858.0
+PSSA3.SA     0.0970  1.8006 -11.8087   9.3805       1858.0
+TOTS3.SA     0.1118  2.4672 -15.3436  19.7996       1858.0
+
+
+REGRESSAO (vol_anual ~ market_cap + endividamento):
+  Intercepto: 34.987
+  Coef. market_cap (mm USD): -0.000123
+  Coef. endividamento: 15.907
+  R²: 0.420

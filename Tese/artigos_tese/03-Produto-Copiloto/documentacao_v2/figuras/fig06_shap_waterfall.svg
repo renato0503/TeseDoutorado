@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="Inter, system-ui, sans-serif">
+  <defs>
+    <linearGradient id="sh-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d9488"/><stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+    <radialGradient id="bg-rad" cx="50%" cy="50%" r="100%">
+      <stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#f0f9fc"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="400" fill="url(#bg-rad)"/>
+
+  <!-- Feature Axis -->
+  <g transform="translate(50, 30)">
+    <line x1="0" y1="0" x2="700" y2="0" stroke="#0f172a" stroke-width="2"/>
+    <text x="-20" y="-15" text-anchor="middle" font-size="12" fill="#0f172a" transform="rotate(-90 -20 -15)">SHAP Value (Contribuição)</text>
+    <text x="350" y="-15" text-anchor="middle" font-size="12" fill="#0f172a">0,0</text>
+    <text x="700" y="-15" text-anchor="middle" font-size="12" fill="#0f172a">1,0</text>
+    <g transform="translate(0, 20)">
+      <rect width="700" height="320" rx="4" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+      <text x="350" y="0" text-anchor="middle" font-size="12" fill="#64748b">Contribuição de Características para Predição Individual</text>
+    </g>
+  </g>
+
+  <!-- Main Grid -->
+  <g transform="translate(50, 70)">
+    <rect width="700" height="280" rx="4" fill="url(#sh-grad)" stroke="#cbd5e1" stroke-width="1"/>
+    <!-- Waterfall Steps -->
+    <g transform="translate(50, 30)">
+      <!-- Base Value -->
+      <g transform="translate(10, 0)">
+        <rect width="60" height="10" rx="2" fill="#94a3b8"/>
+        <text x="30" y="15" text-anchor="middle" font-size="9" fill="#fff">Base</text>
+      </g>
+      <!-- VIGENCIA_LOG -->
+      <g transform="translate(80, 30)">
+        <rect width="200" height="10" rx="2" fill="#0d9488"/>
+        <text x="125" y="15" text-anchor="middle" font-size="9" fill="#fff">+76%</text>
+      </g>
+      <!-- TIPO_ENCODED -->
+      <g transform="translate(300, 60)">
+        <rect width="40" height="10" rx="2" fill="#a855f7"/>
+        <text x="20" y="15" text-anchor="middle" font-size="9" fill="#fff">+7%</text>
+      </g>
+      <!-- UF_ENCODED -->
+      <g transform="translate(350, 90)">
+        <rect width="30" height="10" rx="2" fill="#10b981"/>
+        <text x="15" y="15" text-anchor="middle" font-size="9" fill="#fff">+6%</text>
+      </g>
+      <!-- OBJETO_LEN -->
+      <g transform="translate(390, 120)">
+        <rect width="18" height="10" rx="2" fill="#f59e0b"/>
+        <text x="9" y="15" text-anchor="middle" font-size="9" fill="#fff">+3%</text>
+      </g>
+      <!-- VALOR_LOG -->
+      <g transform="translate(415, 150)">
+        <rect width="16" height="10" rx="2" fill="#3b82f6"/>
+        <text x="8" y="15" text-anchor="middle" font-size="9" fill="#fff">+3%</text>
+      </g>
+      <!-- Final Prediction -->
+      <g transform="translate(440, 180)">
+        <rect width="60" height="10" rx="2" fill="#ef4444"/>
+        <text x="30" y="15" text-anchor="middle" font-size="9" fill="#fff">73%</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(50, 350)">
+    <rect width="80" height="20" rx="2" fill="#94a3b8"/>
+    <text x="40" y="15" text-anchor="middle" font-size="9" fill="#0f172a">Base Value</text>
+    <rect width="80" height="20" rx="2" fill="#ef4444"/>
+    <text x="120" y="15" text-anchor="middle" font-size="9" fill="#0f172a">Final Prediction</text>
+    <rect width="120" height="20" rx="2" fill="#0d9488"/>
+    <text x="180" y="15" text-anchor="middle" font-size="9" fill="#0f172a">Feature Contributions</text>
+  </g>
+
+  <text x="400" y="390" text-anchor="middle" font-size="10" fill="#64748b" font-style="italic">Waterfall Plot SHAP para uma Minuta de Edital Específica
+Fontes: PubliCopilot v1.3</text>
+</svg>

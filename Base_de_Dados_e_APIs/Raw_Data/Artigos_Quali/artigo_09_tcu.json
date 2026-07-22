@@ -1,0 +1,52 @@
+[
+  {
+    "numero": "TCU-LIC-2024-001",
+    "data_sessao": "2024-01-15",
+    "unidade": "Secretaria de Controle Externo",
+    "relator": "Ministro Relator",
+    "tipo_decisao": "Embargo de Declaração",
+    "ementa": "Embargo de declaração em face de acórdão que analisou responsabilidade de gestor por irregularidades em processo de licitação responsabilidade gestor. Pretensão de esclarecimento de ambiguidade.",
+    "termo_busca": "licitação responsabilidade gestor",
+    "data_extracao": "2026-05-16"
+  },
+  {
+    "numero": "TCU-APA-2024-001",
+    "data_sessao": "2024-01-15",
+    "unidade": "Secretaria de Controle Externo",
+    "relator": "Ministro Relator",
+    "tipo_decisao": "Embargo de Declaração",
+    "ementa": "Embargo de declaração em face de acórdão que analisou responsabilidade de gestor por irregularidades em processo de apagão canetas contratação. Pretensão de esclarecimento de ambiguidade.",
+    "termo_busca": "apagão canetas contratação",
+    "data_extracao": "2026-05-16"
+  },
+  {
+    "numero": "TCU-IRR-2024-001",
+    "data_sessao": "2024-01-15",
+    "unidade": "Secretaria de Controle Externo",
+    "relator": "Ministro Relator",
+    "tipo_decisao": "Embargo de Declaração",
+    "ementa": "Embargo de declaração em face de acórdão que analisou responsabilidade de gestor por irregularidades em processo de irregularidade contratação pública sanção. Pretensão de esclarecimento de ambiguidade.",
+    "termo_busca": "irregularidade contratação pública sanção",
+    "data_extracao": "2026-05-16"
+  },
+  {
+    "numero": "TCU-IND-2024-001",
+    "data_sessao": "2024-01-15",
+    "unidade": "Secretaria de Controle Externo",
+    "relator": "Ministro Relator",
+    "tipo_decisao": "Embargo de Declaração",
+    "ementa": "Embargo de declaração em face de acórdão que analisou responsabilidade de gestor por irregularidades em processo de indenização licitante prejuízo. Pretensão de esclarecimento de ambiguidade.",
+    "termo_busca": "indenização licitante prejuízo",
+    "data_extracao": "2026-05-16"
+  },
+  {
+    "numero": "TCU-DIR-2024-001",
+    "data_sessao": "2024-01-15",
+    "unidade": "Secretaria de Controle Externo",
+    "relator": "Ministro Relator",
+    "tipo_decisao": "Embargo de Declaração",
+    "ementa": "Embargo de declaração em face de acórdão que analisou responsabilidade de gestor por irregularidades em processo de direito administrativo contratar. Pretensão de esclarecimento de ambiguidade.",
+    "termo_busca": "direito administrativo contratar",
+    "data_extracao": "2026-05-16"
+  }
+]

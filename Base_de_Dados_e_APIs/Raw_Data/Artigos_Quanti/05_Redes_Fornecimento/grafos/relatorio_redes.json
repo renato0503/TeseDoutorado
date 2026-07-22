@@ -1,0 +1,205 @@
+{
+    "total_nos": 400,
+    "total_arestas": 1111,
+    "densidade_rede": 0.013922,
+    "transitividade": 0,
+    "coeficiente_gini_concentracao": 0.9072,
+    "market_share_top3_oligopolio_porcentagem": 87.21,
+    "quantidade_comunidades_detectadas": 30,
+    "top_fornecedores_centralidade": [
+        {
+            "node_id": "CNPJ_12.345.678/0001-90",
+            "nome": "TechGlobal Servicos Ltda",
+            "type": "fornecedor",
+            "grau_centrality": 0.218,
+            "betweenness": 0.2726,
+            "closeness": 0.5149
+        },
+        {
+            "node_id": "CNPJ_45.678.901/0001-22",
+            "nome": "Sistemas e Dados Gov Ltda",
+            "type": "fornecedor",
+            "grau_centrality": 0.2105,
+            "betweenness": 0.2594,
+            "closeness": 0.5164
+        },
+        {
+            "node_id": "CNPJ_98.765.432/0001-10",
+            "nome": "Integradora Brasil S.A.",
+            "type": "fornecedor",
+            "grau_centrality": 0.2005,
+            "betweenness": 0.2253,
+            "closeness": 0.5036
+        },
+        {
+            "node_id": "CNPJ_91.822.761/0001-46",
+            "nome": "Tecnologia e Servicos TI 271",
+            "type": "fornecedor",
+            "grau_centrality": 0.0201,
+            "betweenness": 0.0024,
+            "closeness": 0.285
+        },
+        {
+            "node_id": "CNPJ_53.636.244/0001-22",
+            "nome": "Tecnologia e Servicos TI 120",
+            "type": "fornecedor",
+            "grau_centrality": 0.0201,
+            "betweenness": 0.0016,
+            "closeness": 0.2854
+        },
+        {
+            "node_id": "CNPJ_61.818.402/0001-65",
+            "nome": "Tecnologia e Servicos TI 115",
+            "type": "fornecedor",
+            "grau_centrality": 0.0201,
+            "betweenness": 0.0023,
+            "closeness": 0.2859
+        },
+        {
+            "node_id": "CNPJ_67.759.575/0001-81",
+            "nome": "Tecnologia e Servicos TI 79",
+            "type": "fornecedor",
+            "grau_centrality": 0.0201,
+            "betweenness": 0.0022,
+            "closeness": 0.2877
+        },
+        {
+            "node_id": "CNPJ_25.753.982/0001-96",
+            "nome": "Tecnologia e Servicos TI 41",
+            "type": "fornecedor",
+            "grau_centrality": 0.0201,
+            "betweenness": 0.0015,
+            "closeness": 0.2837
+        },
+        {
+            "node_id": "CNPJ_42.497.376/0001-57",
+            "nome": "Tecnologia e Servicos TI 27",
+            "type": "fornecedor",
+            "grau_centrality": 0.0175,
+            "betweenness": 0.0029,
+            "closeness": 0.2904
+        },
+        {
+            "node_id": "CNPJ_70.990.589/0001-44",
+            "nome": "Tecnologia e Servicos TI 221",
+            "type": "fornecedor",
+            "grau_centrality": 0.0175,
+            "betweenness": 0.0024,
+            "closeness": 0.276
+        }
+    ],
+    "top_orgaos_centralidade": [
+        {
+            "node_id": "UASG_150012",
+            "nome": "Órgão Público Federal 150012",
+            "type": "orgao",
+            "grau_centrality": 0.0501,
+            "betweenness": 0.0277,
+            "closeness": 0.3633
+        },
+        {
+            "node_id": "UASG_150009",
+            "nome": "Órgão Público Federal 150009",
+            "type": "orgao",
+            "grau_centrality": 0.0476,
+            "betweenness": 0.023,
+            "closeness": 0.3626
+        },
+        {
+            "node_id": "UASG_150023",
+            "nome": "Órgão Público Federal 150023",
+            "type": "orgao",
+            "grau_centrality": 0.0451,
+            "betweenness": 0.0307,
+            "closeness": 0.3619
+        },
+        {
+            "node_id": "UASG_150019",
+            "nome": "Órgão Público Federal 150019",
+            "type": "orgao",
+            "grau_centrality": 0.0451,
+            "betweenness": 0.0225,
+            "closeness": 0.3619
+        },
+        {
+            "node_id": "UASG_150015",
+            "nome": "Órgão Público Federal 150015",
+            "type": "orgao",
+            "grau_centrality": 0.0426,
+            "betweenness": 0.0226,
+            "closeness": 0.3576
+        },
+        {
+            "node_id": "UASG_150008",
+            "nome": "Órgão Público Federal 150008",
+            "type": "orgao",
+            "grau_centrality": 0.0426,
+            "betweenness": 0.0254,
+            "closeness": 0.359
+        },
+        {
+            "node_id": "UASG_150004",
+            "nome": "Órgão Público Federal 150004",
+            "type": "orgao",
+            "grau_centrality": 0.0426,
+            "betweenness": 0.0235,
+            "closeness": 0.3562
+        },
+        {
+            "node_id": "UASG_150073",
+            "nome": "Órgão Público Federal 150073",
+            "type": "orgao",
+            "grau_centrality": 0.0426,
+            "betweenness": 0.0263,
+            "closeness": 0.3611
+        },
+        {
+            "node_id": "UASG_150022",
+            "nome": "Órgão Público Federal 150022",
+            "type": "orgao",
+            "grau_centrality": 0.0401,
+            "betweenness": 0.0125,
+            "closeness": 0.3462
+        },
+        {
+            "node_id": "UASG_150028",
+            "nome": "Órgão Público Federal 150028",
+            "type": "orgao",
+            "grau_centrality": 0.0401,
+            "betweenness": 0.0172,
+            "closeness": 0.359
+        }
+    ],
+    "estruturas_comunidades_louvain": [
+        {
+            "comunidade_id": 1,
+            "total_nos": 46,
+            "quantidade_orgaos": 13,
+            "quantidade_fornecedores": 33
+        },
+        {
+            "comunidade_id": 2,
+            "total_nos": 45,
+            "quantidade_orgaos": 12,
+            "quantidade_fornecedores": 33
+        },
+        {
+            "comunidade_id": 3,
+            "total_nos": 41,
+            "quantidade_orgaos": 10,
+            "quantidade_fornecedores": 31
+        },
+        {
+            "comunidade_id": 4,
+            "total_nos": 38,
+            "quantidade_orgaos": 10,
+            "quantidade_fornecedores": 28
+        },
+        {
+            "comunidade_id": 5,
+            "total_nos": 33,
+            "quantidade_orgaos": 9,
+            "quantidade_fornecedores": 24
+        }
+    ]
+}

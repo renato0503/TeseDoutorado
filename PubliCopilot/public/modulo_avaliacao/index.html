@@ -4,471 +4,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modulo de Avaliacao - PubliCopilot</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="icon" type="image/png" href="../publicopilot.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="../css/auth.css">
+
+    <!-- Firebase SDK (síncrono, mesmo padrão do index.html) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="../js/firebase-init.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin-seed.js"></script>
+    <script>
+        // Gate de autenticacao
+        (async function() {
+            try {
+                // Esperar PubliAuth inicializar
+                if (typeof window.whenFirebaseReady === 'function') {
+                    await window.whenFirebaseReady();
+                }
+                if (typeof PubliAuth === 'undefined') {
+                    await new Promise(r => setTimeout(r, 300));
+                }
+                if (typeof PubliAuth === 'undefined') {
+                    console.error('PubliAuth nao carregou');
+                    return;
+                }
+                await PubliAuth.whenReady();
+                // onAuthStateChanged ja restaura a sessao automaticamente
+                if (!PubliAuth.isLogado()) {
+                    PubliAuth.Modal.abrir('login');
+                }
+            } catch (e) {
+                console.error('Gate error:', e);
+            }
+        })();
+    </script>
     <style>
-        :root {
-            --primary: #0066d6;
-            --primary-dark: #0052a3;
-            --primary-light: #3399ff;
-            --accent-green: #00c853;
-            --accent-orange: #ff9500;
-            --accent-red: #ff3b30;
-            --accent-purple: #9c27b0;
-            --bg-dark: #0a0a1a;
-            --bg-gradient: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0a0a2a 100%);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-bg-hover: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.7);
-            --text-tertiary: rgba(255, 255, 255, 0.5);
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-gradient);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 40px;
-        }
-        
-        .bg-orbs {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
-        }
-        
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.3;
-        }
-        
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--primary);
-            top: -100px;
-            right: -100px;
-        }
-        
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: var(--accent-red);
-            bottom: -50px;
-            left: -50px;
-        }
-        
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            margin-bottom: 32px;
-            transition: color 0.2s;
-        }
-        
-        .back-link:hover {
-            color: white;
-        }
-        
-        .back-link svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-        
-        .header {
-            margin-bottom: 40px;
-        }
-        
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .badge svg {
-            width: 14px;
-            height: 14px;
-            fill: currentColor;
-        }
-        
-        .header h1 {
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            margin-bottom: 8px;
-        }
-        
-        .header p {
-            color: var(--text-secondary);
-            font-size: 16px;
-        }
-        
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 32px;
-        }
-        
-        .card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 28px;
-            backdrop-filter: blur(20px);
-        }
-        
-        .card-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .card-title svg {
-            width: 22px;
-            height: 22px;
-            fill: var(--primary-light);
-        }
-        
+        .page { padding: 32px 0 60px; }
+        .page-head { margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
+        .page-head .badge { margin-bottom: 0; }
+        .page-head h1 { font-size: 28px; font-weight: 800; color: var(--preto); letter-spacing: -0.5px; }
+        .page-head p { color: var(--texto-sec); font-size: 15px; }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 24px; }
+
         textarea {
-            width: 100%;
-            min-height: 200px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 16px;
-            font-family: inherit;
-            font-size: 14px;
-            line-height: 1.7;
-            color: white;
-            resize: vertical;
-            margin-bottom: 16px;
-            transition: border-color 0.2s;
+            min-height: 220px; resize: vertical; line-height: 1.7;
+            background: var(--surface-alt);
         }
-        
-        textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        textarea::placeholder {
-            color: var(--text-tertiary);
-        }
-        
-        .sample-box {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 16px;
-        }
-        
-        .sample-box-title {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-tertiary);
-            margin-bottom: 12px;
-        }
-        
+
+        .sample-box { background: var(--surface-alt); border: 1px solid var(--borda); border-radius: var(--raio-sm); padding: 14px; margin-top: 14px; }
+        .sample-box-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--texto-ter); margin-bottom: 10px; font-weight: 700; }
         .sample-btn {
-            display: inline-block;
-            padding: 8px 14px;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            font-size: 12px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            margin-right: 8px;
-            margin-bottom: 8px;
-            transition: all 0.2s;
+            display: inline-block; padding: 7px 13px; background: var(--surface); border: 1px solid var(--borda);
+            border-radius: 8px; font-size: 12px; color: var(--texto-sec); cursor: pointer; margin: 0 6px 6px 0; transition: all 0.2s;
         }
-        
-        .sample-btn:hover {
-            background: var(--glass-bg-hover);
-            border-color: var(--primary);
-            color: white;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            box-shadow: 0 4px 20px rgba(0, 102, 214, 0.4);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 102, 214, 0.5);
-        }
-        
-        .btn-primary svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-        
-        .feature-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px;
-        }
-        
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            font-size: 13px;
-        }
-        
-        .feature-item svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--primary-light);
-            flex-shrink: 0;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 12px;
-            font-size: 13px;
-        }
-        
-        th, td {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        th {
-            font-weight: 600;
-            color: var(--text-tertiary);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .status-ok { color: var(--accent-green); }
-        .status-warning { color: var(--accent-orange); }
-        .status-error { color: var(--accent-red); }
-        
+        .sample-btn:hover { border-color: var(--verde-piscina); color: var(--verde-piscina-escuro); }
+
+        .feature-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+        .feature-item { display: flex; align-items: center; gap: 9px; padding: 12px; background: var(--surface-alt); border: 1px solid var(--borda); border-radius: 10px; font-size: 13px; color: var(--texto-sec); }
+        .feature-item svg { width: 18px; height: 18px; fill: var(--verde-piscina-escuro); flex-shrink: 0; }
+
+        /* Resultado */
         .result-card {
-            background: linear-gradient(135deg, rgba(0, 102, 214, 0.2) 0%, rgba(156, 39, 176, 0.2) 100%);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 28px;
-            margin-top: 32px;
-            backdrop-filter: blur(20px);
+            background: linear-gradient(135deg, rgba(46,196,182,0.08) 0%, rgba(212,160,23,0.10) 100%);
+            border: 1px solid var(--borda); border-radius: var(--raio); padding: 28px; margin-top: 28px; box-shadow: var(--sombra);
         }
-        
-        .result-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .result-title svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--primary-light);
-        }
-        
-        .score-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 12px;
-            font-size: 28px;
-            font-weight: 700;
-            margin-left: auto;
-        }
-        
-        .score-high { background: rgba(0, 200, 83, 0.2); color: var(--accent-green); }
-        .score-medium { background: rgba(255, 149, 0, 0.2); color: var(--accent-orange); }
-        .score-low { background: rgba(255, 59, 48, 0.2); color: var(--accent-red); }
-        
-        .result-section {
-            margin-bottom: 20px;
-        }
-        
-        .result-section-title {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-tertiary);
-            margin-bottom: 12px;
-        }
-        
-        .result-content {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 13px;
-        }
-        
-        .warning-list {
-            list-style: none;
-        }
-        
-        .warning-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .warning-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .warning-icon {
-            color: var(--accent-orange);
-            flex-shrink: 0;
-        }
-        
-        .warning-icon svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-        
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 60px;
-        }
-        
-        .loading.show {
-            display: block;
-        }
-        
-        .spinner {
-            width: 48px;
-            height: 48px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .loading p {
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-        
-        .progress-bar {
-            background: #f0f0f0;
-            border-radius: 8px;
-            height: 8px;
-            overflow: hidden;
-            margin-top: 8px;
-        }
-        
-        .progress-bar-fill {
-            height: 100%;
-            border-radius: 8px;
-            transition: width 0.6s ease;
-        }
-        
-        .progress-bar-fill.green { background: var(--accent-green); }
-        .progress-bar-fill.blue { background: var(--primary); }
-        
-        @media (max-width: 768px) {
-            .grid-2 { grid-template-columns: 1fr; }
-            body { padding: 20px; }
-        }
+        .result-title { font-size: 18px; font-weight: 700; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; color: var(--preto); }
+        .result-title svg { width: 22px; height: 22px; fill: var(--verde-piscina-escuro); }
+        .score-badge { display: inline-block; padding: 8px 18px; border-radius: 12px; font-size: 26px; font-weight: 800; margin-left: auto; }
+        .score-high { background: rgba(46,196,182,0.16); color: var(--verde-piscina-escuro); }
+        .score-medium { background: rgba(212,160,23,0.16); color: var(--amarelo-queimado-escuro); }
+        .score-low { background: rgba(192,57,43,0.12); color: var(--alerta); }
+
+        .result-section { margin-bottom: 18px; }
+        .result-section-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--texto-ter); margin-bottom: 10px; font-weight: 700; }
+        .result-content { background: var(--surface); border: 1px solid var(--borda); padding: 14px; border-radius: var(--raio-sm); font-size: 13px; }
+
+        .warning-list { list-style: none; }
+        .warning-list li { display: flex; align-items: flex-start; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--borda); }
+        .warning-list li:last-child { border-bottom: none; }
+        .warning-icon { color: var(--amarelo-queimado-escuro); flex-shrink: 0; }
+        .warning-icon svg { width: 18px; height: 18px; fill: currentColor; }
+
+        .progress-bar { background: var(--cinza-borda); border-radius: 8px; height: 8px; overflow: hidden; margin-top: 6px; }
+        .progress-bar-fill { height: 100%; border-radius: 8px; transition: width 0.6s ease; }
+        .progress-bar-fill.green { background: var(--verde-piscina); }
+        .progress-bar-fill.blue { background: var(--amarelo-queimado); }
+
+        .loading { display: none; text-align: center; padding: 56px; }
+        .loading.show { display: block; }
+        .loading p { color: var(--texto-sec); font-size: 14px; }
+
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="bg-orbs">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-    </div>
-    
-    <div class="container">
-        <a href="https://comprapublica.web.app" class="back-link">
-            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-            Voltar ao Dashboard
-        </a>
-        
-        <div class="header">
-            <span class="badge">
-                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-                Modulo 1
-            </span>
-            <h1>Modulo de Avaliacao de Minutas</h1>
-            <p>Recebimento de minutas e identificacao de assimetrias e inconsistencias</p>
+    <header class="pc-header">
+        <div class="container">
+            <a href="../index.html" class="pc-logo">
+                <img src="../publicopilot.png" alt="PubliCopilot">
+                <span class="pc-logo-text">Publi<span>Copilot</span></span>
+            </a>
+            <nav class="pc-nav">
+                <a href="../index.html#modulos">Modulos</a>
+                <a href="../index.html#recursos">Recursos</a>
+                <a href="../index.html#sobre">Sobre</a>
+            </nav>
         </div>
-        
+    </header>
+
+    <div class="container page">
+        <div class="page-head">
+            <span class="badge">Modulo 1</span>
+            <div>
+                <h1>Modulo de Avaliacao de Minutas</h1>
+                <p>Recebimento de minutas e identificacao de assimetrias e inconsistencias com ML real</p>
+            </div>
+        </div>
+
         <div class="grid-2">
             <div>
                 <div class="card">
                     <div class="card-title">
-                        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                        <svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:var(--verde-piscina-escuro)"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
                         Entrada da Minuta
                     </div>
                     <textarea id="minuta-input" placeholder="Cole aqui o texto da minuta do edital ou contrato publico para analise..."></textarea>
-                    
+
                     <div class="sample-box">
                         <div class="sample-box-title">Exemplos de Minutas</div>
                         <button class="sample-btn" onclick="loadSample('tecnologia')">Edital de TI</button>
@@ -476,69 +141,51 @@
                         <button class="sample-btn" onclick="loadSample('sustentavel')">Licitacao Sustentavel</button>
                         <button class="sample-btn" onclick="loadSample('sis')">Sistema Integrado</button>
                     </div>
-                    
-                    <button class="btn btn-primary" onclick="analisarMinuta()">
+
+                    <button class="btn btn-primary" onclick="analisarMinuta()" style="margin-top:16px;">
                         <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
                         Analisar Minuta
                     </button>
                 </div>
             </div>
-            
+
             <div>
                 <div class="card">
                     <div class="card-title">
-                        <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                        <svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:var(--amarelo-queimado-escuro)"><path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
                         Funcionalidades do Modulo
                     </div>
                     <div class="feature-list">
-                        <div class="feature-item">
-                            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                            Classificacao de Clausulas
-                        </div>
-                        <div class="feature-item">
-                            <svg viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
-                            NER - Entidades Nomeadas
-                        </div>
-                        <div class="feature-item">
-                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
-                            Analise de Complexidade
-                        </div>
-                        <div class="feature-item">
-                            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-                            Jurisprudencia TCU
-                        </div>
-                        <div class="feature-item">
-                            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                            Deteccao de Lacunas
-                        </div>
-                        <div class="feature-item">
-                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                            Recomendacoes XAI
-                        </div>
+                        <div class="feature-item"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg> Classificacao de Clausulas</div>
+                        <div class="feature-item"><svg viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg> NER - Entidades Nomeadas</div>
+                        <div class="feature-item"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg> Analise de Complexidade</div>
+                        <div class="feature-item"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg> Jurisprudencia TCU</div>
+                        <div class="feature-item"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg> Deteccao de Lacunas</div>
+                        <div class="feature-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> Recomendacoes XAI</div>
                     </div>
                 </div>
-                
+
                 <div class="card" style="margin-top: 24px;">
                     <div class="card-title">
-                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                        <svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:var(--verde-piscina-escuro)"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
                         Base de Conhecimento
                     </div>
                     <table>
                         <tr><th>Fonte</th><th>Registros</th><th>Status</th></tr>
                         <tr><td>Acordaos TCU</td><td>8.547</td><td class="status-ok">Ativo</td></tr>
-                        <tr><td>Editais PNCP</td><td>19.640</td><td class="status-ok">Ativo</td></tr>
+                        <tr><td>Contratos PNCP (treino)</td><td>100.000</td><td class="status-ok">Ativo</td></tr>
                         <tr><td>Jurisprudencia TCE</td><td>3.291</td><td class="status-ok">Ativo</td></tr>
                         <tr><td>Lei 14.133/21</td><td>Completo</td><td class="status-ok">Ativo</td></tr>
                     </table>
                 </div>
             </div>
         </div>
-        
+
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            <p>Analisando minuta com modelos de NLP e XAI...</p>
+            <p>Analisando minuta com modelos de NLP e XAI (Random Forest + Isolation Forest + SHAP)...</p>
         </div>
-        
+
         <div id="resultado" style="display: none;">
             <div class="result-card">
                 <div class="result-title">
@@ -546,58 +193,58 @@
                     Relatorio de Conformidade Legal
                     <span class="score-badge" id="score-badge">--</span>
                 </div>
-                
+
                 <div class="result-section">
                     <div class="result-section-title">Clausulas Identificadas</div>
                     <div class="result-content" id="clausulas-detectadas">-</div>
                 </div>
-                
+
                 <div class="result-section">
-                    <div class="result-section-title">Entidades Nomeadas (NER)</div>
+                    <div class="result-section-title">Explicacoes XAI por Clausula</div>
                     <div class="result-content" id="entidades-detectadas">-</div>
                 </div>
-                
+
                 <div class="result-section">
                     <div class="result-section-title">Lacunas Identificadas</div>
                     <ul class="warning-list" id="lacunas-list">-</ul>
                 </div>
-                
+
                 <div class="result-section">
                     <div class="result-section-title">Recomendacoes</div>
                     <div class="result-content" id="recomendacoes">-</div>
                 </div>
-                
+
                 <div class="result-section">
-                    <div class="result-section-title">Explicabilidade (XAI)</div>
+                    <div class="result-section-title">Explicabilidade (XAI / SHAP)</div>
                     <div class="result-content" id="explicabilidade">-</div>
                 </div>
             </div>
         </div>
-        
+
         <div class="card" style="margin-top: 32px;">
             <div class="card-title">
-                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                <svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:var(--amarelo-queimado-escuro)"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
                 Metricas de Qualidade
             </div>
             <div class="grid-2">
                 <div>
-                    <h4 style="font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;">Indice de Completude</h4>
+                    <h4 style="font-size: 13px; color: var(--texto-sec); margin-bottom: 8px;">Score de Conformidade (Heuristico)</h4>
                     <div class="progress-bar">
-                        <div class="progress-bar-fill green" style="width: 78%;"></div>
+                        <div class="progress-bar-fill green" id="bar-score" style="width: 0%;"></div>
                     </div>
-                    <p style="font-size: 12px; color: var(--text-tertiary); margin-top: 8px;">78% das clausulas essenciais identificadas em editais similares</p>
+                    <p style="font-size: 12px; color: var(--texto-ter); margin-top: 8px;" id="bar-score-text">Calculado via NLP sobre a Lei 14.133/2021</p>
                 </div>
                 <div>
-                    <h4 style="font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;">Acuracia do Modelo</h4>
-                    <div class="progress-bar">
-                        <div class="progress-bar-fill blue" style="width: 94.88%;"></div>
+                    <h4 style="font-size: 13px; color: var(--texto-sec); margin-bottom: 8px;">Metricas do Modelo (Treinado PNCP) — Relatorio Academico</h4>
+                    <div class="progress-bar" title="Acuracia 93,36%">
+                        <div class="progress-bar-fill blue" id="bar-acc" style="width: 93.36%;"></div>
                     </div>
-                    <p style="font-size: 12px; color: var(--text-tertiary); margin-top: 8px;">Random Forest + SHAP com 94,88% de acuracia</p>
+                    <p style="font-size: 12px; color: var(--texto-ter); margin-top: 8px;"><strong>Acuracia:</strong> 93,36% &nbsp;|&nbsp; <strong>AUC-ROC:</strong> 90,83% &nbsp;|&nbsp; <strong>F1-Score:</strong> 26,39% (desbalanceamento de classes: 1,99% positivos)</p>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <script>
         const SAMPLES = {
             tecnologia: `EDITAL DE LICITACAO No 001/2026
@@ -621,7 +268,7 @@ c) Suporte tecnico e help desk.
 
 5. DO PRAZO DE VIGENCIA
 5.1. O contrato tera vigencia de 12 (doze) meses, contados da data de sua assinatura.`,
-            
+
             inovacao: `CONTRATO DE PRESTACAO DE SERVICOS DE INOVACAO TECNOLOGICA
 
 PROCESSO DE CONTRATACAO DIRETA No 002/2026
@@ -640,7 +287,7 @@ c) Dashboard de monitoramento em tempo real.
 
 4. DA REMUNERACAO
 4.1. O pagamento sera efetuado mensalmente, mediante apresentacao de notas fiscais.`,
-            
+
             sustentavel: `EDITAL DE PREGAO ELETRONICO - COMPRAS SUSTENTAVEIS
 
 1. DO OBJETO
@@ -654,7 +301,7 @@ c) Possibilidade de reciclagem.
 
 3. DA EMBALAGEM
 3.1. Os produtos devem ser entregues em embalagem reciclavel.`,
-            
+
             sis: `CONTRATO DE SISTEMA INTEGRADO DE GESTAO
 
 1. DO OBJETO
@@ -670,128 +317,177 @@ d) Patrimonio.
 3. DA TRANSFERENCIA TECNOLOGICA
 3.1. Devera ser Provided treinamento para servidores.`
         };
-        
+
         function loadSample(tipo) {
             document.getElementById('minuta-input').value = SAMPLES[tipo] || SAMPLES.tecnologia;
         }
-        
-        function analisarMinuta() {
+
+        async function analisarMinuta() {
             const texto = document.getElementById('minuta-input').value.trim();
             if (!texto) {
                 alert('Por favor, cole uma minuta para analise.');
                 return;
             }
-            
+
             document.getElementById('loading').classList.add('show');
             document.getElementById('resultado').style.display = 'none';
-            
-            setTimeout(() => {
-                const resultado = processarMinuta(texto);
+
+            try {
+                const token = await PubliAuth.Auth.getIdToken();
+                if (!token) {
+                    PubliAuth.Modal.abrir('login');
+                    throw new Error('Voce precisa estar logado para usar este modulo.');
+                }
+                const resp = await fetch('/api/analisar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify({ texto: texto })
+                });
+                if (resp.status === 401 || resp.status === 403) {
+                    PubliAuth.Modal.abrir('login');
+                    throw new Error('Sessao expirada. Faca login novamente.');
+                }
+                if (!resp.ok) {
+                    const err = await resp.json().catch(() => ({}));
+                    throw new Error(err.erro || ('HTTP ' + resp.status));
+                }
+                const resultado = await resp.json();
                 exibirResultado(resultado);
-            }, 1500);
+            } catch (e) {
+                document.getElementById('loading').classList.remove('show');
+                alert('Erro ao analisar minuta (backend ML): ' + e.message);
+            }
         }
-        
-        function processarMinuta(texto) {
-            const clausulas = [];
-            const entidades = [];
-            
-            if (texto.match(/objeto|contrata|servico/i)) {
-                clausulas.push({ tipo: 'Objeto', status: 'ok', texto: 'Clausula de objeto identificada' });
-                entidades.push({ tipo: 'ACAO', valor: 'Contratacao de servicos' });
-            }
-            if (texto.match(/fundamenta|legal|lei\s*14\.133/i)) {
-                clausulas.push({ tipo: 'Fundamentacao', status: 'ok', texto: 'Fundamentacao legal presente' });
-                entidades.push({ tipo: 'LEI', valor: 'Lei 14.133/2021' });
-            }
-            if (texto.match(/criterio|menor preco|maior lance/i)) {
-                clausulas.push({ tipo: 'Criterio', status: 'ok', texto: 'Criterio de julgamento definido' });
-            }
-            if (texto.match(/vigen|icio|prazo|meses|anos/i)) {
-                clausulas.push({ tipo: 'Vigencia', status: 'ok', texto: 'Prazo de vigencia identificado' });
-                entidades.push({ tipo: 'TEMPO', valor: 'Prazo contratual' });
-            }
-            if (texto.match(/pagamento|remuneracao|valor/i)) {
-                clausulas.push({ tipo: 'Pagamento', status: 'ok', texto: 'Condicoes de pagamento definidas' });
-                entidades.push({ tipo: 'VALOR', valor: 'Condicao de pagamento' });
-            }
-            if (texto.match(/habilita|certidoes|regularidade/i)) {
-                clausulas.push({ tipo: 'Habilitacao', status: 'ok', texto: 'Requisitos de habilitacao presentes' });
-            }
-            if (texto.match(/multa|penalidade|sancao|inadimplemento/i)) {
-                clausulas.push({ tipo: 'Sancoes', status: 'ok', texto: 'Clausula de sancoes identificada' });
-            }
-            
-            const lacunas = [];
-            if (!texto.match(/garantia/i)) lacunas.push({ item: 'Clausula de Garantia', prioridade: 'Alta', desc: 'Ausencia de garantia contratual pode gerar riscos para a Administracao' });
-            if (!texto.match(/responsabilizad|responsabilidade/i)) lacunas.push({ item: 'Responsabilidades', prioridade: 'Alta', desc: 'Falta delimitacao de responsabilidades entre as partes' });
-            if (!texto.match(/propriedade|intelectual|software/i)) lacunas.push({ item: 'Propriedade Intelectual', prioridade: 'Media', desc: 'Questoes de IP nao estao regulamentadas' });
-            if (!texto.match(/sigilo|confidencial|seguranca\s*dados/i)) lacunas.push({ item: 'Confidencialidade', prioridade: 'Alta', desc: 'Ausencia de clausula de sigilo pode expor dados sensiveis' });
-            if (!texto.match(/inexecu|rescis|encerramento/i)) lacunas.push({ item: 'Rescisao', prioridade: 'Alta', desc: 'Condicoes de rescisao nao estao detalhadas' });
-            if (!texto.match(/forense|acuidade|metricas|sla/i)) lacunas.push({ item: 'Niveis de Servico (SLA)', prioridade: 'Media', desc: 'Indicadores de desempenho nao estao especificados' });
-            
-            const recomendacoes = [];
-            if (lacunas.some(l => l.prioridade === 'Alta')) {
-                recomendacoes.push({ tipo: 'CRITICA', texto: 'Adicionar clausula de garantia contratual para protecao do erario' });
-                recomendacoes.push({ tipo: 'CRITICA', texto: 'Incluir clausula de confidencialidade conforme LGPD' });
-                recomendacoes.push({ tipo: 'CRITICA', texto: 'Detalhar condicoes de rescisao unilateral e suas consequencias' });
-            }
-            recomendacoes.push({ tipo: 'MELHORIA', texto: 'Especificar metricas de desempenho (KPIs) com valores-alvo' });
-            recomendacoes.push({ tipo: 'MELHORIA', texto: 'Incluir dispositivo de transferencia tecnologica ao termino do contrato' });
-            
-            const score = Math.max(0, Math.min(100, 100 - (lacunas.filter(l => l.prioridade === 'Alta').length * 15) - (lacunas.filter(l => l.prioridade === 'Media').length * 8)));
-            
-            return { clausulas, entidades, lacunas, recomendacoes, score };
-        }
-        
+
         function exibirResultado(r) {
             document.getElementById('loading').classList.remove('show');
             document.getElementById('resultado').style.display = 'block';
-            
+
+            const score = r.score != null ? r.score : 0;
             let scoreClass = 'score-high';
-            if (r.score < 70) scoreClass = 'score-medium';
-            if (r.score < 50) scoreClass = 'score-low';
+            if (score < 70) scoreClass = 'score-medium';
+            if (score < 50) scoreClass = 'score-low';
             document.getElementById('score-badge').className = `score-badge ${scoreClass}`;
-            document.getElementById('score-badge').textContent = r.score + '%';
-            
+            document.getElementById('score-badge').textContent = score + '%';
+
+            const clausulas = r.clausulas_encontradas || [];
             let clausulasHTML = '<table><tr><th>Clausula</th><th>Status</th></tr>';
-            r.clausulas.forEach(c => {
-                clausulasHTML += `<tr><td>${c.tipo}</td><td class="status-ok">OK - ${c.texto}</td></tr>`;
-            });
+            if (clausulas.length === 0) {
+                clausulasHTML += '<tr><td colspan="2">Nenhuma clausula padrao identificada</td></tr>';
+            } else {
+                clausulas.forEach(c => {
+                    clausulasHTML += `<tr><td>${c}</td><td class="status-ok">OK</td></tr>`;
+                });
+            }
             clausulasHTML += '</table>';
             document.getElementById('clausulas-detectadas').innerHTML = clausulasHTML;
-            
-            let entidadesHTML = '<table><tr><th>Tipo</th><th>Valor</th></tr>';
-            r.entidades.forEach(e => {
-                entidadesHTML += `<tr><td>${e.tipo}</td><td>${e.valor}</td></tr>`;
-            });
+
+            const explicacoes = r.explicacoes_clausulas || [];
+            let entidadesHTML = '<table><tr><th>Clausula</th><th>Explicacao XAI</th></tr>';
+            if (explicacoes.length === 0) {
+                entidadesHTML += '<tr><td colspan="2">-</td></tr>';
+            } else {
+                explicacoes.forEach(e => {
+                    const tit = (e.titulo || '').replace(/[<>&]/g, '');
+                    const txt = (e.explicacao || '').replace(/[<>&]/g, '');
+                    entidadesHTML += `<tr><td><strong>${tit}</strong></td><td style="font-size:12px;">${txt}</td></tr>`;
+                });
+            }
             entidadesHTML += '</table>';
             document.getElementById('entidades-detectadas').innerHTML = entidadesHTML;
-            
+
+            const lacunas = r.lacunas || [];
             let lacunasHTML = '';
-            r.lacunas.forEach(l => {
-                lacunasHTML += `<li><span class="warning-icon"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg></span><div><strong>${l.item}</strong> (${l.prioridade})<br><small>${l.desc}</small></div></li>`;
+            lacunas.forEach(l => {
+                const item = (l.item || '').replace(/[<>&]/g, '');
+                const pri = (l.prioridade || '').replace(/[<>&]/g, '');
+                const desc = (l.desc || '').replace(/[<>&]/g, '');
+                lacunasHTML += `<li><span class="warning-icon"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg></span><div><strong>${item}</strong> (${pri})<br><small>${desc}</small></div></li>`;
             });
             if (lacunasHTML === '') lacunasHTML = '<li><span class="status-ok">Nenhuma lacuna critica identificada</span></li>';
             document.getElementById('lacunas-list').innerHTML = lacunasHTML;
-            
-            let recHTML = '<table><tr><th>Tipo</th><th>Recomendacao</th></tr>';
-            r.recomendacoes.forEach(rec => {
-                recHTML += `<tr><td>${rec.tipo}</td><td>${rec.texto}</td></tr>`;
+
+            const recomendacoes = r.recomendacoes || [];
+            let recHTML = '<table><tr><th>Tipo</th><th>Recomendacao</th><th>Fundamento</th></tr>';
+            recomendacoes.forEach(rec => {
+                const tipo = (rec.tipo || '').replace(/[<>&]/g, '');
+                const txt = (rec.texto || '').replace(/[<>&]/g, '');
+                const fund = (rec.fundamento || '').replace(/[<>&]/g, '');
+                recHTML += `<tr><td>${tipo}</td><td>${txt}</td><td style="font-size:11px;color:var(--texto-ter);">${fund}</td></tr>`;
             });
+            if (recomendacoes.length === 0) recHTML += '<tr><td colspan="3">Nenhuma recomendacao adicional.</td></tr>';
             recHTML += '</table>';
             document.getElementById('recomendacoes').innerHTML = recHTML;
-            
+
+            const m = r.metricas_treino || {};
+            const acc = (m.acuracia != null) ? (m.acuracia * 100).toFixed(2) : '93,36';
+            const auc = (m.auc_roc != null) ? (m.auc_roc * 100).toFixed(2) : '90,83';
+            const f1 = (m.f1_score != null) ? (m.f1_score * 100).toFixed(2) : '26,39';
+            const rfProba = (r.rf_proba != null) ? (r.rf_proba * 100).toFixed(1) : null;
+            const riscoML = r.risco_ml || 'n/a';
+
+            let shapHTML = '<ul style="margin-top: 8px; padding-left: 20px;">';
+            (r.features_shap || []).slice(0, 5).forEach(f => {
+                const nome = (f.feature || '').replace(/[<>&]/g, '');
+                const peso = (f.peso != null) ? (f.peso * 100).toFixed(2) : '0';
+                shapHTML += `<li>${nome} &mdash; ${peso}% de impacto na predicao de risco</li>`;
+            });
+            if ((r.features_shap || []).length === 0) {
+                shapHTML += '<li>Explicabilidade baseada em referencial teorico (fallback).</li>';
+            }
+            shapHTML += '</ul>';
+
+            let cfHTML = '';
+            (r.contrafactuais || []).forEach(cf => {
+                const txt = (cf.contrafactual || '').replace(/[<>&]/g, '');
+                cfHTML += `<p style="margin-top:8px;font-size:13px;">${txt}</p>`;
+            });
+
+            const COUNTERFACTUAL_LEGAL = {
+                "objeto_len": { "nome_legal": "Tamanho do texto do objeto", "pergunta": "Se Tamanho do texto do objeto fosse alterado, como o risco mudaria?" },
+                "objeto_palavras": { "nome_legal": "Nivel de detalhamento da descricao do objeto", "pergunta": "Se Nivel de detalhamento da descricao do objeto fosse alterado, como o risco mudaria?" },
+                "complexidade_lexica": { "nome_legal": "Densidade de termos tecnicos no objeto", "pergunta": "Se Densidade de termos tecnicos no objeto fosse alterado, como o risco mudaria?" },
+                "score_tecnico": { "nome_legal": "Mencoes a tecnologia e inovacao no objeto", "pergunta": "Se Mencoes a tecnologia e inovacao no objeto fosse alterado, como o risco mudaria?" },
+                "valor_log": { "nome_legal": "Valor estimado do contrato", "pergunta": "Se Valor estimado do contrato fosse alterado, como o risco mudaria?" },
+                "uf_encoded": { "nome_legal": "Localizacao geografica (UF)", "pergunta": "Se Localizacao geografica (UF) fosse alterada, como o risco mudaria?" },
+                "tipo_encoded": { "nome_legal": "Tipo de instrumento contratual", "pergunta": "Se Tipo de instrumento contratual fosse alterado, como o risco mudaria?" },
+                "vigencia_log": { "nome_legal": "Duracao prevista do contrato", "pergunta": "Se Duracao prevista do contrato fosse alterada, como o risco mudaria?" }
+            };
+
+            let legalBoxesHTML = '';
+            (r.contrafactuais || []).forEach(cf => {
+                const feat = cf.feature || '';
+                const info = COUNTERFACTUAL_LEGAL[feat];
+                if (info) {
+                    const nome = info.nome_legal;
+                    const perg = info.pergunta;
+                    const peso = (cf.peso != null) ? (cf.peso * 100).toFixed(2) : '0';
+                    legalBoxesHTML += `
+                        <div style="background:rgba(46,196,182,0.07);border-left:4px solid #2e7d32;border-radius:8px;padding:12px 14px;margin-top:10px;">
+                            <strong style="color:#2e7d32;font-size:13px;">${nome}</strong>
+                            <p style="margin:4px 0 0 0;font-size:12px;color:#333;">${perg}</p>
+                        </div>`;
+                }
+            });
+
             document.getElementById('explicabilidade').innerHTML = `
-                <p><strong>Modelo:</strong> Random Forest Classifier (94,88% acuracia)</p>
-                <p style="margin-top: 12px;"><strong>Features principais:</strong></p>
-                <ul style="margin-top: 8px; padding-left: 20px;">
-                    <li>Historico de sancoes do fornecedor vencedor (7,79% impacto)</li>
-                    <li>Complexidade textual do objeto (5,21% impacto)</li>
-                    <li>Valor estimado vs. mercado (4,85% impacto)</li>
-                    <li>Especificidade tecnica declarada (3,92% impacto)</li>
-                </ul>
-                <p style="margin-top: 12px;"><strong>Explicacao SHAP:</strong> O modelo identifica correlacoes entre clausulas ausentes e risco de Termo Aditivo ou rescisao contratual, com base em 572.045 contratos PNCP processados.</p>
+                <p><strong>Modelo treinado (PNCP):</strong> ${r.modelo_treinado ? 'SIM' : 'NAO (fallback heuristico)'} &mdash; Random Forest + Isolation Forest + SHAP</p>
+                <p style="margin-top: 8px;"><strong>Acuracia:</strong> ${acc}% &nbsp;|&nbsp; <strong>AUC-ROC:</strong> ${auc}% &nbsp;|&nbsp; <strong>F1-Score:</strong> ${f1}% (desbalanceamento)</p>
+                ${rfProba !== null ? `<p style="margin-top: 8px;"><strong>Risco ML (Random Forest):</strong> ${rfProba}% &mdash; classificacao <strong>${riscoML.toUpperCase()}</strong></p>` : ''}
+                <p style="margin-top: 12px;"><strong>Top features SHAP:</strong></p>
+                ${shapHTML}
+                ${cfHTML}
+                ${legalBoxesHTML ? `<p style="margin-top:16px;font-size:13px;font-weight:600;color:var(--preto);">Fundamento Juridico (XAI Normativamente Ancorada):</p>${legalBoxesHTML}` : ''}
             `;
+
+            document.getElementById('bar-score').style.width = score + '%';
+            document.getElementById('bar-score-text').textContent =
+                score + '% de conformidade heuristica sobre a Lei 14.133/2021';
+            const accNum = parseFloat(acc.replace(',', '.'));
+            document.getElementById('bar-acc').style.width = Math.min(100, accNum) + '%';
         }
     </script>
 </body>

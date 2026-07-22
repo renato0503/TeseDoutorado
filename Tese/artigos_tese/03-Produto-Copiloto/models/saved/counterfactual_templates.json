@@ -1,0 +1,58 @@
+{
+  "objeto_len": {
+    "nome_tecnico": "objeto_len",
+    "nome_traduzido": "Tamanho do texto do objeto",
+    "valor_medio": 0.0008,
+    "desvio_padrao": 0.9834,
+    "template_pergunta": "Se Tamanho do texto do objeto fosse alterado, como o risco mudaria?"
+  },
+  "objeto_palavras": {
+    "nome_tecnico": "objeto_palavras",
+    "nome_traduzido": "Nivel de detalhamento da descricao do objeto",
+    "valor_medio": -0.0001,
+    "desvio_padrao": 0.9883,
+    "template_pergunta": "Se Nivel de detalhamento da descricao do objeto fosse alterado, como o risco mudaria?"
+  },
+  "complexidade_lexica": {
+    "nome_tecnico": "complexidade_lexica",
+    "nome_traduzido": "Densidade de termos tecnicos no objeto",
+    "valor_medio": -0.0013,
+    "desvio_padrao": 0.9997,
+    "template_pergunta": "Se Densidade de termos tecnicos no objeto fosse alterado, como o risco mudaria?"
+  },
+  "score_tecnico": {
+    "nome_tecnico": "score_tecnico",
+    "nome_traduzido": "Mencoes a tecnologia e inovacao no objeto",
+    "valor_medio": 0.0026,
+    "desvio_padrao": 1.0033,
+    "template_pergunta": "Se Mencoes a tecnologia e inovacao no objeto fosse alterado, como o risco mudaria?"
+  },
+  "valor_log": {
+    "nome_tecnico": "valor_log",
+    "nome_traduzido": "Valor estimado do contrato",
+    "valor_medio": 0.0036,
+    "desvio_padrao": 0.9981,
+    "template_pergunta": "Se Valor estimado do contrato fosse alterado, como o risco mudaria?"
+  },
+  "uf_encoded": {
+    "nome_tecnico": "uf_encoded",
+    "nome_traduzido": "Localizacao geografica (UF)",
+    "valor_medio": -0.0018,
+    "desvio_padrao": 1.0037,
+    "template_pergunta": "Se Localizacao geografica (UF) fosse alterado, como o risco mudaria?"
+  },
+  "tipo_encoded": {
+    "nome_tecnico": "tipo_encoded",
+    "nome_traduzido": "Tipo de instrumento contratual",
+    "valor_medio": -0.0015,
+    "desvio_padrao": 1.0025,
+    "template_pergunta": "Se Tipo de instrumento contratual fosse alterado, como o risco mudaria?"
+  },
+  "vigencia_log": {
+    "nome_tecnico": "vigencia_log",
+    "nome_traduzido": "Duracao prevista do contrato",
+    "valor_medio": 0.0083,
+    "desvio_padrao": 0.9934,
+    "template_pergunta": "Se Duracao prevista do contrato fosse alterado, como o risco mudaria?"
+  }
+}

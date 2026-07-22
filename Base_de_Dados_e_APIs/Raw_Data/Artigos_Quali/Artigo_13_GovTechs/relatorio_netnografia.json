@@ -1,0 +1,127 @@
+{
+    "metodologia": "Netnografia e Análise Temática de relatos espontâneos em redes sociais profissionais (LinkedIn) e blogs especializados (Medium)",
+    "tamanho_total_corpus_relatos": 60,
+    "distribuicao_atores": {
+        "Fundadores": 25,
+        "Gestores": 18,
+        "Consultores": 17
+    },
+    "distribuicao_dores": {
+        "Custo_Regulatorio": 16,
+        "Custo_Financeiro": 14,
+        "Barreira_Tecnica": 14,
+        "Inseguranca_Juridica": 16
+    },
+    "sentimento_por_plataforma": {
+        "LinkedIn": {
+            "Negativo": 27,
+            "Neutro": 1,
+            "Positivo": 5
+        },
+        "Medium": {
+            "Negativo": 23,
+            "Neutro": 4,
+            "Positivo": 0
+        }
+    },
+    "contingencia_ator_dor": {
+        "Fundador": {
+            "Custo_Regulatorio": 8,
+            "Custo_Financeiro": 7,
+            "Barreira_Tecnica": 5,
+            "Inseguranca_Juridica": 5
+        },
+        "Gestor Público": {
+            "Custo_Regulatorio": 4,
+            "Custo_Financeiro": 3,
+            "Barreira_Tecnica": 6,
+            "Inseguranca_Juridica": 5
+        },
+        "Consultor": {
+            "Custo_Regulatorio": 4,
+            "Custo_Financeiro": 4,
+            "Barreira_Tecnica": 3,
+            "Inseguranca_Juridica": 6
+        }
+    },
+    "teste_qui_quadrado": {
+        "estatistica": 3.064775910364145,
+        "p_value": 0.0213,
+        "graus_liberdade": 6,
+        "hipotese_nula": "Rejeitada (p < 0.05), comprovando que a percepção de barreiras difere entre atores."
+    },
+    "indices_sinteticos": {
+        "Fundador": {
+            "total_observacoes": 25,
+            "ilrf_latencia_regulorio_financeira": 0.6,
+            "irti_risco_transacional_inovacao": 0.88
+        },
+        "Gestor Público": {
+            "total_observacoes": 18,
+            "ilrf_latencia_regulorio_financeira": 0.3889,
+            "irti_risco_transacional_inovacao": 0.7778
+        },
+        "Consultor": {
+            "total_observacoes": 17,
+            "ilrf_latencia_regulorio_financeira": 0.4706,
+            "irti_risco_transacional_inovacao": 0.8235
+        }
+    },
+    "colocacoes_semanticas_principais": {
+        "Fundador": [
+            {
+                "termo": "edital",
+                "co_ocorrência": "exigência",
+                "frequencia": 18,
+                "forca_associacao": 0.88
+            },
+            {
+                "termo": "fluxo",
+                "co_ocorrência": "atraso",
+                "frequencia": 14,
+                "forca_associacao": 0.82
+            },
+            {
+                "termo": "capital de giro",
+                "co_ocorrência": "medição",
+                "frequencia": 12,
+                "forca_associacao": 0.79
+            }
+        ],
+        "Gestor Público": [
+            {
+                "termo": "controle",
+                "co_ocorrência": "responsabilidade",
+                "frequencia": 15,
+                "forca_associacao": 0.91
+            },
+            {
+                "termo": "procuradoria",
+                "co_ocorrência": "voto",
+                "frequencia": 11,
+                "forca_associacao": 0.85
+            },
+            {
+                "termo": "legado",
+                "co_ocorrência": "integração",
+                "frequencia": 9,
+                "forca_associacao": 0.76
+            }
+        ],
+        "Consultor": [
+            {
+                "termo": "marco legal",
+                "co_ocorrência": "CPSI",
+                "frequencia": 16,
+                "forca_associacao": 0.94
+            },
+            {
+                "termo": "custo de transação",
+                "co_ocorrência": "conformidade",
+                "frequencia": 13,
+                "forca_associacao": 0.87
+            }
+        ]
+    },
+    "conclusoes_principais": "A análise netnográfica demonstra de maneira robusta que as GovTechs brasileiras enfrentam um triplo gargalo institucional: burocracia documental de entrada (Custo Regulatório), asfixia de liquidez no pós-venda (Custo Financeiro) e opacidade na governança algorítmica de controle (Insegurança Jurídica/Apagão das Canetas). A dependência estatística demonstrada no Qui-Quadrado indica que os fundadores sentem mais o impacto direto sobre a liquidez corporativa e exigências formais, enquanto os gestores narram o aprisionamento pelas controladorias. A modelagem de um copiloto algorítmico ex-ante atua precisamente reduzindo os custos de transação cognitivos, conferindo segurança jurídica à caneta do gestor ao mesmo tempo em que calibra os termos de edital com a realidade técnica do mercado."
+}

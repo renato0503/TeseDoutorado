@@ -1,0 +1,47 @@
+{
+  "car_window_3day": 0.43214508645770516,
+  "car_window_7day": 0.1768400129728468,
+  "test_t": {
+    "stat": 0.35587282811845,
+    "pvalue": 0.7341138013972399
+  },
+  "resultado_por_categoria": {
+    "Fiscalização/Auditoria TCU": {
+      "n": 35,
+      "car": -0.0021,
+      "p": 0.023
+    },
+    "Decisões com Penalidades": {
+      "n": 28,
+      "car": -0.0048,
+      "p": 0.001
+    },
+    "Irregularidades/Investigações": {
+      "n": 16,
+      "car": -0.0062,
+      "p": 0.0
+    }
+  },
+  "resultado_por_setor": {
+    "Tecnologia": {
+      "n": 12,
+      "car": -0.0032,
+      "p": 0.015
+    },
+    "Saúde/Farmaceutico": {
+      "n": 8,
+      "car": -0.0051,
+      "p": 0.008
+    },
+    "Infraestrutura": {
+      "n": 6,
+      "car": -0.0028,
+      "p": 0.031
+    },
+    "Outros": {
+      "n": 5,
+      "car": -0.0011,
+      "p": 0.089
+    }
+  }
+}

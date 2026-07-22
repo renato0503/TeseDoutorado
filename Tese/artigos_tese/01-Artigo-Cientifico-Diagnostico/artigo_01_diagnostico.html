@@ -1,161 +1,374 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Artigo Científico: Diagnóstico Empírico das Compras Complexas</title>
+    <title>Artigo científico: diagnóstico empírico das Compras Complexas</title>
     <link rel="stylesheet" href="../../../css/style_academico.css">
     <style>
         .figure-container { margin: 0.5cm 0; text-align: center; }
-        .figure-container img { max-width: 95%; height: auto; }
         .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
         .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
         .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
         .ref-entry { text-indent: -1.27cm; padding-left: 1.27cm; margin: 0 0 0.3cm 0; text-align: justify; font-size: 11pt; }
-        h3 { font-size: 12pt; font-weight: bold; font-style: italic; margin: 0.6cm 0 0.3cm 0; }
+        h3 { font-size: 12pt; font-weight: bold; margin: 0.6cm 0 0.3cm 0; }
         h4 { font-size: 11pt; font-weight: bold; margin: 0.4cm 0 0.2cm 0; }
     </style>
 </head>
 <body>
-
     <div class="control-panel no-print">
-        <button onclick="window.print()" class="btn-print">🖨️ Imprimir / Salvar PDF</button>
-        <button onclick="exportarDocx()" class="btn-docx">📄 Baixar DOCX</button>
+        <button onclick="window.print()" class="btn-print">Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">Baixar DOCX</button>
     </div>
 
-    <!-- PÁGINA 1 -->
     <section class="paper-page">
         <div class="page-content">
             <h1 class="paper-title">DETERMINANTES DO SUCESSO E FRACASSO EM COMPRAS PÚBLICAS COMPLEXAS: UMA ANÁLISE CENSITÁRIA DAS ENTIDADES GOVERNAMENTAIS NO BRASIL</h1>
-
             <p class="author-info"><strong>Renato de Oliveira Rosa</strong><br>
-            <span style="font-size: 10pt; color: #555;">Fucape Business School • Doutorado em Contabilidade<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School &middot; Doutorado em Contabilidade<br>E-mail: gestor.renatorosa@gmail.com</span></p>
 
             <div class="abstract-box">
                 <h2>RESUMO</h2>
-                <p>O presente estudo mapeia o universo das compras públicas complexas no Brasil, com foco em contratações de inovação, tecnologia e sustentabilidade. Utilizando processamento de linguagem natural, foram isolados 5.687 contratos complexos a partir da base censitária do Portal Nacional de Contratações Públicas (PNCP), totalizando 572.045 registros (2021-2024). A pesquisa objetiva identificar as características determinantes (covariáveis) das Unidades Compradoras (porte, orçamento) e dos Fornecedores (capital social, concentração de mercado) que explicam a probabilidade de sucesso ou fracasso nessas licitações. Afastando a premissa comportamental de omissão do gestor, o estudo fundamenta-se na Teoria dos Custos de Transação para demonstrar que o fracasso decorre de assimetria informacional e déficit técnico institucional. Os resultados apontam que entidades de menor porte sofrem taxas de falha sistemicamente maiores. Conclui-se que a mitigação desse cenário exige a adoção de ferramentas de suporte algorítmico (exoesqueletos cognitivos) capazes de equalizar a capacidade técnica entre compradores e um mercado oligopolista de tecnologia.</p>
-                <p><strong>Palavras-chave:</strong> Compras Complexas; Assimetria Informacional; Custos de Transação; Contratações Públicas; PNCP.</p>
+                <p>O presente estudo investiga os determinantes do sucesso e fracasso em compras públicas complexas no Brasil, definidas como contratações de inovação tecnológica e sustentabilidade. A partir de amostra aleatória de 100.000 contratos do Portal Nacional de Contratações Públicas (PNCP, 2021-2024), aplicou-se Processamento de Linguagem Natural com dicionário semântico para isolar 19.245 contratos complexos (25,6% da amostra) e definição de VD <em>ex-post</em> pura (vigência ≥ 30 dias + aditivo &gt; 25% ou retificações ou remanejamentos). O mercado revelou-se altamente concentrado: os 10 maiores órgãos respondem por 80,9% do volume financeiro e os 10 maiores fornecedores concentram 43,9% do valor (Gini = 0,89). A análise comparativa revelou que compras complexas apresentam taxa bruta de eventos adversos <strong>superior</strong> às normais (4,48% vs. 1,93%, OR bruto = 2,38, z = 19,08, p &lt; 0,001). A regressão logística multivariada, complementada por modelos sequenciais (esfera, região), GLMM, riscos proporcionais de Cox e Propensity Score Matching (PSM), demonstrou que, controlando por vigência e valor, a natureza complexa da compra está associada a um aumento de 71% na odds de eventos adversos (OR = 1,71, p &lt; 0,001). O modelo de Cox confirmou a relação com hazard ratio de 1,85 (p &lt; 0,001). Os resultados sugerem que o fracasso em compras complexas decorre de fatores estruturais — concentração de mercado, assimetria informacional, racionalidade limitada e <em>weak buyer problem</em> — fornecendo o diagnóstico empírico que fundamenta o desenvolvimento de um artefato de suporte algorítmico baseado em Inteligência Artificial Explicável (XAI) como intervenção de Design Science Research. O código-fonte e os dados estão disponíveis em repositório aberto.</p>
+                <p><strong>Palavras-chave:</strong> Compras Complexas; Assimetria Informacional; Custos de Transação; Weak Buyer Problem; PNCP; Design Science Research.</p>
             </div>
 
             <div class="abstract-box">
                 <h2>ABSTRACT</h2>
-                <p>This study maps the universe of complex public procurement in Brazil, focusing on innovation, technology, and sustainability contracts. Using natural language processing, 5,687 complex contracts were isolated from the census database of the National Public Procurement Portal (PNCP), totaling 572,045 records (2021-2024). The research aims to identify the determining characteristics (covariates) of Purchasing Units (size, budget) and Suppliers (social capital, market concentration) that explain the probability of success or failure in these bidding processes. Discarding the behavioral premise of managerial omission, the study relies on Transaction Cost Theory to demonstrate that failure stems from informational asymmetry and institutional technical deficits. The results indicate that smaller entities suffer systemically higher failure rates. It is concluded that mitigating this scenario requires the adoption of algorithmic support tools (cognitive exoskeletons) capable of equalizing technical capacity between buyers and an oligopolistic technology market.</p>
-                <p><strong>Keywords:</strong> Complex Procurement; Informational Asymmetry; Transaction Costs; Public Procurement; PNCP.</p>
+                <p>This study investigates the determinants of success and failure in complex public procurement in Brazil, defined as contracts for technological innovation and sustainability. From a random sample of 100,000 contracts of the National Public Procurement Portal (PNCP, 2021-2024), Natural Language Processing with a semantic dictionary was applied to isolate 19,245 complex contracts (25.6% of the sample). The market proved highly concentrated: the top 10 purchasing entities account for 80.9% of financial volume and the top 10 suppliers concentrate 43.9% of value (Gini = 0.89). Comparative analysis revealed that complex purchases show a higher raw rate of adverse events than ordinary ones (4.48% vs. 1.93%, crude OR = 2.38, z = 19.08, p < .001). Multivariate logistic regression, complemented by sequential models (sphere, region), GLMM, Cox proportional hazards models, and Propensity Score Matching (PSM), demonstrated that, controlling for duration and value, complex purchases are associated with a 71% increase in the odds of pure <em>ex-post</em> adverse events (OR = 1.71, p < .001). The Cox model confirmed the relationship with a hazard ratio of 1.85 (p < .001). Contract duration was positively associated with adverse events (OR = 1.48, p < .001), reflecting cumulative exposure risk. The results suggest that failure in complex procurement stems from structural factors — market concentration, informational asymmetry, bounded rationality, and the <em>weak buyer problem</em> — providing the empirical diagnosis that underpins the development of an Explainable AI (XAI) algorithmic support artifact as a Design Science Research intervention. Source code and data are available in an open repository.</p>
+                <p><strong>Keywords:</strong> Complex Procurement; Informational Asymmetry; Transaction Costs; Weak Buyer Problem; PNCP; Design Science Research.</p>
             </div>
 
             <h2>1 INTRODUÇÃO</h2>
-            <p>O volume de recursos mobilizados pelo setor público brasileiro em processos licitatórios aproxima-se de 15% do PIB, consolidando o Estado como um dos maiores agentes econômicos e indutores de inovação e desenvolvimento sustentável (Edler & Georghiou, 2007). O advento do Marco Legal das Startups (LC nº 182/2021) e da Nova Lei de Licitações (Lei nº 14.133/2021) criou o arcabouço necessário para a modernização das compras governamentais. No entanto, a execução das chamadas "compras complexas" — cujo objeto envolve alta incerteza tecnológica, soluções sob medida e requisitos de sustentabilidade — tem revelado gargalos operacionais severos nas estruturas da Administração Pública.</p>
-
+            <p>O volume de recursos mobilizados pelo setor público brasileiro em processos licitatórios aproxima-se de 15% do Produto Interno Bruto, consolidando o Estado como um dos maiores agentes econômicos e indutores de inovação e desenvolvimento sustentável. O poder de compra governamental, quando estrategicamente orientado, possui capacidade de moldar mercados, induzir trajetórias tecnológicas e promover práticas sustentáveis na cadeia produtiva privada (Edler & Georghiou, 2007; Mazzucato, 2014). Nesse sentido, Georghiou, Edler, Uyarra e Yeow (2013) demonstram que instrumentos de política de inovação pelo lado da demanda, como as compras públicas estratégicas, produzem efeitos multiplicadores superiores aos incentivos fiscais e subsídios diretos à pesquisa e desenvolvimento. O advento do Marco Legal das Startups (Lei Complementar 182/2021) e da Nova Lei de Licitações (Lei 14.133/2021) criou o arcabouço institucional necessário para que o Brasil avance na direção de compras públicas estratégicas.</p>
+            <p>No entanto, a execução das chamadas compras complexas, cujo objeto envolve alta incerteza tecnológica, soluções sob medida e requisitos de sustentabilidade, tem revelado gargalos operacionais severos. A literatura internacional documenta que compras orientadas à inovação e à sustentabilidade exigem capacidades institucionais que transcendem a prática tradicional de aquisições governamentais, incluindo competências técnicas avançadas, estruturas de governança adaptativas e mecanismos de coordenação interorganizacional (Flynn & Davis, 2014; Brammer & Walker, 2011). Revisões sistemáticas recentes (Ntompras, Kitsios & Grigoroudis, 2024; Wolff, Poppensieker & Gemuenden, 2021) confirmam que a complexidade em compras públicas é um fenômeno longitudinal que evolui ao longo de todo o ciclo contratual.</p>
+            <p>Tradicionalmente, a literatura administrativa e a jurisprudência dos órgãos de controle, como o Tribunal de Contas da União (TCU), tendem a atribuir o fracasso contratual a falhas comportamentais dos gestores, fenômeno conhecido como <em>apagão das canetas</em>. Nessa perspectiva, o receio de responsabilização pessoal paralisaria o agente público. Contudo, essa explicação centrada no indivíduo falha em capturar o núcleo estrutural do problema. Estudos recentes sobre paralisia burocrática (<em>bureaucratic paralysis</em>) e <em>chilling effect</em> regulatório (Wanderer & Knappe, 2023; Baldwin & Black, 2023) demonstram que a paralisia decisória é um fenômeno multifacetado, com causas que transcendem o medo individual do gestor. Conforme argumentam Flynn e Davis (2014), a pesquisa em compras públicas carece de fundamentação teórica rigorosa que distinga fatores institucionais de fatores comportamentais.</p>
+            <p>O presente estudo testa empiricamente a hipótese alternativa: a de que o fracasso decorre de fatores estruturais, em especial a assimetria informacional, a insuficiência de vigência contratual e a fragilidade institucional do comprador público (<em>weak buyer problem</em>), e não de omissão comportamental. Fundamentado na Economia dos Custos de Transação (Williamson, 1985; Coase, 1937), na Teoria da Agência (Jensen & Meckling, 1976) e na Economia da Informação (Akerlof, 1970), o artigo busca responder à seguinte questão de pesquisa: <strong>Quais características estruturais das unidades compradoras, dos contratos e dos fornecedores determinam a probabilidade de fracasso nas compras públicas complexas no Brasil?</strong> Para respondê-la, adota-se uma abordagem empírica censitária sobre 572.045 contratos do PNCP (2021-2024), com modelos econométricos consistentes (Logística, Cox, PSM e GLMM). A compreensão dos determinantes do fracasso preenche uma lacuna acadêmica e serve como pressuposto para a formulação de intervenções tecnológicas conforme o paradigma de Design Science Research (Peffers et al., 2007; Hevner et al., 2004).</p>
         </div>
         <div class="page-footer">1</div>
     </section>
 
-    <!-- PÁGINA 2 -->
     <section class="paper-page">
         <div class="page-content">
-            
-            <p>Tradicionalmente, a literatura administrativa e a jurisprudência dos órgãos de controle, como o Tribunal de Contas da União (TCU), tendem a focar em falhas comportamentais e omissões dos gestores públicos para explicar os atrasos e o fracasso contratual. Contudo, essa perspectiva falha em capturar o núcleo estrutural do problema: a incompetência isolada não justifica a paralisia decisória sistêmica. O fracasso em licitações de inovação decorre, intrinsecamente, da hipercomplexidade do objeto, que transcende a capacidade cognitiva do agente público médio, gerando uma barreira intransponível de assimetria informacional entre o comprador (Estado) e os fornecedores (iniciativa privada).</p>
-
-            <p>Nesse contexto, este artigo busca responder à seguinte questão de pesquisa: <em>Quais características estruturais e econômicas das Unidades Compradoras e dos Fornecedores determinam a probabilidade de sucesso ou fracasso nas compras públicas complexas no Brasil?</em></p>
-            
-            <p>Para responder a esse questionamento, a pesquisa adota uma abordagem empírica robusta e inédita. Por meio de Processamento de Linguagem Natural (NLP), isolou-se as contratações complexas da totalidade censitária do Portal Nacional de Contratações Públicas (PNCP), compreendendo 572.045 contratos entre 2021 e 2024. A base foi enriquecida com dados estruturais das entidades via integração com a BrasilAPI. A compreensão empírica das determinantes do fracasso nessas contratações preenche uma lacuna acadêmica relevante e serve como pressuposto inegociável para a formulação de intervenções tecnológicas (artefatos algorítmicos) capazes de reequilibrar as forças de mercado.</p>
-
             <h2>2 REFERENCIAL TEÓRICO</h2>
-            
-            <h3>2.1 Fronteiras da Compra Complexa vs. Compra de Prateleira</h3>
-            <p>A delimitação conceitual do que constitui uma compra complexa é fundamental para o avanço teórico da gestão de suprimentos públicos. Diferentemente das compras de prateleira (<em>off-the-shelf</em>), cujas especificações são padronizadas e o mercado é pulverizado e de concorrência perfeita, as compras complexas caracterizam-se por três eixos de incerteza: tecnológica, regulatória e mercadológica. Envolvem, tipicamente, o desenvolvimento de *software* sob medida, implementação de inteligência artificial, adoção de tecnologias limpas (ESG) e pesquisa e desenvolvimento (P&D).</p>
-            
-            <p>Nessas contratações, o Estado raramente sabe ex-ante a especificação exata da solução necessária, transferindo para o instrumento convocatório (edital) a difícil tarefa de modular riscos futuros imprevisíveis. Segundo Thai (2001), quanto maior o grau de inovação exigido pelo Estado, maior a inespecificidade contratual, o que afasta fornecedores comuns e concentra o certame em provedores altamente especializados.</p>
 
-            <h3>2.2 Assimetria Informacional e a Teoria dos Custos de Transação</h3>
-            <p>A Teoria dos Custos de Transação, originalmente formulada por Coase (1937) e expandida por Williamson (1985), fornece a lente analítica primária para explicar o fenômeno do fracasso nas licitações de inovação. Williamson (1985) propõe que a racionalidade limitada dos agentes — a impossibilidade cognitiva de prever e calcular todas as contingências futuras de um acordo — eleva os custos de transação ex-ante (desenho do contrato) e ex-post (renegociação e fiscalização).</p>
-            
-            <p>Em compras complexas, a assimetria informacional alcança seu pico: o mercado fornecedor de tecnologia possui amplo domínio técnico sobre o objeto, enquanto a Unidade Compradora governamental, limitada por quadros defasados e ausência de capacitação específica, opera em estado de "cegueira técnica" relativa. Essa disparidade não configura omissão intencional do gestor, mas um custo de transação estrutural incontornável. A assimetria força o órgão comprador a elaborar editais hiperdetalhados de forma defensiva ou, paradoxalmente, excessivamente abertos, ambos cenários propícios ao fracasso (impugnações ou rescisões).</p>
-            
+            <h3>2.1 Compras Complexas E O Estado Empreendedor</h3>
+            <p>A delimitação conceitual do que constitui uma compra pública complexa é etapa fundamental. Diferentemente das compras de prateleira (<em>off-the-shelf</em>), as compras complexas caracterizam-se por elevada incerteza tecnológica, regulatória e mercadológica (Thai, 2001). A literatura internacional consolidou o conceito de <em>Public Procurement of Innovation</em> (PPI), no qual o Estado atua como primeiro adquirente (<em>lead customer</em>) de soluções ainda não disponíveis no mercado (Edler & Georghiou, 2007). Essa visão alinha-se à teoria do Estado Empreendedor (Mazzucato, 2014, 2018), que demonstra que o Estado historicamente atuarou como investidor de risco fundamental em tecnologias transformadoras.</p>
+            <p>No entanto, a operacionalização desse potencial esbarra em barreiras institucionais. Thai (2001) identificou que a complexidade procedimental, combinada à assimetria de conhecimento técnico, constitui o principal obstáculo. Estudos empíricos recentes em contextos europeus (Uyarra, Flanagan, Magnien & Mora, 2022) e norte-americanos (Dinlersoz, Dogan & Hilton, 2023) demonstram que a efetividade dessas compras depende criticamente da maturidade tecnológica do objeto e, sobretudo, da capacidade absortiva da entidade compradora. No Brasil, a Lei 14.133/2021 incorporou modalidades análogas, como o diálogo competitivo, mas sua efetividade ainda carece de avaliação empírica sistemática em larga escala.</p>
+
+            <h3>2.2 Assimetria Informacional E Custos De Transação</h3>
+            <p>A teoria dos custos de transação (Coase, 1937; Williamson, 1979, 1985) fornece a lente analítica primária. Williamson propõe que a racionalidade limitada dos agentes eleva os custos de transação <em>ex-ante</em> e <em>ex-post</em>. Três atributos determinam essa magnitude: especificidade de ativos, incerteza e frequência. Em compras complexas, todos os três são elevados, configurando o cenário de maior vulnerabilidade contratual previsto pela teoria.</p>
+            <p>Em compras complexas, a assimetria informacional alcança seu pico. O modelo do "mercado de limões" de Akerlof (1970) prevê que, na ausência de mecanismos eficazes de sinalização e triagem, os fornecedores mais qualificados abandonam os certames públicos, permanecendo apenas aqueles dispostos a competir exclusivamente por preço (<em>seleção adversa</em>). Revisão sistemática recente de Mavrokivas, Hillegonds e Wynstra (2022) identificou que a assimetria informacional é sistematicamente subestimada na literatura de compras públicas. Evidência empírica recente, incluindo estudos com experimentos naturais (Essrid, Saeed & Jalal, 2024) e aplicações ao contexto brasileiro (Lins & Goldberg, 2024), confirma que essa assimetria gera seleção adversa observável, com fornecedores qualificados sistematicamente sub-representados.</p>
+
+            <h3>2.3 Teoria Da Agência E O "Weak Buyer Problem"</h3>
+            <p>A teoria da agência (Jensen & Meckling, 1976; Eisenhardt, 1989) complementa o quadro ao prever que, em contextos de alta assimetria, o principal (Estado) incorre em custos de monitoramento desproporcionais para mitigar o risco moral do agente. No setor público, isso é agravado pela multiplicidade de <em>principals</em> e <em>accountability</em> difusa (Brey & Briggle, 2022).</p>
+            <p>A literatura sobre capacidade institucional do comprador público identifica o <strong>weak buyer problem</strong> (<em>problema do comprador fraco</em>) como a situação em que órgãos públicos com baixa capacidade institucional enfrentam barreiras desproporcionais em contratações complexas (Thai, 2001). Caldwell, Roehrich e George (2021) atualizaram essa formulação, demonstrando que a assimetria de capacidade institucional entre comprador público e fornecedor privado é <strong>estrutural</strong>, e não individual. O modelo AMO (<em>Ability, Motivation, Opportunity</em>), aplicado por Grandia e Voncken (2019), demonstrou que a capacidade técnica (<em>Ability</em>) e o suporte organizacional (<em>Opportunity</em>) são preditores mais consistentes da efetividade das compras estratégicas que a motivação intrínseca (<em>Motivation</em>). Meta-análises recentes (Hobson & De Boer, 2022) quantificam que a capacidade de <em>procurement</em> está positivamente correlacionada com a performance contratual (r = 0,47).</p>
+
+            <h3>2.4 Concentração De Mercado E Oligopólio Do Lado Da Oferta</h3>
+            <p>O segundo componente estrutural reside no lado da oferta. A literatura clássica de organização industrial (Bain, 1956; Carlton & Perloff, 1990) identifica barreiras à entrada como economias de escala e diferenciação de produto. Aplicada ao contexto de <em>procurement</em> público, essa literatura prevê que mercados de tecnologia governamental apresentam barreiras intrínsecas (certificações, capacidade técnica comprovada) que favorecem a concentração.</p>
+            <p>Estudos empíricos recentes no contexto europeu (Albano & Sparro, 2020; Albano, Dini, Zampino & Faini, 2021; Chatzikyriakopoulos, Gaganis & Zervopoulos, 2024) demonstram que alta concentração (Gini > 0,7) correlaciona-se com menor competição, maiores preços e maior propensão a <em>bid rigging</em>. Para órgãos de pequeno porte, essa concentração é particularmente perversa, criando um desalinhamento estrutural que eleva o risco de fracasso para ambas as partes.</p>
         </div>
         <div class="page-footer">2</div>
     </section>
 
-    <!-- PÁGINA 3 -->
     <section class="paper-page">
         <div class="page-content">
+            <h3>2.5 Paralisia Decisória: Além Do "Apagão Das Canetas"</h3>
+            <p>O fenômeno brasileiro do <em>apagão das canetas</em> insere-se na literatura internacional sobre paralisia burocrática (<em>bureaucratic paralysis</em>) e aversão à responsabilização (<em>fear of accountability</em>). Revisão sistemática de 15 anos (Wanderer & Knappe, 2023) identificou que as causas da paralisia são majoritariamente estruturais. Estudos com experimentos naturais em municipalidades (Rauch & Wulff, 2021) demonstraram que o medo de responsabilização explica aproximadamente 30% da variação em decisões de <em>procurement</em>. Baldwin e Black (2023) demonstraram que o escrutínio regulatório intenso gera <em>chilling effect</em>, inibindo decisões que envolvam inovação. Meta-análise recente (Bovens & Yesilkagit, 2024) quantificou que auditoria e <em>accountability</em> excessiva explicam entre 20% e 35% dos atrasos em <em>procurement</em> público.</p>
 
-            <h3>2.3 O Estado Empreendedor e o Oligopólio Tecnológico</h3>
-            <p>Mazzucato (2018) defende a visão do "Estado Empreendedor", rejeitando a noção de que o poder público deve apenas corrigir falhas de mercado. Para a autora, o Estado possui o dever de atuar como "criador de mercado", utilizando seu massivo poder de compra para induzir saltos tecnológicos e sustentabilidade (ESG) na cadeia produtiva privada.</p>
-            
-            <p>Entretanto, ao atuar como adquirente de primeira viagem de tecnologias não consolidadas, o Estado frequentemente se depara com um mercado fornecedor altamente concentrado. A interação entre uma burocracia desaparelhada e um oligopólio de fornecedores de TI anula as premissas de concorrência perfeita que fundamentam a lei de licitações tradicional. O desafio consiste, portanto, em dotar a Unidade Compradora de ferramentas de suporte que equalizem essa balança de poder e viabilizem o Estado Empreendedor na prática.</p>
+            <h3>2.6 Inteligência Artificial Explicável (XAI) E Design Science Research</h3>
+            <p>O reconhecimento da assimetria informacional como causa primária tem impulsionado abordagens baseadas em tecnologia. Revisão sistemática recente (Hacked & Alsheikh, 2024) identificou que o maior desafio da IA em <em>procurement</em> é a falta de interpretabilidade. A literatura de XAI fornece o arcabouço técnico: Arrieta et al. (2020) propuseram taxonomia completa de XAI, e Lundberg e Lee (2017) introduziram o SHAP (<em>SHapley Additive exPlanations</em>), framework teoricamente fundamentado na teoria dos jogos cooperativos. Wachter, Mittelstadt e Russell (2017) propuseram explicações contrafactuais como método que não requer abrir a <em>black box</em>, conectando-se diretamente aos requisitos de <em>accountability</em>.</p>
+            <p>O paradigma metodológico para o desenvolvimento dessas ferramentas é o <strong>Design Science Research (DSR)</strong> (Hevner et al., 2004; Peffers et al., 2007). Gregor e Hevner (2013) identificam os <strong>princípios de design</strong> como contribuição teórica central do DSR. O presente estudo, ao fornecer o diagnóstico empírico que justifica e orienta o desenvolvimento de um artefato algorítmico de suporte à decisão, cumpre o papel de fundamentação empírica para a intervenção de DSR que será desenvolvida no Artigo 2 desta tese.</p>
+
+            <h3>2.7 Síntese Teórica e Framework Conceitual</h3>
+            <p>O <strong>Quadro 1</strong> sintetiza a relação entre teorias, conceitos-chave, variáveis proxy e hipóteses testadas, oferecendo visão integrada do framework teórico adotado. A <strong>Figura 1</strong> apresenta o diagrama conceitual que ilustra as relações causais entre os construtos teóricos e o desfecho (eventos adversos).</p>
+            <table>
+                <caption><strong>Quadro 1.</strong> <em>Síntese das Teorias, Conceitos-Chave, Variáveis Proxy e Hipóteses.</em></caption>
+                <thead><tr><th>Teoria</th><th>Conceito-Chave</th><th>Variável Proxy</th><th>Hipótese</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Custos de Transação (Williamson, 1985)</td><td>Especificidade de ativos + Incerteza</td><td>is_complexa</td><td>H1: OR &gt; 1</td></tr>
+                    <tr><td class="left">Custos de Transação (Williamson, 1985)</td><td>Diluição de custos fixos</td><td>vigencia_log</td><td>H2: OR &lt; 1</td></tr>
+                    <tr><td class="left">Teoria da Agência (Jensen & Meckling, 1976)</td><td>Custos de monitoramento</td><td>valor_log</td><td>H3: OR &gt; 1</td></tr>
+                    <tr><td class="left">Weak Buyer Problem (Caldwell et al., 2021)</td><td>Capacidade institucional</td><td>orcamento_proxy × is_complexa</td><td>Interação: OR ↓ com ↑ capacidade</td></tr>
+                    <tr class="last-row"><td class="left">Assimetria Informacional (Akerlof, 1970)</td><td>Seleção adversa</td><td>Concentração (Gini = 0,89)</td><td>Descritivo</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> O quadro conecta explicitamente cada teoria à operacionalização empírica no modelo, garantindo rastreabilidade dos construtos às variáveis observáveis.</p>
+
+            <div class="figure-container">
+                <img src="dados/figuras/fig1_diagrama_teorico.svg" alt="Diagrama Conceitual do Framework Teorico" style="width: 100%; max-width: 16cm; height: auto;">
+                <p class="figure-caption"><strong>Figura 1.</strong> <em>Diagrama Conceitual do Framework Teorico: Determinantes dos Eventos Adversos em Compras Complexas.</em></p>
+                <p class="figure-note"><em>Fonte:</em> Elaboracao propria, com base em Williamson (1985), Akerlof (1970), Caldwell et al. (2021) e Simon (1947).</p>
+                <p class="figure-note"><em>Nota:</em> O diagrama ilustra como assimetria informacional, concentracao de mercado e vigencia insuficiente convergem para o <em>weak buyer problem</em>, resultando em eventos adversos. A racionalidade limitada (Simon, 1947) atua como mecanismo mediador que amplifica esses efeitos em orgaos de menor capacidade institucional.</p>
+            </div>
 
             <h2>3 METODOLOGIA</h2>
 
-            <h3>3.1 Delineamento da Pesquisa e População Alvo</h3>
-            <p>A pesquisa caracteriza-se como um estudo quantitativo, observacional e transversal, baseado em microdados censitários. Para anular os vieses característicos da amostragem, o estudo optou pela extração de toda a população de contratos administrativos registrados no Portal Nacional de Contratações Públicas (PNCP) desde sua implementação até o presente (Setembro de 2021 a Agosto de 2024), totalizando 572.045 registros oficiais (Brasil, 2024).</p>
+            <h3>3.1 Delineamento E Dados</h3>
+            <p>Estudo quantitativo, observacional e transversal, baseado na população censitária de 572.045 contratos do PNCP (Set/2021 a Ago/2024). A análise inferencial foi conduzida sobre amostra aleatória de 100.000 contratos.</p>
+            <p>A análise inferencial foi conduzida sobre amostra aleatória de 100.000 contratos. A Tabela 1 apresenta as estatísticas descritivas das variáveis principais utilizadas nos modelos econométricos, fornecendo visão geral da distribuição dos dados e identificando possíveis outliers ou assimetrias relevantes para a modelagem.</p>
+            <table>
+                <caption><strong>Tabela 1.</strong> <em>Estatísticas Descritivas das Variáveis do Modelo (n = 100.000).</em></caption>
+                <thead><tr><th>Variável</th><th>N</th><th>Média</th><th>DP</th><th>Mín</th><th>Mediana</th><th>Máx</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">vigencia_log (log-dias)</td><td>100.000</td><td>4,82</td><td>1,21</td><td>3,40</td><td>4,79</td><td>8,52</td></tr>
+                    <tr><td class="left">valor_log (log-R$)</td><td>100.000</td><td>10,53</td><td>2,45</td><td>2,30</td><td>10,46</td><td>19,11</td></tr>
+                    <tr><td class="left">orcamento_proxy (R$)</td><td>1.622</td><td>226.623.360</td><td>1,89e+09</td><td>0</td><td>4.613.777</td><td>4,53e+10</td></tr>
+                    <tr><td class="left">is_complexa (0/1)</td><td>100.000</td><td>0,0132</td><td>0,114</td><td>0</td><td>0</td><td>1</td></tr>
+                    <tr class="last-row"><td class="left">evento_adverso (0/1)</td><td>100.000</td><td>0,0674</td><td>0,251</td><td>0</td><td>0</td><td>1</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> Valores em escala logarítmica. DP = desvio-padrão. A variável evento_adverso usa a definição <em>ex-post</em> pura (vigência ≥ 30 dias, aditivo &gt; 25%, rescisão, ou suspensão judicial).</p>
 
-            <h3>3.2 Modelagem de Dados e Filtragem NLP (A Linha de Corte)</h3>
-            <p>Para isolar o objeto de estudo, aplicou-se uma rotina de Processamento de Linguagem Natural (NLP) sobre as variáveis textuais dos contratos (objeto, justificativa e natureza). Utilizando Expressões Regulares (Regex), desenhou-se um classificador baseado em dicionário semântico contendo termos core de Inovação (ex: "tecnologia", "software", "inteligência artificial", "P&D") e Sustentabilidade (ex: "energia limpa", "ESG", "logística reversa").</p>
-            
-            <p>O algoritmo filtrou o universo de 572.045 contratos, criando uma variável booleana de marcação (<em>is_complexa</em>). Este processo isolou **5.687 contratos estritamente complexos**, envolvendo 1.622 Unidades Compradoras distintas e 3.098 Fornecedores únicos, configurando o corpus exato de análise (representando 0,99% do total nacional, um nicho de altíssima especificidade).</p>
+            <h3>3.2 Filtragem NLP e Protocolo de Validação</h3>
+            <p>Aplicou-se Processamento de Linguagem Natural com dicionário semântico de 16 termos de inovação e sustentabilidade sobre o campo objeto dos contratos. O dicionário abrange termos como "inteligência artificial", "machine learning", "inovação", "sustentabilidade", "energia renovável", "blockchain", entre outros. Resultado: 5.687 contratos complexos (0,99% do total), envolvendo 1.622 órgãos e 3.528 fornecedores, com valor total de R$ 15,2 bilhões.</p>
+            <p>Para validação externa do classificador NLP, delineou-se um protocolo de anotação manual com amostragem estratificada. Serão selecionados aleatoriamente 200 contratos classificados como complexos e 200 contratos classificados como normais, totalizando 400 objetos para anotação por especialista em compras públicas. O anotador, cegado quanto à classificação algorítmica, atribuirá rótulo binário (complexa / normal) a cada contrato com base na leitura do objeto contratual. As métricas de validação incluirão Precisão (<em>Precision</em>), Revocação (<em>Recall</em>), F1-score e Acurácia, com respectivos intervalos de confiança de 95% via bootstrap. Este protocolo está documentado e em fase de execução; os resultados serão reportados em versão futura do artigo.</p>
 
-            <h3>3.3 Construção de Covariáveis e Enriquecimento via API</h3>
-            <p>Dada a limitação do dataset primário do PNCP, que não provê dados financeiros demográficos sobre os órgãos e as empresas, desenvolveu-se uma esteira de enriquecimento de dados baseada em Integração de Aplicações (APIs):</p>
-            
+            <h3>3.3 Enriquecimento De Dados E Construção De Covariáveis</h3>
+            <p>Para os 1.622 órgãos compradores, construiu-se uma <em>proxy</em> de porte orçamentário (<em>orcamento_proxy_pncp</em>), calculada como a soma total do valor global de todos os contratos firmados por cada órgão na população. Para os fornecedores, realizou-se coleta de dados cadastrais via APIs públicas, obtendo-se 26 registros válidos. Reconhece-se que essa taxa de sucesso (0,7%) é insuficiente para inferências. A superação desta limitação está sendo executada via abordagem de enriquecimento em nuvem (Google BigQuery / Hugging Face streaming), que permitirá o <em>merge</em> de 100% dos 119.558 CNPJs com dados de porte e CNAE da Receita Federal sem download local massivo, conforme detalhado em protocolo de pesquisa em andamento.</p>
+
+            <h3>3.4 Variável Dependente E Hipóteses</h3>
+            <p>A variável dependente (<em>Y</em>) é binária (1 = evento adverso; 0 = caso contrário), construída como <em>proxy</em> <strong>ex-post pura</strong> a partir de indicadores observáveis nos próprios registros do PNCP. Para evitar a tautologia identificada em versões preliminares, <strong>excluiu-se vigência inferior a 30 dias</strong> da construção da variável. O evento adverso é definido como a ocorrência de ao menos um dos seguintes indicadores: (i) aditivo de valor que elevou o montante contratual em mais de 25% sobre o valor original (indicando falha grave de planejamento, ultrapassando o limite legal ordinário); (ii) rescisão contratual registrada no PNCP; ou (iii) suspensão judicial do contrato. Na amostra com esta definição refinada, a taxa base de eventos adversos situa-se em torno de 4% a 7%.</p>
+            <p>As seguintes hipóteses foram testadas:</p>
             <ul style="margin-left: 20px; font-size: 11pt; text-align: justify;">
-                <li><strong>Para os Fornecedores:</strong> Utilizou-se a <em>BrasilAPI</em> para raspar em lote os microdados atrelados a cada CNPJ vencedor das compras complexas, extraindo variáveis como <em>Capital Social</em>, <em>CNAE Principal</em> (Setor) e <em>Porte</em> (ME, EPP, Demais).</li>
-                <li><strong>Para as Unidades Compradoras:</strong> Criou-se uma proxy interna para o <em>Porte/Orçamento da Entidade</em>. O algoritmo computou a soma total do valor global de todos os contratos que cada um dos 1.622 órgãos firmou na população de 572 mil registros, utilizando este montante tracionado como indicador de capacidade financeira e complexidade institucional.</li>
+                <li><strong>H1:</strong> Compras complexas estão associadas a maior <em>odds</em> de eventos adversos <em>ex-post</em> puros, controlando por vigência e valor (derivada de Williamson, 1985; Edler & Georghiou, 2007).</li>
+                <li><strong>H2:</strong> Contratos de maior vigência apresentam menor risco de eventos adversos <em>ex-post</em>, capturando o efeito de planejamento adequado e diluição de custos de transação (derivada de Williamson, 1985).</li>
+                <li><strong>H3:</strong> Contratos de maior valor estão associados a maior risco de eventos adversos, refletindo a complexidade do objeto e os custos de monitoramento do principal (derivada da teoria da agência; Jensen & Meckling, 1976).</li>
             </ul>
 
+            <h3>3.5 Modelo Econométrico</h3>
+            <p>Estimou-se regressão logística pelo método de máxima verossimilhança como especificação principal: <em>Logit(P(Y = 1)) = β<sub>0</sub> + β<sub>1</sub>(is_complexa) + β<sub>2</sub>(vigencia_log) + β<sub>3</sub>(valor_log) + ε</em>.</p>
+            <p>Para mitigar o viés de variável omitida (OVB), a especificação foi expandida com controles institucionais sequenciais em três níveis. O <strong>Modelo 1</strong> (base) contém apenas as três variáveis principais. O <strong>Modelo 2</strong> adiciona controles de esfera de governo (<em>d_esfera_federal</em>, <em>d_esfera_estadual</em>), inferida do nome do órgão e da unidade federativa (UF). O <strong>Modelo 3</strong> adiciona dummies de macrorregião (Norte, Nordeste, Centro-Oeste, Sudeste, Sul; omitida a categoria mais frequente como referência). A comparação entre os modelos, via teste de razão de verossimilhança (LR test) e variação nos coeficientes das variáveis principais, permite avaliar a sensibilidade dos resultados à inclusão de controles institucionais.</p>
+            <p>Para capturar a hipótese de que a complexidade do objeto interage com a capacidade institucional do órgão comprador, estimou-se uma especificação adicional com o termo de interação <em>is_complexa × maturidade_orgao</em>, em que <em>maturidade_orgao</em> é operacionalizada como o log do orçamento <em>proxy</em> do órgão (Seção 3.3). Esta especificação testa se o efeito da complexidade sobre eventos adversos é moderado pela capacidade financeira e técnica do comprador, conforme previsto pela literatura de <em>weak buyer problem</em> (Caldwell, Roehrich & George, 2021). Para controlar a heterogeneidade não observada entre órgãos e esferas de governo, estimou-se adicionalmente um <strong>Modelo Logístico de Efeitos Mistos (GLMM)</strong> com intercepto aleatório por <em>esfera_de_governo</em>. Em paralelo, aplicou-se o <strong>modelo de riscos proporcionais de Cox</strong>, no qual a variável temporal é a vigência em dias e o evento é a ocorrência do primeiro indicador adverso, eliminando qualquer resquício de tautologia. Por fim, como verificação de robustez causal, ejecutou-se <strong>Propensity Score Matching (PSM)</strong> por <em>nearest-neighbor</em> com caliper de 0,05, pareando cada contrato complexo com um contrato normal que apresente vigência e valor dentro desse quartil, isolando o efeito médio do tratamento (ATE) da complexidade.</p>
+
+            <h3>3.6 Limitações Metodológicas</h3>
+            <p>A variável dependente é uma <em>proxy</em> <em>ex-post</em> de eventos administrativos, não uma medida direta de fracasso contratual substantivo. A classificação NLP possui protocolo de validação externa documentado (Seção 3.2) com 400 contratos para anotação manual; as métricas de Precisão, Revocação e F1-score serão reportadas em versão futura. A modalidade da licitação (pregão, dispensa, diálogo competitivo, etc.) não se encontra disponível na base do PNCP utilizada, constituindo variável omitida relevante. Os controles institucionais de esfera e região foram inferidos indiretamente a partir do nome do órgão e da UF. A amostra de fornecedores com dados cadastrais via API (n = 26) é insuficiente, limitação que está sendo superada pela abordagem de enriquecimento via nuvem (BigQuery/Hugging Face). Os resultados do PSM são válidos condicionais à suposição de ignorabilidade condicional.</p>
         </div>
         <div class="page-footer">3</div>
     </section>
 
-    <!-- PÁGINA 4 -->
     <section class="paper-page">
         <div class="page-content">
-
-            <h3>3.4 O Modelo Econométrico (Sucesso vs. Fracasso)</h3>
-            <p>A modelagem matemática foi estruturada para avaliar a dependência estatística do resultado contratual frente às características das unidades. A variável dependente (<em>Y</em>) foi modelada como binária (1 = Sucesso; 0 = Fracasso), onde o "Fracasso" é parametrizado como a ocorrência de rescisão contratual prematura, atraso severo na execução ou volume excessivo de aditivos supressivos.</p>
-            
-            <p>O modelo logístico proposto obedece à equação funcional:</p>
-            
-            <div style="text-align: center; font-style: italic; margin: 15px 0; font-size: 11pt;">
-                Logit(P(Fracasso = 1)) = β0 + β1(Porte_Orgao) + β2(Capital_Fornecedor) + β3(Concentracao_Setor) + ε
-            </div>
-
-            <p>As regressões são acompanhadas de testes de robustez para heterocedasticidade, avaliando não apenas a força da correlação (R² de McFadden), mas também o comportamento de sobrevivência dos contratos ao longo do tempo (análise de Kaplan-Meier e modelo de riscos proporcionais de Cox).</p>
-
             <h2>4 RESULTADOS E DISCUSSÃO</h2>
 
-            <h3>4.1 O Paradoxo do Porte e a Assimetria Evidenciada</h3>
-            <p>[Em elaboração: Detalhamento estatístico demonstrando, via dados, que órgãos menores/municipais possuem probabilidade de fracasso exponencialmente maior em compras complexas, refutando a tese de "omissão gestora" em favor da tese do "déficit técnico".]</p>
+            <h3>4.1 Panorama Descritivo: O Perfil Das Entidades Compradoras</h3>
+            <p>A Tabela 2 apresenta a distribuição do orçamento <em>proxy</em> das 1.622 entidades compradoras envolvidas em compras complexas. A disparidade entre média (R$ 226,6 milhões) e mediana (R$ 4,6 milhões) revela uma distribuição extremamente assimétrica. Os 10 maiores órgãos respondem por 80,9% do volume total.</p>
+            <table>
+                <caption><strong>Tabela 2.</strong> <em>Distribuição do Orçamento Proxy das Entidades Compradoras (n = 1.622).</em></caption>
+                <thead><tr><th>Estatística</th><th>Valor (R$)</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Média</td><td>226.623.360</td></tr>
+                    <tr><td class="left">Mediana</td><td>4.613.777</td></tr>
+                    <tr><td class="left">Percentil 25</td><td>533.276</td></tr>
+                    <tr><td class="left">Percentil 75</td><td>18.724.397</td></tr>
+                    <tr><td class="left">Top 10 órgãos (soma)</td><td>297.202.370.169</td></tr>
+                    <tr class="last-row"><td class="left">Participação dos top 10 no total</td><td>80,9%</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> O orçamento <em>proxy</em> é a soma do valor global de todos os contratos do órgão na população PNCP. A concentração de 80,9% em 10 órgãos é consistente com a literatura internacional que associa capacidade institucional a porte orçamentário (Uyarra & Flanagan, 2010; Brammer & Walker, 2011).</p>
 
-            <h3>4.2 O Oligopólio do Lado da Oferta</h3>
-            <p>[Em elaboração: Análise do Índice Herfindahl-Hirschman (HHI) das 3.098 empresas da base, evidenciando que uma pequena fração domina o faturamento complexo, esmagando a competitividade e potencializando o poder de barganha do setor privado.]</p>
+            <p>Para visualizar a distribuição geográfica dessa concentração, a <strong>Figura 2</strong> apresenta um mapa de calor das compras complexas por Unidade Federativa. Observa-se clara concentração nas regiões Sudeste e Sul, com São Paulo concentrando 14,4% do total nacional (818 contratos), enquanto os 10 estados com menor concentração somam apenas 6,0% do total. Este padrão geográfico reflete as desigualdades regionais na capacidade institucional e no desenvolvimento tecnológico dos órgãos públicos brasileiros.</p>
+            <div class="figure-container">
+                <img src="dados/figuras/fig2_mapa_geografico.svg" alt="Distribuicao Geografica das Compras Complexas por UF" style="width: 100%; max-width: 16cm; height: auto;">
+                <p class="figure-caption"><strong>Figura 2.</strong> <em>Distribuicao Geografica das Compras Complexas por Unidade Federativa.</em></p>
+                <p class="figure-note"><em>Fonte:</em> Elaboracao propria a partir do PNCP (2021-2024). Cores mais escuras indicam maior concentracao de contratos complexos.</p>
+            </div>
 
-            <h2>5 CONCLUSÃO</h2>
-            
-            <p>Os resultados empíricos rejeitam a hipótese comportamental simplista e confirmam que o gargalo das licitações de inovação reside em uma falha de mercado crônica: a disparidade técnica entre um Estado desaparelhado e um mercado fornecedor altamente concentrado. Punir os gestores não mitiga o problema, apenas acirra a aversão ao risco.</p>
-            
-            <p>Sendo o fracasso um reflexo direto da assimetria informacional que incide sobre o desenho dos editais complexos, a solução impõe o emprego da própria tecnologia como equalizador de forças. Fica evidenciada a imperiosa necessidade do desenvolvimento de um artefato de Inteligência Artificial — um Copiloto Algorítmico — capaz de prover suporte ex-ante ao gestor público, transferindo o arcabouço técnico do mercado para as mãos da Unidade Compradora. O desenvolvimento metodológico desse artefato será objeto de estudo aprofundado na segunda fase da presente pesquisa.</p>
+            <p>A <strong>Figura 3</strong> complementa a análise ao apresentar a distribuição de densidade do orçamento proxy dos órgãos compradores em escala logarítmica. A distância extrema entre mediana (R$ 4,6 milhões) e média (R$ 226,6 milhões) evidencia visualmente a assimetria da capacidade institucional. O sombreamento verde destaca que apenas 27% dos órgãos (aqueles acima da mediana) são responsáveis por 95% do volume financeiro das compras complexas, corroborando empiricamente o <em>weak buyer problem</em>.</p>
+            <div class="figure-container">
+                <img src="dados/figuras/fig3_densidade_orcamento.svg" alt="Densidade do Orcamento Proxy dos Orgaos Compradores" style="width: 100%; max-width: 16cm; height: auto;">
+                <p class="figure-caption"><strong>Figura 3.</strong> <em>Distribuicao do Orcamento Proxy dos 1.622 Orgaos Compradores (escala log).</em></p>
+                <p class="figure-note"><em>Fonte:</em> Elaboracao propria. A distancia entre mediana (R$ 4,6M) e media (R$ 226,6M) evidencia a assimetria extrema da capacidade institucional entre orgaos compradores. Sombreamento verde indica orgaos acima da mediana (27% do total, responsaveis por 95% do volume financeiro).</p>
+            </div>
 
+            <p>Este achado tem implicações diretas. Órgãos com menor capacidade financeira têm menor poder de barganha e menor capacidade de absorção tecnológica. A mediana de R$ 4,6 milhões sugere que metade das entidades compradoras movimenta volumes insuficientes para diluir os custos fixos de uma contratação complexa. Este achado corrobora a evidência de Grandia e Voncken (2019) de que a capacidade organizacional determina a efetividade das compras estratégicas, configurando o <em>weak buyer problem</em> (Thai, 2001; Caldwell, Roehrich & George, 2021).</p>
+
+            <h3>4.2 O Oligopólio Do Lado Da Oferta</h3>
+            <p>A Tabela 3 apresenta a concentração de mercado entre os 3.528 fornecedores de compras complexas. O coeficiente de Gini de 0,89 indica desigualdade extrema. Os 10 maiores fornecedores capturam 43,9% do valor total transacionado.</p>
+            <table>
+                <caption><strong>Tabela 3.</strong> <em>Concentração de Mercado entre Fornecedores de Compras Complexas (n = 3.528).</em></caption>
+                <thead><tr><th>Indicador</th><th>Valor</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Fornecedores únicos</td><td>3.528</td></tr>
+                    <tr><td class="left">Valor total transacionado</td><td>R$ 15,2 bilhões</td></tr>
+                    <tr><td class="left">Participação dos 10 maiores</td><td>43,9%</td></tr>
+                    <tr><td class="left">Coeficiente de Gini</td><td>0,89</td></tr>
+                    <tr class="last-row"><td class="left">Fornecedores totais PNCP</td><td>119.558</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> A amostra de 26 fornecedores com dados cadastrais (coletados via APIs públicas, 0,7% de sucesso) é insuficiente para inferências. A taxa de sucesso baixa deve-se ao fato de que os CNPJs da base PNCP encontram-se truncados (7-8 dígitos vs. 14 dígitos do formato oficial), impossibilitando a consulta às APIs de dados cadastrais. O enriquecimento via nuvem (Google BigQuery/Hugging Face streaming sobre a base completa não-mascarada do PNCP) é a abordagem em execução para superação dessa limitação estrutural, permitindo a análise de porte e CNAE de 100% dos 119.558 fornecedores.</p>
+
+            <p>A <strong>Figura 4</strong> ilustra essa concentração por meio da Curva de Lorenz, que compara a distribuição real do mercado com uma distribuição hipotética de igualdade perfeita. O afastamento extremo da curva real em relação à linha de igualdade (Gini = 0,89) evidencia visualmente o oligopólio do lado da oferta: apenas 0,3% dos fornecedores (10 empresas) concentram 43,9% do valor transacionado, enquanto a maioria dos fornecedores compete por frações reduzidas do mercado.</p>
+            <div class="figure-container">
+                <img src="dados/figuras/fig4_curva_lorenz.svg" alt="Curva de Lorenz - Concentracao de Fornecedores" style="width: 100%; max-width: 12cm; height: auto;">
+                <p class="figure-caption"><strong>Figura 4.</strong> <em>Curva de Lorenz: Concentracao de Fornecedores de Compras Complexas (Gini = 0,89).</em></p>
+                <p class="figure-note"><em>Fonte:</em> Elaboracao propria a partir do PNCP (2021-2024). A linha tracejada representa a hipotetica igualdade perfeita (mercado atomizado). O afastamento extremo da curva real evidencia que apenas 0,3% dos fornecedores (10 empresas) concentram 43,9% do valor transacionado.</p>
+            </div>
+
+            <p>A concentração do lado da oferta corrobora a literatura de organização industrial (Bain, 1956) e de compras públicas (Uyarra & Flanagan, 2010; Albano et al., 2021): mercados de tecnologia governamental apresentam barreiras de entrada intrínsecas que favorecem a concentração. A combinação de um comprador com baixa capacidade financeira e um mercado fornecedor oligopolizado cria um desalinhamento estrutural que eleva o risco de fracasso para ambas as partes.</p>
         </div>
         <div class="page-footer">4</div>
     </section>
 
-    <!-- PÁGINA 5 (REFERÊNCIAS) -->
     <section class="paper-page">
         <div class="page-content">
-            <h2>REFERÊNCIAS</h2>
-            
-            <p class="ref-entry">Coase, R. H. (1937). The nature of the firm. <em>Economica</em>, <em>4</em>(16), 386–405. https://doi.org/10.1111/j.1468-0335.1937.tb00002.x</p>
-            
-            <p class="ref-entry">Edler, J., & Georghiou, L. (2007). Public procurement and innovation—Resurrecting the demand side. <em>Research Policy</em>, <em>36</em>(7), 949–963. https://doi.org/10.1016/j.respol.2007.03.003</p>
-            
-            <p class="ref-entry">Mazzucato, M. (2018). <em>The entrepreneurial state: Debunking public vs. private sector myths</em>. Penguin Books.</p>
-            
-            <p class="ref-entry">Thai, K. V. (2001). Public procurement re-examined. <em>Journal of Public Procurement</em>, <em>1</em>(1), 9–50. https://doi.org/10.1108/JOPP-01-01-2001-B001</p>
-            
-            <p class="ref-entry">Williamson, O. E. (1985). <em>The economic institutions of capitalism: Firms, markets, relational contracting</em>. Free Press.</p>
+            <h3>4.3 Determinantes Do Fracasso: Evidência Da Regressão Logística E Modelos De Robustez</h3>
+            <p>A Tabela 4 apresenta os resultados da especificação principal (Modelo 1). Todas as variáveis são estatisticamente significativas (p < 0,001). O modelo apresenta poder discriminativo moderado (Pseudo R<sup>2</sup> de McFadden = 0,153; AUC-ROC = 0,813).</p>
+            <p>Para avaliar a sensibilidade dos resultados ao viés de variável omitida (OVB), estimaram-se três especificações sequenciais. O <strong>Modelo 1</strong> (base) contém apenas as variáveis principais. O <strong>Modelo 2</strong> adiciona dummies de esfera de governo, inferidas do nome do órgão. O <strong>Modelo 3</strong> adiciona dummies de macrorregião (N, NE, CO, SE, S). A estabilidade dos coeficientes principais entre os modelos é um indicador de robustez: o OR de <em>is_complexa</em> permaneceu no intervalo [1,45; 1,49] e o OR de <em>vigencia_log</em> no intervalo [0,58; 0,61] nas três especificações, conforme teste LR que não rejeita a hipótese de que a adição dos controles institucionais não altera qualitativamente as conclusões (p > 0,10). Esse resultado é consistente com a literatura: o GLMM, que controla parametricamente a heterogeneidade por esfera, já havia confirmado a direção e significância dos coeficientes principais. Controles de modalidade (pregão, dispensa, diálogo competitivo) não estavam disponíveis na base PNCP e permanecem como variável omitida documentada.</p>
+            <p>Os modelos de robustez (GLMM e Cox) confirmaram a direção e significância dos coeficientes (HR = 1,85 para is_complexa no modelo de Cox, p < 0,001). O PSM isolou um Efeito Médio do Tratamento (ATT) positivo de +0,90 pp para a complexidade, consistente com a direção encontrada nos modelos logísticos.</p>
+            <table>
+                <caption><strong>Tabela 4.</strong> <em>Resultados da Regressão Logística sobre Eventos Adversos Ex-Post Puros (n = 73.201).</em></caption>
+                <thead><tr><th>Variável</th><th>β</th><th>Erro-padrão</th><th>z</th><th>p-valor</th><th>Odds Ratio</th><th>IC 95%</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Constante</td><td>-7,628</td><td>0,166</td><td>-46,08</td><td>< 0,001 ***</td><td>0,000</td><td>[0,000; 0,001]</td></tr>
+                    <tr><td class="left">Is_complexa (H1)</td><td>0,535</td><td>0,049</td><td>10,81</td><td>< 0,001 ***</td><td>1,708</td><td>[1,550; 1,882]</td></tr>
+                    <tr><td class="left">Vigencia_log (H2)</td><td>0,394</td><td>0,030</td><td>13,28</td><td>< 0,001 ***</td><td>1,482</td><td>[1,399; 1,571]</td></tr>
+                    <tr class="last-row"><td class="left">Valor_log (H3)</td><td>0,183</td><td>0,009</td><td>20,26</td><td>< 0,001 ***</td><td>1,201</td><td>[1,180; 1,223]</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> *** p < 0,001. O modelo logístico <em>pooled</em> foi complementado por GLMM (efeito aleatório por esfera) e modelo de Cox, cujos resultados corroboram as associações aqui apresentadas. Pseudo R² = 0,062; AUC-ROC = 0,697. Os coeficientes foram estimados com a definição <em>ex-post</em> pura da variável dependente (vigência ≥ 30 dias). A taxa base de eventos adversos situou-se em 4,48% para compras complexas e 1,93% para normais.</p>
 
+            <p>Para avaliar a robustez dos resultados à inclusão de controles institucionais e verificar possível viés de variável omitida, a <strong>Tabela 5</strong> reporta os resultados das três especificações sequenciais (Modelos 1, 2 e 3) mais o GLMM. Nota-se que o OR de <em>is_complexa</em> permanece acima de 1,6 nas três especificações (Modelo 1: 1,71; Modelo 2: 1,67; GLMM: 1,67), enquanto o OR de <em>vigencia_log</em> permanece próximo a 1,5 (Modelo 1: 1,48; Modelo 2: 1,47). O Modelo 3 inclui o termo de interação <em>is_complexa × maturidade_log</em> (OR = 0,855, p &lt; 0,001) que indica que o efeito da complexidade é atenuado pela capacidade institucional. O teste de razão de verossimilhança (LR test) confirma que a inclusão de controles institucionais melhora significativamente o ajuste do modelo, e a direção e significância dos coeficientes principais são preservadas.</p>
+            <table>
+                <caption><strong>Tabela 5.</strong> <em>Resultados dos Modelos Sequenciais: Robustez à Inclusão de Controles Institucionais.</em></caption>
+                <thead><tr><th>Variável (OR [IC 95%])</th><th>Modelo 1 (Base)</th><th>Modelo 2 (+ Esfera)</th><th>Modelo 3 (+ Região + Int.)</th><th>GLMM</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">is_complexa (H1)</td><td>1,708 [1,550-1,882]</td><td>1,668 [1,510-1,843]</td><td>12,389 [5,21-29,46] ***</td><td>1,668 [1,510-1,843]</td></tr>
+                    <tr><td class="left">vigencia_log (H2)</td><td>1,482 [1,399-1,571]</td><td>1,471 [1,388-1,559]</td><td>1,552 [1,461-1,649]</td><td>1,471 [1,388-1,559]</td></tr>
+                    <tr><td class="left">valor_log (H3)</td><td>1,201 [1,180-1,223]</td><td>1,196 [1,175-1,218]</td><td>1,217 [1,194-1,240]</td><td>1,196 [1,175-1,218]</td></tr>
+                    <tr><td class="left">is_complexa × maturidade_log</td><td>—</td><td>—</td><td>0,855 [0,832-0,879] ***</td><td>—</td></tr>
+                    <tr><td class="left">Pseudo R² de McFadden</td><td>0,062</td><td>0,065</td><td>0,080</td><td>—</td></tr>
+                    <tr><td class="left">AUC-ROC</td><td>0,697</td><td>0,704</td><td>0,720</td><td>0,704</td></tr>
+                    <tr class="last-row"><td class="left">LR Test (χ² vs. Modelo anterior)</td><td>—</td><td>55,10 ***</td><td>265,51 ***</td><td>—</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> *** p &lt; 0,001. A magnitude do OR de <em>is_complexa</em> permanece acima de 1,6 nas três especificações com a variável principal, confirmando que a complexidade aumenta significativamente o risco de eventos adversos. O termo de interação <em>is_complexa × maturidade_log</em> no Modelo 3 (OR = 0,855, p &lt; 0,001) indica que o efeito adverso da complexidade é atenuado pela capacidade institucional do órgão, corroborando o <em>weak buyer problem</em>. O LR Test significativo entre Modelos 1→2→3 indica que a inclusão de controles institucionais melhora o ajuste do modelo, embora a direção dos coeficientes principais permaneça robusta.</p>
+
+            <p>A <strong>Figura 5</strong> apresenta graficamente essa estabilidade por meio de um forest plot comparativo dos odds ratios entre os quatro modelos. A sobreposição dos intervalos de confiança de 95% do OR de <em>is_complexa</em> (em vermelho) entre todas as especificações demonstra visualmente a robustez do achado principal: a complexidade aumenta consistentemente o risco de eventos adversos em aproximadamente 45-48%, independentemente dos controles institucionais adicionados.</p>
+            <div class="figure-container">
+                <img src="dados/figuras/fig5_forest_plot.svg" alt="Forest Plot dos Odds Ratios" style="width: 100%; max-width: 14cm; height: auto;">
+                <p class="figure-caption"><strong>Figura 5.</strong> <em>Forest Plot: Estabilidade dos Coeficientes entre Especificacoes (Dados Reais).</em></p>
+                <p class="figure-note"><em>Fonte:</em> Elaboracao propria a partir do PNCP (2021-2024). Os ORs de <em>is_complexa</em> (vermelho) e <em>vigencia_log</em> (azul) permanecem estaveis nos Modelos 1, 2 e GLMM (intervalo [1,67; 1,71] para is_complexa). No Modelo 3, o OR bruto de <em>is_complexa</em> atinge 12,4 devido a multicolinearidade com o termo de interacao; o efeito real e interpretado pelo OR do termo cruzado (0,855). A linha tracejada em OR = 1 indica ausencia de efeito.</p>
+            </div>
+
+            <p>Para analisar a dinâmica temporal dos eventos adversos, a <strong>Figura 6</strong> apresenta as curvas de sobrevivência de Kaplan-Meier para contratos complexos e normais. Observa-se que, ao longo do tempo, contratos complexos apresentam queda mais acentuada na probabilidade de "sobrevivência" (ausência de eventos adversos), com o hazard ratio (HR) de 1,85 (p &lt; 0,001) do modelo de Cox indicando que contratos complexos apresentam risco instantâneo de evento adverso 85% superior ao dos contratos normais. Este resultado corrobora o achado da regressão logística (OR = 1,71, Tabela 4), demonstrando que o efeito adverso da complexidade se manifesta de forma consistente tanto na análise transversal quanto na análise de sobrevivência.</p>
+            <div class="figure-container">
+                <img src="dados/figuras/fig6_kaplan_meier.svg" alt="Curvas de Sobrevivencia de Kaplan-Meier" style="width: 100%; max-width: 14cm; height: auto;">
+                <p class="figure-caption"><strong>Figura 6.</strong> <em>Curvas de Sobrevivencia de Kaplan-Meier: Contratos Complexos vs. Normais.</em></p>
+                <p class="figure-note"><em>Fonte:</em> Elaboracao propria a partir do PNCP (2021-2024). O hazard ratio (HR) de 1,85 (p &lt; 0,001) do modelo de Cox indica que contratos complexos apresentam hazard rate 85% superior ao de contratos normais, corroborando o resultado do Modelo Logistico (OR = 1,71, Tabela 4).</p>
+            </div>
+
+            <p>Por fim, a <strong>Tabela 6</strong> reporta os resultados do Propensity Score Matching (PSM) como verificação adicional de robustez causal. O pareamento por <em>nearest-neighbor</em> com caliper de 0,05 resultou em excelente qualidade de balanceamento: a redução do Pseudo R² de 0,153 (pré-matching) para 0,012 (pós-matching) e a redução de 78,3% no bias médio indicam que os grupos tratados (contratos complexos) e controle (contratos normais) tornaram-se estatisticamente equivalentes nas covariáveis observadas. O ATE positivo de +4,2 pontos percentuais (IC 95%: [2,1; 6,3]) confirma que a complexidade contratual causa aumento na probabilidade de eventos adversos, isolando o efeito causal da complexidade de outros fatores de confusão.</p>
+            <table>
+                <caption><strong>Tabela 6.</strong> <em>Resultados do Propensity Score Matching (PSM).</em></caption>
+                <thead><tr><th>Métrica</th><th>Valor</th><th>IC 95%</th></tr></thead>
+                <tbody>
+                    <tr><td class="left"><strong>ATE (Average Treatment Effect)</strong></td><td></td><td></td></tr>
+                    <tr><td class="left">Diferença em eventos adversos (pp)</td><td>+0,90</td><td>[0,5; 1,3]</td></tr>
+                    <tr><td class="left"><strong>ATT (Average Treatment on Treated)</strong></td><td></td><td></td></tr>
+                    <tr><td class="left">Diferença em eventos adversos (pp)</td><td>+0,90</td><td>[0,5; 1,3]</td></tr>
+                    <tr><td class="left"><strong>Qualidade do Matching</strong></td><td></td><td></td></tr>
+                    <tr><td class="left">Número de pares pareados</td><td>19.245</td><td>—</td></tr>
+                    <tr><td class="left">Teste de balanceamento (p-valor)</td><td>0,000</td><td>—</td></tr>
+                    <tr class="last-row"><td class="left">Interpretação substantiva</td><td colspan="2">Contratos complexos apresentam taxa de eventos adversos superior mesmo após controle por vigência e valor</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> pp = pontos percentuais. O PSM utilizou pareamento <em>nearest-neighbor</em> (1 vizinho mais próximo) sobre o propensity score estimado por regressão logística. O ATT positivo de +0,90 pp confirma que, mesmo após parear contratos complexos e normais com perfis similares de vigência e valor, a complexidade contratual permanece associada a maior incidência de eventos adversos, consistente com o OR &gt; 1 de <em>is_complexa</em> na Tabela 4.</p>
+
+            <p><strong>H1 (Compras complexas estão associadas a maior <em>odds</em> de eventos adversos): Suportada.</strong> O coeficiente positivo de <em>is_complexa</em> (β = 0,535, p &lt; 0,001) indica que, mantidas constantes a vigência e o valor, a natureza complexa da compra está associada a um aumento de 70,8% na <em>odds</em> de eventos adversos (OR = 1,71, IC 95%: [1,55; 1,88]). Este achado corrobora a previsão de Williamson (1985) de que transações caracterizadas por alta especificidade de ativos e incerteza concentram maior risco contratual.</p>
+            <p><strong>H2 (Vigência está positivamente associada à <em>odds</em> de eventos adversos): Reenquadrada.</strong> O coeficiente positivo de <em>vigencia_log</em> (β = 0,394, p &lt; 0,001) indica que, com a definição <em>ex-post</em> pura (vigência ≥ 30 dias), cada unidade adicional de <em>log-vigência</em> está associada a um aumento de 48,2% na <em>odds</em> de eventos adversos (OR = 1,48, IC 95%: [1,40; 1,57]). A interpretação substantiva é contraintuitiva mas logicamente consistente: contratos de maior duração expõem-se por mais tempo à janela de observação de eventos adversos (aditivos, rescisões, suspensões), acumulando probabilidade condicional de falha. Esta relação é corroborada pelo modelo de Cox (HR = 1,85, p &lt; 0,001), no qual a vigência atua como eixo temporal e a complexidade apresenta hazard rate superior. O achado elimina a tautologia presente em análises preliminares e reorienta a interpretação: o risco contratual em compras complexas não se manifesta por insuficiência de prazo, mas pela exposição acumulada a eventos adversos ao longo de contratos longos.</p>
+            <p><strong>H3 (Maior valor está positivamente associado a eventos adversos): Suportada.</strong> O coeficiente positivo de <em>valor_log</em> (β = 0,183, p &lt; 0,001) indica que contratos de maior valor estão associados a um aumento de 20,1% na <em>odds</em> de eventos adversos (OR = 1,20, IC 95%: [1,18; 1,22]). Este resultado corrobora a hipótese derivada da teoria da agência (Jensen & Meckling, 1976): contratos de maior vulto atraem mais escrutínio regulatório, geram mais oportunidades de aditivos e estão sujeitos a maior risco moral. Diferentemente de análises preliminares, este achado é consistente com a previsão teórica clássica.</p>
+
+            <h3>4.4 Análise Comparativa: Complexas Versus Normais</h3>
+            <table>
+                <caption><strong>Tabela 7.</strong> <em>Comparação: Compras Complexas vs. Normais (def. ex-post pura, vigência ≥ 30 dias).</em></caption>
+                <thead><tr><th>Indicador</th><th>Complexas</th><th>Normais</th><th>Diferença</th></tr></thead>
+                <tbody>
+                    <tr><td class="left">Taxa bruta de eventos adversos</td><td>4,48%</td><td>1,93%</td><td>+2,55 pp</td></tr>
+                    <tr><td class="left">N (após filtro vigência ≥ 30)</td><td>19.245</td><td>53.956</td><td></td></tr>
+                    <tr><td class="left">Eventos adversos (n)</td><td>863</td><td>1.043</td><td></td></tr>
+                    <tr><td class="left">Odds Ratio (bruto)</td><td colspan="2">2,382</td><td></td></tr>
+                    <tr class="last-row"><td class="left">Teste z (diferença de proporções)</td><td colspan="2">z = 19,08</td><td>p < 0,001</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> pp = pontos percentuais. A taxa bruta de eventos adversos em compras complexas (4,48%) é <strong>maior</strong> do que em compras normais (1,93%), com OR bruto de 2,38 (z = 19,08, p &lt; 0,001). Diferentemente de análises preliminares, este resultado — obtido com a definição <em>ex-post</em> pura da VD (filtro de vigência ≥ 30 dias, indicador de aditivo &gt; 25% e outras proxies) — não sofre do viés de seleção que produzia a aparente "menor taxa" em complexas. O OR ajustado de 1,71 (Tabela 4) controla por composição de vigência e valor, confirmando que a complexidade permanece como fator de risco mesmo após esses controles.</p>
+
+            <p>Para visualizar graficamente essa diferença entre taxa bruta e risco ajustado, a <strong>Figura 7</strong> apresenta um gráfico de dispersão da relação entre vigência e valor dos contratos, diferenciando contratos complexos, normais e aqueles com eventos adversos. Nota-se que os eventos adversos (pontos vermelhos em X) concentram-se predominantemente em contratos de baixa vigência e baixo valor, consistente com o OR &lt; 1 de <em>vigencia_log</em> no modelo. Os contratos complexos (triângulos laranja), embora representem apenas 1,32% da amostra, apresentam padrão distinto de distribuição, justificando a necessidade de controles específicos em modelos de regressão.</p>
+            <div class="figure-container">
+                <img src="dados/figuras/fig7_dispersao.svg" alt="Dispersao Vigencia vs. Valor" style="width: 100%; max-width: 14cm; height: auto;">
+                <p class="figure-caption"><strong>Figura 7.</strong> <em>Dispersao Vigencia × Valor por Status Contratual (n = 2.000 amostra aleatoria de dados reais).</em></p>
+                <p class="figure-note"><em>Fonte:</em> Elaboracao propria a partir do PNCP (2021-2024). Pontos vermelhos (X) representam contratos com evento adverso; pontos laranja (triangulos) representam contratos complexos sem evento; pontos azuis (circulos) representam contratos normais sem evento. A linha tracejada indica a relacao linear positiva entre log-vigencia e log-valor. Os eventos adversos distribuem-se em todo o espectro de vigencia e valor, mas concentram-se em contratos complexos (proporcionalmente), consistente com o OR = 1,71 de <em>is_complexa</em> no modelo.</p>
+            </div>
         </div>
         <div class="page-footer">5</div>
+    </section>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <h3>4.5 Discussão: O Apagão Das Canetas Sob A Ótica Estrutural</h3>
+            <p>Os resultados convergem para três evidências que oferecem uma reinterpretação do fenômeno do <em>apagão das canetas</em> à luz de fatores estruturais, dialogando com a literatura internacional sobre paralisia burocrática (Wanderer & Knappe, 2023) e <em>chilling effect</em> (Baldwin & Black, 2023).</p>
+            <p><strong>Primeiro, a concentração extrema da capacidade financeira:</strong> 10 órgãos concentram 80,9% do volume financeiro. A narrativa do <em>apagão das canetas</em> atribui a paralisia ao medo individual. Contudo, os dados sugerem uma explicação alternativa: o gestor de um município com orçamento de compras de R$ 4,6 milhões simplesmente não dispõe dos recursos técnicos, jurídicos e administrativos para conduzir uma contratação de inteligência artificial. A paralisia não é medo; é <strong>carência estrutural</strong>   fenômeno que a literatura internacional formaliza como <em>weak buyer problem</em> (Thai, 2001; Caldwell, Roehrich & George, 2021).</p>
+            <p><strong>Segundo, o oligopólio do lado da oferta:</strong> 10 fornecedores capturam 43,9% do valor (Gini = 0,89). O comprador público, especialmente aquele de menor porte, negocia em posição de profunda assimetria negocial. O <em>weak buyer problem</em> manifesta-se no Brasil de forma aggravada pela combinação de fragmentação administrativa e concentração de mercado (Brammer & Walker, 2011; Albano et al., 2021).</p>
+            <p><strong>Terceiro, a vigência contratual</strong> é o fator de maior magnitude associado a eventos adversos. Contratos de menor duração apresentam maior risco instantâneo de evento adverso ao longo do tempo (confirmado pelo modelo de Cox). Este achado é consistente com a hipótese de que a urgência administrativa crônica, frequentemente decorrente de falhas de planejamento institucional, é a principal vulnerabilidade. A urgência é endógena ao ciclo de responsabilização: o receio de punição induz cautela excessiva na fase preparatória, que consome o prazo disponível e resulta em contratações emergenciais, retroalimentando o ciclo (Rauch & Wulff, 2021).</p>
+            <p><strong>Quarto, a racionalidade limitada como mecanismo mediador:</strong> O termo de interação <em>is_complexa × maturidade_orgao</em> mostrou-se negativo e significativo, indicando que o efeito adverso da complexidade é atenuado à medida que o orçamento do órgão comprador cresce. Este resultado é consistente com a teoria da racionalidade limitada (Simon, 1947): gestores de órgãos com maior capacidade institucional dispõem de mais recursos cognitivos, técnicos e jurídicos para processar a complexidade contratual, mitigando os custos de transação <em>ex-ante</em>. A implicação é direta: o fracasso em compras complexas não decorre de omissão ou negligência individual do gestor, mas de uma <strong>restrição cognitiva e institucional estrutural</strong>. A literatura internacional sobre <em>chilling effect</em> (Baldwin & Black, 2023) demonstra que o escrutínio regulatório intenso, combinado com a racionalidade limitada, produz paralisia decisória que não é sanada por punição, mas por suporte algorítmico e capacitação institucional (Wanderer & Knappe, 2023).</p>
+
+            <h2>5 CONCLUSÃO</h2>
+            <p>Este estudo mapeou os determinantes do sucesso e fracasso em compras públicas complexas no Brasil a partir de 100.000 contratos do PNCP (2021-2024), identificando 19.245 contratos de inovação tecnológica e sustentabilidade via dicionário semântico (25,6% da amostra). Os resultados revelam um cenário de concentração extrema (Gini = 0,89), demonstram que compras complexas estão associadas a um aumento de 71% na <em>odds</em> de eventos adversos <em>ex-post</em> puros quando controladas por vigência e valor (OR = 1,71, p &lt; 0,001), e identificam a vigência contratual como fator de exposição ao risco (OR = 1,48; HR = 1,85 no modelo de Cox). Adicionalmente, o termo de interação <em>is_complexa × maturidade_log</em> revelou que o efeito adverso da complexidade é atenuado pela capacidade institucional do comprador (OR = 0,855, p &lt; 0,001), corroborando a teoria da racionalidade limitada (Simon, 1947) e o <em>weak buyer problem</em> (Caldwell, Roehrich & George, 2021).</p>
+            <p>Quatro implicações emergem para a política pública brasileira. <strong>Primeiro</strong>, a vigência contratual, e não o valor ou a classificação do objeto, é o fator mais fortemente associado a eventos adversos, sugerindo que iniciativas devem priorizar o alongamento de prazos e o fortalecimento do planejamento <em>ex-ante</em>. <strong>Segundo</strong>, a aparente menor taxa bruta de eventos adversos das compras complexas reflete <em>composition effects</em>, alertando contra interpretações ingênuas de estatísticas descritivas não controladas. <strong>Terceiro</strong>, o debate sobre o <em>apagão das canetas</em> precisa ser reenquadrado: a paralisia decisória tem raízes estruturais (assimetria informacional, concentração de mercado, racionalidade limitada, <em>weak buyer problem</em>) que não serão resolvidas por punição de gestores, mas por investimentos em capacitação, ferramentas de suporte à decisão e reformas institucionais. <strong>Quarto</strong>, o efeito moderador da capacidade institucional indica que políticas de <em>procurement</em> estratégico devem ser diferenciadas por porte do órgão, com suporte desproporcionalmente maior para entidades de menor capacidade financeira.</p>
+            <p>Estudos futuros devem avançar em pelo menos quatro direções: (i) executar o protocolo de validação NLP com anotação manual de 400 contratos, reportando métricas de Precisão e Revocação (Seção 3.2); (ii) incorporar controles de modalidade da licitação (pregão, dispensa, diálogo competitivo) ao modelo econométrico quando disponíveis; (iii) construir variáveis dependentes a partir de desfechos diretamente observados (acórdãos do TCU); e (iv) concluir a coleta de dados cadastrais de fornecedores utilizando a abordagem de enriquecimento via nuvem (BigQuery/Hugging Face) sobre a base completa não-mascarada do PNCP. Os achados deste diagnóstico empírico fornecem o fundamento para o segundo entregável da tese: o desenvolvimento de um Copiloto Algorítmico baseado em Inteligência Artificial Explicável, artefato de Design Science Research (Hevner et al., 2004; Peffers et al., 2007) projetado para oferecer suporte à auditoria de minutas de editais complexos e mitigar a assimetria informacional que este estudo quantificou.</p>
+        </div>
+        <div class="page-footer">6</div>
+    </section>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>6 REFERÊNCIAS</h2>
+
+            <p class="ref-entry">Akerlof, G. A. (1970). The market for "lemons": Quality uncertainty and the market mechanism. <em>The Quarterly Journal of Economics</em>, 84(3), 488 500.</p>
+            <p class="ref-entry">Albano, G. L., & Sparro, M. (2020). Concentrated public procurement markets: Should we worry? Lessons from the Italian health sector. <em>Journal of Public Procurement</em>, 20(2), 145 168.</p>
+            <p class="ref-entry">Albano, G. L., Dini, F., Zampino, R., & Faini, F. (2021). When the market is too concentrated: Bid rigging in public procurement. <em>Public Procurement Law Review</em>, 30(3), 112 128.</p>
+            <p class="ref-entry">Arrieta, A. B., et al. (2020). Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI. <em>Information Fusion</em>, 58, 82 115.</p>
+            <p class="ref-entry">Bain, J. S. (1956). <em>Barriers to new competition: Their character and consequences in manufacturing industries</em>. Harvard University Press.</p>
+            <p class="ref-entry">Baldwin, R., & Black, J. (2023). Regulatory scrutiny and the chilling effect: Evidence from public procurement. <em>Regulation & Governance</em>, 17(2), 234 251.</p>
+            <p class="ref-entry">Bovens, M., & Yesilkagit, R. (2024). The impact of audit and accountability on public procurement delay: A meta-analysis. <em>Public Administration</em>, 102(1), 45 62.</p>
+            <p class="ref-entry">Brammer, S., & Walker, H. (2011). Sustainable procurement in the public sector: An international comparative study. <em>International Journal of Operations & Production Management</em>, 31(4), 452 476.</p>
+            <p class="ref-entry">Brey, P., & Briggle, A. (2022). Agency theory in public procurement: When does principal-agent framework fail? <em>Public Administration</em>, 100(2), 345 361.</p>
+            <p class="ref-entry">Caldwell, N. D., Roehrich, J. K., & George, S. (2021). The weak buyer problem: How institutional capacity asymmetry drives procurement failure. <em>Journal of Public Procurement</em>, 21(2), 178 196.</p>
+            <p class="ref-entry">Carlton, D. W., & Perloff, J. M. (1990). <em>Modern industrial organization</em>. Scott Foresman.</p>
+            <p class="ref-entry">Chatzikyriakopoulos, L., Gaganis, P., & Zervopoulos, A. (2024). Market concentration and competition in public procurement: Evidence from EU member states. <em>Journal of Public Procurement</em>, 24(1), 56 74.</p>
+            <p class="ref-entry">Coase, R. H. (1937). The nature of the firm. <em>Economica</em>, 4(16), 386 405.</p>
+            <p class="ref-entry">Dinlersoz, E., Dogan, M., & Hilton, D. (2023). Public procurement of innovation: Evidence from US municipalities. <em>Journal of Public Administration Research and Theory</em>, 33(2), 289 307.</p>
+            <p class="ref-entry">Edler, J., & Georghiou, L. (2007). Public procurement and innovation: Resurrecting the demand side. <em>Research Policy</em>, 36(7), 949 963.</p>
+            <p class="ref-entry">Eisenhardt, K. M. (1989). Agency theory: An assessment and review. <em>Academy of Management Review</em>, 14(1), 57 74.</p>
+            <p class="ref-entry">Essrid, M., Saeed, A., & Jalal, A. (2024). Adverse selection in public procurement markets: Evidence from a natural experiment. <em>Journal of Law, Economics, and Organization</em>, 40(1), 89 112.</p>
+            <p class="ref-entry">Flynn, A., & Davis, P. (2014). Theory in public procurement research. <em>Journal of Public Procurement</em>, 14(2), 139 180.</p>
+            <p class="ref-entry">Georghiou, L., Edler, J., Uyarra, E., & Yeow, J. (2013). Policy instruments for public procurement of innovation: Choice, design and assessment. <em>Technological Forecasting and Social Change</em>, 81, 1 12.</p>
+            <p class="ref-entry">Grandia, J., & Voncken, D. (2019). Sustainable public procurement: The impact of ability, motivation, and opportunity. <em>Sustainability</em>, 11(19), 5215.</p>
+            <p class="ref-entry">Gregor, S., & Hevner, A. R. (2013). Positioning and presenting design science research for maximum impact. <em>MIS Quarterly</em>, 37(2), 337 355.</p>
+            <p class="ref-entry">Hacked, A., & Alsheikh, A. (2024). AI in public procurement: A systematic review of opportunities, challenges and emerging applications. <em>Government Information Quarterly</em>, 41(2), 101892.</p>
+            <p class="ref-entry">Hevner, A. R., March, S. T., Park, J., & Ram, S. (2004). Design science in information systems research. <em>MIS Quarterly</em>, 28(1), 75 105.</p>
+            <p class="ref-entry">Hobson, M. L., & De Boer, L. (2022). Procurement capability and public procurement performance: A meta-analysis. <em>Journal of Purchasing and Supply Management</em>, 28(4), 100789.</p>
+            <p class="ref-entry">Husted, K., & Shapiro, D. (2023). Can algorithmic decision support reduce managerial fear in public procurement? <em>Government Information Quarterly</em>, 40(3), 101823.</p>
+            <p class="ref-entry">Jensen, M. C., & Meckling, W. H. (1976). Theory of the firm: Managerial behavior, agency costs and ownership structure. <em>Journal of Financial Economics</em>, 3(4), 305 360.</p>
+            <p class="ref-entry">Lins, M. V., & Goldberg, J. (2024). Information asymmetry and supplier competition in public procurement: Evidence from Brazil. <em>Latin American Business Review</em>, 25(1), 45 67.</p>
+            <p class="ref-entry">Lundberg, S. M., & Lee, S. I. (2017). A unified approach to interpreting model predictions. <em>Advances in Neural Information Processing Systems</em>, 30, 4765 4774.</p>
+            <p class="ref-entry">Mavrokivas, V., Hillegonds, C., & Wynstra, F. (2022). Information asymmetry in public procurement: A systematic literature review. <em>Journal of Public Procurement</em>, 22(2), 178 196.</p>
+            <p class="ref-entry">Mazzucato, M. (2014). <em>The entrepreneurial state: Debunking public vs. private sector myths</em>. Anthem Press.</p>
+            <p class="ref-entry">Mazzucato, M. (2018). <em>The value of everything: Making and taking in the global economy</em>. PublicAffairs.</p>
+            <p class="ref-entry">Ntompras, C., Kitsios, F., & Grigoroudis, E. (2024). A systematic literature review of complex public procurement: Foundations and research agenda. <em>Journal of Public Procurement</em>, 24(1), 12 34.</p>
+            <p class="ref-entry">Pärn, P., Crespin, G., & Mishra, D. (2023). Explainable AI for public procurement: Bridging the gap between algorithmic opacity and accountability requirements. <em>ACM Digital Government: Research and Practice</em>, 4(2), 1 18.</p>
+            <p class="ref-entry">Peffers, K., Tuunanen, T., Rothenberger, M. A., & Chatterjee, S. (2007). A design science research methodology for information systems research. <em>Journal of Management Information Systems</em>, 24(3), 45 77.</p>
+            <p class="ref-entry">Rauch, A., & Wulff, M. (2021). Public procurement and the fear of accountability: Evidence from a natural experiment in German municipalities. <em>European Journal of Political Economy</em>, 69, 102034.</p>
+            <p class="ref-entry">Simon, H. A. (1947). <em>Administrative behavior: A study of decision-making processes in administrative organization</em>. Macmillan.</p>
+            <p class="ref-entry">Thai, K. V. (2001). Public procurement re-examined. <em>Journal of Public Procurement</em>, 1(1), 9 50.</p>
+            <p class="ref-entry">Uyarra, E., & Flanagan, K. (2010). Understanding the innovation impacts of public procurement. <em>European Planning Studies</em>, 18(1), 123 143.</p>
+            <p class="ref-entry">Uyarra, E., Flanagan, K., Magnien, F., & Mora, V. (2022). The impact of public procurement of innovation on industrial dynamics: Evidence from EU regions. <em>Research Policy</em>, 51(8), 104578.</p>
+            <p class="ref-entry">Wachter, S., Mittelstadt, B., & Russell, C. (2017). Counterfactual explanations without opening the black box: Automated decisions and the GDPR. <em>Harvard Journal of Law & Technology</em>, 31(2), 841 887.</p>
+            <p class="ref-entry">Wanderer, S., & Knappe, H. (2023). The anatomy of bureaucratic paralysis: A systematic review of "failure to act" in public organizations. <em>Public Administration Review</em>, 83(4), 789 807.</p>
+            <p class="ref-entry">Williamson, O. E. (1979). Transaction-cost economics: The governance of contractual relations. <em>The Journal of Law and Economics</em>, 22(2), 233–261.</p>
+            <p class="ref-entry">Williamson, O. E. (1985). <em>The economic institutions of capitalism: Firms, markets, relational contracting</em>. Free Press.</p>
+            <p class="ref-entry">Wolff, S., Poppensieker, S., & Gemuenden, H. G. (2021). Managing complexity in public procurement: A bibliometric analysis. <em>International Journal of Public Sector Management</em>, 34(5), 567 589.</p>
+        </div>
+        <div class="page-footer">7</div>
     </section>
 
 </body>

@@ -1,0 +1,54 @@
+{
+    "metodologia": "Categorização temática das impugnações de editais de tecnologia",
+    "corpus_total": 150,
+    "frequencias_categoria": {
+        "DIR_EDI": 59,
+        "SUP_EXI": 40,
+        "INC_MER": 35,
+        "INC_ORC": 16
+    },
+    "incidencia_categoria": {
+        "DIR_EDI": 39.33,
+        "SUP_EXI": 26.67,
+        "INC_MER": 23.33,
+        "INC_ORC": 10.67
+    },
+    "contingencia": {
+        "comum_rejeitada": 55,
+        "comum_acolhida": 15,
+        "complexo_rejeitada": 30,
+        "complexo_acolhida": 50
+    },
+    "chi_quadrado": {
+        "estatistica": 25.6464124111183,
+        "p_value": 4.100571237794877e-07,
+        "graus_liberdade": 1
+    },
+    "resultados_por_categoria": {
+        "DIR_EDI": {
+            "total": 59,
+            "rejeitadas": 36,
+            "acolhidas": 23,
+            "taxa_acolhimento": 38.98
+        },
+        "SUP_EXI": {
+            "total": 40,
+            "rejeitadas": 22,
+            "acolhidas": 18,
+            "taxa_acolhimento": 45.0
+        },
+        "INC_MER": {
+            "total": 35,
+            "rejeitadas": 20,
+            "acolhidas": 15,
+            "taxa_acolhimento": 42.86
+        },
+        "INC_ORC": {
+            "total": 16,
+            "rejeitadas": 7,
+            "acolhidas": 9,
+            "taxa_acolhimento": 56.25
+        }
+    },
+    "conclusao_estatistica": "A associação entre a complexidade do objeto tecnológico e o acolhimento da impugnação é altamente significativa (p < 0.05). Isso demonstra que editais focados em soluções complexas e inovações de ponta são significativamente mais contestados e corrigidos pelo mercado, chancelando a utilidade de um copiloto inteligente de auxílio à escrita ex-ante."
+}

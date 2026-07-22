@@ -1,0 +1,81 @@
+{
+  "data_treinamento": "2026-07-18T12:28:33.679900",
+  "target_tipo": "observavel_ex_post",
+  "registros_total": 100000,
+  "target_distribuicao": {
+    "positivos": 1990,
+    "negativos": 98010,
+    "pct_positivos": 1.99
+  },
+  "modelo_A_sem_vigencia": {
+    "features": [
+      "objeto_palavras",
+      "complexidade_lexica",
+      "score_tecnico",
+      "valor_log",
+      "uf_encoded",
+      "tipo_encoded",
+      "if_anomaly_score",
+      "if_is_anomaly",
+      "interacao_if_valor"
+    ],
+    "acuracia": 0.918,
+    "auc_roc": 0.8893,
+    "f1_score": 0.2344,
+    "feature_importance_gini": {
+      "objeto_palavras": 0.1133,
+      "complexidade_lexica": 0.0849,
+      "score_tecnico": 0.0025,
+      "valor_log": 0.1764,
+      "uf_encoded": 0.1845,
+      "tipo_encoded": 0.1823,
+      "if_anomaly_score": 0.0999,
+      "if_is_anomaly": 0.0043,
+      "interacao_if_valor": 0.152
+    }
+  },
+  "modelo_B_com_vigencia": {
+    "features": [
+      "objeto_palavras",
+      "complexidade_lexica",
+      "score_tecnico",
+      "valor_log",
+      "uf_encoded",
+      "tipo_encoded",
+      "vigencia_log",
+      "if_anomaly_score",
+      "if_is_anomaly",
+      "interacao_if_valor",
+      "interacao_if_vigencia"
+    ],
+    "acuracia": 0.9336,
+    "auc_roc": 0.9083,
+    "f1_score": 0.2639,
+    "feature_importance_gini": {
+      "objeto_palavras": 0.0912,
+      "complexidade_lexica": 0.0652,
+      "score_tecnico": 0.0017,
+      "valor_log": 0.1475,
+      "uf_encoded": 0.1375,
+      "tipo_encoded": 0.1462,
+      "vigencia_log": 0.1096,
+      "if_anomaly_score": 0.0657,
+      "if_is_anomaly": 0.0032,
+      "interacao_if_valor": 0.1214,
+      "interacao_if_vigencia": 0.1107
+    },
+    "feature_importance_shap": {
+      "objeto_palavras": 6.33,
+      "complexidade_lexica": 4.36,
+      "score_tecnico": 0.27,
+      "valor_log": 11.31,
+      "uf_encoded": 20.91,
+      "tipo_encoded": 20.77,
+      "vigencia_log": 14.4,
+      "if_anomaly_score": 4.33,
+      "if_is_anomaly": 0.45,
+      "interacao_if_valor": 6.89,
+      "interacao_if_vigencia": 9.98
+    }
+  }
+}

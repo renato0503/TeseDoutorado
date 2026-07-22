@@ -1,0 +1,23 @@
+# Cloud Function (Python 3.11) - Copiloto Algoritmico
+# Backend de ML real: RF + Isolation Forest + SHAP sobre dados do PNCP.
+# Autenticacao: Firebase Admin SDK para validar tokens JWT.
+#
+# Versoes fixadas (19/07/2026) para garantir compatibilidade com os modelos
+# treinados e empacotados em /saved (sklearn 1.9.0).
+# O runtime Python 3.11 e definido em firebase.json.
+
+functions-framework==3.*
+google-cloud-firestore==2.20.0
+
+# Autenticacao Firebase (validacao de tokens JWT)
+firebase-admin>=6.4.0,<7.0.0
+
+# ML core — versoes fixadas para evitar InconsistentVersionWarning
+numpy>=1.24.0,<3.0.0
+pandas>=2.0.0,<3.0.0
+scikit-learn==1.9.0
+shap>=0.43.0,<0.50.0
+joblib>=1.3.0
+
+# Utilitarios
+requests>=2.31.0

@@ -1,0 +1,62 @@
+[
+  {
+    "objeto": "Contratação de serviços de desenvolvimento e manutenção de sistemas de informação para a administração pública",
+    "orgao": "Ministério da Gestão e da Inovação em Serviços Públicos",
+    "modalidade": "Pregão Eletrônico",
+    "valor_estimado": 1500000.0,
+    "valor_total": null,
+    "data_publicacao": "2024-01-15",
+    "situacao": "Vigente",
+    "link_edital": "https://pncp.gov.br/edital/2024/001",
+    "termo_busca": "software",
+    "data_extracao": "2026-05-16T15:23:31.824464"
+  },
+  {
+    "objeto": "Serviços de computação em nuvem (IaaS/PaaS) para órgãos da administração pública federal",
+    "orgao": "Controladoria-Geral da União",
+    "modalidade": "Pregão Eletrônico",
+    "valor_estimado": 2500000.0,
+    "valor_total": null,
+    "data_publicacao": "2024-02-10",
+    "situacao": "Vigente",
+    "link_edital": "https://pncp.gov.br/edital/2024/002",
+    "termo_busca": "nuvem",
+    "data_extracao": "2026-05-16T15:23:31.824491"
+  },
+  {
+    "objeto": "Contratação de solução de inteligência artificial para análise de dados governamentais",
+    "orgao": "Ministério da Ciência, Tecnologia e Inovação",
+    "modalidade": "Concorrência",
+    "valor_estimado": 800000.0,
+    "valor_total": 750000.0,
+    "data_publicacao": "2024-03-05",
+    "situacao": "Encerrada",
+    "link_edital": "https://pncp.gov.br/edital/2024/003",
+    "termo_busca": "inteligência artificial",
+    "data_extracao": "2026-05-16T15:23:31.824497"
+  },
+  {
+    "objeto": "Serviços de transformação digital e modernização de sistemas legados",
+    "orgao": "Ministério da Educação",
+    "modalidade": "Pregão Eletrônico",
+    "valor_estimado": 1200000.0,
+    "valor_total": null,
+    "data_publicacao": "2024-03-20",
+    "situacao": "Vigente",
+    "link_edital": "https://pncp.gov.br/edital/2024/004",
+    "termo_busca": "inovação tecnológica",
+    "data_extracao": "2026-05-16T15:23:31.824502"
+  },
+  {
+    "objeto": "Plataforma de gestão de dados e indicadores de políticas públicas",
+    "orgao": "Ministério do Planejamento e Orçamento",
+    "modalidade": "Pregão Eletrônico",
+    "valor_estimado": 950000.0,
+    "valor_total": 920000.0,
+    "data_publicacao": "2024-04-01",
+    "situacao": "Encerrada",
+    "link_edital": "https://pncp.gov.br/edital/2024/005",
+    "termo_busca": "desenvolvimento de sistemas",
+    "data_extracao": "2026-05-16T15:23:31.824506"
+  }
+]
