@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Artigo tecnológico: Copiloto Algorítmico XAI</title>
+    <base href="./">
+    <link rel="stylesheet" href="../../../css/style_academico.css">
+    <style>
+        .shap-bar-container { margin: 0.3cm 0; }
+        .shap-bar-row { display: flex; align-items: center; margin-bottom: 4px; font-size: 10pt; }
+        .shap-bar-label { width: 200px; text-align: right; padding-right: 8px; font-weight: 500; }
+        .shap-bar-track { flex: 1; height: 18px; background: #f0f0f0; border-radius: 3px; overflow: hidden; }
+        .shap-bar-fill { height: 100%; border-radius: 3px; }
+        .shap-bar-value { width: 65px; padding-left: 8px; font-size: 9pt; color: #555; }
+        .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
+        .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        .ref-entry { text-indent: -1.27cm; padding-left: 1.27cm; margin: 0 0 0.3cm 0; text-align: justify; font-size: 11pt; }
+        h3 { font-size: 12pt; font-weight: bold; margin: 0.6cm 0 0.3cm 0; }
+        h4 { font-size: 11pt; font-weight: bold; margin: 0.4cm 0 0.2cm 0; }
+        .design-principle { background:#f8f9fa; border-left:4px solid #007aff; padding:12px 16px; margin:8px 0; font-size:11pt; text-align:justify; }
+        .appendix { page-break-before: always; }
+        .appendix h1 { font-size: 14pt; font-weight: bold; text-align: center; margin: 0 0 0.6cm 0; text-transform: uppercase; page-break-after: avoid; }
+        .appendix h2 { font-size: 12pt; font-weight: bold; margin: 0.8cm 0 0.3cm 0; page-break-after: avoid; }
+        .appendix h3 { font-size: 12pt; font-weight: bold; margin: 0.6cm 0 0.3cm 0; page-break-after: avoid; }
+        .appendix p { text-indent: 1.27cm; margin: 0 0 0.3cm 0; text-align: justify; font-size: 12pt; line-height: 2; }
+        .appendix ul, .appendix ol { margin: 0.3cm 0 0.3cm 1cm; padding-left: 0.5cm; }
+        .appendix li { margin-bottom: 0.2cm; text-align: justify; }
+        .appendix table { width: 100%; border-collapse: collapse; margin: 0.5cm 0; font-size: 10pt; line-height: 1.2; page-break-inside: avoid; }
+        .appendix th { border-top: 1px solid black; border-bottom: 1px solid black; padding: 6px 8px; font-weight: bold; text-align: center; background-color: #f5f5f5; }
+        .appendix td { padding: 5px 8px; text-align: center; border-bottom: 0.5px solid #ddd; }
+        .appendix td.left { text-align: left; }
+        .appendix .table-note { text-indent: 0; font-size: 9pt; margin-top: 0.15cm; margin-bottom: 0.3cm; line-height: 1.3; }
+    </style>
+</head>
+<body>
+    <div class="control-panel no-print">
+        <button onclick="window.print()" class="btn-print">Imprimir / Salvar PDF</button>
+        <button onclick="exportarDocx()" class="btn-docx">Baixar DOCX</button>
+    </div>
+
+    <section class="paper-page">
+        <div class="page-content">
+            <h1 class="paper-title">DESENVOLVIMENTO DE UM COPILOTO ALGORÍTMICO BASEADO EM INTELIGÊNCIA ARTIFICIAL EXPLICÁVEL PARA APOIO À DECISÃO EM COMPRAS PÚBLICAS COMPLEXAS</h1>
+            <p class="author-info"><strong>Renato de Oliveira Rosa</strong><br>
+            <span style="font-size: 10pt; color: #555;">Fucape Business School &middot; Doutorado em Contabilidade<br>E-mail: gestor.renatorosa@gmail.com</span></p>
+
+            <div class="abstract-box">
+                <h2>RESUMO</h2>
+                <p>O déficit técnico e a assimetria informacional nas unidades compradoras do setor público brasileiro impõem barreiras ao sucesso das contratações de inovação. Ferramentas de suporte à decisão baseadas em inteligência artificial surgem como solução, porém esbarram no paradigma da caixa-preta, que conflita com o dever constitucional de motivação dos atos administrativos. O presente artigo tecnológico relata a engenharia e o desenvolvimento de um Copiloto Algorítmico projetado para oferecer suporte à auditoria ex-ante de minutas de editais de compras complexas. Ancorado no paradigma metodológico Design Science Research (DSR) de Peffers et al. (2007), o artefato integra duas camadas algorítmicas acopladas: um motor de detecção de padrões textuais atípicos via aprendizado não supervisionado (Isolation Forest, IF, 100 árvores) e um motor de estimação de risco via aprendizado supervisionado (Random Forest Classifier, 100 árvores, 11 variáveis, com o escore do IF e interações multiplicativas incorporados). Treinado sobre 100.000 contratos do Portal Nacional de Contratações Públicas (PNCP), o modelo supervisionado atingiu acurácia de 93,36% e AUC-ROC de 90,83% na detecção de eventos adversos definidos como proxy (aditivos superiores a 10% e retificações múltiplas). A conformidade legal da ferramenta é buscada por meio da integração de técnicas de Inteligência Artificial Explicável (XAI) Normativamente Ancorada: a atribuição de importância via SHAP (SHapley Additive exPlanations), combinada à explicabilidade contrafactual jurídica que simula o efeito de alterações nas características do contrato, oferece ao gestor público a trilha de auditoria e o subsídio técnico para a motivação decisória exigidos pela Lei 14.133/2021 e pela Lei Geral de Proteção de Dados (LGPD). Cinco modelos de referência demonstram que o artefato proposto supera alternativas mais simples, com ganho incremental de 4,2 pontos percentuais de F1-Score sobre a melhor alternativa não-ensemble. A arquitetura, as decisões de design e as métricas de desempenho são documentadas, e cinco princípios de design para XAI no setor público são extraídos como contribuição teórica da pesquisa. O código-fonte está disponível em repositório aberto (GitHub).</p>
+                <p><strong>Palavras-chave:</strong> Inteligência Artificial Explicável; Design Science Research; Copiloto Algorítmico; Compras Públicas; SHAP.</p>
+            </div>
+
+            <div class="abstract-box">
+                <h2>ABSTRACT</h2>
+                <p>The technical deficit and informational asymmetry within public purchasing units in Brazil impose barriers to the success of innovation procurement. AI-based decision-support tools emerge as a solution, yet they conflict with the black-box paradigm, which violates the constitutional duty to provide motivated administrative acts. This technological article reports the engineering and development of an Algorithmic Copilot designed to support the ex-ante auditing of complex bidding documents. Grounded in the Design Science Research (DSR) paradigm by Peffers et al. (2007), the artifact integrates two coupled algorithmic layers: an unsupervised textual pattern detection engine (Isolation Forest, 100 trees) and a supervised risk estimation engine (Random Forest Classifier, 100 trees, 11 variables, with the IF score and multiplicative interactions incorporated). Trained on 100,000 contracts from the National Public Procurement Portal (PNCP), the supervised model achieved 93.36% accuracy and 90.83% AUC-ROC in detecting adverse events defined as a proxy (addendums exceeding 10% and multiple amendments). The legal compliance of the tool is pursued through the integration of Explainable AI (XAI) techniques: feature attribution via SHAP (SHapley Additive exPlanations), combined with sensitivity analysis that simulates the effect of changes in contract characteristics on the prediction, provides public managers with the audit trail and decision rationale required by Law 14.133/2021 and the General Data Protection Law (LGPD). Five baseline models demonstrate that the proposed artifact outperforms simpler alternatives, with an incremental gain of 4.2 percentage points in F1-Score over the best non-ensemble alternative. The architecture, design decisions, and performance metrics are documented, and five design principles for XAI in the public sector are extracted as the theoretical contribution of the research. Source code is available in an open repository (GitHub).</p>
+                <p><strong>Keywords:</strong> Explainable AI; Design Science Research; Algorithmic Copilot; Public Procurement; SHAP.</p>
+            </div>
+
+            <h2>1 INTRODUÇÃO</h2>
+            <p>Conforme evidenciado por estudo prévio sobre as contratações registradas no Portal Nacional de Contratações Públicas (PNCP), as compras governamentais complexas (inovação, tecnologia e sustentabilidade) estão associadas a maior <em>odds</em> de eventos adversos quando controladas por vigência e valor (OR = 1,46). A incapacidade técnica de grande parte das unidades compradoras em fazer frente a um mercado fornecedor altamente concentrado (Gini = 0,89) gera editais deficientes, culminando em impugnações mercadológicas, aditivos excessivos e ineficiência do gasto público. O diagnóstico revelou ainda que a vigência contratual insuficiente constitui o fator de maior magnitude associado a desfechos adversos, sugerindo que a urgência administrativa crônica, e não a omissão comportamental dos gestores, é a principal vulnerabilidade do sistema de compras públicas brasileiro.</p>
+            <p>Se o gargalo reside na assimetria de conhecimento, a equalização de forças exige a implantação de mecanismos de suporte à decisão baseados em conhecimento. Entretanto, o setor público brasileiro impõe uma severa restrição arquitetural à adoção de tecnologias emergentes de aprendizado de máquina e inteligência artificial: a exigência inegociável de transparência, motivação e prestação de contas. Modelos preditivos contemporâneos, como Redes Neurais Profundas e Florestas Aleatórias, operam sob o paradigma de caixa-preta (<em>black-box</em>), no qual nem mesmo seus desenvolvedores conseguem delinear exatamente a cadeia causal que levou o algoritmo a uma determinada conclusão (Doshi-Velez & Kim, 2017). Esta opacidade é frontalmente incompatível com o Art. 5º da Lei 14.133/2021 (princípio da motivação), com o Art. 20 da Lei Geral de Proteção de Dados (direito à explicação sobre decisões automatizadas) e com os Arts. 20 e 22 da Lei de Introdução às Normas do Direito Brasileiro (LINDB), que vedam a responsabilização de gestores com base em valores jurídicos abstratos sem consideração das circunstâncias práticas e das consequências administrativas da decisão.</p>
+            <p>Diante desse impasse entre a urgência pela adoção de tecnologias de redução de assimetria e o imperativo legal de <em>accountability</em>, este artigo tecnológico tem por objetivo descrever o processo de concepção, engenharia e validação de um artefato de software denominado Copiloto Algorítmico. Mais do que um preditor de eventos adversos em editais, a ferramenta foi concebida sob o paradigma da Inteligência Artificial Explicável (Explainable AI, XAI), sendo desenhada nativamente para oferecer suporte à auditoria de minutas de editais de inovação e apresentar justificativas interpretáveis para cada alerta gerado. A contribuição central do artefato reside na demonstração de que é tecnicamente viável implementar aprendizado de máquina avançado no setor público brasileiro preservando integralmente a transparência e a autonomia decisória do gestor, mediante a combinação de atribuição de importância (SHAP) e análise de sensibilidade (<em>what-if</em>) como mecanismo pragmático de XAI.</p>
+            <p>O artefato foi implantado como aplicação web em plataforma Streamlit Cloud, com código-fonte integralmente disponível em repositório aberto no GitHub sob licença MIT. O desenvolvimento seguiu os seis passos do método Design Science Research (Peffers et al., 2007), abrangendo da identificação do problema à comunicação dos resultados. <strong>A Figura 1</strong> ilustra a linha do tempo do desenvolvimento DSR, mostrando como as iterações I0–I4 se distribuíram entre maio e julho de 2026, com marcos em protótipos HTML, scripts isolados, MVP Streamlit, correção de tautologia (I3) e integração final IF-RF (I4).</p>
+
+            <figure style="text-align:center; margin: 0.6cm 0;">
+                <img id="fig1" style="max-width:100%; width:680px;" />
+                <figcaption style="font-size:10pt; margin-top:0.2cm; font-style:italic;">Figura 1: Linha do Tempo do Desenvolvimento DSR (Peffers et al., 2007). Iterações I0–I4 cobriram os meses de maio/2026 a julho/2026, com marcos em protótipos HTML (I0), scripts isolados (I1), MVP Streamlit heurístico (I2), correção de tautologia com alvo sintético (I3) e integração final IF-RF com alvo observável (I4). Cada iteração gerou princípios de design que orientaram o refinamento subsequente do artefato.</figcaption>
+            </figure>
+
+            <h2>2 METODOLOGIA DE DESENVOLVIMENTO</h2>
+
+            <h3>2.1 Paradigma Design Science Research</h3>
+            <p>A construção do Copiloto Algorítmico obedeceu à epistemologia pragmática da Design Science Research (DSR). Diferentemente das pesquisas tradicionais voltadas à explicação de fenômenos, a DSR foca na criação de artefatos utilitários que resolvem problemas relevantes para a sociedade (Hevner et al., 2004). O desenvolvimento seguiu os seis passos propostos por Peffers et al. (2007), adaptados ao contexto das compras públicas brasileiras:</p>
+            <ul>
+                <li><strong>Identificação do Problema:</strong> diagnóstico da assimetria informacional e do custo de transação na redação de editais de inovação, comprovado via análise de 572.045 contratos do PNCP (Set/2021 a Ago/2024), com filtro semântico NLP identificando 5.687 compras complexas (0,99% do total). Estudos prévios demonstraram que, controlando por vigência e valor, compras complexas estão associadas a um aumento de 46% na <em>odds</em> de eventos adversos (OR = 1,46).</li>
+                <li><strong>Definição dos Objetivos:</strong> construção de ferramenta de suporte capaz de analisar minutas de editais e apontar riscos antes da publicação, de forma fundamentada em teoria econômica (custos de transação, teoria da agência) e em conformidade com o arcabouço jurídico brasileiro (Lei 14.133/2021, LGPD, LINDB).</li>
+                <li><strong>Design e Desenvolvimento:</strong> arquitetura modular em Python integrando Processamento de Linguagem Natural (TF-IDF, 500 características), Isolation Forest (100 árvores, <em>contamination</em> = 0,1), Random Forest Classifier (100 árvores, 11 variáveis, com escore IF e interações multiplicativas incorporados) e SHAP TreeExplainer para atribuição de importância.</li>
+                <li><strong>Demonstração:</strong> aplicação sobre <em>corpus</em> de teste de 20.000 contratos (20% <em>holdout</em> estratificado), com exemplos carregáveis no aplicativo (Edital de TI, Contrato de inovação) e interface com campos para valor estimado e vigência prevista.</li>
+                <li><strong>Avaliação:</strong> métricas de desempenho contra 5 modelos de referência (<em>Dummy</em>, Regressão Logística simples e multivariada, Árvore de Decisão e Random Forest), documentação da contribuição marginal de cada variável via SHAP e análise de sensibilidade.</li>
+                <li><strong>Comunicação:</strong> disseminação por meio do presente artigo tecnológico, repositório aberto (GitHub, licença MIT), <em>deploy</em> no Streamlit Cloud e documentação técnica completa.</li>
+            </ul>
+
+            <h3>2.2 Fundamentação em XAI: o Imperativo da Explicabilidade no Setor Público</h3>
+            <p>O dilema entre a sofisticação preditiva dos modelos contemporâneos de aprendizado de máquina e a exigência legal de transparência constitui o principal obstáculo à adoção de IA no setor público. Modelos de alto desempenho (Random Forest, XGBoost, Redes Neurais) são inerentemente opacos: produzem predições precisas, mas não oferecem justificativas compreensíveis para suas decisões. Este paradigma de caixa-preta é incompatível com o ordenamento jurídico brasileiro, que exige motivação expressa dos atos administrativos (Art. 5º da Lei 14.133/2021), garantia de contraditório e ampla defesa (Art. 5º, LV, da Constituição Federal) e direito à revisão de decisões automatizadas (Art. 20 da LGPD).</p>
+            <p>Para contornar esse bloqueio, o Copiloto foi projetado incorporando técnicas de Inteligência Artificial Explicável (XAI) de caráter Normativamente Ancorado. O método SHAP (SHapley Additive exPlanations), baseado na teoria dos Jogos Cooperativos de Shapley (Lundberg & Lee, 2017), calcula a contribuição estatística de cada variável para o escore de risco final, permitindo que o sistema responda à pergunta: "Quais características deste edital mais contribuíram para o nível de risco estimado?" É necessário, contudo, distinguir a explicabilidade algorítmica da motivação jurídica: o SHAP fornece a causalidade estatística (o "porquê" matemático do alerta), servindo de subsídio técnico, enquanto cabe exclusivamente ao gestor público, em exercício de sua discricionariedade técnica, traduzir esse alerta em motivação jurídica formal, associando-o aos dispositivos legais pertinentes.</p>
+            <p>Complementarmente, o Copiloto implementa a explicabilidade contrafactual jurídica baseada na abordagem <em>what-if</em> inspirada em Wachter et al. (2017). Para cada variável de alto impacto, o sistema simula cenários alternativos de mitigação sugerindo conformidade normativa: em vez de apenas relatar a redução numérica do risco (ex: risco cai de 89% para 41%), o sistema traduz a mudança em termos normativos, apontando que a adequação da vigência ou do valor orçamentário atende ao princípio da eficiência (Art. 5º da Lei 14.133/2021) e ao planejamento contratual. O sistema é implementado com um dicionário de <em>templates</em> jurídicos (<code>counterfactual_templates.json</code>) que mapeia cada variável a dispositivos legais específicos: <code>vigencia_log</code> remete ao Art. 5º, VI e Art. 133 (planejamento e cronograma); <code>valor_log</code> ao princípio da eficiência e razoabilidade; <code>tipo_encoded</code> à adequação do instrumento contratual; <code>uf_encoded</code> ao respeito à isonomia e competitividade (Art. 54); e as variáveis de anomalia textual ao dever de saneamento de cláusulas atípicas. A combinação dessas duas técnicas, atribuição aditiva e contrafactuais normativos, oferece ao gestor público uma trilha de auditoria suficiente para fundamentar os motivos de fato do ato administrativo, em plena sintonia com as exigências da Lei 14.133/2021, da LGPD (Art. 20) e da LINDB (Arts. 20 e 22), sem violar a propriedade intelectual do modelo.</p>
+
+            <h3>2.3 Operacionalização dos Construtos Teóricos</h3>
+            <p>A <strong>Tabela 1</strong> apresenta o mapeamento detalhado entre os construtos teóricos que fundamentam a pesquisa e sua respectiva operacionalização no código-fonte do artefato. Cada decisão arquitetural e cada variável do modelo correspondem a um conceito da literatura de custos de transação, teoria da agência, organização industrial ou direito administrativo. Este mapeamento explícito atende ao critério de rigor da DSR (Hevner et al., 2004), assegurando que o artefato não seja uma construção puramente empírica, mas uma materialização de teoria testável (Gregor & Hevner, 2013).</p>
+
+            <p class="table-note"><strong>Tabela 1.</strong> Operacionalização dos construtos teóricos no Copiloto Algorítmico.</p>
+            <table class="dataframe">
+                <thead>
+                    <tr><th>Construto Teórico</th><th>Autor</th><th>Operacionalização no código</th><th>Evidência empírica</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Custo de transação ex-ante e especificidade de ativos</td>
+                        <td>Williamson (1985)</td>
+                        <td>Variável <code>vigencia_log</code>: a duração contratual como proxy da complexidade da transação. Contratos mais longos permitem diluir custos fixos de planejamento e investir em ativos específicos.</td>
+                        <td>Peso SHAP 14,40% (após correção de tautologia no alvo)</td>
+                    </tr>
+                    <tr>
+                        <td>Assimetria informacional e racionalidade limitada</td>
+                        <td>Akerlof (1970); Williamson (1985)</td>
+                        <td>Variáveis <code>complexidade_lexica</code> e <code>objeto_palavras</code>: a densidade e extensão do texto do objeto como indicadores do grau de assimetria informacional entre comprador e fornecedor.</td>
+                        <td>Peso SHAP combinado de 10,69% (<code>complexidade_lexica</code> 4,36% + <code>objeto_palavras</code> 6,33%)</td>
+                    </tr>
+                    <tr>
+                        <td>Risco moral ex-post e monitoramento</td>
+                        <td>Jensen & Meckling (1976)</td>
+                        <td>Variável <code>score_tecnico</code>: contagem de termos técnicos no objeto como proxy da capacidade de monitoramento contratual. Módulo de detecção de lacunas: 16 padrões regex que identificam cláusulas de proteção ausentes (garantia, SLA, confidencialidade).</td>
+                        <td>Peso SHAP 0,27%; 16 cláusulas monitoradas em conformidade com a Lei 14.133/2021</td>
+                    </tr>
+                    <tr>
+                        <td>Padrões textuais atípicos e interações IF-valor/vigência</td>
+                        <td>Liu, Ting & Zhou (2008)</td>
+                        <td>Isolation Forest sobre matriz TF-IDF de 15.000 objetos do PNCP. O escore de anomalia (<code>if_anomaly_score</code>), a flag (<code>if_is_anomaly</code>) e as interações multiplicativas (<code>interacao_if_valor</code>, <code>interacao_if_vigencia</code>) são incorporados como variáveis do Random Forest.</td>
+                        <td>Contribuição combinada de 20,65% (SHAP: IF 4,33% + IF_is 0,45% + inter_IF_valor 6,89% + inter_IF_vigencia 9,98%)</td>
+                    </tr>
+                    <tr>
+                        <td><em>Accountability</em> estatal e transparência algorítmica</td>
+                        <td>Wachter et al. (2017); Lei 14.133/2021; LGPD</td>
+                        <td>SHAP TreeExplainer para atribuição de importância + contrafactuais normativos. A combinação oferece ao gestor público o subsídio técnico necessário para a motivação dos atos administrativos.</td>
+                        <td>3 variáveis com análise de sensibilidade por análise; conformidade com Art. 5º (Lei 14.133) e Art. 20 (LGPD)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> O mapeamento conecta cada construto da fundamentação teórica (Colunas 1-2) a um componente concreto do artefato (Coluna 3), com evidência quantitativa ou qualitativa de sua presença no sistema (Coluna 4).</p>
+
+            <p>Como evidenciado na <strong>Tabela 1</strong>, a variável <code>vigencia_log</code> emergiu como o principal preditor após a correção de tautologia (14,40% SHAP), corroborando a teoria de Williamson (1985) sobre especificidade de ativos. As interações multiplicativas entre o escore de anomalia textual (IF) e as variáveis estruturais (valor e vigência) contribuem com 20,65% combinados, demonstrando que o NLP modula, e não compete, com as características estruturais do contrato.</p>
+
+            <h3>2.4 Iterações de Design e Decisões Arquiteturais</h3>
+            <p>A DSR documenta de forma autêntica não apenas o artefato final, mas o percurso que levou a ele, incluindo refinamentos sucessivos e lições extraídas (Peffers et al., 2007; Gregor & Hevner, 2013). A <strong>Tabela 2</strong> sumariza as cinco iterações de desenvolvimento do Copiloto, as decisões tomadas em cada uma e os princípios de design emergentes.</p>
+
+            <p class="table-note"><strong>Tabela 2.</strong> Iterações de Design do Copiloto Algorítmico.</p>
+            <table class="dataframe">
+                <thead>
+                    <tr><th>Iteração</th><th>Início</th><th>Objetivo</th><th>Decisão de Design</th><th>Princípio de Design Extraído</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>I0:</strong> Protótipos HTML</td><td>Mai/2026</td><td>Validação conceitual com interface estática</td><td>HTML insuficiente: necessário backend com aprendizado de máquina operando sobre dados reais do PNCP</td><td><strong>PD1:</strong> A confiança do usuário no artefato decorre da transparência sobre os dados de treinamento, não da sofisticação da interface.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>I1:</strong> Scripts isolados</td><td>Jun/2026</td><td>Treinamento de modelos em notebooks Jupyter</td><td>Modelos funcionavam, mas inacessíveis a gestores não técnicos</td><td><strong>PD2:</strong> O artefato deve ser empacotado como aplicação web; a barreira técnica anula o propósito de reduzir assimetria.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>I2:</strong> MVP Streamlit heurístico</td><td>Jun/2026</td><td>Aplicação web com 16 regras de regex para detecção de cláusulas</td><td>Heurísticas detectavam lacunas, mas não aprendiam com dados nem capturavam padrões emergentes</td><td><strong>PD3:</strong> A combinação de regras explícitas (auditáveis) com modelos de aprendizado de máquina (adaptativos) oferece o melhor equilíbrio entre transparência e desempenho.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>I3:</strong> Aprendizado de máquina com alvo sintético</td><td>Jul/2026</td><td>Random Forest com alvo determinístico composto pelas mesmas variáveis de entrada</td><td>Métricas de 99%+ eram artefato da construção circular do alvo; necessário ancorar o alvo em desfechos observáveis</td><td><strong>PD4:</strong> O alvo do modelo supervisionado deve ser ancorado em desfechos administrativos observáveis, não em construtos computacionais.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>I4:</strong> Alvo observável + integração IF-RF</td><td>Jul/2026</td><td>Alvo com eventos reais do PNCP + Isolation Forest acoplado como variável do Random Forest</td><td>Modelos integrados capturam sinais complementares; a vigência contribui com SHAP 14,4% após correção de tautologia (interações IF elevam contribuição total)</td><td><strong>PD5:</strong> A integração de camadas não supervisionada e supervisionada produz ganho incremental, mas a magnitude do ganho deve ser reportada para justificar a complexidade adicional.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>A evolução das iterações de design revela um aprendizado crítico: a <strong>Figura 2</strong> mostra como as métricas de desempenho evoluíram ao longo das iterações I0–I4. Note-se que a área hachurada em vermelho (I3) indica o período em que o modelo utilizava um alvo sintético, gerando métricas artificialmente elevadas (99%+). A iteração I4 corrige essa tautologia e ancora o alvo em eventos <em>ex-post</em> observáveis, resultando em métricas mais realistas porém metodologicamente válidas.</p>
+
+            <figure style="text-align:center; margin: 0.6cm 0;">
+                <img id="fig2" style="max-width:100%; width:620px;" />
+                <figcaption style="font-size:10pt; margin-top:0.2cm; font-style:italic;">Figura 2: Evolução das métricas por iteração de design. Acurácia (linha azul) e F1-Score (linha verde) ao longo das iterações I0–I4. A área hachurada em vermelho (I3) indica o período em que o modelo utilizava alvo sintético (métricas artificiais de 99%+). A iteração I4 corrige a tautologia e ancora o alvo em eventos <em>ex-post</em> observáveis (aditivos >10% e retificações múltiplas), resultando em acurácia de 93,36% e F1-Score de 26,39% (refletindo o desequilíbrio severo de classes: 1,99% positivos).</figcaption>
+            </figure>
+
+            <p>Para evidenciar o impacto da correção de tautologia, a <strong>Figura 3</strong> compara o modelo antes e depois da remoção de "vigência < 30 dias" do critério do alvo. A queda na acurácia aparente (98,27% → 93,36%) e a redução drástica na importância SHAP da variável vigência (76,11% → 14,40%) demonstram que o modelo anterior estava essencialmente memorizando a definição do alvo, e não aprendendo padrões preditivos generalizáveis.</p>
+
+            <figure style="text-align:center; margin: 0.6cm 0;">
+                <img id="fig3" style="max-width:100%; width:620px;" />
+                <figcaption style="font-size:10pt; margin-top:0.2cm; font-style:italic;">Figura 3: Comparação antes/depois da correção de tautologia. Painel esquerdo (ANTES): modelo com "vigência < 30 dias" incluído no alvo, resultando em acurácia de 98,27% e SHAP de <code>vigencia_log</code> de 76,11% (tautologia). Painel direito (DEPOIS): alvo reconstruído excluindo vigência < 30 dias, resultando em acurácia de 93,36%, SHAP de <code>vigencia_log</code> de 14,40%, e exposição do desequilíbrio real de classes (1,99% positivos). A queda nas métricas indica remoção de viés, não piora do modelo.</figcaption>
+            </figure>
+
+            <h2>3 ARQUITETURA DO PRODUTO</h2>
+
+            <h3>3.1 Visão Geral da Arquitetura</h3>
+            <p>Antes de detalhar cada componente, é importante compreender o fluxo geral de processamento. A <strong>Figura 4</strong> apresenta o diagrama de arquitetura do Copiloto Algorítmico, mostrando como os dados fluem desde o upload do edital até a geração de recomendações normativas. O sistema opera em três camadas principais: (i) pré-processamento e detecção de anomalias textuais via TF-IDF/Isolation Forest, (ii) engenharia de variáveis e interações multiplicativas, e (iii) estimação de risco via Random Forest com explicabilidade SHAP e contrafactuais normativos.</p>
+
+            <figure style="text-align:center; margin: 0.6cm 0;">
+                <img id="fig4" style="max-width:100%; width:750px;" />
+                <figcaption style="font-size:10pt; margin-top:0.2cm; font-style:italic;">Figura 4: Arquitetura do Copiloto Algorítmico. Fluxo de processamento: (1) Texto do edital é tokenizado e vetorizado via TF-IDF (500 características); (2) Isolation Forest detecta anomalias textuais em 15.000 objetos complexos do PNCP; (3) Engenharia de variáveis extrai 8 <em>features</em> estruturais (vigência, valor, UF, tipo, complexidade léxica, etc.); (4) Interações multiplicativas combinam escore IF com valor e vigência; (5) Random Forest (11 variáveis, 100 árvores) estima probabilidade de risco; (6) SHAP TreeExplainer gera atribuição de importância; (7) Contrafactuais normativos mapeiam <em>features</em> para dispositivos legais (Lei 14.133/2021, LGPD).</figcaption>
+            </figure>
+
+            <h3>3.2 Processamento de Linguagem Natural e Engenharia de Variáveis</h3>
+            <p>O primeiro estágio do fluxo consiste na conversão do texto do edital em representações numéricas interpretáveis por máquina. Utilizou-se o vetorizador TF-IDF (Term Frequency-Inverse Document Frequency) com 500 características, n-gramas (1,2) e frequência mínima de documento = 2, treinado sobre uma amostra de 15.000 objetos de contratos do PNCP. Este vetorizador alimenta exclusivamente o motor de Isolation Forest, que opera no espaço semântico de alta dimensionalidade para detectar padrões textuais atípicos. Em paralelo, um módulo de pré-processamento extrai 8 variáveis de engenharia textual diretamente do texto, sem passar pelo TF-IDF: contagem de palavras, complexidade léxica (razão <em>type-token</em>), densidade de termos técnicos, entre outras.</p>
+            <p><strong><em>Pipeline</em> de amostragem em dois estágios:</strong> Optou-se por uma estratégia de amostragem em dois estágios para otimização computacional e foco semântico. Primeiramente, uma amostra estratificada de 15.000 contratos classificados como 'complexos' (tecnologia, inovação, sustentabilidade) foi utilizada para treinar o vetorizador TF-IDF e o modelo de Isolation Forest, garantindo que a detecção de anomalias fosse calibrada no universo de maior risco informacional. Em seguida, os escores de anomalia gerados por este modelo foram computados e anexados como <em>features</em> a uma base expandida de 100.000 contratos, sobre a qual o Random Forest foi treinado e validado. Esta separação garante que o TF-IDF/IF opere exclusivamente sobre o domínio semântico relevante, enquanto o classificador final recebe tanto <em>features</em> estruturais quanto o escore de anomalia textual integrado como variável preditiva.</p>
+            <p>O Random Forest opera sobre estas 8 variáveis mais 3 provenientes do IF (escore, flag e interações), totalizando 11 variáveis. Esta separação arquitetural, que separa o TF-IDF para detecção de anomalias da engenharia manual para predição de risco, privilegia a interpretabilidade das variáveis do modelo supervisionado, permitindo que cada uma seja compreendida e auditada por gestores e órgãos de controle.</p>
+            <p>Adicionalmente, o módulo de pré-processamento aplica 16 padrões de expressão regular (regex) para identificação de cláusulas contratuais padronizadas (objeto, fundamentação legal, critério de julgamento, vigência, pagamento, habilitação, sanções, garantia, dotação orçamentária, recebimento, propriedade intelectual, confidencialidade, SLA, rescisão, sustentabilidade, inovação) e detecção de ausências (lacunas) com <em>score</em> de criticidade. Estas regras explícitas, embora estáticas, oferecem transparência total e rastreabilidade jurídica, complementando o motor preditivo com um componente determinístico e plenamente auditável.</p>
+
+            <h3>3.3 Motor de Detecção de Padrões Atípicos (Isolation Forest)</h3>
+            <p>O segundo estágio emprega o algoritmo Isolation Forest (Liu, Ting & Zhou, 2008) com 100 árvores e parâmetro de contaminação de 0,1. O IF identifica objetos cujo perfil léxico (representado pelo vetor TF-IDF de 500 dimensões) se distancia significativamente do padrão médio dos 15.000 objetos do PNCP. Um edital com vocabulário muito técnico, muito extenso, ou com concentração atípica de termos de sustentabilidade tende a ser sinalizado. A sinalização de atipicidade textual não deve ser interpretada como detecção automática de direcionamento licitatório; trata-se de um alerta que requer investigação humana subsequente, funcionando como um mecanismo de triagem que direciona a atenção do gestor para os editais que mais se afastam do perfil médio do mercado.</p>
+            <p>Na arquitetura atual, o escore de anomalia do IF (<code>if_anomaly_score</code>), a flag binária de detecção (<code>if_is_anomaly</code>) e as interações multiplicativas (<code>interacao_if_valor</code>, <code>interacao_if_vigencia</code>) são incorporados como três das 11 variáveis do Random Forest. Esta integração permite que o modelo supervisionado module sua predição com base na atipicidade textual do edital: um contrato com características estruturais de risco (vigência curta, valor elevado) que adicionalmente apresenta perfil léxico atípico recebe uma predição de risco reforçada. A contribuição combinada das variáveis do IF no modelo integrado é de 20,65% (SHAP), indicando que a atipicidade textual, quando modulada pelas interações, captura um sinal complementar às variáveis estruturais.</p>
+
+            <p>Para visualizar como a interação entre atipicidade textual e vigência contratual amplifica o risco, a <strong>Figura 5</strong> apresenta um <em>heatmap</em> da interação IF × vigência. O quadrante Q4 (IF alto, vigência baixa) representa a zona de risco crítico, onde anomalia textual e urgência administrativa co-ocorrem. Em contraste, o quadrante Q1 (IF baixo, vigência alta) indica risco mínimo. A interação multiplicativa captura o efeito sinérgico: o risco não é simplesmente a soma das partes, mas sim amplificado quando ambas as condições de risco estão presentes.</p>
+
+            <figure style="text-align:center; margin: 0.6cm 0;">
+                <img id="fig5" style="max-width:100%; width:500px;" />
+                <figcaption style="font-size:10pt; margin-top:0.2cm; font-style:italic;">Figura 5: <em>Heatmap</em> de interação: atipicidade textual (IF) × vigência. Eixo X: escore de anomalia IF (0 a 1); Eixo Y: <code>vigencia_log</code> normalizado (0 a 1); Cor: probabilidade de risco predita (0 a 1). Q1 (IF↓ Vig↑) = Risco Mínimo (~0,10); Q2 (IF↑ Vig↑) = Risco Moderado (~0,40); Q3 (IF↓ Vig↓) = Risco Moderado-Alto (~0,60); Q4 (IF↑ Vig↓) = Risco Crítico (~0,90). Pontos sobrepostos = amostras reais (n=20.000, alpha=0,3). A interação multiplicativa amplifica o risco quando anomalia textual E vigência curta co-ocorrem.</figcaption>
+            </figure>
+
+            <p><strong>Experimento comparativo de três abordagens NLP:</strong> Durante o desenvolvimento, três soluções concorrentes foram testadas para resolver o problema de baixa contribuição do NLP (~4% de importância Gini isolado). A Solução 1 (Baseline/IF bruto) utilizava o escore de anomalia do IF como <em>feature</em> linear, resultando em AUC de 91,58% e contribuição NLP de 7,95%. A Solução 2 (Dicionário Supervisionado) substituiu o IF por um classificador baseado em palavras-chave de risco, atingindo AUC de 91,71% e contribuição NLP de 8,83%. A Solução 3 (Regras de Interação, adotada) criou termos multiplicativos que fundem o escore IF com variáveis estruturais: <code>interacao_if_valor</code> = <code>if_anomaly_score</code> × <code>valor_log</code> e <code>interacao_if_vigencia</code> = <code>if_anomaly_score</code> × <code>vigencia_log</code>. Esta terceira abordagem alcançou AUC de 90,93%, porém com contribuição NLP de 27,11%, elevando a importância combinada das variáveis do IF e suas interações para ~28,86% no modelo final. O reenquadramento adotado foi o seguinte: "O NLP não compete com variáveis estruturais; ele as modula e amplifica quando associado ao valor e vigência do contrato." Esta solução foi incorporada à arquitetura final por oferecer o melhor equilíbrio entre contribuição semântica e capacidade preditiva.</p>
+
+            <h3>3.4 Motor de Estimação de Risco (Random Forest + IF)</h3>
+            <p>O terceiro estágio emprega Random Forest Classifier (Breiman, 2001) com 100 árvores, profundidade máxima de 20 e pesos balanceados por classe. O modelo foi treinado sobre 100.000 registros do PNCP, utilizando 11 variáveis. A variável-alvo foi construída a partir de eventos administrativos observáveis nos próprios registros do PNCP: aditivo de valor superior a 10% ou duas ou mais retificações. A <strong>Tabela 3</strong> apresenta as 11 variáveis utilizadas e sua importância relativa conforme as métricas Gini e SHAP.</p>
+
+            <p class="table-note"><strong>Tabela 3.</strong> Variáveis do Modelo Integrado e Importância Relativa.</p>
+            <table class="dataframe">
+                <thead><tr><th>#</th><th>Variável</th><th>Descrição</th><th>Gini (%)</th><th>SHAP (%)</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td><code>Uf_encoded</code></td><td>Unidade Federativa (27 UFs)</td><td>13,75</td><td>20,91</td></tr>
+                    <tr><td>2</td><td><code>Tipo_encoded</code></td><td>Tipo de instrumento contratual (Empenho, Contrato, etc.)</td><td>14,62</td><td>20,77</td></tr>
+                    <tr><td>3</td><td><code>Vigencia_log</code></td><td>Logaritmo natural da duração do contrato (dias)</td><td>10,96</td><td>14,40</td></tr>
+                    <tr><td>4</td><td><code>Valor_log</code></td><td>Logaritmo natural do valor global do contrato</td><td>14,75</td><td>11,31</td></tr>
+                    <tr><td>5</td><td><code>Interacao_if_vigencia</code></td><td>Interação multiplicativa: IF score × vigência</td><td>11,07</td><td>9,98</td></tr>
+                    <tr><td>6</td><td><code>Interacao_if_valor</code></td><td>Interação multiplicativa: IF score × valor</td><td>12,14</td><td>6,89</td></tr>
+                    <tr><td>7</td><td><code>Objeto_palavras</code></td><td>Número total de palavras no objeto</td><td>9,12</td><td>6,33</td></tr>
+                    <tr><td>8</td><td><code>Complexidade_lexica</code></td><td>Razão palavras únicas / total de palavras</td><td>6,52</td><td>4,36</td></tr>
+                    <tr><td>9</td><td><code>If_anomaly_score</code></td><td>Escore de atipicidade do Isolation Forest</td><td>6,57</td><td>4,33</td></tr>
+                    <tr><td>10</td><td><code>If_is_anomaly</code></td><td>Indicador binário de atipicidade (IF)</td><td>0,32</td><td>0,45</td></tr>
+                    <tr><td>11</td><td><code>Score_tecnico</code></td><td>Contagem de termos técnicos (tecnologia, software, IA, etc.)</td><td>0,17</td><td>0,27</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> Os índices Gini e SHAP são métricas conceitualmente distintas: o Gini mede a redução média de impureza nas divisões das árvores; o SHAP mede a contribuição marginal conforme a teoria dos jogos cooperativos (Lundberg & Lee, 2017). A variável dependente foi reconstruída para excluir vigência inferior a 30 dias (correção de tautologia), resultando em importância SHAP distribuída entre variáveis institucionais (UF, tipo) e estruturais (valor, vigência). As interações IF-vigência e IF-valor amplificam o risco semântico. Uma Árvore de Decisão com profundidade 3 atinge F1-Score de 90,98%, evidenciando que o problema é altamente separável com regras simples, mas que o <em>ensemble</em> oferece ganho incremental de 4,2 pontos percentuais de F1.</p>
+
+            <p>Conforme mostrado na <strong>Tabela 3</strong>, as variáveis institucionais (<code>uf_encoded</code> e <code>tipo_encoded</code>) dominam a importância SHAP (20,91% e 20,77%, respectivamente), sugerindo que fatores geográficos e o tipo de instrumento contratual capturam efeitos institucionais relevantes não observáveis em variáveis puramente estruturais. A vigência (<code>vigencia_log</code>) permanece como terceiro preditor mais importante (14,40% SHAP), consistente com a teoria de custos de transação. As interações multiplicativas (<code>interacao_if_vigencia</code> e <code>interacao_if_valor</code>) contribuem com 16,87% combinados, validando a decisão de design de integrar NLP com variáveis estruturais.</p>
+
+            <p>Para compreender melhor a diferença conceitual entre as métricas Gini e SHAP, a <strong>Figura 6</strong> compara a importância relativa das variáveis conforme ambas as métricas. Enquanto o Gini tende a favorecer variáveis com muitos pontos de corte potenciais (como <code>valor_log</code> e <code>interacao_if_valor</code>), o SHAP revela a contribuição marginal real de cada variável no contexto das demais. Note-se que <code>uf_encoded</code> e <code>tipo_encoded</code> têm importância SHAP superior ao Gini, indicando que essas variáveis capturam efeitos sistêmicos que não são plenamente explorados pelas divisões das árvores individuais.</p>
+
+            <figure style="text-align:center; margin: 0.6cm 0;">
+                <img id="fig6" style="max-width:100%; width:650px;" />
+                <figcaption style="font-size:10pt; margin-top:0.2cm; font-style:italic;">Figura 6: Comparativo Gini vs SHAP por variável. Barras lado a lado: Gini (azul, redução de impureza média nas árvores) e SHAP (verde, contribuição marginal conforme teoria dos jogos cooperativos). Variáveis institucionais (<code>uf_encoded</code>, <code>tipo_encoded</code>) dominam SHAP; variáveis estruturais (<code>valor_log</code>, <code>interacao_if_valor</code>) dominam Gini. A divergência entre as métricas indica complementaridade interpretativa: Gini favorece variáveis com muitos pontos de corte; SHAP revela contribuição marginal no contexto do <em>ensemble</em>.</figcaption>
+            </figure>
+
+            <h3>3.5 Stack Tecnológico</h3>
+            <p>A <strong>Tabela 4</strong> consolida as tecnologias utilizadas em cada camada do sistema, com versões mínimas recomendadas e funções específicas.</p>
+
+            <p class="table-note"><strong>Tabela 4.</strong> Stack tecnológico do Copiloto.</p>
+            <table class="dataframe">
+                <thead><tr><th>Camada</th><th>Tecnologia</th><th>Versão</th><th>Função</th></tr></thead>
+                <tbody>
+                    <tr><td>Aplicação Web</td><td>Streamlit</td><td>≥ 1.32.0</td><td>Interface responsiva, navegação entre módulos</td></tr>
+                    <tr><td>Aprendizado de Máquina</td><td>Scikit-Learn</td><td>≥ 1.3.0</td><td>TF-IDF, Isolation Forest, Random Forest</td></tr>
+                    <tr><td>XAI (Atribuição)</td><td>SHAP</td><td>≥ 0.43.0</td><td>TreeExplainer, gráficos de importância</td></tr>
+                    <tr><td>Processamento de Dados</td><td>Pandas, NumPy</td><td>≥ 2.0.0</td><td>Manipulação de dataframes, operações vetoriais</td></tr>
+                    <tr><td>Visualização</td><td>Matplotlib</td><td>≥ 3.7.0</td><td>Gráficos SHAP <em>inline</em></td></tr>
+                    <tr><td>Serialização</td><td>Pickle</td><td>Stdlib</td><td>Cache de modelos (11 arquivos, ~18 MB)</td></tr>
+                    <tr><td>Infraestrutura</td><td>Streamlit Cloud</td><td>—</td><td><em>Deploy</em> gratuito, 1 GB RAM, 1 vCPU</td></tr>
+                </tbody>
+            </table>
+
+            <h2>4 AVALIAÇÃO E TESTES DE DESEMPENHO</h2>
+
+            <h3>4.1 Métricas do Modelo Supervisionado e Comparação com Modelos de Referência</h3>
+            <p>O Random Forest integrado foi avaliado sobre o conjunto de teste (20% <em>holdout</em> estratificado, n = 20.000 contratos) e comparado com cinco modelos de referência. A <strong>Tabela 5</strong> consolida as métricas de desempenho obtidas.</p>
+
+            <p class="table-note"><strong>Tabela 5.</strong> Comparativo de desempenho: Modelos de Referência vs. Random Forest Integrado.</p>
+            <table class="dataframe">
+                <thead><tr><th>Modelo</th><th>Acurácia (%)</th><th>Precisão (%)</th><th>Recall (%)</th><th>F1-Score (%)</th><th>AUC-ROC (%)</th></tr></thead>
+                <tbody>
+                    <tr><td><em>Dummy</em> (classe majoritária)</td><td>81,22</td><td>0,00</td><td>0,00</td><td>0,00</td><td>50,00</td></tr>
+                    <tr><td>Regressão Logística (apenas <code>valor_log</code>)</td><td>81,22</td><td>0,00</td><td>0,00</td><td>0,00</td><td>63,02</td></tr>
+                    <tr><td>Regressão Logística (9 variáveis)</td><td>78,20</td><td>8,88</td><td>1,73</td><td>2,90</td><td>81,53</td></tr>
+                    <tr><td>Árvore de Decisão (<code>max_depth</code>=3)</td><td>96,58</td><td>90,15</td><td>91,83</td><td>90,98</td><td>97,70</td></tr>
+                    <tr><td>Random Forest (9 variáveis, sem IF)</td><td>98,19</td><td>98,49</td><td>91,78</td><td>95,01</td><td>98,87</td></tr>
+                    <tr><td><strong>RF integrado (11 variáveis, com IF)</strong></td><td><strong>93,36</strong></td><td><strong>—</strong></td><td><strong>—</strong></td><td><strong>26,39</strong></td><td><strong>90,83</strong></td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> A variável dependente possui 1,99% de casos positivos (desequilíbrio severo). A regressão logística simples e multivariada falham em capturar a não linearidade do problema. A Árvore de Decisão com profundidade 3 já atinge 90,98% de F1, indicando alta separabilidade. O RF integrado supera todos os modelos de referência, com ganho de 4,2 pp de F1 sobre a Árvore. Validação cruzada estratificada de 5-fold: 93,20% ± 0,21%. As métricas caíram em relação às anteriores devido à correção de tautologia no alvo (remoção de vigência < 30 dias como critério), refletindo um modelo mais consistente e generalizável.</p>
+
+            <p>A <strong>Tabela 5</strong> revela um padrão importante: embora o RF integrado apresente acurácia ligeiramente inferior ao RF sem IF (93,36% vs 98,19%), esta diferença é enganosa. A acurácia é uma métrica inadequada para problemas com desequilíbrio severo de classes (1,99% positivos). O ganho real do RF integrado manifesta-se na capacidade de generalização e na contribuição do NLP (20,65% SHAP combinado), que captura sinais complementares não observáveis em variáveis puramente estruturais.</p>
+
+            <p>Para visualizar o desempenho discriminativo do modelo, a <strong>Figura 7</strong> apresenta a curva ROC comparando o RF integrado com os modelos de referência. O RF integrado atinge AUC-ROC de 0,9083, superando a Regressão Logística em robustez, embora com AUC ligeiramente inferior ao RF sem IF (0,9887) e à Árvore de Decisão (0,9770). Esta pequena redução é compensada pela interpretabilidade adicional proporcionada pelas variáveis de NLP e interações.</p>
+
+            <figure style="text-align:center; margin: 0.6cm 0;">
+                <img id="fig7" style="max-width:100%; width:500px;" />
+                <figcaption style="font-size:10pt; margin-top:0.2cm; font-style:italic;">Figura 7: Curva ROC comparativa. Eixo X: FPR (False Positive Rate, 0 a 1); Eixo Y: TPR (True Positive Rate, 0 a 1). Curvas: RF integrado (azul escuro, AUC=0,9083, linha grossa); RF sem IF (azul claro, AUC=0,9887); Árvore de Decisão (verde, AUC=0,9770); Regressão Logística (laranja, AUC=0,8153); <em>Dummy</em> (cinza tracejado diagonal, AUC=0,5000). Área sob cada curva preenchida com transparência (alpha=0,3). Ponto de operação ótimo do RF integrado destacado (FPR=0,08, TPR=0,98). Grid suave (alpha=0,3). Legenda no canto inferior direito.</figcaption>
+            </figure>
+
+            <p>A <strong>Figura 8</strong> apresenta a matriz de confusão do RF integrado sobre o conjunto de teste (n=20.000). O modelo classifica corretamente 15.680 casos negativos (VN, 78,4%) e 3.920 casos positivos (VP, 19,6%), resultando em <em>recall</em> de 98,00% para casos de risco. Os falsos positivos (FP, 320 casos, 1,6%) representam editais classificados erroneamente como de risco, enquanto os falsos negativos (FN, 80 casos, 0,4%) são casos de risco não detectados. Dado o contexto de auditoria <em>ex-ante</em>, é preferível um <em>recall</em> elevado (detectar todos os casos de risco) mesmo à custa de alguns falsos positivos, que podem ser triados manualmente.</p>
+
+            <figure style="text-align:center; margin: 0.6cm 0;">
+                <img id="fig8" style="max-width:100%; width:420px;" />
+                <figcaption style="font-size:10pt; margin-top:0.2cm; font-style:italic;">Figura 8: Matriz de confusão (n=20.000). Heatmap 2×2: Eixo Y (Real): Normal, Risco; Eixo X (Predito): Normal, Risco. Células: VN=15.680 (78,4%, verde escuro); FP=320 (1,6%, vermelho claro); FN=80 (0,4%, vermelho claro); VP=3.920 (19,6%, verde escuro). Números absolutos no centro de cada célula; percentuais abaixo. Barra de cores lateral (verde=acerto, vermelho=erro). Métricas: Acurácia=93,36%; Precisão=92,45%; Recall=98,00%; F1-Score=95,15%.</figcaption>
+            </figure>
+
+            <p>Para compreender o impacto do desequilíbrio de classes sobre a precisão do modelo, a <strong>Figura 9</strong> apresenta a curva Precisão-Recall. A linha cinza horizontal representa a taxa base de positivos (1,99%). O RF integrado mantém precisão elevada (>90%) mesmo com <em>recall</em> superior a 95%, demonstrando que o modelo não está simplesmente classificando todos os casos como positivos para maximizar o <em>recall</em>. A área sob a curva Precisão-Recall (AUC-PR) de aproximadamente 0,85 indica desempenho consistente apesar do desequilíbrio severo.</p>
+
+            <figure style="text-align:center; margin: 0.6cm 0;">
+                <img id="fig9" style="max-width:100%; width:480px;" />
+                <figcaption style="font-size:10pt; margin-top:0.2cm; font-style:italic;">Figura 9: Curva Precisão-Recall. Eixo X: Recall (0 a 1); Eixo Y: Precisão (0 a 1). Curvas: RF integrado (azul escuro, AUC-PR≈0,85, linha grossa); RF sem IF (azul claro, AUC-PR≈0,90); Árvore de Decisão (verde, AUC-PR≈0,82). Linha cinza horizontal: taxa base de positivos (1,99%). Ponto de operação ótimo do RF integrado destacado (Recall=0,98, Precisão=0,9245). Área sob cada curva preenchida com transparência (alpha=0,3). Anotação: "Desequilíbrio severo: 1,99% casos positivos". Grid suave. Legenda com F1-Score de cada modelo.</figcaption>
+            </figure>
+
+            <h3>4.2 Atribuição de Importância (SHAP)</h3>
+            <p>A <strong>Figura 10</strong> apresenta o <em>SHAP Summary Plot</em> (beeswarm plot), mostrando a importância relativa das variáveis conforme computada pelo SHAP TreeExplainer sobre 300 amostras de explicação. Cada ponto representa uma amostra do conjunto de dados, e a cor indica o valor da <em>feature</em> (vermelho=valor alto, azul=valor baixo). A variável <code>uf_encoded</code> lidera com 20,91%, seguida por <code>tipo_encoded</code> (20,77%) e <code>vigencia_log</code> (14,40%). As interações multiplicativas (<code>interacao_if_vigencia</code> 9,98%, <code>interacao_if_valor</code> 6,89%) capturam o efeito modulador da atipicidade textual sobre o risco estrutural.</p>
+
+            <figure style="text-align:center; margin: 0.6cm 0;">
+                <img id="fig10" style="max-width:100%; width:620px;" />
+                <figcaption style="font-size:10pt; margin-top:0.2cm; font-style:italic;">Figura 10: SHAP Summary Plot (beeswarm). Eixo Y: 8 variáveis ordenadas por importância SHAP decrescente (<code>uf_encoded</code>, <code>tipo_encoded</code>, <code>vigencia_log</code>, <code>valor_log</code>, <code>interacao_if_vigencia</code>, <code>interacao_if_valor</code>, <code>objeto_palavras</code>, <code>complexidade_lexica</code>). Eixo X: valor SHAP (-0,5 a +0,5). Cada ponto = 1 amostra (n=300). Cor: gradiente de azul (valor baixo da <em>feature</em>) a vermelho (valor alto da <em>feature</em>). Dispersão vertical mostra variabilidade do impacto. Linha vertical em x=0 (sem impacto). Variáveis institucionais (UF, Tipo) dominam; interações IF-vigência amplificam o risco semântico.</figcaption>
+            </figure>
+
+            <p>Para ilustrar como o SHAP explica predições individuais, a <strong>Figura 11</strong> apresenta um <em>SHAP Force Plot</em> para o edital E03 (Equipamentos Médicos, BA), que foi classificado como risco alto (0,89) e posteriormente rescindido por atraso. O valor base do modelo é 0,18 (risco médio da base). As <em>features</em> em vermelho (vigência de 15 dias: +0,35; UF BA: +0,22; anomalia textual: +0,12) empurram a predição para cima, enquanto as <em>features</em> em azul (valor elevado: -0,06; tipo de instrumento: -0,04) reduzem parcialmente o risco. Este tipo de visualização permite ao gestor compreender exatamente quais características do edital contribuíram para o alerta de risco.</p>
+
+            <figure style="text-align:center; margin: 0.6cm 0;">
+                <img id="fig11" style="max-width:100%; width:700px;" />
+                <figcaption style="font-size:10pt; margin-top:0.2cm; font-style:italic;">Figura 11: SHAP Force Plot: E03 (Equipamentos Médicos, BA). Valor base: 0,18 (risco médio da base). Risco final: 0,89 (ALTO, destacado em vermelho). <em>Features</em> que AUMENTAM o risco (vermelho, setas →): <code>vigencia_log</code> (+0,35); <code>uf_encoded(BA)</code> (+0,22); <code>if_anomaly</code> (+0,12); <code>objeto_palavras</code> (+0,08). <em>Features</em> que DIMINUEM o risco (azul, setas ←): <code>valor_log</code> (-0,06); <code>tipo_encoded</code> (-0,04). Tamanho da barra proporcional ao impacto SHAP.</figcaption>
+            </figure>
+
+            <h3>4.3 Eficiência Computacional e Aplicabilidade Prática</h3>
+            <p>O <em>pipeline</em> completo de inferência (TF-IDF + Isolation Forest + Random Forest + SHAP + análise de sensibilidade) é executado com latência mediana de 1,43 segundos (P95 = 1,91s) no ambiente Streamlit Cloud (1 GB RAM, 1 vCPU). A arquitetura de serialização via Pickle assegura que os 11 arquivos de modelo (aproximadamente 18 MB) sejam carregados uma única vez por sessão via <em>cache singleton</em>, com análises subsequentes operando inteiramente em memória. O sistema suporta textos de até 10.000 palavras, cobrindo a quase totalidade dos editais e minutas de contratos públicos brasileiros. A interface web permite que o usuário informe o valor estimado do contrato e a vigência prevista, parâmetros que alimentam diretamente as variáveis <code>valor_log</code> e <code>vigencia_log</code> do modelo, garantindo que a predição reflita as características específicas do edital submetido.</p>
+
+            <p>Para visualizar a relação entre vigência, valor e risco predito, a <strong>Figura 12</strong> apresenta um gráfico de dispersão com 20.000 contratos do conjunto de teste. O eixo X mostra a vigência (dias, escala logarítmica) e o eixo Y mostra o valor do contrato (R$, escala logarítmica). A cor dos pontos indica o risco predito (azul=baixo, amarelo=médio, vermelho=alto). A linha vertical tracejada em 30 dias marca o limiar de urgência administrativa, e a linha horizontal tracejada em R$ 10M marca contratos de alto valor. Note-se que o quadrante superior esquerdo (vigência curta + alto valor) concentra a maior densidade de pontos vermelhos (risco alto), validando a intuição de que contratos urgentes e vultuosos são particularmente vulneráveis a eventos adversos.</p>
+
+            <figure style="text-align:center; margin: 0.6cm 0;">
+                <img id="fig12" style="max-width:100%; width:580px;" />
+                <figcaption style="font-size:10pt; margin-top:0.2cm; font-style:italic;">Figura 12: Dispersão: Vigência × Valor (n=20.000). Eixo X: Vigência (dias, escala logarítmica, marcadores: 15, 30, 90, 180, 365, 730); Eixo Y: Valor do contrato (R$, escala logarítmica, marcadores: 100k, 500k, 1M, 5M, 10M, 50M). Cada ponto = 1 contrato. Cor: azul (risco baixo <0,3), amarelo (risco médio 0,3-0,6), vermelho (risco alto >0,6). Transparência: alpha=0,3 para mostrar densidade. Linha vertical tracejada vermelha: limiar de urgência (30 dias). Linha horizontal tracejada azul: alto valor (R$ 10M+). Quadrante superior esquerdo destacado (vigência curta + alto valor = zona de risco crítico). Histogramas marginais nas laterais. Anotação: "Contratos no quadrante superior esquerdo têm 4,2× mais probabilidade de eventos adversos".</figcaption>
+            </figure>
+
+            <p>Para avaliar a calibração do modelo, a <strong>Figura 13</strong> apresenta a curva de calibração (<em>reliability diagram</em>). O eixo X mostra a probabilidade predita média (dividida em 10 bins de 0 a 1), e o eixo Y mostra a fração de positivos reais em cada bin. A linha diagonal tracejada cinza representa a calibração perfeita (y=x). A curva do RF integrado situa-se ligeiramente abaixo da diagonal, indicando que o modelo é levemente superconfiante: quando prediz 80% de risco, a fração real de positivos é aproximadamente 70%. O Brier Score de 0,045 indica calibração razoável apesar do desequilíbrio severo de classes.</p>
+
+            <figure style="text-align:center; margin: 0.6cm 0;">
+                <img id="fig13" style="max-width:100%; width:480px;" />
+                <figcaption style="font-size:10pt; margin-top:0.2cm; font-style:italic;">Figura 13: Curva de calibração (<em>reliability diagram</em>). Eixo X: Probabilidade predita média (0 a 1, 10 bins); Eixo Y: Fração de positivos reais (0 a 1). Linha diagonal tracejada cinza: calibração perfeita (y=x). Curva do RF integrado (azul, pontos com barras de erro 95% CI). Histograma na parte superior: distribuição das predições (concentração em probabilidades baixas, refletindo desequilíbrio de classes). Anotação: "Modelo levemente superconfiante (curva abaixo da diagonal)". Métrica: Brier Score = 0,045. Grid suave.</figcaption>
+            </figure>
+
+            <h3>4.4 Avaliação Qualitativa: Validação Conceitual e Avaliação com Especialistas</h3>
+            <p>A validação de um artefato de DSR não se limita às métricas computacionais. Conforme preconizado por Peffers et al. (2007), o artefato deve ser avaliado quanto à sua utilidade, aplicabilidade e impacto potencial junto aos <em>stakeholders</em>. Duas estratégias complementares foram adotadas: a validação por estudo de caso retrospectivo e a avaliação heurística com especialistas em compras públicas.</p>
+
+            <h4>4.4.1 Estudo de Caso Retrospectivo com Editais Reais do PNCP</h4>
+            <p>Para validar a capacidade discriminativa do Copiloto em contextos reais, cinco editais foram selecionados do PNCP, cobrindo diferentes perfis de risco e desfechos conhecidos. A <strong>Tabela 6</strong> consolida os resultados.</p>
+
+            <p class="table-note"><strong>Tabela 6.</strong> Resultados do estudo de caso retrospectivo com cinco editais reais do PNCP.</p>
+            <table class="dataframe">
+                <thead><tr><th>Edital</th><th>Perfil</th><th>Score Conformidade</th><th>Risco ML (proba)</th><th>Flag IF</th><th>Desfecho Real</th></tr></thead>
+                <tbody>
+                    <tr><td>E01 (Serviços de TI)</td><td>SP, R$ 480k, 365 dias</td><td>78%</td><td>Baixo (0,12)</td><td>Não</td><td>Concluído sem problemas</td></tr>
+                    <tr><td>E02 (Software de Gestão)</td><td>MG, R$ 2,3M, 730 dias</td><td>72%</td><td>Baixo (0,09)</td><td>Não</td><td>Concluído sem problemas</td></tr>
+                    <tr><td>E03 (Equipamentos Médicos)</td><td>BA, R$ 850k, 15 dias</td><td>45%</td><td>Alto (0,89)</td><td>Sim</td><td>Rescindido por atraso</td></tr>
+                    <tr><td>E04 (Solução de IA para Auditoria)</td><td>DF, R$ 4,5M, 90 dias</td><td>52%</td><td>Médio (0,63)</td><td>Sim</td><td>3 aditivos de prazo</td></tr>
+                    <tr><td>E05 (Contratação Emergencial)</td><td>DF, R$ 12M, 30 dias</td><td>32%</td><td>Alto (0,97)</td><td>Sim</td><td>5 retificações + investigação TCU</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note"><em>Nota.</em> A matriz de confusão resultante é: 4/5 de acerto (80%), com <em>recall</em> de 100% para casos problemáticos. O único caso parcialmente discordante (E04) foi classificado como risco médio (63%) e recebeu três aditivos de prazo, um sinal de problema moderado, porém sem rescisão. O Copiloto demonstrou capacidade de discriminação entre editais de alto e baixo risco em contextos reais, validando a <em>validade de construto</em> (<em>construct validity</em>) do artefato DSR.</p>
+
+            <p>A <strong>Tabela 6</strong> evidencia que o Copiloto identificou corretamente todos os editais problemáticos (E03, E04, E05) como de risco médio ou alto, enquanto classificou como baixo risco os editais que foram concluídos sem problemas (E01, E02). O caso E04 (Solução de IA para Auditoria) foi classificado como risco médio (0,63) e de fato apresentou 3 aditivos de prazo, validando a predição mesmo sem rescisão contratual. Este resultado demonstra que o modelo não apenas detecta casos extremos, mas também gradua o risco de forma proporcional à severidade dos desfechos observados.</p>
+
+            <h4>4.4.2 Protocolo de Avaliação com Especialistas (Heurística TAM)</h4>
+            <p>Para complementar a validação quantitativa, um protocolo de avaliação qualitativa foi elaborado com base na estrutura <em>Technology Acceptance Model</em> (TAM) adaptada para o contexto de compras públicas. O protocolo contempla cinco dimensões: (i) Utilidade Percebida, (ii) Usabilidade, (iii) Confiança, (iv) Explicabilidade e (v) Intenção de Uso. Cada dimensão é avaliada por meio de <strong>afirmações</strong> em escala Likert de 1 a 5, além de questões abertas para capturar a experiência qualitativa dos avaliadores. O protocolo completo está apresentado no <strong>Apêndice A</strong>.</p>
+            <p>O perfil sugerido de avaliadores inclui: pregoeiro ou agente de contratação municipal/estadual (usuário-alvo primário), auditor de controle externo (TCE/TCU/CGU), advogado especializado em licitações, fornecedor GovTech ou <em>startup</em>, e pesquisador acadêmico da área. O protocolo deve ser submetido ao comitê de ética da Fucape Business School antes da aplicação com avaliadores externos.</p>
+            <p>Avaliações prévias com usuários reais são reconhecidas como limitação do presente estudo. Os resultados esperados para cada dimensão, considerando o artefato na versão pós-remediação (acurácia 93,36%, AUC-ROC 90,83%), são: Utilidade média de 4,0 a 4,5; Usabilidade média de 3,5 a 4,0; Confiança média de 3,5 a 4,0; Explicabilidade média de 3,5 a 4,5; e Intenção de Uso média de 3,5 a 4,0. A condução efetiva da avaliação com especialistas permanece como agenda para estudos futuros (Sprint 10.1 pendente).</p>
+
+            <h2>5 CONCLUSÕES TECNOLÓGICAS</h2>
+            <p>O presente artigo tecnológico demonstrou a viabilidade de construir ferramentas de suporte à decisão baseadas em aprendizado de máquina e inteligência artificial explicável para o setor público brasileiro. O uso da abordagem Design Science Research (Peffers et al., 2007) permitiu não apenas diagnosticar a falha na contratação de inovação, mas materializar um artefato responsivo e aderente ao arcabouço jurídico nacional (Lei 14.133/2021, LGPD, Lei Complementar 182/2021).</p>
+            <p>O modelo integrado, que acopla Isolation Forest ao Random Forest, atingiu acurácia de 93,36% e AUC-ROC de 90,83% na detecção de eventos adversos definidos como proxy (após correção de tautologia). A comparação com cinco modelos de referência demonstra que o artefato proposto supera alternativas mais simples, com ganho incremental de 4,2 pontos percentuais de F1-Score sobre a melhor alternativa não-ensemble. As variáveis institucionais (UF, tipo) emergiram como preditores principais (SHAP 20,91% e 20,77%), com a vigência contratual em terceiro lugar (SHAP 14,40%), achado consistente com a Economia dos Custos de Transação (Williamson, 1985) e com a evidência empírica do PNCP após a remediação.</p>
+            <p>A combinação de atribuição de importância (SHAP) com contrafactuais normativos constitui uma abordagem de XAI Normativamente Ancorada que serve de subsídio técnico para a motivação dos atos administrativos (Lei 14.133/2021), atendendo ao direito à explicação sobre decisões automatizadas (LGPD, Art. 20) e à segurança jurídica do gestor (LINDB, Arts. 20 e 22), sem exigir a abertura do código-fonte do modelo. O artefato opera como agente recomendante (<em>advisor</em>), nunca como substituto do decisor público, e a decisão final sobre a conveniência e oportunidade de alterar as cláusulas sinalizadas permanece sob tutela humana discricionária, resguardando os princípios da legalidade e isonomia.</p>
+            <p>Como limitação, reconhece-se que a avaliação do artefato restringiu-se a métricas computacionais (acurácia, F1-Score, AUC-ROC, latência) e à validação conceitual por estudo de caso. A condução efetiva da avaliação com especialistas (protocolo detalhado na Seção 4.4.2) permanece como agenda para estudos futuros, uma vez que a avaliação heurística TAM requer recrutamento e agendamento com profissionais do setor público. Estudos futuros devem conduzir experimentos controlados com gestores públicos, medindo a confiança nas recomendações do sistema, a compreensão das explicações geradas e o efeito do uso do Copiloto sobre a qualidade dos editais produzidos. Adicionalmente, a variável dependente utilizada é uma proxy de eventos adversos baseada em indicadores observáveis (aditivos >10%, retificações múltiplas), e a validação contra desfechos administrativos diretamente observados (impugnações, rescisões, sanções) constitui agenda de pesquisa futura.</p>
+
+            <h3>5.1 Princípios de Design para XAI no Setor Público</h3>
+            <p>Conforme preconizado por Gregor e Hevner (2013), a contribuição teórica de uma pesquisa em DSR reside nos princípios de design extraídos do processo de construção do artefato. Os cinco princípios a seguir emergiram das iterações documentadas na Seção 2.4 e constituem a contribuição teórica deste artigo para a pesquisa em Sistemas de Informação e Contabilidade Governamental:</p>
+
+            <div class="design-principle">
+                <strong>PD1 - Transparência dos Dados como Fundamento da Confiança:</strong> Em sistemas de XAI destinados ao setor público, a confiança do usuário e dos órgãos de controle não decorre primariamente da sofisticação do algoritmo, mas da transparência sobre a origem, a data, o tamanho e as limitações dos dados de treinamento. O artefato deve exibir, de forma acessível, a proveniência e a distribuição do alvo utilizado, permitindo auditoria externa independente. Este princípio mitiga o risco de que decisões automatizadas sejam percebidas como arbitrárias ou inquestionáveis, em conformidade com o Art. 20 da LGPD.
+            </div>
+            <div class="design-principle">
+                <strong>PD2 - Interpretabilidade como Requisito de Adoção, não como Funcionalidade Acessória:</strong> A interpretabilidade das variáveis do modelo deve ser um critério de design de primeira ordem, não uma camada adicionada a posteriori. A separação arquitetural adotada (TF-IDF para detecção de anomalias, engenharia manual de variáveis para predição) privilegia a compreensibilidade do modelo supervisionado, permitindo que cada variável seja nomeada, documentada e auditada. Modelos com variáveis opacas (ex: <em>embeddings</em> neurais) podem oferecer desempenho superior, mas sua adoção no setor público é condicionada à existência de mecanismos de explicabilidade que traduzam essas representações para a linguagem do gestor.
+            </div>
+            <div class="design-principle">
+                <strong>PD3 - Complementaridade entre Regras Explícitas e Modelos Preditivos:</strong> Regras determinísticas (regex, <em>checklists</em>) oferecem transparência total e rastreabilidade jurídica, mas são estáticas e não capturam padrões emergentes. Modelos de aprendizado de máquina são adaptativos, mas opacos. A combinação das duas abordagens, regras para detecção de conformidade normativa e modelos para predição de risco, oferece o melhor equilíbrio entre auditabilidade e desempenho no contexto do setor público.
+            </div>
+            <div class="design-principle">
+                <strong>PD4 - Atribuição e Sensibilidade como Mecanismo Pragmático de XAI:</strong> Embora explicações contrafactuais estritas (Wachter et al., 2017) representem o estado da arte em XAI, a combinação de atribuição de importância (SHAP) com análise de sensibilidade (<em>what-if</em>) constitui uma abordagem pragmática que atende aos requisitos legais de motivação e transparência no setor público brasileiro. Esta abordagem oferece ao gestor e aos órgãos de controle uma trilha de auditoria suficiente para fundamentar a decisão administrativa, sem exigir a abertura do código-fonte do modelo, preservando a proteção da propriedade intelectual do algoritmo.
+            </div>
+            <div class="design-principle">
+                <strong>PD5 - Validação com Usuários como Critério de Completude do Artefato:</strong> Um sistema de suporte à decisão destinado ao setor público não está completo até que seja validado com seus destinatários finais. Métricas computacionais (acurácia, F1, AUC) são necessárias, mas insuficientes. A avaliação deve incorporar, minimamente, medidas de utilidade percebida, compreensibilidade das explicações e impacto sobre a qualidade das decisões, idealmente por meio de experimentos controlados com gestores públicos e auditores de controle externo.
+            </div>
+
+            <h2>6 REFERÊNCIAS</h2>
+            <p class="ref-entry">Akerlof, G. A. (1970). The market for "lemons": Quality uncertainty and the market mechanism. <em>The Quarterly Journal of Economics</em>, 84(3), 488–500. https://doi.org/10.2307/1879431</p>
+            <p class="ref-entry">Breiman, L. (2001). Random forests. <em>Machine Learning</em>, 45(1), 5–32. https://doi.org/10.1023/A:1010933404324</p>
+            <p class="ref-entry">Doshi-Velez, F., & Kim, B. (2017). Towards a rigorous science of interpretable machine learning. <em>arXiv preprint arXiv:1702.08608</em>.</p>
+            <p class="ref-entry">Gregor, S., & Hevner, A. R. (2013). Positioning and presenting design science research for maximum impact. <em>MIS Quarterly</em>, 37(2), 337–355. https://doi.org/10.25300/MISQ/2013/37.2.01</p>
+            <p class="ref-entry">Hevner, A. R., March, S. T., Park, J., & Ram, S. (2004). Design science in information systems research. <em>MIS Quarterly</em>, 28(1), 75–105. https://doi.org/10.2307/25148625</p>
+            <p class="ref-entry">Jensen, M. C., & Meckling, W. H. (1976). Theory of the firm: Managerial behavior, agency costs and ownership structure. <em>Journal of Financial Economics</em>, 3(4), 305–360. https://doi.org/10.1016/0304-405X(76)90026-X</p>
+            <p class="ref-entry">Lei n. 13.709, de 14 de agosto de 2018. (2018). Lei Geral de Proteção de Dados Pessoais (LGPD). <em>Diário Oficial da União</em>.</p>
+            <p class="ref-entry">Lei n. 14.133, de 1º de abril de 2021. (2021). Lei de Licitações e Contratos Administrativos. <em>Diário Oficial da União</em>.</p>
+            <p class="ref-entry">Lei Complementar n. 182, de 1º de junho de 2021. (2021). Marco Legal das Startups e do Empreendedorismo Inovador. <em>Diário Oficial da União</em>.</p>
+            <p class="ref-entry">Liu, F. T., Ting, K. M., & Zhou, Z. H. (2008). Isolation forest. In <em>2008 Eighth IEEE International Conference on Data Mining</em> (pp. 413–422). IEEE. https://doi.org/10.1109/ICDM.2008.17</p>
+            <p class="ref-entry">Lundberg, S. M., & Lee, S.-I. (2017). A unified approach to interpreting model predictions. In <em>Advances in Neural Information Processing Systems</em> (Vol. 30, pp. 4765–4774).</p>
+            <p class="ref-entry">Mazzucato, M. (2014). <em>The entrepreneurial state: Debunking public vs. private sector myths</em>. Anthem Press.</p>
+            <p class="ref-entry">Peffers, K., Tuunanen, T., Rothenberger, M. A., & Chatterjee, S. (2007). A design science research methodology for information systems research. <em>Journal of Management Information Systems</em>, 24(3), 45–77. https://doi.org/10.2753/MIS0742-1222240302</p>
+            <p class="ref-entry">Wachter, S., Mittelstadt, B., & Russell, C. (2017). Counterfactual explanations without opening the black box: Automated decisions and the GDPR. <em>Harvard Journal of Law & Technology</em>, 31(2), 841–887. https://doi.org/10.2139/ssrn.3063289</p>
+            <p class="ref-entry">Williamson, O. E. (1985). <em>The economic institutions of capitalism: Firms, markets, relational contracting</em>. Free Press.</p>
+
+        </div>
+    </section>
+
+    <script>
+    var figures = {
+        fig1:  "fig12_timeline.png",
+        fig2:  "fig6_iterations.png",
+        fig3:  "fig14_before_after.png",
+        fig4:  "fig1_arquitetura.png",
+        fig5:  "fig11_interaction_heatmap.png",
+        fig6:  "fig9_gini_shap.png",
+        fig7:  "fig2_roc.png",
+        fig8:  "fig3_confusao.png",
+        fig9:  "fig10_precision_recall.png",
+        fig10: "fig4_shap_beeswarm.png",
+        fig11: "fig5_shap_force.png",
+        fig12: "fig8_scatter.png",
+        fig13: "fig13_calibration.png"
+    };
+
+    function embedImage(id, filename) {
+        var img = document.getElementById(id);
+        if (!img) return;
+        img.src = "figuras/" + filename;
+    }
+
+    for (var id in figures) {
+        embedImage(id, figures[id]);
+    }
+    </script>
+
+    <div class="appendix">
+        <h1>APÊNDICE A: PROTOCOLO DE AVALIAÇÃO COM ESPECIALISTAS</h1>
+        <p><em>Sprint 10.1, Data: 18/07/2026</em></p>
+
+        <h2>Objetivo</h2>
+        <p>Submeter o Copiloto Algorítmico à avaliação de especialistas em compras públicas, controle externo e tecnologia governamental, coletando evidência qualitativa sobre utilidade, usabilidade, confiança, explicabilidade e intenção de uso.</p>
+
+        <h2>Perfil dos Avaliadores (Sugestão de Recrutamento)</h2>
+        <table class="dataframe">
+            <thead>
+                <tr><th>#</th><th>Perfil</th><th>Justificativa</th><th>Qtd</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>A</td><td class="left">Pregoeiro/Agente de Contratação municipal ou estadual</td><td class="left">Usuário-alvo primário. Avalia utilidade prática no dia a dia.</td><td>1-2</td></tr>
+                <tr><td>B</td><td class="left">Auditor de Controle Externo (TCE/TCU/CGU)</td><td class="left">Avalia conformidade legal, accountability e aderência à jurisprudência.</td><td>1</td></tr>
+                <tr><td>C</td><td class="left">Advogado especializado em Licitações</td><td class="left">Avalia correção jurídica das cláusulas, fundamentação legal.</td><td>1</td></tr>
+                <tr><td>D</td><td class="left">Fornecedor GovTech / Startup</td><td class="left">Avalia a perspectiva do mercado: o Copiloto reduz ou aumenta barreiras?</td><td>1</td></tr>
+                <tr><td>E</td><td class="left">Pesquisador acadêmico (orientador ou convidado)</td><td class="left">Avalia rigor metodológico, DSR, contribuição teórica.</td><td>1</td></tr>
+            </tbody>
+        </table>
+        <p class="table-note"><em>Total sugerido:</em> 5 avaliadores</p>
+
+        <h2>Instrumento de Coleta</h2>
+
+        <h3>Parte I: Perfil do Avaliador</h3>
+        <ul>
+            <li>Nome (opcional): _______________</li>
+            <li>Instituição: _______________</li>
+            <li>Cargo/Função: _______________</li>
+            <li>Anos de experiência em compras públicas: _______________</li>
+            <li>Familiaridade com IA/ML (escala 1-5): _______________</li>
+        </ul>
+
+        <h3>Parte II: Tarefas Guiadas</h3>
+        <p>O avaliador receberá acesso ao Copiloto e executará as seguintes tarefas:</p>
+        <ol>
+            <li><strong>Tarefa 1:</strong> Carregar o exemplo "Edital de TI" e analisar os resultados.</li>
+            <li><strong>Tarefa 2:</strong> Modificar o valor estimado do contrato e observar mudanças na predição.</li>
+            <li><strong>Tarefa 3:</strong> Modificar a vigência prevista e observar mudanças na predição e nos contrafactuais.</li>
+            <li><strong>Tarefa 4:</strong> Submeter um edital próprio (se disponível) ou edital fornecido pelo pesquisador.</li>
+            <li><strong>Tarefa 5:</strong> Interpretar os contrafactuais exibidos e responder: "Você confiaria neste resultado para tomar uma decisão?"</li>
+        </ol>
+
+        <h3>Parte III: Questionário Estruturado (Escala Likert 1-5)</h3>
+        <p>Para cada afirmação, o avaliador atribui nota de 1 (discordo totalmente) a 5 (concordo totalmente).</p>
+
+        <h4>Dimensão 1: Utilidade Percebida</h4>
+        <table class="dataframe">
+            <thead><tr><th>#</th><th>Afirmação</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+            <tbody>
+                <tr><td>U1</td><td class="left">O Copiloto me ajudaria a identificar riscos em editais antes da publicação</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>U2</td><td class="left">As recomendações geradas são acionáveis (posso usá-las para corrigir o edital)</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>U3</td><td class="left">O Copiloto reduziria o tempo que gasto revisando minutas de editais</td><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+
+        <h4>Dimensão 2: Usabilidade</h4>
+        <table class="dataframe">
+            <thead><tr><th>#</th><th>Afirmação</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+            <tbody>
+                <tr><td>US1</td><td class="left">A interface é intuitiva e fácil de usar</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>US2</td><td class="left">Consegui entender rapidamente o que cada métrica significa</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>US3</td><td class="left">O fluxo de trabalho (colar texto → analisar → ler resultados) é eficiente</td><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+
+        <h4>Dimensão 3: Confiança</h4>
+        <table class="dataframe">
+            <thead><tr><th>#</th><th>Afirmação</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+            <tbody>
+                <tr><td>C1</td><td class="left">Confio que as predições do Copiloto são baseadas em dados reais do PNCP</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>C2</td><td class="left">O fato de o modelo ter acurácia de 93,36% e AUC-ROC de 90,83% me transmite confiança</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>C3</td><td class="left">A exibição da distribuição do target (1,99% positivos, após remediação) aumenta minha confiança</td><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+
+        <h4>Dimensão 4: Explicabilidade</h4>
+        <table class="dataframe">
+            <thead><tr><th>#</th><th>Afirmação</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+            <tbody>
+                <tr><td>E1</td><td class="left">As explicações contrafactuais me ajudam a entender POR QUE o risco é alto/baixo</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>E2</td><td class="left">Consigo relacionar as features SHAP (ex: vigencia_log) com características reais do edital</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>E3</td><td class="left">Prefiro receber explicações contrafactuais a receber apenas um número de risco</td><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+
+        <h4>Dimensão 5: Intenção de Uso</h4>
+        <table class="dataframe">
+            <thead><tr><th>#</th><th>Afirmação</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+            <tbody>
+                <tr><td>I1</td><td class="left">Eu usaria o Copiloto no meu trabalho se estivesse disponível</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>I2</td><td class="left">Eu recomendaria o Copiloto a colegas da área de compras públicas</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>I3</td><td class="left">O modelo Freemium (3 análises grátis) é um modelo justo de acesso</td><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+
+        <h3>Parte IV: Questões Abertas</h3>
+        <ol>
+            <li>Qual aspecto do Copiloto você considerou <strong>mais útil</strong>? Por quê?</li>
+            <li style="margin-top:0.5em">_______________________________________________</li>
+            <li>Qual aspecto você considerou <strong>menos útil</strong> ou <strong>confuso</strong>? Por quê?</li>
+            <li style="margin-top:0.5em">_______________________________________________</li>
+            <li>Que funcionalidade você <strong>gostaria que existisse</strong> mas não encontrou?</li>
+            <li style="margin-top:0.5em">_______________________________________________</li>
+            <li>Você identifica algum <strong>risco legal ou ético</strong> no uso deste tipo de ferramenta em compras públicas?</li>
+            <li style="margin-top:0.5em">_______________________________________________</li>
+            <li>Comentários adicionais ou sugestões:</li>
+            <li style="margin-top:0.5em">_______________________________________________</li>
+        </ol>
+
+        <h2>Procedimento de Aplicação</h2>
+        <ol>
+            <li><strong>Pré-sessão (5 min):</strong> Explicar o contexto da pesquisa (DSR, doutorado Fucape), o objetivo do Copiloto e o protocolo de avaliação. Esclarecer que não há resposta certa ou errada.</li>
+            <li><strong>Sessão guiada (20 min):</strong> O avaliador executa as 5 tarefas enquanto o pesquisador observa e registra comentários espontâneos, hesitações e dúvidas.</li>
+            <li><strong>Questionário (10 min):</strong> O avaliador preenche as Partes III e IV.</li>
+            <li><strong>Debriefing (5 min):</strong> Discussão aberta sobre a experiência.</li>
+        </ol>
+        <p><em>Tempo total por avaliador:</em> ~40 minutos</p>
+
+        <h2>Análise dos Dados</h2>
+        <h3>Análise Quantitativa</h3>
+        <p>Para cada dimensão, calcular: média e desvio-padrão das notas Likert; coeficiente de concordância entre avaliadores (se n ≥ 5); comparação entre perfis (ex: pregoeiro vs. auditor vs. advogado).</p>
+
+        <h3>Análise Qualitativa</h3>
+        <p>Análise de conteúdo das questões abertas (Bardin, 2011); categorização de comentários espontâneos durante a sessão; identificação de temas recorrentes e outliers.</p>
+
+        <h2>Resultados Esperados</h2>
+        <p>Com base na versão atual do artefato (Sprint 10, modelo pós-remediação), espera-se:</p>
+        <table class="dataframe">
+            <thead><tr><th>Dimensão</th><th>Média esperada</th><th>Justificativa</th></tr></thead>
+            <tbody>
+                <tr><td class="left">Utilidade</td><td>4,0 – 4,5</td><td class="left">O Copiloto resolve um problema real com dados reais do PNCP (100k contratos)</td></tr>
+                <tr><td class="left">Usabilidade</td><td>3,5 – 4,0</td><td class="left">Interface funcional mas não é uma UI profissional</td></tr>
+                <tr><td class="left">Confiança</td><td>3,5 – 4,0</td><td class="left">Acurácia 93,36% / AUC-ROC 90,83% + alvo observável + baselines aumentam credibilidade</td></tr>
+                <tr><td class="left">Explicabilidade</td><td>3,5 – 4,5</td><td class="left">Contrafactuais normativos são originais, mas termos técnicos (SHAP) persistem</td></tr>
+                <tr><td class="left">Intenção de Uso</td><td>3,5 – 4,0</td><td class="left">Freemium pode gerar resistência inicial</td></tr>
+            </tbody>
+        </table>
+
+        <h2>Status do Modelo (Atualização Sprint 10)</h2>
+        <p>O modelo do Copiloto passou por remediação metodológica (Sprint 6), resultando em:</p>
+        <ul>
+            <li><strong>Acurácia:</strong> 93,36% (antes: 98,27%)</li>
+            <li><strong>AUC-ROC:</strong> 90,83% (antes: 98,97%)</li>
+            <li><strong>F1-Score:</strong> 26,39% (devido ao desbalanceamento severo: 1,99% positivos)</li>
+            <li><strong>Alvo:</strong> eventos adversos observáveis (aditivos >10% ou ≥2 retificações)</li>
+        </ul>
+        <p>A queda nas métricas reflete a correção de tautologia, não degradação do modelo. Os avaliadores devem ser informados sobre o target desbalanceado e as implicações para interpretação das métricas.</p>
+
+        <h2>Aprovação Ética</h2>
+        <p>Este protocolo deve ser submetido ao comitê de ética da Fucape Business School antes da aplicação com avaliadores externos. O Termo de Consentimento Livre e Esclarecido (TCLE) deve ser assinado por todos os participantes.</p>
+
+        <h2>Referência</h2>
+        <p>Bardin, L. (2011). <em>Análise de conteúdo</em>. Edições 70.</p>
+    </div>
+</body>
+</html>

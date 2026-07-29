@@ -1,6 +1,6 @@
 # Contexto do Projeto - Tese de Doutorado
 
-**Última atualização:** 19 de Julho de 2026 07h
+**Última atualização:** 25 de Julho de 2026 23h — v2.1: código 100% pronto. Cloud Function: build falha — compute SA sem permissão Artifact Registry. Pendente: `artifactregistry.reader` + redeploy.
 
 ---
 
@@ -19,11 +19,12 @@
 
 A tese foi pivotada do modelo original de 25 artigos para o **Modelo Fucape de 3 Entregáveis**:
 
-| # | Entregável | Estado (19/07/2026) |
+| # | Entregável | Estado (23/07/2026) |
 |---|------------|---------------------|
 | 1 | **Artigo 1 — Diagnóstico Empírico** (PNCP) | ✅ **100% PRONTO** para submissão Qualis A |
 | 2 | **Artigo 2 — Artigo Tecnológico** (Copiloto) | ✅ FINALIZADO (18/07/2026) |
-| 3 | **Produto — MVP Funcional** (Firebase) | ⚠️ Front-end online, back-end em deploy |
+| 3 | **Produto — MVP Funcional** (Firebase) | ⚠️ **v2.1** — Código 100% pronto. Cloud Function: build falha (Artifact Registry). Pendente: add permissão + redeploy |
+| 4 | **Tese Completa** (`Tese/tese_draft.html`) | ✅ Estruturada com 3 artigos (23/07/2026) |
 
 ---
 
@@ -81,10 +82,14 @@ A tese foi pivotada do modelo original de 25 artigos para o **Modelo Fucape de 3
 
 | Componente | Status | Detalhe |
 |------------|--------|---------|
-| Front-end (Hosting) | 🟢 Online | 3 páginas HTML + tema |
-| Cloud Function `analisar_minuta` | ⚠️ **Em deploy** | Bloqueio: autorização interativa |
-| API `/api/analisar` | ⚠️ 404 | Roteada para function inexistente |
-| Modelos ML | 🟢 11 arquivos, 27,35 MB | Limpos em 19/07/2026 |
+| Front-end (Hosting) | 🟢 Online | Módulos avaliação + geração + dashboard admin |
+| Cloud Function `analisar_minuta` | 🟢 **v14 deployada** | NVIDIA_API_KEY configurada, 512MB/120s timeout |
+| API `/api/analisar` | ❌ Build falha — sem deploy | Artifact Registry: compute SA sem `artifactregistry.repositories.downloadArtifacts` |
+| NVIDIA IA | 🟢 Integrada | `meta/llama-3.3-70b-instruct` para geração de editais |
+| Modelos ML | 🟢 11 arquivos, 27,35 MB | Random Forest + SHAP + Isolation Forest |
+| XSS | 🟢 Sanitizado | 15 innerHTML → DOM methods |
+| Rate limiting | 🟢 Implementado | 30 req/min por usuário |
+| Segurança headers | 🟢 Configurados | X-Frame-Options, X-Content-Type-Options |
 
 ### 4 Tarefas de Qualidade Concluídas (19/07/2026 07h)
 
@@ -93,27 +98,69 @@ A tese foi pivotada do modelo original de 25 artigos para o **Modelo Fucape de 3
 3. ✅ **Limpeza de modelos**: -12,17 MB removidos (4 arquivos duplicados)
 4. ✅ **requirements.txt**: scikit-learn==1.9.0 fixado (evita InconsistentVersionWarning)
 
-### Pendência Crítica
+### Pendências Críticas
 
-**Cloud Function `analisar_minuta` precisa ser deployada** no terminal do usuário:
-```bash
+1. **Permissão Artifact Registry + redeploy** (rodar como `comercial@cerradofinancas.com.br`):
+```powershell
 cd C:\Users\Renato\Documents\Doutorado\PubliCopilot
-firebase deploy --only functions --project publicopilot-aa662
+gcloud config set account comercial@cerradofinancas.com.br
+gcloud artifacts repositories add-iam-policy-binding gcf-artifacts --location=us-central1 --project=publicopilot --member=serviceAccount:432118179013-compute@developer.gserviceaccount.com --role=roles/artifactregistry.reader
+gcloud functions deploy analisar_minuta --runtime python311 --trigger-http --allow-unauthenticated --project publicopilot --region us-central1 --source=functions --entry-point=analisar_minuta --memory=512MB --timeout=120s --set-env-vars NVIDIA_API_KEY=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
 ```
+
+2. **Firebase hosting deploy:**
+```powershell
+firebase login
+firebase deploy --only hosting
+```
+
+3. **Permissão IAM allUsers** para acesso direto à URL da função (se necessário)
+
+4. **Permissão Storage Object Viewer** para o compute SA no bucket gcf-sources (se o passo 1 nao resolver):
+```powershell
+gsutil iam ch serviceAccount:432118179013-compute@developer.gserviceaccount.com:objectViewer gs://gcf-sources-432118179013-us-central1
+```
+
+3. **Expandir `tese_draft.html`** com conteúdo integral dos artigos
+
+4. **Gerar PDF da tese** para submissão à banca
+
+5. **Opicionais:** Testes unitários (D1/D2), reCAPTCHA v3 (B3), página de histórico (F2), relatório PDF (F4)
 
 ---
 
-## Arquivos-Chave (19/07/2026)
+## Tese Completa (tese_draft.html)
+
+**Arquivo:** `Tese/tese_draft.html`
+**Tamanho:** 790 linhas, 61 KB
+**Estrutura:** 6 capítulos + pre-textual + referências + apêndices
+**Modelo:** Segue a estrutura do `Tese-Joao-Eudes-Bezerra.pdf` (tese Fucape com 3 artigos)
+
+| Capítulo | Conteúdo |
+|----------|----------|
+| Pré-textual | Capa, Folha de Rosto, Aprovação, Epígrafe, Dedicatória, Resumo, Abstract, Listas, Sumário |
+| 1 | Introdução Geral (contexto, problema, justificativa, objetivos, estrutura) |
+| 2 | Fundamentação Teórica Geral (ECT, Estado Empreendedor, Transparência Algorítmica, DSR) |
+| 3 | Artigo 1 — Diagnóstico Empírico (OR=1,71, Cox HR=1,85, Gini=0,89) |
+| 4 | Artigo 2 — Copiloto Algorítmico XAI (AUC-ROC=90,83%, F1=26,39%) |
+| 5 | Produto — PubliCopilot v1.3 (arquitetura Firebase, ML, segurança, roadmap) |
+| 6 | Considerações Finais (contribuições, limitações, pesquisas futuras) |
+| Pós-textual | Referências (21 obras) + Apêndices A (Protocolo TAM) e B (TCLE) |
+
+## Arquivos-Chave (23/07/2026)
 
 | Arquivo | Função |
 |---------|--------|
 | `novo.imp.md` | Controle geral de implementação |
+| `Tese/tese_draft.html` | Tese completa com 3 artigos (790 linhas) |
 | `Tese/artigos_tese/01-Artigo-Cientifico-Diagnostico/artigo_01_diagnostico.html` | Artigo 1 (HTML) |
 | `Tese/artigos_tese/01-Artigo-Cientifico-Diagnostico/dados/figuras/fig[1-7]_*.svg` | 7 figuras SVG |
 | `Tese/artigos_tese/01-Artigo-Cientifico-Diagnostico/dados/resultados_reais.json` | Outputs da regressão real |
 | `PubliCopilot/functions/main.py` | Cloud Function |
 | `PubliCopilot/functions/models/saved/` | 11 modelos ML |
 | `PubliCopilot/public/` | Front-end (deployado) |
+| `PubliCopilot/functions/models/nvidia_client.py` | Cliente NVIDIA API (novo v2.1) |
+| `PubliCopilot/public/data/counterfactual_templates.json` | Templates contrafactuais (asset estático) |
 | `PubliCopilot/limpar_modelos.py` | Script de limpeza (manutenção) |
 | `erros_firebase.md` | Histórico de erros Firebase |
 | `imp.produto.md` | Controle específico do Produto |

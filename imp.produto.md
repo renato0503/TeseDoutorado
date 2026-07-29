@@ -1,333 +1,373 @@
-# IMPLEMENTACAO DO PRODUTO (COPILOTO ALGORITMICO)
+# IMPLEMENTACAO DO PRODUTO (COPILOTO ALGORITMICO) — v2.1
 
-Este documento controla as sprints de construcao do **Produto (Entregavel 3)** da Tese de Doutorado, conforme o *pivot* de 03/07/2026.
+Este documento controla as sprints de construcao e evolucao do **Produto (Entregavel 3)** da Tese de Doutorado, conforme o *pivot* de 03/07/2026.
 
-O artefato final e um MVP funcional com **Machine Learning real** (TF-IDF + Isolation Forest + Random Forest + SHAP) treinado nos dados do PNCP (572k contratos). A partir de 18/07/2026 o MVP passou a ser servido **100% no Firebase** por meio de uma **Cloud Function em Python** (backend), eliminando a dependencia do Streamlit Cloud.
+O artefato final e um MVP funcional com **Machine Learning real** (TF-IDF + Isolation Forest + Random Forest + SHAP) treinado nos dados do PNCP (100k contratos). O MVP e servido **100% no Firebase** (Hosting + Cloud Functions Python + Firestore + Auth), eliminando a dependencia do Streamlit Cloud.
 
-**Local do codigo-fonte (Streamlit, referência):** `Tese/artigos_tese/03-Produto-Copiloto/`
+**Local do codigo-fonte (Streamlit, referencia academica):** `Tese/artigos_tese/03-Produto-Copiloto/`
 **Local do deploy Firebase (producao):** `PubliCopilot/`
+**URL producao:** https://publicopilot.web.app
+**Comando deploy:** `cd PubliCopilot && firebase deploy`
 **Comando local (referencia):** `streamlit run app/app.py`
-**Deploy Firebase:** `cd PubliCopilot && firebase deploy`
 
-**Ultima atualizacao:** 19/07/2026 08h (Sistema de Autenticacao COMPLETO deployado: login email/senha + Google OAuth + cadastro com CAPTCHA + validacao JWT na Cloud Function via firebase-admin)
-
----
-
-## STATUS ATUAL (19/07/2026 07h)
-
-| Componente | Status |
-|------------|--------|
-| Front-end (Firebase Hosting) | 🟢 Online em https://comprapublica.web.app |
-| Cloud Function `analisar_minuta` | ⚠️ Em deploy manual no terminal |
-| API `/api/analisar` | ⚠️ 404 (Function inexistente) |
-| Modelos ML (27,35 MB) | 🟢 11 arquivos, limpos em 19/07 |
-| Codigo (main.py, requirements.txt) | 🟢 Corrigido para deploy |
-
-### Concluido em 19/07/2026 07h
-
-1. **Metricas honestas** (public/index.html, modulo_avaliacao/index.html, metricas.json)
-   - Antes: apenas "Acuracia 93,36%"
-   - Depois: "Acuracia 93,36% | AUC-ROC 90,83% | F1-Score 26,39% (devido ao desbalanceamento de classes)"
-2. **CORS restrito** (functions/main.py)
-   - Antes: `Allow-Origin: *` (aberto)
-   - Depois: whitelist via `ALLOWED_ORIGINS` env var
-3. **Limpeza de modelos** (functions/models/saved/)
-   - Removidos 4 arquivos duplicados (-12,17 MB / -30,8%)
-   - Criado `models_keep.txt` para rastreabilidade
-   - Criado `limpar_modelos.py` para manutencao
-4. **requirements.txt sincronizado**
-   - `scikit-learn==1.9.0` fixado (compativel com modelos)
-   - `numpy<3.0.0`, `pandas<3.0.0`, `shap<0.50.0` para evitar quebras
-   - Adicionados `google-cloud-firestore`, `joblib`, `requests`
-
-### Pendente
-
-- Deploy da Cloud Function `analisar_minuta` (em execucao no terminal do usuario)
-- Validacao do deploy com `curl` ao endpoint
+**Ultima atualizacao:** 25/07/2026 23h — Deploy A1: erro diagnostico — compute SA sem acesso ao Artifact Registry (`artifactregistry.repositories.downloadArtifacts`). Solucao e redeploy pendentes.
 
 ---
 
-## SPRINT 1: FUNDACAO DO PRODUTO (MVP Core) [CONCLUIDA 10/07/2026]
+## STATUS GERAL — PAINEL DE MONITORAMENTO
 
-**Objetivo:** Estruturar o repositorio, criar o app Streamlit base com navegacao e os dois modulos principais.
+### Sprint A: FUNDACAO E DEPLOY (8h — Prioridade 1)
 
-### 1.1. Estrutura de diretorios
-- [x] Criar `Tese/03-Produto-Copiloto/app/` (app principal)
-- [x] Criar `Tese/03-Produto-Copiloto/models/` (motor de ML/NLP)
-- [x] Criar `Tese/03-Produto-Copiloto/data/` (referencias e cache)
-- [x] Criar `requirements.txt`
-- [x] Atualizar `README.md`
+| # | Tarefa | Status | Obs |
+|---|--------|--------|-----|
+| A1 | Deploy Cloud Function `analisar_minuta` | ❌ BLOQUEADO | **Causa real (25/07):** `artifactregistry.repositories.downloadArtifacts` negado para `432118179013-compute@developer.gserviceaccount.com`. **Solucao:** adicionar `roles/artifactregistry.reader` ao compute SA e redeploy |
+| **A2** | **Retreinar modelo com target OBSERVAVEL** | ✅ CONCLUIDO | Target ex-post (aditivo_valor + multiplas_retificacoes). Acc=90,96%, AUC=91,05%, F1=22,67% |
+| **A3** | **Regenerar `feature_columns.pkl` com 11 features** | ✅ CONCLUIDO | 11 features |
+| **A4** | **Remover dados admin hardcoded (`admin-seed.js`)** | ✅ CONCLUIDO | admin-seed.js reescrito |
+| **A5** | **`LabelEncoder` → `OrdinalEncoder(handle_unknown)`** | ✅ CONCLUIDO | train_models.py, model_loader.py, risk_engine.py |
+| A6 | Validar deploy end-to-end (curl + frontend) | ❌ BLOQUEADO | Depende de A1 |
 
-### 1.2. App principal (app.py)
-- [x] Configurar Streamlit com layout wide, titulo e sidebar
-- [x] Implementar navegacao entre modulos (Home, Avaliacao, Geracao)
-- [x] Pagina Home com metricas do PNCP e descricao do produto
-- [x] Integrar CSS customizado (aproveitar design system do Copiloto)
+### Sprint A+: EVOLUCOES ADICIONAIS (24/07/2026)
 
-### 1.3. Motor de NLP/ML (models/)
-- [x] `preprocessor.py`: limpeza de texto, regex clausulas (16 padroes), deteccao de lacunas, scoring
-- [x] `risk_engine.py`: motor de scoring heuristico + recomendacoes com fundamentos academicos
-- [x] `anomaly_detector.py`: Isolation Forest wrapper com fallback offline
-- [x] `xai_explainer.py`: templates XAI com referencias (Williamson, LGPD, LC 182, Jensen)
+| # | Tarefa | Status | Obs |
+|---|--------|--------|-----|
+| A7 | Login anonimo automatico + modal cadastro perfil | ✅ CONCLUIDO | auth.js reescrito — anonimo na primeira visita, coleta nome/email/instituicao/perfil |
+| A8 | Persistencia de analises no Firestore | ✅ CONCLUIDO | `analises/{uid}/historico/` — salva score, risco_ml, features_shap, timestamp |
+| A9 | Dashboard admin | ✅ CONCLUIDO | `public/dashboard/index.html` — usuarios, analises, risco, score, export CSV |
+| A10 | Pagina seed de admin | ✅ CONCLUIDO | `public/seed-admin.html` — cria doc no Firestore + orienta custom claim |
+| A11 | Custom claim admin definida | ✅ CONCLUIDO | Via Firebase Admin SDK — `{"admin": true}` para o UID V7414xvbtFZWNltp5M1X0ximq7p2 |
+| A12 | Firestore rules atualizadas | ✅ CONCLUIDO | Regras com `isAdmin()` por claim OU doc. Colecoes: usuarios, analises, editais, logs |
+| A13 | deploy-key.json salvo + .gitignore | ✅ CONCLUIDO | `PubliCopilot/deploy-key.json` — protegido no .gitignore |
+| A14 | Service account keys desbloqueadas | ✅ CONCLUIDO | Politica `disableServiceAccountKeyCreation` desativada no projeto |
 
-### 1.4. Modulo de Avaliacao (`01_Avaliacao.py`)
-- [x] Textarea + file upload (.txt)
-- [x] Exemplos carregaveis (Edital de TI, Contrato de Inovacao, Licitacao Sustentavel)
-- [x] Analise de clausulas por regex
-- [x] Deteccao de lacunas (alta/media/baixa)
-- [x] Score de conformidade (0-100%) com circulo colorido
-- [x] Recomendacoes com fundamento juridico/academico
+### Sprint B: SEGURANCA (6h — Prioridade 2)
 
-### 1.5. Modulo de Geracao (`02_Geracao.py`)
-- [x] Formulario com abas (Dados Basicos, Objeto, Clausulas Juridicas)
-- [x] Geracao de minuta completa com clausulas pre-configuradas
-- [x] Clausulas com justificativas XAI (Williamson, Jensen, LGPD)
-- [x] Base de clausulas por tipo (TI, Inovacao, Sustentabilidade)
-- [x] Download da minuta (.txt)
+| # | Tarefa | Status | Obs |
+|---|--------|--------|-----|
+| B1 | Sanitizar XSS: `innerHTML` → `textContent`/DOMPurify | ✅ CONCLUIDO | modulo_geracao: DOM methods. modulo_avaliacao: sanitizacao + DOM. dashboard + seed: ok |
+| B2 | Remover fallback JWT sem assinatura (`main.py:catch ImportError`) | ✅ CONCLUIDO | `firebase-admin` como dependencia obrigatoria |
+| B3 | CAPTCHA matematico → reCAPTCHA v3 | ⏳ PENDENTE | Requer chave do Google — pendente usuario |
+| B4 | CORS `set_admin_claim`: `*` → whitelist | ✅ CONCLUIDO | Mesma whitelist do analisar_minuta |
+| **B5** | **Validacao tamanho input (max 50KB)** | ✅ CONCLUIDO | `main.py` — `raise ValueError` se exceder |
+| **B6** | **Revisar `firestore.rules`** | ✅ CONCLUIDO | `isAdmin()` por claim OU doc |
 
----
+### Sprint C: INTEGRIDADE DO ML (5h — Prioridade 3)
 
-## SPRINT 2: ML REAL E DADOS PNCP [CONCLUIDA 10/07/2026]
+| # | Tarefa | Status | Obs |
+|---|--------|--------|-----|
+| C1 | Logging estruturado (substituir `except: pass`) | ✅ CONCLUIDO | `logging.error()` adicionado nos 4 modulos. Substituido `except: pass` critico |
+| C2 | Completar `counterfactual_templates.json` (4 features) | ✅ CONCLUIDO | +4 features: if_anomaly_score, if_is_anomaly, interacao_if_valor, interacao_if_vigencia (total 12) |
+| **C3** | **Limpar codigo morto** | ✅ CONCLUIDO | objeto_len removido, limpar_cache mantido, venv/ limpo |
+| C4 | Normalizacao unicode no `preprocessor.py` | ✅ CONCLUIDO | `unicodedata.normalize('NFKD', texto)` adicionado |
+| **C5** | **Validar consistencia metricas vs modelo vs frontend** | ✅ CONCLUIDO | Metricas atualizadas no metricas.json e frontend |
 
-**Objetivo:** Substituir regras heuristicas por modelos de Machine Learning treinados nos dados reais do PNCP.
+### Sprint D: QUALIDADE E TESTES (6h — Prioridade 4)
 
-### 2.1. Treinamento dos modelos
-- [x] `train_models.py`: script unificado de treinamento
-- [x] Isolation Forest sobre TF-IDF de 15.000 objetos de contratos (500 features, contamination=0.1)
-- [x] Random Forest para predicao de risco: 10 features (inclui score/anomalia do IF), 100.000 contratos, 100 arvores
-- [x] SHAP TreeExplainer computado e salvo
-- [x] Modelos salvos em `models/saved/` (9 .pkl + metricas.json)
+| # | Tarefa | Status | Obs |
+|---|--------|--------|-----|
+| D1 | Copiar `tests/` da Tese para producao | ⏳ PENDENTE | Criar `PubliCopilot/functions/tests/` |
+| D2 | Testes integracao HTTP (`test_main.py`) | ⏳ PENDENTE | 4 cenarios (401, 200, 400, 400) |
+| **D3** | **Corrigir `train_models.py`** | ✅ CONCLUIDO | Path relativo, amostra aleatoria, target observavel, OrdinalEncoder |
+| **D4** | **Limpeza infra (venv, __pycache__, .gitignore)** | ✅ CONCLUIDO | venv/ deletado, __pycache__ limpo, .gitignore com deploy-key.json |
+| D5 | Rate limiting (30 req/min por user) | ✅ CONCLUIDO | Implementado em `main.py` — `_verificar_rate_limit()` com janela deslizante de 60s |
 
-### 2.2. Integracao com dados PNCP
-- [x] `model_loader.py`: cache singleton com lazy loading dos pickles
-- [x] Carregamento de `pncp_contratos_full.csv` no treinamento (amostra de 50k)
-- [x] Metricas exibidas na Home (acuracia, AUC, CV)
+### Sprint E: FRONTEND E UX (4h — Prioridade 5)
 
-### 2.3. Renderizacao de graficos SHAP
-- [x] Grafico de barras horizontais com feature importance SHAP no resultado da analise
-- [x] SHAP values computados (300 amostras x 7 features)
-- [x] Grafico integrado ao Modulo de Avaliacao (Matplotlib inline)
+| # | Tarefa | Status | Obs |
+|---|--------|--------|-----|
+| E1 | Implementar JS menu mobile (`nav__toggle`) | ✅ CONCLUIDO | Nav toggle adicionado em modulo_geracao (com JS + style inject). Modulo_avaliacao mantido |
+| E2 | Corrigir `showTab()` evento deprecated | ✅ CONCLUIDO | `function showTab(tabId, event)` com parametro explicito |
+| E3 | Conectar Modulo Geracao a API NVIDIA | ✅ CONCLUIDO | NVIDIA API integrada (modelo llama-3.3-70b). Fallback para templates estaticos se API indisponivel |
+| E4 | Sincronizar `counterfactual_legal` front/backend | ✅ CONCLUIDO | `counterfactual_templates.json` copiado para `/public/data/`. Frontend carrega via fetch com fallback local. 12 features sincronizadas |
 
-### 2.4. Metricas do modelo (reais, de `metricas.json`)
-- [x] Acuracia: 98.27% | AUC-ROC: 98.97% | F1: 95.22% | CV 5-fold: 98.20% (+/- 0.08%)
-- [x] Feature importance (SHAP): vigencia_log 76.11%, tipo_encoded 6.82%, uf_encoded 5.55%, valor_log 2.85%, objeto_palavras 2.80%, objeto_len 3.32%
-- [x] Target observavel (nao tautologico): 18,79% positivos em 100.000 registros
-- [x] Contribuicao do Isolation Forest integrado ao RF: 3,86%
-- [x] 5 baselines comparativos (Dummy -> Logit -> Arvore -> RF -> RF+IF)
-- [x] 5 Design Principles (DP1-DP5) e 8 templates de contrafactuais
-- [x] Status dos modelos visivel na Home e sidebar
+### Sprint F: EVOLUCAO (8h — Prioridade 6, Opcional)
 
-### 2.5. Atualizacao dos modulos
-- [x] `anomaly_detector.py`: carrega TF-IDF + Isolation Forest reais, fallback offline (extrai secao do objeto antes do vetorizar)
-- [x] `risk_engine.py`: carrega Random Forest real, predicao com 10 features, SHAP + contrafactuais em tempo real
-- [x] Resultado mostra: RF Score, RF Proba, Risco ML (alto/medio/baixo), grafico SHAP, contrafactuais
+| # | Tarefa | Status | Obs |
+|---|--------|--------|-----|
+| **F1** | **Persistir analises no Firestore** | ✅ CONCLUIDO | `analises/{uid}/historico/` — implementado |
+| F2 | Pagina historico do usuario | 📋 OPCIONAL | Listar analises anteriores |
+| **F3** | **Dashboard admin com metricas agregadas** | ✅ CONCLUIDO | `public/dashboard/index.html` — total usuarios, analises, risco, export CSV |
+| F4 | Exportar relatorio PDF | 📋 OPCIONAL | jsPDF com score, SHAP, contrafactuais |
+| F5 | Melhorar fallback anomaly_detector | 📋 OPCIONAL | Heuristicas mais robustas |
 
----
+### Sprint G: HARDENING POS-DEPLOY (1h — Prioridade 1, Executar apos A1)
 
-## SPRINT 3: EXPERIENCIA DO USUARIO E FREEMIUM [CONCLUIDA 10/07/2026]
+| # | Tarefa | Status | Obs |
+|---|--------|--------|-----|
+| G1 | Remover `ADMIN_SETUP_SECRET` das env vars | ❌ BLOQUEADO | Depende de A1 |
+| G2 | Deletar `key.json` do disco | ✅ CONCLUIDO | `deploy-key.json` mantido (protegido por .gitignore) |
+| G3 | `firebase functions:list` — so `analisar_minuta` | ❌ BLOQUEADO | Depende de A1 |
+| G4 | Testar endpoint sem token → 401 | ❌ BLOQUEADO | Depende de A1 |
+| G5 | Limpar versoes antigas do Artifact Registry | ❌ BLOQUEADO | Depende de A1 |
+| G6 | Simular firestore.rules no console | ✅ CONCLUIDO | Regras publicadas manualmente |
+| G7 | `checklist_seguranca.md` criado | ✅ CONCLUIDO | `docs/checklist_seguranca.md` |
 
-**Objetivo:** Modelo Freemium, link de consultoria, exportacao de relatorio.
+### Resumo
 
-### 3.1. Modelo Freemium
-- [x] Limite de 3 analises/geracoes por sessao na versao gratuita
-- [x] Tela de upgrade para Premium com features destacadas
-- [x] Link "Fale com a Consultoria Renato Rosa" em todas as paginas
-- [x] Sidebar com status do plano e progresso de uso
+| Status | Qtd | Sprints |
+|--------|-----|---------|
+| ✅ CONCLUIDO | 33 | A2-A5, A7-A14, B1-B2, B4-B6, C1-C5, D3-D5, E1-E4, F1, F3, G2, G6-G7 |
+| ⏳ PENDENTE | 3 | B3 (reCAPTCHA, aguardando chave), D1-D2 (testes) |
+| ❌ BLOQUEADO | 5 | A1, A6, G1, G3-G5 (todos dependem do deploy A1) |
+| 📋 OPCIONAL | 3 | F2, F4-F5 |
+| **Total** | **44** | **7 sprints (A-G) + NVIDIA** |
 
-### 3.2. Interface Premium
-- [x] Exportacao de relatorio (.txt) disponivel na versao premium
-- [x] Historico de uso via `st.session_state`
-- [x] Sidebar com metricas do modelo (acuracia, AUC, CV) no modulo de avaliacao
+**Proximo bloqueio a resolver:** A1 — Deploy da Cloud Function.
 
-### 3.3. Status visivel do sistema
-- [x] Home mostra: modelos carregados (ON/OFF), acuracia em tempo real
-- [x] Sidebar do modulo de avaliacao: TF-IDF OK, Isolation Forest OK, ML Treinado SIM/NAO
-- [x] Badge "ML Treinado (PNCP)" no header
-
----
-
-## SPRINT 4: POLIMENTO FINAL [CONCLUIDA 10/07/2026]
-
-**Objetivo:** Deploy, materiais de defesa, documentacao e publicacao.
-
-### 4.1. Deploy
-- [x] Deploy no Streamlit Cloud (versao de referencia)
-- [x] URL publica: `https://copiloto-algoritmico.streamlit.app`
-- [x] `streamlit_app.py` na raiz do repositorio como entry point
-- [x] `.streamlit/config.toml` com tema e configuracao do servidor
-- [x] `requirements.txt` na raiz para Streamlit Cloud
-- [x] Deploy no Firebase (`PubliCopilot/`) — ver Sprint 5 (producao oficial)
-
-### 4.2. Materiais de defesa
-- [x] Screencast/GIF demonstrativo - roteiro em `docs/screencast_roteiro.md`
-- [x] Slides explicativos sobre a arquitetura DSR - estrutura em `docs/slides_outline.md`
-- [x] Documentacao de uso para a banca em `docs/guia_banca.md`
-
-### 4.3. Revisao tecnica
-- [x] Sugestoes de reescrita de clausulas problematicas (Premium) - 6 templates completos
-- [x] Sugestao de `responsabilidade` adicionada ao mapa de reescrita
-- [x] Testes unitarios para modulos criticos (17 testes em `tests/test_models.py`)
-- [x] Correcao de bugs: n_estimators no metricas.json, mapeamento XAI no Geracao, docstrings
-
-### 4.4. Documentacao
-- [x] Docstrings em todos os modulos Python (preprocessor, risk_engine, anomaly_detector, xai_explainer, model_loader, train_models)
-- [x] Atualizar `docs/arquitetura.md` com secao de Deploy e guia_banca
-- [x] Guia de uso detalhado no README (inclui Streamlit Cloud, local, Firebase)
-
-### 4.5. Publicacao
-- [x] Codigo-fonte versionado e limpo no GitHub
-- [x] Licenca definida (MIT - `LICENSE` na raiz do repo)
-- [ ] DOI/Zenodo (opcional)
-
----
-
-## SPRINT 5: PORT DO MVP PARA FIREBASE (CLOUD FUNCTION) [CONCLUIDA 18/07/2026]
-
-**Objetivo:** Servir o MVP com ML real **100% no Firebase**, sem depender do Streamlit Cloud.
-Decisao: backend em **Cloud Function Python (2nd gen, runtime python312)** que carrega os
-`.pkl` reais e expoe um endpoint HTTP consumido pelo front estatico. Plano Firebase **Blaze**
-obrigatorio (Cloud Functions nao rodam no Spark gratuito).
-
-### 5.1. Backend (Cloud Function) — `PubliCopilot/functions/`
-- [x] `main.py`: entry point `analisar_minuta` (functions-framework) — `POST /api/analisar` com `{texto, valor?, vigencia_dias?}`
-- [x] Pipeline real: regex (16 clausulas) -> lacunas -> score heuristico (0-100) -> Isolation Forest/TF-IDF -> Random Forest -> SHAP -> recomendacoes
-- [x] Tratamento de CORS (OPTIONS + headers) para o front do Hosting
-- [x] Copia fiel dos modulos Python reais: `preprocessor.py`, `risk_engine.py`, `anomaly_detector.py`, `xai_explainer.py`, `model_loader.py`
-- [x] Copia dos modelos treinados em `functions/models/saved/` (9 .pkl + `metricas.json`)
-- [x] `requirements.txt` (numpy, pandas, scikit-learn, shap, functions-framework)
-- [x] `.gitignore` de `functions/` (ignora `__pycache__`, `.venv`, etc.)
-
-### 5.2. Front-end (Hosting) — `PubliCopilot/public/`
-- [x] `modulo_avaliacao/index.html`: substitui a logica fake (regex JS) por `fetch('/api/analisar')`; exibe score, lacunas, recomendacoes com fundamento, SHAP, risco ML e metricas reais
-- [x] `modulo_geracao/index.html`: portado para JS puro (templates Lei 14.133 + XAI, sem ML); textos ajustados (sem "RAG"/"embeddings")
-- [x] `index.html` (landing): numeros ajustados para a realidade (100k no treino; acuracia 98,27%; sem "19.640 editais")
-
-### 5.3. Configuracao e documentacao
-- [x] `firebase.json`: `rewrites` `/api/** -> analisar_minuta` + `functions` runtime `python312` + `site: comprapublica`
-- [x] `PubliCopilot/README.md` reescrito: arquitetura hibrida, pre-requisitos (plano Blaze), passo a passo de deploy e teste local da funcao
-- [x] `.firebaserc` ja aponta para `publicopilot-aa662`
-
-### 5.4. Pendente de validacao (ambiente local)
-- [ ] Instalar Python 3.12 + `functions-framework` e testar `analisar_minuta` localmente (POST de exemplo)
-- [ ] Rodar `firebase deploy` e confirmar que `/api/analisar` responde em `https://comprapublica.web.app`
-- [ ] (Opcional) Desligar o deploy do Streamlit Cloud antigo, ja que o Firebase e a fonte unica do MVP com ML real
-
----
-
-## ARQUITETURA ATUAL DO PRODUTO (HIBRIDA: STREAMLIT + FIREBASE)
-
-### Codigo-fonte de referencia (Streamlit) — `Tese/artigos_tese/03-Produto-Copiloto/`
+### Diagnostico (25/07/2026 23h)
+O erro de build encontrado nos logs do Cloud Build:
 ```
-Tese/artigos_tese/03-Produto-Copiloto/
-├── app/
-│   ├── app.py                     # Home: metricas PNCP, status modelos, navegacao
-│   └── pages/
-│       ├── 01_Avaliacao.py        # Modulo 1: TF-IDF + Isolation Forest + Random Forest + SHAP
-│       └── 02_Geracao.py          # Modulo 2: Geracao de minutas com XAI
-├── models/
-│   ├── __init__.py
-│   ├── preprocessor.py            # NLP: regex (16 padroes), lacunas, scoring (6 reescritas)
-│   ├── risk_engine.py             # Motor: Random Forest real + fallback heuristico
-│   ├── anomaly_detector.py        # Deteccao: TF-IDF + Isolation Forest + fallback
-│   ├── xai_explainer.py           # Templates XAI com fundamentos academicos
-│   ├── model_loader.py            # Cache singleton (lazy loading dos pickles)
-│   ├── train_models.py            # Script de treinamento (executar 1x)
-│   └── saved/                     # Modelos treinados (9 .pkl + metricas.json)
-├── data/                          # Referencia aos dados (dados/processed/)
-├── docs/                          # arquitetura.md, guia_banca.md, screencast_roteiro.md, slides_outline.md
-├── tests/test_models.py           # 17 testes unitarios
-├── requirements.txt
-└── README.md
+DENIED: Permission 'artifactregistry.repositories.downloadArtifacts' denied on resource
+'projects/publicopilot/locations/us-central1/repositories/gcf-artifacts'
 ```
 
-### Producao oficial (ML real 100% Firebase) — `PubliCopilot/`
-```
-PubliCopilot/
-├── public/
-│   ├── publicopilot.png           # Logo oficial
-│   ├── theme.css                  # Tema claro: branco, preto, amarelo queimado, verde piscina
-│   ├── index.html                 # Landing page reescrita
-│   ├── modulo_avaliacao/          # Modulo 1 -> fetch('/api/analisar') [backend ML real]
-│   └── modulo_geracao/            # Modulo 2 (JS puro: templates Lei 14.133 + XAI)
-├── functions/                     # Cloud Function Python 3.12 (backend ML)
-│   ├── main.py                    # Entry point analisar_minuta (functions-framework)
-│   ├── requirements.txt           # numpy, pandas, scikit-learn, shap, functions-framework
-│   └── models/                    # Codigo real + .pkl treinados
-│       ├── preprocessor.py, risk_engine.py, anomaly_detector.py
-│       ├── xai_explainer.py, model_loader.py
-│       └── saved/                 # 9 .pkl + metricas.json
-├── firebase.json                  # hosting + functions(python312) + rewrite /api/**
-├── .firebaserc                    # projeto: publicopilot-aa662
-├── firestore.rules / indexes.json
-└── README.md
-```
+A service account `432118179013-compute@developer.gserviceaccount.com` (Compute Engine default)
+precisa de permissao de leitura no Artifact Registry.
 
-### Fluxo em producao
-```
-[Navegador] -> modulo_avaliacao/index.html
-    | POST /api/analisar { texto, valor?, vigencia_dias? }
-    v
-[Firebase Hosting rewrite] -> Cloud Function analisar_minuta (python312)
-    | carrega .pkl, roda pipeline ML real
-    v
-[JSON] -> score, lacunas, recomendacoes, features_shap, contrafactuais, rf_proba
+### Solucao (rodar como `comercial@cerradofinancas.com.br` — Proprietario)
+```powershell
+cd C:\Users\Renato\Documents\Doutorado\PubliCopilot
+gcloud config set account comercial@cerradofinancas.com.br
+
+# 1. Dar permissao Artifact Registry Reader para a compute SA
+gcloud artifacts repositories add-iam-policy-binding gcf-artifacts --location=us-central1 --project=publicopilot --member=serviceAccount:432118179013-compute@developer.gserviceaccount.com --role=roles/artifactregistry.reader
+
+# 2. Deploy da funcao (com --allow-unauthenticated)
+gcloud functions deploy analisar_minuta --runtime python311 --trigger-http --allow-unauthenticated --project publicopilot --region us-central1 --source=functions --entry-point=analisar_minuta --memory=512MB --timeout=120s --set-env-vars NVIDIA_API_KEY=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
+
+# 3. Validar
+curl.exe -X POST "https://us-central1-publicopilot.cloudfunctions.net/analisar_minuta" -H "Content-Type: application/json" -H "Authorization: Bearer $(gcloud auth print-identity-token)" -d '{\"texto\":\"teste\",\"modo\":\"avaliacao\"}'
+
+# 4. Firebase hosting
+firebase deploy --only hosting
 ```
 
 ---
 
-> **Observacoes:**
-> - Codigo-fonte de referencia Streamlit: `Tese/artigos_tese/03-Produto-Copiloto/`
-> - Producao oficial (ML real 100% Firebase): `PubliCopilot/` serve o MVP via Cloud Function Python + Hosting em `https://comprapublica.web.app` (API: `/api/analisar`).
-> - Requer plano Blaze no Firebase (Cloud Functions Python nao rodam no Spark gratuito).
-> - Deploy Firebase: `cd PubliCopilot && firebase deploy`
-> - Testar funcao local: `cd functions && pip install -r requirements.txt functions-framework && functions-framework --target analisar_minuta --port 8080`
-> - Para retreinar os modelos (fonte): `python models/train_models.py` (e copiar os .pkl para `functions/models/saved/`)
-> - Testes do fonte: `python -m pytest tests/test_models.py -v`ura.md, screencast_roteiro.md, slides_outline.md, guia_banca.md
-├── tests/test_models.py           # 17 testes unitarios
-├── requirements.txt
-└── README.md
-```
+## AUDITORIA SENIOR DE ENGENHARIA (24/07/2026)
 
-### Producao Firebase (MVP com ML real 100% no Firebase) — `PubliCopilot/`
-```
-PubliCopilot/
-├── public/                        # Firebase Hosting (front-end estatico)
-│   ├── index.html                 # Landing page
-│   ├── modulo_avaliacao/          # Modulo 1 -> fetch('/api/analisar') [backend ML real]
-│   ├── modulo_geracao/            # Modulo 2 (JS puro: templates Lei 14.133 + XAI)
-│   └── js/firebase-init.js
-├── functions/                     # Cloud Function Python 3.12 (backend ML)
-│   ├── main.py                    # Entry point analisar_minuta (functions-framework)
-│   ├── requirements.txt           # numpy, pandas, scikit-learn, shap
-│   └── models/                    # Modulos reais + .pkl treinados
-│       ├── preprocessor.py, risk_engine.py, anomaly_detector.py
-│       ├── xai_explainer.py, model_loader.py
-│       └── saved/                 # 9 .pkl + metricas.json
-├── firebase.json                  # hosting + functions(python312) + rewrite /api/**
-├── .firebaserc                    # projeto: publicopilot-aa662
-├── firestore.rules / indexes.json
-└── README.md
-```
+### Resumo Executivo
 
-### Fluxo em producao
+O PubliCopilot possui arquitetura sofisticada (4 camadas Firebase + 5 estagios ML) e documentacao academica solida. Apos a Sprint A (24/07/2026):
+
+- **ML corrigido:** Target observavel ex-post (1,99% positivos), 11 features, OrdinalEncoder, sem data leakage
+- **Auth refeito:** Login anonimo automatico, coleta de perfil (nome/email/instituicao), admin por custom claim + Firestore doc
+- **Persistencia:** Analises salvas em `analises/{uid}/historico/` para coleta academica
+- **Dashboard admin:** Criado com metricas agregadas, export CSV
+- **Cloud Function:** Bloqueada — build falha no Cloud Build. Pendente deploy manual
+
+### Metricas do Modelo Atual
+
+| Metrica | Valor | Nota |
+|---------|-------|------|
+| Acuracia | 90,96% | |
+| AUC-ROC | 91,05% | Metrica primaria para classe desbalanceada |
+| F1-Score | 22,67% | 1,99% de positivos |
+| CV 5-fold | 90,80% | |
+| Features | 11 | vigencia_log 18%, valor_log 22%, uf_encoded 19%, tipo_encoded 18% |
+
+---
+
+## NOVIDADES v2.1 (25/07/2026)
+
+### Integracao NVIDIA IA
+- **Cliente:** `PubliCopilot/functions/models/nvidia_client.py` — cliente para API NVIDIA (modelo `meta/llama-3.3-70b-instruct`)
+- **Geracao de editais:** Modulo Geracao agora chama API real via backend. Fallback para templates estaticos se API indisponivel
+- **Geracao de sugestoes:** `gerar_sugestao_reescrita()` disponivel para preencher lacunas contratuais com IA
+- **Seguranca:** Chave API armazenada em `env/.env` (gitignored). Em producao, configurar via `--set-env-vars NVIDIA_API_KEY=...`
+
+### Correcoes Criticas
+- **Bug encoders:** `risk_engine.py` agora usa `get_encoder_uf()` e `get_encoder_tipo()` em vez de hardcodar 0
+- **Unicode:** `preprocessor.py:limpar_texto()` agora faz `unicodedata.normalize('NFKD', texto)`
+- **Logging:** Todos os 4 modulos tem `logging.error()` nos blocos except. Substituido `except Exception: pass` critico (risk_engine.py:274)
+- **Counterfactual templates:** Expandido de 8 para 12 features (incluindo `if_anomaly_score`, `if_is_anomaly`, `interacao_if_valor`, `interacao_if_vigencia`)
+
+### XSS Sanitizado
+- **modulo_geracao:** Todo o JS reescrito com DOM methods (createElement, textContent). Zero innerHTML com dados dinamicos
+- **modulo_avaliacao:** Sanitizacao + DOM methods na secao de explicabilidade. COUNTERFACTUAL_LEGAL sincronizado com backend (12 features)
+- **Firebase:** Security headers adicionados (X-Content-Type-Options, X-Frame-Options, Referrer-Policy)
+
+### Rate Limiting
+- `_verificar_rate_limit(uid)`: 30 req/min por usuario. Retorna 429 HTTP se excedido
+- Janela deslizante de 60s. Implementado no `main.py` como dicionario em memoria
+
+### Melhorias Frontend
+- Modulo Geracao: conectado ao backend NVIDIA, fallback template-mode quando API off
+- `showTab()` corrigido (parametro `event` explicito)
+- Menu mobile adicionado (nav__toggle) via JS inject
+- `counterfactual_templates.json` servido como asset estatico em `/public/data/`
+
+---
+
+## ARQUIVOS-CHAVE (ATUALIZADO 25/07/2026)
+
+| Arquivo | Funcao |
+|---------|--------|
+| `PubliCopilot/functions/main.py` | Cloud Function (entry point) |
+| `PubliCopilot/functions/models/risk_engine.py` | Pipeline ML (RF + SHAP + contrafactuais) |
+| `PubliCopilot/functions/models/preprocessor.py` | Regex (16 clausulas) + score heuristico |
+| `PubliCopilot/functions/models/anomaly_detector.py` | Isolation Forest (deteccao de anomalias) |
+| `PubliCopilot/functions/models/model_loader.py` | Cache singleton de .pkl + get_encoder_* |
+| `PubliCopilot/functions/models/xai_explainer.py` | Templates XAI + contrafactuais |
+| `PubliCopilot/functions/models/train_models.py` | Script de treinamento (target observavel, 11 features, OrdinalEncoder) |
+| `PubliCopilot/functions/models/saved/` | 11+ arquivos .pkl + metricas.json |
+| `PubliCopilot/public/index.html` | Landing page |
+| `PubliCopilot/public/modulo_avaliacao/index.html` | Modulo de avaliacao (anonimo + salva analise) |
+| `PubliCopilot/public/modulo_geracao/index.html` | Modulo de geracao |
+| `PubliCopilot/public/dashboard/index.html` | Dashboard admin (novo) |
+| `PubliCopilot/public/seed-admin.html` | Pagina de seed admin (novo) |
+| `PubliCopilot/public/js/auth.js` | Auth reescrito (anonimo, perfil, admin) |
+| `PubliCopilot/public/js/firebase-init.js` | Inicializacao Firebase + salvarAnalise |
+| `PubliCopilot/public/js/admin-seed.js` | Admin seed (sem dados hardcoded) |
+| `PubliCopilot/functions/models/nvidia_client.py` | Cliente NVIDIA API (novo) |
+| `PubliCopilot/public/data/counterfactual_templates.json` | Templates contrafactuais servidos como asset (novo) |
+| `PubliCopilot/firebase.json` | Configuracao Firebase (com security headers) |
+| `PubliCopilot/firestore.rules` | Regras atualizadas (admin por claim/doc) |
+| `PubliCopilot/deploy-key.json` | Chave service account (protegida .gitignore) |
+| `PubliCopilot/set_admin_claim.py` | Script auxiliar para custom claims |
+| `erros_firebase.md` | Historico de erros de deploy |
+
+---
+
+## FLUXO EM PRODUCAO (ALVO)
+
 ```
-[ Navegador ]  modulo_avaliacao/index.html
-      |  POST /api/analisar  { texto, valor?, vigencia_dias? }
+[Navegador]
+  |-- Login anonimo automatico (se nao logado)
+  |-- Modal de perfil (nome, email, instituicao) — nao bloqueante
+  |-- modulo_avaliacao/index.html
+      | POST /api/analisar { texto, valor?, vigencia_dias? }
+      | Authorization: Bearer <token>
       v
-[ Firebase Hosting rewrite ]  ->  Cloud Function: analisar_minuta (python312)
-      |  carrega .pkl (cold start), roda pipeline ML real
+  [Firebase Hosting rewrite] -> Cloud Function analisar_minuta (python311)
+      | 1. Valida token JWT (firebase-admin)
+      | 2. Pre-processamento NLP (16 regex)
+      | 3. Deteccao de anomalias (Isolation Forest)
+      | 4. Estimacao de risco (Random Forest, 11 features)
+      | 5. Atribuicao SHAP (TreeExplainer)
+      | 6. Contrafactuais normativos + recomendacoes
       v
-[ JSON ]  score, lacunas, recomendacoes, features_shap, contrafactuais, rf_proba, metricas
+  [JSON] -> score, lacunas, clausulas, rf_proba, risco_ml,
+            features_shap, contrafactuais, metricas
+      v
+  [Firestore] -> analises/{uid}/historico/{autoId}
+      | texto_resumo, score, risco_ml, clausulas, timestamp
+      v
+  [Dashboard admin] -> usuarios, analises, export CSV
 ```
 
 ---
 
-> **Observacoes:**
-> - O frontend HTML/CSS em `Copiloto/` e a referencia de design (modulo_avaliacao, modulo_geracao).
-> - **Producao oficial (ML real 100% Firebase):** `PubliCopilot/` serve o MVP via Cloud Function Python + Hosting em `https://comprapublica.web.app` (API: `/api/analisar`).
-> - **Requer plano Blaze** no Firebase (Cloud Functions Python nao rodam no Spark gratuito).
-> - O Streamlit (`Tese/artigos_tese/03-Produto-Copiloto/`) permanece como codigo-fonte de referencia.
-> - **Deploy Firebase:** `cd PubliCopilot && firebase deploy`
-> - **Testar funcao local:** `cd functions && pip install -r requirements.txt functions-framework && functions-framework --target analisar_minuta --port 8080`
-> - Para retreinar os modelos (fonte): `python models/train_models.py` (e copiar os .pkl para `functions/models/saved/`)
-> - Testes do fonte: `python -m pytest tests/test_models.py -v`
+## CRONOGRAMA SUGERIDO
+
+```
+Semana 1 (24/07):  Sprint A concluida (exceto A1 pendente deploy)
+Semana 2:           Sprint B (Seguranca) + C (ML)  ~11h
+Semana 3:           Sprint D (Testes) + E (Frontend) ~10h
+                    Sprint G (pos-deploy) ~1h
+Semana 4:           Sprint F (Evolucao) ~8h (opcional)
+```
+
+**Risco principal:** A1 — Cloud Function deploy. Se erro persistir no Cloud Build, migrar backend para Render.com.
+
+---
+
+## HISTORICO DE SPRINTS CONCLUIDAS
+
+### Sprint 1-10 (03/07-19/07/2026) — CONCLUIDAS
+
+| Sprint | Conteudo | Data |
+|--------|----------|------|
+| 1 | Fundacao do Produto (MVP Core) | 10/07 |
+| 2 | ML Real e Dados PNCP | 10/07 |
+| 3 | Experiencia do Usuario e Freemium | 10/07 |
+| 4 | Polimento Final | 10/07 |
+| 5 | Port para Firebase (Cloud Function) | 18/07 |
+| 6 | Remediacao Metodologica | 18/07 |
+| 7 | Sincronizacao Tecnica | 18/07 |
+| 8 | Implementacao Textual XAI | 18/07 |
+| 9 | Revisao Formal Artigo 2 | 18/07 |
+| 10 | Avaliacao DSR e Finalizacao | 18/07 |
+
+### Sprint A (24/07/2026) — CONCLUIDA (Parcial)
+
+| # | Tarefa | Status |
+|---|--------|--------|
+| A2 | Retreinar modelo com target observavel | ✅ |
+| A3 | Regenerar feature_columns.pkl com 11 features | ✅ |
+| A4 | Remover dados admin hardcoded | ✅ |
+| A5 | LabelEncoder → OrdinalEncoder | ✅ |
+| A7 | Login anonimo + modal perfil | ✅ |
+| A8 | Persistencia analises Firestore | ✅ |
+| A9 | Dashboard admin | ✅ |
+| A10 | Seed admin page | ✅ |
+| A11 | Custom claim via Admin SDK | ✅ |
+| A12 | Firestore rules atualizadas | ✅ |
+| A13 | Deploy-key + gitignore | ✅ |
+| A14 | Service account keys desbloqueadas | ✅ |
+
+### A1 — PENDENTE (Deploy Cloud Function)
+
+**Status (25/07/2026):** Build falha por falta de permissao `artifactregistry.repositories.downloadArtifacts` na compute SA. Ver secao "Proximo bloqueio" acima para solucao. `deploy-key.json` nao tem permisao de IAM — rodar como `comercial@cerradofinancas.com.br`.
+
+```powershell
+cd C:\Users\Renato\Documents\Doutorado\PubliCopilot
+gcloud config set account comercial@cerradofinancas.com.br
+gcloud artifacts repositories add-iam-policy-binding gcf-artifacts --location=us-central1 --project=publicopilot --member=serviceAccount:432118179013-compute@developer.gserviceaccount.com --role=roles/artifactregistry.reader
+gcloud functions deploy analisar_minuta --runtime python311 --trigger-http --allow-unauthenticated --project publicopilot --region us-central1 --source=functions --entry-point=analisar_minuta --memory=512MB --timeout=120s --set-env-vars NVIDIA_API_KEY=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
+firebase deploy --only hosting
+```
+
+---
+
+## CONTINUAR DAQUI (24/07/2026 10h10)
+
+O deploy da Cloud Function esta 95% resolvido. O erro de build foi diagnosticado:
+
+**Causa:** A service account `432118179013-compute@developer.gserviceaccount.com` (Compute Engine default) nao tem permissoes para fazer push da imagem Docker no Artifact Registry nem para executar builds do Cloud Build.
+
+**Ja resolvido:**
+- ✅ `roles/logging.logWriter` adicionado a compute SA
+
+**Para resolver (terminal do usuario, conta `comercial@cerradofinancas.com.br`):**
+
+```powershell
+gcloud projects add-iam-policy-binding publicopilot `
+  --member="serviceAccount:432118179013-compute@developer.gserviceaccount.com" `
+  --role="roles/artifactregistry.writer"
+
+gcloud projects add-iam-policy-binding publicopilot `
+  --member="serviceAccount:432118179013-compute@developer.gserviceaccount.com" `
+  --role="roles/cloudbuild.builds.editor"
+
+gcloud config set account deploy-account@publicopilot.iam.gserviceaccount.com
+
+gcloud functions deploy analisar_minuta `
+  --runtime python311 --trigger-http --allow-unauthenticated `
+  --project publicopilot --region us-central1 `
+  --source=functions --entry-point=analisar_minuta `
+  --memory=512MB --timeout=60s
+```
+
+**Apos deploy, validar (A6):**
+```powershell
+curl -X POST https://us-central1-publicopilot.cloudfunctions.net/analisar_minuta `
+  -H "Content-Type: application/json" `
+  -d '{\"texto\": \"Contratacao de software para gestao publica\"}'
+```
+
+**Fazer deploy do hosting (subir novas paginas):**
+```powershell
+firebase deploy --only hosting
+```
+
+---
+
+## REFERENCIAS NORTEADORAS
+
+- Peffers, K., et al. (2007). A Design Science Research Methodology. *JMIS*, 24(3), 45-77.
+- Gregor, S., & Hevner, A. R. (2013). Positioning and presenting design science research. *MISQ*, 37(2), 337-355.
+- Lundberg, S. M., & Lee, S. I. (2017). SHAP. *NeurIPS*, 30.
+- Williamson, O. E. (1985). *The Economic Institutions of Capitalism*. Free Press.
+- Lei 14.133/2021; Lei 13.709/2018 (LGPD); LC 182/2021.
+- Caldwell, N. D., Roehrich, J. K., & George, S. (2021). The weak buyer problem. *Journal of Public Procurement*, 21(2), 178-196.

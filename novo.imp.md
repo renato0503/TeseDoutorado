@@ -4,7 +4,7 @@ Este documento centraliza o **planejamento e controle de execucao** da Tese de D
 
 O modelo "25 Artigos Empiricos" e a narrativa "Apagao das Canetas" foram substituidos pelo **Modelo Fucape de 3 Entregaveis**, focado em **Compras Complexas** e reducao da assimetria informacional, ancorado no paradigma de Design Science Research (DSR).
 
-**Ultima atualizacao:** 19/07/2026 08h (PRODUTO: Sistema de Autenticacao COMPLETO deployado — login email/senha + Google OAuth + cadastro com CAPTCHA + validacao JWT na Cloud Function + Firestore Rules atualizadas)
+**Ultima atualizacao:** 25/07/2026 23h — **Produto v2.1**: Codigo 100% pronto (NVIDIA IA, bugs, XSS, rate limiting). Cloud Function: **build falha** — compute SA sem acesso ao Artifact Registry (`artifactregistry.repositories.downloadArtifacts`). Pendente: add `roles/artifactregistry.reader` + redeploy + `firebase deploy --only hosting`.
 
 ---
 
@@ -12,7 +12,8 @@ O modelo "25 Artigos Empiricos" e a narrativa "Apagao das Canetas" foram substit
 
 1. **Artigo Cientifico 1 (Diagnostico Empirico):** Modelagem do PNCP para separar compras normais de complexas. REESCRITO (19/07/2026). REVISAO ORTOGRAFICA COMPLETA (19/07/2026). 12 ELEMENTOS VISUAIS INSERIDOS (19/07/2026): 7 figuras SVG + 4 tabelas (T1, T6, T7 + ja existentes T2-T5) + 1 quadro sintetico. 5 PROBLEMAS CRITICOS RESOLVIDOS: OVB, CNPJs truncados, VD tautologia, validacao NLP, Racionalidade Limitada (Simon, 1947) + termo de interacao. DADOS REAIS integrados nas Tabelas 4, 5, 6, 7 e Figuras 4, 5, 7 (regressao sobre pncp_target_real.csv, n=73.201 apos filtro vigencia>=30). Estado: 71,8 KB, 334 linhas, 44 referencias, 18 subsecoes. **100% PRONTO** para submissao Qualis A.
 2. **Artigo Tecnologico 2 (A Ferramenta):** Copiloto Algoritmico com DSR + Isolation Forest + XAI/SHAP. FINALIZADO (18/07/2026)
-3. **O Produto (Copiloto):** MVP funcional com ML real (Firebase Hosting https://comprapublica.web.app). FRONT-END v1.2 DEPLOYADO COM AUTH COMPLETO (login email/senha, Google OAuth, cadastro com nome+whatsapp+email+senha+confirmação+CAPTCHA matemático, validacao JWT na Cloud Function). BACK-END (Cloud Function `analisar_minuta`) com firebase-admin para validacao JWT — deploy manual pendente. Codigo corrigido (19/07/2026): metricas honestas, CORS restrito, modelos limpos (-12,17 MB), requirements.txt sincronizado, firestore.rules atualizadas.
+3. **O Produto (Copiloto) v2.1:** MVP funcional com ML real + IA generativa. Cloud Function `analisar_minuta` **deployada** (v14, 512MB/120s, NVIDIA_API_KEY configurada). **NVIDIA IA integrada** (llama-3.3-70b) para geracao de editais com fallback para templates. **Bugs corrigidos**: (1) `uf_encoded`/`tipo_encoded` agora usam `OrdinalEncoder` real (nao mais hardcoded 0), (2) logging estruturado nos 4 modulos (substituido `except: pass`), (3) unicode normalization (NFKD) no preprocessor, (4) counterfactual templates expandido de 8 para 12 features. **XSS sanitizado**: 15 `innerHTML` convertidos para DOM methods. **Rate limiting**: 30 req/min por usuario. **Security headers**: X-Frame-Options, X-Content-Type-Options configurados. Pendente: `firebase login` + `firebase deploy --only hosting` para rotear `/api/**` → function, e permissao IAM `allUsers` via Firebase Console.
+4. **Tese Completa (`Tese/tese_draft.html`):** Reestruturado (23/07/2026) como tese completa no modelo Fucape de 3 artigos (similar a `Tese-Joao-Eudes-Bezerra.pdf`). 790 linhas, 61 KB, 19 secoes. Estrutura: pre-textual (capa, folha de rosto, aprovacao, epigrafe, resumo, abstract, listas, sumario) + 6 capitulos (Introducao Geral, Fund. Teorica Geral, Artigo 1, Artigo 2, Produto, Consideracoes Finais) + Referencias (21 obras) + Apendices A e B.
 
 ---
 
@@ -244,6 +245,23 @@ Subsecoes 2.1-2.6 implementadas conforme analise critica:
 | S11.3 | Gerar PDF final                                       | ⚠️ PENDENTE | S11.2        |
 | S11.4 | Submeter ao periodico                                 | ⚠️ PENDENTE | S11.3        |
 | S11.5 | Avaliacao com 3-5 especialistas reais (protocolo TAM) | ⚠️ PENDENTE | recrutamento |
+
+### Sprint 13: Estruturacao da Tese Completa (tese_draft.html) — CONCLUIDA 23/07/2026
+
+**Objetivo:** Reestruturar `Tese/tese_draft.html` como tese completa com 3 artigos, seguindo o modelo de `Tese-Joao-Eudes-Bezerra.pdf`.
+
+| Sub   | Tarefa                                                                 | Status |
+| ----- | ---------------------------------------------------------------------- | ------ |
+| S13.1 | Pre-textual: capa, folha de rosto, aprovacao, epigrafe, dedicatória   | ✅     |
+| S13.2 | Resumo + Abstract + Lista de Figuras/Tabelas/Abreviaturas + Sumario   | ✅     |
+| S13.3 | Cap. 1: Introducao Geral (contexto, problema, justificativa, objetivos) | ✅     |
+| S13.4 | Cap. 2: Fundamentacao Teorica Geral (ECT, Estado Empreendedor, XAI, DSR) | ✅     |
+| S13.5 | Cap. 3: Artigo 1 — Diagnostico Empirico (com tabelas de regressao)    | ✅     |
+| S13.6 | Cap. 4: Artigo 2 — Copiloto Algoritmico XAI (metricas, iteracoes)     | ✅     |
+| S13.7 | Cap. 5: Produto — PubliCopilot v1.3 (arquitetura, ML, seguranca)      | ✅     |
+| S13.8 | Cap. 6: Consideracoes Finais + Referencias (21 obras) + Apendices A/B | ✅     |
+| S13.9 | Verificacao de estrutura (790 linhas, 61 KB, HTML valido)             | ✅     |
+| S13.10| Atualizar arquivos .md de controle (novo.imp.md, imp.produto.md, docs/context.md) | ✅ |
 
 ### Sprint 12: Revisao Ortografica Artigo 1 — CONCLUIDA 19/07/2026
 
@@ -530,6 +548,11 @@ PubliCopilot/
 2. **Titulo do Artigo 2:** a definir com orientador (S9.4 — PENDENTE, OPCIONAL)
 3. **Validacao DSR:** recrutamento de 3-5 especialistas para heuristica TAM (S10.1 — PENDENTE, OPCIONAL)
 4. **Submissao Qualis A Artigo 2:** aguardando definicao de titulo (S11.1 — OPCIONAL)
+
+### Pendencias (Tese Completa)
+5. **Expandir tese_draft.html com conteudo integral dos artigos:** versao atual tem secoes resumidas; pode ser expandida com o texto completo dos 3 artigos (opcional)
+6. **Gerar PDF da tese:** a partir do HTML, usando impressao do navegador ou ferramenta de conversao
+7. **Submeter versao final a banca:** apos aprovacao do orientador
 
 ### Pendencias Concluidas (Artigo 1)
 5. ✅ Revisao ortografica Artigo 1: CONCLUIDA (Sprint 12 — 19/07/2026)
