@@ -1,6 +1,6 @@
 # Contexto do Projeto - Tese de Doutorado
 
-**Última atualização:** 25 de Julho de 2026 23h — v2.1: código 100% pronto. Cloud Function: build falha — compute SA sem permissão Artifact Registry. Pendente: `artifactregistry.reader` + redeploy.
+**Última atualização:** 31 de Julho de 2026 — v2.1: Cloud Function `analisar_minuta` **deployada (v17 ACTIVE)**. Remediacao completa da Tese e artigos de congresso executada (ver `remediacao_tese.md`). Push para GitHub `6e6a86d`. Pendente: acesso publico da funcao (org policy allUsers) + hosting rewrite `/api/**` (404).
 
 ---
 
@@ -78,15 +78,15 @@ A tese foi pivotada do modelo original de 25 artigos para o **Modelo Fucape de 3
 
 ## Produto (Copiloto Algorítmico)
 
-**URL Pública:** https://comprapublica.web.app
+**URL Pública:** https://publicopilot.web.app
 
 | Componente | Status | Detalhe |
 |------------|--------|---------|
 | Front-end (Hosting) | 🟢 Online | Módulos avaliação + geração + dashboard admin |
-| Cloud Function `analisar_minuta` | 🟢 **v14 deployada** | NVIDIA_API_KEY configurada, 512MB/120s timeout |
-| API `/api/analisar` | ❌ Build falha — sem deploy | Artifact Registry: compute SA sem `artifactregistry.repositories.downloadArtifacts` |
+| Cloud Function `analisar_minuta` | 🟢 **v17 deployada** | NVIDIA_API_KEY configurada, 512MB/120s timeout |
+| API `/api/analisar` | ⚠️ 404/403 | Função deployada; acesso público (allUsers) bloqueado por org policy; hosting rewrite a validar |
 | NVIDIA IA | 🟢 Integrada | `meta/llama-3.3-70b-instruct` para geração de editais |
-| Modelos ML | 🟢 11 arquivos, 27,35 MB | Random Forest + SHAP + Isolation Forest |
+| Modelos ML | 🟢 11 arquivos | Random Forest + SHAP + Isolation Forest |
 | XSS | 🟢 Sanitizado | 15 innerHTML → DOM methods |
 | Rate limiting | 🟢 Implementado | 30 req/min por usuário |
 | Segurança headers | 🟢 Configurados | X-Frame-Options, X-Content-Type-Options |
@@ -94,38 +94,23 @@ A tese foi pivotada do modelo original de 25 artigos para o **Modelo Fucape de 3
 ### 4 Tarefas de Qualidade Concluídas (19/07/2026 07h)
 
 1. ✅ **Métricas honestas**: Acc + AUC + F1 com nota de desbalanceamento (1,99% positivos)
-2. ✅ **CORS restrito**: Whitelist `comprapublica.web.app` (não mais `*`)
+2. ✅ **CORS restrito**: Whitelist `publicopilot.web.app` (não mais `*`)
 3. ✅ **Limpeza de modelos**: -12,17 MB removidos (4 arquivos duplicados)
 4. ✅ **requirements.txt**: scikit-learn==1.9.0 fixado (evita InconsistentVersionWarning)
 
 ### Pendências Críticas
 
-1. **Permissão Artifact Registry + redeploy** (rodar como `comercial@cerradofinancas.com.br`):
-```powershell
-cd C:\Users\Renato\Documents\Doutorado\PubliCopilot
-gcloud config set account comercial@cerradofinancas.com.br
-gcloud artifacts repositories add-iam-policy-binding gcf-artifacts --location=us-central1 --project=publicopilot --member=serviceAccount:432118179013-compute@developer.gserviceaccount.com --role=roles/artifactregistry.reader
-gcloud functions deploy analisar_minuta --runtime python311 --trigger-http --allow-unauthenticated --project publicopilot --region us-central1 --source=functions --entry-point=analisar_minuta --memory=512MB --timeout=120s --set-env-vars NVIDIA_API_KEY=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
-```
-
-2. **Firebase hosting deploy:**
+1. **Acesso público da função** (org policy impede `allUsers`):
+   - Alternativa A: liberar `allUsers` via exemption no org policy
+   - Alternativa B: autenticar via Identity Platform no frontend (Bearer token — fluxo já suportado em `main.py`)
+2. **Firebase hosting deploy** (validar rewrite `/api/**`):
 ```powershell
 firebase login
 firebase deploy --only hosting
 ```
-
-3. **Permissão IAM allUsers** para acesso direto à URL da função (se necessário)
-
-4. **Permissão Storage Object Viewer** para o compute SA no bucket gcf-sources (se o passo 1 nao resolver):
-```powershell
-gsutil iam ch serviceAccount:432118179013-compute@developer.gserviceaccount.com:objectViewer gs://gcf-sources-432118179013-us-central1
-```
-
-3. **Expandir `tese_draft.html`** com conteúdo integral dos artigos
-
-4. **Gerar PDF da tese** para submissão à banca
-
-5. **Opicionais:** Testes unitários (D1/D2), reCAPTCHA v3 (B3), página de histórico (F2), relatório PDF (F4)
+3. **Validar end-to-end (A6)**: POST real com token Firebase Auth.
+4. **Gerar PDF da tese** para submissão à banca.
+5. **Opcionais:** Testes unitários (D1/D2), reCAPTCHA v3 (B3), página de histórico (F2), relatório PDF (F4).
 
 ---
 
@@ -147,21 +132,25 @@ gsutil iam ch serviceAccount:432118179013-compute@developer.gserviceaccount.com:
 | 6 | Considerações Finais (contribuições, limitações, pesquisas futuras) |
 | Pós-textual | Referências (21 obras) + Apêndices A (Protocolo TAM) e B (TCLE) |
 
-## Arquivos-Chave (23/07/2026)
+## Arquivos-Chave (31/07/2026)
 
 | Arquivo | Função |
 |---------|--------|
 | `novo.imp.md` | Controle geral de implementação |
+| `remediacao_tese.md` | Plano de remediação da Tese (R1-R8) |
+| `revisao_literatura.md` | Plano e execução do banco de fichamento (15 temas) |
+| `sprints_injecao_referencial.md` | Sprints de injeção de referencial nos artigos de congresso |
+| `fichamento_congressos.csv` | Banco de fichamento (389 obras, 288 DOIs confirmados) |
 | `Tese/tese_draft.html` | Tese completa com 3 artigos (790 linhas) |
 | `Tese/artigos_tese/01-Artigo-Cientifico-Diagnostico/artigo_01_diagnostico.html` | Artigo 1 (HTML) |
-| `Tese/artigos_tese/01-Artigo-Cientifico-Diagnostico/dados/figuras/fig[1-7]_*.svg` | 7 figuras SVG |
-| `Tese/artigos_tese/01-Artigo-Cientifico-Diagnostico/dados/resultados_reais.json` | Outputs da regressão real |
+| `Tese/artigos_tese/02-Artigo-Tecnologico-Copiloto/artigo_02_tecnologico.html` | Artigo 2 (HTML) |
+| `Tese/artigos_tese/03-Produto-Copiloto/produto_tecnologico.html` | Produto (Entregável 3, HTML) |
+| `Tese/artigos_tese/01-Artigo-Cientifico-Diagnostico/dados/resultados_reais.json` | Outputs da regressão real (fonte canônica dos números) |
 | `PubliCopilot/functions/main.py` | Cloud Function |
 | `PubliCopilot/functions/models/saved/` | 11 modelos ML |
 | `PubliCopilot/public/` | Front-end (deployado) |
-| `PubliCopilot/functions/models/nvidia_client.py` | Cliente NVIDIA API (novo v2.1) |
-| `PubliCopilot/public/data/counterfactual_templates.json` | Templates contrafactuais (asset estático) |
-| `PubliCopilot/limpar_modelos.py` | Script de limpeza (manutenção) |
+| `PubliCopilot/functions/models/nvidia_client.py` | Cliente NVIDIA API (v2.1) |
+| `curadoria/bloco_*.json` | Lista-mestra curada do fichamento |
 | `erros_firebase.md` | Histórico de erros Firebase |
 | `imp.produto.md` | Controle específico do Produto |
 

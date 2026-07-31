@@ -52,9 +52,10 @@
 
 | Item | Prioridade | Observação |
 |------|-----------|------------|
-| ~~Expandir referências para 30-35~~ | ⚠️ PARCIAL (31/07/2026) | 16 → **27 refs** via injeção do fichamento. Meta 30-35: completar com +3-8 na expansão do corpus (60-80 artigos WoS/Scopus) |
+| ~~Expandir referências para 30-35~~ | ⚠️ QUASE (31/07/2026) | 16 → **31 refs** via injeção do fichamento (+4 refs novas: Andhov 2025, Mikalef 2022, Priem 2022, Wieringa 2020). Meta 30-35: faltam 0-4; completar com a expansão do corpus (60-80 artigos WoS/Scopus) |
+| ~~Citação fantasma removida~~ | ✅ (31/07/2026) | "Hacked & Alsheikh (2024)" (inexistente no Crossref) removida; substituída por Andhov et al. (2025) |
+| ~~Fluxograma PRISMA numérico~~ | ✅ (31/07/2026) | Funil 847→806→196→42 documentado na Seção 3.1 + Apêndice A |
 | Expandir corpus para 60-80 artigos | Alta | Requer nova busca em WoS/Scopus |
-| Fluxograma PRISMA | Média | Figura obrigatória para PRISMA-ScR |
 | Submeter para congresso-alvo | Alta | ICEGOV 2027 / DESRIST 2027 / EGOV 2027 |
 | Releitura humana do texto injetado | Média | Verificar fluidez e paginação após injeção |
 

@@ -195,7 +195,7 @@ Cada sprint corresponde a um tema e deve gerar **≥ 25 registros** no `fichamen
 #### Sprint 14 — IA e NLP em Compras Publicas
 - **Artigos fonte:** 02
 - **Autores classicos-alvo:** Vaidya et al. (2006) (e-procurement)
-- **Autores recentes-alvo:** Hacked & Alsheikh (2024), Soltes et al. (2023), Kral et al. (2024), Parn et al. (2023)
+- **Autores recentes-alvo:** Andhov, Darnall & Andhov (2025), Soltes et al. (2023), Kral et al. (2024), Parn et al. (2023)
 - **Queries:**
   - EN: `("artificial intelligence" OR "machine learning" OR NLP) AND ("public procurement")`
   - EN: `("e-procurement" OR "procurement automation") AND (AI OR algorithm OR text mining)`
@@ -279,6 +279,9 @@ A execucao abandonou a busca generica (Crossref/OpenAlex com ruido) e adotou a
   (TCE, Isomorfismo, Framing, Legitimidade) permanecem classicos por natureza.
   O refinamento da proporcao 70/30 por tema fica como sprint futuro (busca
   Scopus/WoS para ampliar recentes nesses temas).
+- **Citacoes fantasma removidas:** "Hacked & Alsheikh (2024)" (nao existe no
+  Crossref) eliminada do CSV e dos artigos; substituida por obras reais validadas
+  (Andhov et al. 2025, Mikalef et al. 2022, Priem et al. 2022, Wieringa 2020).
 
 **Scripts criados:**
 | Script | Funcao |

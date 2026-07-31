@@ -2,9 +2,10 @@
 
 ## Resumo do Estado
 
-- **Hosting**: deploy OK — `https://comprapublica.web.app`
-- **Functions**: bloqueado — todas as versões/alternativas falharam
-  -Projeto: `publicopilot-aa662` (Blaze plano ativo)
+- **Hosting**: deploy OK — `https://publicopilot.web.app`
+- **Functions**: ✅ **RESOLVIDO (31/07/2026)** — `analisar_minuta` **v17 ACTIVE** (512MB/120s, NVIDIA_API_KEY configurada). Causa raiz final: faltava `roles/artifactregistry.writer` (upload) na compute SA; aplicado + redeploy via `gcloud functions deploy`.
+- **Pendente**: acesso público (org policy bloqueia `allUsers`) + hosting rewrite `/api/**` (404 a validar)
+- **Projeto**: `publicopilot` (identidade canônica; o histórico usou `publicopilot-aa662`)
 
 ---
 

@@ -4,7 +4,7 @@ Este documento centraliza o **planejamento e controle de execucao** da Tese de D
 
 O modelo "25 Artigos Empiricos" e a narrativa "Apagao das Canetas" foram substituidos pelo **Modelo Fucape de 3 Entregaveis**, focado em **Compras Complexas** e reducao da assimetria informacional, ancorado no paradigma de Design Science Research (DSR).
 
-**Ultima atualizacao:** 31/07/2026 — **Produto v2.1**: Cloud Function `analisar_minuta` **deployada (v17 ACTIVE)** — ver `imp.produto.md`. **Novo plano de revisao da literatura** dos 4 artigos de congresso criado: `revisao_literatura.md` (15 sprints/temas) + `fichamento_congressos.csv` (schema rico) + `extrator_fichamento_openalex.py` (busca automatizada; OpenAlex com orcamento diario — 429, retry no dia seguinte).
+**Ultima atualizacao:** 31/07/2026 — **REMEDIACAO COMPLETA DA TESE + SUBIDA AO GITHUB**. Produto v2.1: Cloud Function `analisar_minuta` **deployada (v17 ACTIVE)** — ver `imp.produto.md`. Revisao da literatura executada (`revisao_literatura.md`, `fichamento_congressos.csv`, curadoria). **Injecao de referencial nos artigos de congresso** (10→36, 15→40, 17→31, 02→31 refs) + **remediacao da pasta Tese** (Artigo 1, Artigo 2, Produto, scripts) conforme `remediacao_tese.md`. Push para GitHub (`6e6a86d`): NVIDIA_API_KEY removida do repo, venv untracked.
 
 ---
 
@@ -665,7 +665,45 @@ PubliCopilot/
 
 **Status:** Plano e sprints criados. TODAS as obras planejadas pre-verificadas no fichamento (secao 8 do arquivo). Ajuste feito no CSV: `s11_04` (Zuiderwijk 2021) `relacao_artigo` 15 → `15, 17`. **EXECUCAO CONCLUIDA (31/07/2026):**
 - Artigo 10: 23 → **36 refs** (+13)
-- Artigo 17: 16 → **27 refs** (+11)
+- Artigo 17: 16 → **31 refs** (+15; +11 injeção +4 refs novas: Andhov 2025, Mikalef 2022, Priem 2022, Wieringa 2020)
 - Artigo 15: 20 → **40 refs** (+20)
 - Artigo 02: 21 → **31 refs** (+10)
 - QA autoplagio: 1 par duplicado corrigido (paragrafo de validacao metodologica 15/10); sincronizados para `PubliCopilot/public/artigos_congressos/`.
+- **Correcao de citacao fantasma:** "Hacked & Alsheikh (2024)" removida (inexistente no Crossref) do Artigo 17 e do Artigo 1 da Tese; substituida por Andhov, Darnall & Andhov (2025) — real, validada. Entradas duplicadas "Hacked" removidas do `fichamento_congressos.csv`.
+
+---
+
+## 17. REMEDIACAO DA PASTA TESE (31/07/2026)
+
+**Arquivo:** `remediacao_tese.md` (raiz)
+
+**Escopo:** Artigo 1 (Diagnostico), Artigo 2 (Tecnologico), Produto (Entregavel 3), scripts geradores, docs de apoio.
+
+**R1-R3 — Artigo 1 (Diagnostico):**
+- Citacao fantasma "Hacked & Alsheikh" removida (texto L80 + referencias); substituida por Zuiderwijk et al. (2021)
+- Titulo: "ANALISE CENSITARIA" → **"ANALISE EMPIRICA EM LARGA ESCALA"**
+- Numeros padronizados pelos dados reais (`resultados_reais.json`): n=73.201, 19.245 complexas (26,3%), NLP=5.687 (0,99%)
+- Pseudo R² 0,062 | AUC 0,697 | OR is_complexa 1,71 | OR vigencia 1,48 | PSM ATT +0,90 pp
+- Mean-centering documentado (Modelo 3); H2/Figura 7 reconciliadas (risco cumulativo)
+- NLP "em fase de execucao" → limitacao explicita; n=26 reformulado como proxy (CNPJ truncado)
+- Siglas expandidas, refs orfas citadas, intervalos de pagina e acentuacao corrigidos
+
+**R4-R5 — Produto (Entregavel 3):**
+- SHAP vigencia_log **76,11% → 14,40%** (Tabela 5 + Figura 6); matriz confusao 98,89% → 93,36%
+- Features corrigidas para o Modelo B real (11 features); pesos da Tabela 3 somam 100%
+- URL padronizada: `publicopilot.web.app`; fragmento orfao `product_tecnologico.html` removido
+- Docs de apoio (arquitetura.md, guia_banca.md, slides_outline.md): Streamlit → Firebase
+
+**R6 — Scripts geradores:** `montar_tese.py` / `reconstruir_tese_v2.py` — metricas viciadas (98,27/98,97/95,22) → 93,36/90,83/26,39; Streamlit → Firebase; rascunhos .md atualizados
+
+**R8 — Layout HTML:** artigos 1 e 2 da Tese com `<base href="./">` (CSS/figuras locais funcionam no navegador)
+
+**R7 — QA final:** todos os arquivos validados (zero termos viciados; integridade HTML OK; notas de transparencia intencionais preservadas)
+
+---
+
+## 18. GITHUB (31/07/2026)
+
+- **Commit `6e6a86d`** enviado a `github.com/renato0503/TeseDoutorado` (main)
+- **Seguranca:** NVIDIA_API_KEY removida do `imp.produto.md`; venv `functions_venv_old` untracked; `.gitignore` ampliado
+- 572 arquivos: remediação Tese + artigos congresso + fichamento + curadoria + planos
