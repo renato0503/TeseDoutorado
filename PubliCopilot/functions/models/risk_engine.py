@@ -16,13 +16,17 @@ References:
     Lei 14.133/2021. Nova Lei de Licitacoes.
 """
 
+import logging
 import numpy as np
 import pandas as pd
 from models.preprocessor import calcular_score, detectar_lacunas, extrair_clausulas
 from models.model_loader import (
-    get_random_forest, get_feature_columns, get_label_encoder_uf,
-    get_label_encoder_tipo, get_metricas, get_shap_explainer, modelos_disponiveis,
+    get_random_forest, get_feature_columns,
+    get_metricas, get_shap_explainer, get_scaler, get_encoder_uf,
+    get_encoder_tipo, modelos_disponiveis,
 )
+
+logger = logging.getLogger(__name__)
 
 PESOS_FEATURES = {
     "historico_sancoes": 0.0779,
@@ -73,6 +77,19 @@ def _extrair_features_ml(texto, metadados=None):
     if vigencia <= 0:
         vigencia = 365
 
+    uf = str(metadados.get("uf", "BR")).strip().upper()[:2]
+    tipo = str(metadados.get("tipo", "desconhecido")).strip().lower()
+    encoder_uf = get_encoder_uf()
+    encoder_tipo = get_encoder_tipo()
+    try:
+        uf_encoded = int(encoder_uf.transform([[uf]])[0][0]) if encoder_uf else 0
+    except Exception:
+        uf_encoded = 0
+    try:
+        tipo_encoded = int(encoder_tipo.transform([[tipo]])[0][0]) if encoder_tipo else 0
+    except Exception:
+        tipo_encoded = 0
+
     return {
         "objeto_len": len(texto),
         "objeto_palavras": len(palavras),
@@ -86,8 +103,8 @@ def _extrair_features_ml(texto, metadados=None):
             if kw in texto.lower()
         ),
         "valor_log": np.log1p(valor),
-        "uf_encoded": 0,
-        "tipo_encoded": 0,
+        "uf_encoded": uf_encoded,
+        "tipo_encoded": tipo_encoded,
         "vigencia_log": np.log1p(vigencia),
         "if_anomaly_score": 0.0,
         "if_is_anomaly": 0,
@@ -108,7 +125,8 @@ def _gerar_contrafactual(feature_nome, valor_atual, shap_peso, feature_cols, rf_
         proba_original = rf_model.predict_proba(X_base)[0][1]
         proba_modificada = rf_model.predict_proba(X_mod)[0][1]
         delta = proba_original - proba_modificada
-    except Exception:
+    except Exception as e:
+        logger.error("Falha ao gerar contrafactual para %s: %s", feature_nome, e)
         return None
 
     TRADUCAO_JURIDICA = {
@@ -226,8 +244,7 @@ def analisar_risco_contratual(texto, metadados=None):
             available_cols = [c for c in feature_cols if c in features_df.columns]
             features_df = features_df[available_cols].fillna(0)
 
-            from models.model_loader import _carregar_pickle
-            scaler = _carregar_pickle("scaler.pkl")
+            scaler = get_scaler()
             if scaler is not None:
                 try:
                     features_scaled = pd.DataFrame(
@@ -235,7 +252,8 @@ def analisar_risco_contratual(texto, metadados=None):
                         columns=available_cols,
                         index=features_df.index,
                     )
-                except Exception:
+                except Exception as e:
+                    logger.warning("Scaler transform falhou, usando features brutas: %s", e)
                     features_scaled = features_df
             else:
                 features_scaled = features_df
@@ -272,9 +290,10 @@ def analisar_risco_contratual(texto, metadados=None):
                                 "peso": sf["peso"],
                                 "contrafactual": cf,
                             })
-                except Exception:
-                    pass
-        except Exception:
+                except Exception as e:
+                    logger.error("Falha na extracao SHAP: %s", e)
+        except Exception as e:
+            logger.error("Falha no pipeline ML: %s", e)
             rf_proba = None
 
     if not shap_features:

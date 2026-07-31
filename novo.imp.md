@@ -4,7 +4,7 @@ Este documento centraliza o **planejamento e controle de execucao** da Tese de D
 
 O modelo "25 Artigos Empiricos" e a narrativa "Apagao das Canetas" foram substituidos pelo **Modelo Fucape de 3 Entregaveis**, focado em **Compras Complexas** e reducao da assimetria informacional, ancorado no paradigma de Design Science Research (DSR).
 
-**Ultima atualizacao:** 25/07/2026 23h — **Produto v2.1**: Codigo 100% pronto (NVIDIA IA, bugs, XSS, rate limiting). Cloud Function: **build falha** — compute SA sem acesso ao Artifact Registry (`artifactregistry.repositories.downloadArtifacts`). Pendente: add `roles/artifactregistry.reader` + redeploy + `firebase deploy --only hosting`.
+**Ultima atualizacao:** 31/07/2026 — **Produto v2.1**: Cloud Function `analisar_minuta` **deployada (v17 ACTIVE)** — ver `imp.produto.md`. **Novo plano de revisao da literatura** dos 4 artigos de congresso criado: `revisao_literatura.md` (15 sprints/temas) + `fichamento_congressos.csv` (schema rico) + `extrator_fichamento_openalex.py` (busca automatizada; OpenAlex com orcamento diario — 429, retry no dia seguinte).
 
 ---
 
@@ -618,3 +618,54 @@ PubliCopilot/
 | 10 | Capacidade Institucional / Weak Buyer Problem | ~3.301 |
 | 11 | Design Science Research (DSR) | ~24.500 |
 | 12 | IA/NLP em Compras Publicas | ~28.124 |
+
+---
+
+## 15. REVISAO DA LITERATURA — ARTIGOS DE CONGRESSO (31/07/2026)
+
+**Objetivo:** banco de fichamento para os 4 artigos de `artigos_congressos/` (02-Copiloto, 10-Inovacao, 15-IA/Midia, 17-DSR).
+
+**Arquivos criados:**
+| Arquivo | Funcao |
+|---------|--------|
+| `revisao_literatura.md` (raiz) | Plano completo: 15 temas/sprints, queries EN/PT, autores classicos-alvo, criterios, fluxo, cronograma + seção 8b execucao curada |
+| `fichamento_congressos.csv` (raiz) | Banco de fichamento preenchido (389 obras, 288 DOI confirmados, campos analiticos) |
+| `curadoria/bloco_a|b|c.json` | Lista-mestra curada de obras reais por bloco |
+| `Base_de_Dados_e_APIs/Scripts_Extracao/builder_fichamento_curado.py` | Validacao de DOIs no Crossref por titulo + geracao do CSV |
+| `Base_de_Dados_e_APIs/Scripts_Extracao/adicionar_recentes.py` / `consolidar_blocos.py` | Enriquecimento e consolidacao da curadoria |
+| `Base_de_Dados_e_APIs/Scripts_Extracao/extrator_fichamento_openalex.py` | Busca OpenAlex (manutido como fallback; orcamento diario) |
+
+**Metas:** 15 temas × ≥25 artigos = ≥375 registros | 70% recentes (2018-2026) + 30% classicos.
+
+**Status:** ESTRUTURA + EXECUCAO CURADA (31/07/2026). Busca generica DESCARTADA (Crossref/OpenAlex retornavam ruido — ex.: "Impact Of Salt Washing Rates"). Adotada metodologia da lista-mestra curada (mesma do projeto Itau): curadoria manual de obras reais em `curadoria/bloco_*.json` + validacao no Crossref por correspondencia de titulo (`builder_fichamento_curado.py`). **Resultado: 389 obras, 288 com DOI confirmado (74%), campos analiticos preenchidos.** Proporcao por ano real: 41% recentes/59% classicos (temas IA/XAI atingem 75-84%; temas teoricos classicos sao classicos por natureza).
+
+**Sprints (temas):**
+| Bloco | Sprints | Temas |
+|-------|---------|-------|
+| A | 1-7 | Compras Complexas; PPI; Estado Empreendedor; TCE; Teoria da Agencia; Isomorfismo; Paralisia Decisoria |
+| B | 8-10 | Washing; Framing/Midia; Legitimidade Organizacional |
+| C | 11-14 | Governanca Algoritmica; Aceitacao de Algoritmos; XAI; IA/NLP em Compras |
+| D | 15 | Design Science Research |
+
+---
+
+## 16. INJECAO DO REFERENCIAL NOS ARTIGOS DE CONGRESSO (31/07/2026)
+
+**Arquivo:** `sprints_injecao_referencial.md` (raiz)
+
+**Objetivo:** injetar o referencial fichado nas secoes de fundamentacao (2.x) e discussao (5.x) dos 4 artigos de congresso.
+
+**Metas de referencias:**
+| Artigo | Refs hoje | Meta | Sprints |
+|--------|-----------|------|---------|
+| 10 (Enbra/ABNT) | 23 | ~40 | 10.1-10.5 |
+| 17 (BTCongress/APA) | 16 | ~35 | 17.1-17.6 |
+| 15 (Enbra/ABNT) | 20 | ~40 | 15.1-15.5 |
+| 02 (BTCongress/APA) | 21 | ~32 | 02.1-02.3 |
+
+**Status:** Plano e sprints criados. TODAS as obras planejadas pre-verificadas no fichamento (secao 8 do arquivo). Ajuste feito no CSV: `s11_04` (Zuiderwijk 2021) `relacao_artigo` 15 → `15, 17`. **EXECUCAO CONCLUIDA (31/07/2026):**
+- Artigo 10: 23 → **36 refs** (+13)
+- Artigo 17: 16 → **27 refs** (+11)
+- Artigo 15: 20 → **40 refs** (+20)
+- Artigo 02: 21 → **31 refs** (+10)
+- QA autoplagio: 1 par duplicado corrigido (paragrafo de validacao metodologica 15/10); sincronizados para `PubliCopilot/public/artigos_congressos/`.

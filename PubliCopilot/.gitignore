@@ -3,6 +3,16 @@
 env/*.env
 *.local
 
+# Service account keys (NUNCA commitar)
+key.json
+credentials.json
+service-account*.json
+deploy-key.json
+
+# Python
+__pycache__/
+*.pyc
+
 # Logs
 logs
 *.log

@@ -6,21 +6,25 @@ Plataforma de apoio à decisão para avaliação de editais e geração de cláu
 para compras públicas complexas (inovação, TI, sustentabilidade), com **ML real**
 servido 100% no Firebase.
 
-**URL Produção:** https://comprapublica.web.app
-**Projeto Firebase:** publicopilot-aa662
-**Última atualização:** 19 de Julho de 2026 07h
+**URL Produção:** https://publicopilot.web.app
+**Projeto Firebase:** publicopilot
+**Última atualização:** 25 de Julho de 2026
 
 ---
 
-## Estado Atual (19/07/2026)
+## Estado Atual (25/07/2026)
 
 | Componente | URL/Local | Status |
 |------------|-----------|--------|
-| Front-end (Hosting) | https://comprapublica.web.app | 🟢 Online |
+| Front-end (Hosting) | https://publicopilot.web.app | 🟢 Online |
 | Auth Firebase | Login/Cadastro/Google | 🟢 Deployado |
 | Firestore Rules | Regras de usuários/perfis | 🟢 Deployado |
-| API `/api/analisar` | Firebase Function (com auth JWT) | ⚠️ Aguarda deploy manual |
+| Cloud Function `analisar_minuta` | Firebase Function | ❌ **Build falha** — compute SA sem Artifact Registry |
+| API `/api/analisar` | Firebase Hosting rewrite | ❌ Aguardando deploy da function + hosting |
 | Modelos ML | `functions/models/saved/` | 🟢 11 arquivos, 27,35 MB |
+| NVIDIA API | `meta/llama-3.3-70b-instruct` | 🟢 Cliente integrado (`nvidia_client.py`) |
+| Rate limiting | 30 req/min por usuário | 🟢 Implementado |
+| Security headers | X-Frame-Options, X-Content-Type-Options | 🟢 Configurados em `firebase.json` |
 
 ---
 
@@ -80,8 +84,26 @@ A Cloud Function executa, em Python 3.11 real:
 5. **SHAP TreeExplainer** → top features + contrafactuais.
 6. Recomendações híbridas (lacunas + SHAP) com fundamentos (Williamson, LGPD, LC 182).
 
-O Módulo de Geração é client-side (templates da Lei 14.133 + justificativas XAI),
-não depende de backend.
+O Módulo de Geração agora é server-side: o frontend chama `/api/analisar` com `modo: "geracao"`,
+que roteia para o mesmo backend. O backend tenta usar a **NVIDIA API** (meta/llama-3.3-70b-instruct)
+para gerar minutas com IA real. Se a API estiver indisponível, cai em fallback com templates estáticos.
+
+---
+
+## Integração NVIDIA IA (25/07/2026)
+
+O Módulo de Geração agora usa a **NVIDIA AI Foundation API** com o modelo `meta/llama-3.3-70b-instruct`.
+
+**Arquivo:** `functions/models/nvidia_client.py`
+
+### Funcionalidades
+1. **Gerar minuta de edital:** `gerar_minuta()` — recebe tipo, descrição, valor, vigência; retorna JSON com minuta completa, cláusulas e justificativas XAI
+2. **Sugestão de reescrita:** `gerar_sugestao_reescrita()` — preenche lacunas contratuais com IA
+
+### Segurança
+- Chave API em `env/.env` (protegido por `.gitignore`)
+- Em produção, configurada via env var `NVIDIA_API_KEY` no Cloud Function
+- Fallback automático para templates estáticos se API indisponível
 
 ---
 
@@ -111,22 +133,25 @@ não depende de backend.
 
 ## Deploy
 
+### Cloud Function (via gcloud)
+```powershell
+cd C:\Users\Renato\Documents\Doutorado\PubliCopilot
+gcloud auth activate-service-account --key-file=deploy-key.json
+gcloud functions deploy analisar_minuta --runtime python311 --trigger-http --allow-unauthenticated --project publicopilot --region us-central1 --source=functions --entry-point=analisar_minuta --memory=512MB --timeout=120s --set-env-vars NVIDIA_API_KEY=<KEY>
+```
+
+### Hosting + Functions (via Firebase CLI)
 ```bash
 cd PubliCopilot
 firebase login
-firebase use publicopilot-aa662
+firebase use publicopilot
 firebase deploy          # hosting + functions
-```
-
-Apenas a função (deploy em andamento no terminal do usuário, 19/07/2026 07h):
-```bash
 firebase deploy --only functions
-```
-
-Apenas o front:
-```bash
 firebase deploy --only hosting
 ```
+
+### Permissões IAM (para acesso direto à URL da function)
+Adicionar no [Firebase Console](https://console.firebase.google.com/project/publicopilot/functions) > Cloud Functions > `analisar_minuta` > Permissões > `allUsers` > `Cloud Functions Invoker`.
 
 ---
 
@@ -147,8 +172,8 @@ curl -X POST http://localhost:8080/ -H "Content-Type: application/json" \
 
 ## URLs
 
-- **Produção (Hospedagem):** https://comprapublica.web.app
-- **API de análise:** https://comprapublica.web.app/api/analisar
+- **Produção (Hospedagem):** https://publicopilot.web.app
+- **API de análise:** https://publicopilot.web.app/api/analisar
 
 ---
 
@@ -157,7 +182,7 @@ curl -X POST http://localhost:8080/ -H "Content-Type: application/json" \
 - Regras de Firestore para operações autenticadas.
 - Credenciais em `env/` (gitignored).
 - **CORS restrito** (corrigido em 19/07/2026): apenas origens autorizadas via env var
-  `ALLOWED_ORIGINS` (padrão: `https://comprapublica.web.app,https://comprapublica.firebaseapp.com`).
+  `ALLOWED_ORIGINS` (padrão: `https://publicopilot.web.app,https://publicopilot.firebaseapp.com`).
 - Adicionado header `Vary: Origin` para cache CDN correto.
 - Modelos pickle com `scikit-learn==1.9.0` fixado (evita `InconsistentVersionWarning`).
 
@@ -220,4 +245,5 @@ Para desenvolvimento local, defina `SKIP_AUTH=1` para bypassar a validação.
 | 18/07/2026 | v1.0 | Deploy inicial (hosting only); front-end online |
 | 19/07/2026 | v1.1 | Métricas honestas; CORS restrito; modelos limpos (-12,17 MB); requirements.txt sincronizado; front-end v1.1 deployado |
 | 19/07/2026 | v1.2 | **Sistema de autenticação completo**: login email/senha, Google OAuth, cadastro com nome+whatsapp+email+senha+confirmação+CAPTCHA matemático. Validação JWT na Cloud Function via firebase-admin. Firestore Rules atualizadas. Front-end v1.2 deployado. |
-| 19/07/2026 | v1.3 (pendente) | Deploy da Cloud Function `analisar_minuta` com auth |
+| 19/07/2026 | v1.3 | Deploy da Cloud Function `analisar_minuta` com auth JWT, lazy load, retreino com target observável (AUC 91,05%) |
+| 25/07/2026 | v2.1 | **NVIDIA IA integrada** — geração de editais com llama-3.3-70b. **Bug corrigido**: `uf_encoded`/`tipo_encoded` usando `OrdinalEncoder` real. **Logging estruturado** nos 4 módulos. **Counterfactual templates expandido** para 12 features. **XSS sanitizado** (modulo_geracao + modulo_avaliacao). **Rate limiting** (30 req/min). **Unicode normalization** (NFKD). **Menu mobile** + fix `showTab()`. |

@@ -15,6 +15,7 @@ References:
 """
 
 import re
+import unicodedata
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -115,14 +116,7 @@ SUGESTOES_REESCRITA = {
 
 
 def limpar_texto(texto):
-    """Remove maiusculas e normaliza espacos em branco.
-
-    Args:
-        texto: String com o texto da minuta ou edital.
-
-    Returns:
-        Texto normalizado em lowercase com espacos colapsados.
-    """
+    texto = unicodedata.normalize("NFKD", texto)
     texto = texto.lower()
     texto = re.sub(r"\s+", " ", texto)
     return texto.strip()

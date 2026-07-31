@@ -64,14 +64,19 @@ def get_random_forest():
     return _carregar_pickle("random_forest.pkl")
 
 
-def get_label_encoder_uf():
-    """Retorna o LabelEncoder para UF do fornecedor/orgao."""
-    return _carregar_pickle("label_encoder_uf.pkl")
+def get_encoder_uf():
+    """Retorna o OrdinalEncoder para UF (handle_unknown='use_encoded_value')."""
+    return _carregar_pickle("encoder_uf.pkl") or _carregar_pickle("label_encoder_uf.pkl")
 
 
-def get_label_encoder_tipo():
-    """Retorna o LabelEncoder para tipo de contrato."""
-    return _carregar_pickle("label_encoder_tipo.pkl")
+def get_encoder_tipo():
+    """Retorna o OrdinalEncoder para tipo de contrato (handle_unknown='use_encoded_value')."""
+    return _carregar_pickle("encoder_tipo.pkl") or _carregar_pickle("label_encoder_tipo.pkl")
+
+
+# Aliases para compatibilidade reversa
+get_label_encoder_uf = get_encoder_uf
+get_label_encoder_tipo = get_encoder_tipo
 
 
 def get_feature_columns():

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seed Admin - PubliCopilot</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f4f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; color: #1e293b; }
+.card { background: white; border-radius: 16px; padding: 40px; max-width: 480px; width: 100%; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+h1 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+p { font-size: 14px; color: #64748b; margin-bottom: 24px; }
+label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; margin-top: 16px; }
+input { width: 100%; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 14px; outline: none; transition: border 0.2s; }
+input:focus { border-color: #2ec4b6; }
+.btn { display: block; width: 100%; padding: 12px; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 20px; transition: opacity 0.2s; }
+.btn-primary { background: #2ec4b6; color: white; }
+.btn-primary:hover { opacity: 0.9; }
+.btn-danger { background: #e74c3c; color: white; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-outline { background: white; color: #2ec4b6; border: 2px solid #2ec4b6; margin-top: 8px; }
+.log { background: #f8fafc; border-radius: 10px; padding: 14px; font-size: 13px; font-family: monospace; margin-top: 16px; max-height: 200px; overflow-y: auto; white-space: pre-wrap; color: #334155; }
+.log .ok { color: #16a34a; }
+.log .err { color: #dc2626; }
+.log .info { color: #2563eb; }
+.hidden { display: none; }
+.badge { display: inline-block; background: #ecfdf5; color: #065f46; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; margin-bottom: 12px; }
+.step { background: #f8fafc; border-radius: 10px; padding: 16px; margin-top: 12px; border-left: 4px solid #2ec4b6; }
+.step h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.step p { font-size: 13px; margin-bottom: 0; color: #475569; }
+.step code { background: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+.status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+.status-dot.green { background: #16a34a; }
+.status-dot.red { background: #dc2626; }
+.status-dot.yellow { background: #eab308; }
+</style>
+</head>
+<body>
+<div class="card">
+  <span class="badge">🔧 Admin Setup</span>
+  <h1>Seed de Administrador</h1>
+  <p>Cria o documento do admin no Firestore e orienta a configuração da custom claim.</p>
+
+  <!-- Step 1: Login -->
+  <div id="step-login">
+    <label>Email</label>
+    <input type="email" id="input-email" placeholder="gestor.renatorosa@gmail.com" value="gestor.renatorosa@gmail.com">
+    <label>Senha</label>
+    <input type="password" id="input-senha" placeholder="Sua senha do Firebase Auth">
+    <button class="btn btn-primary" id="btn-login">Login</button>
+  </div>
+
+  <!-- Step 2: Seed -->
+  <div id="step-seed" class="hidden">
+    <div id="user-info" style="background:#f0fdf4;border-radius:10px;padding:14px;margin-bottom:16px;">
+      <span class="status-dot green"></span><strong id="display-name">—</strong>
+      <br><span style="font-size:13px;color:#64748b;margin-left:14px;" id="display-email">—</span>
+      <br><span style="font-size:12px;color:#94a3b8;margin-left:14px;">UID: <span id="display-uid">—</span></span>
+    </div>
+
+    <button class="btn btn-primary" id="btn-seed">📌 Etapa 1: Criar Documento no Firestore</button>
+
+    <div class="step">
+      <h3>⚡ Etapa 2 (obrigatória) — Custom Claim</h3>
+      <p>O papel <strong>admin</strong> será ativado pela custom claim. Após criar o documento:</p>
+      <p style="margin-top:8px;font-size:13px;">
+        1. Abra <a href="https://console.firebase.google.com/project/publicopilot/authentication/users" target="_blank">Authentication > Usuários</a><br>
+        2. Clique no usuário <strong id="step-uid">V7414xvbtFZWNltp5M1X0ximq7p2</strong><br>
+        3. Em "Custom Claims", adicione: <code>{"admin": true}</code><br>
+        4. Clique em Salvar<br>
+        5. Faça logout e login novamente — o admin-seed.js criará o documento completo com papel=admin
+      </p>
+    </div>
+
+    <div class="step">
+      <h3>🔄 Alternativa: criar manualmente no Firestore Console</h3>
+      <p>Abra <a href="https://console.firebase.google.com/project/publicopilot/firestore/data/~2Fusuarios" target="_blank">Firestore > Dados</a> e crie:</p>
+      <p style="font-size:12px;font-family:monospace;background:#1e293b;color:#e2e8f0;padding:12px;border-radius:8px;margin-top:6px;">
+Coleção: usuarios<br>
+Documento: V7414xvbtFZWNltp5M1X0ximq7p2<br>
+Campos:<br>
+&nbsp;&nbsp;nome: "Renato de Oliveira Rosa" (string)<br>
+&nbsp;&nbsp;email: "gestor.renatorosa@gmail.com" (string)<br>
+&nbsp;&nbsp;papel: "admin" (string)<br>
+&nbsp;&nbsp;ativo: true (boolean)<br>
+&nbsp;&nbsp;primeiroAcesso: false (boolean)<br>
+&nbsp;&nbsp;provedor: "password" (string)<br>
+&nbsp;&nbsp;dataCriacao: (timestamp → serverTimestamp)
+      </p>
+    </div>
+
+    <button class="btn btn-outline" id="btn-logout">Sair e trocar conta</button>
+  </div>
+
+  <div class="log" id="log"></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script>
+const ENV = {
+  apiKey: "AIzaSyDfIKrkDv0nQXFFZrQ0ncn6Cz2NPrzF574",
+  authDomain: "publicopilot.firebaseapp.com",
+  projectId: "publicopilot",
+  storageBucket: "publicopilot.firebasestorage.app",
+  messagingSenderId: "432118179013",
+  appId: "1:432118179013:web:752294d08f504e1d2fbcac",
+};
+
+let app, auth, db;
+
+function log(msg, type = 'info') {
+  const el = document.getElementById('log');
+  el.innerHTML += `<span class="${type}">${type.toUpperCase()}: ${msg}</span>\n`;
+  el.scrollTop = el.scrollHeight;
+}
+
+function $(id) { return document.getElementById(id); }
+
+async function init() {
+  if (firebase.apps.length === 0) {
+    app = firebase.initializeApp(ENV);
+  } else {
+    app = firebase.apps[0];
+  }
+  auth = firebase.auth();
+  db = firebase.firestore();
+
+  auth.onAuthStateChanged(async (user) => {
+    if (user) {
+      $('step-login').classList.add('hidden');
+      $('step-seed').classList.remove('hidden');
+      $('display-name').textContent = user.displayName || user.email || 'Usuário';
+      $('display-email').textContent = user.email || '';
+      $('display-uid').textContent = user.uid;
+      $('step-uid').textContent = user.uid;
+
+      const token = await user.getIdTokenResult();
+      if (token.claims.admin) {
+        $('user-info').innerHTML = '<span class="status-dot green"></span><strong>' + (user.displayName || user.email) + '</strong> <span style="background:#2ec4b6;color:white;padding:2px 8px;border-radius:4px;font-size:11px;">admin (claim ok)</span>';
+      }
+
+      const doc = await db.collection('usuarios').doc(user.uid).get();
+      if (doc.exists && doc.data().papel === 'admin') {
+        $('btn-seed').textContent = '✅ Documento admin já existe no Firestore';
+        $('btn-seed').disabled = true;
+        log('Documento admin já existe em /usuarios/' + user.uid, 'ok');
+      } else if (doc.exists) {
+        $('btn-seed').textContent = '📌 Atualizar papel para admin';
+        log('Documento existe mas papel = ' + doc.data().papel, 'info');
+      }
+    } else {
+      $('step-login').classList.remove('hidden');
+      $('step-seed').classList.add('hidden');
+    }
+  });
+}
+
+$('btn-login').onclick = async () => {
+  const email = $('input-email').value.trim();
+  const senha = $('input-senha').value;
+  if (!email || !senha) { log('Preencha email e senha.', 'err'); return; }
+  $('btn-login').disabled = true;
+  $('btn-login').textContent = 'Entrando...';
+  try {
+    await auth.signInWithEmailAndPassword(email, senha);
+    log('Login OK: ' + email, 'ok');
+  } catch (e) {
+    log('Erro: ' + e.message, 'err');
+    $('btn-login').disabled = false;
+    $('btn-login').textContent = 'Login';
+  }
+};
+
+$('btn-seed').onclick = async () => {
+  const user = auth.currentUser;
+  if (!user) { log('Nenhum usuário logado.', 'err'); return; }
+  $('btn-seed').disabled = true;
+  $('btn-seed').textContent = 'Criando documento...';
+  try {
+    await db.collection('usuarios').doc(user.uid).set({
+      nome: user.displayName || user.email || 'Admin',
+      email: user.email || '',
+      whatsapp: '',
+      papel: 'usuario',
+      ativo: true,
+      primeiroAcesso: false,
+      dataCriacao: firebase.firestore.FieldValue.serverTimestamp(),
+      provedor: user.providerData[0]?.providerId || 'password',
+    });
+    log('✔ Documento criado! Agora defina a custom claim no Authentication.', 'ok');
+    $('btn-seed').textContent = '✅ Documento criado!';
+    $('btn-seed').style.background = '#16a34a';
+  } catch (e) {
+    log('Erro: ' + e.message, 'err');
+    $('btn-seed').disabled = false;
+    $('btn-seed').textContent = '📌 Tentar novamente';
+  }
+};
+
+$('btn-logout').onclick = async () => {
+  await auth.signOut();
+  $('input-senha').value = '';
+};
+
+init();
+</script>
+</body>
+</html>

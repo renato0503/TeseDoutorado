@@ -16,6 +16,27 @@
           {
             "key": "Cache-Control",
             "value": "max-age=300"
+          },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "X-Frame-Options",
+            "value": "DENY"
+          },
+          {
+            "key": "Referrer-Policy",
+            "value": "strict-origin-when-cross-origin"
+          }
+        ]
+      },
+      {
+        "source": "**/*.json",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=3600"
           }
         ]
       }
@@ -26,7 +47,7 @@
         "function": "analisar_minuta"
       }
     ],
-    "site": "comprapublica"
+    "site": "publicopilot"
   },
   "functions": {
     "source": "functions",

@@ -234,7 +234,7 @@ if idx_t12 > 0:
         content = content[:section_start] + tabela12 + '\n' + content[section_start:]
 
 # Tabela 13: in Chapter 4, after the second paragraph
-insert_t13_marker = 'O deploy e realizado via Streamlit Cloud'
+insert_t13_marker = 'O deploy e realizado via Firebase'
 idx_t13 = content.find(insert_t13_marker)
 if idx_t13 > 0:
     # Find the end of the paragraph before inserting

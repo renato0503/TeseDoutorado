@@ -29,7 +29,7 @@ Descrever detalhadamente a arquitetura, as decisões de design e a metodologia d
   - Uso de aprendizado não supervisionado (*Isolation Forest*) para detecção de editais e cláusulas com padrão anômalo.
 - **3.3. Módulo de Compliance e Avaliação de Risco:**
   - *(Reaproveitado do Artigo 18 e 08)*
-  - Treinamento do modelo supervisionado (*Random Forest*) que atingiu 94,88% de acurácia.
+  - Treinamento do modelo supervisionado (*Random Forest*) que atingiu 93,36% de acurácia e 90,83% de AUC-ROC (pós-remediação de tautologia).
   - A integração da camada XAI (SHAP) para traduzir o peso numérico das features em explicações textuais (justificativas) para o gestor.
 - **3.4. Stack Tecnológico:** 
   - Backend, Frontend (se aplicável), e APIs utilizadas para conectar o Copiloto ao ecossistema do PNCP/Transparência.

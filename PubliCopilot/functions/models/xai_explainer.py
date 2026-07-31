@@ -15,14 +15,18 @@ References:
 """
 
 import json as _json
+import logging
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 _COUNTERFACTUAL_TEMPLATES_PATH = Path(__file__).parent / "saved" / "counterfactual_templates.json"
 
 try:
     with open(_COUNTERFACTUAL_TEMPLATES_PATH, "r", encoding="utf-8") as _f:
         _COUNTERFACTUAL_TEMPLATES = _json.load(_f)
-except Exception:
+except Exception as e:
+    logger.warning("Nao foi possivel carregar counterfactual_templates.json: %s", e)
     _COUNTERFACTUAL_TEMPLATES = {}
 
 XAI_TEMPLATES = {

@@ -13,7 +13,15 @@ Thumbs.db
 # Firebase / PubliCopilot
 PubliCopilot/env/
 PubliCopilot/node_modules/
+PubliCopilot/functions/functions_venv_old/
+PubliCopilot/functions/functions_venv/
 .firebase/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
 
 # Arquivos de saída (serão gerados depois)
 # *.html  # agora serão versionados

@@ -14,4 +14,8 @@
 .gitignore
 
 node_modules
+venv
+__pycache__
+*.pyc
+
 #!include:.gitignore

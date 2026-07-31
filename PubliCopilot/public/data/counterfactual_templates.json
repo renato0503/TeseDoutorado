@@ -1,0 +1,98 @@
+{
+  "objeto_len": {
+    "nome_tecnico": "objeto_len",
+    "nome_traduzido": "Tamanho do texto do objeto",
+    "valor_medio": 0.0008,
+    "desvio_padrao": 0.9834,
+    "template_pergunta": "Se o tamanho do texto do objeto fosse alterado, como o risco mudaria?",
+    "template_mitigacao": "A revisão da extensão do objeto para alinhamento aos padrões de mercado reduz ambiguidades e riscos de impugnação (Art. 5º, Lei 14.133/2021)."
+  },
+  "objeto_palavras": {
+    "nome_tecnico": "objeto_palavras",
+    "nome_traduzido": "Nível de detalhamento da descrição do objeto",
+    "valor_medio": -0.0001,
+    "desvio_padrao": 0.9883,
+    "template_pergunta": "Se o nível de detalhamento da descrição do objeto fosse alterado, como o risco mudaria?",
+    "template_mitigacao": "O detalhamento adequado da descrição reduz a assimetria informacional ex-ante, ampliando a competitividade do certame (Art. 6º, XXIII)."
+  },
+  "complexidade_lexica": {
+    "nome_tecnico": "complexidade_lexica",
+    "nome_traduzido": "Densidade de termos técnicos no objeto",
+    "valor_medio": -0.0013,
+    "desvio_padrao": 0.9997,
+    "template_pergunta": "Se a densidade de termos técnicos no objeto fosse alterada, como o risco mudaria?",
+    "template_mitigacao": "A simplificação descritiva reduz a ambiguidade informacional, ampliando a participação de proponentes em respeito ao princípio da isonomia (Art. 5º)."
+  },
+  "score_tecnico": {
+    "nome_tecnico": "score_tecnico",
+    "nome_traduzido": "Menções a tecnologia e inovação no objeto",
+    "valor_medio": 0.0026,
+    "desvio_padrao": 1.0033,
+    "template_pergunta": "Se as menções a tecnologia e inovação no objeto fossem alteradas, como o risco mudaria?",
+    "template_mitigacao": "A especificação clara de métricas objetivas de entrega para itens tecnológicos afasta riscos de inexecução contratual (Art. 6º, XXIII)."
+  },
+  "valor_log": {
+    "nome_tecnico": "valor_log",
+    "nome_traduzido": "Valor estimado do contrato",
+    "valor_medio": 0.0036,
+    "desvio_padrao": 0.9981,
+    "template_pergunta": "Se o valor estimado do contrato fosse alterado, como o risco mudaria?",
+    "template_mitigacao": "O parcelamento do objeto (Art. 40, § 2º) ou redimensionamento do escopo pode reenquadrar a contratação em faixas de menor complexidade administrativa."
+  },
+  "uf_encoded": {
+    "nome_tecnico": "uf_encoded",
+    "nome_traduzido": "Localização geográfica (UF)",
+    "valor_medio": -0.0018,
+    "desvio_padrao": 1.0037,
+    "template_pergunta": "Se a localização geográfica (UF) fosse alterada, como o risco mudaria?",
+    "template_mitigacao": "A publicidade centralizada e digital em portais nacionais mitiga desvantagens regionais (Art. 54, Lei 14.133/2021)."
+  },
+  "tipo_encoded": {
+    "nome_tecnico": "tipo_encoded",
+    "nome_traduzido": "Tipo de instrumento contratual",
+    "valor_medio": -0.0015,
+    "desvio_padrao": 1.0025,
+    "template_pergunta": "Se o tipo de instrumento contratual fosse alterado, como o risco mudaria?",
+    "template_mitigacao": "A modelagem adequada do instrumento (ex: diálogo competitivo para inovação) mitiga riscos de inadequação regulatória."
+  },
+  "vigencia_log": {
+    "nome_tecnico": "vigencia_log",
+    "nome_traduzido": "Duração prevista do contrato",
+    "valor_medio": 0.0083,
+    "desvio_padrao": 0.9934,
+    "template_pergunta": "Se a duração prevista do contrato fosse alterada, como o risco mudaria?",
+    "template_mitigacao": "A alteração da vigência para prazos recomendados de mercado atende ao princípio do planejamento e eficiência (Art. 5º)."
+  },
+  "if_anomaly_score": {
+    "nome_tecnico": "if_anomaly_score",
+    "nome_traduzido": "Score de anomalia textual (Isolation Forest)",
+    "valor_medio": 0.0,
+    "desvio_padrao": 1.0,
+    "template_pergunta": "Se o score de anomalia textual fosse reduzido, como o risco mudaria?",
+    "template_mitigacao": "A revisão semântica para expurgar cláusulas obsoletas ou atípicas reduz a probabilidade de recursos ex-post."
+  },
+  "if_is_anomaly": {
+    "nome_tecnico": "if_is_anomaly",
+    "nome_traduzido": "Indicador de padrão atípico textual",
+    "valor_medio": 0.0,
+    "desvio_padrao": 1.0,
+    "template_pergunta": "Se o indicador de padrão atípico textual fosse normalizado, como o risco mudaria?",
+    "template_mitigacao": "O saneamento de desvios textuais resguarda a padronização e o princípio da vinculação ao edital."
+  },
+  "interacao_if_valor": {
+    "nome_tecnico": "interacao_if_valor",
+    "nome_traduzido": "Risco semântico associado ao valor estimado",
+    "valor_medio": 0.0,
+    "desvio_padrao": 1.0,
+    "template_pergunta": "Se o risco semântico associado ao valor estimado fosse mitigado, como o risco mudaria?",
+    "template_mitigacao": "A realização de audiência pública ex-ante para grandes vultos com objetos complexos resguarda a legalidade (Art. 21)."
+  },
+  "interacao_if_vigencia": {
+    "nome_tecnico": "interacao_if_vigencia",
+    "nome_traduzido": "Risco semântico associado à vigência do contrato",
+    "valor_medio": 0.0,
+    "desvio_padrao": 1.0,
+    "template_pergunta": "Se o risco semântico associado à vigência fosse mitigado, como o risco mudaria?",
+    "template_mitigacao": "O estabelecimento claro de SLAs e garantias (Art. 96) atenua riscos operacionais decorrentes de vigências prolongadas."
+  }
+}

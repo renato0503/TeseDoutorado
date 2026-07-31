@@ -124,7 +124,7 @@ def main():
     print()
     print("Proximos passos:")
     print("  1. cd C:\\Users\\Renato\\Documents\\Doutorado\\PubliCopilot")
-    print("  2. firebase deploy --only functions --project publicopilot-aa662")
+    print("  2. firebase deploy --only functions --project publicopilot")
     print("  3. Validar que a Cloud Function carrega modelos corretamente")
 
 if __name__ == "__main__":

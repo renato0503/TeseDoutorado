@@ -105,23 +105,28 @@ Tese/03-Produto-Copiloto/
 
 ## 6. Deploy e Infraestrutura
 
-O produto esta preparado para deploy automatico no Streamlit Cloud:
+O produto esta deployado no Firebase (Hosting + Cloud Functions + Firestore + Authentication):
 
-- `streamlit_app.py` na raiz do repositorio redireciona para `Tese/03-Produto-Copiloto/app/app.py`
-- `.streamlit/config.toml` com tema e configuracao do servidor
-- `requirements.txt` na raiz com todas as dependencias
-- URL publica: `https://copiloto-algoritmico.streamlit.app`
+- Frontend: `PubliCopilot/public/` (modulos de avaliacao, geracao e dashboard admin)
+- Backend: `PubliCopilot/functions/` — Cloud Function `analisar_minuta` (Python 3.11, 512MB/120s)
+- URL publica: `https://publicopilot.web.app`
+- Deploy: `cd PubliCopilot && firebase deploy`
+
+> Nota: a versao Streamlit (`streamlit run app/app.py`) permanece como referencia academica no repositorio, mas a producao oficial e 100% Firebase.
 
 ## 7. Stack Tecnologico
 
 | Camada | Tecnologia | Versao |
 |--------|-----------|--------|
-| Frontend | Streamlit | >=1.32.0 |
-| ML Engine | Scikit-Learn | >=1.3.0 |
+| Frontend | HTML/CSS/JS (Firebase Hosting) | — |
+| Backend | Cloud Functions (Python) | 3.11 |
+| ML Engine | Scikit-Learn | ==1.9.0 |
 | XAI | SHAP | >=0.43.0 |
+| IA Generativa | NVIDIA llama-3.3-70b (geracao) | — |
 | Dados | Pandas, NumPy | >=2.0.0, >=1.24.0 |
-| Graficos | Matplotlib | >=3.7.0 |
-| Infra | Streamlit Cloud | Gratuito |
+| Auth | Firebase Authentication + RBAC | — |
+| Banco | Firestore | — |
+| Infra | Firebase (Hosting/Functions/Blaze) | — |
 
 ## 7. Referencias Academicas
 

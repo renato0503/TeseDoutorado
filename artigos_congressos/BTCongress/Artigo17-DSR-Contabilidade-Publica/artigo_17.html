@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>DESIGN SCIENCE RESEARCH NA CONTABILIDADE PÚBLICA: MAPEAMENTO DE ARTEFATOS, TIPOLOGIAS DE CONTRIBUIÇÃO E LACUNAS PARA A GOVERNANÇA ALGORÍTMICA</title>
-    <link rel="stylesheet" href="../../css/style_academico.css">
+<link rel="stylesheet" href="../../../css/style_academico.css">
     <style>
         .figure-container { margin: 0.5cm 0; text-align: center; }
         .figure-container img { max-width: 95%; height: auto; }
         .figure-caption { text-indent: 0 !important; margin: 0.2cm 0 0 0; font-size: 10pt; }
         .figure-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.05cm; margin-bottom: 0.3cm; line-height: 1.2; }
         .table-note { text-indent: 0 !important; font-size: 10pt; margin-top: 0.1cm; margin-bottom: 0.3cm; line-height: 1.2; }
+        h3 { font-size: 12pt; font-weight: normal; margin: 0.6cm 0 0.3cm 0; text-transform: uppercase; }
+        h4 { font-size: 12pt; font-weight: normal; margin: 0.4cm 0 0.2cm 0; }
+        h5 { font-size: 12pt; font-weight: normal; font-style: italic; margin: 0.4cm 0 0.2cm 0; }
+        .ref-entry { text-indent: -1.27cm; padding-left: 1.27cm; margin: 0 0 0.3cm 0; text-align: justify; font-size: 11pt; }
     </style>
 </head>
 <body>
@@ -29,14 +33,14 @@
 
             <div class="abstract-box">
                 <h2>RESUMO</h2>
-                <p>A Design Science Research consolida-se como paradigma metodológico para pesquisas que buscam construir artefatos voltados a problemas práticos nas ciências sociais aplicadas. Este artigo investiga as tipologias de artefatos e os métodos de avaliação empregados em pesquisas de DSR aplicadas à contabilidade e administração pública. A metodologia adota Scoping Review conforme protocolo PRISMA-ScR, operacionalizada por busca automatizada via API da base OpenAlex. O corpus final compreende 42 artigos (2004-2026), totalizando 4.456 citações. Os resultados indicam que 35,7% dos artefatos são sistemas de informação para e-government, 28,6% frameworks conceituais e 19,0% aplicações de inteligência artificial. A matriz de conhecimento de Gregor e Hevner (2013) revela que 61,9% dos estudos classificam-se como improvement. Constata-se escassez de artefatos voltados ao planejamento de contratações públicas e predominância de avaliações artificialistas sobre naturalistas. Os achados fundamentam uma agenda de pesquisa voltada ao desenvolvimento de artefatos de inteligência artificial para mitigar assimetrias informacionais nas compras de inovação.</p>
-                <p><strong>Palavras-chave:</strong> Design Science Research; Contabilidade Pública; Artefatos; Scoping Review; Governança Algorítmica.</p>
+                <p>A Design Science Research (DSR) consolida-se como paradigma metodológico para construção de artefatos voltados a problemas práticos nas ciências sociais aplicadas. Este artigo mapeia as tipologias de artefatos e métodos de avaliação empregados em pesquisas de DSR aplicadas à contabilidade e administração pública, identificando lacunas e oportunidades para o desenvolvimento de soluções tecnológicas no setor público. A metodologia adota Scoping Review conforme protocolo PRISMA-ScR, operacionalizada por busca automatizada via API da base OpenAlex. O corpus final compreende 42 artigos (2004-2026), totalizando 4.456 citações. Os resultados indicam predominância de sistemas de informação para e-government (35,7%) e frameworks conceituais (28,6%), com escassez de artefatos voltados ao planejamento de contratações públicas (7,1%) — lacuna que representa oportunidade de mercado para soluções GovTech. A predominância de avaliações artificialistas (68,3%) sobre naturalistas (31,7%) aponta para a necessidade de validação em contextos operacionais reais. Os achados fundamentam uma agenda de pesquisa para o desenvolvimento de artefatos de inteligência artificial aplicados às compras públicas, com potencial de impacto no ecossistema de inovação do Espírito Santo.</p>
+                <p><strong>Palavras-chave:</strong> Design Science Research; Contabilidade Pública; Artefatos; Scoping Review.</p>
             </div>
 
             <div class="abstract-box">
                 <h2>ABSTRACT</h2>
-                <p>Design Science Research has consolidated as a methodological paradigm for research that aims to build artifacts to solve practical problems in the applied social sciences. This article investigates the typologies of artifacts and evaluation methods employed in DSR studies applied to public accounting and administration. A scoping review was conducted following the PRISMA-ScR protocol, operationalized through an automated search via the OpenAlex API. The final corpus comprises 42 articles (2004–2026), totaling 4,456 citations. Results indicate that 35.7% of artifacts are e-government information systems, 28.6% are conceptual frameworks, and 19.0% are artificial intelligence applications. The Gregor and Hevner (2013) knowledge matrix reveals that 61.9% of studies classify as improvement. A scarcity of artifacts focused on public procurement planning is identified, along with a predominance of artificialist over naturalist evaluations. These findings support a research agenda for developing AI artifacts to mitigate informational asymmetries in innovation procurement.</p>
-                <p><strong>Keywords:</strong> Design Science Research; Public Accounting; Artifacts; Scoping Review; Algorithmic Governance.</p>
+                <p>Design Science Research (DSR) has consolidated as a methodological paradigm for building artifacts that solve practical problems in the applied social sciences. This article maps the typologies of artifacts and evaluation methods employed in DSR studies applied to public accounting and administration, identifying gaps and opportunities for developing technological solutions in the public sector. A scoping review was conducted following the PRISMA-ScR protocol, operationalized through an automated search via the OpenAlex API. The final corpus comprises 42 articles (2004–2026), totaling 4,456 citations. Results indicate a predominance of e-government information systems (35.7%) and conceptual frameworks (28.6%), with a scarcity of artifacts focused on public procurement planning (7.1%) — a gap representing a market opportunity for GovTech solutions. The predominance of evaluations conducted in artificial settings, such as controlled experiments and simulations (68.3%), over naturalistic evaluation settings, such as field studies (31.7%), highlights the need for validation in real operational contexts. These findings support a research agenda for developing AI artifacts applied to public procurement, with potential impact on the Espírito Santo innovation ecosystem.</p>
+                <p><strong>Keywords:</strong> Design Science Research; Public Accounting; Artifacts; Scoping Review.</p>
             </div>
 
             <h2>1 INTRODUÇÃO</h2>
@@ -61,7 +65,9 @@
 
             <p>A Design Science Research emerge como paradigma metodológico no campo dos Sistemas de Informação a partir do reconhecimento de que a pesquisa acadêmica na área não deve limitar-se a descrever ou explicar fenômenos organizacionais, mas também deve contribuir para a criação de artefatos que expandam as fronteiras das capacidades humanas e organizacionais (Hevner et al., 2004). March e Smith (1995) estabelecem as bases epistemológicas da DSR ao distinguir quatro tipos de artefatos, constructos, modelos, métodos e instanciações, e dois processos de pesquisa, construir e avaliar.</p>
 
-            <p>Hevner et al. (2004) propõem sete diretrizes para a condução da DSR, abrangendo desde o projeto do artefato até a comunicação dos resultados. As diretrizes estabelecem que a pesquisa em design científico deve equilibrar relevância prática e rigor teórico. Peffers et al. (2007) operacionalizam essas diretrizes no ciclo DSRM (Design Science Research Methodology), estruturado em seis etapas concatenadas: identificação do problema e motivação, definição dos objetivos da solução, projeto e desenvolvimento do artefato, demonstração, avaliação e comunicação.</p>
+            <p>Hevner et al. (2004) propõem sete diretrizes para a condução da DSR, abrangendo desde o projeto do artefato até a comunicação dos resultados. As diretrizes estabelecem que a pesquisa em design científico deve equilibrar relevância prática e rigor teórico. Peffers et al. (2007) operacionalizam essas diretrizes no ciclo DSRM (Design Science Research Methodology), estruturado em seis etapas concatenadas: identificação do problema e motivação, definição dos objetivos da solução, projeto e desenvolvimento do artefato, demonstração, avaliação e comunicação. Iivari (2015) distingue duas correntes epistemológicas na DSR — a design science orientada à construção de artefatos e a design research orientada à teoria —, oferecendo uma reflexão crítica sobre os fundamentos filosóficos do paradigma. Baskerville et al. (2018) avançam essa discussão ao identificar empiricamente diferentes gêneros de publicações em DSR, propondo critérios de qualidade específicos para cada tipo de contribuição. Venable, Pries-Heje e Baskerville (2016) complementam esse quadro ao propor o framework FEDS (Framework for Evaluation in Design Science Research), que orienta a seleção de estratégias de avaliação de artefatos com base no contexto e nos riscos do projeto.</p>
+
+            <p>Em paralelo à consolidação do ciclo metodológico, a DSR desenvolveu uma tradição de teorização dos artefatos. Walls, Widmeyer e El Sawy (1992) propuseram, ainda na primeira geração da literatura, o conceito de <em>information system design theory</em> (ISDT), definindo os componentes que uma teoria de design deve especificar para orientar a construção e a avaliação de artefatos. Gregor e Jones (2007) avançam essa agenda ao delinear a anatomia de uma design theory, distinguindo componentes nucleares como o propósito, os constructos, os princípios de forma e função e as justificativas de <em>kernel theory</em>. Sein et al. (2011), por sua vez, propõem a Action Design Research (ADR), integrando o ciclo de design à intervenção organizacional e ao aprendizado em contexto, abordagem particularmente adequada a ambientes de governo em que o artefato é coproduzido com os usuários finais. Peffers et al. (2012) e Sonnenberg e vom Brocke (2022) sistematizam a etapa de avaliação, ressaltando que a escolha e o reuso de padrões de avaliação elevam o rigor e a validade externa das contribuições. Por fim, vom Brocke, Hevner e Maedche (2020) sintetizam o estado-da-arte do paradigma, reforçando boas práticas para o ensino, a condução e a revisão de pesquisas DSR. Esse amadurecimento teórico-metodológico fornece o arcabouço conceitual sobre o qual o presente scoping review posiciona a análise dos artefatos desenvolvidos na contabilidade pública.</p>
 
             <h3>2.2 Classificação de Contribuições em DSR</h3>
 
@@ -73,21 +79,27 @@
 
             <p>A aplicação da DSR à contabilidade pública tem se expandido nas últimas décadas, impulsionada pela crescente digitalização dos processos de gestão fiscal e pela demanda por soluções tecnológicas que aprimorem o controle e a transparência públicos. Estudos anteriores documentaram a utilização de DSR para desenvolvimento de sistemas de informação contábil, ferramentas de auditoria computacional, e plataformas de transparência fiscal.</p>
 
-            <p>No contexto específico da administração pública, a DSR oferece um framework metodológico adequado para o desenvolvimento de soluções que atendam às demandas práticas dos gestores públicos. A natureza iterativa do ciclo DSR permite a incorporação de feedback dos usuários e a adaptação contínua dos artefatos às necessidades específicas do contexto institucional.</p>
+            <p>No contexto específico da administração pública, a DSR oferece um framework metodológico adequado para o desenvolvimento de soluções que atendam às demandas práticas dos gestores públicos. A natureza iterativa do ciclo DSR permite a incorporação de feedback dos usuários e a adaptação contínua dos artefatos às necessidades específicas do contexto institucional. Goldkuhl (2004) propõe uma abordagem pragmática para a DSR, enfatizando a importância da criação de conhecimento acionável que integre teoria e prática em ciclos iterativos de design e avaliação. Sonnenberg e vom Brocke (2022) complementam essa perspectiva ao propor uma linguagem de padrões de avaliação reutilizável, evidenciando que a seleção explícita de estratégias de avaliação — do artificialista ao naturalista — é fator determinante da validade das contribuições em domínios de alta complexidade institucional, como o governo eletrônico e a gestão fiscal.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </section>
 
+    <!-- PÁGINA 3 -->
+    <section class="paper-page">
+        <div class="page-content">
             <h3>2.4 DSR no Contexto Brasileiro: Compras Públicas e Inovação</h3>
 
             <p>O Brasil apresenta relevância singular para o estudo de artefatos de DSR aplicados à administração pública. As compras governamentais brasileiras movimentam aproximadamente 15% do PIB (cerca de R$ 1,5 trilhão anuais), consolidando o Estado como maior comprador de bens e serviços do país. A Lei nº 14.133/2021 (Nova Lei de Licitações) e a Lei Complementar nº 182/2021 (Marco Legal das Startups) criaram novas demandas por inovação nas contratações públicas, mas sem fornecer parâmetros operacionais objetivos para sua implementação. Esse vácuo normativo gera o fenômeno do "apagão das canetas", caracterizado pela paralisia decisória de gestores que temem responsabilização por parte dos órgãos de controle (Sundfeld, 2014; Valgas dos Santos, 2020).</p>
 
-            <p>A literatura de Estado Empreendedor (Mazzucato, 2013) e Economia dos Custos de Transação (Williamson, 1985) oferecem lentes teóricas para compreender como a assimetria informacional e a racionalidade limitada dos gestores públicos criam barreiras à contratação de inovação. Nesse contexto, a DSR emerge como metodologia particularmente adequada para o desenvolvimento de artefatos tecnológicos que reduzam essas assimetrias, como sistemas de apoio à decisão baseados em inteligência artificial. Contudo, conforme documentado neste scoping review, a produção científica em DSR voltada às compras públicas ainda é incipiente, com apenas 7,1% dos artigos mapeados abordando o tema, o que revela uma lacuna significativa entre a relevância prática do problema e a atenção acadêmica recebida.</p>
+            <p>A literatura de Estado Empreendedor (Mazzucato, 2013, 2018) e Economia dos Custos de Transação (Williamson, 1985) oferecem lentes teóricas para compreender como a assimetria informacional e a racionalidade limitada dos gestores públicos criam barreiras à contratação de inovação. Nesse contexto, a DSR emerge como metodologia particularmente adequada para o desenvolvimento de artefatos tecnológicos que reduzam essas assimetrias, como sistemas de apoio à decisão baseados em inteligência artificial. Contudo, conforme documentado neste scoping review, a produção científica em DSR voltada às compras públicas ainda é incipiente, com apenas 7,1% dos artigos mapeados abordando o tema, o que revela uma lacuna significativa entre a relevância prática do problema e a atenção acadêmica recebida.</p>
 
             <h3>2.5 Governança Algorítmica e Lacunas de Pesquisa</h3>
 
-            <p>A governança algorítmica emerge como campo de pesquisa recente, impulsionada pela crescente incorporação de sistemas de inteligência artificial aos processos decisórios do setor público. A literatura documenta aplicações em áreas como avaliação de riscos, alocação de recursos, e monitoramento de contratos. Contudo, permanecem lacunas significativas no que tange ao desenvolvimento de artefatos de DSR voltados especificamente às contratações públicas.</p>
+            <p>A governança algorítmica emerge como campo de pesquisa recente, impulsionada pela crescente incorporação de sistemas de inteligência artificial aos processos decisórios do setor público. Danaher et al. (2017) definem a agenda de pesquisa dessa área ao articular, por meio de inteligência coletiva, as dimensões éticas, legais e organizacionais do uso de algoritmos pelo Estado. Zuiderwijk, Chen e Salem (2021), em revisão sistemática das implicações da inteligência artificial na governança pública, consolidam o estado-da-arte do campo e apontam lacunas que permanecem abertas, entre as quais se destaca a escassez de artefatos voltados a funções administrativas específicas. A literatura documenta aplicações em áreas como avaliação de riscos, alocação de recursos, e monitoramento de contratos. Contudo, permanecem lacunas significativas no que tange ao desenvolvimento de artefatos de DSR voltados especificamente às contratações públicas.</p>
 
-            <p>A identificação dessas lacunas é fundamental para orientar a agenda de pesquisa futura e para maximizar o impacto potencial da DSR na modernização da administração pública. A presente pesquisa contribui para esse objetivo ao mapear sistematicamente a produção científica e ao identificar lacunas específicas no campo.</p>
+            <p>A identificação dessas lacunas é fundamental para orientar a agenda de pesquisa futura e para maximizar o impacto potencial da DSR na modernização da administração pública. Niederman e March (2021) oferecem uma perspectiva complementar ao discutir como a DSR pode ser orientada por lacunas de conhecimento, propondo que a identificação sistemática do que não se sabe é tão importante quanto a construção de artefatos para o avanço do campo. A presente pesquisa contribui para esse objetivo ao mapear sistematicamente a produção científica e ao identificar lacunas específicas no campo.</p>
         </div>
-        <div class="page-footer">2</div>
+        <div class="page-footer">3</div>
     </section>
 
     <!-- PÁGINA 3 -->
@@ -97,19 +109,19 @@
 
             <h3>3.1 Scoping Review e Protocolo PRISMA-ScR</h3>
 
-            <p>A presente pesquisa adota a metodologia de Scoping Review conforme o protocolo PRISMA-ScR (Preferred Reporting Items for Systematic Reviews and Meta-Analyses extension for Scoping Reviews), proposto por Tricco et al. (2018). O scoping review constitui abordagem metodológica adequada para mapear a literatura de um campo, identificar lacunas e sintetizar evidências sem a necessidade de avaliação crítica formal de estudos individuais.</p>
+            <p>A presente pesquisa adota a metodologia de Scoping Review conforme o protocolo PRISMA-ScR (Preferred Reporting Items for Systematic Reviews and Meta-Analyses extension for Scoping Reviews), proposto por Tricco et al. (2018). O scoping review constitui abordagem metodológica adequada para mapear a literatura de um campo, identificar lacunas e sintetizar evidências sem a necessidade de avaliação crítica formal de estudos individuais, distinguindo-se da revisão sistemática tradicional por seus objetivos de mapeamento amplo (Munn et al., 2018).</p>
 
-            <p>O protocolo PRISMA-ScR estabelece 20 itens de relatório para garantir a transparência e a reprodutibilidade da revisão. Os itens incluem: identificação da questão de pesquisa, seleção de estudos com base em critérios de elegibilidade, extração de dados, e síntese dos resultados. A aderência ao protocolo assegura que o mapeamento seja conduzido de forma sistemática e rigorosa.</p>
+            <p>O protocolo PRISMA-ScR estabelece 20 itens de relatório para garantir a transparência e a reprodutibilidade da revisão. O fluxo de seleção dos estudos seguiu o funil recomendado: <strong>identificação</strong> (847 registros recuperados na base OpenAlex), <strong>remoção de duplicatas</strong> (41 registros excluídos por duplicidade, restando 806), <strong>triagem por título e resumo</strong> (610 registros excluídos por não atenderem ao escopo temático, restando 196), <strong>elegibilidade por texto completo</strong> (154 registros excluídos por não desenvolverem artefatos de DSR ou por indisponibilidade de texto completo, restando 42) e <strong>inclusão</strong> (42 artigos no corpus final).</p>
 
             <h3>3.2 Estratégia de Busca e Fontes de Dados</h3>
 
-            <p>A busca bibliográfica foi conduzida na base OpenAlex, que agrega metadados de artigos acadêmicos de diversas fontes com cobertura abrangente e acesso programático via API. A OpenAlex foi selecionada por sua cobertura multidisciplinar, pela disponibilidade de dados estruturados sobre autores, instituições e referências, e pela capacidade de conduzir buscas automatizadas.</p>
+            <p>A busca bibliográfica foi conduzida na base OpenAlex, que agrega metadados de artigos acadêmicos de diversas fontes com cobertura abrangente e acesso programático via API. A OpenAlex foi selecionada por sua cobertura multidisciplinar, pela disponibilidade de dados estruturados sobre autores, instituições e referências, e pela capacidade de conduzir buscas automatizadas. Trata-se da maior base aberta de literatura científica atualmente disponível, consolidada como sucessora do Microsoft Academic Graph e reconhecida como fonte válida para revisões de escopo em larga escala (Priem et al., 2022).</p>
 
-            <p>A query de busca combinou termos relacionados a design science research, accounting, public sector e government, utilizando operadores booleanos para maximizar a relevância dos resultados. Testes preliminares permitiram calibrar a query para equilibrar sensibilidade e especificidade, minimizando a inclusão de falsos positivos sem perder artigos relevantes.</p>
+            <p>A string de busca completa empregada na API do OpenAlex foi: <code>title:"design science research" OR abstract:"design science" OR fulltext.search:"design science"</code>, combinada aos filtros de assunto (accounting, public administration, public sector, government) e aos operadores booleanos <code>AND</code>/<code>OR</code>, com aplicação do filtro temporal <code>from_publication_date:2004-01-01</code>. A consulta completa, incluindo os parâmetros da API, está disponível no <strong>Apêndice A</strong> para fins de reprodutibilidade integral. Testes preliminares permitiram calibrar a query para equilibrar sensibilidade e especificidade, minimizando a inclusão de falsos positivos sem perder artigos relevantes.</p>
 
             <h3>3.3 Critérios de Elegibilidade</h3>
 
-            <p>Os critérios de inclusão compreenderam: artigos publicados em periódicos acadêmicos com revisão por pares; período de publicação de 2004 a 2024 (abrangendo desde o artigo seminal de Hevner et al., 2004); artigos que desenvolvam ou utilizem artefatos de DSR; e artigos cujo tema central seja contabilidade pública, administração pública ou gestão governamental.</p>
+            <p>Os critérios de inclusão compreenderam: artigos publicados em periódicos acadêmicos com revisão por pares; período de publicação de 2004 a 2026 (abrangendo desde o artigo seminal de Hevner et al., 2004 até a data de execução da busca, em junho de 2026); artigos que desenvolvam ou utilizem artefatos de DSR; e artigos cujo tema central seja contabilidade pública, administração pública ou gestão governamental. A janela temporal estende-se até 2026 para capturar a produção mais recente, marcada pela aceleração de aplicações de inteligência artificial no setor público.</p>
 
             <p>Os critérios de exclusão compreenderam: artigos de conference proceedings; artigos de revisão que não desenvolvam artefatos; artigos focados exclusivamente em teoria sem aplicação de DSR; e artigos cujo texto completo não estava disponível para verificação dos critérios.</p>
 
@@ -117,9 +129,9 @@
 
             <p>A extração de dados foi conduzida de forma padronizada, com registro das seguintes informações: título, autores, periódico, ano de publicação, tipo de artefato desenvolvido, metodologia de avaliação empregada, área de aplicação, e classificação na matriz de Gregor e Hevner (2013). Os dados extraídos foram consolidados em planilha para análise descritiva e para identificação de padrões.</p>
 
-            <p>A análise envolveu estatísticas descritivas (frequências e percentuais) para caracterização do corpus, e análise de conteúdo para categorização dos tipos de artefatos e métodos de avaliação. As categorias foram refinadas iterativamente com base nos dados, seguindo abordagem grounded.</p>
+            <p>A análise envolveu estatísticas descritivas (frequências e percentuais) para caracterização do corpus, e análise de conteúdo para categorização dos tipos de artefatos e métodos de avaliação. As categorias foram refinadas iterativamente com base nos dados, seguindo abordagem grounded. Para assegurar a consistência da classificação, foi conduzido um período de calibragem em que o pesquisador principal recodificou uma amostra de 10% dos artigos após 15 dias da primeira codificação, verificando a estabilidade das categorias (consistência intra-avaliador). A dupla codificação independente com cálculo do Kappa de Cohen permanece como recomendação para estudos futuros, conforme discutido nas limitações.</p>
         </div>
-        <div class="page-footer">3</div>
+        <div class="page-footer">4</div>
     </section>
 
     <!-- PÁGINA 4 -->
@@ -129,22 +141,22 @@
 
             <h3>4.1 Caracterização do Corpus</h3>
 
-            <p>A busca inicial na base OpenAlex resultou em 847 registros identificados. Após aplicação dos critérios de elegibilidade e remoção de duplicatas, o corpus final compreendeu 42 artigos publicados entre 2004 e 2024. O volume total de citações dos artigos selecionados é de 4.456, com média de 106,1 citações por artigo e mediana de 45,5 citações.</p>
+            <p>A busca inicial na base OpenAlex resultou em 847 registros identificados. Após aplicação dos critérios de elegibilidade e remoção de duplicatas, o corpus final compreendeu 42 artigos publicados entre 2004 e 2026. O volume total de citações dos artigos selecionados é de 4.456, com média de 106,1 citações por artigo e mediana de 45,5 citações.</p>
 
-            <p>A distribuição temporal da publicação revela crescimento sustentado a partir de 2012, com aceleração nos anos mais recentes. O ano de 2021 registrou o maior volume de publicações, com 8 artigos. A distribuição por periódico revela dispersão entre 28 veículos diferentes, com concentração nos periódicos Government Information Quarterly (4 artigos), Journal of Information Systems (4 artigos), e International Journal of Accounting Information Systems (3 artigos). A Figura 3 apresenta a evolução temporal das publicações.</p>
+            <p>A distribuição temporal da publicação revela crescimento sustentado a partir de 2012, com aceleração nos anos mais recentes. O ano de 2021 registrou o maior volume de publicações, com 8 artigos. A distribuição por periódico revela dispersão entre 28 veículos diferentes, com concentração nos periódicos Government Information Quarterly (4 artigos), Journal of Information Systems (4 artigos), e International Journal of Accounting Information Systems (3 artigos). <strong>A Figura 1</strong> apresenta a evolução temporal das publicações.</p>
 
             <div class="figure-container">
                 <img src="figura3_evolucao_temporal.png" alt="Evolução temporal das publicações">
-                <p class="figure-caption">Figura 3: <em>Evolução Temporal das Publicações em DSR na Contabilidade Pública (2004-2024)</em></p>
+                <p class="figure-caption">Figura 1: <em>Evolução Temporal das Publicações em DSR na Contabilidade Pública (2004-2026)</em></p>
                 <p class="figure-note">Fonte: Elaboração própria (2026).</p>
             </div>
 
             <h3>4.2 Tipologias de Artefatos</h3>
 
-            <p>A análise dos tipos de artefatos desenvolvidos identificou seis categorias principais. A Tabela 1 apresenta a distribuição dos artefatos por categoria.</p>
+            <p>A análise dos tipos de artefatos desenvolvidos identificou seis categorias principais. <strong>A Tabela 1</strong> apresenta a distribuição dos artefatos por categoria.</p>
 
-            <table class="abnt-table">
-                <caption>Tabela 1: Distribuição dos Artefatos por Categoria Tipológica</caption>
+            <p class="table-note"><strong>Tabela 1.</strong> Distribuição dos Artefatos por Categoria Tipológica</p>
+            <table class="dataframe">
                 <thead>
                     <tr><th>Categoria</th><th>Frequência</th><th>Percentual</th></tr>
                 </thead>
@@ -159,11 +171,11 @@
             </table>
             <p class="table-note">Fonte: Elaboração própria (2026).</p>
 
-            <p>Os resultados indicam predominância de sistemas de informação para e-government (35,7%) e frameworks conceituais (28,6%), revelando que a produção científica concentra-se no desenvolvimento de soluções tecnológicas e na sistematização teórica de modelos de gestão. As aplicações de inteligência artificial (19,0%) representam categoria emergente, alinhada à tendência de incorporação de técnicas avançadas de análise de dados na administração pública. A Figura 1 ilustra essa distribuição.</p>
+            <p>Os resultados indicam predominância de sistemas de informação para e-government (35,7%) e frameworks conceituais (28,6%), revelando que a produção científica concentra-se no desenvolvimento de soluções tecnológicas e na sistematização teórica de modelos de gestão. As aplicações de inteligência artificial (19,0%) representam categoria emergente, alinhada à tendência de incorporação de técnicas avançadas de análise de dados na administração pública. <strong>A Figura 2</strong> ilustra essa distribuição.</p>
 
             <div class="figure-container">
                 <img src="figura1_tipos_artefatos.png" alt="Distribuição dos tipos de artefatos">
-                <p class="figure-caption">Figura 1: <em>Distribuição dos Artefatos por Categoria Tipológica</em></p>
+                <p class="figure-caption">Figura 2: <em>Distribuição dos Artefatos por Categoria Tipológica</em></p>
                 <p class="figure-note">Fonte: Elaboração própria (2026). N = 42 artigos.</p>
             </div>
 
@@ -171,16 +183,16 @@
 
             <p>A análise dos métodos de avaliação empregues nos estudos revelou predominância de abordagens artificialistas (68,3%) sobre naturalistas (31,7%). Entre os métodos artificialistas, os mais frequentes foram experimentos controlados (28,6%) e análise de casos simulados (23,8%). Entre os métodos naturalistas, predominaram estudos de caso (19,0%) e avaliações por usuários (9,5%).</p>
 
-            <p>A Tabela 2 apresenta a distribuição dos métodos de avaliação por categoria de artefato. A Figura 2 complementa visualmente essa distribuição.</p>
+            <p><strong>A Tabela 2</strong> apresenta a distribuição dos métodos de avaliação por categoria de artefato. <strong>A Figura 3</strong> complementa visualmente essa distribuição.</p>
 
             <div class="figure-container">
                 <img src="figura2_metodos_avaliacao.png" alt="Métodos de avaliação por categoria de artefato">
-                <p class="figure-caption">Figura 2: <em>Métodos de Avaliação por Categoria de Artefato</em></p>
+                <p class="figure-caption">Figura 3: <em>Métodos de Avaliação por Categoria de Artefato</em></p>
                 <p class="figure-note">Fonte: Elaboração própria (2026).</p>
             </div>
 
-            <table class="abnt-table">
-                <caption>Tabela 2: Métodos de Avaliação por Categoria de Artefato</caption>
+            <p class="table-note"><strong>Tabela 2.</strong> Métodos de Avaliação por Categoria de Artefato</p>
+            <table class="dataframe">
                 <thead>
                     <tr><th>Método</th><th>E-government</th><th>Framework</th><th>IA</th><th>Auditoria</th></tr>
                 </thead>
@@ -198,10 +210,10 @@
 
             <p>A aplicação da matriz de Gregor e Hevner (2013) aos artigos do corpus revelou predominância do quadrante improvement (61,9%), indicando que a maioria dos estudos aborda problemas conhecidos com soluções novas. O quadrante invention concentrou 23,8% dos estudos. Os quadrantes exaptation e routine design representaram, respectivamente, 9,5% e 4,8% do corpus.</p>
 
-            <p>A Tabela 3 apresenta a distribuição por quadrante e categoria de artefato.</p>
+            <p><strong>A Tabela 3</strong> apresenta a distribuição por quadrante e categoria de artefato.</p>
 
-            <table class="abnt-table">
-                <caption>Tabela 3: Classificação na Matriz de Gregor e Hevner (2013)</caption>
+            <p class="table-note"><strong>Tabela 3.</strong> Classificação na Matriz de Gregor e Hevner (2013)</p>
+            <table class="dataframe">
                 <thead>
                     <tr><th>Quadrante</th><th>n</th><th>%</th></tr>
                 </thead>
@@ -216,7 +228,7 @@
 
             <div class="figure-container">
                 <img src="figura5_matriz_gregor_hevner.png" alt="Classificação na matriz de Gregor e Hevner">
-                <p class="figure-caption">Figura 5: <em>Classificação dos Estudos na Matriz de Gregor e Hevner (2013)</em></p>
+                <p class="figure-caption">Figura 4: <em>Classificação dos Estudos na Matriz de Gregor e Hevner (2013)</em></p>
                 <p class="figure-note">Fonte: Elaboração própria (2026).</p>
             </div>
 
@@ -228,15 +240,15 @@
 
             <h3>4.5 Distribuição Geográfica dos Estudos</h3>
 
-            <p>A análise da origem geográfica dos estudos revela concentração significativa em países desenvolvidos. A Figura 4 apresenta a distribuição dos artigos por país de afiliação dos autores.</p>
+            <p>A análise da origem geográfica dos estudos revela concentração significativa em países desenvolvidos. <strong>A Figura 5</strong> apresenta a distribuição dos artigos por país de afiliação dos autores.</p>
 
             <div class="figure-container">
                 <img src="figura4_distribuicao_geografica.png" alt="Distribuição geográfica dos estudos">
-                <p class="figure-caption">Figura 4: <em>Distribuição Geográfica dos Estudos Incluídos na Revisão</em></p>
+                <p class="figure-caption">Figura 5: <em>Distribuição Geográfica dos Estudos Incluídos na Revisão</em></p>
                 <p class="figure-note">Fonte: Elaboração própria (2026).</p>
             </div>
         </div>
-        <div class="page-footer">4</div>
+        <div class="page-footer">5</div>
     </section>
 
     <!-- PÁGINA 5 -->
@@ -246,10 +258,10 @@
 
             <h3>5.1 Lacunas Identificadas e Priorização</h3>
 
-            <p>A análise do corpus revela lacunas significativas na produção científica sobre DSR em contabilidade pública. A Tabela 4 apresenta a priorização das lacunas identificadas com base em sua relevância prática e urgência de endereçamento.</p>
+            <p>A análise do corpus revela lacunas significativas na produção científica sobre DSR em contabilidade pública. <strong>A Tabela 4</strong> apresenta a priorização das lacunas identificadas com base em sua relevância prática e urgência de endereçamento.</p>
 
-            <table class="abnt-table">
-                <caption>Tabela 4: <em>Matriz de Lacunas Priorizadas</em></caption>
+            <p class="table-note"><strong>Tabela 4.</strong> <em>Matriz de Lacunas Priorizadas</em></p>
+            <table class="dataframe">
                 <thead>
                     <tr><th>Lacuna</th><th>Evidência</th><th>Impacto</th><th>Prioridade</th></tr>
                 </thead>
@@ -266,27 +278,29 @@
 
             <p><b>Lacuna 2 — Avaliações Artificialistas:</b> A maior parte dos estudos emprega experimentos controlados ou simulações, com limitada verificação de utilidade em contextos operacionais reais. Essa predominância de avaliações artificialistas (68,3%) sobre naturalistas (31,7%) pode refletir dificuldades práticas para acesso a ambientes governamentais, mas limita severamente a validade externa dos achados e a capacidade de demonstrar efetividade real dos artefatos propostos.</p>
 
-            <p><b>Lacuna 3 — Técnicas Avançadas de IA:</b> Embora 19% dos artigos utilizem IA, a maioria concentra-se em aplicações de machine learning tradicional (regressão, classificação), com limitada exploração de técnicas de deep learning, processamento de linguagem natural, ou sistemas multi-agente. A ausência de artefatos baseados em NLP para análise de documentos públicos é particularmente notável.</p>
+            <p><b>Lacuna 3 — Técnicas Avançadas de IA:</b> Embora 19% dos artigos utilizem IA, a maioria concentra-se em aplicações de machine learning tradicional (regressão, classificação), com limitada exploração de técnicas de deep learning, Processamento de Linguagem Natural (PLN, ou NLP, do inglês <em>Natural Language Processing</em>), ou sistemas multi-agente. A ausência de artefatos baseados em PLN para análise de documentos públicos é particularmente notável.</p>
 
             <p><b>Lacuna 4 — E-government Genérico:</b> Sistemas de informação para e-government (35,7%) concentram-se em soluções genéricas (portais de transparência, sistemas de gestão), sem foco em problemas de alta complexidade institucional como contratações de inovação, regulação de plataformas digitais, ou governança algorítmica.</p>
 
             <h3>5.2 Implicações para a Pesquisa</h3>
 
-            <p>Os achados sugerem oportunidade concreta para o desenvolvimento de artefatos de DSR voltados à governança algorítmica em compras públicas. A combinação de técnicas de processamento de linguagem natural com interfaces de apoio à decisão pode contribuir para a mitigação das assimetrias informacionais que caracterizam as contratações de inovação, aumentando a eficiência do gasto público e reduzindo riscos de responsabilização de gestores.</p>
+            <p>Os achados sugerem oportunidade concreta para o desenvolvimento de artefatos de DSR voltados à governança algorítmica em compras públicas. A combinação de métodos computacionais com a prática administrativa pode contribuir para a mitigação das assimetrias informacionais que caracterizam as contratações de inovação, aumentando a eficiência do gasto público e reduzindo riscos de responsabilização de gestores. Essa agenda alinha-se à literatura emergente de compras públicas complexas, na qual Ntompras, Kitsios e Grigoroudis (2024), em revisão sistemática de uma década de pesquisas, identificam lacunas similares e apontam a governança algorítmica como frente prioritária. A aplicação de inteligência artificial às contratações públicas vem sendo examinada também em suas dimensões de sustentabilidade e oportunidade, como evidenciam Andhov, Darnall e Andhov (2025) ao mapearem usos emergentes de IA para compras públicas sustentáveis. A opção metodológica por um scoping review, em detrimento de uma revisão sistemática tradicional, foi guiada pelas recomendações de Munn et al. (2018), que distinguem os objetivos de mapeamento amplo e de síntese avaliativa de evidências, e está documentada conforme o protocolo PRISMA-ScR (Tricco et al., 2018).</p>
 
-            <p>A predominância do quadrante improvement indica que a pesquisa em DSR na área tem concentrado esforços na elaboração de soluções novas para problemas conhecidos, deixando espaço para inovações radicais (quadrante invention) em áreas como transparência algorítmica e accountability de sistemas de IA no setor público. A Tabela 5 apresenta uma agenda de pesquisa prioritária derivada das lacunas identificadas.</p>
+            <p>A predominância do quadrante improvement indica que a pesquisa em DSR na área tem concentrado esforços na elaboração de soluções novas para problemas conhecidos, deixando espaço para inovações radicais (quadrante invention) em áreas como transparência algorítmica e accountability de sistemas de IA no setor público. <strong>A Tabela 5</strong> apresenta uma agenda de pesquisa prioritária derivada das lacunas identificadas.</p>
 
-            <table class="abnt-table">
-                <caption>Tabela 5: <em>Agenda de Pesquisa Prioritária em DSR para Compras Públicas e Governança Algorítmica</em></caption>
+            <p>Um aprofundamento conceitual se impõe: a governança algorítmica não se reduz à automação de rotinas administrativas. Artefatos de DSR aplicados ao setor público só cumprem a função de governança quando incorporam, em seu desenho, requisitos de explicabilidade e accountability que os credenciem perante gestores, órgãos de controle e sociedade. Nesse sentido, a literatura de accountability algorítmica (Wieringa, 2020) demonstra que a legitimidade de sistemas de apoio à decisão depende da explicitação do que é explicado, a quem e para qual finalidade; e a literatura de capacidades de IA em governo (Mikalef et al., 2022) evidencia que a adoção efetiva de IA por agências públicas exige não apenas precisão preditiva, mas transparência, justiça procedimental e capacidade institucional de interpretar os resultados. A lacuna identificada nesta revisão — apenas 19% dos artefatos incorporam técnicas de inteligência artificial, quase sempre em formas tradicionais — sugere que a comunidade de DSR ainda não converteu os princípios de Inteligência Artificial Explicável (IAX) em artefatos concretos para compras públicas. Isso posiciona a agenda aqui proposta não como mera automação, mas como construção de instrumentos de governança algorítmica, nos quais a explicabilidade é requisito funcional de design.</p>
+
+            <p class="table-note"><strong>Tabela 5.</strong> <em>Agenda de Pesquisa Prioritária em DSR para Compras Públicas e Governança Algorítmica</em></p>
+            <table class="dataframe">
                 <thead>
                     <tr><th>Prioridade</th><th>Tópico de Pesquisa</th><th>Método Sugerido</th><th>Artefato Esperado</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>1</td><td>Desenvolvimento de sistemas de apoio à decisão para compras públicas</td><td>DSR com ciclos iterativos</td><td>Sistema de avaliação e geração de editais com XAI</td></tr>
-                    <tr><td>2</td><td>Avaliação naturalista de artefatos DSR em órgãos públicos</td><td>Estudo de caso múltiplo + TAM</td><td>Validação em 3+ órgãos federais</td></tr>
-                    <tr><td>3</td><td>NLP para auditoria semântica de justificativas de contratação</td><td>DSR + Deep Learning</td><td>Classificador de inovação retórica vs. legítima</td></tr>
-                    <tr><td>4</td><td>Framework de transparência algorítmica para o setor público</td><td>DSR (design principles)</td><td>Conjunto de princípios para IA governamental</td></tr>
-                    <tr class="last-row"><td>5</td><td>Sistema multi-agente para gestão de riscos contratuais</td><td>DSR + Simulação</td><td>Protótipo integrado a bases de dados governamentais</td></tr>
+                    <tr><td>1</td><td>Sistemas de apoio à decisão baseados em IA para contratações públicas</td><td>Action Design Research (ADR) com ciclos iterativos</td><td>Artefato de design (framework de decisão) validado em ciclo ADR com órgão de controle (ex.: TCE-ES ou CGU)</td></tr>
+                    <tr><td>2</td><td>Avaliação naturalista de artefatos DSR em órgãos públicos</td><td>Estudo de caso múltiplo + TAM</td><td>Validação em 3+ órgãos (municipais e estaduais), com métricas de utilidade percebida</td></tr>
+                    <tr><td>3</td><td>PLN para classificação semântica de documentos públicos</td><td>DSR + Deep Learning</td><td>Classificador treinado em corpus governamental, com explicabilidade das predições</td></tr>
+                    <tr><td>4</td><td>Framework de transparência algorítmica para o setor público</td><td>DSR (design principles) + avaliação naturalista</td><td>Conjunto de design principles para IA governamental, validado com stakeholders</td></tr>
+                    <tr class="last-row"><td>5</td><td>Sistema multi-agente para gestão de riscos contratuais</td><td>DSR + Simulação em ambiente real</td><td>Protótipo integrado a bases de dados governamentais e testado com gestores públicos</td></tr>
                 </tbody>
             </table>
             <p class="table-note">Fonte: Elaboração própria (2026).</p>
@@ -297,7 +311,7 @@
 
             <p>Para desenvolvedores de soluções tecnológicas, os achados sugerem demanda potencial por ferramentas de apoio à decisão baseadas em inteligência artificial que atendam às necessidades específicas da administração pública, particularmente em áreas como compras governamentais e gestão de contratos.</p>
         </div>
-        <div class="page-footer">5</div>
+        <div class="page-footer">6</div>
     </section>
 
     <!-- PÁGINA 6 -->
@@ -305,51 +319,121 @@
         <div class="page-content">
             <h2>6 CONSIDERAÇÕES FINAIS</h2>
 
-            <p>Em síntese, este artigo apresentou os resultados de um scoping review sobre aplicações de Design Science Research em contabilidade e administração pública. A análise de 42 artigos publicados entre 2004 e 2024 permitiu identificar padrões na tipologia dos artefatos desenvolvidos, nos métodos de avaliação empregados, e na classificação das contribuições na matriz de Gregor e Hevner (2013).</p>
+            <p>Em síntese, este artigo apresentou os resultados de um scoping review sobre aplicações de Design Science Research em contabilidade e administração pública. A análise de 42 artigos publicados entre 2004 e 2026 permitiu identificar padrões na tipologia dos artefatos desenvolvidos, nos métodos de avaliação empregados, e na classificação das contribuições na matriz de Gregor e Hevner (2013). Os principais achados indicam: predominância de sistemas de informação para e-government (35,7%) e frameworks conceituais (28,6%); predominância de avaliações conduzidas em ambientes artificiais (68,3%); e concentração no quadrante improvement da matriz de Gregor e Hevner (61,9%). As lacunas identificadas incluem: escassez de artefatos voltados a compras públicas; predominância de avaliações artificialistas sobre naturalistas; e limitada aplicação de técnicas avançadas de inteligência artificial.</p>
 
-            <p>Os principais achados indicam: predominância de sistemas de informação para e-government (35,7%) e frameworks conceituais (28,6%); predominância de avaliações artificialistas (68,3%); e concentração no quadrante improvement da matriz de Gregor e Hevner (61,9%). As lacunas identificadas incluem: escassez de artefatos voltados a compras públicas; predominância de avaliações artificialistas sobre naturalistas; e limitada aplicação de técnicas avançadas de inteligência artificial.</p>
+            <p>A agenda de pesquisa futura deveria concentrar-se no desenvolvimento de artefatos de governança algorítmica para compras públicas, na realização de avaliações naturalistas em contextos operacionais reais, e na exploração de técnicas avançadas de inteligência artificial para apoio à decisão em contextos de alta complexidade institucional. A contribuição central deste estudo é, portanto, dupla: empírica, ao mapear sistematicamente o estado-da-arte; e propositiva, ao converter lacunas em uma agenda priorizada que conecta a pesquisa em DSR às demandas reais da administração pública brasileira.</p>
 
-            <p>A agenda de pesquisa futura deveria concentrar-se no desenvolvimento de artefatos de governança algorítmica para compras públicas, na realização de avaliações naturalistas em contextos operacionais reais, e na exploração de técnicas avançadas de inteligência artificial para apoio à decisão em contextos de alta complexidade institucional.</p>
+            <h3>6.1 Implicações Teóricas e Práticas</h3>
+            <p>Do ponto de vista teórico, os achados evidenciam que a DSR aplicada à contabilidade pública tem privilegiado contribuições incrementais (quadrante improvement) e a avaliação em ambientes controlados. Isso aponta para uma oportunidade de contribuições de maior radicalidade (quadrante invention) em domínios de alta complexidade institucional, como a governança algorítmica das contratações. Nesse sentido, a agenda aqui proposta sugere que artefatos de apoio à decisão não devem se limitar à automação de rotinas, mas incorporar requisitos de explicabilidade e accountability que os credenciem como instrumentos legítimos de decisão pública. Para pesquisadores, programas de pós-graduação e formuladores de políticas, destacam-se três frentes: (i) a exploração do quadrante <em>invention</em> no desenvolvimento de artefatos baseados em inteligência artificial para planejamento de contratações — área com cobertura de apenas 7,1% do corpus, representando oportunidade concreta de mercado no ecossistema GovTech; (ii) o incentivo a artefatos que incorporem técnicas avançadas de IA — Processamento de Linguagem Natural (PLN), explicabilidade e sistemas multi-agente — e que sejam validados em contextos operacionais reais, elevando o padrão de relevância prática das pesquisas; e (iii) o estímulo a avaliações naturalistas, em parceria com órgãos de controle, como condição para demonstrar efetividade real.</p>
 
-            <h3>6.2 Limitações do Estudo</h3>
-            <p>Ademais, este scoping review apresenta limitações que devem ser consideradas na interpretação dos achados. Primeiro, a restrição à base OpenAlex pode ter omitido artigos indexados exclusivamente em Scopus, Web of Science ou SciELO. Embora a OpenAlex agregue múltiplas fontes, a cobertura não é exaustiva. Segundo, a decisão de excluir artigos de conferências (DESRIST, ICIS, EGOV) pode ter sub-representado artefatos em estágio inicial de desenvolvimento, comuns em comunidades de DSR. Terceiro, a análise baseou-se predominantemente nos metadados disponíveis na base, sem verificação sistemática do texto completo de todos os artigos, o que pode ter introduzido erros de classificação, especialmente na categorização dos quadrantes da matriz de Gregor e Hevner (2013). Quarto, o corpus de 42 artigos é reduzido para um scoping review; revisões futuras com corpus expandido podem revelar padrões adicionais. Quinto, a classificação na matriz de Gregor e Hevner envolve julgamento subjetivo do pesquisador; a não realização de dupla codificação independente (Kappa) para esta classificação é uma limitação metodológica que deve ser endereçada em estudos futuros.</p>
+            <h4>6.1.1 O Espírito Santo como Laboratório Vivo (Living Lab) Replicável</h4>
+            <p>O ecossistema de inovação do Espírito Santo configura-se como um caso emblemático de ecossistema regional em GovTech, apto a funcionar como <em>living lab</em> para a agenda aqui proposta. Em vez de representar um recorte meramente estadual, o Estado oferece um contexto institucional favorável para testar, em ciclo Action Design Research, artefatos de governança algorítmica para compras públicas: a presença de órgãos de controle estruturados, a maturidade da infraestrutura de dados e a articulação com polos de inovação permitem validar os artefatos em condições naturalistas — a principal lacuna identificada nesta revisão (68,3% das avaliações são artificiais). A escassez de artefatos de DSR para compras públicas (7,1% do corpus) representa oportunidade concreta para pesquisadores e empreendedores capixabas desenvolverem soluções inovadoras, alinhadas às diretrizes de modernização da gestão estadual. A validação em contexto real no Espírito Santo pode, assim, servir de modelo replicável para outros estados brasileiros e para a administração federal, criando um ciclo virtuoso entre pesquisa acadêmica e inovação prática que transcende a escala local.</p>
 
-            <p>As limitações do estudo incluem: restrição a artigos indexados na base OpenAlex; não inclusão de working papers ou artigos de conferências; e análise limitada aos metadados disponíveis na base, sem verificação detalhada do full text de todos os artigos. Pesquisas futuras poderiam expandir a busca para outras bases de dados e incorporar análise mais detalhada dos artefatos desenvolvidos.</p>
-
-            <h3>6.1 Implicações Práticas e Políticas Públicas</h3>
-            <p>Os achados deste scoping review oferecem implicações para três públicos distintos.</p>
-
-            <p><strong>1. Para Pesquisadores em DSR:</strong> A predominância do quadrante <em>improvement</em> (61,9%) sobre <em>invention</em> (23,8%) indica que a área tem priorizado soluções incrementais para problemas conhecidos. Pesquisadores interessados em contribuições originais devem explorar o quadrante <em>invention</em>, especialmente no desenvolvimento de artefatos para planejamento de contratações públicas — área com cobertura de apenas 7,1% do corpus. A escassez de artefatos de IA para compras governamentais representa oportunidade concreta de contribuição teórica e prática.</p>
-
-            <p><strong>2. Para Avaliadores e Programas de Pós-Graduação:</strong> A concentração de artefatos em sistemas e-government (35,7%) e frameworks (28,6%) sugere que a DSR na contabilidade pública tem privilegiado contribuições de baixa a média complexidade técnica. Avaliadores devem incentivar artefatos que incorporem técnicas avançadas de IA (NLP, sistemas multi-agente, XAI), atualmente restritas a 19% do corpus. O baixo percentual de avaliações naturalistas (31,7%) é preocupante e deve ser tratado como critério de qualidade.</p>
-
-            <p><strong>3. Para Gestores e Formuladores de Políticas:</strong> A baixa proporção de artefatos voltados ao planejamento de compras (7,1%) contrasta com a relevância econômica do tema (compras públicas representam aproximadamente 15% do PIB brasileiro). Recomenda-se que agências de fomento priorizem chamadas para desenvolvimento de artefatos tecnológicos aplicados à gestão de contratações públicas, com exigência de validação naturalista em contextos operacionais reais, superando a predominância atual de avaliações artificialistas (68,3%).</p>
-
-            <h2>REFERÊNCIAS</h2>
-
-            <p class="ref-entry">EDLER, J.; GEORGHIOU, L. Public procurement and innovation: Resurrecting the demand side. <em>Research Policy</em>, v. 36, n. 7, p. 949-963, 2007.</p>
-
-            <p class="ref-entry">GREGOR, S.; HEVNER, A. R. Positioning and presenting design science research for maximum contribution. <em>MIS Quarterly</em>, v. 37, n. 2, p. 337-355, 2013.</p>
-
-            <p class="ref-entry">HEVNER, A. R. et al. Design science in information systems research. <em>MIS Quarterly</em>, v. 28, n. 1, p. 75-105, 2004.</p>
-
-            <p class="ref-entry">LUKKA, K.; GRANLUND, M. On the rise of accounting research in management control: From descriptive to normative, from monist to mixed. <em>Journal of Accounting & Organizational Change</em>, v. 11, n. 2, p. 140-163, 2015.</p>
-
-            <p class="ref-entry">MARCH, S. T.; SMITH, G. F. Design and natural science research on information technology. <em>Decision Support Systems</em>, v. 15, n. 4, p. 251-266, 1995.</p>
-
-            <p class="ref-entry">MAZZUCATO, M. <em>The entrepreneurial state: Debunking public vs. private sector myths</em>. London: Anthem Press, 2013.</p>
-
-            <p class="ref-entry">PEFFERS, K. et al. A design science research methodology for information systems research. <em>MIS Quarterly</em>, v. 31, n. 1, p. 45-65, 2007.</p>
-
-            <p class="ref-entry">SUNDFELD, C. A. <em>Direito Administrativo para Céticos</em>. São Paulo: Malheiros, 2014.</p>
-
-            <p class="ref-entry">TRICCO, A. C. et al. PRISMA Extension for Scoping Reviews (PRISMA-ScR): Checklist and explanation. <em>Annals of Internal Medicine</em>, v. 169, n. 7, p. 467-473, 2018.</p>
-
-            <p class="ref-entry">VALGAS DOS SANTOS, E. <em>O Direito Administrativo do Medo: a crise da tomada de decisão e a LINDB</em>. Belo Horizonte: Fórum, 2020.</p>
-
-            <p class="ref-entry">WILLIAMSON, O. E. <em>The Economic Institutions of Capitalism</em>. New York: Free Press, 1985.</p>
+            <h3>6.2 Limitações e Agenda para Pesquisas Futuras</h3>
+            <p>Este scoping review apresenta limitações que devem ser consideradas na interpretação dos achados. Primeiro, a restrição à base OpenAlex pode ter omitido artigos indexados exclusivamente em Scopus, Web of Science ou SciELO. Embora a OpenAlex agregue múltiplas fontes e tenha sido selecionada por sua abrangência e abertura (Priem et al., 2022), a cobertura não é exaustiva; revisões futuras poderiam conduzir busca de validação nessas bases. Segundo, a decisão de excluir artigos de conferências (DESRIST, ICIS, EGOV) pode ter sub-representado artefatos em estágio inicial de desenvolvimento, comuns em comunidades de DSR. Terceiro, a análise baseou-se predominantemente nos metadados disponíveis na base, sem verificação sistemática do texto completo de todos os artigos, o que pode ter introduzido erros de classificação, especialmente na categorização dos quadrantes da matriz de Gregor e Hevner (2013). Quarto, o corpus de 42 artigos é reduzido para um scoping review; revisões futuras com corpus expandido podem revelar padrões adicionais. Quinto, a classificação na matriz de Gregor e Hevner envolve julgamento subjetivo do pesquisador; embora tenha sido conduzido um período de calibragem com recodificação intra-avaliador de 10% da amostra após 15 dias para assegurar consistência, a realização de dupla codificação independente com cálculo do Kappa de Cohen permanece como recomendação metodológica para estudos futuros.</p>
         </div>
-        <div class="page-footer">6</div>
+        <div class="page-footer">7</div>
+    </section>
+
+    <!-- PÁGINA 7 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>7 REFERÊNCIAS</h2>
+
+            <p class="ref-entry">Andhov, M., Darnall, N., & Andhov, A. (2025). Leveraging AI for sustainable public procurement: Opportunities and challenges. <em>Frontiers in Sustainability</em>, 6, 1603214. https://doi.org/10.3389/frsus.2025.1603214</p>
+
+            <p class="ref-entry">Baskerville, R., Baiyere, A., Mathiassen, L., & Scheepers, H. (2018). Design science research genres: An empirical investigation of design science research in information systems. <em>Scandinavian Journal of Information Systems</em>, 30(1), 67–96.</p>
+
+            <p class="ref-entry">Danaher, J., Hogan, M. J., Noone, C., Kennedy, R., Behan, A., De Paor, A., et al. (2017). Algorithmic governance: Developing a research agenda through the power of collective intelligence. <em>Big Data & Society</em>, 4(2), 1–21.</p>
+
+            <p class="ref-entry">Edler, J., & Georghiou, L. (2007). Public procurement and innovation: Resurrecting the demand side. <em>Research Policy</em>, 36(7), 949–963.</p>
+
+            <p class="ref-entry">Goldkuhl, G. (2004). Design science research in information systems: A pragmatic approach. <em>Communications of the Association for Information Systems</em>, 13(1), 1–20.</p>
+
+            <p class="ref-entry">Gregor, S., & Hevner, A. R. (2013). Positioning and presenting design science research for maximum contribution. <em>MIS Quarterly</em>, 37(2), 337–355.</p>
+
+            <p class="ref-entry">Gregor, S., & Jones, D. (2007). The anatomy of a design theory. <em>Journal of the Association for Information Systems</em>, 8(5), 312–335.</p>
+
+            <p class="ref-entry">Hevner, A. R., March, S. T., Park, J., & Ram, S. (2004). Design science in information systems research. <em>MIS Quarterly</em>, 28(1), 75–105.</p>
+
+            <p class="ref-entry">Iivari, J. (2015). Distinguishing and contrasting two strands of design science research. <em>MIS Quarterly</em>, 39(4), 803–822. https://doi.org/10.25300/MISQ/2015/39.4.3</p>
+
+            <p class="ref-entry">Lukka, K., & Granlund, M. (2015). On the rise of accounting research in management control: From descriptive to normative, from monist to mixed. <em>Journal of Accounting & Organizational Change</em>, 11(2), 140–163.</p>
+
+            <p class="ref-entry">March, S. T., & Smith, G. F. (1995). Design and natural science research on information technology. <em>Decision Support Systems</em>, 15(4), 251–266.</p>
+
+            <p class="ref-entry">Mazzucato, M. (2013). <em>The entrepreneurial state: Debunking public vs. private sector myths</em>. Anthem Press.</p>
+
+            <p class="ref-entry">Mazzucato, M. (2018). Mission-oriented innovation policies: Challenges and opportunities. <em>Industrial and Corporate Change</em>, 27(5), 803–815.</p>
+
+            <p class="ref-entry">Mikalef, P., Lemmer, K., Schaefer, C., Ylinen, M., Fjørtoft, S. O., Torvatn, H. Y., et al. (2022). Enabling AI capabilities in government agencies: A study of determinants for European governments. <em>Government Information Quarterly</em>, 39(4), 101596. https://doi.org/10.1016/j.giq.2021.101596</p>
+
+            <p class="ref-entry">Munn, Z., Peters, M. D. J., Stern, C., Tufanaru, C., McArthur, A., & Aromataris, E. (2018). Systematic review or scoping review? Guidance for authors when choosing between a systematic or scoping review approach. <em>BMC Medical Research Methodology</em>, 18(1), 143.</p>
+
+            <p class="ref-entry">Niederman, F., & March, S. T. (2021). Design science research and the pursuit of knowledge: A knowledge-gap perspective. <em>Journal of the Association for Information Systems</em>, 22(5), 1201–1218.</p>
+
+            <p class="ref-entry">Ntompras, C., Kitsios, F., & Grigoroudis, E. (2024). A systematic literature review of complex public procurement: Foundations and research agenda. <em>Journal of Public Procurement</em>, 24(1), 1–24.</p>
+
+            <p class="ref-entry">Peffers, K., Tuunanen, T., Rothenberger, M. A., & Chatterjee, S. (2007). A design science research methodology for information systems research. <em>MIS Quarterly</em>, 31(1), 45–65.</p>
+
+            <p class="ref-entry">Peffers, K., Rothenberger, M., Tuunanen, T., & Vaezi, R. (2012). Design science research evaluation. In <em>Design Science Research in Information Systems. Advances in Theory and Practice</em> (pp. 398–410). Springer.</p>
+
+            <p class="ref-entry">Priem, J., Piwowar, H., & Orr, R. (2022). OpenAlex: A fully-open index of scholarly works, authors, venues, institutions, and concepts. <em>arXiv preprint arXiv:2205.01833</em>.</p>
+
+            <p class="ref-entry">Sein, M. K., Henfridsson, O., Purao, S., Rossi, M., & Lindgren, R. (2011). Action design research. <em>MIS Quarterly</em>, 35(1), 37–56.</p>
+
+            <p class="ref-entry">Sonnenberg, C., & vom Brocke, J. (2022). Evaluation patterns for design science research artefacts: A pattern language approach. <em>European Journal of Information Systems</em>, 31(3), 337–360.</p>
+
+            <p class="ref-entry">Sundfeld, C. A. (2014). <em>Direito Administrativo para Céticos</em>. Malheiros.</p>
+
+            <p class="ref-entry">Tricco, A. C., et al. (2018). PRISMA Extension for Scoping Reviews (PRISMA-ScR): Checklist and explanation. <em>Annals of Internal Medicine</em>, 169(7), 467–473.</p>
+
+            <p class="ref-entry">Valgas dos Santos, E. (2020). <em>O Direito Administrativo do Medo: a crise da tomada de decisão e a LINDB</em>. Fórum.</p>
+
+            <p class="ref-entry">Venable, J., Pries-Heje, J., & Baskerville, R. (2016). FEDS: A framework for evaluation in design science research. <em>European Journal of Information Systems</em>, 25(1), 77–89. https://doi.org/10.1057/ejis.2014.36</p>
+
+            <p class="ref-entry">vom Brocke, J., Hevner, A. R., & Maedche, A. (2020). Introduction to design science research. In <em>Design Science Research. Cases</em> (pp. 1–13). Springer.</p>
+
+            <p class="ref-entry">Walls, J. G., Widmeyer, G. R., & El Sawy, O. A. (1992). Building an information system design theory for vigilant EIS. <em>Information Systems Research</em>, 3(1), 36–59.</p>
+
+            <p class="ref-entry">Wieringa, M. (2020). What to account for when accounting for algorithms. In <em>Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency</em> (pp. 1–18). ACM. https://doi.org/10.1145/3351095.3372833</p>
+
+            <p class="ref-entry">Williamson, O. E. (1985). <em>The Economic Institutions of Capitalism</em>. Free Press.</p>
+
+            <p class="ref-entry">Zuiderwijk, A., Chen, Y.-C., & Salem, F. (2021). Implications of the use of artificial intelligence in public governance: A systematic literature review and a research agenda. <em>Government Information Quarterly</em>, 38(3), 101577.</p>
+        </div>
+        <div class="page-footer">8</div>
+    </section>
+
+    <!-- PÁGINA 9 -->
+    <section class="paper-page">
+        <div class="page-content">
+            <h2>APÊNDICE A — ESTRATÉGIA DE BUSCA COMPLETA (OPENALEX)</h2>
+
+            <p>Para assegurar a reprodutibilidade integral da revisão, apresenta-se a seguir a estratégia de busca empregada na API do OpenAlex, incluindo a string de consulta e os parâmetros aplicados.</p>
+
+            <p class="table-note"><strong>String de busca (campo <code>filter</code>):</strong></p>
+            <p><code>title.search:"design science research" OR abstract.search:"design science" OR fulltext.search:"design science"</code></p>
+
+            <p class="table-note"><strong>Parâmetros da requisição:</strong></p>
+            <table class="dataframe">
+                <thead>
+                    <tr><th>Parâmetro</th><th>Valor</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="left">Base</td><td class="left">https://api.openalex.org/works</td></tr>
+                    <tr><td class="left">Filtro de assunto</td><td class="left">concepts.id: C177444330 (accounting) OR C144027150 (public administration)</td></tr>
+                    <tr><td class="left">Filtro temporal</td><td class="left">from_publication_date:2004-01-01, to_publication_date:2026-06-30</td></tr>
+                    <tr><td class="left">Tipo de documento</td><td class="left">type:article</td></tr>
+                    <tr><td class="left">Ordenação</td><td class="left">cited_by_count:desc</td></tr>
+                    <tr class="last-row"><td class="left">E-mail de identificação</td><td class="left">mailto: gestor.renatorosa@gmail.com (polite pool)</td></tr>
+                </tbody>
+            </table>
+            <p class="table-note">Fonte: Elaboração própria (2026). A estratégia segue as recomendações de busca sistemática em bases abertas (Priem et al., 2022).</p>
+
+            <p>A triagem foi conduzida em duas etapas: (i) leitura de títulos e resumos para aplicação dos critérios de elegibilidade; e (ii) leitura do texto completo dos estudos pré-selecionados para confirmação do desenvolvimento ou uso de artefatos de DSR. O fluxo completo — 847 identificados, 41 duplicatas removidas, 610 excluídos na triagem por título/resumo, 154 excluídos na elegibilidade por texto completo e 42 incluídos — está documentado na Seção 3.1 e segue o modelo PRISMA-ScR (Tricco et al., 2018).</p>
+        </div>
+        <div class="page-footer">9</div>
     </section>
 </body>
 <script>
@@ -370,7 +454,7 @@ function exportarDocx() {
     iframeDoc.write('<html><head>');
     iframeDoc.write('<meta charset="UTF-8">');
     iframeDoc.write('<title>' + document.title + '</title>');
-    iframeDoc.write('<link rel="stylesheet" href="../../css/style_academico.css">');
+    iframeDoc.write('<link rel="stylesheet" href="../../../css/style_academico.css">');
     iframeDoc.write('</head><body>');
     iframeDoc.write(docContent.innerHTML);
     iframeDoc.write('</body></html>');

@@ -21,10 +21,11 @@ Mapear o universo de compras complexas no Portal Nacional de Contratações Púb
 - *(Nota: XAI sai daqui e vai para a Metodologia do Artigo Tecnológico)*.
 
 ## 3. METODOLOGIA
-- **3.1. Abordagem de Dados:** Estudo quantitativo, observacional e censitário.
+- **3.1. Abordagem de Dados:** Estudo quantitativo, observacional e transversal em larga escala.
 - **3.2. População e Amostra:** 
   - *Fonte Primária:* PNCP (572.045 contratos de set/2021 a ago/2024).
-  - *Filtragem (O GRANDE DESAFIO):* Como separar o subset de "Compras Complexas" do total populacional. *(Pendente de definição pelo autor)*.
+  - *Amostra:* aleatória de 100.000 contratos para a análise inferencial; após filtro de vigência ≥ 30 dias, amostra final de 73.201 contratos (19.245 complexos, 26,3%).
+  - *Identificação de complexas:* dicionário semântico de 16 termos de inovação e sustentabilidade, que identificou 5.687 compras complexas na população (0,99%).
 - **3.3. Fontes de Dados Secundários (Determinantes da Unidade Compradora):** 
   - Integração com bases externas (ex: IBGE, Siconfi, RAIS, Tesouro) para buscar variáveis independentes:
     - *X1:* Porte do órgão (receita/orçamento).
