@@ -4,6 +4,9 @@
 **Objetivo:** corrigir inconsistencias criticas, metodologicas e de layout dos entregaveis da pasta `Tese/`, tornando-os publicaveis e defensaveis perante a banca.
 **Fonte canonica de numeros:** `dados/processed/*.csv`, `resultados_reais.json`, `stats_compras_complexas.json`, `target_distribution.json`.
 
+**STATUS: ✅ EXECUCAO CONCLUIDA (31/07/2026) — todas as sprints R1-R8 aplicadas.**
+**Apos execucao:** commit `6e6a86d` enviado ao GitHub; NVIDIA_API_KEY removida do repo.
+
 ---
 
 ## NUMEROS CANONICOS (verificados nos dados reais)

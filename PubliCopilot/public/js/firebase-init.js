@@ -2,7 +2,7 @@
 // ATENCAO: Credenciais sao carregadas via env (nao commitadas)
 
 const ENV = {
-  apiKey: "AIzaSyDfIKrkDv0nQXFFZrQ0ncn6Cz2NPrzF574",
+  apiKey: "__FIREBASE_API_KEY__",
   authDomain: "publicopilot.firebaseapp.com",
   projectId: "publicopilot",
   storageBucket: "publicopilot.firebasestorage.app",

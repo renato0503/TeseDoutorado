@@ -272,7 +272,7 @@
 | Artigo | Refs antes | Refs depois | Sprints | Status |
 |--------|-----------|-------------|---------|--------|
 | 10 (Enbra/ABNT) | 23 | **36** | 10.1-10.5 | ✅ CONCLUIDO |
-| 17 (BTCongress/APA) | 16 | **27** | 17.1-17.6 | ✅ CONCLUIDO |
+| 17 (BTCongress/APA) | 16 | **31** | 17.1-17.6 | ✅ CONCLUIDO |
 | 15 (Enbra/ABNT) | 20 | **40** | 15.1-15.5 | ✅ CONCLUIDO |
 | 02 (BTCongress/APA) | 21 | **31** | 02.1-02.3 | ✅ CONCLUIDO |
 | X1 (sincronizacao) | — | — | Copy p/ PubliCopilot | ✅ CONCLUIDO |
@@ -283,6 +283,7 @@
 - Paragrafos novos integrados nas secoes 2.x (fundamentacao) e 5.x (discussao) de cada artigo, com citacoes no estilo do congresso (ABNT caixa alta p/ Enbra; APA p/ BTCongress).
 - Conteudo das citacoes fiel ao `fichamento_congressos.csv` (resumo/achados/paradigma curados).
 - QA de autoplagio (similaridade >= 0.75 entre paragrafos de artigos distintos): 1 par pre-existente corrigido no Artigo 15 (paragrafo de validacao metodologica compartilhado com o Artigo 10).
+- **Pos-execucao (Artigo 17):** +4 refs novas apos a injecao (Andhov et al. 2025, Mikalef et al. 2022, Priem et al. 2022, Wieringa 2020) → 31 refs. **Citacao fantasma removida:** "Hacked & Alsheikh (2024)" (inexistente no Crossref) eliminada da lista e do corpo.
 - Pendencia de qualidade: releitura humana final dos textos injetados e verificacao de paginacao (numeração de paginas dos HTMLs pode ter deslocado).
 
 ---

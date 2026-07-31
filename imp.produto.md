@@ -10,7 +10,7 @@ O artefato final e um MVP funcional com **Machine Learning real** (TF-IDF + Isol
 **Comando deploy:** `cd PubliCopilot && firebase deploy`
 **Comando local (referencia):** `streamlit run app/app.py`
 
-**Ultima atualizacao:** 31/07/2026 — A1 RESOLVIDO: Cloud Function `analisar_minuta` deployada com sucesso (v17, ACTIVE, 512MB/120s). Causa raiz corrigida: faltava `roles/artifactregistry.writer` (upload). Nova pendencia: acesso publico (allUsers) bloqueado por org policy; hosting rewrite `/api/**` ainda retorna 404.
+**Ultima atualizacao:** 31/07/2026 — A1 RESOLVIDO: Cloud Function `analisar_minuta` deployada com sucesso (v17, ACTIVE, 512MB/120s). Causa raiz corrigida: faltava `roles/artifactregistry.writer` (upload). Nova pendencia: acesso publico (allUsers) bloqueado por org policy; hosting rewrite `/api/**` ainda retorna 404. **REMEDIACAO DOC v1.3 → alinhada ao v2.1:** SHAP 76,11%→14,40%, matriz confusao 93,36%, features Modelo B, URL `publicopilot.web.app`, fragmento orfao removido. NVIDIA_API_KEY removida do repo (GitHub 6e6a86d).
 
 ---
 
@@ -178,6 +178,25 @@ firebase deploy --only hosting
 2. Definir estrategia de acesso a funcao (org policy allUsers vs. autenticacao Bearer).
 3. Validar end-to-end (A6): POST real com token Firebase Auth.
 4. Apos acesso funcionar, concluir Sprint G (G1, G3, G4, G5).
+
+---
+
+## REMEDIACAO DA DOCUMENTACAO DO PRODUTO (31/07/2026)
+
+A documentacao academica do produto (`Tese/artigos_tese/03-Produto-Copiloto/produto_tecnologico.html`) foi alinhada ao estado real v2.1:
+
+| Item | Antes | Depois |
+|------|-------|--------|
+| SHAP `vigencia_log` | 76,11% (modelo viciado) | **14,40%** (Modelo B correto) |
+| Matriz de confusao | acuracia 98,89% | **93,36%** (com nota de desbalanceamento) |
+| Features | sla_presenca, dotacao_presenca, escore_if (inexistentes) | **11 features do Modelo B** (uf_encoded 20,91%, tipo_encoded 20,77%, vigencia 14,40%...) |
+| URL | comprapublica.web.app / publicopilot-aa662 | **publicopilot.web.app** (projeto real) |
+| Fragmento orfao | product_tecnologico.html (381B) | **removido** |
+| Docs de apoio | arquitetura.md, guia_banca.md, slides_outline.md (Streamlit) | **Firebase** (Hosting + Cloud Functions) |
+| Pesos Tabela 3 | somavam 108% | **100%** (recalibrados) |
+| Corpus regex | "19.640 editais" (indefinido) | **amostra de 100.000 contratos PNCP** |
+
+**Seguranca (GitHub):** NVIDIA_API_KEY removida do `imp.produto.md` (placeholder `<NVIDIA_API_KEY>`); venv `functions_venv_old` untracked; `.gitignore` ampliado. Commit `6e6a86d`.
 
 ---
 
