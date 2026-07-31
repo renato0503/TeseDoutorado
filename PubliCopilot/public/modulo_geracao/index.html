@@ -299,11 +299,11 @@
     </div>
 
     <script>
-        function showTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        function showTab(tabId, event) {
+            document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
+            document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
             document.getElementById('tab-' + tabId).classList.add('active');
-            event.target.classList.add('active');
+            if (event && event.target) { event.target.classList.add('active'); }
         }
 
         function carregarExemplo() {
@@ -323,309 +323,188 @@
             document.getElementById('penalidades').value = 'Multa de 2% sobre o valor do contrato em caso de inadimplemento; Multa de 10% em caso de rescisao por culpa da contratada.';
         }
 
-        function gerarEdital() {
-            const orgao = document.getElementById('orgao').value;
-            const uasg = document.getElementById('uasg').value;
-            const modalidade = document.getElementById('modalidade').value;
-            const tipo = document.getElementById('tipo_contratacao').value;
-            const valor = document.getElementById('valor').value;
-            const vigencia = document.getElementById('vigencia').value;
-            const objeto = document.getElementById('objeto').value;
-            const justificativa = document.getElementById('justificativa').value;
-            const criterio = document.getElementById('criterio').value;
+        function _getToken() {
+            if (typeof PubliAuth !== 'undefined' && PubliAuth.isLogado && PubliAuth.isLogado()) {
+                return PubliAuth.getToken();
+            }
+            var u = firebase.auth().currentUser;
+            return u ? u.getIdToken(false) : Promise.resolve(null);
+        }
 
-            if (!orgao || !uasg || !modalidade || !objeto) {
-                alert('Por favor, preencha os campos obrigatorios (*).');
+        function _apiCall(payload) {
+            _getToken().then(function(token) {
+                var headers = { 'Content-Type': 'application/json' };
+                if (token) { headers['Authorization'] = 'Bearer ' + token; }
+                return fetch('/api/analisar', {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify(payload)
+                });
+            }).then(function(resp) {
+                if (resp.status === 429) {
+                    document.getElementById('loading').classList.remove('show');
+                    alert('Limite de requisicoes excedido. Aguarde e tente novamente.');
+                    return null;
+                }
+                if (resp.status === 401) {
+                    document.getElementById('loading').classList.remove('show');
+                    alert('Sessao expirada. Faca login novamente.');
+                    if (typeof PubliAuth !== 'undefined' && PubliAuth.Modal) {
+                        PubliAuth.Modal.abrir('login');
+                    }
+                    return null;
+                }
+                return resp.json();
+            }).then(function(data) {
+                if (!data) { return; }
+                if (data.erro) {
+                    document.getElementById('loading').classList.remove('show');
+                    alert('Erro: ' + data.erro);
+                    return;
+                }
+                exibirResultado(data);
+            }).catch(function(err) {
+                document.getElementById('loading').classList.remove('show');
+                exibirFallback();
+            });
+        }
+
+        function _coletarDados() {
+            return {
+                modo: 'geracao',
+                tipo_contrato: document.getElementById('tipo_contratacao').value,
+                descricao: document.getElementById('objeto').value,
+                orgao: document.getElementById('orgao').value,
+                uasg: document.getElementById('uasg').value,
+                modalidade: document.getElementById('modalidade').value,
+                valor: document.getElementById('valor').value,
+                vigencia: document.getElementById('vigencia').value,
+                justificativa: document.getElementById('justificativa').value,
+                criterio: document.getElementById('criterio').value,
+                contexto_extra: [
+                    'Requisitos tecnicos: ' + document.getElementById('requisitos_tecnicos').value,
+                    'KPIs: ' + document.getElementById('kpis').value,
+                    'Pagamento: ' + document.getElementById('pagamento').value,
+                    'Garantia: ' + document.getElementById('garantia').value,
+                    'Penalidades: ' + document.getElementById('penalidades').value
+                ].filter(function(s) { return s.indexOf(': ') < s.length - 2; }).join('. ')
+            };
+        }
+
+        function gerarEdital() {
+            var orgao = document.getElementById('orgao').value;
+            var objeto = document.getElementById('objeto').value;
+            if (!orgao || !objeto) {
+                alert('Preencha o orgao licitante e a descricao do objeto.');
                 return;
             }
-
             document.getElementById('loading').classList.add('show');
             document.getElementById('resultado').style.display = 'none';
-
-            setTimeout(() => {
-                const resultado = gerarMinuta({ orgao, uasg, modalidade, tipo, valor, vigencia, objeto, justificativa, criterio });
-                exibirResultado(resultado);
-            }, 2000);
+            _apiCall(_coletarDados());
         }
 
         function gerarClausulas() {
-            const tipo = document.getElementById('tipo_contratacao').value;
+            var tipo = document.getElementById('tipo_contratacao').value;
             if (!tipo) {
                 alert('Selecione o tipo de contratacao.');
                 return;
             }
-
             document.getElementById('loading').classList.add('show');
             document.getElementById('resultado').style.display = 'none';
-
-            setTimeout(() => {
-                const resultado = gerarApenasClausulas(tipo);
-                exibirResultado(resultado);
-            }, 1500);
+            _apiCall(_coletarDados());
         }
 
-        function gerarMinuta(dados) {
-            const criterios = {
-                'menor_preco': 'Menor Preco',
-                'melhor_tecnica': 'Melhor Tecnica',
-                'tecnica_preco': 'Menor Preco',
-                'maior_desconto': 'Maior Desconto'
-            };
-
-            const modalidades = {
-                'pregao': 'PREGÃO ELETRÔNICO',
-                'concorrencia': 'CONCORRÊNCIA',
-                'tomada_preco': 'TOMADA DE PREÇOS',
-                'inexigibilidade': 'INEXIGIBILIDADE',
-                'dispensa': 'DISPENSA DE LICITAÇÃO'
-            };
-
-            const minuta = `${modalidades[dados.modalidade] || dados.modalidade.toUpperCase()} No ${dados.uasg}
-
-================================================================================
-                                 PREÂMBULO
-================================================================================
-
-${dados.orgao}, UASG: ${dados.uasg}, torna publico que realizara ${modalidades[dados.modalidade] || 'LICITAÇÃO'}, na modalidade ${modalidades[dados.modalidade] || dados.modalidade.toUpperCase()}, do tipo ${criterios[dados.criterio] || 'MENOR PREÇO'}
-
-================================================================================
-                                 DO OBJETO
-================================================================================
-
-${dados.objeto}
-
-================================================================================
-                             DA JUSTIFICATIVA
-================================================================================
-
-${dados.justificativa || 'A presente contratacao se faz necessaria para atender as demandas de modernizacao e eficiencia da administracao publica.'}
-
-================================================================================
-                         DA FUNDAMENTAÇÃO LEGAL
-================================================================================
-
-Esta licitacao rege-se pelas disposicoes da Lei no 14.133, de 1o de abril de 2021, Lei Complementar no 123/2006, e alteracoes posteriores.
-
-================================================================================
-                         DO CRITÉRIO DE JULGAMENTO
-================================================================================
-
-Sera adotado o criterio de ${criterios[dados.criterio] || 'MENOR PREÇO'} para julgamento das propostas.
-
-================================================================================
-                           DO VALOR ESTIMADO
-================================================================================
-
-O valor estimado da contratacao e de R$ ${dados.valor || '0,00'}.
-
-================================================================================
-                          DO PRAZO DE VIGÊNCIA
-================================================================================
-
-O contrato tera vigencia de ${dados.vigencia || '12 (doze) meses'}, contados da data de sua assinatura.
-
-================================================================================
-                      DAS CONDIÇÕES DE PAGAMENTO
-================================================================================
-
-O pagamento sera efetuado em ${dados.pagamento || '30 (trinta) dias'} apos a apresentacao da nota fiscal e atesto pelo fiscal do contrato.
-
-================================================================================
-                             DA HABILITAÇÃO
-================================================================================
-
-Para habilitacao, exigira:
-
-a) Certidoes negativas de debitos federais, estaduais e municipais;
-
-b) Prova de regularidade com o FGTS;
-
-c) Documentos de capacidade tecnica, quando aplicavel;
-
-d) Declaracao de inexistencia de fato impeditivo;
-
-e) Declaracao de cumprimento ao dispose no art. 7o, XXXIII, da Constituicao Federal.
-
-================================================================================
-                          DAS PENALIDADES
-================================================================================
-
-${dados.penalidades || 'O inadimplemento das obrigacoes assumidas sujeitara o contratado as sancoes previstas na Lei 14.133/2021, podendo configurar-se em: I - advertencia; II - multa; III - impedimento de licitar e contratar; IV - declaracao de inidoneidade.'}
-
-================================================================================
-                         DA GARANTIA CONTRATUAL
-================================================================================
-
-${dados.garantia === 'garantia_contratual' ? 'Sera exigida garantia contratual de 5% (cinco por cento) do valor total do contrato.' : dados.garantia === 'garantia_financeira' ? 'Sera exigida garantia financeira de 5% (cinco por cento) do valor estimado.' : 'Nao sera exigida garantia contratual.'}
-
-================================================================================
-                          DAS DISPOSIÇÕES FINAIS
-================================================================================
-
-O Edital completo encontra-se disponivel no portal Compras Net e no site do orgao.
-
-Os pedidos de esclarecimento deverao ser solicitados ate 3 (tres) dias uteis antes da data de abertura.
-
-================================================================================
-                                 DO FORO
-================================================================================
-
-Fica eleito o foro da Justica Federal, Secao Judiciaria de ${dados.orgao.split(' de ')[1] || 'Espirito Santo'}, para dirimir quaisquer questoes oriundas desta licitacao.
-
-${dados.orgao}, ____/____/________ .
-
-________________________________________________________________________________
-${dados.orgao}
-Ordenador de Despesas
-`;
-
-            return {
-                minuta,
-                clausulas: gerarListaClausulas(dados.tipo),
-                editaisSimilares: gerarEditaisSimilares(),
-                totalClausulas: 12,
-                editaisBase: 5,
-                justificativasXAI: 8
-            };
+        function limparContainer(el) {
+            while (el.firstChild) { el.removeChild(el.firstChild); }
         }
 
-        function gerarApenasClausulas(tipo) {
-            const clausulas = gerarListaClausulas(tipo);
-            return {
-                minuta: clausulas.map(c => c.texto).join('\n\n'),
-                clausulas: clausulas,
-                editaisSimilares: [
-                    { titulo: 'Prefeitura de Sao Paulo - SIEMENS', similaridade: 94 },
-                    { titulo: 'Governo do Estado MG - Analytics', similaridade: 89 },
-                    { titulo: 'TCU - Sistema de Auditoria', similaridade: 85 }
-                ],
-                totalClausulas: clausulas.length,
-                editaisBase: 3,
-                justificativasXAI: clausulas.filter(c => c.xai).length
-            };
-        }
-
-        function gerarListaClausulas(tipo) {
-            return [
-                {
-                    tipo: 'Objeto',
-                    titulo: '1. DO OBJETO',
-                    texto: '1.1. O presente Edital tem por objeto a contratacao de solucao de tecnologia inovadora, conforme especificacoes constantes deste Edital e seus anexos.\n1.2. A contratacao compreende: fornecimento de licenca de uso, implementacao, treinamento e suporte tecnico.',
-                    xai: true,
-                    explicacao: 'A descricao detalhada do objeto reduz assimetrias informacionais e impede interpretacoes divergentes.'
-                },
-                {
-                    tipo: 'Fundamentacao',
-                    titulo: '2. DA FUNDAMENTAÇÃO LEGAL',
-                    texto: '2.1. A presente contratacao rege-se pela Lei no 14.133/2021 (Nova Lei de Licitacoes) e Lei Complementar no 123/2006 (ME/EPP).',
-                    xai: false,
-                    explicacao: null
-                },
-                {
-                    tipo: 'Pagamento',
-                    titulo: '3. DAS CONDIÇÕES DE PAGAMENTO',
-                    texto: '3.1. O pagamento sera efetuado em ate 30 (trinta) dias apos a apresentacao da nota fiscal e comprovada a entrega do objeto.\n3.2. Em caso de atraso, os juros de mora serao calculados conforme taxa SELIC.',
-                    xai: true,
-                    explicacao: 'A definicao de prazos reduz o custo de transacao ex-post.'
-                },
-                {
-                    tipo: 'Garantia',
-                    titulo: '4. DA GARANTIA',
-                    texto: '4.1. A contratada devera apresentar garantia de 5% do valor do contrato em ate 10 dias apos a assinatura.\n4.2. A garantia podera ser prestada em dinheiro, fianca bancaria ou seguro-garantia.',
-                    xai: true,
-                    explicacao: 'A exigencia de garantia protege o erario contra hold-up comportamental.'
-                },
-                {
-                    tipo: 'Responsabilidades',
-                    titulo: '5. DAS RESPONSABILIDADES',
-                    texto: '5.1. A contratada e responsavel por todos os onus trabalhistas, sociais e fiscais decorrentes do contrato.\n5.2. A Administracao nao aceitara qualquer claim de tercerizacao de responsabilidade.',
-                    xai: false,
-                    explicacao: null
-                },
-                {
-                    tipo: 'Confidencialidade',
-                    titulo: '6. DA CONFIDENCIALIDADE',
-                    texto: '6.1. A contratada se compromete a manter sigilo sobre todas as informacoes obtidas em razao do contrato.\n6.2. O descumprimento implicara em rescisao motivada e apuracao de responsabilidade.',
-                    xai: true,
-                    explicacao: 'Conforme artigo 48 da LGPD, a confidencialidade protege dados sensiveis do cidadao.'
-                },
-                {
-                    tipo: 'SLA',
-                    titulo: '7. DOS NÍVEIS DE SERVIÇO (SLA)',
-                    texto: '7.1. O sistema devera atender aos seguintes indicadores:\n- Disponibilidade: 99,5% (maximo de 3,65 horas de indisponibilidade/mes)\n- Tempo de resposta: < 2 segundos para operacoes criticas\n- Tempo de recuperacao: < 4 horas apos incidente\n7.2. O descumprimento acarretara aplicacao de glosas progressivas.',
-                    xai: true,
-                    explicacao: 'KPIs mensuraveis reduzem o custo de monitoramento ex-post.'
-                },
-                {
-                    tipo: 'Propriedade Intelectual',
-                    titulo: '8. DA PROPRIEDADE INTELECTUAL',
-                    texto: '8.1. A propriedade do codigo-fonte sera da Administracao Publica.\n8.2. A contratada podera utilizar componentes de terceiros mediante licenca valida.\n8.3. Ao termino do contrato, todo o codigo e documentacao shall be transferred.',
-                    xai: true,
-                    explicacao: 'A transferencia de IP ao termino evita lock-in e reduz custos de transacao.'
-                },
-                {
-                    tipo: 'Sustentabilidade',
-                    titulo: '9. DOS CRITÉRIOS DE SUSTENTABILIDADE',
-                    texto: '9.1. Os produtos devem possuir certificacao ambiental (ISO 14001 ou similar).\n9.2. Embalagens devem ser reciclaveis.\n9.3. Prioridade para fornecedores com certificacao ambiental.',
-                    xai: false,
-                    explicacao: tipo === 'sustentavel' ? 'Conforme Politica Nacional de Compras Publicas Sustentaveis.' : null
-                },
-                {
-                    tipo: 'XAI',
-                    titulo: '10. DA EXPLICABILIDADE ALGORITMICA',
-                    texto: '10.1. Quando aplicavel, o sistema deve fornecer explicacoes comprehensivas para todas as decisoes automatizadas.\n10.2. As explicacoes devem ser geradas em linguagem natural e permitir auditoria por humanos.\n10.3. Os logs de decisao devem ser mantidos por 5 anos para fins de accountability.',
-                    xai: true,
-                    explicacao: 'A explicabilidade algoritmica e mandatoria para sistemas de apoio a decisao em orgaos publicos.'
-                }
-            ];
-        }
-
-        function gerarEditaisSimilares() {
-            return [
-                { titulo: 'TCU - Sistema de Deteccao de Anomalias em Contratos', similaridade: 94 },
-                { titulo: 'CGU - Plataforma de Analise de Riscos', similaridade: 91 },
-                { titulo: 'Prefeitura SP - SIEMENS - Gestao Integrada', similaridade: 87 },
-                { titulo: 'Governo MG - GovTech - Contratacao de Inovacao', similaridade: 85 },
-                { titulo: 'BNDES - Plataforma de Compras Sustentaveis', similaridade: 82 }
-            ];
+        function criarTag(texto, classe) {
+            var span = document.createElement('span');
+            span.className = classe || 'tag';
+            span.textContent = texto;
+            return span;
         }
 
         function exibirResultado(r) {
             document.getElementById('loading').classList.remove('show');
             document.getElementById('resultado').style.display = 'block';
 
-            document.getElementById('stat-clausulas').textContent = r.totalClausulas;
-            document.getElementById('stat-similar').textContent = r.editaisBase;
-            document.getElementById('stat-xai').textContent = r.justificativasXAI;
+            var clausulas = r.clausulas || [];
+            document.getElementById('stat-clausulas').textContent = clausulas.length;
+            document.getElementById('stat-similar').textContent = r.metadados && r.metadados.total_clausulas ? Math.ceil(r.metadados.total_clausulas / 2) : '--';
+            document.getElementById('stat-xai').textContent = clausulas.filter(function(c) { return c.xai; }).length;
 
-            let clausulasHTML = '';
-            r.clausulas.forEach(c => {
-                clausulasHTML += `
-                    <div class="clause-preview">
-                        <div class="clause-title">
-                            ${c.titulo}
-                            ${c.xai ? '<span class="tag tag-xai">XAI</span>' : ''}
-                            <span class="tag tag-required">Obrigatoria</span>
-                        </div>
-                        <div class="clause-text">${c.texto.replace(/\n/g, '<br>')}</div>
-                        ${c.xai && c.explicacao ? `
-                        <div class="xai-box">
-                            <strong>Justificativa XAI:</strong><br>
-                            ${c.explicacao}
-                        </div>` : ''}
-                    </div>
-                `;
+            var container = document.getElementById('clausulas-geradas');
+            limparContainer(container);
+            clausulas.forEach(function(c) {
+                var div = document.createElement('div');
+                div.className = 'clause-preview';
+
+                var titleDiv = document.createElement('div');
+                titleDiv.className = 'clause-title';
+                titleDiv.textContent = c.titulo || c.tipo || '';
+                if (c.xai) { titleDiv.appendChild(criarTag('XAI', 'tag tag-xai')); }
+                titleDiv.appendChild(criarTag('Obrigatoria', 'tag tag-required'));
+                div.appendChild(titleDiv);
+
+                var textDiv = document.createElement('div');
+                textDiv.className = 'clause-text';
+                textDiv.textContent = c.texto || '';
+                div.appendChild(textDiv);
+
+                if (c.xai && c.explicacao) {
+                    var xaiDiv = document.createElement('div');
+                    xaiDiv.className = 'xai-box';
+                    var strong = document.createElement('strong');
+                    strong.textContent = 'Justificativa XAI:';
+                    xaiDiv.appendChild(strong);
+                    xaiDiv.appendChild(document.createElement('br'));
+                    xaiDiv.appendChild(document.createTextNode(c.explicacao));
+                    div.appendChild(xaiDiv);
+                }
+
+                container.appendChild(div);
             });
-            document.getElementById('clausulas-geradas').innerHTML = clausulasHTML;
 
-            let similaresHTML = '';
-            r.editaisSimilares.forEach(e => {
-                similaresHTML += `<span class="similar-badge"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6z"/></svg>${e.titulo} (${e.similaridade}% similar)</span>`;
-            });
-            document.getElementById('editais-similares').innerHTML = similaresHTML;
-
-            document.getElementById('minuta-completa').textContent = r.minuta;
+            document.getElementById('minuta-completa').textContent = r.minuta || '';
         }
+
+        function exibirFallback() {
+            document.getElementById('resultado').style.display = 'block';
+            document.getElementById('stat-clausulas').textContent = '--';
+            document.getElementById('stat-similar').textContent = '--';
+            document.getElementById('stat-xai').textContent = '--';
+            var container = document.getElementById('clausulas-geradas');
+            limparContainer(container);
+            var msg = document.createElement('p');
+            msg.style.color = 'var(--texto-sec)';
+            msg.style.padding = '24px';
+            msg.style.textAlign = 'center';
+            msg.textContent = 'Servico de IA temporariamente indisponivel. Tente novamente em instantes.';
+            container.appendChild(msg);
+            document.getElementById('minuta-completa').textContent = '';
+        }
+
+        (function() {
+            var btnToggle = document.createElement('button');
+            btnToggle.className = 'nav__toggle';
+            btnToggle.setAttribute('aria-label', 'Menu');
+            btnToggle.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" fill="currentColor"/></svg>';
+            btnToggle.style.cssText = 'display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--preto);';
+
+            var nav = document.querySelector('.pc-nav');
+            var header = document.querySelector('.pc-header .container');
+            if (nav && header) {
+                header.insertBefore(btnToggle, nav);
+                btnToggle.addEventListener('click', function() {
+                    nav.classList.toggle('nav--open');
+                });
+            }
+
+            var style = document.createElement('style');
+            style.textContent = '@media(max-width:768px){.nav__toggle{display:inline-flex!important}.pc-nav{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:1px solid var(--borda);padding:16px;z-index:100}.pc-nav.nav--open{display:flex}.pc-header .container{position:relative}}';
+            document.head.appendChild(style);
+        })();
     </script>
 </body>
 </html>

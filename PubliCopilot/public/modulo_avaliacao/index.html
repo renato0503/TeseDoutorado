@@ -17,28 +17,29 @@
     <script src="../js/auth.js"></script>
     <script src="../js/admin-seed.js"></script>
     <script>
-        // Gate de autenticacao
         (async function() {
             try {
-                // Esperar PubliAuth inicializar
-                if (typeof window.whenFirebaseReady === 'function') {
-                    await window.whenFirebaseReady();
-                }
-                if (typeof PubliAuth === 'undefined') {
-                    await new Promise(r => setTimeout(r, 300));
-                }
-                if (typeof PubliAuth === 'undefined') {
-                    console.error('PubliAuth nao carregou');
-                    return;
-                }
+                if (typeof window.whenFirebaseReady === 'function') await window.whenFirebaseReady();
+                if (typeof PubliAuth === 'undefined') await new Promise(r => setTimeout(r, 300));
+                if (typeof PubliAuth === 'undefined') { console.error('PubliAuth nao carregou'); return; }
                 await PubliAuth.whenReady();
-                // onAuthStateChanged ja restaura a sessao automaticamente
                 if (!PubliAuth.isLogado()) {
-                    PubliAuth.Modal.abrir('login');
+                    const user = await PubliAuth.loginAnonimo();
+                    if (user) {
+                        setTimeout(() => PubliAuth.ProfileModal.abrir(), 800);
+                    } else {
+                        PubliAuth.Modal.abrir('login');
+                    }
+                } else {
+                    const user = PubliAuth.getUser();
+                    if (user && user.isAnonymous) {
+                        const profile = await PubliAuth.getUserProfile(user.uid);
+                        if (profile && profile.primeiroAcesso) {
+                            setTimeout(() => PubliAuth.ProfileModal.abrir(), 800);
+                        }
+                    }
                 }
-            } catch (e) {
-                console.error('Gate error:', e);
-            }
+            } catch (e) { console.error('Gate error:', e); }
         })();
     </script>
     <style>
@@ -246,6 +247,7 @@
     </div>
 
     <script>
+        fetch('/data/counterfactual_templates.json').then(function(r){return r.json();}).then(function(d){window._COUNTERFACTUAL_MAP=d;}).catch(function(){});
         const SAMPLES = {
             tecnologia: `EDITAL DE LICITACAO No 001/2026
 
@@ -356,6 +358,24 @@ d) Patrimonio.
                 }
                 const resultado = await resp.json();
                 exibirResultado(resultado);
+                const user = PubliAuth.getUser();
+                if (user && typeof salvarAnalise === 'function') {
+                    const analytics = {
+                        texto_resumo: texto.substring(0, 300),
+                        score: resultado.score,
+                        classificacao: resultado.classificacao,
+                        risco_ml: resultado.risco_ml,
+                        rf_proba: resultado.rf_proba,
+                        clausulas_encontradas: resultado.clausulas_encontradas || [],
+                        lacunas: (resultado.lacunas || []).map(l => l.item || ''),
+                        features_shap: (resultado.features_shap || []).slice(0, 5).map(f => ({ feature: f.feature, peso: f.peso })),
+                        contrafactuais: (resultado.contrafactuais || []).map(c => c.feature),
+                        duracao_ms: performance.now(),
+                        modelo_treinado: resultado.modelo_treinado,
+                        total_palavras: resultado.total_palavras || texto.split(' ').length,
+                    };
+                    salvarAnalise(user.uid, analytics);
+                }
             } catch (e) {
                 document.getElementById('loading').classList.remove('show');
                 alert('Erro ao analisar minuta (backend ML): ' + e.message);
@@ -446,42 +466,115 @@ d) Patrimonio.
                 cfHTML += `<p style="margin-top:8px;font-size:13px;">${txt}</p>`;
             });
 
-            const COUNTERFACTUAL_LEGAL = {
-                "objeto_len": { "nome_legal": "Tamanho do texto do objeto", "pergunta": "Se Tamanho do texto do objeto fosse alterado, como o risco mudaria?" },
-                "objeto_palavras": { "nome_legal": "Nivel de detalhamento da descricao do objeto", "pergunta": "Se Nivel de detalhamento da descricao do objeto fosse alterado, como o risco mudaria?" },
-                "complexidade_lexica": { "nome_legal": "Densidade de termos tecnicos no objeto", "pergunta": "Se Densidade de termos tecnicos no objeto fosse alterado, como o risco mudaria?" },
-                "score_tecnico": { "nome_legal": "Mencoes a tecnologia e inovacao no objeto", "pergunta": "Se Mencoes a tecnologia e inovacao no objeto fosse alterado, como o risco mudaria?" },
-                "valor_log": { "nome_legal": "Valor estimado do contrato", "pergunta": "Se Valor estimado do contrato fosse alterado, como o risco mudaria?" },
-                "uf_encoded": { "nome_legal": "Localizacao geografica (UF)", "pergunta": "Se Localizacao geografica (UF) fosse alterada, como o risco mudaria?" },
-                "tipo_encoded": { "nome_legal": "Tipo de instrumento contratual", "pergunta": "Se Tipo de instrumento contratual fosse alterado, como o risco mudaria?" },
-                "vigencia_log": { "nome_legal": "Duracao prevista do contrato", "pergunta": "Se Duracao prevista do contrato fosse alterada, como o risco mudaria?" }
+            var COUNTERFACTUAL_LEGAL = window._COUNTERFACTUAL_MAP || {
+                "objeto_len": { "nome_traduzido": "Tamanho do texto do objeto", "template_mitigacao": "A revisão da extensão do objeto para alinhamento aos padrões de mercado reduz ambiguidades." },
+                "objeto_palavras": { "nome_traduzido": "Nível de detalhamento da descrição do objeto", "template_mitigacao": "O detalhamento adequado reduz a assimetria informacional ex-ante." },
+                "complexidade_lexica": { "nome_traduzido": "Densidade de termos técnicos no objeto", "template_mitigacao": "A simplificação descritiva reduz a ambiguidade informacional." },
+                "score_tecnico": { "nome_traduzido": "Menções a tecnologia e inovação no objeto", "template_mitigacao": "Métricas objetivas de entrega afastam riscos de inexecução contratual." },
+                "valor_log": { "nome_traduzido": "Valor estimado do contrato", "template_mitigacao": "O parcelamento do objeto pode reenquadrar a contratação em faixas de menor complexidade." },
+                "uf_encoded": { "nome_traduzido": "Localização geográfica (UF)", "template_mitigacao": "Publicidade centralizada em portais nacionais mitiga desvantagens regionais." },
+                "tipo_encoded": { "nome_traduzido": "Tipo de instrumento contratual", "template_mitigacao": "Modelagem adequada do instrumento mitiga riscos de inadequação regulatória." },
+                "vigencia_log": { "nome_traduzido": "Duração prevista do contrato", "template_mitigacao": "Alteração da vigência para prazos recomendados atende ao princípio do planejamento." },
+                "if_anomaly_score": { "nome_traduzido": "Score de anomalia textual", "template_mitigacao": "Revisão semântica para expurgar cláusulas obsoletas reduz riscos de recursos ex-post." },
+                "if_is_anomaly": { "nome_traduzido": "Indicador de padrão atípico textual", "template_mitigacao": "Saneamento de desvios textuais resguarda a vinculação ao edital." },
+                "interacao_if_valor": { "nome_traduzido": "Risco semântico associado ao valor", "template_mitigacao": "Audiência pública ex-ante para grandes vultos com objetos complexos." },
+                "interacao_if_vigencia": { "nome_traduzido": "Risco semântico associado à vigência", "template_mitigacao": "SLAs e garantias claras atenuam riscos de vigências prolongadas." }
             };
 
-            let legalBoxesHTML = '';
-            (r.contrafactuais || []).forEach(cf => {
-                const feat = cf.feature || '';
-                const info = COUNTERFACTUAL_LEGAL[feat];
-                if (info) {
-                    const nome = info.nome_legal;
-                    const perg = info.pergunta;
-                    const peso = (cf.peso != null) ? (cf.peso * 100).toFixed(2) : '0';
-                    legalBoxesHTML += `
-                        <div style="background:rgba(46,196,182,0.07);border-left:4px solid #2e7d32;border-radius:8px;padding:12px 14px;margin-top:10px;">
-                            <strong style="color:#2e7d32;font-size:13px;">${nome}</strong>
-                            <p style="margin:4px 0 0 0;font-size:12px;color:#333;">${perg}</p>
-                        </div>`;
-                }
+            var explDiv = document.getElementById('explicabilidade');
+            _clear(explDiv);
+
+            var p1 = _c('p');
+            var s1 = _c('strong');
+            s1.textContent = 'Modelo treinado (PNCP):';
+            p1.appendChild(s1);
+            p1.appendChild(_t(' ' + (r.modelo_treinado ? 'SIM' : 'NAO (fallback heuristico)') + ' — Random Forest + Isolation Forest + SHAP'));
+            explDiv.appendChild(p1);
+
+            var p2 = _c('p');
+            p2.style.marginTop = '8px';
+            var parts = [
+                {s: 'Acuracia:', v: acc + '%'},
+                {s: 'AUC-ROC:', v: auc + '%'},
+                {s: 'F1-Score:', v: f1 + '% (desbalanceamento)'}
+            ];
+            parts.forEach(function(part, i) {
+                if (i > 0) p2.appendChild(_t(' | '));
+                var st = _c('strong');
+                st.textContent = part.s;
+                p2.appendChild(st);
+                p2.appendChild(_t(' ' + part.v));
+            });
+            explDiv.appendChild(p2);
+
+            if (rfProba !== null) {
+                var p3 = _c('p');
+                p3.style.marginTop = '8px';
+                var st3 = _c('strong');
+                st3.textContent = 'Risco ML (Random Forest):';
+                p3.appendChild(st3);
+                p3.appendChild(_t(' ' + rfProba + '% — classificacao '));
+                var st3b = _c('strong');
+                st3b.textContent = riscoML.toUpperCase();
+                p3.appendChild(st3b);
+                explDiv.appendChild(p3);
+            }
+
+            var p4 = _c('p');
+            p4.style.marginTop = '12px';
+            var st4 = _c('strong');
+            st4.textContent = 'Top features SHAP:';
+            p4.appendChild(st4);
+            explDiv.appendChild(p4);
+
+            var ul = _c('ul');
+            ul.style.cssText = 'margin-top:8px;padding-left:20px;';
+            var features = r.features_shap || [];
+            features.slice(0, 5).forEach(function(f) {
+                var li = _c('li');
+                li.textContent = (f.feature || '') + ' — ' + ((f.peso != null ? f.peso * 100 : 0).toFixed(2)) + '% de impacto na predicao de risco';
+                ul.appendChild(li);
+            });
+            if (features.length === 0) {
+                var li = _c('li');
+                li.textContent = 'Explicabilidade baseada em referencial teorico (fallback).';
+                ul.appendChild(li);
+            }
+            explDiv.appendChild(ul);
+
+            (r.contrafactuais || []).forEach(function(cf) {
+                var p = _c('p');
+                p.style.cssText = 'margin-top:8px;font-size:13px;';
+                p.textContent = cf.contrafactual || '';
+                explDiv.appendChild(p);
             });
 
-            document.getElementById('explicabilidade').innerHTML = `
-                <p><strong>Modelo treinado (PNCP):</strong> ${r.modelo_treinado ? 'SIM' : 'NAO (fallback heuristico)'} &mdash; Random Forest + Isolation Forest + SHAP</p>
-                <p style="margin-top: 8px;"><strong>Acuracia:</strong> ${acc}% &nbsp;|&nbsp; <strong>AUC-ROC:</strong> ${auc}% &nbsp;|&nbsp; <strong>F1-Score:</strong> ${f1}% (desbalanceamento)</p>
-                ${rfProba !== null ? `<p style="margin-top: 8px;"><strong>Risco ML (Random Forest):</strong> ${rfProba}% &mdash; classificacao <strong>${riscoML.toUpperCase()}</strong></p>` : ''}
-                <p style="margin-top: 12px;"><strong>Top features SHAP:</strong></p>
-                ${shapHTML}
-                ${cfHTML}
-                ${legalBoxesHTML ? `<p style="margin-top:16px;font-size:13px;font-weight:600;color:var(--preto);">Fundamento Juridico (XAI Normativamente Ancorada):</p>${legalBoxesHTML}` : ''}
-            `;
+            var cfs = r.contrafactuais || [];
+            var hasLegal = cfs.some(function(cf) { return cf.feature; });
+            if (hasLegal) {
+                var pTitle = _c('p');
+                pTitle.style.cssText = 'margin-top:16px;font-size:13px;font-weight:600;color:var(--preto);';
+                pTitle.textContent = 'Fundamento Juridico (XAI Normativamente Ancorada):';
+                explDiv.appendChild(pTitle);
+
+                cfs.forEach(function(cf) {
+                    var feat = cf.feature || '';
+                    var info = COUNTERFACTUAL_LEGAL[feat];
+                    if (info) {
+                        var box = _c('div');
+                        box.style.cssText = 'background:rgba(46,196,182,0.07);border-left:4px solid #2e7d32;border-radius:8px;padding:12px 14px;margin-top:10px;';
+                        var strong = _c('strong');
+                        strong.style.cssText = 'color:#2e7d32;font-size:13px;';
+                        strong.textContent = info.nome_traduzido || feat;
+                        box.appendChild(strong);
+                        var q = _c('p');
+                        q.style.cssText = 'margin:4px 0 0 0;font-size:12px;color:#333;';
+                        q.textContent = info.template_mitigacao || '';
+                        box.appendChild(q);
+                        explDiv.appendChild(box);
+                    }
+                });
+            }
 
             document.getElementById('bar-score').style.width = score + '%';
             document.getElementById('bar-score-text').textContent =

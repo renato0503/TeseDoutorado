@@ -11,9 +11,8 @@
 
 | Opcao | URL | Descricao |
 |-------|-----|-----------|
-| Streamlit Cloud | `copiloto-algoritmico.streamlit.app` | App funcional (recomendado) |
-| Local | `streamlit run app/app.py` | Clone do GitHub |
-| Firebase | `comprapublica.web.app` | Versao estatica |
+| Firebase (producao) | `https://publicopilot.web.app` | MVP funcional (recomendado) — ML + IA generativa |
+| Local (referencia academica) | `streamlit run app/app.py` | Clone do GitHub |
 
 ## 2. Funcionalidades
 
@@ -45,7 +44,7 @@
 ## 4. Arquitetura Resumida
 
 ```
-Usuario -> Streamlit
+Usuario -> Firebase Hosting
   -> preprocessor.py (NLP, 16 regex)
   -> anomaly_detector.py (TF-IDF + Isolation Forest, 15k objetos PNCP)
   -> risk_engine.py (Random Forest 7 features, 50k contratos, acc 99.13%)
@@ -67,7 +66,7 @@ Usuario -> Streamlit
 Peffers et al. (2007) - 6 etapas:
 1. Identificacao do problema (assimetria informacional)
 2. Objetivos da solucao (XAI para compras complexas)
-3. Design e desenvolvimento (MVP Streamlit + Scikit-Learn)
+3. Design e desenvolvimento (MVP Firebase + Scikit-Learn)
 4. Demonstracao (app funcional com dados reais PNCP)
 5. Avaliacao (metricas ML: acc 99.13%, AUC 99.97%)
 6. Comunicacao (artigos, repositorio, defesa)

@@ -70,16 +70,16 @@
 - **XAI:** Graficos SHAP provam que nao e "caixa preta"
 
 ## Slide 9: Entregavel 3 - O Produto
-- **Stack:** Streamlit + Scikit-Learn + SHAP + Matplotlib
+- **Stack:** Firebase + Scikit-Learn + SHAP
 - **2 Modulos:**
   1. Avaliacao de Minutas (ML real)
   2. Geracao de Editais (XAI)
 - **Modelo Freemium:** 3 analises gratuitas, Premium com reescrita
 - **Consultoria:** Esteira para Consultoria Renato Rosa
-- **Deploy:** Streamlit Cloud (gratuito)
+- **Deploy:** Firebase (Hosting + Cloud Functions)
 
 ## Slide 10: DEMO AO VIVO (3-5 min)
-- Abrir `streamlit run app/app.py`
+- Abrir `firebase deploy`
 - Home: metricas PNCP, status modelos
 - Modulo 1: Carregar exemplo, analisar, mostrar SHAP
 - Modulo 2: Gerar edital com clausulas XAI
@@ -105,7 +105,7 @@
 - Artigo Cientifico 1: Diagnostico Empirico (submissao: RAC/RAUSP)
 - Artigo Tecnologico 2: Copiloto DSR (submissao: JISTEM)
 - Repositorio GitHub: github.com/renato0503/TeseDoutorado
-- Produto: Copiloto Algoritmico (Streamlit Cloud)
+- Produto: Copiloto Algoritmico (Firebase)
 - Versao estatica: comprapublica.web.app (Firebase)
 
 ## Slide 14: Agradecimentos

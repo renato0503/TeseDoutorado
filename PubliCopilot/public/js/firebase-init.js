@@ -2,13 +2,13 @@
 // ATENCAO: Credenciais sao carregadas via env (nao commitadas)
 
 const ENV = {
-  apiKey: atob("QUl6YVN5Q3JPYmY1OFh6ZVBvWXczOUNkSzEzNlJvejg3czRFN01J"),
-  authDomain: "publicopilot-aa662.firebaseapp.com",
-  projectId: "publicopilot-aa662",
-  storageBucket: "publicopilot-aa662.firebasestorage.app",
-  messagingSenderId: "186635348378",
-  appId: "1:186635348378:web:a18e336bb98a0cf3e0f223",
-  measurementId: "G-9DKWYRD8VJ"
+  apiKey: "AIzaSyDfIKrkDv0nQXFFZrQ0ncn6Cz2NPrzF574",
+  authDomain: "publicopilot.firebaseapp.com",
+  projectId: "publicopilot",
+  storageBucket: "publicopilot.firebasestorage.app",
+  messagingSenderId: "432118179013",
+  appId: "1:432118179013:web:752294d08f504e1d2fbcac",
+  measurementId: "G-Y2Q8770D9E"
 };
 
 // Inicializacao do Firebase (singleton)
@@ -76,22 +76,21 @@ function initializeFirebase() {
   }
 }
 
-// Salvar analise no Firestore
-async function salvarAvaliacao(dados) {
+// Salvar analise no Firestore (colecao analises/{uid}/)
+async function salvarAnalise(uid, dados) {
   if (!db) {
     console.warn('Firestore nao disponivel');
     return null;
   }
-
   try {
-    const docRef = await db.collection('avaliacoes').add({
+    const docRef = await db.collection('analises').doc(uid).collection('historico').add({
       ...dados,
       dataCriacao: firebase.firestore.FieldValue.serverTimestamp()
     });
     console.log('Analise salva:', docRef.id);
     return docRef.id;
   } catch (error) {
-    console.error('Erro ao salvar:', error);
+    console.error('Erro ao salvar analise:', error);
     return null;
   }
 }
@@ -102,7 +101,6 @@ async function salvarEdital(dados) {
     console.warn('Firestore nao disponivel');
     return null;
   }
-
   try {
     const docRef = await db.collection('editais').add({
       ...dados,

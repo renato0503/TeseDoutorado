@@ -13,8 +13,11 @@ References:
     PNCP - Portal Nacional de Contratacoes Publicas (572.045 contratos).
 """
 
+import logging
 import numpy as np
 from models.model_loader import get_vectorizer, get_isolation_forest, modelos_disponiveis
+
+logger = logging.getLogger(__name__)
 
 TFIDF_CACHE = None
 MODELO_CACHE = None
@@ -97,7 +100,8 @@ def detectar_anomalia(texto):
                 else "Texto dentro dos padroes observados em objetos de contratos do PNCP."
             ),
         }
-    except Exception:
+    except Exception as e:
+        logger.error("Falha na deteccao de anomalia com modelo treinado, usando fallback: %s", e)
         result = _fallback(texto_objeto)
         result["score_raw"] = result.get("score_anomalia", 0)
         return result

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - PubliCopilot Admin</title>
+    <link rel="icon" type="image/png" href="../publicopilot.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="../theme.css">
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="../js/firebase-init.js"></script>
+    <style>
+        body { background: #f8f9fa; }
+        .dashboard { padding: 32px 0 60px; }
+        .header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
+        .header-bar h1 { font-size: 24px; font-weight: 800; color: var(--preto); }
+        .header-bar .sub { color: var(--texto-sec); font-size: 14px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px; }
+        .stat-card { background: white; border: 1px solid var(--borda); border-radius: var(--raio); padding: 20px; box-shadow: var(--sombra); }
+        .stat-card .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--texto-ter); font-weight: 600; }
+        .stat-card .value { font-size: 28px; font-weight: 800; color: var(--preto); margin: 6px 0; }
+        .stat-card .detail { font-size: 13px; color: var(--texto-sec); }
+        .card { background: white; border: 1px solid var(--borda); border-radius: var(--raio); padding: 24px; margin-bottom: 24px; box-shadow: var(--sombra); }
+        .card h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { text-align: left; padding: 10px 8px; border-bottom: 2px solid var(--borda); color: var(--texto-ter); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+        td { padding: 10px 8px; border-bottom: 1px solid var(--borda); }
+        .admin-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+        .btn-sm { padding: 6px 14px; border-radius: 8px; border: 1px solid var(--borda); background: white; cursor: pointer; font-size: 13px; }
+        .btn-sm:hover { background: var(--surface-alt); }
+        .loading { text-align: center; padding: 60px; color: var(--texto-sec); }
+        .badge-admin { background: rgba(46,196,182,0.16); color: #0d7a6e; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .export-btn { background: var(--verde-piscina); color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px; }
+        .export-btn:hover { opacity: 0.9; }
+        @media (max-width: 768px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container dashboard">
+        <div class="header-bar">
+            <div>
+                <h1>Dashboard PubliCopilot</h1>
+                <div class="sub">Painel administrativo acadêmico · coleta de dados de uso</div>
+            </div>
+            <div class="admin-actions">
+                <a href="../index.html" class="btn-sm">← Voltar</a>
+                <button class="export-btn" onclick="exportarCSV()">Exportar CSV</button>
+                <button class="btn-sm" onclick="atualizar()">↻ Atualizar</button>
+            </div>
+        </div>
+
+        <div class="stats-grid" id="stats-grid">
+            <div class="stat-card"><div class="label">Usuários</div><div class="value" id="stat-usuarios">-</div><div class="detail" id="stat-usuarios-detail"></div></div>
+            <div class="stat-card"><div class="label">Análises</div><div class="value" id="stat-analises">-</div><div class="detail" id="stat-analises-detail"></div></div>
+            <div class="stat-card"><div class="label">Risco Alto</div><div class="value" id="stat-risco-alto" style="color:#c0392b;">-</div><div class="detail">% do total</div></div>
+            <div class="stat-card"><div class="label">Score Médio</div><div class="value" id="stat-score-medio">-</div><div class="detail">heurístico (0-100)</div></div>
+        </div>
+
+        <div class="card">
+            <h3>Usuários</h3>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead><tr><th>Nome</th><th>Email</th><th>Perfil</th><th>Instituição</th><th>Provedor</th><th>Análises</th><th>Primeiro Acesso</th><th>Papel</th></tr></thead>
+                    <tbody id="tabela-usuarios"><tr><td colspan="8" class="loading">Carregando...</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Últimas Análises</h3>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead><tr><th>Usuário</th><th>Score</th><th>Risco ML</th><th>RF Proba</th><th>Cláusulas</th><th>Data</th></tr></thead>
+                    <tbody id="tabela-analises"><tr><td colspan="6" class="loading">Carregando...</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let db;
+
+        async function init() {
+            await window.whenFirebaseReady();
+            db = firebase.firestore();
+
+            const user = firebase.auth().currentUser;
+            if (!user) {
+                document.body.innerHTML = '<div class="container" style="padding:60px;text-align:center;"><h2>Acesso negado</h2><p>Faça login como administrador.</p><a href="../index.html" class="btn-sm">Voltar</a></div>';
+                return;
+            }
+
+            const token = await user.getIdTokenResult();
+            const isAdmin = token.claims.admin === true;
+            if (!isAdmin) {
+                const doc = await db.collection('usuarios').doc(user.uid).get();
+                if (!doc.exists || doc.data().papel !== 'admin') {
+                    document.body.innerHTML = '<div class="container" style="padding:60px;text-align:center;"><h2>Acesso restrito</h2><p>Você não possui permissão de administrador.</p><a href="../index.html" class="btn-sm">Voltar</a></div>';
+                    return;
+                }
+            }
+
+            await atualizar();
+        }
+
+        async function atualizar() {
+            document.querySelectorAll('.loading').forEach(el => el.textContent = 'Carregando...');
+
+            const usuariosSnap = await db.collection('usuarios').get();
+            const usuarios = usuariosSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+            let totalAnalises = 0;
+            let riscoAlto = 0;
+            let somaScore = 0;
+            let totalScore = 0;
+            const analisesList = [];
+
+            for (const u of usuarios) {
+                const analisesSnap = await db.collection('analises').doc(u.id).collection('historico').orderBy('dataCriacao', 'desc').get();
+                const analises = analisesSnap.docs.map(d => ({ userId: u.id, userName: u.nome || u.id, ...d.data() }));
+                analisesList.push(...analises);
+                totalAnalises += analises.length;
+                u._analiseCount = analises.length;
+                for (const a of analises) {
+                    if (a.risco_ml === 'alto') riscoAlto++;
+                    if (a.score != null) { somaScore += a.score; totalScore++; }
+                }
+            }
+
+            const anonimos = usuarios.filter(u => u.provedor === 'anonymous').length;
+            const registrados = usuarios.length - anonimos;
+
+            document.getElementById('stat-usuarios').textContent = usuarios.length;
+            document.getElementById('stat-usuarios-detail').textContent = `${anonimos} anônimos · ${registrados} registrados`;
+            document.getElementById('stat-analises').textContent = totalAnalises;
+            document.getElementById('stat-analises-detail').textContent = `média ${totalAnalises > 0 ? (totalAnalises / usuarios.length).toFixed(1) : 0} por usuário`;
+            document.getElementById('stat-risco-alto').textContent = riscoAlto;
+            document.getElementById('stat-risco-alto').style.color = riscoAlto > 0 ? '#c0392b' : '#666';
+            document.getElementById('stat-score-medio').textContent = totalScore > 0 ? (somaScore / totalScore).toFixed(1) + '%' : '-';
+
+            const tbodyU = document.getElementById('tabela-usuarios');
+            tbodyU.innerHTML = usuarios.sort((a, b) => (b._analiseCount || 0) - (a._analiseCount || 0)).map(u => `
+                <tr>
+                    <td><strong>${escapeHtml(u.nome || '—')}</strong>${u.papel === 'admin' ? ' <span class="badge-admin">admin</span>' : ''}</td>
+                    <td>${escapeHtml(u.email || '—')}</td>
+                    <td>${escapeHtml(u.perfil || '—')}</td>
+                    <td>${escapeHtml(u.instituicao || '—')}</td>
+                    <td>${u.provedor || '—'}</td>
+                    <td>${u._analiseCount || 0}</td>
+                    <td>${u.primeiroAcesso ? '✅ Sim' : '❌ Não'}</td>
+                    <td>${u.papel || 'usuario'}</td>
+                </tr>
+            `).join('');
+
+            const tbodyA = document.getElementById('tabela-analises');
+            tbodyA.innerHTML = analisesList.sort((a, b) => {
+                const ta = a.dataCriacao ? a.dataCriacao.toMillis() : 0;
+                const tb = b.dataCriacao ? b.dataCriacao.toMillis() : 0;
+                return tb - ta;
+            }).slice(0, 50).map(a => `
+                <tr>
+                    <td>${escapeHtml(a.userName || a.userId || '—')}</td>
+                    <td><strong>${a.score != null ? a.score + '%' : '—'}</strong></td>
+                    <td><span style="color:${a.risco_ml === 'alto' ? '#c0392b' : a.risco_ml === 'medio' ? '#d4a017' : '#2e7d32'}">${escapeHtml(a.risco_ml || '—')}</span></td>
+                    <td>${a.rf_proba != null ? (a.rf_proba * 100).toFixed(1) + '%' : '—'}</td>
+                    <td>${(a.clausulas_encontradas || []).length}</td>
+                    <td style="font-size:11px;color:var(--texto-ter);">${a.dataCriacao ? new Date(a.dataCriacao.toMillis()).toLocaleString('pt-BR') : '—'}</td>
+                </tr>
+            `).join('');
+        }
+
+        function escapeHtml(s) {
+            if (s == null) return '';
+            return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function exportarCSV() {
+            const rows = [['Nome', 'Email', 'Perfil', 'Instituicao', 'Provedor', 'Analises', 'Papel']];
+            document.querySelectorAll('#tabela-usuarios tr').forEach(tr => {
+                const tds = tr.querySelectorAll('td');
+                if (tds.length >= 7) {
+                    rows.push([tds[0].textContent.trim(), tds[1].textContent.trim(), tds[2].textContent.trim(), tds[3].textContent.trim(), tds[4].textContent.trim(), tds[5].textContent.trim(), tds[7]?.textContent.trim() || '']);
+                }
+            });
+            const csv = rows.map(r => r.map(c => '"' + c.replace(/"/g, '""') + '"').join(',')).join('\n');
+            const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'publicopilot_usuarios_' + new Date().toISOString().slice(0, 10) + '.csv';
+            link.click();
+        }
+
+        init();
+    </script>
+</body>
+</html>

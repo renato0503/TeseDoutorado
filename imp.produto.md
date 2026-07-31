@@ -10,7 +10,7 @@ O artefato final e um MVP funcional com **Machine Learning real** (TF-IDF + Isol
 **Comando deploy:** `cd PubliCopilot && firebase deploy`
 **Comando local (referencia):** `streamlit run app/app.py`
 
-**Ultima atualizacao:** 25/07/2026 23h — Deploy A1: erro diagnostico — compute SA sem acesso ao Artifact Registry (`artifactregistry.repositories.downloadArtifacts`). Solucao e redeploy pendentes.
+**Ultima atualizacao:** 31/07/2026 — A1 RESOLVIDO: Cloud Function `analisar_minuta` deployada com sucesso (v17, ACTIVE, 512MB/120s). Causa raiz corrigida: faltava `roles/artifactregistry.writer` (upload). Nova pendencia: acesso publico (allUsers) bloqueado por org policy; hosting rewrite `/api/**` ainda retorna 404.
 
 ---
 
@@ -20,12 +20,12 @@ O artefato final e um MVP funcional com **Machine Learning real** (TF-IDF + Isol
 
 | # | Tarefa | Status | Obs |
 |---|--------|--------|-----|
-| A1 | Deploy Cloud Function `analisar_minuta` | ❌ BLOQUEADO | **Causa real (25/07):** `artifactregistry.repositories.downloadArtifacts` negado para `432118179013-compute@developer.gserviceaccount.com`. **Solucao:** adicionar `roles/artifactregistry.reader` ao compute SA e redeploy |
+| A1 | Deploy Cloud Function `analisar_minuta` | ✅ CONCLUIDO (31/07) | **v17 ACTIVE.** Causa raiz 25/07 era so leitura (`downloadArtifacts`); em 31/07 o build avancou e falhou por falta de UPLOAD (`uploadArtifacts`). Resolvido com `roles/artifactregistry.writer` + redeploy. |
 | **A2** | **Retreinar modelo com target OBSERVAVEL** | ✅ CONCLUIDO | Target ex-post (aditivo_valor + multiplas_retificacoes). Acc=90,96%, AUC=91,05%, F1=22,67% |
 | **A3** | **Regenerar `feature_columns.pkl` com 11 features** | ✅ CONCLUIDO | 11 features |
 | **A4** | **Remover dados admin hardcoded (`admin-seed.js`)** | ✅ CONCLUIDO | admin-seed.js reescrito |
 | **A5** | **`LabelEncoder` → `OrdinalEncoder(handle_unknown)`** | ✅ CONCLUIDO | train_models.py, model_loader.py, risk_engine.py |
-| A6 | Validar deploy end-to-end (curl + frontend) | ❌ BLOQUEADO | Depende de A1 |
+| A6 | Validar deploy end-to-end (curl + frontend) | ⚠️ PARCIAL | Funcao ACTIVE, mas endpoint publico retorna 403 (sem allUsers) e hosting `/api/**` retorna 404. Ver secao 31/07/2026 |
 
 ### Sprint A+: EVOLUCOES ADICIONAIS (24/07/2026)
 
@@ -106,13 +106,14 @@ O artefato final e um MVP funcional com **Machine Learning real** (TF-IDF + Isol
 
 | Status | Qtd | Sprints |
 |--------|-----|---------|
-| ✅ CONCLUIDO | 33 | A2-A5, A7-A14, B1-B2, B4-B6, C1-C5, D3-D5, E1-E4, F1, F3, G2, G6-G7 |
+| ✅ CONCLUIDO | 34 | A1, A2-A5, A7-A14, B1-B2, B4-B6, C1-C5, D3-D5, E1-E4, F1, F3, G2, G6-G7 |
 | ⏳ PENDENTE | 3 | B3 (reCAPTCHA, aguardando chave), D1-D2 (testes) |
-| ❌ BLOQUEADO | 5 | A1, A6, G1, G3-G5 (todos dependem do deploy A1) |
+| ⚠️ PARCIAL | 1 | A6 (validacao end-to-end — 403/404, ver 31/07) |
+| ❌ BLOQUEADO | 4 | G1, G3-G5 (dependem do acesso publico da funcao / allUsers) |
 | 📋 OPCIONAL | 3 | F2, F4-F5 |
 | **Total** | **44** | **7 sprints (A-G) + NVIDIA** |
 
-**Proximo bloqueio a resolver:** A1 — Deploy da Cloud Function.
+**Proximo bloqueio a resolver:** acesso publico a `analisar_minuta` (allUsers bloqueado por org policy) + redeploy hosting com rewrite `/api/**`.
 
 ### Diagnostico (25/07/2026 23h)
 O erro de build encontrado nos logs do Cloud Build:
@@ -133,7 +134,7 @@ gcloud config set account comercial@cerradofinancas.com.br
 gcloud artifacts repositories add-iam-policy-binding gcf-artifacts --location=us-central1 --project=publicopilot --member=serviceAccount:432118179013-compute@developer.gserviceaccount.com --role=roles/artifactregistry.reader
 
 # 2. Deploy da funcao (com --allow-unauthenticated)
-gcloud functions deploy analisar_minuta --runtime python311 --trigger-http --allow-unauthenticated --project publicopilot --region us-central1 --source=functions --entry-point=analisar_minuta --memory=512MB --timeout=120s --set-env-vars NVIDIA_API_KEY=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
+gcloud functions deploy analisar_minuta --runtime python311 --trigger-http --allow-unauthenticated --project publicopilot --region us-central1 --source=functions --entry-point=analisar_minuta --memory=512MB --timeout=120s --set-env-vars NVIDIA_API_KEY=<NVIDIA_API_KEY>
 
 # 3. Validar
 curl.exe -X POST "https://us-central1-publicopilot.cloudfunctions.net/analisar_minuta" -H "Content-Type: application/json" -H "Authorization: Bearer $(gcloud auth print-identity-token)" -d '{\"texto\":\"teste\",\"modo\":\"avaliacao\"}'
@@ -141,6 +142,42 @@ curl.exe -X POST "https://us-central1-publicopilot.cloudfunctions.net/analisar_m
 # 4. Firebase hosting
 firebase deploy --only hosting
 ```
+
+---
+
+## RESOLUCAO A1 + DIAGNOSTICO 31/07/2026
+
+### Timeline completa do deploy (31/07/2026)
+
+| Passo | Acao | Resultado |
+|-------|------|-----------|
+| 1 | Verificar permissoes Artifact Registry | `roles/artifactregistry.reader` JA estava aplicado (25/07) |
+| 2 | Redeploy `gcloud functions deploy analisar_minuta` | Build falhou: `Permission 'artifactregistry.repositories.uploadArtifacts' denied` |
+| 3 | Logs do Cloud Build (`gcloud builds log`) | Confirmou: erro era de UPLOAD da imagem Docker, nao mais de download |
+| 4 | Causa raiz | compute SA `432118179013-compute@developer.gserviceaccount.com` tinha `reader` mas nao `writer` |
+| 5 | `add-iam-policy-binding ... --role=roles/artifactregistry.writer` | Inicialmente PERMISSION_DENIED com deploy-account (sem setIamPolicy) |
+| 6 | Contas testadas | `gestor.renatorosa@gmail.com` e `comercial@cerradofinancas.com.br` sem permissao/reauth; `deploy-account` tem `roles/editor` mas nao pode setar IAM do Artifact Registry |
+| 7 | Owner do projeto identificado | `user:comercial@cerradofinancas.com.br` (`roles/owner`) — usuario executou `gcloud auth login` e `add-iam-policy-binding` manualmente no terminal |
+| 8 | Confirmacao | `get-iam-policy` agora mostra `reader` + `writer` para a compute SA |
+| 9 | Redeploy final (deploy-account) | ✅ **`analisar_minuta` v17 ACTIVE** — `https://us-central1-publicopilot.cloudfunctions.net/analisar_minuta`, 512MB, 120s, NVIDIA_API_KEY preservada |
+| 10 | `add-iam-policy-binding ... --member=allUsers --role=roles/cloudfunctions.invoker` | deploy-account: 403 sem permissao. owner: **400 org policy** — `User allUsers is not in permitted organization` |
+| 11 | Teste endpoint publico (POST sem token) | **403 Proibido** (funcao exige autenticacao, allUsers bloqueado) |
+| 12 | Teste via hosting `https://comprapublica.web.app/api/analisar` | **404** — hosting nao esta roteando `/api/**` (rewrite nao ativo) |
+| 13 | `firebase deploy --only hosting` | ⏸️ Abortado pelo usuario — pendente |
+
+### Conclusao (31/07/2026)
+
+- ✅ **A1 RESOLVIDO:** Cloud Function `analisar_minuta` **deployada (v17, ACTIVE)**.
+- ⚠️ **Acesso publico:** o projeto possui **org policy** que impede `allUsers` (invocacao publica da funcao). Consequencia: chamada direta a funcao retorna 403.
+- ⚠️ **Hosting rewrite:** `https://comprapublica.web.app/api/analisar` retorna 404 — o hosting precisa ser redeployado para ativar o rewrite `/api/**` (abortado por solicitacao do usuario).
+- ℹ️ **Nota:** como a funcao exige token (sem allUsers), o rewrite do hosting pode nao funcionar mesmo apos redeploy se o org policy bloquear invocacao anonima. Alternativas: (a) liberar allUsers via exemption no org policy, (b) autenticar via Identity Platform no frontend e enviar `Authorization: Bearer <token>` (fluxo ja suportado em `main.py` via firebase-admin).
+
+### Passos pendentes (proxima sessao)
+
+1. Redeploy do hosting (`firebase deploy --only hosting`) para ativar rewrite `/api/**`.
+2. Definir estrategia de acesso a funcao (org policy allUsers vs. autenticacao Bearer).
+3. Validar end-to-end (A6): POST real com token Firebase Auth.
+4. Apos acesso funcionar, concluir Sprint G (G1, G3, G4, G5).
 
 ---
 
@@ -306,21 +343,23 @@ Semana 4:           Sprint F (Evolucao) ~8h (opcional)
 | A13 | Deploy-key + gitignore | ✅ |
 | A14 | Service account keys desbloqueadas | ✅ |
 
-### A1 — PENDENTE (Deploy Cloud Function)
+### A1 — RESOLVIDO (Deploy Cloud Function)
 
-**Status (25/07/2026):** Build falha por falta de permissao `artifactregistry.repositories.downloadArtifacts` na compute SA. Ver secao "Proximo bloqueio" acima para solucao. `deploy-key.json` nao tem permisao de IAM — rodar como `comercial@cerradofinancas.com.br`.
+**Status (31/07/2026):** ✅ DEPLOYADA — `analisar_minuta` v17 ACTIVE em `us-central1` (512MB/120s). Historia: 25/07 build falhava por `downloadArtifacts` (leitura); 31/07 o build avancou e falhou por `uploadArtifacts` (escrita). Aplicado `roles/artifactregistry.writer` na compute SA + redeploy. Acesso publico (allUsers) bloqueado por org policy — ver secao "RESOLUCAO A1 + DIAGNOSTICO 31/07/2026".
 
 ```powershell
 cd C:\Users\Renato\Documents\Doutorado\PubliCopilot
 gcloud config set account comercial@cerradofinancas.com.br
 gcloud artifacts repositories add-iam-policy-binding gcf-artifacts --location=us-central1 --project=publicopilot --member=serviceAccount:432118179013-compute@developer.gserviceaccount.com --role=roles/artifactregistry.reader
-gcloud functions deploy analisar_minuta --runtime python311 --trigger-http --allow-unauthenticated --project publicopilot --region us-central1 --source=functions --entry-point=analisar_minuta --memory=512MB --timeout=120s --set-env-vars NVIDIA_API_KEY=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
+gcloud functions deploy analisar_minuta --runtime python311 --trigger-http --allow-unauthenticated --project publicopilot --region us-central1 --source=functions --entry-point=analisar_minuta --memory=512MB --timeout=120s --set-env-vars NVIDIA_API_KEY=<NVIDIA_API_KEY>
 firebase deploy --only hosting
 ```
 
 ---
 
-## CONTINUAR DAQUI (24/07/2026 10h10)
+## CONTINUAR DAQUI (24/07/2026 10h10) — HISTORICO
+
+> ⚠️ **SUPERADO em 31/07/2026** — ver secao "RESOLUCAO A1 + DIAGNOSTICO 31/07/2026". A funcao esta deployada (v17 ACTIVE). Bloqueio atual: acesso publico (org policy allUsers) + hosting rewrite 404.
 
 O deploy da Cloud Function esta 95% resolvido. O erro de build foi diagnosticado:
 

@@ -19,9 +19,12 @@ Entry point: funcao analisar_minuta (functions-framework, --target analisar_minu
 """
 
 import json
+import logging
 import os
 import sys
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 # Garante que o diretorio 'models' seja importavel.
 BASE_DIR = Path(__file__).resolve().parent
@@ -30,28 +33,38 @@ if str(BASE_DIR) not in sys.path:
 
 # Validacao opcional de Firebase Auth (desabilitada em dev local com SKIP_AUTH=1)
 SKIP_AUTH = os.environ.get("SKIP_AUTH", "0") == "1"
-FIREBASE_PROJECT_ID = os.environ.get("FIREBASE_PROJECT_ID", "publicopilot-aa662")
+FIREBASE_PROJECT_ID = os.environ.get("FIREBASE_PROJECT_ID", "publicopilot")
 ALLOWED_ORIGINS = os.environ.get(
     "ALLOWED_ORIGINS",
-    "https://comprapublica.web.app,https://comprapublica.firebaseapp.com"
+    "https://publicopilot.web.app,https://publicopilot.firebaseapp.com"
 ).split(",")
 
 # Domínio principal para o cabeçalho CORS (backward compat).
-PRIMARY_ORIGIN = ALLOWED_ORIGINS[0].strip() if ALLOWED_ORIGINS else "https://comprapublica.web.app"
+PRIMARY_ORIGIN = ALLOWED_ORIGINS[0].strip() if ALLOWED_ORIGINS else "https://publicopilot.web.app"
 
 import functions_framework  # noqa: E402
 
 from models.risk_engine import analisar_risco_contratual, gerar_recomendacoes  # noqa: E402
 from models.xai_explainer import gerar_explicacoes_clausulas  # noqa: E402
+from models.nvidia_client import gerar_minuta as nvidia_gerar_minuta, gerar_sugestao_reescrita as nvidia_gerar_sugestao  # noqa: E402
 
 
-def _tratar_corpo(request):
-    """Extrai texto e metadados do corpo da requisicao (JSON ou form)."""
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
+
+MAX_TAMANHO_TEXTO = 50000
+
+def _extrair_dados(request):
     if request.content_type and "application/json" in request.content_type:
         data = request.get_json(silent=True) or {}
     else:
         data = request.form.to_dict()
+    return data
+
+
+def _tratar_corpo(data):
     texto = (data.get("texto") or data.get("minuta") or "").strip()
+    if len(texto) > MAX_TAMANHO_TEXTO:
+        raise ValueError(f"Texto excede o limite de {MAX_TAMANHO_TEXTO} caracteres.")
     try:
         valor = float(data.get("valor") or 0) or None
     except (TypeError, ValueError):
@@ -124,6 +137,154 @@ def _validar_token_firebase(request):
         return None, f"Erro na verificacao do token: {e}"
 
 
+_REQUISICOES_POR_UID = {}
+_LIMITE_REQ_POR_MINUTO = 30
+
+
+def _verificar_rate_limit(uid):
+    import time
+    agora = time.time()
+    historico = _REQUISICOES_POR_UID.get(uid, [])
+    historico = [t for t in historico if agora - t < 60]
+    if len(historico) >= _LIMITE_REQ_POR_MINUTO:
+        return False
+    historico.append(agora)
+    _REQUISICOES_POR_UID[uid] = historico
+    return True
+
+
+def _executar_geracao(data, headers, uid):
+    import time
+    start = time.time()
+
+    tipo_contrato = (data.get("tipo_contrato") or data.get("tipo_contratacao") or "").strip()
+    descricao = (data.get("descricao") or data.get("objeto") or "").strip()
+    orgao = (data.get("orgao") or "").strip()
+    modalidade = (data.get("modalidade") or "").strip()
+    valor_str = (data.get("valor") or "0").replace(".", "").replace(",", ".")
+    contexto = data.get("contexto_extra") or data.get("justificativa") or ""
+
+    try:
+        valor = float(valor_str) if valor_str else None
+    except (TypeError, ValueError):
+        valor = None
+
+    try:
+        vigencia_dias = int(data.get("vigencia_dias") or data.get("vigencia") or 0) or None
+    except (TypeError, ValueError):
+        vigencia_dias = None
+
+    if not tipo_contrato:
+        tipo_contrato = "tecnologia"
+    if not descricao:
+        descricao = f"Contratacao de solucao de {tipo_contrato} para administracao publica"
+
+    contexto_extra = f"Orgao: {orgao}. Modalidade: {modalidade}." if orgao or modalidade else ""
+    if contexto:
+        contexto_extra += f" Contexto: {contexto}"
+
+    logger.info("Geracao iniciada: tipo=%s, uid=%s", tipo_contrato, uid)
+
+    resultado_nvidia = nvidia_gerar_minuta(
+        tipo_contrato, descricao, valor, vigencia_dias, contexto_extra
+    )
+
+    if resultado_nvidia:
+        logger.info("Geracao via NVIDIA concluida em %.2fs para uid=%s", time.time() - start, uid)
+        payload = {
+            "modo": "geracao",
+            "fonte": "nvidia",
+            "minuta": resultado_nvidia.get("minuta", ""),
+            "clausulas": resultado_nvidia.get("clausulas", []),
+            "metadados": {
+                "tipo": tipo_contrato,
+                "descricao": descricao,
+                "total_clausulas": len(resultado_nvidia.get("clausulas", [])),
+            },
+            "usuario_id": uid,
+        }
+        return (json.dumps(payload, ensure_ascii=False), 200, headers)
+
+    logger.warning("NVIDIA API indisponivel, usando fallback para uid=%s", uid)
+    return _gerar_fallback(data, headers, uid)
+
+
+def _gerar_fallback(data, headers, uid):
+    tipo = (data.get("tipo_contrato") or data.get("tipo_contratacao") or "tecnologia").strip().lower()
+    descricao = (data.get("descricao") or data.get("objeto") or "Objeto da contratacao").strip()
+    orgao = (data.get("orgao") or "Orgao Publico").strip()
+    modalidade = data.get("modalidade", "pregao")
+    valor = data.get("valor", "0")
+    vigencia = data.get("vigencia", "12 meses")
+
+    criterios_map = {"menor_preco": "MENOR PRECO", "melhor_tecnica": "MELHOR TECNICA", "tecnica_preco": "TECNICA E PRECO", "maior_desconto": "MAIOR DESCONTO"}
+    modalidades_map = {"pregao": "PREGAO ELETRONICO", "concorrencia": "CONCORRENCIA", "tomada_preco": "TOMADA DE PRECOS", "inexigibilidade": "INEXIGIBILIDADE", "dispensa": "DISPENSA DE LICITACAO"}
+    criterio_nome = criterios_map.get(data.get("criterio"), "MENOR PRECO")
+    modalidade_nome = modalidades_map.get(modalidade, modalidade.upper())
+
+    tipos_clausulas = {
+        "tecnologia": [
+            {"titulo": "DO OBJETO", "texto": f"Contratacao de solucao de tecnologia: {descricao}", "xai": True, "explicacao": "Descricao detalhada reduz assimetrias informacionais (Williamson, 1985)."},
+            {"titulo": "DA FUNDAMENTACAO LEGAL", "texto": "Lei 14.133/2021", "xai": False},
+            {"titulo": "DOS NIVEIS DE SERVICO", "texto": "Disponibilidade 99,5%, tempo de resposta < 2s", "xai": True, "explicacao": "KPIs reduzem custo de monitoramento ex-post."},
+            {"titulo": "DA PROPRIEDADE INTELECTUAL", "texto": "Codigo-fonte pertencente a Administracao", "xai": True, "explicacao": "Evita lock-in tecnologico."},
+        ],
+        "inovacao": [
+            {"titulo": "DO OBJETO", "texto": f"Contratacao de solucao inovadora: {descricao}", "xai": True, "explicacao": "Inovacao requer especificacao por problemas, nao por solucoes."},
+            {"titulo": "DA FUNDAMENTACAO LEGAL", "texto": "LC 182/2021 (Marco Legal das Startups)", "xai": False},
+            {"titulo": "DA GARANTIA", "texto": "Garantia de 5% do valor do contrato", "xai": True, "explicacao": "Protege o erario contra hold-up (Williamson, 1985)."},
+        ],
+        "sustentavel": [
+            {"titulo": "DO OBJETO", "texto": f"Contratacao sustentavel: {descricao}", "xai": True},
+            {"titulo": "DOS CRITERIOS DE SUSTENTABILIDADE", "texto": "ISO 14001, embalagens reciclaveis", "xai": True, "explicacao": "ODS 12 - Agenda 2030 ONU."},
+        ],
+    }
+
+    clausulas = tipos_clausulas.get(tipo, tipos_clausulas["tecnologia"])
+
+    minuta = f"""{modalidade_nome}
+
+========================================================================
+                             PREAMBULO
+========================================================================
+
+{orgao} torna publico que realizara {modalidade_nome}, do tipo {criterio_nome}.
+
+========================================================================
+                             DO OBJETO
+========================================================================
+
+{descricao}
+
+========================================================================
+                       DA FUNDAMENTACAO LEGAL
+========================================================================
+
+Lei 14.133/2021 e legislacao correlata.
+
+========================================================================
+                        DO VALOR ESTIMADO
+========================================================================
+
+R$ {valor}
+
+========================================================================
+                      DO PRAZO DE VIGENCIA
+========================================================================
+
+{vigencia}
+"""
+
+    return (json.dumps({
+        "modo": "geracao",
+        "fonte": "template",
+        "minuta": minuta,
+        "clausulas": clausulas,
+        "metadados": {"tipo": tipo, "descricao": descricao, "total_clausulas": len(clausulas)},
+        "usuario_id": uid,
+    }, ensure_ascii=False), 200, headers)
+
+
 @functions_framework.http
 def analisar_minuta(request):
     """Endpoint HTTP: POST com {texto, valor?, vigencia_dias?}.
@@ -160,11 +321,26 @@ def analisar_minuta(request):
     if erro_auth:
         return (json.dumps({"erro": erro_auth, "code": "unauthorized"}), 401, headers)
 
+    # === Rate limiting (30 req/min por usuario) ===
+    if not _verificar_rate_limit(uid):
+        logger.warning("Rate limit excedido para uid=%s", uid)
+        return (json.dumps({"erro": "Limite de requisicoes excedido (30/min). Aguarde e tente novamente.", "code": "rate_limit"}), 429, headers)
+
     # === Processamento do corpo ===
     try:
-        texto, metadados = _tratar_corpo(request)
-    except Exception as exc:  # Corpo invalido
+        data = _extrair_dados(request)
+    except Exception as exc:
         return (json.dumps({"erro": f"Corpo da requisicao invalido: {exc}"}), 400, headers)
+
+    modo = (data.get("modo") or "avaliacao").strip().lower()
+
+    if modo == "geracao":
+        return _executar_geracao(data, headers, uid)
+
+    try:
+        texto, metadados = _tratar_corpo(data)
+    except ValueError as exc:
+        return (json.dumps({"erro": str(exc)}), 400, headers)
 
     if not texto:
         return (json.dumps({"erro": "Informe o texto da minuta (campo 'texto')."}), 400, headers)

@@ -2,97 +2,50 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Funções auxiliares
-    function isAuthenticated() {
-      return request.auth != null;
-    }
+    function isAuthenticated() { return request.auth != null; }
+    function isOwner(userId) { return isAuthenticated() && request.auth.uid == userId; }
+    function isAdminByClaim() { return isAuthenticated() && request.auth.token.admin == true; }
+    function isAdminByDoc() { return isAuthenticated() && get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.papel == 'admin'; }
+    function isAdmin() { return isAdminByClaim() || isAdminByDoc(); }
 
-    function isOwner(userId) {
-      return isAuthenticated() && request.auth.uid == userId;
-    }
-
-    function isAdminByClaim() {
-      // Custom claim definida via firebase-admin
-      return isAuthenticated() && request.auth.token.admin == true;
-    }
-
-    function isAdminByDoc() {
-      // Fallback: verifica no proprio documento (mais lento mas não requer custom claim)
-      return isAuthenticated() &&
-             exists(/databases/$(database)/documents/usuarios/$(request.auth.uid)) &&
-             get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.papel == 'admin';
-    }
-
-    function isAdmin() {
-      return isAdminByClaim() || isAdminByDoc();
-    }
-
-    // Coleção de perfis de usuários
     match /usuarios/{userId} {
-      // Usuario pode ler apenas seu próprio perfil
-      // Admins (por custom claim) podem ler todos
-      allow read: if isOwner(userId) || isAdminByClaim();
-      // Apenas o próprio usuario pode criar/atualizar seu perfil (com validacao)
-      allow create: if isOwner(userId) &&
-                       request.resource.data.keys().hasAll(['nome', 'whatsapp', 'email', 'papel', 'dataCriacao']) &&
-                       request.resource.data.papel == 'usuario' &&
-                       request.resource.data.ativo == true;
-      // Usuario pode atualizar dados nao-criticos (nome, whatsapp)
-      // Campos papel/ativo só por admin (por custom claim)
-      allow update: if (isOwner(userId) &&
-                       !request.resource.data.diff(resource.data).affectedKeys()
-                           .hasAny(['papel', 'ativo', 'dataCriacao'])) ||
-                      (isAdminByClaim() &&
-                       request.auth.uid != userId);
-      // Apenas admin pode deletar
-      allow delete: if isAdminByClaim();
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId);
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
     }
 
-    // Coleção de análises do módulo de avaliação
-    match /avaliacoes/{avaliacaoId} {
-      allow read: if isAuthenticated() && (isOwner(resource.data.usuarioId) || isAdminByClaim());
-      allow create: if isAuthenticated() && request.resource.data.keys().hasAll([
-        'textoOriginal',
-        'usuarioId',
-        'dataCriacao'
-      ]) && request.auth.uid == request.resource.data.usuarioId;
-      allow update, delete: if isOwner(resource.data.usuarioId) || isAdminByClaim();
+    match /analises/{userId}/{document=**} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId);
+      allow delete: if isAdmin();
     }
 
-    // Coleção de editais gerados
     match /editais/{editalId} {
-      allow read: if isAuthenticated() && (isOwner(resource.data.usuarioId) || isAdminByClaim());
-      allow create: if isAuthenticated() && request.resource.data.keys().hasAll([
-        'dadosEntrada',
-        'usuarioId',
-        'dataCriacao'
-      ]) && request.auth.uid == request.resource.data.usuarioId;
-      allow update, delete: if isOwner(resource.data.usuarioId) || isAdminByClaim();
-    }
-
-    // Coleção de logs de uso (apenas leitura para admins)
-    match /logs/{logId} {
-      allow read: if isAdminByClaim();
+      allow read: if isAuthenticated() && (isOwner(resource.data.usuarioId) || isAdmin());
       allow create: if isAuthenticated();
-      allow update, delete: if false; // Imutável
+      allow update, delete: if isOwner(resource.data.usuarioId) || isAdmin();
     }
 
-    // Configurações públicas (apenas admin por custom claim pode escrever)
+    match /logs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isAuthenticated();
+      allow update, delete: if false;
+    }
+
     match /configuracoes/{configId} {
       allow read: if true;
-      allow write: if isAdminByClaim();
+      allow write: if isAdmin();
     }
 
-    // Base de conhecimento (apenas leitura)
     match /base_conhecimento/{docId} {
       allow read: if true;
-      allow write: if isAdminByClaim();
+      allow write: if isAdmin();
     }
 
-    // Estatísticas agregadas (apenas leitura)
     match /estatisticas/{statId} {
       allow read: if true;
-      allow write: if isAdminByClaim();
+      allow write: if isAdmin();
     }
   }
 }
