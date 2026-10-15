@@ -1,7 +1,7 @@
 {
   "indexes": [
     {
-      "collectionGroup": "avaliacoes",
+      "collectionGroup": "editais",
       "queryScope": "COLLECTION",
       "fields": [
         { "fieldPath": "usuarioId", "order": "ASCENDING" },
@@ -12,7 +12,7 @@
       "collectionGroup": "editais",
       "queryScope": "COLLECTION",
       "fields": [
-        { "fieldPath": "usuarioId", "order": "ASCENDING" },
+        { "fieldPath": "orgaoId", "order": "ASCENDING" },
         { "fieldPath": "dataCriacao", "order": "DESCENDING" }
       ]
     },
@@ -20,16 +20,31 @@
       "collectionGroup": "logs",
       "queryScope": "COLLECTION",
       "fields": [
-        { "fieldPath": "usuarioId", "order": "ASCENDING" },
         { "fieldPath": "dataCriacao", "order": "DESCENDING" }
       ]
     },
     {
-      "collectionGroup": "avaliacoes",
+      "collectionGroup": "logs",
       "queryScope": "COLLECTION",
       "fields": [
-        { "fieldPath": "usuarioId", "order": "ASCENDING" },
-        { "fieldPath": "score", "order": "DESCENDING" }
+        { "fieldPath": "tipo", "order": "ASCENDING" },
+        { "fieldPath": "dataCriacao", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "logs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "orgaoId", "order": "ASCENDING" },
+        { "fieldPath": "dataCriacao", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "logs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "uid", "order": "ASCENDING" },
+        { "fieldPath": "dataCriacao", "order": "DESCENDING" }
       ]
     },
     {
@@ -38,6 +53,14 @@
       "fields": [
         { "fieldPath": "usuarioId", "order": "ASCENDING" },
         { "fieldPath": "modalidade", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "usuarios",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "orgaoId", "order": "ASCENDING" },
+        { "fieldPath": "dataCriacao", "order": "DESCENDING" }
       ]
     }
   ],

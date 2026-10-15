@@ -1,0 +1,16 @@
+[
+  {
+    "email": "pregoeiro.sesp@sesp.mt.gov.br",
+    "nome": "Pregoeiro SESP-MT (modelo)",
+    "orgao": "SESP-MT",
+    "perfil": "pregoeiro",
+    "whatsapp": "(65) 99999-1001"
+  },
+  {
+    "email": "agente.politec@politec.mt.gov.br",
+    "nome": "Agente de Contratacao POLITEC (modelo)",
+    "orgao": "POLITEC-MT",
+    "perfil": "agente_compras",
+    "whatsapp": "(65) 99999-2001"
+  }
+]
