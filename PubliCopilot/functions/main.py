@@ -33,10 +33,10 @@ if str(BASE_DIR) not in sys.path:
 
 # Validacao opcional de Firebase Auth (desabilitada em dev local com SKIP_AUTH=1)
 SKIP_AUTH = os.environ.get("SKIP_AUTH", "0") == "1"
-FIREBASE_PROJECT_ID = os.environ.get("FIREBASE_PROJECT_ID", "publicopilot")
+FIREBASE_PROJECT_ID = os.environ.get("FIREBASE_PROJECT_ID", "publicopiloto")
 ALLOWED_ORIGINS = os.environ.get(
     "ALLOWED_ORIGINS",
-    "https://publicopilot.web.app,https://publicopilot.firebaseapp.com"
+    "https://publicopiloto.web.app,https://publicopiloto.firebaseapp.com"
 ).split(",")
 
 # Domínio principal para o cabeçalho CORS (backward compat).
@@ -92,19 +92,18 @@ def _tratar_corpo(data):
 def _validar_token_firebase(request):
     """Valida o token Firebase Auth (Authorization: Bearer <token>).
 
-    Retorna (uid, email) se valido, ou (None, None) se SKIP_AUTH=1 (dev).
-    Retorna (None, erro) se token invalido.
+    Retorna (uid, email, None) se valido, ou (None, None, erro) se token invalido.
     """
     if SKIP_AUTH:
-        return ("dev-user", "dev@local"), None
+        return "dev-user", "dev@local", None
 
     auth_header = request.headers.get("Authorization", "")
     if not auth_header.startswith("Bearer "):
-        return None, "Token de autenticacao ausente. Faca login primeiro."
+        return None, None, "Token de autenticacao ausente. Faca login primeiro."
 
     token = auth_header.split(" ", 1)[1].strip()
     if not token:
-        return None, "Token vazio."
+        return None, None, "Token vazio."
 
     # Validacao local sem chamar API (rapido e offline)
     try:
@@ -121,7 +120,7 @@ def _validar_token_firebase(request):
             firebase_admin.initialize_app(cred, {"projectId": FIREBASE_PROJECT_ID})
 
         decoded = auth.verify_id_token(token, check_revoked=False)
-        return decoded.get("uid"), decoded.get("email")
+        return decoded.get("uid"), decoded.get("email"), None
     except ImportError:
         # firebase-admin nao instalado: faz validacao basica do JWT
         import base64
@@ -129,7 +128,7 @@ def _validar_token_firebase(request):
         try:
             parts = token.split(".")
             if len(parts) != 3:
-                return None, "Token mal-formado."
+                return None, None, "Token mal-formado."
             payload = parts[1]
             # Adiciona padding se necessario
             padding = 4 - (len(payload) % 4)
@@ -137,12 +136,12 @@ def _validar_token_firebase(request):
                 payload += "=" * padding
             decoded = jsonlib.loads(base64.urlsafe_b64decode(payload))
             if decoded.get("aud") == FIREBASE_PROJECT_ID and decoded.get("exp", 0) > 0:
-                return decoded.get("user_id") or decoded.get("sub"), decoded.get("email")
-            return None, "Token invalido (aud/exp)."
+                return decoded.get("user_id") or decoded.get("sub"), decoded.get("email"), None
+            return None, None, "Token invalido (aud/exp)."
         except Exception as e:
-            return None, f"Token invalido: {e}"
+            return None, None, f"Token invalido: {e}"
     except Exception as e:
-        return None, f"Erro na verificacao do token: {e}"
+        return None, None, f"Erro na verificacao do token: {e}"
 
 
 _REQUISICOES_POR_UID = {}

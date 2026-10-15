@@ -47,7 +47,7 @@
         "function": "analisar_minuta"
       }
     ],
-    "site": "publicopilot"
+    "site": "publicopiloto"
   },
   "functions": {
     "source": "functions",

@@ -2,13 +2,13 @@
 // ATENCAO: Credenciais sao carregadas via env (nao commitadas)
 
 const ENV = {
-  apiKey: "__FIREBASE_API_KEY__",
-  authDomain: "publicopilot.firebaseapp.com",
-  projectId: "publicopilot",
-  storageBucket: "publicopilot.firebasestorage.app",
-  messagingSenderId: "432118179013",
-  appId: "1:432118179013:web:752294d08f504e1d2fbcac",
-  measurementId: "G-Y2Q8770D9E"
+  apiKey: "AIzaSyBykmjXm5gqtXghyZpKMvWG0rc5Nmggy2k",
+  authDomain: "publicopiloto.firebaseapp.com",
+  projectId: "publicopiloto",
+  storageBucket: "publicopiloto.firebasestorage.app",
+  messagingSenderId: "1054968391009",
+  appId: "1:1054968391009:web:8e8362a2bffad2ec519120",
+  measurementId: "G-M2PGBNB52K"
 };
 
 // Inicializacao do Firebase (singleton)

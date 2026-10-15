@@ -100,7 +100,7 @@ def _init_firebase(credentials_path=None):
     else:
         cred = credentials.ApplicationDefault()
 
-    firebase_admin.initialize_app(cred, {"projectId": "publicopilot"})
+    firebase_admin.initialize_app(cred, {"projectId": "publicopiloto"})
 
 
 def _gerar_senha_temporaria(tamanho=14):
@@ -269,18 +269,19 @@ def _processar_arquivo(db, arquivo):
 
 
 def _validar_args(args):
-    if args.modo != "arquivo" and not args.orgao:
-        print("ERRO: --orgao obrigatorio (SESP-MT | POLITEC-MT | TJPR | TJRN).", file=sys.stderr)
-        sys.exit(2)
-    if args.modo != "arquivo" and args.orgao not in ORGAOS:
-        print(f"ERRO: orgao '{args.orgao}' nao reconhecido. Validos: {list(ORGAOS.keys())}", file=sys.stderr)
-        sys.exit(2)
-    if args.modo != "arquivo" and not args.email:
-        print("ERRO: --email obrigatorio.", file=sys.stderr)
-        sys.exit(2)
-    if args.modo != "arquivo" and not args.nome:
-        print("ERRO: --nome obrigatorio.", file=sys.stderr)
-        sys.exit(2)
+    if args.modo == "unico":
+        if not args.orgao:
+            print("ERRO: --orgao obrigatorio (SESP-MT | POLITEC-MT | TJPR | TJRN).", file=sys.stderr)
+            sys.exit(2)
+        if args.orgao not in ORGAOS:
+            print(f"ERRO: orgao '{args.orgao}' nao reconhecido. Validos: {list(ORGAOS.keys())}", file=sys.stderr)
+            sys.exit(2)
+        if not args.email:
+            print("ERRO: --email obrigatorio.", file=sys.stderr)
+            sys.exit(2)
+        if not args.nome:
+            print("ERRO: --nome obrigatorio.", file=sys.stderr)
+            sys.exit(2)
     if args.modo != "arquivo" and args.perfil not in PERFIS_VALIDOS:
         print(f"ERRO: perfil '{args.perfil}' invalido. Validos: {sorted(PERFIS_VALIDOS)}", file=sys.stderr)
         sys.exit(2)
