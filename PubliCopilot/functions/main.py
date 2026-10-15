@@ -42,6 +42,14 @@ ALLOWED_ORIGINS = os.environ.get(
 # Domínio principal para o cabeçalho CORS (backward compat).
 PRIMARY_ORIGIN = ALLOWED_ORIGINS[0].strip() if ALLOWED_ORIGINS else "https://publicopilot.web.app"
 
+# Rate limit por UID. Padrao 1000/min (alto, sem restricao pratica para testes
+# com SESP/Politec/TJPR/TJRN). Para desligar: export MAX_REQ_PER_MIN=0.
+MAX_REQ_PER_MIN = int(os.environ.get("MAX_REQ_PER_MIN", "1000"))
+
+# Habilita/desabilita gravacao de audit logs no Firestore. Padrao ligado.
+# Em testes pesados, pode desligar para evitar custo de escrita.
+ENABLE_AUDIT_LOG = os.environ.get("ENABLE_AUDIT_LOG", "1") == "1"
+
 import functions_framework  # noqa: E402
 
 from models.risk_engine import analisar_risco_contratual, gerar_recomendacoes  # noqa: E402
@@ -138,11 +146,13 @@ def _validar_token_firebase(request):
 
 
 _REQUISICOES_POR_UID = {}
-_LIMITE_REQ_POR_MINUTO = 30
+_LIMITE_REQ_POR_MINUTO = MAX_REQ_PER_MIN
 
 
 def _verificar_rate_limit(uid):
     import time
+    if _LIMITE_REQ_POR_MINUTO <= 0:
+        return True
     agora = time.time()
     historico = _REQUISICOES_POR_UID.get(uid, [])
     historico = [t for t in historico if agora - t < 60]
@@ -151,6 +161,99 @@ def _verificar_rate_limit(uid):
     historico.append(agora)
     _REQUISICOES_POR_UID[uid] = historico
     return True
+
+
+def _extrair_claims_decoded(token):
+    """Decodifica o JWT sem chamar API do Firebase para extrair claims basicos.
+    Retorna dict com orgaoId/perfil/admin se presentes.
+    """
+    import base64
+    try:
+        parts = token.split(".")
+        if len(parts) != 3:
+            return {}
+        payload = parts[1]
+        padding = 4 - (len(payload) % 4)
+        if padding != 4:
+            payload += "=" * padding
+        decoded = json.loads(base64.urlsafe_b64decode(payload))
+        return decoded or {}
+    except Exception:
+        return {}
+
+
+def _obter_uid_email_claims(request):
+    """Retorna (uid, email, claims_dict) extraidos do token Authorization.
+    Faz cache interno por requisicao (request.headers nao muda dentro do handler)."""
+    if not hasattr(request, "_publi_uid_cache"):
+        uid, email, err = _validar_token_firebase(request)
+        token = ""
+        if uid and request.headers.get("Authorization", "").startswith("Bearer "):
+            token = request.headers.get("Authorization", "").split(" ", 1)[1].strip()
+        claims = _extrair_claims_decoded(token) if token else {}
+        request._publi_uid_cache = (uid, email, claims, err)
+    return request._publi_uid_cache
+
+
+def _registrar_audit_log(tipo, request, *, uid=None, email=None, claims=None,
+                         sucesso=True, status_code=None, duracao_ms=None,
+                         extras=None):
+    """Grava evento na colecao `logs/` do Firestore (best-effort).
+
+    Nunca levanta excecao para o caller — log na colecao eh telemetria,
+    nao pode quebrar a chamada principal.
+    """
+    if not ENABLE_AUDIT_LOG:
+        return
+    try:
+        import firebase_admin
+        from firebase_admin import firestore as fb_firestore
+
+        if not firebase_admin._apps:
+            try:
+                from firebase_admin import credentials as fb_creds
+                cred = fb_creds.ApplicationDefault()
+                firebase_admin.initialize_app(cred, {"projectId": FIREBASE_PROJECT_ID})
+            except Exception:
+                return
+
+        db = fb_firestore.client()
+        ip = (request.headers.get("X-Forwarded-For") or
+              request.headers.get("X-Real-IP") or
+              request.remote_addr or "")
+        ip = ip.split(",")[0].strip() if ip else ""
+
+        ua = request.headers.get("User-Agent", "")
+        origin = request.headers.get("Origin", "")
+        referer = request.headers.get("Referer", "")
+
+        claims_dict = claims or {}
+        payload = {
+            "tipo": tipo,
+            "uid": uid,
+            "email": email,
+            "orgaoId": claims_dict.get("orgaoId"),
+            "perfil": claims_dict.get("perfil"),
+            "admin": bool(claims_dict.get("admin")),
+            "sucesso": sucesso,
+            "statusCode": status_code,
+            "duracaoMs": int(duracao_ms) if duracao_ms is not None else None,
+            "ip": ip,
+            "userAgent": ua,
+            "origin": origin,
+            "referer": referer,
+            "dataCriacao": fb_firestore.SERVER_TIMESTAMP,
+        }
+        if extras:
+            payload.update(extras)
+        # Mantem payload enxuto para nao estourar 1MB doc-limit
+        serialized = json.dumps(payload, default=str)
+        if len(serialized) > 900_000:
+            payload.pop("userAgent", None)
+            payload.pop("referer", None)
+        db.collection("logs").add(payload)
+    except Exception as exc:
+        logger.warning("Falha ao registrar audit log (%s): %s", tipo, exc)
 
 
 def _executar_geracao(data, headers, uid):
@@ -287,12 +390,20 @@ R$ {valor}
 
 @functions_framework.http
 def analisar_minuta(request):
-    """Endpoint HTTP: POST com {texto, valor?, vigencia_dias?}.
+    """Endpoint HTTP: POST com {texto, valor?, vigencia_dias?} (modo default = avaliacao)
+    ou {modo: geracao, ...} para geracao de minutas.
 
     Requer token Firebase Auth (Authorization: Bearer <token>).
     Retorna JSON com score, lacunas, clausulas, explicacoes XAI,
-    predicao do Random Forest e SHAP.
+    predicao do Random Forest e SHAP (modo avaliacao) ou
+    minuta + clausulas geradas (modo geracao).
+
+    Cada requisicao gera um registro na colecao `logs/` do Firestore
+    com uid, email, orgaoId, modo, duracao, sucesso/erro.
     """
+    import time
+    start_ts = time.time()
+
     # Habilita CORS para origens autorizadas (whitelist).
     # Antes estava "*" (permissivo) — corrigido em 19/07/2026 para reduzir superficie de ataque.
     origin = request.headers.get("Origin", "").strip()
@@ -316,34 +427,101 @@ def analisar_minuta(request):
         "Vary": "Origin",
     }
 
-    # === Validacao de autenticacao ===
-    uid, erro_auth = _validar_token_firebase(request)
-    if erro_auth:
-        return (json.dumps({"erro": erro_auth, "code": "unauthorized"}), 401, headers)
+    uid, email, claims, erro_auth = (None, None, {}, None)
 
-    # === Rate limiting (30 req/min por usuario) ===
+    def _finalizar(status_code, body_str, *, modo="avaliacao", extras=None):
+        duracao_ms = (time.time() - start_ts) * 1000.0
+        sucesso = 200 <= status_code < 400
+        _registrar_audit_log(
+            "api_analisar",
+            request,
+            uid=uid,
+            email=email,
+            claims=claims,
+            sucesso=sucesso,
+            status_code=status_code,
+            duracao_ms=duracao_ms,
+            extras={"modo": modo, **(extras or {})},
+        )
+        return (body_str, status_code, headers)
+
+    # === Validacao de autenticacao ===
+    uid, email, claims, erro_auth = _obter_uid_email_claims(request)
+    if erro_auth:
+        return _finalizar(
+            401,
+            json.dumps({"erro": erro_auth, "code": "unauthorized"}),
+            extras={"subtipo": "auth"},
+        )
+
+    # === Rate limiting (configuravel via MAX_REQ_PER_MIN; 0 = desativado) ===
     if not _verificar_rate_limit(uid):
-        logger.warning("Rate limit excedido para uid=%s", uid)
-        return (json.dumps({"erro": "Limite de requisicoes excedido (30/min). Aguarde e tente novamente.", "code": "rate_limit"}), 429, headers)
+        logger.warning("Rate limit excedido para uid=%s (limite=%s)", uid, _LIMITE_REQ_POR_MINUTO)
+        return _finalizar(
+            429,
+            json.dumps({
+                "erro": f"Limite de requisicoes excedido ({_LIMITE_REQ_POR_MINUTO}/min). Aguarde e tente novamente.",
+                "code": "rate_limit",
+            }),
+            extras={"subtipo": "rate_limit"},
+        )
 
     # === Processamento do corpo ===
     try:
         data = _extrair_dados(request)
     except Exception as exc:
-        return (json.dumps({"erro": f"Corpo da requisicao invalido: {exc}"}), 400, headers)
+        return _finalizar(
+            400,
+            json.dumps({"erro": f"Corpo da requisicao invalido: {exc}"}),
+            extras={"subtipo": "body_parse"},
+        )
 
     modo = (data.get("modo") or "avaliacao").strip().lower()
 
     if modo == "geracao":
-        return _executar_geracao(data, headers, uid)
+        try:
+            body, status, hdrs = _executar_geracao(data, headers, uid)
+            # Chama audit log manualmente aqui pois _executar_geracao ja retorna
+            # tuple pronto; substituimos por _finalizar com os mesmos parametros.
+            duracao_ms = (time.time() - start_ts) * 1000.0
+            _registrar_audit_log(
+                "api_analisar",
+                request,
+                uid=uid,
+                email=email,
+                claims=claims,
+                sucesso=(200 <= status < 400),
+                status_code=status,
+                duracao_ms=duracao_ms,
+                extras={
+                    "modo": "geracao",
+                    "fonte": "geracao_inline",
+                },
+            )
+            return (body, status, hdrs)
+        except Exception as exc:
+            return _finalizar(
+                500,
+                json.dumps({"erro": f"Falha na geracao: {exc}"}),
+                modo="geracao",
+                extras={"subtipo": "geracao_exception"},
+            )
 
     try:
         texto, metadados = _tratar_corpo(data)
     except ValueError as exc:
-        return (json.dumps({"erro": str(exc)}), 400, headers)
+        return _finalizar(
+            400,
+            json.dumps({"erro": str(exc)}),
+            extras={"subtipo": "tratar_corpo"},
+        )
 
     if not texto:
-        return (json.dumps({"erro": "Informe o texto da minuta (campo 'texto')."}), 400, headers)
+        return _finalizar(
+            400,
+            json.dumps({"erro": "Informe o texto da minuta (campo 'texto')."}),
+            extras={"subtipo": "sem_texto"},
+        )
 
     # === Execucao do pipeline ML ===
     try:
@@ -373,9 +551,25 @@ def analisar_minuta(request):
             "metricas_treino": resultado.get("metricas_treino", {}),
             "usuario_id": uid,
         }
-        return (json.dumps(payload, ensure_ascii=False), 200, headers)
+        return _finalizar(
+            200,
+            json.dumps(payload, ensure_ascii=False),
+            modo="avaliacao",
+            extras={
+                "score": payload["score"],
+                "risco_ml": payload["risco_ml"],
+                "rf_proba": payload["rf_proba"],
+                "clausulasQtd": len(payload["clausulas_encontradas"]),
+                "lacunasQtd": len(payload["lacunas"]),
+            },
+        )
     except Exception as exc:  # Erro de inferencia
-        return (json.dumps({"erro": f"Falha ao analisar minuta: {exc}"}), 500, headers)
+        return _finalizar(
+            500,
+            json.dumps({"erro": f"Falha ao analisar minuta: {exc}"}),
+            modo="avaliacao",
+            extras={"subtipo": "ml_exception"},
+        )
 
 
 @functions_framework.http
