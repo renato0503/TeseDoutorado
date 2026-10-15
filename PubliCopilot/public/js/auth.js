@@ -90,7 +90,9 @@
           if (user) {
             const isAnon = user.isAnonymous;
             const doc = await this.db.collection('usuarios').doc(user.uid).get();
+            let primeiroAcessoDetectado = false;
             if (!doc.exists) {
+              primeiroAcessoDetectado = true;
               await this.db.collection('usuarios').doc(user.uid).set({
                 nome: isAnon ? 'Anônimo' : (user.displayName || ''),
                 email: user.email || '',
@@ -105,10 +107,26 @@
                 ultimoAcesso: firebase.firestore.FieldValue.serverTimestamp(),
               });
             } else {
+              primeiroAcessoDetectado = !!doc.data().primeiroAcesso;
               await this.db.collection('usuarios').doc(user.uid).update({
                 ultimoAcesso: firebase.firestore.FieldValue.serverTimestamp(),
               });
             }
+            // Telemetria: registrar evento de login/primeiro acesso
+            try {
+              if (typeof registrarEvento === 'function') {
+                if (primeiroAcessoDetectado && !isAnon) {
+                  await registrarEvento('primeiro_acesso', {
+                    provedor: user.providerData[0]?.providerId || 'password',
+                    emailVerificado: !!user.emailVerified,
+                  });
+                }
+                await registrarEvento('login_sucesso', {
+                  anonimo: isAnon,
+                  provedor: user.providerData[0]?.providerId || 'password',
+                });
+              }
+            } catch (e) { /* telemetria nunca bloqueia */ }
           }
           await this.atualizarUI();
         });
@@ -125,9 +143,19 @@
     async loginAnonimo() {
       try {
         const cred = await this.auth.signInAnonymously();
+        try {
+          if (typeof registrarEvento === 'function') {
+            await registrarEvento('login_anonimo', {});
+          }
+        } catch (e) { /* telemetria nunca bloqueia */ }
         return cred.user;
       } catch (e) {
         console.error('Erro login anonimo:', e);
+        try {
+          if (typeof registrarEvento === 'function') {
+            await registrarEvento('login_erro', { modo: 'anonimo', erro: e.message || String(e) });
+          }
+        } catch (_) {}
         return null;
       }
     },
@@ -139,18 +167,35 @@
         else { const e = Validators[campo](dados[campo]); if (e) erros.push(e); }
       }
       if (!Captcha.validar(dados.captcha)) erros.push('CAPTCHA incorreto.');
-      if (erros.length > 0) throw new Error(erros.join('\n'));
-      const cred = await this.auth.createUserWithEmailAndPassword(dados.email, dados.senha);
-      const user = cred.user;
-      await user.updateProfile({ displayName: dados.nome });
-      await this.db.collection('usuarios').doc(user.uid).set({
-        nome: dados.nome, whatsapp: dados.whatsapp, email: dados.email,
-        instituicao: dados.instituicao || '', perfil: dados.perfil || '',
-        papel: 'usuario', ativo: true, totalAnalises: 0,
-        dataCriacao: firebase.firestore.FieldValue.serverTimestamp(),
-        primeiroAcesso: true,
-      });
-      return user;
+      if (erros.length > 0) {
+        try { if (typeof registrarEvento === 'function') await registrarEvento('cadastro_erro', { motivo: 'validacao', detalhes: erros.join(' | ') }); } catch (_) {}
+        throw new Error(erros.join('\n'));
+      }
+      try {
+        const cred = await this.auth.createUserWithEmailAndPassword(dados.email, dados.senha);
+        const user = cred.user;
+        await user.updateProfile({ displayName: dados.nome });
+        await this.db.collection('usuarios').doc(user.uid).set({
+          nome: dados.nome, whatsapp: dados.whatsapp, email: dados.email,
+          instituicao: dados.instituicao || '', perfil: dados.perfil || '',
+          papel: 'usuario', ativo: true, totalAnalises: 0,
+          dataCriacao: firebase.firestore.FieldValue.serverTimestamp(),
+          primeiroAcesso: true,
+        });
+        try {
+          if (typeof registrarEvento === 'function') {
+            await registrarEvento('cadastro_sucesso', {
+              perfil: dados.perfil || '',
+              instituicao: dados.instituicao || '',
+              whatsappInformado: !!dados.whatsapp,
+            });
+          }
+        } catch (_) {}
+        return user;
+      } catch (e) {
+        try { if (typeof registrarEvento === 'function') await registrarEvento('cadastro_erro', { motivo: 'firebase', erro: e.message || String(e) }); } catch (_) {}
+        throw e;
+      }
     },
     async atualizarPerfil(uid, dados) {
       await this.db.collection('usuarios').doc(uid).update({
@@ -158,29 +203,55 @@
         primeiroAcesso: false,
         dataAtualizacao: firebase.firestore.FieldValue.serverTimestamp(),
       });
+      try {
+        if (typeof registrarEvento === 'function') {
+          await registrarEvento('perfil_atualizado', {
+            instituicao: dados.instituicao || '',
+            perfil: dados.perfil || '',
+            pulou: dados.pulado === true,
+          });
+        }
+      } catch (_) {}
     },
     async login(email, senha) {
-      const cred = await this.auth.signInWithEmailAndPassword(email, senha);
-      return cred.user;
+      try {
+        const cred = await this.auth.signInWithEmailAndPassword(email, senha);
+        return cred.user;
+      } catch (e) {
+        try { if (typeof registrarEvento === 'function') await registrarEvento('login_erro', { modo: 'email', erro: e.message || String(e) }); } catch (_) {}
+        throw e;
+      }
     },
     async loginGoogle() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      const cred = await this.auth.signInWithPopup(provider);
-      const user = cred.user;
-      const docRef = this.db.collection('usuarios').doc(user.uid);
-      const doc = await docRef.get();
-      if (!doc.exists) {
-        await docRef.set({
-          nome: user.displayName || '', email: user.email,
-          instituicao: '', perfil: '',
-          papel: 'usuario', ativo: true, totalAnalises: 0,
-          dataCriacao: firebase.firestore.FieldValue.serverTimestamp(),
-          primeiroAcesso: true, provedor: 'google.com',
-        });
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const cred = await this.auth.signInWithPopup(provider);
+        const user = cred.user;
+        const docRef = this.db.collection('usuarios').doc(user.uid);
+        const doc = await docRef.get();
+        if (!doc.exists) {
+          await docRef.set({
+            nome: user.displayName || '', email: user.email,
+            instituicao: '', perfil: '',
+            papel: 'usuario', ativo: true, totalAnalises: 0,
+            dataCriacao: firebase.firestore.FieldValue.serverTimestamp(),
+            primeiroAcesso: true, provedor: 'google.com',
+          });
+        }
+        return user;
+      } catch (e) {
+        try { if (typeof registrarEvento === 'function') await registrarEvento('login_erro', { modo: 'google', erro: e.message || String(e) }); } catch (_) {}
+        throw e;
       }
-      return user;
     },
-    async logout() { await this.auth.signOut(); },
+    async logout() {
+      try {
+        if (this.user && typeof registrarEvento === 'function') {
+          await registrarEvento('logout', { uid: this.user.uid });
+        }
+      } catch (_) { /* telemetria nunca bloqueia */ }
+      await this.auth.signOut();
+    },
     async getIdToken() { if (!this.user) return null; return await this.user.getIdToken(true); },
     async isAdmin() {
       if (!this.user) return false;
