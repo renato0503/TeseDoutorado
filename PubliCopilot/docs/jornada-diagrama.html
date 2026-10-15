@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada do Cliente — PubliCopilot v3.0</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0F172A;
+            --surface: #1E293B;
+            --surface-alt: #334155;
+            --borda: #475569;
+            --verde: #2EC4B6;
+            --verde-escuro: #0D9488;
+            --amarelo: #F59E0B;
+            --vermelho: #EF4444;
+            --texto: #F1F5F9;
+            --texto-sec: #94A3B8;
+            --texto-ter: #64748B;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--texto);
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        header .badge {
+            display: inline-block;
+            background: rgba(46,196,182,0.15);
+            color: var(--verde);
+            border: 1px solid rgba(46,196,182,0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        h1 {
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #2EC4B6, #F59E0B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            color: var(--texto-sec);
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .meta {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .meta-item {
+            background: var(--surface);
+            border: 1px solid var(--borda);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--texto-sec);
+        }
+        .meta-item strong { color: var(--verde); }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+        nav a {
+            padding: 10px 20px;
+            background: var(--surface);
+            border: 1px solid var(--borda);
+            border-radius: 10px;
+            color: var(--texto-sec);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        nav a:hover, nav a.active {
+            background: var(--verde);
+            color: var(--bg);
+            border-color: var(--verde);
+        }
+        section {
+            margin-bottom: 80px;
+        }
+        .section-header {
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--borda);
+        }
+        .section-header h2 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: var(--texto);
+        }
+        .section-header p {
+            color: var(--texto-sec);
+            font-size: 14px;
+        }
+        .diagram-box {
+            background: var(--surface);
+            border: 1px solid var(--borda);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+        }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: var(--surface-alt);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--texto-sec);
+        }
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .dot-actor { background: #2EC4B6; }
+        .dot-system { background: #F59E0B; }
+        .dot-api { background: #8B5CF6; }
+        .dot-db { background: #EF4444; }
+        .dot-firestore { background: #F97316; }
+        .dot-decision { background: #EC4899; }
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+        .flow-card {
+            background: var(--surface);
+            border: 1px solid var(--borda);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .flow-card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--verde);
+        }
+        .flow-card ol {
+            padding-left: 20px;
+            font-size: 13px;
+            color: var(--texto-sec);
+            line-height: 1.8;
+        }
+        .flow-card code {
+            background: var(--surface-alt);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--amarelo);
+        }
+        .api-flow {
+            background: var(--surface);
+            border: 1px solid var(--borda);
+            border-radius: 16px;
+            padding: 24px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.8;
+        }
+        .api-flow .line { display: flex; gap: 12px; }
+        .api-flow .time { color: var(--texto-ter); min-width: 70px; }
+        .api-flow .actor { color: var(--verde); min-width: 80px; }
+        .api-flow .arrow { color: var(--texto-ter); }
+        .api-flow .sys { color: var(--amarelo); }
+        .api-flow .api { color: #8B5CF6; }
+        .api-flow .db { color: var(--vermelho); }
+        .api-flow .ok { color: #22C55E; }
+        .api-flow .err { color: var(--vermelho); }
+        .stats-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        .stat-card {
+            flex: 1;
+            min-width: 140px;
+            background: var(--surface);
+            border: 1px solid var(--borda);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-card .val {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--verde);
+        }
+        .stat-card .label {
+            font-size: 12px;
+            color: var(--texto-ter);
+            margin-top: 4px;
+        }
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--texto-ter);
+            font-size: 13px;
+            border-top: 1px solid var(--borda);
+            margin-top: 80px;
+        }
+        @media print {
+            body { background: white; color: black; }
+            .diagram-box { border: 1px solid #ccc; break-inside: avoid; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<header>
+    <div class="badge">Arquitetura · v3.0</div>
+    <h1>Jornada do Cliente — PubliCopilot</h1>
+    <p class="subtitle">Diagrama completo de todos os fluxos: autenticação, análise de editais, geração de cláusulas e painel administrativo.</p>
+    <div class="meta">
+        <div class="meta-item"><strong>Hosting:</strong> publicopiloto.web.app</div>
+        <div class="meta-item"><strong>API:</strong> us-central1-publicopiloto.cloudfunctions.net</div>
+        <div class="meta-item"><strong>Banco:</strong> Firestore</div>
+        <div class="meta-item"><strong>Auth:</strong> Firebase Auth</div>
+    </div>
+</header>
+
+<nav>
+    <a href="#jornada">Jornada Principal</a>
+    <a href="#autenticacao">Autenticação</a>
+    <a href="#avaliacao">Avaliação</a>
+    <a href="#geracao">Geração</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#api">API Flow</a>
+    <a href="#firestore">Firestore</a>
+</nav>
+
+<!-- =======================================================
+     SEÇÃO 1: JORNADA PRINCIPAL
+     ======================================================= -->
+<section id="jornada">
+    <div class="section-header">
+        <h2>1. Jornada Principal — Visitante → Análise Completa</h2>
+        <p>Fluxo completo desde o primeiro acesso até a análise de um edital com relatório de risco.</p>
+    </div>
+
+    <div class="diagram-box">
+        <pre class="mermaid">
+flowchart TB
+    subgraph LANDING["🌐 LANDING PAGE — publicopiloto.web.app"]
+        A1["👤 Visitante acessa<br/>landing page"] --> A2["Lê hero +<br/>módulos + metodologia"]
+        A2 --> A3{"Tem conta?"}
+        A3 -->|NÃO| A4["Clica <b>Solicitar Acesso</b><br/>(CTA principal)"]
+        A3 -->|SIM| A5["Clica <b>Entrar</b><br/>(navbar)"]
+        A4 --> B1["📝 MODAL DE CADASTRO<br/>auth.js — PubliAuth.Modal"]
+        A5 --> B2["🔐 MODAL DE LOGIN<br/>auth.js — PubliAuth.Modal"]
+    end
+
+    subgraph AUTH["🔐 FLUXO DE AUTENTICAÇÃO"]
+        B1 --> C1["Preenche formulário:<br/>Nome, Email, Senha,<br/>WhatsApp + CAPTCHA"]
+        B2 --> C2["Email + Senha"]
+        C1 --> C3["PubliAuth.cadastrar()<br/>signInWithEmailAndPassword"]
+        C2 --> C3B["PubliAuth.login()<br/>signInWithEmailAndPassword"]
+        C3 --> D1["✅ Firebase Auth<br/>cria/atualiza usuário"]
+        C3B --> D1
+        D1 --> D2["onAuthStateChanged<br/>dispara em auth.js"]
+        D2 --> D3{"Primeiro<br/>acesso?"}
+        D3 -->|SIM| D4["📋 PROFILE MODAL<br/>Coleta: Instituição,<br/>Perfil, Órgão"]
+        D3 -->|NÃO| E1["✅ Login OK —<br/>UI atualizada"]
+        D4 --> D5["Grava Firestore<br/>usuarios/{uid}"]
+        D5 --> E1
+        D3B["Anônimo<br/>logado?"] -->|SIM| E1
+    end
+
+    subgraph MODULES["📱 MÓDULOS"]
+        E1 --> F1["Navega para<br/>módulo de interesse"]
+        F1 --> F2{"Qual módulo?"}
+        F2 -->|Avaliação| G1["📊 MÓDULO AVALIAÇÃO<br/>modulo_avaliacao/"]
+        F2 -->|Geração| G2["📝 MÓDULO GERAÇÃO<br/>modulo_geracao/"]
+        F2 -->|Dashboard| G3["🖥️ DASHBOARD<br/>dashboard/ (admin only)"]
+    end
+
+    subgraph ANALISE["📊 MÓDULO DE AVALIAÇÃO"]
+        G1 --> H1["📋 Cola texto do edital<br/>+ informa valor estimado"]
+        H1 --> H2["Clica <b>Avaliar Minuta</b>"]
+        H2 --> H3["📡 POST /api/analisar_minuta<br/>Authorization: Bearer {token}<br/>{texto, valor}"]
+        H3 --> H4{"Token<br/>válido?"}
+        H4 -->|NÃO| H5["❌ 401 Unauthorized<br/>Erro: token ausente/inválido"]
+        H4 -->|SIM| H6["⚙️ Cloud Function<br/>valida token + rate limit"]
+        H6 --> H7["🔍 Pipeline de Análise"]
+    end
+
+    subgraph PIPELINE["⚙️ PIPELINE ML — functions/main.py"]
+        H7 --> I1["1. Regex: extrai 16<br/>padrões de cláusulas"]
+        I1 --> I2["2. Heurística: detecta<br/>lacunas contratuais"]
+        I2 --> I3["3. Score heurístico<br/>(0-100)"]
+        I3 --> I4{"Modelos<br/>disponíveis?"]
+        I4 -->|NÃO (.pkl ausentes)| I5["✅ Fallback heurístico<br/>retorna score + lacunas"]
+        I4 -->|SIM| I6["4. Isolation Forest<br/>detecta anomalias textuais"]
+        I6 --> I7["5. Random Forest<br/>prediz risco (0-1)"]
+        I7 --> I8["6. SHAP TreeExplainer<br/>explicabilidade +<br/>contrafactuais"]
+        I8 --> I9["7. Monta relatório<br/>final + recomendações"]
+        I5 --> J1
+        I9 --> J1
+    end
+
+    subgraph RESULT["📋 RESULTADO"]
+        J1["📤 Response:<br/>score, risco, lacunas,<br/>cláusulas, explicações,<br/>SHAP, contrafactuais"] --> K1["🖥️ Tela exibe:<br/>Badge de risco<br/>Lista de lacunas<br/>Recomendações<br/>Fundamentação jurídica"]
+        K1 --> K2["💾 Salva análise<br/>Firestore analises/"]
+        K2 --> K3["📊 Telemetria:<br/>registrarEvento()<br/>logs/collection"]
+    end
+
+    H5 --> RESULT
+    style LANDING fill:#1E293B,stroke:#2EC4B6,stroke-width:2px,color:#F1F5F9
+    style AUTH fill:#1E293B,stroke:#F59E0B,stroke-width:2px,color:#F1F5F9
+    style MODULES fill:#1E293B,stroke:#8B5CF6,stroke-width:2px,color:#F1F5F9
+    style ANALISE fill:#1E293B,stroke:#2EC4B6,stroke-width:2px,color:#F1F5F9
+    style PIPELINE fill:#1E293B,stroke:#F59E0B,stroke-width:2px,color:#F1F5F9
+    style RESULT fill:#1E293B,stroke:#22C55E,stroke-width:2px,color:#F1F5F9
+    style H5 fill:#7f1d1d,stroke:#EF4444,color:#F1F5F9
+    style I5 fill:#1E293B,stroke:#64748B,stroke-width:1px,color:#94A3B8,stroke-dasharray:5,5
+        </pre>
+    </div>
+
+    <div class="legend">
+        <div class="legend-item"><div class="legend-dot dot-actor"></div>Actor / Usuário</div>
+        <div class="legend-item"><div class="legend-dot dot-system"></div>Decision / Condição</div>
+        <div class="legend-item"><div class="legend-dot dot-api"></div>Cloud Function</div>
+        <div class="legend-item"><div class="legend-dot dot-firestore"></div>Firestore</div>
+        <div class="legend-item"><div class="legend-dot dot-decision"></div>Processo interno</div>
+        <div class="legend-item"><div class="legend-dot dot-db"></div>Dados / Response</div>
+    </div>
+</section>
+
+<!-- =======================================================
+     SEÇÃO 2: AUTENTICAÇÃO
+     ======================================================= -->
+<section id="autenticacao">
+    <div class="section-header">
+        <h2>2. Fluxo de Autenticação — Detalhado</h2>
+        <p>Como o Firebase Auth, o Firestore e os custom claims se integram em cada tela.</p>
+    </div>
+
+    <div class="diagram-box">
+        <pre class="mermaid">
+sequenceDiagram
+    participant B as Browser
+    participant FBA as Firebase Auth
+    participant FS as Firestore
+    participant CF as Cloud Function
+
+    Note over B: Usuário abre landing page<br/>publicopiloto.web.app
+
+    B->>B: DOMContentLoaded<br/>firebase-init.js carrega SDK
+    B->>B: auth.js: PubliAuth.init()<br/>onAuthStateChanged listener ativo
+
+    rect rgba(30,41,59,0.8)
+        Note over B,FBA: CASO 1: Visitante NÃO tem conta
+        B->>B: Clica "Solicitar Acesso"
+        B->>B: PubliAuth.Modal.abrir('signup')
+        B->>FBA: signInWithEmailAndPassword(email, senha)
+        FBA-->>B: UserCredential (uid, email)
+        B->>FS: set(usuarios/{uid}, {<br/>  nome, email, papel: 'usuario',<br/>  primeiroAcesso: true,<br/>  dataCriacao, ultimoAcesso
+        })
+        B->>FS: update(usuarios/{uid},<br/>{primeiroAcesso: false,<br/>instituicao, perfil, orgaoId})
+        Note over B: Profile Modal fecha<br/>Usuário redirecionado
+    end
+
+    rect rgba(30,41,59,0.8)
+        Note over B,FBA: CASO 2: Servidor de órgão faz login
+        B->>FBA: signInWithEmailAndPassword(email, senha)
+        FBA-->>B: UserCredential (uid + custom claims:<br/>orgaoId, perfil, admin)
+        B->>FS: get(usuarios/{uid})
+        FS-->>B: DocumentSnapshot (papel, orgaoId)
+        B->>B: UI atualizada com<br/>nome + orgaoId
+    end
+
+    rect rgba(30,41,59,0.8)
+        Note over B,FBA: CASO 3: Admin faz login
+        B->>FBA: signInWithEmailAndPassword(email, senha)
+        FBA-->>B: UserCredential (uid + claim admin:true)
+        B->>FS: get(usuarios/{uid})
+        FS-->>B: DocumentSnapshot (papel: admin)
+        Note over B: isAdmin() = true<br/>Dashboard liberado
+    end
+
+    rect rgba(30,41,59,0.8)
+        Note over B,CF: CASO 4: API call com token
+        B->>B: PubliAuth.getIdToken()<br/>user.getIdToken(true)
+        B->>CF: POST /api/analisar_minuta<br/>Authorization: Bearer {idToken}
+        CF->>FBA: verify_id_token(token)
+        FBA-->>CF: DecodedToken {uid, email,<br/>orgaoId, admin, perfil}
+        CF-->>B: {score, risco, lacunas,...}
+    end
+        </pre>
+    </div>
+</section>
+
+<!-- =======================================================
+     SEÇÃO 3: MÓDULO AVALIAÇÃO
+     ======================================================= -->
+<section id="avaliacao">
+    <div class="section-header">
+        <h2>3. Módulo de Avaliação — Análise de Minutas</h2>
+        <p>Fluxo desde a seleção de exemplo até o relatório de risco com explicações SHAP.</p>
+    </div>
+
+    <div class="flow-grid">
+        <div class="flow-card">
+            <h3>📋 Preparação</h3>
+            <ol>
+                <li>Usuário acessa <code>/modulo_avaliacao/</code></li>
+                <li>Gate: verifica <code>PubliAuth.isLogado()</code></li>
+                <li>Se anônimo → login automático</li>
+                <li>Se <code>primeiroAcesso=true</code> → abre Profile Modal</li>
+                <li>Usuário seleciona exemplo (opcional)</li>
+                <li>Ou cola texto próprio + informa <code>valor</code></li>
+            </ol>
+        </div>
+        <div class="flow-card">
+            <h3>🔗 Chamada à API</h3>
+            <ol>
+                <li><code>POST /api/analisar_minuta</code></li>
+                <li>Header: <code>Authorization: Bearer {token}</code></li>
+                <li>Body: <code>{texto, valor}</code></li>
+                <li>Rate limit: 1000 req/min por UID</li>
+                <li>Timeout: 120s</li>
+                <li>Auditoria: evento <code>avaliar_inicio</code> em <code>logs/</code></li>
+            </ol>
+        </div>
+        <div class="flow-card">
+            <h3>🧠 Pipeline ML (Cloud Function)</h3>
+            <ol>
+                <li><code>extrair_clausulas()</code> — 16 regex patterns</li>
+                <li><code>detectar_lacunas()</code> — heurística</li>
+                <li><code>calcular_score()</code> — 0 a 100</li>
+                <li><code>detectar_anomalia()</code> — Isolation Forest</li>
+                <li><code>rf.predict_proba()</code> — Random Forest</li>
+                <li><code>explainer.shap_values()</code> — SHAP</li>
+            </ol>
+        </div>
+        <div class="flow-card">
+            <h3>📤 Resposta e Telemetria</h3>
+            <ol>
+                <li>Response: <code>{score, risco,<br/>lacunas, clausulas,<br/>explicacoes, contrafactuais}</code></li>
+                <li>Tela exibe relatório formatado</li>
+                <li><code>registrarEvento('avaliar_sucesso')</code></li>
+                <li><code>registrarEvento('avaliar_click')</code> para cada clique</li>
+                <li>Salvamento opcional em <code>analises/{id}</code></li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="diagram-box">
+        <pre class="mermaid">
+flowchart LR
+    subgraph INPUT["📥 INPUT"]
+        I1["📝 Texto do edital<br/>(cola ou exemplo)"]
+        I2["💰 Valor estimado<br/>(R$)"]
+    end
+
+    subgraph PROCESS["⚙️ CLOUD FUNCTION — analisar_minuta"]
+        P1["🔤 Regex 16 padrões<br/>extrair_clausulas()"]
+        P2["🔎 Heurística<br/>detectar_lacunas()"]
+        P3["📊 Score heurístico<br/>calcular_score()"]
+        P4["⚡ Isolation Forest<br/>detectar_anomalia()"]
+        P5["🌲 Random Forest<br/>rf.predict_proba()"]
+        P6["📈 SHAP<br/>shap_values()"]
+        P7["⚖️ Contrafactuais<br/>jurídicos"]
+    end
+
+    subgraph OUTPUT["📤 OUTPUT"]
+        O1["🏷️ Risco: BAIXO / MÉDIO / ALTO"]
+        O2["📋 Lista de lacunas<br/>contratuais"]
+        O3["⚖️ Recomendações<br/>Lei 14.133/2021"]
+        O4["📊 Explicações SHAP<br/>(top-3 features)"]
+        O5["🔄 Contrafactuais<br/>normativos"]
+    end
+
+    I1 --> P1 --> P2 --> P3 --> P4 --> P5 --> P6 --> P7 --> OUTPUT
+
+    style INPUT fill:#1E293B,stroke:#8B5CF6,color:#F1F5F9
+    style PROCESS fill:#1E293B,stroke:#F59E0B,color:#F1F5F9
+    style OUTPUT fill:#1E293B,stroke:#22C55E,color:#F1F5F9
+        </pre>
+    </div>
+</section>
+
+<!-- =======================================================
+     SEÇÃO 4: MÓDULO GERAÇÃO
+     ======================================================= -->
+<section id="geracao">
+    <div class="section-header">
+        <h2>4. Módulo de Geração — Cláusulas + NVIDIA NIM</h2>
+        <p>Recomendações de cláusulas para editais de inovação e sustentabilidade via NVIDIA NIM + templates Lei 14.133.</p>
+    </div>
+
+    <div class="diagram-box">
+        <pre class="mermaid">
+flowchart TB
+    G1["📝 Acessa<br/>/modulo_geracao/"] --> G2{"Modo?"}
+    G2 -->|Templates| G3["📚 Templates Lei 14.133<br/>Catálogo de cláusulas<br/>pré-definidas"]
+    G2 -->|NVIDIA IA| G4["🤖 NVIDIA NIM API<br/>geração de cláusulas<br/>sob medida"]
+    G2 -->|Reescrita| G5["✏️ Sugestão de<br/>reescrita de cláusula"]
+
+    G3 --> G6["Seleciona tipo:<br/>inovação | sustentabilidade<br/>tecnologia | ESG"]
+    G4 --> G7["Envia contexto:<br/>tipo, valor, órgão"]
+    G5 --> G8["Envia cláusula<br/>original"]
+
+    G6 --> G9["🎯 Resultado:<br/>Cláusula recomendada<br/>+ justificação legal"]
+    G7 --> G9
+    G8 --> G9
+
+    G9 --> G10["📋 Preview<br/>da cláusula"]
+    G10 --> G11["✏️ Edita<br/>(opcional)"]
+    G11 --> G12["💾 salvarGeracao()<br/>Firestore editais/{id}"]
+    G12 --> G13["📤 Exportar<br/>como texto"]
+
+    style G1 fill:#1E293B,stroke:#2EC4B6,color:#F1F5F9
+    style G4 fill:#1E293B,stroke:#8B5CF6,color:#F1F5F9
+    style G9 fill:#1E293B,stroke:#22C55E,color:#F1F5F9
+    style G12 fill:#1E293B,stroke:#F97316,color:#F1F5F9
+        </pre>
+    </div>
+</section>
+
+<!-- =======================================================
+     SEÇÃO 5: DASHBOARD ADMIN
+     ======================================================= -->
+<section id="dashboard">
+    <div class="section-header">
+        <h2>5. Dashboard Administrativo</h2>
+        <p>Acesso total a métricas, usuários, análises, editais e logs de todos os órgãos. Exportação CSV multi-escopo.</p>
+    </div>
+
+    <div class="diagram-box">
+        <pre class="mermaid">
+flowchart TB
+    D1["🖥️ Admin acessa<br/>/dashboard/"] --> D2{"É admin?"}
+    D2 -->|NÃO| D3["⛔ Acesso negado<br/>redirect para landing"]
+    D2 -->|SIM| D4["✅ Dashboard<br/>carrega métricas"]
+
+    D4 --> D5["📊 Cards de resumo<br/>Total usuários · Análises<br/>Editais · Score médio<br/>Risco alto · Eventos 24h"]
+
+    D5 --> D6["🎛️ Filtro por órgão<br/>Dropdown: Todos | SESP-MT<br/>POLITEC-MT | TJPR | TJRN"]
+
+    D6 --> D7{"Aba selecionada?"}
+    D7 -->|Usuários| D8["📋 Tabela: usuários<br/>uid · nome · email<br/>órgão · perfil · acesso"]
+    D7 -->|Análises| D9["📋 Tabela: análises<br/>uid · data · score<br/>risco · #lacunas"]
+    D7 -->|Editais| D10["📋 Tabela: editais<br/>órgão · tipo · valor<br/>cláusulas geradas"]
+    D7 -->|Logs| D11["📋 Logs eventos<br/>tipo · uid · timestamp<br/>status · IP"]
+
+    D8 --> D12["📥 Exportar CSV"]
+    D9 --> D12
+    D10 --> D12
+    D11 --> D12
+
+    D12 --> D13["CSV: usuarios | analises<br/>| editais | logs | tudo"]
+
+    D5 --> D14["📈 Cards clicáveis<br/>Gráfico por órgão<br/>Detalhe drilling-down"]
+    D14 --> D15["📋 Filtra tabela<br/>pelo órgão selecionado"]
+
+    style D3 fill:#7f1d1d,stroke:#EF4444,color:#F1F5F9
+    style D2 fill:#1E293B,stroke:#EC4899,color:#F1F5F9
+    style D4 fill:#1E293B,stroke:#2EC4B6,color:#F1F5F9
+    style D5 fill:#1E293B,stroke:#F59E0B,color:#F1F5F9
+    style D13 fill:#1E293B,stroke:#22C55E,color:#F1F5F9
+        </pre>
+    </div>
+</section>
+
+<!-- =======================================================
+     SEÇÃO 6: API FLOW DETALHADO
+     ======================================================= -->
+<section id="api">
+    <div class="section-header">
+        <h2>6. API Flow — Análise de Minuta (detalhado)</h2>
+        <p>Passo a passo de cada camada: browser → Firebase Auth → Cloud Function → Firestore.</p>
+    </div>
+
+<div class="api-flow">┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│  NAVEGADOR                              CLOUD FUNCTION                        FIRESTORE
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+</div>
+
+<div class="api-flow">
+<span class="line"><span class="time">T+0ms</span><span class="actor">Browser</span> <span class="arrow">│</span> <span class="sys">PubliAuth.getIdToken()</span></span>
+<span class="line"><span class="time">T+50ms</span><span class="actor">Browser</span> <span class="arrow">┼─▶</span> <span class="api">POST /api/analisar_minuta</span></span>
+<span class="line"><span class="time"></span>         <span class="arrow">│</span> <span class="sys">Authorization: Bearer {idToken}</span></span>
+<span class="line"><span class="time"></span>         <span class="arrow">│</span> <span class="sys">{texto: "...", valor: 50000}</span></span>
+<span class="line"><span class="time">T+80ms</span><span class="sys">CF</span>     <span class="arrow">│</span> <span class="ok">verify_id_token(token) → uid/email/claims</span></span>
+<span class="line"><span class="time">T+90ms</span><span class="sys">CF</span>     <span class="arrow">│</span> <span class="ok">Rate limit: 1000 req/min por UID</span></span>
+<span class="line"><span class="time">T+100ms</span><span class="sys">CF</span>    <span class="arrow">│</span> <span class="ok">extrair_clausulas(texto) → 16 padrões regex</span></span>
+<span class="line"><span class="time">T+110ms</span><span class="sys">CF</span>    <span class="arrow">│</span> <span class="ok">detectar_lacunas(texto) → lista lacunas</span></span>
+<span class="line"><span class="time">T+115ms</span><span class="sys">CF</span>    <span class="arrow">│</span> <span class="ok">calcular_score() → 0-100</span></span>
+<span class="line"><span class="time">T+120ms</span><span class="sys">CF</span>    <span class="arrow">│</span> <span class="ok">Isolation Forest → anomaly_score</span></span>
+<span class="line"><span class="time">T+130ms</span><span class="sys">CF</span>    <span class="arrow">│</span> <span class="ok">Random Forest → rf_proba, rf_class</span></span>
+<span class="line"><span class="time">T+140ms</span><span class="sys">CF</span>    <span class="arrow">│</span> <span class="ok">SHAP shap_values() → top-3 features</span></span>
+<span class="line"><span class="time">T+145ms</span><span class="sys">CF</span>    <span class="arrow">│</span> <span class="ok">Contrafactuais jurídicos gerados</span></span>
+<span class="line"><span class="time">T+150ms</span><span class="sys">CF</span>    <span class="arrow">│</span> <span class="ok">Montando response JSON</span></span>
+<span class="line"><span class="time">T+155ms</span><span class="sys">CF</span>    <span class="arrow">│</span> <span class="db">set(doc logs/{id}, {tipo:'analise', uid, email, orgaoId, duracao_ms, status:'sucesso'})</span></span>
+<span class="line"><span class="time">T+160ms</span><span class="sys">CF</span>    <span class="arrow">│</span> <span class="ok">FirebaseAuth.write</span></span>
+<span class="line"><span class="time">T+170ms</span><span class="sys">CF</span>    <span class="arrow">│◀─</span> <span class="db">✓ logs gravado</span></span>
+<span class="line"><span class="time">T+175ms</span><span class="sys">CF</span>    <span class="arrow">│──▶</span> <span class="ok">HTTP 200 {score, risco, lacunas, clausulas, explicacoes, shap, contrafactuais}</span></span>
+<span class="line"><span class="time">T+200ms</span><span class="actor">Browser</span> <span class="arrow">│</span> <span class="ok">registrarEvento('avaliar_sucesso', {score, risco})</span></span>
+<span class="line"><span class="time">T+205ms</span><span class="actor">Browser</span> <span class="arrow">│</span> <span class="ok">salvarGeracao() → Firestore editais/{id}</span></span>
+<span class="line"><span class="time">T+210ms</span><span class="actor">Browser</span> <span class="arrow">│</span> <span class="ok">UI atualiza: exibe score + risk badge</span></span>
+</div>
+
+    <div class="flow-grid" style="margin-top:24px">
+        <div class="flow-card">
+            <h3>✅ Resposta de Sucesso (HTTP 200)</h3>
+<pre style="font-size:11px;font-family:monospace;background:#0F172A;padding:12px;border-radius:8px;overflow-x:auto">
+{
+  "score": 72.5,
+  "risco": "médio",
+  "lacunas": ["vigência excessiva", ...],
+  "clausulas": [{id, tipo, texto}],
+  "explicacoes": [
+    {"feature":"historico_sancoes",
+     "peso": 0.0779,
+     "explicacao":"..."}
+  ],
+  "contrafactuais": [...],
+  "metricas": {"modelos_disponiveis":true}
+}
+</pre>
+        </div>
+        <div class="flow-card">
+            <h3>❌ Respostas de Erro</h3>
+<pre style="font-size:11px;font-family:monospace;background:#0F172A;padding:12px;border-radius:8px;overflow-x:auto">
+401 Unauthorized
+{tipo:"unauthorized", code:"unauthorized",
+ erro:"Token de autenticacao ausente.
+  Faca login primeiro."}
+
+429 Too Many Requests
+{tipo:"rate_limit", code:"rate_limited",
+ erro:"Limite de 1000 req/min
+ excedido para este UID."}
+
+400 Bad Request
+{tipo:"validacao", code:"invalid_input",
+ erro:"Texto excede o limite de
+ 50000 caracteres."}
+
+500 Internal Server Error
+{tipo:"server_error", code:"internal",
+ erro:"Falha no pipeline ML.
+ Tente novamente."}
+</pre>
+        </div>
+    </div>
+</section>
+
+<!-- =======================================================
+     SEÇÃO 7: FIRESTORE SCHEMA
+     ======================================================= -->
+<section id="firestore">
+    <div class="section-header">
+        <h2>7. Schema do Firestore — Collections e Regras</h2>
+        <p>Estrutura de dados completa com regras de segurança por coleção.</p>
+    </div>
+
+    <div class="diagram-box">
+        <pre class="mermaid">
+erDiagram
+    usuarios {
+        string uid PK "Firebase Auth UID"
+        string email "email do usuário"
+        string nome "nome completo"
+        string papel "usuario | admin"
+        string perfil "pregoeiro | servidor | pesquisador | ..."
+        string orgaoId "SESP-MT | POLITEC-MT | TJPR | TJRN"
+        string provedor "password | google.com | anonymous"
+        bool ativo "conta ativa?"
+        bool primeiroAcesso "precisa completar perfil?"
+        int totalAnalises "contador"
+        string whatsapp "DDD + número"
+        string instituicao "nome do órgão"
+        timestamp dataCriacao "server timestamp"
+        timestamp ultimoAcesso "server timestamp"
+    }
+
+    orgaos {
+        string orgaoId PK "SESP-MT | POLITEC-MT | TJPR | TJRN"
+        string nome "nome completo"
+        string sigla "SESP-MT"
+        string estado "MT | PR | RN"
+        string tipo "secretaria | politec | tribunal"
+        string regiao "Centro-Oeste | Sul | Nordeste"
+        bool ativo "ativo?"
+        timestamp dataCriacao "server timestamp"
+    }
+
+    analises {
+        string analiseId PK "auto-id"
+        string uid FK "usuarios.uid"
+        string orgaoId "órgão do usuário"
+        string texto "texto do edital"
+        number score "0-100"
+        string risco "baixo | medio | alto"
+        array lacunas "lista de lacunas"
+        timestamp dataCriacao "server timestamp"
+    }
+
+    editais {
+        string editalId PK "auto-id"
+        string orgaoId "órgão"
+        string titulo "título do edital"
+        string tipo "inovação | sustentabilidade | ..."
+        number valor "valor estimado"
+        array clausulasGeradas "cláusulas recomendadas"
+        string usuarioId FK "usuarios.uid"
+        timestamp dataCriacao "server timestamp"
+    }
+
+    logs {
+        string logId PK "auto-id"
+        string tipo "page_view | login_sucesso | avaliar_sucesso | ..."
+        string uid "usuário (ou anon)"
+        string email "email"
+        string orgaoId "órgão"
+        object claims "custom claims"
+        number duracao_ms "duração da operação"
+        string status "sucesso | erro"
+        string ip "IP do cliente"
+        string userAgent "navegador"
+        object extras "dados extras"
+        timestamp timestamp "server timestamp"
+    }
+
+    usuarios ||--o{ analises : "cria"
+    usuarios ||--o{ editais : "cria"
+    orgaos ||--o{ analises : "agrupa"
+    orgaos ||--o{ editais : "agrupa"
+    orgaos ||--o{ logs : "gera eventos"
+        </pre>
+    </div>
+
+    <div class="flow-grid" style="margin-top:24px">
+        <div class="flow-card">
+            <h3>🔒 Regras de Segurança</h3>
+<pre style="font-size:11px;font-family:monospace;background:#0F172A;padding:12px;border-radius:8px;overflow-x:auto">
+/usuarios/{userId}
+  read:  isOwner(userId) || isAdmin()
+  create: isOwner(userId)
+  update: isOwner(userId) || isAdmin()
+  delete: isAdmin()
+
+/orgaos/{orgaoId}
+  read:  isAuthenticated()
+  write: isAdmin()
+
+/analises/{userId}/**
+  read:  isOwner(userId) || isAdmin()
+  create: isOwner(userId)
+  delete: isAdmin()
+
+/editais/{editalId}
+  read:  isAuthenticated()
+  create: isOwner(request.resource.data.usuarioId)
+  update/delete: isOwner(resource.data.usuarioId) || isAdmin()
+
+/logs/{logId}
+  read:  isAdmin()
+  create: isAuthenticated()
+  update/delete: never
+</pre>
+        </div>
+        <div class="flow-card">
+            <h3>📊 Índices Compostos</h3>
+<pre style="font-size:11px;font-family:monospace;background:#0F172A;padding:12px;border-radius:8px;overflow-x:auto">
+Collection: analises
+  fields: orgaoId ASC + dataCriacao DESC
+  fields: uid ASC + dataCriacao DESC
+
+Collection: editais
+  fields: orgaoId ASC + dataCriacao DESC
+  fields: usuarioId ASC + dataCriacao DESC
+
+Collection: logs
+  fields: orgaoId ASC + timestamp DESC
+  fields: uid ASC + timestamp DESC
+  fields: tipo ASC + timestamp DESC
+</pre>
+        </div>
+    </div>
+</section>
+
+<!-- =======================================================
+     SEÇÃO 8: USUÁRIOS DE TESTE
+     ======================================================= -->
+<section id="usuarios">
+    <div class="section-header">
+        <h2>8. Usuários de Teste — Ambientes de Validação</h2>
+        <p>Credenciais para testes manuais e validação com especialistas.</p>
+    </div>
+
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:14px;margin-top:16px">
+        <thead>
+            <tr style="background:var(--surface);color:var(--verde)">
+                <th style="padding:12px 16px;text-align:left;border-bottom:1px solid var(--borda)">Email</th>
+                <th style="padding:12px 16px;text-align:left;border-bottom:1px solid var(--borda)">Órgão</th>
+                <th style="padding:12px 16px;text-align:left;border-bottom:1px solid var(--borda)">Perfil</th>
+                <th style="padding:12px 16px;text-align:left;border-bottom:1px solid var(--borda)">Custom Claims</th>
+                <th style="padding:12px 16px;text-align:left;border-bottom:1px solid var(--borda)">Senha</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background:var(--surface-alt)">
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda);font-weight:600">gestor.renatorosa@gmail.com</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda)">gestor</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda)">admin</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda);font-family:monospace;font-size:12px;color:var(--amarelo)">admin:true, papel:admin</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda);font-family:monospace;color:var(--verde)">G3st0r@2026!</td>
+            </tr>
+            <tr>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda)">sesp-teste@sesp.mt.gov.br</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda)">SESP-MT</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda)">pregoeiro</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda);font-family:monospace;font-size:12px;color:var(--amarelo)">orgaoId:SESP-MT</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda);font-family:monospace;color:var(--verde)">7L%9JSh0pxl1cX</td>
+            </tr>
+            <tr style="background:var(--surface-alt)">
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda)">politec-teste@politec.mt.gov.br</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda)">POLITEC-MT</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda)">pregoeiro</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda);font-family:monospace;font-size:12px;color:var(--amarelo)">orgaoId:POLITEC-MT</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda);font-family:monospace;color:var(--verde)">Lw8&XT3pU*j0vE</td>
+            </tr>
+            <tr>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda)">tjpr-teste@tjpr.jus.br</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda)">TJPR</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda)">pregoeiro</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda);font-family:monospace;font-size:12px;color:var(--amarelo)">orgaoId:TJPR</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda);font-family:monospace;color:var(--verde)">&PhfU6S8Fv78$!</td>
+            </tr>
+            <tr style="background:var(--surface-alt)">
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda)">tjrn-teste@tjrn.jus.br</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda)">TJRN</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda)">pregoeiro</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda);font-family:monospace;font-size:12px;color:var(--amarelo)">orgaoId:TJRN</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--borda);font-family:monospace;color:var(--verde)">nUXfwLZVzH7Enh</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</section>
+
+<footer>
+    <p><strong>PubliCopilot v3.0</strong> · Plataforma de Análise de Compras Públicas · Fucape Business School</p>
+    <p style="margin-top:8px">Hosting: publicopiloto.web.app · API: us-central1-publicopiloto.cloudfunctions.net</p>
+</footer>
+
+</div>
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'dark',
+        flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true,
+            curve: 'basis',
+            rankSpacing: 40,
+            nodeSpacing: 30,
+            padding: 16
+        },
+        sequence: {
+            useMaxWidth: true,
+            diagramMarginX: 20,
+            diagramMarginY: 20,
+            actorMargin: 50,
+            width: 180,
+            height: 65,
+            boxMargin: 10,
+            boxTextMargin: 5,
+            noteMargin: 10,
+            messageMargin: 35
+        },
+        er: {
+            useMaxWidth: true,
+            diagramMarginX: 20,
+            diagramMarginY: 20
+        },
+        themeVariables: {
+            primaryColor: '#1E293B',
+            primaryTextColor: '#F1F5F9',
+            primaryBorderColor: '#2EC4B6',
+            lineColor: '#475569',
+            secondaryColor: '#334155',
+            tertiaryColor: '#0F172A',
+            noteBkgColor: '#334155',
+            noteTextColor: '#F1F5F9',
+            actorBkg: '#1E293B',
+            actorBorder: '#2EC4B6',
+            actorTextColor: '#F1F5F9',
+            signalColor: '#F1F5F9',
+            signalTextColor: '#F1F5F9'
+        }
+    });
+</script>
+</body>
+</html>
