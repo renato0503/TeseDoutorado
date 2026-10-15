@@ -23,8 +23,12 @@ servido 100% no Firebase.
 | API `/api/analisar` | Firebase Hosting rewrite | ❌ Aguardando deploy da function + hosting |
 | Modelos ML | `functions/models/saved/` | 🟢 11 arquivos, 27,35 MB |
 | NVIDIA API | `meta/llama-3.3-70b-instruct` | 🟢 Cliente integrado (`nvidia_client.py`) |
-| Rate limiting | 30 req/min por usuário | 🟢 Implementado |
+| Rate limiting | 1000 req/min por usuário (configurável via `MAX_REQ_PER_MIN`) | 🟢 Implementado |
 | Security headers | X-Frame-Options, X-Content-Type-Options | 🟢 Configurados em `firebase.json` |
+| Cadastro multi-orgão (SESP-MT, Politec-MT, TJPR, TJRN) | provisionamento via `scripts/admin_create_user.py` | 🟢 Pronto |
+| Audit log em `logs/` | telemetria de UI + API | 🟢 Ativo |
+| Dashboard admin com filtro por orgão | `dashboard/index.html` | 🟢 Ativo |
+| Persistência de editais gerados | coleção `editais/` | 🟢 Ativo |
 
 ---
 
@@ -247,3 +251,4 @@ Para desenvolvimento local, defina `SKIP_AUTH=1` para bypassar a validação.
 | 19/07/2026 | v1.2 | **Sistema de autenticação completo**: login email/senha, Google OAuth, cadastro com nome+whatsapp+email+senha+confirmação+CAPTCHA matemático. Validação JWT na Cloud Function via firebase-admin. Firestore Rules atualizadas. Front-end v1.2 deployado. |
 | 19/07/2026 | v1.3 | Deploy da Cloud Function `analisar_minuta` com auth JWT, lazy load, retreino com target observável (AUC 91,05%) |
 | 25/07/2026 | v2.1 | **NVIDIA IA integrada** — geração de editais com llama-3.3-70b. **Bug corrigido**: `uf_encoded`/`tipo_encoded` usando `OrdinalEncoder` real. **Logging estruturado** nos 4 módulos. **Counterfactual templates expandido** para 12 features. **XSS sanitizado** (modulo_geracao + modulo_avaliacao). **Rate limiting** (30 req/min). **Unicode normalization** (NFKD). **Menu mobile** + fix `showTab()`. |
+| Outubro/2026 | v3.0 | **Fase de testes multi-orgão (SESP-MT, Politec-MT, TJPR, TJRN)**. Cadastro manual via `scripts/admin_create_user.py`. Coleção `orgaos/` populada automaticamente. Audit log completo (`logs/`) com telemetria de UI + API. Dashboard admin com métricas por orgão, persistência de editais em `editais/`. Rate limit configurável via `MAX_REQ_PER_MIN` (default 1000/min). Veja `docs/fase_testes.md` para detalhes. |
