@@ -22,6 +22,9 @@
         .stat-card .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--texto-ter); font-weight: 600; }
         .stat-card .value { font-size: 28px; font-weight: 800; color: var(--preto); margin: 6px 0; }
         .stat-card .detail { font-size: 13px; color: var(--texto-sec); }
+        .stat-card.clickable { cursor: pointer; transition: transform .12s, box-shadow .12s; }
+        .stat-card.clickable:hover { transform: translateY(-2px); box-shadow: 0 4px 18px rgba(20,184,166,0.18); border-color: var(--verde-piscina); }
+        .stat-card.clickable.active { outline: 2px solid var(--verde-piscina); }
         .card { background: white; border: 1px solid var(--borda); border-radius: var(--raio); padding: 24px; margin-bottom: 24px; box-shadow: var(--sombra); }
         .card h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
         table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -32,8 +35,37 @@
         .btn-sm:hover { background: var(--surface-alt); }
         .loading { text-align: center; padding: 60px; color: var(--texto-sec); }
         .badge-admin { background: rgba(46,196,182,0.16); color: #0d7a6e; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .badge-org { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; background: #e0e7ff; color: #3730a3; }
+        .badge-org.SESP-MT { background: #fee2e2; color: #991b1b; }
+        .badge-org.POLITEC-MT { background: #fef3c7; color: #92400e; }
+        .badge-org.TJPR { background: #d1fae5; color: #065f46; }
+        .badge-org.TJRN { background: #dbeafe; color: #1e40af; }
         .export-btn { background: var(--verde-piscina); color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px; }
         .export-btn:hover { opacity: 0.9; }
+        .filter-bar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; padding: 12px 16px; background: #f3f4f6; border-radius: 12px; border: 1px solid var(--borda); }
+        .filter-bar label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--texto-ter); margin-right: 4px; }
+        .filter-bar select { padding: 6px 12px; border-radius: 8px; border: 1px solid var(--borda); font-size: 13px; background: white; }
+        .filter-bar input { padding: 6px 12px; border-radius: 8px; border: 1px solid var(--borda); font-size: 13px; flex: 1; min-width: 180px; }
+        .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+        .pill-success { background: #d1fae5; color: #065f46; }
+        .pill-warn { background: #fef3c7; color: #92400e; }
+        .pill-error { background: #fee2e2; color: #991b1b; }
+        .pill-info { background: #dbeafe; color: #1e40af; }
+        .pill-neutral { background: #f3f4f6; color: #374151; }
+        .org-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 24px; }
+        .org-card { padding: 14px; border-radius: 12px; border: 1px solid var(--borda); background: linear-gradient(180deg, white 0%, #fafafa 100%); }
+        .org-card .org-name { font-size: 14px; font-weight: 800; margin-bottom: 8px; }
+        .org-card .org-line { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; color: var(--texto-sec); }
+        .org-card .org-line strong { color: var(--preto); font-weight: 700; }
+        .org-card.SESP-MT { border-left: 4px solid #ef4444; }
+        .org-card.POLITEC-MT { border-left: 4px solid #f59e0b; }
+        .org-card.TJPR { border-left: 4px solid #10b981; }
+        .org-card.TJRN { border-left: 4px solid #3b82f6; }
+        .org-card.OUTROS { border-left: 4px solid #6b7280; }
+        details summary { cursor: pointer; }
+        .log-payload { background: #f9fafb; padding: 8px; border-radius: 6px; font-family: monospace; font-size: 11px; max-width: 480px; overflow-x: auto; white-space: pre-wrap; word-break: break-all; }
+        .actions-cell { display: flex; gap: 6px; }
+        .msg-empty { padding: 24px; text-align: center; color: var(--texto-sec); font-size: 13px; }
         @media (max-width: 768px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
     </style>
 </head>
@@ -42,28 +74,84 @@
         <div class="header-bar">
             <div>
                 <h1>Dashboard PubliCopilot</h1>
-                <div class="sub">Painel administrativo acadêmico · coleta de dados de uso</div>
+                <div class="sub">Painel administrativo acadêmico · coleta de dados de uso · fase de testes multi-orgão</div>
             </div>
             <div class="admin-actions">
                 <a href="../index.html" class="btn-sm">← Voltar</a>
-                <button class="export-btn" onclick="exportarCSV()">Exportar CSV</button>
+                <button class="btn-sm" id="btn-seed-orgaos" onclick="seedOrgaosSeFaltar()">Inicializar orgãos</button>
                 <button class="btn-sm" onclick="atualizar()">↻ Atualizar</button>
+                <button class="export-btn" onclick="exportarCSV()">Exportar CSV</button>
+                <select id="csv-scope" style="padding:6px 8px;border-radius:8px;border:1px solid var(--borda);font-size:13px;">
+                    <option value="usuarios">usuários</option>
+                    <option value="analises">análises</option>
+                    <option value="editais">editais</option>
+                    <option value="logs">logs</option>
+                    <option value="tudo">tudo</option>
+                </select>
             </div>
         </div>
 
+        <div class="filter-bar">
+            <label>Filtrar por orgão:</label>
+            <select id="filtro-orgao">
+                <option value="">— Todos —</option>
+            </select>
+            <label>Buscar:</label>
+            <input id="filtro-texto" placeholder="email, nome, minuta, etc." />
+            <button class="btn-sm" onclick="atualizar()">Aplicar</button>
+            <button class="btn-sm" onclick="limparFiltros()">Limpar</button>
+        </div>
+
         <div class="stats-grid" id="stats-grid">
-            <div class="stat-card"><div class="label">Usuários</div><div class="value" id="stat-usuarios">-</div><div class="detail" id="stat-usuarios-detail"></div></div>
-            <div class="stat-card"><div class="label">Análises</div><div class="value" id="stat-analises">-</div><div class="detail" id="stat-analises-detail"></div></div>
-            <div class="stat-card"><div class="label">Risco Alto</div><div class="value" id="stat-risco-alto" style="color:#c0392b;">-</div><div class="detail">% do total</div></div>
-            <div class="stat-card"><div class="label">Score Médio</div><div class="value" id="stat-score-medio">-</div><div class="detail">heurístico (0-100)</div></div>
+            <div class="stat-card clickable" data-filter="usuarios" onclick="filtrarPor('usuarios')">
+                <div class="label">Usuários</div>
+                <div class="value" id="stat-usuarios">-</div>
+                <div class="detail" id="stat-usuarios-detail"></div>
+            </div>
+            <div class="stat-card clickable" data-filter="analises" onclick="filtrarPor('analises')">
+                <div class="label">Análises</div>
+                <div class="value" id="stat-analises">-</div>
+                <div class="detail" id="stat-analises-detail"></div>
+            </div>
+            <div class="stat-card clickable" data-filter="editais" onclick="filtrarPor('editais')">
+                <div class="label">Editais Gerados</div>
+                <div class="value" id="stat-editais">-</div>
+                <div class="detail" id="stat-editais-detail"></div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Score Médio</div>
+                <div class="value" id="stat-score-medio">-</div>
+                <div class="detail">heurístico (0-100)</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Risco Alto</div>
+                <div class="value" id="stat-risco-alto" style="color:#c0392b;">-</div>
+                <div class="detail" id="stat-risco-alto-detail">% do total</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Eventos (24h)</div>
+                <div class="value" id="stat-eventos-24h">-</div>
+                <div class="detail">telemetria</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Métricas por orgão</h3>
+            <div class="org-grid" id="org-grid">
+                <div class="msg-empty">Carregando orgãos...</div>
+            </div>
         </div>
 
         <div class="card">
             <h3>Usuários</h3>
             <div style="overflow-x:auto;">
                 <table>
-                    <thead><tr><th>Nome</th><th>Email</th><th>Perfil</th><th>Instituição</th><th>Provedor</th><th>Análises</th><th>Primeiro Acesso</th><th>Papel</th></tr></thead>
-                    <tbody id="tabela-usuarios"><tr><td colspan="8" class="loading">Carregando...</td></tr></tbody>
+                    <thead><tr>
+                        <th>Nome</th><th>Email</th><th>Orgão</th><th>Perfil</th>
+                        <th>Provedor</th><th>Análises</th><th>Editais</th>
+                        <th>Último acesso</th><th>Papel</th>
+                    </tr></thead>
+                    <tbody id="tabela-usuarios"><tr><td colspan="9" class="loading">Carregando...</td></tr></tbody>
                 </table>
             </div>
         </div>
@@ -72,127 +160,427 @@
             <h3>Últimas Análises</h3>
             <div style="overflow-x:auto;">
                 <table>
-                    <thead><tr><th>Usuário</th><th>Score</th><th>Risco ML</th><th>RF Proba</th><th>Cláusulas</th><th>Data</th></tr></thead>
-                    <tbody id="tabela-analises"><tr><td colspan="6" class="loading">Carregando...</td></tr></tbody>
+                    <thead><tr>
+                        <th>Usuário</th><th>Orgão</th><th>Score</th><th>Risco ML</th>
+                        <th>RF Proba</th><th>Cláusulas</th><th>Lacunas</th><th>Duração</th><th>Data</th>
+                    </tr></thead>
+                    <tbody id="tabela-analises"><tr><td colspan="9" class="loading">Carregando...</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Editais Gerados (Módulo 2)</h3>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead><tr>
+                        <th>Usuário</th><th>Orgão</th><th>Tipo</th><th>Modalidade</th>
+                        <th>Valor (R$)</th><th>Cláusulas</th><th>Fonte</th><th>Duração</th><th>Data</th>
+                    </tr></thead>
+                    <tbody id="tabela-editais"><tr><td colspan="9" class="loading">Carregando...</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Logs de Eventos (telemetria)</h3>
+            <p style="font-size:12px;color:var(--texto-sec);margin-bottom:12px;">
+                Eventos coletados pelo frontend e pelo backend. Limitado às últimas 300 entradas.
+            </p>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead><tr>
+                        <th>Data</th><th>Tipo</th><th>UID</th><th>Orgão</th>
+                        <th>Resumo</th><th>Status</th>
+                    </tr></thead>
+                    <tbody id="tabela-logs"><tr><td colspan="6" class="loading">Carregando...</td></tr></tbody>
                 </table>
             </div>
         </div>
     </div>
 
     <script>
-        let db;
+    let db;
+    let _cacheUsuarios = [];
+    let _cacheOrgaos = [];
+    let _filtroAtivo = '';
 
-        async function init() {
+    const ORGAOS_FIXOS = ['SESP-MT', 'POLITEC-MT', 'TJPR', 'TJRN'];
+
+    async function init() {
+        try {
             await window.whenFirebaseReady();
-            db = firebase.firestore();
+        } catch (e) { console.error('firebase-init:', e); }
+        db = firebase.firestore();
 
-            const user = firebase.auth().currentUser;
-            if (!user) {
-                document.body.innerHTML = '<div class="container" style="padding:60px;text-align:center;"><h2>Acesso negado</h2><p>Faça login como administrador.</p><a href="../index.html" class="btn-sm">Voltar</a></div>';
-                return;
-            }
-
-            const token = await user.getIdTokenResult();
-            const isAdmin = token.claims.admin === true;
-            if (!isAdmin) {
-                const doc = await db.collection('usuarios').doc(user.uid).get();
-                if (!doc.exists || doc.data().papel !== 'admin') {
-                    document.body.innerHTML = '<div class="container" style="padding:60px;text-align:center;"><h2>Acesso restrito</h2><p>Você não possui permissão de administrador.</p><a href="../index.html" class="btn-sm">Voltar</a></div>';
-                    return;
-                }
-            }
-
-            await atualizar();
+        const user = firebase.auth().currentUser;
+        if (!user) {
+            document.body.innerHTML = '<div class="container" style="padding:60px;text-align:center;"><h2>Acesso negado</h2><p>Faça login como administrador.</p><a href="../index.html" class="btn-sm">Voltar</a></div>';
+            return;
         }
 
-        async function atualizar() {
-            document.querySelectorAll('.loading').forEach(el => el.textContent = 'Carregando...');
+        let isAdmin = false;
+        try {
+            const token = await user.getIdTokenResult();
+            isAdmin = token.claims.admin === true;
+        } catch (_) {}
+        if (!isAdmin) {
+            try {
+                const docu = await db.collection('usuarios').doc(user.uid).get();
+                if (docu.exists && docu.data().papel === 'admin') isAdmin = true;
+            } catch (_) {}
+        }
+        if (!isAdmin) {
+            document.body.innerHTML = '<div class="container" style="padding:60px;text-align:center;"><h2>Acesso restrito</h2><p>Você não possui permissão de administrador.</p><a href="../index.html" class="btn-sm">Voltar</a></div>';
+            return;
+        }
 
-            const usuariosSnap = await db.collection('usuarios').get();
-            const usuarios = usuariosSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+        await seedOrgaosSeFaltar(true);
+        await carregarOrgaosFiltro();
+        await atualizar();
+    }
 
-            let totalAnalises = 0;
-            let riscoAlto = 0;
-            let somaScore = 0;
-            let totalScore = 0;
-            const analisesList = [];
+    async function seedOrgaosSeFaltar(silent) {
+        const orgaosSnap = await db.collection('orgaos').limit(1).get();
+        if (!orgaosSnap.empty) return false;
+        const METAS = {
+            'SESP-MT': { nome: 'Secretaria de Estado de Seguranca Publica de Mato Grosso', sigla: 'SESP-MT', estado: 'MT', ativo: true },
+            'POLITEC-MT': { nome: 'Pericia Oficial e Identificacao Tecnica do Estado de Mato Grosso', sigla: 'POLITEC-MT', estado: 'MT', ativo: true },
+            'TJPR': { nome: 'Tribunal de Justica do Estado do Parana', sigla: 'TJPR', estado: 'PR', ativo: true },
+            'TJRN': { nome: 'Tribunal de Justica do Estado do Rio Grande do Norte', sigla: 'TJRN', estado: 'RN', ativo: true },
+        };
+        const batch = db.batch();
+        for (const id of Object.keys(METAS)) {
+            const ref = db.collection('orgaos').doc(id);
+            batch.set(ref, { orgaoId: id, criadoEm: firebase.firestore.FieldValue.serverTimestamp(), atualizadoEm: firebase.firestore.FieldValue.serverTimestamp(), ...METAS[id] }, { merge: true });
+        }
+        await batch.commit();
+        if (!silent) alert('Orgãos inicializados: SESP-MT, POLITEC-MT, TJPR, TJRN.');
+        return true;
+    }
 
-            for (const u of usuarios) {
-                const analisesSnap = await db.collection('analises').doc(u.id).collection('historico').orderBy('dataCriacao', 'desc').get();
-                const analises = analisesSnap.docs.map(d => ({ userId: u.id, userName: u.nome || u.id, ...d.data() }));
+    async function carregarOrgaosFiltro() {
+        const sel = document.getElementById('filtro-orgao');
+        if (!sel) return;
+        // Mantem "Todos"
+        while (sel.options.length > 1) sel.remove(1);
+        const snap = await db.collection('orgaos').orderBy('sigla').get();
+        _cacheOrgaos = [];
+        snap.forEach(doc => {
+            const data = doc.data();
+            _cacheOrgaos.push({ id: doc.id, ...data });
+            const opt = document.createElement('option');
+            opt.value = doc.id;
+            opt.textContent = data.sigla || doc.id;
+            sel.appendChild(opt);
+        });
+    }
+
+    function limparFiltros() {
+        document.getElementById('filtro-orgao').value = '';
+        document.getElementById('filtro-texto').value = '';
+        _filtroAtivo = '';
+        atualizar();
+    }
+
+    function filtrarPor(escopo) {
+        // Filtro de "escopo" foi descontinuado — mantemos apenas para nao quebrar links.
+        // Dica visual: o usuario pode usar o filtro por orgão acima para drill-down.
+        atualizar();
+    }
+
+    async function atualizar() {
+        document.querySelectorAll('.loading').forEach(el => el.textContent = 'Carregando...');
+
+        const orgaoFiltro = document.getElementById('filtro-orgao').value || '';
+        const textoFiltro = (document.getElementById('filtro-texto').value || '').trim().toLowerCase();
+
+        // === Usuários ===
+        const usuariosSnap = await db.collection('usuarios').get();
+        const usuarios = usuariosSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+        const anonimos = usuarios.filter(u => u.provedor === 'anonymous').length;
+        const registrados = usuarios.length - anonimos;
+
+        // === Análises: agrega via N+1 (mas limitado a 200 ultimas por user) ===
+        let totalAnalises = 0;
+        let riscoAlto = 0;
+        let somaScore = 0;
+        let totalScore = 0;
+        const analisesList = [];
+        const editaisList = [];
+        const usuariosPorOrgao = {};
+        for (const id of ORGAOS_FIXOS) usuariosPorOrgao[id] = { users: 0, analises: 0, editais: 0, scoreSum: 0, scoreCount: 0 };
+        usuariosPorOrgao['_OUTROS_'] = { users: 0, analises: 0, editais: 0, scoreSum: 0, scoreCount: 0 };
+
+        for (const u of usuarios) {
+            const orgaoId = u.orgaoId || '_OUTROS_';
+            if (!usuariosPorOrgao[orgaoId]) {
+                usuariosPorOrgao[orgaoId] = { users: 0, analises: 0, editais: 0, scoreSum: 0, scoreCount: 0 };
+            }
+            usuariosPorOrgao[orgaoId].users++;
+            try {
+                const analisesSnap = await db.collection('analises').doc(u.id).collection('historico').orderBy('dataCriacao', 'desc').limit(200).get();
+                const analises = analisesSnap.docs.map(d => ({ userId: u.id, userName: u.nome || u.id, orgaoId, orgaoNome: u.orgaoNome || '', ...d.data() }));
                 analisesList.push(...analises);
                 totalAnalises += analises.length;
                 u._analiseCount = analises.length;
+                usuariosPorOrgao[orgaoId].analises += analises.length;
                 for (const a of analises) {
                     if (a.risco_ml === 'alto') riscoAlto++;
-                    if (a.score != null) { somaScore += a.score; totalScore++; }
+                    if (a.score != null) { somaScore += a.score; totalScore++; usuariosPorOrgao[orgaoId].scoreSum += a.score; usuariosPorOrgao[orgaoId].scoreCount++; }
                 }
+            } catch (e) { u._analiseCount = 0; }
+        }
+
+        // === Editais: top-level collection ===
+        let editaisQuery = db.collection('editais').orderBy('dataCriacao', 'desc').limit(200);
+        const editaisSnap = await editaisQuery.get();
+        const editaisPorUsuario = {};
+        for (const d of editaisSnap.docs) {
+            const e = { id: d.id, ...d.data() };
+            // Resolve nome do usuario
+            const u = usuarios.find(x => x.id === e.usuarioId);
+            if (u) { e.userName = u.nome || u.id; e.orgaoId = e.orgaoId || u.orgaoId || ''; }
+            editaisList.push(e);
+            const orgaoId = e.orgaoId || '_OUTROS_';
+            if (!usuariosPorOrgao[orgaoId]) {
+                usuariosPorOrgao[orgaoId] = { users: 0, analises: 0, editais: 0, scoreSum: 0, scoreCount: 0 };
             }
-
-            const anonimos = usuarios.filter(u => u.provedor === 'anonymous').length;
-            const registrados = usuarios.length - anonimos;
-
-            document.getElementById('stat-usuarios').textContent = usuarios.length;
-            document.getElementById('stat-usuarios-detail').textContent = `${anonimos} anônimos · ${registrados} registrados`;
-            document.getElementById('stat-analises').textContent = totalAnalises;
-            document.getElementById('stat-analises-detail').textContent = `média ${totalAnalises > 0 ? (totalAnalises / usuarios.length).toFixed(1) : 0} por usuário`;
-            document.getElementById('stat-risco-alto').textContent = riscoAlto;
-            document.getElementById('stat-risco-alto').style.color = riscoAlto > 0 ? '#c0392b' : '#666';
-            document.getElementById('stat-score-medio').textContent = totalScore > 0 ? (somaScore / totalScore).toFixed(1) + '%' : '-';
-
-            const tbodyU = document.getElementById('tabela-usuarios');
-            tbodyU.innerHTML = usuarios.sort((a, b) => (b._analiseCount || 0) - (a._analiseCount || 0)).map(u => `
-                <tr>
-                    <td><strong>${escapeHtml(u.nome || '—')}</strong>${u.papel === 'admin' ? ' <span class="badge-admin">admin</span>' : ''}</td>
-                    <td>${escapeHtml(u.email || '—')}</td>
-                    <td>${escapeHtml(u.perfil || '—')}</td>
-                    <td>${escapeHtml(u.instituicao || '—')}</td>
-                    <td>${u.provedor || '—'}</td>
-                    <td>${u._analiseCount || 0}</td>
-                    <td>${u.primeiroAcesso ? '✅ Sim' : '❌ Não'}</td>
-                    <td>${u.papel || 'usuario'}</td>
-                </tr>
-            `).join('');
-
-            const tbodyA = document.getElementById('tabela-analises');
-            tbodyA.innerHTML = analisesList.sort((a, b) => {
-                const ta = a.dataCriacao ? a.dataCriacao.toMillis() : 0;
-                const tb = b.dataCriacao ? b.dataCriacao.toMillis() : 0;
-                return tb - ta;
-            }).slice(0, 50).map(a => `
-                <tr>
-                    <td>${escapeHtml(a.userName || a.userId || '—')}</td>
-                    <td><strong>${a.score != null ? a.score + '%' : '—'}</strong></td>
-                    <td><span style="color:${a.risco_ml === 'alto' ? '#c0392b' : a.risco_ml === 'medio' ? '#d4a017' : '#2e7d32'}">${escapeHtml(a.risco_ml || '—')}</span></td>
-                    <td>${a.rf_proba != null ? (a.rf_proba * 100).toFixed(1) + '%' : '—'}</td>
-                    <td>${(a.clausulas_encontradas || []).length}</td>
-                    <td style="font-size:11px;color:var(--texto-ter);">${a.dataCriacao ? new Date(a.dataCriacao.toMillis()).toLocaleString('pt-BR') : '—'}</td>
-                </tr>
-            `).join('');
+            usuariosPorOrgao[orgaoId].editais++;
+            editaisPorUsuario[e.usuarioId] = (editaisPorUsuario[e.usuarioId] || 0) + 1;
+        }
+        for (const u of usuarios) {
+            u._editalCount = editaisPorUsuario[u.id] || 0;
         }
 
-        function escapeHtml(s) {
-            if (s == null) return '';
-            return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        // === Logs: ultimas 300 ===
+        const logsSnap = await db.collection('logs').orderBy('dataCriacao', 'desc').limit(300).get();
+        const logs = logsSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+        // eventos 24h
+        const cutoff24h = Date.now() - 24 * 60 * 60 * 1000;
+        const eventos24h = logs.filter(l => l.dataCriacao && l.dataCriacao.toMillis && l.dataCriacao.toMillis() > cutoff24h).length;
+
+        // === Aplica filtros ===
+        let usuariosView = usuarios.slice();
+        let analisesView = analisesList.slice();
+        let editaisView = editaisList.slice();
+        let logsView = logs.slice();
+        if (orgaoFiltro) {
+            usuariosView = usuariosView.filter(u => (u.orgaoId || '') === orgaoFiltro);
+            analisesView = analisesView.filter(a => (a.orgaoId || '') === orgaoFiltro);
+            editaisView = editaisView.filter(e => (e.orgaoId || '') === orgaoFiltro);
+            logsView = logsView.filter(l => (l.orgaoId || '') === orgaoFiltro);
+        }
+        if (textoFiltro) {
+            usuariosView = usuariosView.filter(u =>
+                (u.nome || '').toLowerCase().includes(textoFiltro) ||
+                (u.email || '').toLowerCase().includes(textoFiltro) ||
+                (u.instituicao || '').toLowerCase().includes(textoFiltro)
+            );
+            analisesView = analisesView.filter(a =>
+                (a.userName || '').toLowerCase().includes(textoFiltro) ||
+                (a.userId || '').toLowerCase().includes(textoFiltro)
+            );
+            editaisView = editaisView.filter(e =>
+                (e.userName || '').toLowerCase().includes(textoFiltro) ||
+                (e.orgao || '').toLowerCase().includes(textoFiltro) ||
+                (e.modalidade || '').toLowerCase().includes(textoFiltro) ||
+                (e.tipo_contrato || '').toLowerCase().includes(textoFiltro)
+            );
         }
 
-        function exportarCSV() {
-            const rows = [['Nome', 'Email', 'Perfil', 'Instituicao', 'Provedor', 'Analises', 'Papel']];
-            document.querySelectorAll('#tabela-usuarios tr').forEach(tr => {
-                const tds = tr.querySelectorAll('td');
-                if (tds.length >= 7) {
-                    rows.push([tds[0].textContent.trim(), tds[1].textContent.trim(), tds[2].textContent.trim(), tds[3].textContent.trim(), tds[4].textContent.trim(), tds[5].textContent.trim(), tds[7]?.textContent.trim() || '']);
-                }
+        // === Top stats ===
+        document.getElementById('stat-usuarios').textContent = usuariosView.length;
+        document.getElementById('stat-usuarios-detail').textContent = `${usuariosView.filter(u => u.provedor === 'anonymous').length} anônimos · ${usuariosView.length - usuariosView.filter(u => u.provedor === 'anonymous').length} registrados`;
+        document.getElementById('stat-analises').textContent = analisesView.length;
+        document.getElementById('stat-analises-detail').textContent = orgaoFiltro ? `filtrado por ${orgaoFiltro}` : `média ${totalAnalises > 0 ? (totalAnalises / usuarios.length).toFixed(1) : 0} por usuário`;
+        document.getElementById('stat-editais').textContent = editaisView.length;
+        document.getElementById('stat-editais-detail').textContent = `${editaisList.filter(e => (e.fonte || '') === 'nvidia').length} via IA · ${editaisList.length - editaisList.filter(e => (e.fonte || '') === 'nvidia').length} via templates`;
+        document.getElementById('stat-risco-alto').textContent = analisesView.filter(a => a.risco_ml === 'alto').length;
+        document.getElementById('stat-risco-alto').style.color = analisesView.filter(a => a.risco_ml === 'alto').length > 0 ? '#c0392b' : '#666';
+        const somaScoreView = analisesView.reduce((s, a) => s + (a.score || 0), 0);
+        const totalScoreView = analisesView.filter(a => a.score != null).length;
+        document.getElementById('stat-score-medio').textContent = totalScoreView > 0 ? (somaScoreView / totalScoreView).toFixed(1) + '%' : '-';
+        document.getElementById('stat-eventos-24h').textContent = eventos24h;
+
+        // === Cards por orgão ===
+        const orgGrid = document.getElementById('org-grid');
+        orgGrid.innerHTML = '';
+        const todosOrgaos = [...ORGAOS_FIXOS, ...Object.keys(usuariosPorOrgao).filter(k => !ORGAOS_FIXOS.includes(k) && k !== '_OUTROS_'), '_OUTROS_'].filter((v, i, a) => a.indexOf(v) === i);
+        for (const orgaoId of todosOrgaos) {
+            if (!usuariosPorOrgao[orgaoId]) continue;
+            const m = usuariosPorOrgao[orgaoId];
+            const orgaoMeta = _cacheOrgaos.find(o => o.id === orgaoId) || null;
+            const card = document.createElement('div');
+            card.className = 'org-card ' + (orgaoId || 'OUTROS');
+            card.innerHTML = `
+                <div class="org-name">${escapeHtml(orgaoMeta?.sigla || orgaoId || 'OUTROS')}</div>
+                <div class="org-line"><span>Usuários</span><strong>${m.users}</strong></div>
+                <div class="org-line"><span>Análises</span><strong>${m.analises}</strong></div>
+                <div class="org-line"><span>Editais</span><strong>${m.editais}</strong></div>
+                <div class="org-line"><span>Score médio</span><strong>${m.scoreCount > 0 ? (m.scoreSum/m.scoreCount).toFixed(1) + '%' : '—'}</strong></div>
+            `;
+            card.style.cursor = 'pointer';
+            card.onclick = () => {
+                document.getElementById('filtro-orgao').value = orgaoId;
+                atualizar();
+            };
+            orgGrid.appendChild(card);
+        }
+
+        // === Tabela usuários ===
+        const tbodyU = document.getElementById('tabela-usuarios');
+        tbodyU.innerHTML = usuariosView.sort((a, b) => (b._analiseCount || 0) - (a._analiseCount || 0)).map(u => `
+            <tr>
+                <td><strong>${escapeHtml(u.nome || '—')}</strong>${u.papel === 'admin' ? ' <span class="badge-admin">admin</span>' : ''}</td>
+                <td>${escapeHtml(u.email || '—')}</td>
+                <td>${u.orgaoId ? `<span class="badge-org ${escapeHtml(u.orgaoId)}">${escapeHtml(u.orgaoId)}</span>` : '—'}</td>
+                <td>${escapeHtml(u.perfil || '—')}</td>
+                <td>${escapeHtml(u.provedor || '—')}</td>
+                <td>${u._analiseCount || 0}</td>
+                <td>${u._editalCount || 0}</td>
+                <td style="font-size:11px;color:var(--texto-ter);">${u.ultimoAcesso ? (u.ultimoAcesso.toDate ? new Date(u.ultimoAcesso.toDate()).toLocaleString('pt-BR') : new Date(u.ultimoAcesso).toLocaleString('pt-BR')) : '—'}</td>
+                <td>${escapeHtml(u.papel || 'usuario')}</td>
+            </tr>
+        `).join('') || '<tr><td colspan="9" class="msg-empty">Nenhum usuário para os filtros.</td></tr>';
+
+        // === Tabela análises ===
+        const tbodyA = document.getElementById('tabela-analises');
+        tbodyA.innerHTML = analisesView.sort((a, b) => {
+            const ta = a.dataCriacao ? a.dataCriacao.toMillis() : 0;
+            const tb = b.dataCriacao ? b.dataCriacao.toMillis() : 0;
+            return tb - ta;
+        }).slice(0, 50).map(a => `
+            <tr>
+                <td><strong>${escapeHtml(a.userName || a.userId || '—')}</strong></td>
+                <td>${a.orgaoId ? `<span class="badge-org ${escapeHtml(a.orgaoId)}">${escapeHtml(a.orgaoId)}</span>` : '—'}</td>
+                <td><strong>${a.score != null ? a.score + '%' : '—'}</strong></td>
+                <td><span class="pill ${pillPorRisco(a.risco_ml)}">${escapeHtml(a.risco_ml || '—')}</span></td>
+                <td>${a.rf_proba != null ? (a.rf_proba * 100).toFixed(1) + '%' : '—'}</td>
+                <td>${(a.clausulas_encontradas || []).length}</td>
+                <td>${(a.lacunas || []).length}</td>
+                <td style="font-size:11px;">${a.duracao_ms != null ? Math.round(a.duracao_ms) + 'ms' : '—'}</td>
+                <td style="font-size:11px;color:var(--texto-ter);">${a.dataCriacao ? (a.dataCriacao.toDate ? new Date(a.dataCriacao.toDate()).toLocaleString('pt-BR') : new Date(a.dataCriacao).toLocaleString('pt-BR')) : '—'}</td>
+            </tr>
+        `).join('') || '<tr><td colspan="9" class="msg-empty">Nenhuma análise para os filtros.</td></tr>';
+
+        // === Tabela editais ===
+        const tbodyE = document.getElementById('tabela-editais');
+        tbodyE.innerHTML = editaisView.slice(0, 50).map(e => `
+            <tr>
+                <td><strong>${escapeHtml(e.userName || e.usuarioId || '—')}</strong></td>
+                <td>${e.orgaoId ? `<span class="badge-org ${escapeHtml(e.orgaoId)}">${escapeHtml(e.orgaoId)}</span>` : '—'}</td>
+                <td>${escapeHtml(e.tipo_contrato || '—')}</td>
+                <td>${escapeHtml(e.modalidade || '—')}</td>
+                <td>${escapeHtml(e.valor || '—')}</td>
+                <td>${(e.clausulas || []).length}</td>
+                <td><span class="pill ${e.fonte === 'nvidia' ? 'pill-info' : 'pill-neutral'}">${escapeHtml(e.fonte || '—')}</span></td>
+                <td style="font-size:11px;">${e.duracaoMs != null ? Math.round(e.duracaoMs) + 'ms' : '—'}</td>
+                <td style="font-size:11px;color:var(--texto-ter);">${e.dataCriacao ? (e.dataCriacao.toDate ? new Date(e.dataCriacao.toDate()).toLocaleString('pt-BR') : new Date(e.dataCriacao).toLocaleString('pt-BR')) : '—'}</td>
+            </tr>
+        `).join('') || '<tr><td colspan="9" class="msg-empty">Nenhum edital gerado ainda.</td></tr>';
+
+        // === Tabela logs ===
+        const tbodyL = document.getElementById('tabela-logs');
+        const escopo = _filtroAtivo || '';
+        tbodyL.innerHTML = logsView.slice(0, 300).map(l => {
+            let pillClass = 'pill-neutral';
+            let statusLabel = '';
+            if (l.tipo && l.tipo.startsWith('avaliar_')) {
+                if (l.tipo === 'avaliar_sucesso') { pillClass = 'pill-success'; statusLabel = 'OK'; }
+                else if (l.tipo === 'avaliar_erro') { pillClass = 'pill-error'; statusLabel = 'erro'; }
+                else { pillClass = 'pill-info'; statusLabel = 'início'; }
+            } else if (l.tipo && l.tipo.startsWith('gerar_')) {
+                if (l.tipo === 'gerar_sucesso') { pillClass = 'pill-success'; statusLabel = 'OK'; }
+                else if (l.tipo === 'gerar_erro') { pillClass = 'pill-error'; statusLabel = 'erro'; }
+                else { pillClass = 'pill-info'; statusLabel = 'início'; }
+            } else if (l.tipo === 'login_sucesso' || l.tipo === 'cadastro_sucesso') { pillClass = 'pill-success'; statusLabel = 'login'; }
+            else if (l.tipo === 'login_erro' || l.tipo === 'cadastro_erro') { pillClass = 'pill-error'; statusLabel = 'falha'; }
+            else if (l.tipo === 'api_analisar') { pillClass = l.sucesso ? 'pill-success' : 'pill-error'; statusLabel = l.sucesso ? `API ${l.statusCode || 200}` : `API ${l.statusCode || 'erro'}`; }
+            else if (l.tipo === 'page_view') { pillClass = 'pill-info'; statusLabel = l.modulo || 'view'; }
+
+            const resumoParts = [];
+            if (l.email) resumoParts.push(l.email);
+            if (l.score != null) resumoParts.push('score=' + l.score);
+            if (l.risco_ml) resumoParts.push('risco=' + l.risco_ml);
+            if (l.erro) resumoParts.push('erro=' + l.erro);
+            if (l.duracaoMs != null) resumoParts.push(Math.round(l.duracaoMs) + 'ms');
+            const resumo = resumoParts.join(' · ') || l.tipo;
+
+            return `
+            <tr>
+                <td style="font-size:11px;color:var(--texto-ter);">${l.dataCriacao ? (l.dataCriacao.toDate ? new Date(l.dataCriacao.toDate()).toLocaleString('pt-BR') : new Date(l.dataCriacao).toLocaleString('pt-BR')) : '—'}</td>
+                <td><code style="font-size:11px;">${escapeHtml(l.tipo || '—')}</code></td>
+                <td style="font-size:11px;">${l.uid ? escapeHtml(l.uid.substring(0, 12) + '…') : '—'}</td>
+                <td>${l.orgaoId ? `<span class="badge-org ${escapeHtml(l.orgaoId)}">${escapeHtml(l.orgaoId)}</span>` : '—'}</td>
+                <td style="font-size:12px;">${escapeHtml(resumo)}</td>
+                <td><span class="pill ${pillClass}">${escapeHtml(statusLabel || l.tipo)}</span></td>
+            </tr>`;
+        }).join('') || '<tr><td colspan="6" class="msg-empty">Nenhum log ainda. Recarregue após algumas execuções.</td></tr>';
+
+        // Persist cache para CSV
+        window._cacheCSV = { usuarios: usuariosView, analises: analisesView, editais: editaisView, logs: logsView, todosLogs: logs };
+    }
+
+    function pillPorRisco(risco) {
+        if (risco === 'alto') return 'pill-error';
+        if (risco === 'medio') return 'pill-warn';
+        return 'pill-success';
+    }
+
+    function escapeHtml(s) {
+        if (s == null) return '';
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function exportarCSV() {
+        const escopo = document.getElementById('csv-scope').value;
+        const cache = window._cacheCSV || {};
+        const stamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-');
+        let filename = '';
+        let rows = [];
+
+        if (escopo === 'usuarios' || escopo === 'tudo') {
+            rows.push(['uid', 'nome', 'email', 'orgaoId', 'orgaoNome', 'perfil', 'papel', 'provedor', 'totalAnalises', 'primeiroAcesso', 'ultimoAcesso']);
+            (cache.usuarios || []).forEach(u => {
+                rows.push([u.id, u.nome, u.email, u.orgaoId, u.orgaoNome, u.perfil, u.papel, u.provedor, u._analiseCount || 0, u.primeiroAcesso, u.ultimoAcesso]);
             });
-            const csv = rows.map(r => r.map(c => '"' + c.replace(/"/g, '""') + '"').join(',')).join('\n');
-            const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'publicopilot_usuarios_' + new Date().toISOString().slice(0, 10) + '.csv';
-            link.click();
+        }
+        if (escopo === 'analises' || escopo === 'tudo') {
+            if (escopo === 'tudo') rows.push([]);
+            rows.push(['uid', 'userName', 'orgaoId', 'score', 'classificacao', 'risco_ml', 'rf_proba', 'clausulasQtd', 'lacunasQtd', 'duracaoMs', 'data']);
+            (cache.analises || []).forEach(a => {
+                rows.push([a.userId, a.userName, a.orgaoId, a.score, a.classificacao, a.risco_ml, a.rf_proba, (a.clausulas_encontradas || []).length, (a.lacunas || []).length, a.duracao_ms, a.dataCriacao]);
+            });
+        }
+        if (escopo === 'editais' || escopo === 'tudo') {
+            if (escopo === 'tudo') rows.push([]);
+            rows.push(['id', 'usuarioId', 'userName', 'orgaoId', 'orgao', 'tipo_contrato', 'modalidade', 'valor', 'vigencia', 'clausulasQtd', 'fonte', 'data']);
+            (cache.editais || []).forEach(e => {
+                rows.push([e.id, e.usuarioId, e.userName, e.orgaoId, e.orgao, e.tipo_contrato, e.modalidade, e.valor, e.vigencia, (e.clausulas || []).length, e.fonte, e.dataCriacao]);
+            });
+        }
+        if (escopo === 'logs' || escopo === 'tudo') {
+            if (escopo === 'tudo') rows.push([]);
+            rows.push(['id', 'tipo', 'uid', 'email', 'orgaoId', 'sucesso', 'statusCode', 'duracaoMs', 'path', 'data']);
+            (cache.logs || []).forEach(l => {
+                rows.push([l.id, l.tipo, l.uid, l.email, l.orgaoId, l.sucesso, l.statusCode, l.duracaoMs, l.path, l.dataCriacao]);
+            });
         }
 
-        init();
+        filename = `publicopilot_${escopo}_${stamp}.csv`;
+        const csv = rows.map(r => r.map(c => {
+            const s = c == null ? '' : (typeof c === 'object' && c.toDate ? c.toDate().toISOString() : String(c));
+            return '"' + s.replace(/"/g, '""') + '"';
+        }).join(',')).join('\n');
+        const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        link.click();
+    }
+
+    init();
     </script>
 </body>
 </html>
