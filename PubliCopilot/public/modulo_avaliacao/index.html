@@ -322,6 +322,12 @@ d) Patrimonio.
 
         function loadSample(tipo) {
             document.getElementById('minuta-input').value = SAMPLES[tipo] || SAMPLES.tecnologia;
+            if (typeof registrarEvento === 'function') {
+                registrarEvento('exemplo_selecionado', {
+                    exemplo: tipo,
+                    textoQtdChars: document.getElementById('minuta-input').value.length,
+                });
+            }
         }
 
         async function analisarMinuta() {
@@ -330,15 +336,22 @@ d) Patrimonio.
                 alert('Por favor, cole uma minuta para analise.');
                 return;
             }
+            if (typeof registrarEvento === 'function') {
+                registrarEvento('avaliar_click', { textoQtdChars: texto.length, textoQtdPalavras: texto.split(/\s+/).length });
+            }
 
             document.getElementById('loading').classList.add('show');
             document.getElementById('resultado').style.display = 'none';
+            const inicioMs = performance.now();
 
             try {
                 const token = await PubliAuth.Auth.getIdToken();
                 if (!token) {
                     PubliAuth.Modal.abrir('login');
                     throw new Error('Voce precisa estar logado para usar este modulo.');
+                }
+                if (typeof registrarEvento === 'function') {
+                    registrarEvento('avaliar_inicio', { textoQtdChars: texto.length });
                 }
                 const resp = await fetch('/api/analisar', {
                     method: 'POST',
@@ -359,6 +372,7 @@ d) Patrimonio.
                 const resultado = await resp.json();
                 exibirResultado(resultado);
                 const user = PubliAuth.getUser();
+                let analiseDocId = null;
                 if (user && typeof salvarAnalise === 'function') {
                     const analytics = {
                         texto_resumo: texto.substring(0, 300),
@@ -370,15 +384,34 @@ d) Patrimonio.
                         lacunas: (resultado.lacunas || []).map(l => l.item || ''),
                         features_shap: (resultado.features_shap || []).slice(0, 5).map(f => ({ feature: f.feature, peso: f.peso })),
                         contrafactuais: (resultado.contrafactuais || []).map(c => c.feature),
-                        duracao_ms: performance.now(),
+                        duracao_ms: Math.round(performance.now() - inicioMs),
                         modelo_treinado: resultado.modelo_treinado,
                         total_palavras: resultado.total_palavras || texto.split(' ').length,
                     };
-                    salvarAnalise(user.uid, analytics);
+                    analiseDocId = await salvarAnalise(user.uid, analytics);
+                }
+                if (typeof registrarEvento === 'function') {
+                    await registrarEvento('avaliar_sucesso', {
+                        score: resultado.score,
+                        risco_ml: resultado.risco_ml,
+                        rf_proba: resultado.rf_proba,
+                        clausulasQtd: (resultado.clausulas_encontradas || []).length,
+                        lacunasQtd: (resultado.lacunas || []).length,
+                        duracaoMs: Math.round(performance.now() - inicioMs),
+                        analiseDocId,
+                        textoQtdChars: texto.length,
+                    });
                 }
             } catch (e) {
                 document.getElementById('loading').classList.remove('show');
                 alert('Erro ao analisar minuta (backend ML): ' + e.message);
+                if (typeof registrarEvento === 'function') {
+                    await registrarEvento('avaliar_erro', {
+                        erro: e.message || String(e),
+                        duracaoMs: Math.round(performance.now() - inicioMs),
+                        textoQtdChars: texto.length,
+                    });
+                }
             }
         }
 
@@ -582,6 +615,26 @@ d) Patrimonio.
             const accNum = parseFloat(acc.replace(',', '.'));
             document.getElementById('bar-acc').style.width = Math.min(100, accNum) + '%';
         }
+
+        (async function () {
+            try {
+                await whenFirebaseReady();
+                if (typeof PubliAuth !== 'undefined') {
+                    await PubliAuth.whenReady();
+                    await new Promise(r => setTimeout(r, 250));
+                }
+                if (typeof registrarEvento === 'function') {
+                    await registrarEvento('page_view', {
+                        modulo: 'avaliacao',
+                        logado: !!(typeof PubliAuth !== 'undefined' && PubliAuth.isLogado && PubliAuth.isLogado()),
+                        uidPresente: !!(firebase.auth().currentUser),
+                        anonimo: !!(firebase.auth().currentUser && firebase.auth().currentUser.isAnonymous),
+                    });
+                }
+            } catch (e) {
+                console.warn('Falha ao registrar page_view:', e);
+            }
+        })();
     </script>
 </body>
 </html>

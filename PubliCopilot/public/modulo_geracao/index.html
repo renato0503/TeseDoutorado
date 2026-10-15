@@ -321,6 +321,9 @@
             document.getElementById('pagamento').value = '30 dias apos atesto da nota fiscal';
             document.getElementById('garantia').value = 'garantia_contratual';
             document.getElementById('penalidades').value = 'Multa de 2% sobre o valor do contrato em caso de inadimplemento; Multa de 10% em caso de rescisao por culpa da contratada.';
+            if (typeof registrarEvento === 'function') {
+                registrarEvento('carregar_exemplo', { modulo: 'geracao' });
+            }
         }
 
         function _getToken() {
@@ -332,9 +335,19 @@
         }
 
         function _apiCall(payload) {
+            var inicioMs = performance.now();
             _getToken().then(function(token) {
                 var headers = { 'Content-Type': 'application/json' };
                 if (token) { headers['Authorization'] = 'Bearer ' + token; }
+                if (typeof registrarEvento === 'function') {
+                    registrarEvento('gerar_inicio', {
+                        modo: payload.modo,
+                        tipo_contrato: payload.tipo_contrato,
+                        modalidade: payload.modalidade,
+                        orgao: payload.orgao,
+                        valor: payload.valor,
+                    });
+                }
                 return fetch('/api/analisar', {
                     method: 'POST',
                     headers: headers,
@@ -344,6 +357,13 @@
                 if (resp.status === 429) {
                     document.getElementById('loading').classList.remove('show');
                     alert('Limite de requisicoes excedido. Aguarde e tente novamente.');
+                    if (typeof registrarEvento === 'function') {
+                        registrarEvento('gerar_erro', {
+                            status: 429,
+                            erro: 'rate_limit',
+                            duracaoMs: Math.round(performance.now() - inicioMs),
+                        });
+                    }
                     return null;
                 }
                 if (resp.status === 401) {
@@ -351,6 +371,13 @@
                     alert('Sessao expirada. Faca login novamente.');
                     if (typeof PubliAuth !== 'undefined' && PubliAuth.Modal) {
                         PubliAuth.Modal.abrir('login');
+                    }
+                    if (typeof registrarEvento === 'function') {
+                        registrarEvento('gerar_erro', {
+                            status: 401,
+                            erro: 'unauthorized',
+                            duracaoMs: Math.round(performance.now() - inicioMs),
+                        });
                     }
                     return null;
                 }
@@ -360,12 +387,65 @@
                 if (data.erro) {
                     document.getElementById('loading').classList.remove('show');
                     alert('Erro: ' + data.erro);
+                    if (typeof registrarEvento === 'function') {
+                        registrarEvento('gerar_erro', {
+                            erro: data.erro,
+                            duracaoMs: Math.round(performance.now() - inicioMs),
+                        });
+                    }
                     return;
                 }
                 exibirResultado(data);
+                // Persiste no Firestore para a fase de testes multi-orgao
+                if (typeof salvarGeracao === 'function') {
+                    var payloadOriginal = _coletarDados();
+                    var docIdPromessa = salvarGeracao({
+                        orgao: payloadOriginal.orgao,
+                        uasg: payloadOriginal.uasg,
+                        modalidade: payloadOriginal.modalidade,
+                        tipo_contrato: payloadOriginal.tipo_contrato,
+                        valor: payloadOriginal.valor,
+                        vigencia: payloadOriginal.vigencia,
+                        objeto: payloadOriginal.descricao,
+                        justificativa: payloadOriginal.justificativa,
+                        criterio: payloadOriginal.criterio,
+                        requisitos_tecnicos: document.getElementById('requisitos_tecnicos').value,
+                        kpis: document.getElementById('kpis').value,
+                        pagamento: document.getElementById('pagamento').value,
+                        garantia: document.getElementById('garantia').value,
+                        penalidades: document.getElementById('penalidades').value,
+                        minuta: data.minuta || '',
+                        clausulas: data.clausulas || [],
+                        fonte: data.fonte || 'desconhecida',
+                        metadados: data.metadados || {},
+                        totalClausulas: (data.clausulas || []).length,
+                        duracaoMs: Math.round(performance.now() - inicioMs),
+                    });
+                    docIdPromessa && docIdPromessa.then(function(docId) {
+                        if (typeof registrarEvento === 'function') {
+                            registrarEvento('gerar_sucesso', {
+                                orgao: payloadOriginal.orgao,
+                                tipo_contrato: payloadOriginal.tipo_contrato,
+                                modalidade: payloadOriginal.modalidade,
+                                fonte: data.fonte,
+                                totalClausulas: (data.clausulas || []).length,
+                                minutaQtdChars: (data.minuta || '').length,
+                                editalDocId: docId,
+                                duracaoMs: Math.round(performance.now() - inicioMs),
+                            });
+                        }
+                    });
+                }
             }).catch(function(err) {
                 document.getElementById('loading').classList.remove('show');
                 exibirFallback();
+                if (typeof registrarEvento === 'function') {
+                    registrarEvento('gerar_erro', {
+                        erro: err && err.message ? err.message : String(err),
+                        subtipo: 'catch',
+                        duracaoMs: Math.round(performance.now() - inicioMs),
+                    });
+                }
             });
         }
 
@@ -398,6 +478,9 @@
                 alert('Preencha o orgao licitante e a descricao do objeto.');
                 return;
             }
+            if (typeof registrarEvento === 'function') {
+                registrarEvento('gerar_click', { botao: 'gerar_edital_completo' });
+            }
             document.getElementById('loading').classList.add('show');
             document.getElementById('resultado').style.display = 'none';
             _apiCall(_coletarDados());
@@ -408,6 +491,9 @@
             if (!tipo) {
                 alert('Selecione o tipo de contratacao.');
                 return;
+            }
+            if (typeof registrarEvento === 'function') {
+                registrarEvento('gerar_click', { botao: 'gerar_apenas_clausulas' });
             }
             document.getElementById('loading').classList.add('show');
             document.getElementById('resultado').style.display = 'none';
@@ -504,6 +590,26 @@
             var style = document.createElement('style');
             style.textContent = '@media(max-width:768px){.nav__toggle{display:inline-flex!important}.pc-nav{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:1px solid var(--borda);padding:16px;z-index:100}.pc-nav.nav--open{display:flex}.pc-header .container{position:relative}}';
             document.head.appendChild(style);
+        })();
+
+        (async function () {
+            try {
+                await whenFirebaseReady();
+                if (typeof PubliAuth !== 'undefined') {
+                    await PubliAuth.whenReady();
+                    await new Promise(r => setTimeout(r, 250));
+                }
+                if (typeof registrarEvento === 'function') {
+                    await registrarEvento('page_view', {
+                        modulo: 'geracao',
+                        logado: !!(typeof PubliAuth !== 'undefined' && PubliAuth.isLogado && PubliAuth.isLogado()),
+                        uidPresente: !!(firebase.auth().currentUser),
+                        anonimo: !!(firebase.auth().currentUser && firebase.auth().currentUser.isAnonymous),
+                    });
+                }
+            } catch (e) {
+                console.warn('Falha ao registrar page_view:', e);
+            }
         })();
     </script>
 </body>

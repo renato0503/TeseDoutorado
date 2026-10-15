@@ -664,6 +664,25 @@
                 };
             }
         });
+
+        // Telemetria: registrar page_view da landing
+        (async function () {
+            try {
+                await whenFirebaseReady();
+                await new Promise(r => setTimeout(r, 300));
+                if (typeof registrarEvento === 'function') {
+                    await registrarEvento('page_view', {
+                        modulo: 'landing',
+                        logado: !!(firebase.auth().currentUser),
+                        uidPresente: !!(firebase.auth().currentUser && firebase.auth().currentUser.uid),
+                        anonimo: !!(firebase.auth().currentUser && firebase.auth().currentUser.isAnonymous),
+                        referrer: document.referrer || '',
+                    });
+                }
+            } catch (e) {
+                console.warn('Falha ao registrar page_view landing:', e);
+            }
+        })();
     </script>
 </body>
 </html>
