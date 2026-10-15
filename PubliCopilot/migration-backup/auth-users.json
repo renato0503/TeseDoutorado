@@ -1,0 +1,58 @@
+{"users": [
+{
+  "localId": "7W4wNufEPoXTZej0P5fpMEmXMhr2",
+  "lastSignedInAt": "1786133579769",
+  "createdAt": "1786133579769"
+},
+{
+  "localId": "JlXnjxnrCTb2zeHtCVAldNBa1Lv1",
+  "lastSignedInAt": "1786129527039",
+  "createdAt": "1786129527039"
+},
+{
+  "localId": "LNzGsxbngAg9RJ07aKPoRmANCKL2",
+  "lastSignedInAt": "1786133395084",
+  "createdAt": "1786133395084"
+},
+{
+  "localId": "S7lecSmXqhXANKhp883E4zFByB13",
+  "lastSignedInAt": "1786039446824",
+  "createdAt": "1786039446824"
+},
+{
+  "localId": "V7414xvbtFZWNltp5M1X0ximq7p2",
+  "email": "gestor.renatorosa@gmail.com",
+  "emailVerified": false,
+  "passwordHash": "MSDk6FtWUcXH0TbqRIU7OdMjHRI+wlzxwLWNxEAGMxhQxTI+BauXGzeBehcAjkJ4OZKA+1wOVhWYYzVEpQ4pUg==",
+  "salt": "oZyNk+Q0QpE4iQ==",
+  "lastSignedInAt": "1786129514102",
+  "createdAt": "1784898065693",
+  "disabled": false,
+  "customAttributes": "{\"admin\": true}",
+  "providerUserInfo": []
+},
+{
+  "localId": "WeYJQNLjJJM5WY9kpHqQFhOjUBr1",
+  "lastSignedInAt": "1786133468156",
+  "createdAt": "1786133468156"
+},
+{
+  "localId": "amXPno7riUMG4F7HPcXWDihV5sn2",
+  "lastSignedInAt": "1788573075450",
+  "createdAt": "1788573075450"
+},
+{
+  "localId": "fWCW7C0J1AawJy5tUlG7LlDV4if2",
+  "lastSignedInAt": "1787569809678",
+  "createdAt": "1787569809678"
+},
+{
+  "localId": "mDQvrN1ChSha5WHn3S2E1Qp8cxK2",
+  "lastSignedInAt": "1786132571198",
+  "createdAt": "1786132571198"
+},
+{
+  "localId": "nCRzBTh747ZVcTf1hltjPaeS97L2",
+  "lastSignedInAt": "1787968013022",
+  "createdAt": "1787968013022"
+}]}

@@ -1,0 +1,244 @@
+﻿{
+    "documents":  [
+                      {
+                          "name":  "projects/publicopilot/databases/(default)/documents/usuarios/JlXnjxnrCTb2zeHtCVAldNBa1Lv1",
+                          "fields":  {
+                                         "email":  {
+                                                       "stringValue":  "gestor.renatorosa@gmail.com"
+                                                   },
+                                         "ativo":  {
+                                                       "booleanValue":  true
+                                                   },
+                                         "dataCriacao":  {
+                                                             "timestampValue":  "2026-08-07T19:05:27.857Z"
+                                                         },
+                                         "primeiroAcesso":  {
+                                                                "booleanValue":  false
+                                                            },
+                                         "totalAnalises":  {
+                                                               "integerValue":  "0"
+                                                           },
+                                         "instituicao":  {
+                                                             "stringValue":  "UNIFACC"
+                                                         },
+                                         "dataAtualizacao":  {
+                                                                 "timestampValue":  "2026-08-07T19:05:51.158Z"
+                                                             },
+                                         "nome":  {
+                                                      "stringValue":  "Renato Rosa"
+                                                  },
+                                         "papel":  {
+                                                       "stringValue":  "usuario"
+                                                   },
+                                         "ultimoAcesso":  {
+                                                              "timestampValue":  "2026-09-07T16:14:55.593Z"
+                                                          },
+                                         "provedor":  {
+                                                          "stringValue":  "anonymous"
+                                                      },
+                                         "perfil":  {
+                                                        "stringValue":  "pesquisador"
+                                                    }
+                                     },
+                          "createTime":  "2026-08-07T19:05:27.895731Z",
+                          "updateTime":  "2026-09-07T16:14:55.651473Z"
+                      },
+                      {
+                          "name":  "projects/publicopilot/databases/(default)/documents/usuarios/V7414xvbtFZWNltp5M1X0ximq7p2",
+                          "fields":  {
+                                         "primeiroAcesso":  {
+                                                                "booleanValue":  false
+                                                            },
+                                         "whatsapp":  {
+                                                          "stringValue":  ""
+                                                      },
+                                         "provedor":  {
+                                                          "stringValue":  "password"
+                                                      },
+                                         "papel":  {
+                                                       "stringValue":  "admin"
+                                                   },
+                                         "nome":  {
+                                                      "stringValue":  "Renato Rosa"
+                                                  },
+                                         "ativo":  {
+                                                       "booleanValue":  true
+                                                   },
+                                         "ultimoAcesso":  {
+                                                              "timestampValue":  "2026-08-07T19:05:26.709Z"
+                                                          },
+                                         "dataCriacao":  {
+                                                             "timestampValue":  "2026-07-24T13:49:33.800Z"
+                                                         },
+                                         "email":  {
+                                                       "stringValue":  "gestor.renatorosa@gmail.com"
+                                                   }
+                                     },
+                          "createTime":  "2026-07-24T13:49:33.992291Z",
+                          "updateTime":  "2026-08-07T19:05:26.749087Z"
+                      },
+                      {
+                          "name":  "projects/publicopilot/databases/(default)/documents/usuarios/amXPno7riUMG4F7HPcXWDihV5sn2",
+                          "fields":  {
+                                         "provedor":  {
+                                                          "stringValue":  "anonymous"
+                                                      },
+                                         "instituicao":  {
+                                                             "stringValue":  ""
+                                                         },
+                                         "totalAnalises":  {
+                                                               "integerValue":  "0"
+                                                           },
+                                         "perfil":  {
+                                                        "stringValue":  ""
+                                                    },
+                                         "nome":  {
+                                                      "stringValue":  "Anônimo"
+                                                  },
+                                         "ativo":  {
+                                                       "booleanValue":  true
+                                                   },
+                                         "email":  {
+                                                       "stringValue":  ""
+                                                   },
+                                         "dataCriacao":  {
+                                                             "timestampValue":  "2026-09-05T01:51:21.082Z"
+                                                         },
+                                         "primeiroAcesso":  {
+                                                                "booleanValue":  true
+                                                            },
+                                         "papel":  {
+                                                       "stringValue":  "usuario"
+                                                   },
+                                         "ultimoAcesso":  {
+                                                              "timestampValue":  "2026-09-05T01:51:21.082Z"
+                                                          }
+                                     },
+                          "createTime":  "2026-09-05T01:51:19.408318Z",
+                          "updateTime":  "2026-09-05T01:51:21.100674Z"
+                      },
+                      {
+                          "name":  "projects/publicopilot/databases/(default)/documents/usuarios/fWCW7C0J1AawJy5tUlG7LlDV4if2",
+                          "fields":  {
+                                         "primeiroAcesso":  {
+                                                                "booleanValue":  true
+                                                            },
+                                         "papel":  {
+                                                       "stringValue":  "usuario"
+                                                   },
+                                         "totalAnalises":  {
+                                                               "integerValue":  "0"
+                                                           },
+                                         "perfil":  {
+                                                        "stringValue":  ""
+                                                    },
+                                         "provedor":  {
+                                                          "stringValue":  "anonymous"
+                                                      },
+                                         "ultimoAcesso":  {
+                                                              "timestampValue":  "2026-10-06T13:13:54.987Z"
+                                                          },
+                                         "dataCriacao":  {
+                                                             "timestampValue":  "2026-08-24T11:10:11.446Z"
+                                                         },
+                                         "nome":  {
+                                                      "stringValue":  "Anônimo"
+                                                  },
+                                         "instituicao":  {
+                                                             "stringValue":  ""
+                                                         },
+                                         "email":  {
+                                                       "stringValue":  ""
+                                                   },
+                                         "ativo":  {
+                                                       "booleanValue":  true
+                                                   }
+                                     },
+                          "createTime":  "2026-08-24T11:10:11.336918Z",
+                          "updateTime":  "2026-10-06T13:13:55.038152Z"
+                      },
+                      {
+                          "name":  "projects/publicopilot/databases/(default)/documents/usuarios/mDQvrN1ChSha5WHn3S2E1Qp8cxK2",
+                          "fields":  {
+                                         "ultimoAcesso":  {
+                                                              "timestampValue":  "2026-08-07T20:56:03.634Z"
+                                                          },
+                                         "dataCriacao":  {
+                                                             "timestampValue":  "2026-08-07T19:56:13.259Z"
+                                                         },
+                                         "totalAnalises":  {
+                                                               "integerValue":  "0"
+                                                           },
+                                         "provedor":  {
+                                                          "stringValue":  "anonymous"
+                                                      },
+                                         "papel":  {
+                                                       "stringValue":  "usuario"
+                                                   },
+                                         "primeiroAcesso":  {
+                                                                "booleanValue":  false
+                                                            },
+                                         "email":  {
+                                                       "stringValue":  "luna@gmail.com"
+                                                   },
+                                         "nome":  {
+                                                      "stringValue":  "Luna"
+                                                  },
+                                         "instituicao":  {
+                                                             "stringValue":  "LuUniversity"
+                                                         },
+                                         "perfil":  {
+                                                        "stringValue":  "pesquisador"
+                                                    },
+                                         "ativo":  {
+                                                       "booleanValue":  true
+                                                   },
+                                         "dataAtualizacao":  {
+                                                                 "timestampValue":  "2026-08-07T19:56:30.308Z"
+                                                             }
+                                     },
+                          "createTime":  "2026-08-07T19:56:13.299259Z",
+                          "updateTime":  "2026-08-07T20:56:03.672949Z"
+                      },
+                      {
+                          "name":  "projects/publicopilot/databases/(default)/documents/usuarios/nCRzBTh747ZVcTf1hltjPaeS97L2",
+                          "fields":  {
+                                         "perfil":  {
+                                                        "stringValue":  ""
+                                                    },
+                                         "totalAnalises":  {
+                                                               "integerValue":  "0"
+                                                           },
+                                         "instituicao":  {
+                                                             "stringValue":  ""
+                                                         },
+                                         "ultimoAcesso":  {
+                                                              "timestampValue":  "2026-08-29T01:47:00.973Z"
+                                                          },
+                                         "provedor":  {
+                                                          "stringValue":  "anonymous"
+                                                      },
+                                         "papel":  {
+                                                       "stringValue":  "usuario"
+                                                   },
+                                         "ativo":  {
+                                                       "booleanValue":  true
+                                                   },
+                                         "email":  {
+                                                       "stringValue":  ""
+                                                   },
+                                         "primeiroAcesso":  {
+                                                                "booleanValue":  true
+                                                            },
+                                         "nome":  {
+                                                      "stringValue":  "Anônimo"
+                                                  },
+                                         "dataCriacao":  {
+                                                             "timestampValue":  "2026-08-29T01:46:55.019Z"
+                                                         }
+                                     },
+                          "createTime":  "2026-08-29T01:46:55.182287Z",
+                          "updateTime":  "2026-08-29T01:47:01.026583Z"
+                      }
+                  ]
+}
