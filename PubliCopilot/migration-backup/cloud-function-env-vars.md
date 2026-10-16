@@ -4,7 +4,7 @@
 Capturadas do output do terminal do Renato em 14/10/2026.
 
 ```
-NVIDIA_API_KEY=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
+NVIDIA_API_KEY=NVIDIA_API_KEY_REDACTED
 ```
 
 ## Env vars defaults do código (functions/main.py)
@@ -18,7 +18,7 @@ ENABLE_AUDIT_LOG=1
 
 ## Comando de deploy usado (referência)
 ```
-gcloud functions deploy analisar_minuta --gen2 --runtime=python311 --region=us-central1 --source=functions --entry-point=analisar_minuta --trigger-http --memory=512MB --timeout=120s --set-env-vars "NVIDIA_API_KEY=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" --allow-unauthenticated
+gcloud functions deploy analisar_minuta --gen2 --runtime=python311 --region=us-central1 --source=functions --entry-point=analisar_minuta --trigger-http --memory=512MB --timeout=120s --set-env-vars "NVIDIA_API_KEY=NVIDIA_API_KEY_REDACTED" --allow-unauthenticated
 ```
 
 ## Após migrar para o novo projeto:
